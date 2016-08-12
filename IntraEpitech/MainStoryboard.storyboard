@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="seP-H9-gVh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="seP-H9-gVh">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
@@ -250,6 +250,7 @@
         <!--Settings View Controller-->
         <scene sceneID="i3K-3s-ZGP">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Q1-0v-qbS" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="imK-Iu-biY" customClass="SettingsViewController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ihh-GL-5ew"/>
@@ -348,7 +349,6 @@
                         <segue destination="NBy-0p-1eU" kind="show" identifier="webViewSegue" id="0b6-Kv-RiV"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2Q1-0v-qbS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1360" y="3732"/>
         </scene>
@@ -1374,8 +1374,8 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="uvV-TU-ISw"/>
                                         <exclude reference="lZC-LX-8Ob"/>
+                                        <exclude reference="uvV-TU-ISw"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -2008,6 +2008,7 @@
         <!--Select Calendar View Controller-->
         <scene sceneID="oXe-QB-Bml">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9XN-Rx-epo" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="pA1-pK-9bs" customClass="SelectCalendarViewController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bb1-jO-6hp"/>
@@ -2038,7 +2039,6 @@
                         <outlet property="_tableView" destination="Khl-Dq-8SL" id="QOh-5f-aBt"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9XN-Rx-epo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2078" y="3732"/>
         </scene>
@@ -2224,9 +2224,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="WEN-N9-tGx"/>
-        <segue reference="wc1-Wr-Xgh"/>
-        <segue reference="jcX-Uh-dOi"/>
-        <segue reference="MHx-jA-Aj7"/>
         <segue reference="7C7-Yy-o9Q"/>
+        <segue reference="wc1-Wr-Xgh"/>
+        <segue reference="en8-4d-vK7"/>
+        <segue reference="0b6-Kv-RiV"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -56,7 +56,7 @@ class SplashScreenViewController: UIViewController {
 							
 						}
 						else {
-							let storyboard = UIStoryboard(name: "MainStoryboard", bundle: nil)
+							let storyboard = UIStoryboard(name: "MainViewStoryboard", bundle: nil)
 							let vc = storyboard.instantiateInitialViewController()
 							self.presentViewController(vc!, animated: true, completion: nil)
 						}

@@ -96,6 +96,8 @@
 		79E4C5C71C6E35440003DA56 /* AppointmentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E4C5C61C6E35440003DA56 /* AppointmentDetailViewController.swift */; };
 		79E4C5C91C6E35AC0003DA56 /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E4C5C81C6E35AC0003DA56 /* Appointment.swift */; };
 		79EA5CB61D5E49E800DA7C30 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EA5CB51D5E49E800DA7C30 /* Requests.swift */; };
+		79EA5CBC1D5E64C700DA7C30 /* MainViewStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79EA5CBB1D5E64C700DA7C30 /* MainViewStoryboard.storyboard */; };
+		79EA5CC01D5E696000DA7C30 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79EA5CBF1D5E696000DA7C30 /* SettingsStoryboard.storyboard */; };
 		79EAFE731C5619ED005EE542 /* CustomUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFE721C5619ED005EE542 /* CustomUITableViewCell.swift */; };
 		79F1F2731C5902B700AAFB69 /* Planning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F1F2721C5902B700AAFB69 /* Planning.swift */; };
 		79F1F2751C59044200AAFB69 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F1F2741C59044200AAFB69 /* Room.swift */; };
@@ -229,6 +231,8 @@
 		79E4C5C61C6E35440003DA56 /* AppointmentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppointmentDetailViewController.swift; path = Planning/AppointmentDetailViewController.swift; sourceTree = "<group>"; };
 		79E4C5C81C6E35AC0003DA56 /* Appointment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Appointment.swift; path = Model/Appointment.swift; sourceTree = "<group>"; };
 		79EA5CB51D5E49E800DA7C30 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Requests.swift; path = Network/Requests.swift; sourceTree = "<group>"; };
+		79EA5CBB1D5E64C700DA7C30 /* MainViewStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainViewStoryboard.storyboard; path = Storyboards/MainViewStoryboard.storyboard; sourceTree = "<group>"; };
+		79EA5CBF1D5E696000DA7C30 /* SettingsStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SettingsStoryboard.storyboard; path = Storyboards/SettingsStoryboard.storyboard; sourceTree = "<group>"; };
 		79EAFE721C5619ED005EE542 /* CustomUITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomUITableViewCell.swift; sourceTree = "<group>"; };
 		79F1F2721C5902B700AAFB69 /* Planning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Planning.swift; path = Model/Planning.swift; sourceTree = "<group>"; };
 		79F1F2741C59044200AAFB69 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Room.swift; path = Model/Room.swift; sourceTree = "<group>"; };
@@ -457,6 +461,8 @@
 				798850661C4ACBDD00BAA888 /* Connexion */,
 				798850401C4AC51C00BAA888 /* LaunchScreen.storyboard */,
 				79DF37071C4D7B3B00EF69A3 /* MainStoryboard.storyboard */,
+				79EA5CBB1D5E64C700DA7C30 /* MainViewStoryboard.storyboard */,
+				79EA5CBF1D5E696000DA7C30 /* SettingsStoryboard.storyboard */,
 			);
 			name = StoryBoards;
 			sourceTree = "<group>";
@@ -736,6 +742,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79EA5CC01D5E696000DA7C30 /* SettingsStoryboard.storyboard in Resources */,
 				797DC7F71C7A1BF900ED095E /* Students1.0.1.sqlite in Resources */,
 				79306D531C4AEBF300708BED /* Localizable.strings in Resources */,
 				79DF37081C4D7B3B00EF69A3 /* MainStoryboard.storyboard in Resources */,
@@ -747,6 +754,7 @@
 				793C52C41C5E2D9600C33328 /* thirdParty.html in Resources */,
 				798850681C4ACC1400BAA888 /* ConnexionStoryboard.storyboard in Resources */,
 				79A5AE801C56CB2E004B3FB9 /* GoogleService-Info.plist in Resources */,
+				79EA5CBC1D5E64C700DA7C30 /* MainViewStoryboard.storyboard in Resources */,
 				79F2B1021C60FAE600244AC6 /* EmptyTableView.xib in Resources */,
 				797DC7F91C7A5E4500ED095E /* DownloadingAllUsersView.xib in Resources */,
 			);
@@ -1043,7 +1051,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = IntraEpitech/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "junger-m.IntraEpitech";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1063,7 +1071,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = IntraEpitech/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "junger-m.IntraEpitech";
 				PRODUCT_NAME = "$(TARGET_NAME)";
