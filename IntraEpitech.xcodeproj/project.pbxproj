@@ -98,6 +98,10 @@
 		79EA5CB61D5E49E800DA7C30 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EA5CB51D5E49E800DA7C30 /* Requests.swift */; };
 		79EA5CBC1D5E64C700DA7C30 /* MainViewStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79EA5CBB1D5E64C700DA7C30 /* MainViewStoryboard.storyboard */; };
 		79EA5CC01D5E696000DA7C30 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79EA5CBF1D5E696000DA7C30 /* SettingsStoryboard.storyboard */; };
+		79EA5CC41D5E789A00DA7C30 /* NotificationsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79EA5CC31D5E789A00DA7C30 /* NotificationsStoryboard.storyboard */; };
+		79EA5CC61D5E78BF00DA7C30 /* PlanningStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79EA5CC51D5E78BF00DA7C30 /* PlanningStoryboard.storyboard */; };
+		79EA5CC81D5E78D500DA7C30 /* UserStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79EA5CC71D5E78D500DA7C30 /* UserStoryboard.storyboard */; };
+		79EA5CCA1D5E78EF00DA7C30 /* LearnStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79EA5CC91D5E78EF00DA7C30 /* LearnStoryboard.storyboard */; };
 		79EAFE731C5619ED005EE542 /* CustomUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFE721C5619ED005EE542 /* CustomUITableViewCell.swift */; };
 		79F1F2731C5902B700AAFB69 /* Planning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F1F2721C5902B700AAFB69 /* Planning.swift */; };
 		79F1F2751C59044200AAFB69 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F1F2741C59044200AAFB69 /* Room.swift */; };
@@ -233,6 +237,10 @@
 		79EA5CB51D5E49E800DA7C30 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Requests.swift; path = Network/Requests.swift; sourceTree = "<group>"; };
 		79EA5CBB1D5E64C700DA7C30 /* MainViewStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainViewStoryboard.storyboard; path = Storyboards/MainViewStoryboard.storyboard; sourceTree = "<group>"; };
 		79EA5CBF1D5E696000DA7C30 /* SettingsStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SettingsStoryboard.storyboard; path = Storyboards/SettingsStoryboard.storyboard; sourceTree = "<group>"; };
+		79EA5CC31D5E789A00DA7C30 /* NotificationsStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = NotificationsStoryboard.storyboard; path = Storyboards/NotificationsStoryboard.storyboard; sourceTree = "<group>"; };
+		79EA5CC51D5E78BF00DA7C30 /* PlanningStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = PlanningStoryboard.storyboard; path = Storyboards/PlanningStoryboard.storyboard; sourceTree = "<group>"; };
+		79EA5CC71D5E78D500DA7C30 /* UserStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = UserStoryboard.storyboard; path = Storyboards/UserStoryboard.storyboard; sourceTree = "<group>"; };
+		79EA5CC91D5E78EF00DA7C30 /* LearnStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LearnStoryboard.storyboard; sourceTree = "<group>"; };
 		79EAFE721C5619ED005EE542 /* CustomUITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomUITableViewCell.swift; sourceTree = "<group>"; };
 		79F1F2721C5902B700AAFB69 /* Planning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Planning.swift; path = Model/Planning.swift; sourceTree = "<group>"; };
 		79F1F2741C59044200AAFB69 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Room.swift; path = Model/Room.swift; sourceTree = "<group>"; };
@@ -243,7 +251,7 @@
 		79F8265D1C552C5F0002DCC8 /* UIImageViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtensions.swift; sourceTree = "<group>"; };
 		79F8265F1C554B420002DCC8 /* Spices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Spices.swift; path = Model/Spices.swift; sourceTree = "<group>"; };
 		79F826611C554BED0002DCC8 /* Netsoul.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Netsoul.swift; path = Model/Netsoul.swift; sourceTree = "<group>"; };
-		79F8ADE81C52A8E400F4FDD4 /* APICalls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APICalls.swift; path = Network/APICalls.swift; sourceTree = "<group>"; };
+		79F8ADE81C52A8E400F4FDD4 /* APICalls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APICalls.swift; path = Network/APICalls.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		79F8ADEA1C52AA9C00F4FDD4 /* UserApiCalls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserApiCalls.swift; path = Network/UserApiCalls.swift; sourceTree = "<group>"; };
 		79F8ADED1C52AC9100F4FDD4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Model/User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -461,7 +469,11 @@
 				798850661C4ACBDD00BAA888 /* Connexion */,
 				798850401C4AC51C00BAA888 /* LaunchScreen.storyboard */,
 				79DF37071C4D7B3B00EF69A3 /* MainStoryboard.storyboard */,
+				79EA5CC31D5E789A00DA7C30 /* NotificationsStoryboard.storyboard */,
 				79EA5CBB1D5E64C700DA7C30 /* MainViewStoryboard.storyboard */,
+				79EA5CC91D5E78EF00DA7C30 /* LearnStoryboard.storyboard */,
+				79EA5CC71D5E78D500DA7C30 /* UserStoryboard.storyboard */,
+				79EA5CC51D5E78BF00DA7C30 /* PlanningStoryboard.storyboard */,
 				79EA5CBF1D5E696000DA7C30 /* SettingsStoryboard.storyboard */,
 			);
 			name = StoryBoards;
@@ -742,6 +754,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79EA5CC81D5E78D500DA7C30 /* UserStoryboard.storyboard in Resources */,
 				79EA5CC01D5E696000DA7C30 /* SettingsStoryboard.storyboard in Resources */,
 				797DC7F71C7A1BF900ED095E /* Students1.0.1.sqlite in Resources */,
 				79306D531C4AEBF300708BED /* Localizable.strings in Resources */,
@@ -752,8 +765,11 @@
 				79DE549C1C5BABFF00E2ADDE /* EmptyPlanningTableView.xib in Resources */,
 				7988503F1C4AC51C00BAA888 /* Assets.xcassets in Resources */,
 				793C52C41C5E2D9600C33328 /* thirdParty.html in Resources */,
+				79EA5CCA1D5E78EF00DA7C30 /* LearnStoryboard.storyboard in Resources */,
 				798850681C4ACC1400BAA888 /* ConnexionStoryboard.storyboard in Resources */,
 				79A5AE801C56CB2E004B3FB9 /* GoogleService-Info.plist in Resources */,
+				79EA5CC41D5E789A00DA7C30 /* NotificationsStoryboard.storyboard in Resources */,
+				79EA5CC61D5E78BF00DA7C30 /* PlanningStoryboard.storyboard in Resources */,
 				79EA5CBC1D5E64C700DA7C30 /* MainViewStoryboard.storyboard in Resources */,
 				79F2B1021C60FAE600244AC6 /* EmptyTableView.xib in Resources */,
 				797DC7F91C7A5E4500ED095E /* DownloadingAllUsersView.xib in Resources */,

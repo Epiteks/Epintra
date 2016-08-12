@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2hH-aV-Ilp">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="gTq-Qp-gPw">
+            <objects>
+                <viewController id="kqu-EV-Sy3" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BAd-tI-j9h"/>
+                        <viewControllerLayoutGuide type="bottom" id="K8H-Hv-ALO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2Dn-4a-Uqe">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="5qm-Tb-q9l"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Idd-J4-dvP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1103" y="-616"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="F0b-xq-mr2">
+            <objects>
+                <navigationController id="2hH-aV-Ilp" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" image="calendar" selectedImage="calendar_filled" id="Lrw-Zl-zaU"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="706-gT-ete">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="kqu-EV-Sy3" kind="relationship" relationship="rootViewController" id="EHH-03-6f4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6qc-LU-pGN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="361" y="-616"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="calendar" width="25" height="25"/>
+        <image name="calendar_filled" width="25" height="25"/>
+    </resources>
+</document>

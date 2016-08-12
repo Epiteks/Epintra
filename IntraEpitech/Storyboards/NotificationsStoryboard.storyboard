@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="KEL-Uk-1MZ">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Item-->
+        <scene sceneID="3ex-ar-JCV">
+            <objects>
+                <navigationController id="KEL-Uk-1MZ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" image="notif" selectedImage="notif_filled" id="qCo-Wv-wvF"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zbE-B6-m7O">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="JEB-E9-Hgf" kind="relationship" relationship="rootViewController" id="loM-q3-7a1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zhr-UX-nOp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="361" y="-1284"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="n2l-dG-DhA">
+            <objects>
+                <viewController id="JEB-E9-Hgf" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ReE-GJ-e5c"/>
+                        <viewControllerLayoutGuide type="bottom" id="ISM-NH-oI6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="01M-8G-hB5">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pSv-XX-u7b">
+                                <rect key="frame" x="44" y="148" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Ael-Nu-EzG"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="shb-Pw-XC1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1103" y="-1277"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="notif" width="25" height="25"/>
+        <image name="notif_filled" width="25" height="25"/>
+    </resources>
+</document>
