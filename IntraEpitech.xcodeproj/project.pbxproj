@@ -95,6 +95,7 @@
 		79E4C5C51C6E1C140003DA56 /* StudentRegisteredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E4C5C41C6E1C140003DA56 /* StudentRegisteredViewController.swift */; };
 		79E4C5C71C6E35440003DA56 /* AppointmentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E4C5C61C6E35440003DA56 /* AppointmentDetailViewController.swift */; };
 		79E4C5C91C6E35AC0003DA56 /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E4C5C81C6E35AC0003DA56 /* Appointment.swift */; };
+		79EA5CB61D5E49E800DA7C30 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EA5CB51D5E49E800DA7C30 /* Requests.swift */; };
 		79EAFE731C5619ED005EE542 /* CustomUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EAFE721C5619ED005EE542 /* CustomUITableViewCell.swift */; };
 		79F1F2731C5902B700AAFB69 /* Planning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F1F2721C5902B700AAFB69 /* Planning.swift */; };
 		79F1F2751C59044200AAFB69 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F1F2741C59044200AAFB69 /* Room.swift */; };
@@ -227,6 +228,7 @@
 		79E4C5C41C6E1C140003DA56 /* StudentRegisteredViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudentRegisteredViewController.swift; path = Planning/StudentRegisteredViewController.swift; sourceTree = "<group>"; };
 		79E4C5C61C6E35440003DA56 /* AppointmentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppointmentDetailViewController.swift; path = Planning/AppointmentDetailViewController.swift; sourceTree = "<group>"; };
 		79E4C5C81C6E35AC0003DA56 /* Appointment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Appointment.swift; path = Model/Appointment.swift; sourceTree = "<group>"; };
+		79EA5CB51D5E49E800DA7C30 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Requests.swift; path = Network/Requests.swift; sourceTree = "<group>"; };
 		79EAFE721C5619ED005EE542 /* CustomUITableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomUITableViewCell.swift; sourceTree = "<group>"; };
 		79F1F2721C5902B700AAFB69 /* Planning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Planning.swift; path = Model/Planning.swift; sourceTree = "<group>"; };
 		79F1F2741C59044200AAFB69 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Room.swift; path = Model/Room.swift; sourceTree = "<group>"; };
@@ -528,6 +530,14 @@
 			name = SWRevealViewController;
 			sourceTree = "<group>";
 		};
+		79EA5CB41D5E49AE00DA7C30 /* New */ = {
+			isa = PBXGroup;
+			children = (
+				79EA5CB51D5E49E800DA7C30 /* Requests.swift */,
+			);
+			name = New;
+			sourceTree = "<group>";
+		};
 		79F826541C55275B0002DCC8 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -559,6 +569,7 @@
 		79F8ADE51C52A7DC00F4FDD4 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				79EA5CB41D5E49AE00DA7C30 /* New */,
 				79F8ADE81C52A8E400F4FDD4 /* APICalls.swift */,
 				79F8ADEA1C52AA9C00F4FDD4 /* UserApiCalls.swift */,
 				792B7A601C57EC6200F988BB /* ProjectsApiCall.swift */,
@@ -879,6 +890,7 @@
 				795CC32C1C5CC3A6007AFE87 /* ProjectGroup.swift in Sources */,
 				79622E931C5D4C4B00FBA456 /* ModulesApiCalls.swift in Sources */,
 				79DF37151C4D831200EF69A3 /* TestViewController.swift in Sources */,
+				79EA5CB61D5E49E800DA7C30 /* Requests.swift in Sources */,
 				79A5AE7D1C56B432004B3FB9 /* PlanningViewController.swift in Sources */,
 				791172E51C5FAD4800581DF3 /* ProjectMarksViewController.swift in Sources */,
 				795D81C51C623A1000187E43 /* RegisteredStudent.swift in Sources */,
