@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="seP-H9-gVh">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
@@ -32,7 +31,7 @@
         <!--Menu View Controller-->
         <scene sceneID="Hw0-rr-yTa">
             <objects>
-                <viewController id="beD-a3-sFf" customClass="MenuViewController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="beD-a3-sFf" customClass="MenuViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="igE-2O-Gy4"/>
                         <viewControllerLayoutGuide type="bottom" id="rKD-Gd-PFs"/>
@@ -108,7 +107,7 @@
         <!--Custom Navigation Controller-->
         <scene sceneID="hbq-WY-Zek">
             <objects>
-                <navigationController id="dvA-d1-xR9" customClass="CustomNavigationController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="dvA-d1-xR9" customClass="CustomNavigationController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Q3c-D5-urn">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -124,7 +123,7 @@
         <!--Custom Navigation Controller-->
         <scene sceneID="ssI-bl-q4t">
             <objects>
-                <navigationController id="4h1-92-Aa6" customClass="CustomNavigationController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="4h1-92-Aa6" customClass="CustomNavigationController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="tTj-AP-1Op">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -140,7 +139,7 @@
         <!--Custom Navigation Controller-->
         <scene sceneID="axy-gw-NFN">
             <objects>
-                <navigationController id="cPV-NJ-0DF" customClass="CustomNavigationController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="cPV-NJ-0DF" customClass="CustomNavigationController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="3W9-bL-9Bv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -156,7 +155,7 @@
         <!--Home-->
         <scene sceneID="Whh-ta-cYB">
             <objects>
-                <viewController id="zgs-QS-exw" customClass="HomeViewController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="zgs-QS-exw" customClass="HomeViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sId-y6-7H2"/>
                         <viewControllerLayoutGuide type="bottom" id="rPC-CF-UZC"/>
@@ -250,8 +249,7 @@
         <!--Settings View Controller-->
         <scene sceneID="i3K-3s-ZGP">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2Q1-0v-qbS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="imK-Iu-biY" customClass="SettingsViewController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="imK-Iu-biY" customClass="SettingsViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ihh-GL-5ew"/>
                         <viewControllerLayoutGuide type="bottom" id="IfD-6D-wgY"/>
@@ -349,13 +347,14 @@
                         <segue destination="NBy-0p-1eU" kind="show" identifier="webViewSegue" id="0b6-Kv-RiV"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Q1-0v-qbS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1360" y="3732"/>
         </scene>
         <!--Data Source-->
         <scene sceneID="KhP-Ab-KuC">
             <objects>
-                <viewController id="4bE-zO-rdZ" customClass="PlanningViewController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="4bE-zO-rdZ" customClass="PlanningViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rqF-AN-BdD"/>
                         <viewControllerLayoutGuide type="bottom" id="iZY-gx-mjt"/>
@@ -537,7 +536,7 @@
         <!--Select Semesters View Controller-->
         <scene sceneID="dxx-bD-V7E">
             <objects>
-                <viewController id="4OC-Jh-yro" customClass="SelectSemestersViewController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="4OC-Jh-yro" customClass="SelectSemestersViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lrn-dJ-AYz"/>
                         <viewControllerLayoutGuide type="bottom" id="c0l-P7-8fv"/>
@@ -571,7 +570,7 @@
         <!--Student Registered View Controller-->
         <scene sceneID="b36-MP-tzH">
             <objects>
-                <viewController id="N7w-lk-dc9" customClass="StudentRegisteredViewController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="N7w-lk-dc9" customClass="StudentRegisteredViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4qg-bc-75u"/>
                         <viewControllerLayoutGuide type="bottom" id="ESW-N5-l8T"/>
@@ -638,7 +637,7 @@
         <!--Custom Navigation Controller-->
         <scene sceneID="w4B-6G-PJy">
             <objects>
-                <navigationController id="CCf-6c-UFs" customClass="CustomNavigationController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="CCf-6c-UFs" customClass="CustomNavigationController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zf6-tA-hx1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -654,7 +653,7 @@
         <!--Profile View Controller-->
         <scene sceneID="Mfy-Ua-J3X">
             <objects>
-                <viewController id="T0q-d5-Lyl" customClass="ProfileViewController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="T0q-d5-Lyl" customClass="ProfileViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oZa-P6-HGi"/>
                         <viewControllerLayoutGuide type="bottom" id="n48-HY-Ld7"/>
@@ -792,7 +791,7 @@
         <!--Title-->
         <scene sceneID="6lS-Mf-03M">
             <objects>
-                <viewController id="UIN-VI-pRb" customClass="OtherUserViewController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="UIN-VI-pRb" customClass="OtherUserViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iIN-sZ-XnW"/>
                         <viewControllerLayoutGuide type="bottom" id="yQr-vC-E9I"/>
@@ -997,7 +996,7 @@
         <!--Appointment Detail View Controller-->
         <scene sceneID="VuJ-9F-keO">
             <objects>
-                <viewController id="2h9-9t-dlN" customClass="AppointmentDetailViewController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="2h9-9t-dlN" customClass="AppointmentDetailViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dcZ-78-rCM"/>
                         <viewControllerLayoutGuide type="bottom" id="kUf-6W-WVX"/>
@@ -1177,7 +1176,7 @@
         <!--Ranking View Controller-->
         <scene sceneID="Ml7-i3-S0y">
             <objects>
-                <viewController id="8a6-Zb-ukB" customClass="RankingViewController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8a6-Zb-ukB" customClass="RankingViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8qb-2w-Gs0"/>
                         <viewControllerLayoutGuide type="bottom" id="khP-zx-wv7"/>
@@ -1300,7 +1299,7 @@
         <!--Search User View Controller-->
         <scene sceneID="yWq-9A-llc">
             <objects>
-                <viewController id="OdM-LG-rQQ" customClass="SearchUserViewController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="OdM-LG-rQQ" customClass="SearchUserViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1eJ-cT-SlG"/>
                         <viewControllerLayoutGuide type="bottom" id="fiE-i7-JF9"/>
@@ -1406,7 +1405,7 @@
         <!--Registered Students View Controller-->
         <scene sceneID="miy-7k-sc1">
             <objects>
-                <viewController id="9w4-0H-nIr" customClass="RegisteredStudentsViewController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9w4-0H-nIr" customClass="RegisteredStudentsViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ilT-ls-oyb"/>
                         <viewControllerLayoutGuide type="bottom" id="WcS-58-3fC"/>
@@ -1473,7 +1472,7 @@
         <!--Custom Navigation Controller-->
         <scene sceneID="baP-Ga-Hc9">
             <objects>
-                <navigationController id="VVf-qX-wVw" customClass="CustomNavigationController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="VVf-qX-wVw" customClass="CustomNavigationController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2e6-2S-5HQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1489,7 +1488,7 @@
         <!--Modules View Controller-->
         <scene sceneID="thS-bs-ejp">
             <objects>
-                <viewController id="BKX-ZG-0eL" customClass="ModulesViewController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BKX-ZG-0eL" customClass="ModulesViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="h6b-BS-8e0"/>
                         <viewControllerLayoutGuide type="bottom" id="szk-UF-2YQ"/>
@@ -1573,7 +1572,7 @@
         <!--Module Details View Controller-->
         <scene sceneID="kb0-B3-knz">
             <objects>
-                <viewController id="Vf6-Rc-UyU" customClass="ModuleDetailsViewController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Vf6-Rc-UyU" customClass="ModuleDetailsViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Afa-NY-wuR"/>
                         <viewControllerLayoutGuide type="bottom" id="UeJ-4w-2ZV"/>
@@ -1710,7 +1709,7 @@
         <!--Projects Details View Controller-->
         <scene sceneID="sU0-Bh-81r">
             <objects>
-                <viewController id="jyI-if-Z4K" customClass="ProjectsDetailsViewController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="jyI-if-Z4K" customClass="ProjectsDetailsViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rNn-mS-xAO"/>
                         <viewControllerLayoutGuide type="bottom" id="wGD-aU-6xR"/>
@@ -1856,7 +1855,7 @@
         <!--Project Marks View Controller-->
         <scene sceneID="HiD-OQ-zak">
             <objects>
-                <viewController id="dBC-hV-zHc" customClass="ProjectMarksViewController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="dBC-hV-zHc" customClass="ProjectMarksViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Xob-dY-zna"/>
                         <viewControllerLayoutGuide type="bottom" id="kkb-Md-Ddr"/>
@@ -1924,7 +1923,7 @@
         <!--Comments View Controller-->
         <scene sceneID="tAx-OI-qbe">
             <objects>
-                <viewController id="mbp-hh-niS" customClass="CommentsViewController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="mbp-hh-niS" customClass="CommentsViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="d4o-EA-dm1"/>
                         <viewControllerLayoutGuide type="bottom" id="1oU-sF-ggW"/>
@@ -1959,7 +1958,7 @@
         <!--Web View View Controller-->
         <scene sceneID="lbk-78-2KD">
             <objects>
-                <viewController id="NBy-0p-1eU" customClass="WebViewViewController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="NBy-0p-1eU" customClass="WebViewViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mfb-RX-2hW"/>
                         <viewControllerLayoutGuide type="bottom" id="9Kq-lF-zg2"/>
@@ -1992,7 +1991,7 @@
         <!--Custom Navigation Controller-->
         <scene sceneID="8Ab-Vf-ss7">
             <objects>
-                <navigationController id="Ktg-Ew-Cbl" customClass="CustomNavigationController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="Ktg-Ew-Cbl" customClass="CustomNavigationController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Coj-Kl-Og5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2008,8 +2007,7 @@
         <!--Select Calendar View Controller-->
         <scene sceneID="oXe-QB-Bml">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9XN-Rx-epo" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="pA1-pK-9bs" customClass="SelectCalendarViewController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="pA1-pK-9bs" customClass="SelectCalendarViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bb1-jO-6hp"/>
                         <viewControllerLayoutGuide type="bottom" id="Ccu-c6-Ve4"/>
@@ -2039,13 +2037,14 @@
                         <outlet property="_tableView" destination="Khl-Dq-8SL" id="QOh-5f-aBt"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9XN-Rx-epo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2078" y="3732"/>
         </scene>
         <!--Marks View Controller-->
         <scene sceneID="lQT-nm-CHG">
             <objects>
-                <viewController id="8I8-8Y-QdY" customClass="MarksViewController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8I8-8Y-QdY" customClass="MarksViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="z6N-SE-MD7"/>
                         <viewControllerLayoutGuide type="bottom" id="r4v-Lf-mtG"/>
@@ -2130,7 +2129,7 @@
         <!--Custom Navigation Controller-->
         <scene sceneID="xQ9-jo-OLj">
             <objects>
-                <navigationController id="JxF-uM-4Fe" customClass="CustomNavigationController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="JxF-uM-4Fe" customClass="CustomNavigationController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="XmC-6e-oVD">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -2146,7 +2145,7 @@
         <!--Projects View Controller-->
         <scene sceneID="zoW-LS-fcO">
             <objects>
-                <viewController id="zao-ke-oxK" customClass="ProjectsViewController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="zao-ke-oxK" customClass="ProjectsViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Opi-mm-b5n"/>
                         <viewControllerLayoutGuide type="bottom" id="NeP-lv-t91"/>
@@ -2224,9 +2223,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="WEN-N9-tGx"/>
-        <segue reference="7C7-Yy-o9Q"/>
-        <segue reference="wc1-Wr-Xgh"/>
+        <segue reference="MHx-jA-Aj7"/>
+        <segue reference="g89-O9-UIS"/>
         <segue reference="en8-4d-vK7"/>
-        <segue reference="0b6-Kv-RiV"/>
+        <segue reference="wc1-Wr-Xgh"/>
     </inferredMetricsTieBreakers>
 </document>

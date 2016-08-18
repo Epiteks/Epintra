@@ -26,7 +26,6 @@
         <!--Settings View Controller-->
         <scene sceneID="VRo-tk-xlg">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="56L-d4-2Nc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="AFq-lT-m7e" customClass="SettingsViewController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aHt-WA-MIK"/>
@@ -115,24 +114,21 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="wPV-Fa-gQ2">
-                        <barButtonItem key="leftBarButtonItem" image="menu" id="fsD-1J-vNY"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="wPV-Fa-gQ2"/>
                     <connections>
                         <outlet property="_tableView" destination="OCc-JZ-CVe" id="Co8-AN-u9J"/>
-                        <outlet property="menuButton" destination="fsD-1J-vNY" id="2w8-HW-4dU"/>
                         <segue destination="aUR-WV-F7o" kind="show" identifier="SelectCalendarSegue" id="WdO-Rm-UbB">
                             <nil key="action"/>
                         </segue>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="56L-d4-2Nc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="722" y="1420"/>
         </scene>
         <!--Select Calendar View Controller-->
         <scene sceneID="AIq-2T-9BR">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="a0V-F8-dkS" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="aUR-WV-F7o" customClass="SelectCalendarViewController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cbK-c4-O7O"/>
@@ -163,12 +159,12 @@
                         <outlet property="_tableView" destination="bqe-rc-Egn" id="YE3-J1-yNP"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a0V-F8-dkS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1466" y="1420"/>
         </scene>
     </scenes>
     <resources>
-        <image name="menu" width="22" height="22"/>
         <image name="settings-1" width="25" height="25"/>
         <image name="settings_filled" width="25" height="25"/>
     </resources>
