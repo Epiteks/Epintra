@@ -22,11 +22,11 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 		
 		self.title = NSLocalizedString("Calendars", comment: "")
 		
-		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: ("backButtonAction:"))
+		//self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: ("backButtonAction:"))
 		self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
 		
-		self.navigationItem.setHidesBackButton(true, animated: false)
-		self.navigationItem.backBarButtonItem = nil
+		//self.navigationItem.setHidesBackButton(true, animated: false)
+		self.navigationItem.backBarButtonItem?.tintColor = UIColor.redColor()
 		
 	}
 	

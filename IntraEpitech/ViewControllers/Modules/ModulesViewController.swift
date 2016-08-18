@@ -24,7 +24,7 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		if self.revealViewController() != nil {
 			menuButton.target = self.revealViewController()
-			menuButton.action = "revealToggle:"
+			menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
 			self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
 		}
 		self.title = NSLocalizedString("Modules", comment: "")
@@ -49,7 +49,7 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
 		}
 		
 		self._refreshControl.tintColor = UIUtils.backgroundColor()
-		self._refreshControl.addTarget(self, action: "refreshData:", forControlEvents: .ValueChanged)
+		self._refreshControl.addTarget(self, action: #selector(ModulesViewController.refreshData(_:)), forControlEvents: .ValueChanged)
 		self._tableView.addSubview(_refreshControl)
 		
 		// Do any additional setup after loading the view.

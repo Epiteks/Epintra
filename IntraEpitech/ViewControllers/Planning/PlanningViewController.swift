@@ -46,12 +46,10 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		
 		if self.revealViewController() != nil {
 			menuButton.target = self.revealViewController()
-			menuButton.action = "revealToggle:"
+			menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
 			self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
 		}
 		
-		
-		self.title = NSLocalizedString("Planning", comment: "")
 		_tableView.separatorInset = UIEdgeInsetsZero
 		
 		_calendar.scope = FSCalendarScope.Week
@@ -64,7 +62,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		//_calendar.allowsSelection = false
 		
 		self._refreshControl.tintColor = UIUtils.backgroundColor()
-		self._refreshControl.addTarget(self, action: "refreshData:", forControlEvents: .ValueChanged)
+		self._refreshControl.addTarget(self, action: #selector(PlanningViewController.refreshData(_:)), forControlEvents: .ValueChanged)
 		self._tableView.addSubview(_refreshControl)
 		self._tableView.allowsMultipleSelectionDuringEditing = true
 		
@@ -78,6 +76,11 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		loadData((_currentDate.startOfWeek()?.toAPIString())!, end: (_currentDate.endOfWeek()?.toAPIString())!) { _ in
 			MJProgressView.instance.hideProgress()
 		}
+	}
+	
+	
+	override func awakeFromNib() {
+		self.title = NSLocalizedString("Planning", comment: "")
 	}
 	
 	
@@ -181,7 +184,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 			if (data.0 == _currentDate.toAPIString()) {
 				return res
 			}
-			res++
+			res += 1
 		}
 		
 		if (_currentDate.toAPIString() != _tableViewData[_tableViewData.count - 1].0.shortToDate().toAPIString()) {
@@ -199,7 +202,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 			if (data.0 == date.toAPIString()) {
 				return res
 			}
-			res++
+			res += 1
 		}
 		
 		if (date.toAPIString() != _tableViewData[_tableViewData.count - 1].0.shortToDate().toAPIString()) {
@@ -227,7 +230,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		df.dateFormat = "yyyy-MM-dd HH:mm:ss"
 		
 		
-		for (var i = 0; i < _tableViewData.count; i++)
+		for (var i = 0; i < _tableViewData.count; i += 1)
 		{
 			let val = _tableViewData[i].1
 			_tableViewData[i].1 = val.sort{ df.dateFromString($0._startTime!)!.compare(df.dateFromString($1._startTime!)!) == .OrderedAscending }
@@ -305,7 +308,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		statusImageView.imageAtIndexPath = indexPath
 		
 		
-		let singleTap = UITapGestureRecognizer(target: self, action:"actionOnImageView:")
+		let singleTap = UITapGestureRecognizer(target: self, action:#selector(PlanningViewController.actionOnImageView(_:)))
 		singleTap.numberOfTapsRequired = 1
 		
 		statusImageView.userInteractionEnabled = true

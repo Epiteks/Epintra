@@ -32,7 +32,7 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		// Do any additional setup after loading the view.
 		self.title = NSLocalizedString("Ranking", comment: "")
-		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: ("backButtonAction:"))
+		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: (#selector(RankingViewController.backButtonAction(_:))))
 		self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
 		
 		self.navigationItem.setHidesBackButton(true, animated: false)
@@ -78,7 +78,7 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 			self.navigationItem.titleView = resultSearchController.searchBar
 		}
 		self._refreshControl.tintColor = UIUtils.backgroundColor()
-		self._refreshControl.addTarget(self, action: "refreshData:", forControlEvents: .ValueChanged)
+		self._refreshControl.addTarget(self, action: #selector(RankingViewController.refreshData(_:)), forControlEvents: .ValueChanged)
 		self._tableView.addSubview(_refreshControl)
 	}
 	

@@ -42,7 +42,7 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 		_tableView.separatorInset.left = 0
 		
 		self._studentsBarButton.title = NSLocalizedString("Grades", comment: "")
-		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: ("backButtonAction:"))
+		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: (#selector(ModuleDetailsViewController.backButtonAction(_:))))
 		self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
 		
 		self.navigationItem.setHidesBackButton(true, animated: false)

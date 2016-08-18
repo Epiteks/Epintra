@@ -40,10 +40,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		if self.revealViewController() != nil {
 			menuButton.target = self.revealViewController()
-			menuButton.action = "revealToggle:"
+			menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
 			self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
 		}
-		self.title = NSLocalizedString("Profile", comment: "")
 		
 		loadProfileView()
 		setUIElements()
@@ -79,12 +78,15 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		self._profileImageView.toCircle()
 		
 		self._refreshControl.tintColor = UIUtils.backgroundColor()
-		self._refreshControl.addTarget(self, action: "refreshData:", forControlEvents: .ValueChanged)
+		self._refreshControl.addTarget(self, action: #selector(ProfileViewController.refreshData(_:)), forControlEvents: .ValueChanged)
 		self._tableView.addSubview(_refreshControl)
 		
 		confettiConf()
 	}
 	
+	override func awakeFromNib() {
+		self.title = NSLocalizedString("Profile", comment: "")
+	}
 	
 	
 	func confettiConf() {
@@ -199,7 +201,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		_logLabel.textColor = _currentUser?._log?.getColor()
 		
 		
-		let singleTap = UITapGestureRecognizer(target: self, action:"gpaTapDetected:")
+		let singleTap = UITapGestureRecognizer(target: self, action:#selector(ProfileViewController.gpaTapDetected(_:)))
 		singleTap.numberOfTapsRequired = 1
 		_gpaLabel.userInteractionEnabled = true
 		_gpaLabel.addGestureRecognizer(singleTap)

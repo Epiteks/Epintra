@@ -19,7 +19,7 @@ class SelectSemestersViewController: UIViewController, UITableViewDelegate, UITa
 		
 		self.title = NSLocalizedString("Semesters", comment :"")
 		
-		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: ("backButtonAction:"))
+		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: (#selector(SelectSemestersViewController.backButtonAction(_:))))
 		self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
 		
 		self.navigationItem.setHidesBackButton(true, animated: false)

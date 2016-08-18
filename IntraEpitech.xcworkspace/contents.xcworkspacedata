@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:IntraEpitech/Storyboards/NotificationsStoryboard.storyboard">
-   </FileRef>
-   <FileRef
       location = "group:IntraEpitech.xcodeproj">
    </FileRef>
    <FileRef

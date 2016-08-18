@@ -32,15 +32,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 		
 		_currentUser = ApplicationManager.sharedInstance._user!
 		
-		print(ApplicationManager.sharedInstance._token)
-		
-		// Do any additional setup after loading the view.
-		if self.revealViewController() != nil {
-			menuButton.target = self.revealViewController()
-			menuButton.action = "revealToggle:"
-			self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-		}
-		
 		loadProfileView()
 		
 		if let img = ApplicationManager.sharedInstance._downloadedImages![(ApplicationManager.sharedInstance._user?._imageUrl!)!]
@@ -55,9 +46,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 		setUIElements()
 		
 		self._refreshControl.tintColor = UIUtils.backgroundColor()
-		self._refreshControl.addTarget(self, action: "refreshData:", forControlEvents: .ValueChanged)
+		self._refreshControl.addTarget(self, action: #selector(HomeViewController.refreshData(_:)), forControlEvents: .ValueChanged)
 		self._alertTableView.addSubview(_refreshControl)
-		self.title = NSLocalizedString("Home", comment: "")
+		
+	}
+	
+	override func awakeFromNib() {
+		self.title = NSLocalizedString("Notifications", comment: "")
 	}
 	
 	override func viewWillAppear(animated: Bool) {

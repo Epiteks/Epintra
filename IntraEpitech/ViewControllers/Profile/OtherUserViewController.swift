@@ -48,7 +48,7 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 		self.title = _currentUser?._login
 		
 		self._segmentedControl.tintColor = UIUtils.backgroundColor()
-		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: ("backButtonAction:"))
+		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: (#selector(OtherUserViewController.backButtonAction(_:))))
 		self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
 		
 		self.navigationItem.setHidesBackButton(true, animated: false)

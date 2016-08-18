@@ -21,7 +21,7 @@ class ProjectMarksViewController: UIViewController, UITableViewDelegate, UITable
 		self.title = NSLocalizedString("Marks", comment: "")
 		
 		// Do any additional setup after loading the view.
-		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: ("backButtonAction:"))
+		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: (#selector(ProjectMarksViewController.backButtonAction(_:))))
 		self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
 		
 		self.navigationItem.setHidesBackButton(true, animated: false)
@@ -50,7 +50,7 @@ class ProjectMarksViewController: UIViewController, UITableViewDelegate, UITable
 				index = NSIndexPath(forRow: i, inSection: 0)
 				break
 			}
-			i++
+			i += 1
 		}
 		
 		_tableView.scrollToRowAtIndexPath(index, atScrollPosition: UITableViewScrollPosition.Top, animated: true)

@@ -83,7 +83,7 @@ class DBManager: NSObject {
 				studentInfo._gpa = Float(resultSet.stringForColumn("gpa"))
 				studentInfo._promo = resultSet.stringForColumn("promo")
 				studentInfo._position = i
-				i++
+				i += 1
 				marrStudentInfo.addObject(studentInfo)
 			}
 		}

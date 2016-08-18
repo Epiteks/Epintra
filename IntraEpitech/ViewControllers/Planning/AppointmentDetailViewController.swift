@@ -22,7 +22,7 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 		
 		// Do any additional setup after loading the view.
 		self.title = _appointment._eventName!
-		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: ("backButtonAction:"))
+		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: (#selector(AppointmentDetailViewController.backButtonAction(_:))))
 		self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
 		
 		self.navigationItem.setHidesBackButton(true, animated: false)
@@ -98,7 +98,7 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 			subview.removeFromSuperview()
 		}
 		
-		for (var i = 0; i < data._members?.count; i++) {
+		for (var i = 0; i < data._members?.count; i += 1) {
 			let nibView = NSBundle.mainBundle().loadNibNamed("LittleUserView", owner: self, options: nil)[0] as! UIView
 			var profileViewFrame = nibView.frame
 			profileViewFrame.origin.x = profileViewFrame.size.width * CGFloat(i)
@@ -170,7 +170,7 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 			subview.removeFromSuperview()
 		}
 		
-		for (var i = 0; i < data._members?.count; i++) {
+		for (var i = 0; i < data._members?.count; i += 1) {
 			let nibView = NSBundle.mainBundle().loadNibNamed("LittleUserView", owner: self, options: nil)[0] as! UIView
 			var profileViewFrame = nibView.frame
 			profileViewFrame.origin.x = profileViewFrame.size.width * CGFloat(i)

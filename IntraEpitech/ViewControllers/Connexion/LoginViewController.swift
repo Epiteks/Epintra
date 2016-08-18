@@ -59,7 +59,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 			self.view.layoutIfNeeded()
 			}, completion: nil)
 		
-		let gesture = UITapGestureRecognizer(target: self, action: "tapOnView:")
+		let gesture = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.tapOnView(_:)))
 		self.view.addGestureRecognizer(gesture)
 		
 	}

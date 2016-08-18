@@ -49,7 +49,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 		
 		// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 		// self.navigationItem.rightBarButtonItem = self.editButtonItem()
-		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: ("backButtonAction:"))
+		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: (#selector(SearchUserViewController.backButtonAction(_:))))
 		self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
 		
 		self.navigationItem.setHidesBackButton(true, animated: false)
@@ -79,7 +79,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 		}
 		
 		self._refreshControl.tintColor = UIUtils.backgroundColor()
-		self._refreshControl.addTarget(self, action: "refreshData:", forControlEvents: .ValueChanged)
+		self._refreshControl.addTarget(self, action: #selector(SearchUserViewController.refreshData(_:)), forControlEvents: .ValueChanged)
 		
 		self._tableView.addSubview(_refreshControl)
 		

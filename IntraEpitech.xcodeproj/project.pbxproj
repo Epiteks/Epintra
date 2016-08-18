@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		18A64726A8A3EF67E05A8C24 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F850461F157F431C9CB699 /* Pods.framework */; };
+		790455391D662ABF00B26907 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790455381D662ABF00B26907 /* TabBarController.swift */; };
 		7906842A1C6FC1E10067B26F /* AppointmentEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790684291C6FC1E10067B26F /* AppointmentEvent.swift */; };
 		791172E51C5FAD4800581DF3 /* ProjectMarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791172E41C5FAD4800581DF3 /* ProjectMarksViewController.swift */; };
 		791172E71C5FB7B800581DF3 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791172E61C5FB7B800581DF3 /* CommentsViewController.swift */; };
@@ -138,6 +139,7 @@
 		47C6F3DBD33FE04C377D2754 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		66F400B651BD64C9AA64405C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		74F850461F157F431C9CB699 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		790455381D662ABF00B26907 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		790684291C6FC1E10067B26F /* AppointmentEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppointmentEvent.swift; path = Model/AppointmentEvent.swift; sourceTree = "<group>"; };
 		791172E41C5FAD4800581DF3 /* ProjectMarksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectMarksViewController.swift; path = Marks/ProjectMarksViewController.swift; sourceTree = "<group>"; };
 		791172E61C5FB7B800581DF3 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommentsViewController.swift; path = Marks/CommentsViewController.swift; sourceTree = "<group>"; };
@@ -197,7 +199,7 @@
 		797DC7F21C7A0B4E00ED095E /* DBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DBManager.swift; path = Application/DBManager.swift; sourceTree = "<group>"; };
 		797DC7F61C7A1BF900ED095E /* Students1.0.1.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Students1.0.1.sqlite; sourceTree = "<group>"; };
 		797DC7F81C7A5E4500ED095E /* DownloadingAllUsersView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DownloadingAllUsersView.xib; sourceTree = "<group>"; };
-		798850341C4AC51C00BAA888 /* IntraEpitech.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntraEpitech.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		798850341C4AC51C00BAA888 /* Epintra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Epintra.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		798850371C4AC51C00BAA888 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		798850391C4AC51C00BAA888 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7988503E1C4AC51C00BAA888 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -413,7 +415,7 @@
 		798850351C4AC51C00BAA888 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				798850341C4AC51C00BAA888 /* IntraEpitech.app */,
+				798850341C4AC51C00BAA888 /* Epintra.app */,
 				798850481C4AC51C00BAA888 /* IntraEpitechTests.xctest */,
 				798850531C4AC51C00BAA888 /* IntraEpitechUITests.xctest */,
 			);
@@ -514,6 +516,7 @@
 				7988506F1C4ACD9200BAA888 /* Connexion */,
 				79DF37141C4D831200EF69A3 /* TestViewController.swift */,
 				795CC3311C5D00B0007AFE87 /* WebViewViewController.swift */,
+				790455381D662ABF00B26907 /* TabBarController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -652,7 +655,7 @@
 			);
 			name = IntraEpitech;
 			productName = IntraEpitech;
-			productReference = 798850341C4AC51C00BAA888 /* IntraEpitech.app */;
+			productReference = 798850341C4AC51C00BAA888 /* Epintra.app */;
 			productType = "com.apple.product-type.application";
 		};
 		798850471C4AC51C00BAA888 /* IntraEpitechTests */ = {
@@ -891,6 +894,7 @@
 				79622EA01C5D612100FBA456 /* RankingViewController.swift in Sources */,
 				795F1EA41C5602DC00B8C347 /* StringExtensions.swift in Sources */,
 				7988506D1C4ACD4500BAA888 /* UIColorExtensions.swift in Sources */,
+				790455391D662ABF00B26907 /* TabBarController.swift in Sources */,
 				79F8ADE91C52A8E400F4FDD4 /* APICalls.swift in Sources */,
 				795994441C52DA35007BE7C5 /* SplashScreenViewController.swift in Sources */,
 				79F826531C5521AE0002DCC8 /* GPA.swift in Sources */,
@@ -1069,8 +1073,8 @@
 				INFOPLIST_FILE = IntraEpitech/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "junger-m.IntraEpitech";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = Shakarang.IntraEpitech;
+				PRODUCT_NAME = Epintra;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "IntraEpitech/ViewControllers/IntraEpitech-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1089,8 +1093,8 @@
 				INFOPLIST_FILE = IntraEpitech/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "junger-m.IntraEpitech";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = Shakarang.IntraEpitech;
+				PRODUCT_NAME = Epintra;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "IntraEpitech/ViewControllers/IntraEpitech-Bridging-Header.h";
 			};

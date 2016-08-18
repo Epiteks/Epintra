@@ -55,7 +55,7 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 		self._masterImage.cropToSquare()
 		self._masterImage.toCircle()
 		fillProgressView()
-		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: ("backButtonAction:"))
+		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: (#selector(ProjectsDetailsViewController.backButtonAction(_:))))
 		self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
 		
 		self.navigationItem.setHidesBackButton(true, animated: false)
