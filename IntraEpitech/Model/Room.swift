@@ -26,8 +26,7 @@ class Room: NSObject {
 		
 		let arr = code?.componentsSeparatedByString("/")
 		
-		if (arr != nil && arr!.count == 0)
-		{
+		if arr != nil && arr!.count == 0 {
 			return ""
 		}
 		

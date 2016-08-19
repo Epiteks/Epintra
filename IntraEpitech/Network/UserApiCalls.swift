@@ -1,4 +1,4 @@
-    //
+//
 //  UserApiCalls.swift
 //  IntraEpitech
 //
@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class UserApiCalls: APICalls {
 	
-	class func loginCall(login: String, password :String, onCompletion: (Bool, String) ->()) {
+	class func loginCall(login: String, password: String, onCompletion: (Bool, String) ->()) {
 		
 		let url = super.getApiUrl() + "login"
 		
@@ -22,8 +22,8 @@ class UserApiCalls: APICalls {
 					let responseCall = JSON(response.result.value!)
 					let token = responseCall["token"].stringValue
 					let errorDict = responseCall["error"].dictionaryValue
-					let errorMessage :String?
-					if (errorDict.count > 0) {
+					let errorMessage: String?
+					if errorDict.count > 0 {
 						errorMessage = (errorDict["message"]?.stringValue)
 						onCompletion(false, errorMessage!)
 					} else {
@@ -42,49 +42,43 @@ class UserApiCalls: APICalls {
 		
 		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!, "user" : login])
 			.responseJSON { response in
-				if (response.result.isSuccess) {
+				if response.result.isSuccess {
 					let responseCall = JSON(response.result.value!)
 					let errorDict = responseCall["error"].dictionaryValue
-					let errorMessage :String?
-					if (errorDict.count > 0) {
+					let errorMessage: String?
+					if errorDict.count > 0 {
 						errorMessage = (errorDict["message"]?.stringValue)
 						onCompletion(false, errorMessage!)
-					}
-					else
-					{
+					} else {
 						let app = ApplicationManager.sharedInstance
 						app.user = User(dict: responseCall)
 						app.lastUserApiCall = NSDate().timeIntervalSince1970
 						app.planningSemesters[(app.user?.semester!)!] = true
 						onCompletion(true, "Ok")
 					}
-				}
-				else {
+				} else {
 					onCompletion(false, (response.result.error?.localizedDescription)!)
 				}
 		}
 	}
-	class func getSelectedUserData(login :String, onCompletion :(Bool, User?, String) ->()) {
+	class func getSelectedUserData(login: String, onCompletion: (Bool, User?, String) ->()) {
 		
 		let url = super.getApiUrl() + "user"
 		
 		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!, "user" : login])
 			.responseJSON { response in
-				if (response.result.isSuccess) {
+				if response.result.isSuccess {
 					let responseCall = JSON(response.result.value!)
 					let errorDict = responseCall["error"].dictionaryValue
-					let errorMessage :String?
-					if (errorDict.count > 0) {
+					let errorMessage: String?
+					if errorDict.count > 0 {
 						errorMessage = (errorDict["message"]?.stringValue)
 						onCompletion(false, nil, errorMessage!)
-					}
-					else
-					{
+					} else {
 						let usr = User(dict: responseCall)
 						onCompletion(true, usr, "Ok")
 					}
-				}
-				else {
+				} else {
 					
 				}
 		}
@@ -92,49 +86,44 @@ class UserApiCalls: APICalls {
 	
 	
 	
-	class func getUserHistory(onCompletion :(Bool, String) ->()) {
+	class func getUserHistory(onCompletion: (Bool, String) ->()) {
 		
 		let url = super.getApiUrl() + "infos"
 		
 		Alamofire.request(.POST, url, parameters: ["token": ApplicationManager.sharedInstance.token!])
 			.responseJSON { response in
-				if (response.result.isSuccess) {
+				if response.result.isSuccess {
 					let responseCall = JSON(response.result.value!)
 					let errorDict = responseCall["error"].dictionaryValue
-					let errorMessage :String?
-					if (errorDict.count > 0) {
+					let errorMessage: String?
+					if errorDict.count > 0 {
 						errorMessage = (errorDict["message"]?.stringValue)
 						onCompletion(false, errorMessage!)
-					}
-					else
-					{	
+					} else {	
 						ApplicationManager.sharedInstance.user?.fillHistory(responseCall)
 						onCompletion(true, "Ok")
 					}
-				}
-				else {
+				} else {
 					onCompletion(false, (response.result.error?.localizedDescription)!)
 				}
 		}
 	}
 	
-	class func getUserDocuments(onCompletion :(Bool, [File]?, String) ->()) {
+	class func getUserDocuments(onCompletion: (Bool, [File]?, String) ->()) {
 		
 		let url = super.getApiUrl() + "user/files"
 		
 		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
 			"login" :(ApplicationManager.sharedInstance.user?.login)!])
 			.responseJSON { response in
-				if (response.result.isSuccess) {
+				if response.result.isSuccess {
 					let responseCall = JSON(response.result.value!)
 					let errorDict = responseCall["error"].dictionaryValue
-					let errorMessage :String?
-					if (errorDict.count > 0) {
+					let errorMessage: String?
+					if errorDict.count > 0 {
 						errorMessage = (errorDict["message"]?.stringValue)
 						onCompletion(false, nil, errorMessage!)
-					}
-					else
-					{
+					} else {
 						let arr = responseCall.arrayValue
 						var resp = [File]()
 						for tmp in arr {
@@ -143,30 +132,27 @@ class UserApiCalls: APICalls {
 						
 						onCompletion(true, resp, "Ok")
 					}
-				}
-				else {
+				} else {
 					onCompletion(false, nil, (response.result.error?.localizedDescription)!)
 				}
 		}
 	}
 	
-	class func getUserFlags(login :String?, onCompletion :(Bool, [Flags]?, String) ->()) {
+	class func getUserFlags(login: String?, onCompletion: (Bool, [Flags]?, String) ->()) {
 		
 		let url = super.getApiUrl() + "user/flags"
 		
 		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
 			"login" :login!])
 			.responseJSON { response in
-				if (response.result.isSuccess) {
+				if response.result.isSuccess {
 					let responseCall = JSON(response.result.value!)
 					let errorDict = responseCall["error"].dictionaryValue
-					let errorMessage :String?
-					if (errorDict.count > 0) {
+					let errorMessage: String?
+					if errorDict.count > 0 {
 						errorMessage = (errorDict["message"]?.stringValue)
 						onCompletion(false, nil, errorMessage!)
-					}
-					else
-					{
+					} else {
 						let flags = responseCall["flags"]
 						var resp = [Flags]()
 						
@@ -176,31 +162,28 @@ class UserApiCalls: APICalls {
 						resp.append(Flags(name: "ghost", dict: flags["ghost"]))
 						onCompletion(true, resp, "Ok")
 					}
-				}
-				else {
+				} else {
 					
 					onCompletion(false, nil, (response.result.error?.localizedDescription)!)
 				}
 		}
 	}
 	
-	class func getAllUsers(onCompletion :(Bool, [StudentInfo]?, String) ->()) {
+	class func getAllUsers(onCompletion: (Bool, [StudentInfo]?, String) ->()) {
 		
 		let url = super.getRankingUrl()
 		
 		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
 			"login" :(ApplicationManager.sharedInstance.user?.login)!])
 			.responseJSON { response in
-				if (response.result.isSuccess) {
+				if response.result.isSuccess {
 					let responseCall = JSON(response.result.value!)
 					let errorDict = responseCall["error"].dictionaryValue
-					let errorMessage :String?
-					if (errorDict.count > 0) {
+					let errorMessage: String?
+					if errorDict.count > 0 {
 						errorMessage = (errorDict["message"]?.stringValue)
 						onCompletion(false, nil, errorMessage!)
-					}
-					else
-					{
+					} else {
 						
 						var resp = [StudentInfo]()
 						let db = DBManager.getInstance()
@@ -212,15 +195,14 @@ class UserApiCalls: APICalls {
 						resp = UserApiCalls.addPromo("tech5", responseCall: responseCall, arr: resp)
 						onCompletion(true, resp, "Ok")
 					}
-				}
-				else {
+				} else {
 					
 					onCompletion(false, nil, (response.result.error?.localizedDescription)!)
 				}
 		}
 	}
 	
-	class func addPromo(name :String, responseCall :JSON, var arr :[StudentInfo]) -> [StudentInfo]{
+	class func addPromo(name: String, responseCall: JSON, var arr: [StudentInfo]) -> [StudentInfo] {
 		let db = DBManager.getInstance()
 		let tek = responseCall[name].arrayValue
 		

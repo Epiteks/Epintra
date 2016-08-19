@@ -12,7 +12,7 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 	
 	@IBOutlet weak var tableView: UITableView!
 	
-	var appointment : AppointmentEvent!
+	var appointment: AppointmentEvent!
 	var appointments = [Appointment]()
 	
 	override func viewDidLoad() {
@@ -29,7 +29,7 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 		// Dispose of any resources that can be recreated.
 	}
 	
-	func setAppointments(inout app :AppointmentEvent) {
+	func setAppointments(inout app: AppointmentEvent) {
 		appointment = app
 	}
 	
@@ -57,26 +57,23 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 	}
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		var cell :UITableViewCell!
+		var cell: UITableViewCell!
 		
 		if (appointments[indexPath.section].master == nil && appointment.canRegister()) {// appointments[indexPath.section].master == nil && appointment.groupId != "") {
 			cell = createRegisterCell()
-		}
-		else if (appointments[indexPath.section].master == nil && !appointment.canRegister()) {
+		} else if (appointments[indexPath.section].master == nil && !appointment.canRegister()) {
 			cell = UITableViewCell()
 			cell.selectionStyle = .None
-		}
-		else if (appointments[indexPath.section].title?.characters.count == 0) {
+		} else if (appointments[indexPath.section].title?.characters.count == 0) {
 			cell = createFollowUpCell(indexPath)
-		}
-		else {
+		} else {
 			cell = createGroupCell(indexPath)
 		}
 		
 		return cell
 	}
 	
-	func createFollowUpCell(indexPath :NSIndexPath) -> UITableViewCell {
+	func createFollowUpCell(indexPath: NSIndexPath) -> UITableViewCell {
 		
 		let cell = tableView.dequeueReusableCellWithIdentifier("followUpCell")!
 		
@@ -102,15 +99,12 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 			nibView.tag = indexPath.section * 100 + i
 			
 			if (data.members![i].imageURL.characters.count > 0) {
-				if let img = ApplicationManager.sharedInstance.downloadedImages![data.members![i].imageURL]
-				{
+				if let img = ApplicationManager.sharedInstance.downloadedImages![data.members![i].imageURL] {
 					userProfileImage.image = img
 					userProfileImage.cropToSquare()
-				}
-				else {
-					ImageDownloader.downloadFromCallback(link: data.members![i].imageURL) { (link :String) in
-						if let img = ApplicationManager.sharedInstance.downloadedImages![link]
-						{
+				} else {
+					ImageDownloader.downloadFromCallback(link: data.members![i].imageURL) { (link: String) in
+						if let img = ApplicationManager.sharedInstance.downloadedImages![link] {
 							userProfileImage.image = img
 							userProfileImage.cropToSquare()
 							userProfileImage.toCircle()
@@ -143,7 +137,7 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 		return cell
 	}
 	
-	func createGroupCell(indexPath :NSIndexPath) -> UITableViewCell {
+	func createGroupCell(indexPath: NSIndexPath) -> UITableViewCell {
 		
 		let cell = tableView.dequeueReusableCellWithIdentifier("groupCell")!
 		
@@ -174,15 +168,12 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 			nibView.tag = indexPath.section * 100 + i
 			
 			if (data.members![i].imageURL.characters.count > 0) {
-				if let img = ApplicationManager.sharedInstance.downloadedImages![data.members![i].imageURL]
-				{
+				if let img = ApplicationManager.sharedInstance.downloadedImages![data.members![i].imageURL] {
 					userProfileImage.image = img
 					userProfileImage.cropToSquare()
-				}
-				else {
-					ImageDownloader.downloadFromCallback(link: data.members![i].imageURL) { (link :String) in
-						if let img = ApplicationManager.sharedInstance.downloadedImages![link]
-						{
+				} else {
+					ImageDownloader.downloadFromCallback(link: data.members![i].imageURL) { (link: String) in
+						if let img = ApplicationManager.sharedInstance.downloadedImages![link] {
 							userProfileImage.image = img
 							userProfileImage.cropToSquare()
 							userProfileImage.toCircle()
@@ -210,26 +201,24 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 			self.tableView.userInteractionEnabled = false
 			self.tableView.scrollEnabled = false
 			MJProgressView.instance.showProgress(self.view, white: false)
-			PlanningApiCalls.subscribeToSlot(appointment, slot: data) { (isOk :Bool, _, mess :String) in
+			PlanningApiCalls.subscribeToSlot(appointment, slot: data) { (isOk: Bool, _, mess: String) in
 				
 				if (!isOk) {
 					MJProgressView.instance.hideProgress()
 					self.tableView.userInteractionEnabled = true
 					self.tableView.scrollEnabled = true
 					ErrorViewer.errorPresent(self, mess: mess) {}
-				}
-				else {
+				} else {
 					let tmp = Planning(appointment: self.appointment)
 					tmp.startTime = self.appointment.eventStart?.toAppointmentString()
 					tmp.endTime = self.appointment.eventEnd?.toAppointmentString()
-					PlanningApiCalls.getEventDetails(tmp) { (isOk :Bool, resp :AppointmentEvent?, mess :String) in
+					PlanningApiCalls.getEventDetails(tmp) { (isOk: Bool, resp: AppointmentEvent?, mess: String) in
 						MJProgressView.instance.hideProgress()
 						self.tableView.userInteractionEnabled = true
 						self.tableView.scrollEnabled = true
 						if (!isOk) {
 							ErrorViewer.errorPresent(self, mess: mess) {}
-						}
-						else {
+						} else {
 							//self.appointment = resp!
 							self.appointment.registered = true
 							self.appointment.slots = resp!.slots
@@ -248,38 +237,34 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 		
 		if (appointments[indexPath.section].title! == "" || appointments[indexPath.section].master == nil) {
 			return 70
-		}
-		else {
+		} else {
 			return 95
 		}
 	}
 	
-	func actionOnImageView(sender :UIGestureRecognizer)
-	{
+	func actionOnImageView(sender: UIGestureRecognizer) {
 		let tapLocation = sender.locationInView(self.tableView)
 		let indexPath = self.tableView.indexPathForRowAtPoint(tapLocation)
 		let data = appointments[indexPath!.section]
 		
 		print(data.master?.login)
 		MJProgressView.instance.showProgress(self.view, white: false)
-		PlanningApiCalls.unsubscribeToSlot(self.appointment, slot: data) { (isOk :Bool, _, mess :String) in
+		PlanningApiCalls.unsubscribeToSlot(self.appointment, slot: data) { (isOk: Bool, _, mess: String) in
 			
 			if (!isOk) {
 				MJProgressView.instance.hideProgress()
 				ErrorViewer.errorPresent(self, mess: mess) {}
-			}
-			else {
+			} else {
 				let tmp = Planning(appointment: self.appointment)
 				tmp.startTime = self.appointment.eventStart?.toAppointmentString()
 				tmp.endTime = self.appointment.eventEnd?.toAppointmentString()
-				PlanningApiCalls.getEventDetails(tmp) { (isOk :Bool, resp :AppointmentEvent?, mess :String) in
+				PlanningApiCalls.getEventDetails(tmp) { (isOk: Bool, resp: AppointmentEvent?, mess: String) in
 					MJProgressView.instance.hideProgress()
 					self.tableView.userInteractionEnabled = true
 					self.tableView.scrollEnabled = true
 					if (!isOk) {
 						ErrorViewer.errorPresent(self, mess: mess) {}
-					}
-					else {
+					} else {
 						self.appointment = resp!
 						self.appointments = self.appointment.slots!
 						self.tableView.reloadData()

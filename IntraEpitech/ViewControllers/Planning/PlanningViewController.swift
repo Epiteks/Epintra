@@ -16,7 +16,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var calendar: FSCalendar!
 	
-	var swipeAllowed :Bool?
+	var swipeAllowed: Bool?
 	
 	var currentDate = NSDate()
 	
@@ -33,9 +33,9 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 	]
 	
 	var refreshControl = UIRefreshControl()
-	var savedSemesters :[Bool]? = nil
-	var registeredStudentToSend :[RegisteredStudent]?
-	var appointmentsToSend :AppointmentEvent? = nil
+	var savedSemesters: [Bool]? = nil
+	var registeredStudentToSend: [RegisteredStudent]?
+	var appointmentsToSend: AppointmentEvent? = nil
 	
 	@IBOutlet weak var selectSemestersButton: UIBarButtonItem!
 	
@@ -89,16 +89,14 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 			tableView.userInteractionEnabled = false
 			tableView.scrollEnabled = false
 			calendar.userInteractionEnabled = false
-			PlanningApiCalls.getPlanning((cal.startOfWeek()?.toAPIString())!, last: (cal.endOfWeek()?.toAPIString())!) { (isOk :Bool, planningArray :Dictionary<String, [Planning]>?, mess :String?) in
+			PlanningApiCalls.getPlanning((cal.startOfWeek()?.toAPIString())!, last: (cal.endOfWeek()?.toAPIString())!) { (isOk: Bool, planningArray: Dictionary<String, [Planning]>?, mess: String?) in
 				
 				MJProgressView.instance.hideProgress()
-				if (isOk)
-				{
+				if (isOk) {
 					self.currentData = planningArray!
 					self.sortDict()
 					self.tableView.reloadData()
-				}
-				else {
+				} else {
 				}
 				self.tableView.userInteractionEnabled = true
 				self.tableView.scrollEnabled = true
@@ -116,8 +114,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		}
 	}
 	
-	func refreshData(sender:AnyObject)
-	{
+	func refreshData(sender: AnyObject) {
 		let week = calendar.currentPage
 		
 		loadData((week.startOfWeek()?.toAPIString())!, end: (week.endOfWeek()?.toAPIString())!) { _ in
@@ -125,22 +122,20 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		}
 	}
 	
-	func loadData(first :String, end :String, onCompletion :() -> ()) {
+	func loadData(first: String, end: String, onCompletion :() -> ()) {
 		tableView.userInteractionEnabled = false
 		tableView.scrollEnabled = false
 		calendar.userInteractionEnabled = false
-		PlanningApiCalls.getPlanning(first, last: end) { (isOk :Bool, planningArray :Dictionary<String, [Planning]>?, mess :String?) in
+		PlanningApiCalls.getPlanning(first, last: end) { (isOk: Bool, planningArray: Dictionary<String, [Planning]>?, mess: String?) in
 			
 			MJProgressView.instance.hideProgress()
-			if (isOk)
-			{
+			if (isOk) {
 				self.currentData = planningArray!
 				self.sortDict()
 				onCompletion()
 				self.tableView.reloadData()
 				self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: self.getCurrentDateInData()), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
-			}
-			else {
+			} else {
 				onCompletion()
 			}
 			self.tableView.userInteractionEnabled = true
@@ -162,12 +157,10 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 	}
 	
 	
-	func getCurrentDateInData() -> Int
-	{
+	func getCurrentDateInData() -> Int {
 		var res = 0
 		
-		for data in tableViewData
-		{
+		for data in tableViewData {
 			if (data.0 == currentDate.toAPIString()) {
 				return res
 			}
@@ -181,11 +174,10 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		return res
 	}
 	
-	func getDateInArray(date :NSDate) -> Int {
+	func getDateInArray(date: NSDate) -> Int {
 		var res = 0
 		
-		for data in tableViewData
-		{
+		for data in tableViewData {
 			if (data.0 == date.toAPIString()) {
 				return res
 			}
@@ -204,7 +196,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		let df = NSDateFormatter()
 		df.dateFormat = "yyyy-MM-dd"
 		
-		let myArrayOfTuples = currentData.sort{ df.dateFromString($0.0)!.compare(df.dateFromString($1.0)!) == .OrderedAscending}
+		let myArrayOfTuples = currentData.sort { df.dateFromString($0.0)!.compare(df.dateFromString($1.0)!) == .OrderedAscending}
 		
 		tableViewData = myArrayOfTuples
 		
@@ -217,10 +209,9 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		df.dateFormat = "yyyy-MM-dd HH:mm:ss"
 		
 		
-		for (var i = 0; i < tableViewData.count; i += 1)
-		{
+		for (var i = 0; i < tableViewData.count; i += 1) {
 			let val = tableViewData[i].1
-			tableViewData[i].1 = val.sort{ df.dateFromString($0.startTime!)!.compare(df.dateFromString($1.startTime!)!) == .OrderedAscending }
+			tableViewData[i].1 = val.sort { df.dateFromString($0.startTime!)!.compare(df.dateFromString($1.startTime!)!) == .OrderedAscending }
 		}
 		
 		
@@ -242,8 +233,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		let arr = tableViewData[section].1
 		
-		if (arr.count == 0)
-		{
+		if (arr.count == 0) {
 			return 1
 		}
 		
@@ -318,12 +308,12 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 	}
 	
 	
-	func setActionsOnCell(cell :MGSwipeTableCell, indexPath :NSIndexPath) {
+	func setActionsOnCell(cell: MGSwipeTableCell, indexPath: NSIndexPath) {
 		
 		let createEvent = MGSwipeButton(title: NSLocalizedString("AddInCalendar", comment: ""), icon: nil, backgroundColor: UIUtils.planningBlueColor(), callback: { (sender: MGSwipeTableCell!) -> Bool in
 			
 			let calman = CalendarManager()
-			calman.createEvent(self.tableViewData[indexPath.section].1[indexPath.row]) { (isOk :Bool, mess :String) in
+			calman.createEvent(self.tableViewData[indexPath.section].1[indexPath.row]) { (isOk: Bool, mess: String) in
 				
 				if (!isOk) {
 					self.showMessage(NSLocalizedString(mess, comment: ""))
@@ -339,7 +329,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 	}
 	
 	
-	func changeImageToDisplay(data :Planning, imageView :UIImageView) {
+	func changeImageToDisplay(data: Planning, imageView: UIImageView) {
 		
 		if (data.eventType == "rdv") {
 			imageView.image = UIImage(named: "rightArrow")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
@@ -350,39 +340,31 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		if (data.canEnterToken()) {
 			imageView.image = UIImage(named: "Token")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
 			imageView.tintColor = UIUtils.planningBlueColor()
-		}
-		else if (data.canRegister()) {
+		} else if (data.canRegister()) {
 			imageView.image = UIImage(named: "Register")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
 			imageView.tintColor = UIUtils.planningGreenColor()
-		}
-		else if (data.canUnregister()) {
+		} else if (data.canUnregister()) {
 			imageView.image = UIImage(named: "Unregister")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
 			imageView.tintColor = UIUtils.planningRedColor()
-		}
-		else if (data.isRegistered() && !data.canUnregister()) {
+		} else if (data.isRegistered() && !data.canUnregister()) {
 			imageView.image = UIImage(named: "Unregister")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
 			imageView.tintColor = UIUtils.planningGrayColor()
-		}
-		else if (data.isUnregistered() && !data.canRegister()) {
+		} else if (data.isUnregistered() && !data.canRegister()) {
 			imageView.image = UIImage(named: "Register")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
 			imageView.tintColor = UIUtils.planningGrayColor()
-		}
-		else if (data.wasPresent()) {
+		} else if (data.wasPresent()) {
 			imageView.image = UIImage(named: "Done")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
 			imageView.tintColor = UIUtils.planningGreenColor()
-		}
-		else if (data.wasAbsent()) {
+		} else if (data.wasAbsent()) {
 			imageView.image = UIImage(named: "Delete")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
 			imageView.tintColor = UIUtils.planningRedColor()
-		}
-		else {
+		} else {
 			imageView.image = nil
 		}
 	}
 	
 	
-	func actionOnImageView(sender :UIGestureRecognizer)
-	{
+	func actionOnImageView(sender: UIGestureRecognizer) {
 		let tapLocation = sender.locationInView(self.tableView)
 		let indexPath = self.tableView.indexPathForRowAtPoint(tapLocation)
 		let data = tableViewData[indexPath!.section].1[indexPath!.row]
@@ -394,27 +376,23 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		
 		if (data.canEnterToken()) {
 			enterTokenAlertView(data, indexPath: indexPath!)
-		}
-		else if (data.canRegister()) {
-			PlanningApiCalls.registerToEvent(data) { (isOk :Bool, mess :String) in
+		} else if (data.canRegister()) {
+			PlanningApiCalls.registerToEvent(data) { (isOk: Bool, mess: String) in
 				
 				if (!isOk) {
 					self.showMessage(mess)
-				}
-				else {
+				} else {
 					// Reload cell
 					self.updateEventCell(indexPath!, event: data)
 				}
 				
 			}
-		}
-		else if (data.canUnregister()) {
-			PlanningApiCalls.unregisterToEvent(data) { (isOk :Bool, mess :String) in
+		} else if (data.canUnregister()) {
+			PlanningApiCalls.unregisterToEvent(data) { (isOk: Bool, mess: String) in
 				
 				if (!isOk) {
 					self.showMessage(mess)
-				}
-				else {
+				} else {
 					// Reload cell
 					self.updateEventCell(indexPath!, event: data)
 				}
@@ -425,7 +403,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		
 	}
 	
-	func enterTokenAlertView(planning :Planning, indexPath :NSIndexPath) {
+	func enterTokenAlertView(planning: Planning, indexPath: NSIndexPath) {
 		
 		let alertController = UIAlertController(title: NSLocalizedString("Token", comment: ""), message: NSLocalizedString("EnterToken", comment: ""), preferredStyle: .Alert)
 		
@@ -433,13 +411,11 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 			if let field = alertController.textFields![0] as UITextField? {
 				// store your data
 				
-				PlanningApiCalls.enterToken(planning, token: field.text!) { (isOk :Bool, mess :String) in
+				PlanningApiCalls.enterToken(planning, token: field.text!) { (isOk: Bool, mess: String) in
 					
-					if (!isOk)
-					{
+					if (!isOk) {
 						self.showMessage(mess)
-					}
-					else {
+					} else {
 						self.updateEventCell(indexPath, event: planning)
 					}
 				}
@@ -467,7 +443,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		self.presentViewController(alertController, animated: true, completion: nil)
 	}
 	
-	func showMessage(mess :String) {
+	func showMessage(mess: String) {
 		let alert = UIAlertController(title: "", message: "", preferredStyle: .Alert)
 		
 		alert.title = NSLocalizedString("Error", comment: "")
@@ -481,7 +457,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		self.presentViewController(alert, animated: true, completion: nil)
 	}
 	
-	func updateEventCell(indexPath :NSIndexPath, event :Planning) {
+	func updateEventCell(indexPath: NSIndexPath, event: Planning) {
 		
 		self.tableView.beginUpdates()
 		
@@ -493,13 +469,11 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		
 		statusImageView.image = nil
 		
-		PlanningApiCalls.getSpecialEvent(event) { (isOk :Bool, pl :Planning?, mess :String) in
+		PlanningApiCalls.getSpecialEvent(event) { (isOk: Bool, pl: Planning?, mess: String) in
 			
-			if (!isOk)
-			{
+			if (!isOk) {
 				self.showMessage(mess)
-			}
-			else {
+			} else {
 				self.tableViewData[indexPath.section].1[indexPath.row] = pl!
 				
 				self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
@@ -520,28 +494,25 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		tableView.scrollEnabled = false
 		if (data.eventType != "rdv") {
 			
-			PlanningApiCalls.getStudentsRegistered(data) { (isOk :Bool, res :[RegisteredStudent]?, mess :String) in
+			PlanningApiCalls.getStudentsRegistered(data) { (isOk: Bool, res: [RegisteredStudent]?, mess: String) in
 				MJProgressView.instance.hideProgress()
 				self.tableView.userInteractionEnabled = true
 				self.tableView.scrollEnabled = true
 				if (!isOk) {
 					ErrorViewer.errorPresent(self, mess: mess) {}
-				}
-				else {
+				} else {
 					self.registeredStudentToSend = res!
 					self.performSegueWithIdentifier("showStudentsRegistered", sender: self)
 				}
 			}
-		}
-		else {
-			PlanningApiCalls.getEventDetails(data) { (isOk :Bool, resp :AppointmentEvent?, mess :String) in
+		} else {
+			PlanningApiCalls.getEventDetails(data) { (isOk: Bool, resp: AppointmentEvent?, mess: String) in
 				MJProgressView.instance.hideProgress()
 				self.tableView.userInteractionEnabled = true
 				self.tableView.scrollEnabled = true
 				if (!isOk) {
 					ErrorViewer.errorPresent(self, mess: mess) {}
-				}
-				else {
+				} else {
 					resp?.eventName = data.actiTitle!
 					self.appointmentsToSend = resp!
 					self.performSegueWithIdentifier("appointmentDetailSegue", sender: self)
@@ -554,8 +525,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		if (segue.identifier == "showStudentsRegistered") {
 			let vc = segue.destinationViewController as! StudentRegisteredViewController
 			vc.data = registeredStudentToSend!
-		}
-		else if (segue.identifier == "appointmentDetailSegue") {
+		} else if (segue.identifier == "appointmentDetailSegue") {
 			let vc = segue.destinationViewController as! AppointmentDetailViewController
 			vc.appointment = appointmentsToSend!
 		}
@@ -569,7 +539,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		return false
 	}
 	
-	@IBAction func selectSemestersButtonClicked(sender :AnyObject) {
+	@IBAction func selectSemestersButtonClicked(sender: AnyObject) {
 		savedSemesters = ApplicationManager.sharedInstance.planningSemesters
 		performSegueWithIdentifier("selectSemestersSegue", sender: self)
 	}
