@@ -25,9 +25,7 @@ class ProjectsApiCall: APICalls {
 					if (errorDict.count > 0) {
 						errorMessage = (errorDict["message"]?.stringValue)
 						onCompletion(false, nil, errorMessage!)
-					}
-					else
-					{
+					} else {
 						let arr = responseCall.arrayValue
 						var resp = [Project]()
 						for tmp in arr {
@@ -36,10 +34,9 @@ class ProjectsApiCall: APICalls {
 								resp.append(Project(dict: tmp))
 							}
 						}
-						onCompletion(true, resp,  "Ok")
+						onCompletion(true, resp, "Ok")
 					}
-				}
-				else {
+				} else {
 					onCompletion(false, nil, (response.result.error?.localizedDescription)!)
 				}
 		}
@@ -63,14 +60,11 @@ class ProjectsApiCall: APICalls {
 					if (errorDict.count > 0) {
 						errorMessage = (errorDict["message"]?.stringValue)
 						onCompletion(false, nil, errorMessage!)
-					}
-					else
-					{
+					} else {
 						let proj = ProjectDetail(dict: responseCall)
-						onCompletion(true, proj,  "Ok")
+						onCompletion(true, proj, "Ok")
 					}
-				}
-				else {
+				} else {
 					onCompletion(false, nil, (response.result.error?.localizedDescription)!)
 				}
 		}
@@ -94,9 +88,7 @@ class ProjectsApiCall: APICalls {
 					if (errorDict.count > 0) {
 						errorMessage = (errorDict["message"]?.stringValue)
 						onCompletion(false, nil, errorMessage!)
-					}
-					else
-					{
+					} else {
 						var resp = [File]()
 						let arr = responseCall.arrayValue
 					 
@@ -104,10 +96,9 @@ class ProjectsApiCall: APICalls {
 							resp.append(File(dict: tmp))
 						}
 						
-						onCompletion(true, resp,  "Ok")
+						onCompletion(true, resp, "Ok")
 					}
-				}
-				else {
+				} else {
 					onCompletion(false, nil, (response.result.error?.localizedDescription)!)
 				}
 		}

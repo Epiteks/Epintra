@@ -160,6 +160,7 @@ class UserApiCalls: APICalls {
 						resp.append(Flags(name: "remarkable", dict: flags["remarkable"]))
 						resp.append(Flags(name: "difficulty", dict: flags["difficulty"]))
 						resp.append(Flags(name: "ghost", dict: flags["ghost"]))
+						
 						onCompletion(true, resp, "Ok")
 					}
 				} else {

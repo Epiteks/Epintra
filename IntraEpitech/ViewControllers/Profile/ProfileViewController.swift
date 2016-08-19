@@ -43,8 +43,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		MJProgressView.instance.showProgress(self.view, white: false)
 		
-		if let img = ApplicationManager.sharedInstance.downloadedImages![(ApplicationManager.sharedInstance.user?.imageUrl!)!]
-		{
+		if let img = ApplicationManager.sharedInstance.downloadedImages![(ApplicationManager.sharedInstance.user?.imageUrl!)!] {
 			self.profileImageView.image = img
 		}
 		
@@ -52,15 +51,13 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 			
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
-			}
-			else {
+			} else {
 				self.files = resp!
 				UserApiCalls.getUserFlags(ApplicationManager.sharedInstance.user?.login) { (isOk :Bool, resp :[Flags]?, mess :String) in
 					
 					if (!isOk) {
 						ErrorViewer.errorPresent(self, mess: mess) {}
-					}
-					else {
+					} else {
 						self.flags = resp!
 						self.tableView.reloadData()
 					}
@@ -89,10 +86,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		// Set colors (default colors are red, green and blue)
 		confettiView.colors = [UIColor(red:0.95, green:0.40, blue:0.27, alpha:1.0),
-			UIColor(red:1.00, green:0.78, blue:0.36, alpha:1.0),
-			UIColor(red:0.48, green:0.78, blue:0.64, alpha:1.0),
-			UIColor(red:0.30, green:0.76, blue:0.85, alpha:1.0),
-			UIColor(red:0.58, green:0.39, blue:0.55, alpha:1.0)]
+		                       UIColor(red:1.00, green:0.78, blue:0.36, alpha:1.0),
+		                       UIColor(red:0.48, green:0.78, blue:0.64, alpha:1.0),
+		                       UIColor(red:0.30, green:0.76, blue:0.85, alpha:1.0),
+		                       UIColor(red:0.58, green:0.39, blue:0.55, alpha:1.0)]
 		
 		// Set intensity (from 0 - 1, default intensity is 0.5)
 		confettiView.intensity = 0.7
@@ -102,16 +99,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		if (Float(gpaLabel.text!) > 3.00 && Float(gpaLabel.text!) <= 3.50) {
 			confettiView.type = .Star
-		}
-		else if (Float(gpaLabel.text!) > 3.50) {
+		} else if (Float(gpaLabel.text!) > 3.50) {
 			confettiView.type = .Image(UIImage(named: "cup")!)
-		}
-		else {
+		} else {
 			
 			confettiView.colors = [UIColor(hexString: "#6D4C41ff")!,
-				UIColor(hexString: "#5D4037ff")!,
-				UIColor(hexString: "#4E342Eff")!,
-				UIColor(hexString: "#3E2723ff")!]
+			                       UIColor(hexString: "#5D4037ff")!,
+			                       UIColor(hexString: "#4E342Eff")!,
+			                       UIColor(hexString: "#3E2723ff")!]
 			
 			confettiView.type = .Image(UIImage(named: "bug")!)
 		}
@@ -137,15 +132,13 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 			
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
-			}
-			else {
+			} else {
 				self.files = resp!
 				UserApiCalls.getUserFlags(ApplicationManager.sharedInstance.user?.login) { (isOk :Bool, resp :[Flags]?, mess :String) in
 					
 					if (!isOk) {
 						ErrorViewer.errorPresent(self, mess: mess) {}
-					}
-					else {
+					} else {
 						self.flags = resp!
 						self.tableView.reloadData()
 					}
@@ -175,8 +168,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		gpaTypeLabel = nibView.viewWithTag(8) as? UILabel!
 	}
 	
-	func setUIElements()
-	{
+	func setUIElements() {
 		creditsTitleLabel.text = NSLocalizedString("credits", comment: "")
 		creditsLabel.text = String(currentUser!.credits!)
 		spicesLabel.text =  currentUser!.spices!.currentSpices + " " + NSLocalizedString("spices", comment: "")
@@ -207,20 +199,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		if (flags == nil || files == nil) { return 0 }
 		
-		if (section == 0)
-		{
-			if (files?.count == 0)
-			{
+		if (section == 0) {
+			if (files?.count == 0) {
 				res = 1
-			}
-			else { res = (files?.count)! }
-		}
-		else {
-			if ((flags![section - 1].modules.count) == 0)
-			{
+			} else { res = (files?.count)! }
+		} else {
+			if ((flags![section - 1].modules.count) == 0) {
 				res = 1
-			}
-			else { res = (flags![section - 1].modules.count) }
+			} else { res = (flags![section - 1].modules.count) }
 		}
 		
 		return res
@@ -235,21 +221,18 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 			let titleLabel = cell.viewWithTag(1) as! UILabel
 			titleLabel.text = files![indexPath.row].title!
 			cell.accessoryType = .DisclosureIndicator
-		}
-		else if (indexPath.section == 0 && files?.count == 0) {
+		} else if (indexPath.section == 0 && files?.count == 0) {
 			cell = tableView.dequeueReusableCellWithIdentifier("emptyCell")!
 			let titleLabel = cell.viewWithTag(1) as! UILabel
 			titleLabel.text = NSLocalizedString("NoFile", comment: "")
-		}
-		else if (flags![indexPath.section - 1].modules.count > 0) {
+		} else if (flags![indexPath.section - 1].modules.count > 0) {
 			cell = tableView.dequeueReusableCellWithIdentifier("flagCell")!
 			let titleLabel = cell.viewWithTag(1) as! UILabel
 			let gradeLabel = cell.viewWithTag(2) as! UILabel
 			let module = flags![indexPath.section - 1].modules[indexPath.row]
 			titleLabel.text = module.title
 			gradeLabel.text = module.grade
-		}
-		else if (indexPath.section > 0 && flags![indexPath.section - 1].modules.count == 0) {
+		} else if (indexPath.section > 0 && flags![indexPath.section - 1].modules.count == 0) {
 			cell = tableView.dequeueReusableCellWithIdentifier("emptyCell")!
 			let titleLabel = cell.viewWithTag(1) as! UILabel
 			titleLabel.text = NSLocalizedString("NoFlag", comment: "")
@@ -283,8 +266,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)
 		
-		if (indexPath.section == 0)
-		{
+		if (indexPath.section == 0) {
 			webViewData = files![indexPath.row]
 			self.performSegueWithIdentifier("webViewSegue", sender: self)
 		}

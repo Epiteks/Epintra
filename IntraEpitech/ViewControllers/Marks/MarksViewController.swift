@@ -27,15 +27,13 @@ class MarksViewController: UIViewController, UITableViewDataSource, UITableViewD
 		
 		if (ApplicationManager.sharedInstance.marks != nil) {
 			marks = ApplicationManager.sharedInstance.marks!
-		}
-		else {
+		} else {
 			MJProgressView.instance.showProgress(self.view, white: false)
 			MarksApiCalls.getMarks() { (isOk :Bool, resp :[Mark]?, mess :String) in
 				
 				if (!isOk) {
 					ErrorViewer.errorPresent(self, mess: mess) {}
-				}
-				else {
+				} else {
 					self.marks = resp!
 					ApplicationManager.sharedInstance.marks = resp!
 					self.tableView.reloadData()
@@ -60,8 +58,7 @@ class MarksViewController: UIViewController, UITableViewDataSource, UITableViewD
 			
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
-			}
-			else {
+			} else {
 				self.marks = resp!
 				ApplicationManager.sharedInstance.marks = resp!
 				self.tableView.reloadData()
@@ -127,8 +124,7 @@ class MarksViewController: UIViewController, UITableViewDataSource, UITableViewD
 			MJProgressView.instance.hideProgress()
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
-			}
-			else {
+			} else {
 				self.selectedMark = self.marks[indexPath.row]
 				self.marksData = resp!
 				self.performSegueWithIdentifier("allMarksSegue", sender: self)

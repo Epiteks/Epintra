@@ -15,10 +15,8 @@ class DBManager: NSObject {
 	
 	var database :FMDatabase? = nil
 	
-	class func getInstance() -> DBManager
-	{
-		if(sharedInstance.database == nil)
-		{
+	class func getInstance() -> DBManager {
+		if sharedInstance.database == nil {
 			sharedInstance.database = FMDatabase(path: Util.getPath("Students1.0.1.sqlite"))
 		}
 		return sharedInstance

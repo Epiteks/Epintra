@@ -26,8 +26,7 @@ public extension NSDate {
 		return str
 	}
 	
-	func toAPIString() -> String
-	{
+	func toAPIString() -> String {
 		let dateFormatter = NSDateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd"
 		let str = dateFormatter.stringFromDate(self)
@@ -101,4 +100,3 @@ public extension NSDate {
 		return str
 	}
 }
-

@@ -34,8 +34,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 		
 		loadProfileView()
 		
-		if let img = ApplicationManager.sharedInstance.downloadedImages![(ApplicationManager.sharedInstance.user?.imageUrl!)!]
-		{
+		if let img = ApplicationManager.sharedInstance.downloadedImages![(ApplicationManager.sharedInstance.user?.imageUrl!)!] {
 			self.profileImageView.image = img
 			self.profileImageView.cropToSquare()
 		}
@@ -64,8 +63,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 		}
 	}
 	
-	func refreshData(sender:AnyObject)
-	{
+	func refreshData(sender:AnyObject) {
 		
 		UserApiCalls.getUserData(ApplicationManager.sharedInstance.currentLogin!) { (isOk :Bool, s :String) in
 		 
@@ -74,8 +72,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 				ErrorViewer.errorPresent(self, mess: s) {}
 				self.refreshControl.endRefreshing()
 				self.alertTableView.reloadData()
-			}
-			else {
+			} else {
 				ImageDownloader.downloadFrom(link: (ApplicationManager.sharedInstance.user?.imageUrl!)!) {
 					UserApiCalls.getUserHistory() { (isOk :Bool, s :String) in
 						MJProgressView.instance.hideProgress()
@@ -112,8 +109,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 		gpaTypeLabel = nibView.viewWithTag(8) as? UILabel!
 	}
 	
-	func setUIElements()
-	{
+	func setUIElements() {
 		creditsTitleLabel.text = NSLocalizedString("credits", comment: "")
 		creditsLabel.text = String(currentUser!.credits!)
 		spicesLabel.text =  currentUser!.spices!.currentSpices + " " + NSLocalizedString("spices", comment: "")
@@ -157,12 +153,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 			
 			messageLabel.text =  NSLocalizedString("NoAlerts", comment: "")
 			messageLabel.textColor = UIColor.blackColor()
-			messageLabel.numberOfLines = 0;
-			messageLabel.textAlignment = .Center;
+			messageLabel.numberOfLines = 0
+			messageLabel.textAlignment = .Center
 			messageLabel.font = UIFont.systemFontOfSize(13)
 			messageLabel.sizeToFit()
 			
-			alertTableView.backgroundView = messageLabel;
+			alertTableView.backgroundView = messageLabel
 			alertTableView.separatorStyle = UITableViewCellSeparatorStyle.None
 		}
 		return rows!
@@ -185,16 +181,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 		profileImage.image = UIImage(named: "userProfile")
 		
 		if (history!.userPicture!.characters.count > 0) {
-			if let img = ApplicationManager.sharedInstance.downloadedImages![history!.userPicture!]
-			{
+			if let img = ApplicationManager.sharedInstance.downloadedImages![history!.userPicture!] {
 				if (cell.tag == (indexPath.row + 100)) {
 					profileImage.image = img
 				}
-			}
-			else {
+			} else {
 				ImageDownloader.downloadFrom(link: history!.userPicture!) {
-					if let img = ApplicationManager.sharedInstance.downloadedImages![history!.userPicture!]
-					{
+					if let img = ApplicationManager.sharedInstance.downloadedImages![history!.userPicture!] {
 						if (cell.tag == (indexPath.row + 100)) {
 							profileImage.image = img
 						}

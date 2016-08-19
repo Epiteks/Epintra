@@ -26,15 +26,13 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		if (ApplicationManager.sharedInstance.modules != nil) {
 			modules = ApplicationManager.sharedInstance.modules!
-		}
-		else {
+		} else {
 			MJProgressView.instance.showProgress(self.view, white: false)
 			ModulesApiCalls.getRegisteredModules() { (isOk :Bool, resp :[Module]?, mess :String) in
 				
 				if (!isOk) {
 					ErrorViewer.errorPresent(self, mess: mess) {}
-				}
-				else {
+				} else {
 					self.modules = resp!
 					ApplicationManager.sharedInstance.modules = resp!
 					self.tableView.reloadData()
@@ -55,8 +53,7 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
 			
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
-			}
-			else {
+			} else {
 				self.modules = resp!
 				ApplicationManager.sharedInstance.modules = resp!
 				self.tableView.reloadData()
@@ -127,8 +124,7 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
 			tableView.scrollEnabled = true
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
-			}
-			else {
+			} else {
 				self.selectedModule = resp!
 				self.performSegueWithIdentifier("moduleDetailSegue", sender: self)
 			}

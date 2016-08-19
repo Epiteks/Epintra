@@ -57,8 +57,7 @@ class CalendarManager: NSObject {
 			eventStore.requestAccessToEntityType(EKEntityType.Event) { (granted :Bool, error :NSError?) in
 				if (granted) {
 					res = true
-				}
-				else {
+				} else {
 					res = false
 					mess = "CalendarAccessDenied"
 				}
@@ -78,8 +77,7 @@ class CalendarManager: NSObject {
 		if (ApplicationManager.sharedInstance.defaultCalendar == nil) {
 			onCompletion(false, "NoDefaultCalendar")
 			return
-		}
-		else if ((eventStore.calendarWithIdentifier(ApplicationManager.sharedInstance.defaultCalendar!)) != nil) {
+		} else if ((eventStore.calendarWithIdentifier(ApplicationManager.sharedInstance.defaultCalendar!)) != nil) {
 			onCompletion(false, "DefaultCalendarWrong")
 			return
 		}
@@ -101,8 +99,7 @@ class CalendarManager: NSObject {
 					self.insertEvent(eventStore, planning: planning) { (isOk :Bool) in
 						onCompletion(isOk, "SomethingDidntWorkedCorrectly")
 					}
-				}
-				else {
+				} else {
 					print("Access denied")
 					onCompletion(false, "CalendarAccessDenied")
 				}
@@ -125,21 +122,18 @@ class CalendarManager: NSObject {
 				var startDate = NSDate()
 				var endDate = NSDate()
 				
-				if (planning.rdvGroupRegistered!.characters.count > 0)
-				{
+				if (planning.rdvGroupRegistered!.characters.count > 0) {
 					let arr = planning.rdvGroupRegistered?.componentsSeparatedByString("|")
 					//					let resp = (arr![0].toDate().toEventHour(), arr![1].toDate().toEventHour())
 					startDate = arr![0].toDate()
 					endDate = arr![1].toDate()
 					
-				}
-				else if (planning.rdvIndividuelRegistered!.characters.count > 0) {
+				} else if (planning.rdvIndividuelRegistered!.characters.count > 0) {
 					let arr = planning.rdvIndividuelRegistered?.componentsSeparatedByString("|")
 					startDate = arr![0].toDate()
 					endDate = arr![1].toDate()
 					
-				}
-				else {
+				} else {
 					startDate = (planning.startTime?.toDate())!
 					// 2 hours
 					endDate = (planning.endTime?.toDate())!
@@ -164,8 +158,7 @@ class CalendarManager: NSObject {
 				do {
 					try store.saveEvent(event, span: EKSpan.ThisEvent)
 					
-				}
-				catch {
+				} catch {
 					onCompletion(false)
 				}
 				onCompletion(true)

@@ -18,8 +18,7 @@ class GPA: NSObject {
 		cycle = dict["cycle"].stringValue
 	}
 	
-	override init()
-	{
+	override init() {
 		value = "0"
 		cycle = NSLocalizedString("unknown", comment: "")
 	}

@@ -15,8 +15,7 @@ class Flags: NSObject {
 	var label :String?
 	var modules :[Module]
 	
-	init(name :String, dict :JSON)
-	{
+	init(name :String, dict :JSON) {
 		self.name = name
 		label = dict["label"].stringValue
 		

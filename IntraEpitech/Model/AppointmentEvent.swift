@@ -64,8 +64,7 @@ class AppointmentEvent: NSObject {
 			
 			let slots = eventSlots["slots"]
 			
-			for tmpA in slots.arrayValue
-			{
+			for tmpA in slots.arrayValue {
 				let tmp = Appointment(dict: tmpA)
 				tmp.date?.dateByAddingTimeInterval(NSTimeInterval(-1))
 				if (tmp.date?.earlierDate(eventStart!) == eventStart && tmp.date?.laterDate(eventEnd!) == eventEnd) {
@@ -83,7 +82,7 @@ class AppointmentEvent: NSObject {
 	}
 }
 
-func ==(left :AppointmentEvent, right :AppointmentEvent) -> Bool {
+	func == (left: AppointmentEvent, right: AppointmentEvent) -> Bool {
 	
 	if (left.registered == right.registered) {
 		return true

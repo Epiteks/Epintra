@@ -20,9 +20,9 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		["Projects", "projectsSegue"],
 		["Marks", "marksSegue"],
 		["Settings", "settingsSegue"],
-	]
+		]
 	
-	var _screenHeight :CGFloat = 0.0;
+	var _screenHeight :CGFloat = 0.0
 	
 	
 	override func viewDidLoad() {
@@ -78,9 +78,8 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			separatorLineView.backgroundColor = UIUtils.lightBackgroundColor()
 			cell.contentView.addSubview(separatorLineView)
 		}
-		if (indexPath.row < _menuItems.count - 1)
-		{
-			let separatorLineView = UIView(frame: CGRectMake(0, tableView.rectForRowAtIndexPath(indexPath).height - 0.5 , 320, 1))
+		if (indexPath.row < _menuItems.count - 1) {
+			let separatorLineView = UIView(frame: CGRectMake(0, tableView.rectForRowAtIndexPath(indexPath).height - 0.5, 320, 1))
 			separatorLineView.backgroundColor = UIUtils.lightBackgroundColor()
 			cell.contentView.addSubview(separatorLineView)
 		}
@@ -88,7 +87,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		let item = _menuItems[indexPath.row]
 		
 		
-		itemName.text =  NSLocalizedString(item[0] , comment: "")
+		itemName.text =  NSLocalizedString(item[0], comment: "")
 		
 		itemImage.image = UIImage(named: item[0] )
 		
@@ -124,12 +123,10 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
 			
 			if (position == .Right) {
 				goodVC._alertTableView.scrollEnabled = false
-			}
-			else {
+			} else {
 				goodVC._alertTableView.scrollEnabled = true
 			}
-		}
-		else if (revealController.frontViewController.title == NSLocalizedString("Planning", comment: "")) {
+		} else if (revealController.frontViewController.title == NSLocalizedString("Planning", comment: "")) {
 			
 			let goodVC = subVC[0] as! PlanningViewController
 			
@@ -137,74 +134,63 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
 				goodVC._tableView.scrollEnabled = false
 				goodVC._calendar.userInteractionEnabled = false
 				goodVC._swipeAllowed = false
-			}
-			else {
+			} else {
 				goodVC._tableView.scrollEnabled = true
 				goodVC._calendar.userInteractionEnabled = true
 				goodVC._swipeAllowed = true
 			}
-		}
-		else if (revealController.frontViewController.title == NSLocalizedString("Profile", comment: "")) {
+		} else if (revealController.frontViewController.title == NSLocalizedString("Profile", comment: "")) {
 			
 			let goodVC = subVC[0] as! ProfileViewController
 			
 			if (position == .Right) {
 				goodVC._tableView.scrollEnabled = false
 				goodVC._tableView.userInteractionEnabled = false
-			}
-			else {
+			} else {
 				goodVC._tableView.scrollEnabled = true
 				goodVC._tableView.userInteractionEnabled = true
 			}
-		}
-		else if (revealController.frontViewController.title == NSLocalizedString("Modules", comment: "")) {
+		} else if (revealController.frontViewController.title == NSLocalizedString("Modules", comment: "")) {
 			
 			let goodVC = subVC[0] as! ModulesViewController
 			
 			if (position == .Right) {
 				goodVC._tableView.scrollEnabled = false
 				goodVC._tableView.userInteractionEnabled = false
-			}
-			else {
+			} else {
 				goodVC._tableView.scrollEnabled = true
 				goodVC._tableView.userInteractionEnabled = true
 			}
-		}
-		else if (revealController.frontViewController.title == NSLocalizedString("Projects", comment: "")) {
+		} else if (revealController.frontViewController.title == NSLocalizedString("Projects", comment: "")) {
 			
 			let goodVC = subVC[0] as! ProjectsViewController
 			
 			if (position == .Right) {
 				goodVC._tableView.scrollEnabled = false
 				goodVC._tableView.userInteractionEnabled = false
-			}
-			else {
+			} else {
 				goodVC._tableView.scrollEnabled = true
 				goodVC._tableView.userInteractionEnabled = true
 			}
-		}
-		else if (revealController.frontViewController.title == NSLocalizedString("Marks", comment: "")) {
+		} else if (revealController.frontViewController.title == NSLocalizedString("Marks", comment: "")) {
 			
 			let goodVC = subVC[0] as! MarksViewController
 			
 			if (position == .Right) {
 				goodVC._tableView.scrollEnabled = false
 				goodVC._tableView.userInteractionEnabled = false
-			}
-			else {
+			} else {
 				goodVC._tableView.scrollEnabled = true
 				goodVC._tableView.userInteractionEnabled = true
 			}
-		}
-		else if (revealController.frontViewController.title == NSLocalizedString("Settings", comment: "")) {
+		} else if (revealController.frontViewController.title == NSLocalizedString("Settings", comment: "")) {
 			
 			let goodVC = subVC[0] as! SettingsViewController
 			
 			if (position == .Right) {
 				goodVC._tableView.scrollEnabled = false
 				goodVC._tableView.userInteractionEnabled = false
-			}
-			else {
+			} else {
 				goodVC._tableView.scrollEnabled = true
 				goodVC._tableView.userInteractionEnabled = true
 			}

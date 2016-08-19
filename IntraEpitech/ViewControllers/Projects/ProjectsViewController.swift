@@ -31,13 +31,11 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
 			projects = ApplicationManager.sharedInstance.projects!
 			MJProgressView.instance.hideProgress()
 			self.tableView.reloadData()
-		}
-		else {
+		} else {
 			ProjectsApiCall.getCurrentProjects() { (isOk :Bool, proj :[Project]?, mess :String) in
 				if (!isOk) {
 					ErrorViewer.errorPresent(self, mess: mess) {}
-				}
-				else {
+				} else {
 					self.projects = proj!
 					MJProgressView.instance.hideProgress()
 					self.tableView.reloadData()
@@ -61,8 +59,7 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
 		ProjectsApiCall.getCurrentProjects() { (isOk :Bool, proj :[Project]?, mess :String) in
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
-			}
-			else {
+			} else {
 				self.projects = proj!
 				self.refreshControl.endRefreshing()
 				self.tableView.reloadData()
@@ -84,8 +81,7 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
 		
 		if (projects.count == 0) {
 			tableView.separatorStyle = .None
-		}
-		else {
+		} else {
 			tableView.separatorStyle = .SingleLine
 			tableView.backgroundView = nil
 		}
@@ -136,8 +132,7 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
 			
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
-			}
-			else {
+			} else {
 				
 				self.selectedProject = proj!
 				tableView.userInteractionEnabled = false
@@ -147,8 +142,7 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
 					tableView.scrollEnabled = true
 					if (!isOk) {
 						ErrorViewer.errorPresent(self, mess: mess) {}
-					}
-					else {
+					} else {
 						self.selectedProject?.files = files
 						self.performSegueWithIdentifier("detailsProjectSegue", sender: self)
 					}

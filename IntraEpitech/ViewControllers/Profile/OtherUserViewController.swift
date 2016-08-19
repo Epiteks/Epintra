@@ -57,8 +57,7 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
 				MJProgressView.instance.hideProgress()
-			}
-			else {
+			} else {
 				self.currentUser?.marks = resp
 				if (self.segmentedControl.selectedSegmentIndex == 1) {
 					MJProgressView.instance.hideProgress()
@@ -72,8 +71,7 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
 				MJProgressView.instance.hideProgress()
-			}
-			else {
+			} else {
 				self.currentUser?.modules = resp!
 				if (self.segmentedControl.selectedSegmentIndex == 0) {
 					MJProgressView.instance.hideProgress()
@@ -86,8 +84,7 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 			self.isFlagsDownloading = false
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
-			}
-			else {
+			} else {
 				self.flags = resp!
 				if (self.segmentedControl.selectedSegmentIndex == 2) {
 					MJProgressView.instance.hideProgress()
@@ -128,8 +125,7 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 		gpaTypeLabel = nibView.viewWithTag(8) as? UILabel!
 	}
 	
-	func setUIElements()
-	{
+	func setUIElements() {
 		creditsTitleLabel.text = NSLocalizedString("credits", comment: "")
 		creditsLabel.text = String(currentUser!.credits!)
 		spicesLabel.text =  currentUser!.spices!.currentSpices + " " + NSLocalizedString("spices", comment: "")
@@ -159,14 +155,11 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 		
 		if (sender.selectedSegmentIndex == 0 && self.isModuleDownloading == true) {
 			MJProgressView.instance.showProgress(self.tableView, white: false)
-		}
-		else if (sender.selectedSegmentIndex == 1 && self.isMarksDownloading == true) {
+		} else if (sender.selectedSegmentIndex == 1 && self.isMarksDownloading == true) {
 			MJProgressView.instance.showProgress(self.tableView, white: false)
-		}
-		else if (sender.selectedSegmentIndex == 2 && self.isFlagsDownloading == true) {
+		} else if (sender.selectedSegmentIndex == 2 && self.isFlagsDownloading == true) {
 			MJProgressView.instance.showProgress(self.tableView, white: false)
-		}
-		else {
+		} else {
 			MJProgressView.instance.hideProgress()
 		}
 		
@@ -185,12 +178,11 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 		if ((currentUser?.modules == nil && segmentedControl.selectedSegmentIndex == 0)
 			|| (currentUser?.marks == nil && segmentedControl.selectedSegmentIndex == 1)
 			|| (flags == nil && segmentedControl.selectedSegmentIndex == 2)) {
-				self.tableView.separatorStyle = .None
-				return 0
+			self.tableView.separatorStyle = .None
+			return 0
 		}
 		self.tableView.separatorStyle = .SingleLine
-		switch (segmentedControl.selectedSegmentIndex)
-		{
+		switch (segmentedControl.selectedSegmentIndex) {
 		case 0:
 			return (currentUser?.modules?.count)!
 		case 1:
@@ -223,8 +215,7 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 				gradeLabel.text = module!.grade!
 			}
 			titleLabel.text = module!.title!
-		}
-		else if (segmentedControl.selectedSegmentIndex == 1) {
+		} else if (segmentedControl.selectedSegmentIndex == 1) {
 			
 			cell = tableView.dequeueReusableCellWithIdentifier("marksCell")
 			
@@ -237,8 +228,7 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 			actiTitle.text = mark?.title!
 			moduleTitle.text = mark?.titleModule!
 			markLabel.text = mark?.finalNote!
-		}
-		else {
+		} else {
 			if (flags![indexPath.section].modules.count > 0) {
 				cell = tableView.dequeueReusableCellWithIdentifier("flagCell")!
 				let titleLabel = cell!.viewWithTag(1) as! UILabel
@@ -246,8 +236,7 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 				let module = flags![indexPath.section].modules[indexPath.row]
 				titleLabel.text = module.title
 				gradeLabel.text = module.grade
-			}
-			else if (indexPath.section > 0 && flags![indexPath.section].modules.count == 0) {
+			} else if (indexPath.section > 0 && flags![indexPath.section].modules.count == 0) {
 				cell = tableView.dequeueReusableCellWithIdentifier("emptyCell")!
 				let titleLabel = cell!.viewWithTag(1) as! UILabel
 				titleLabel.text = NSLocalizedString("NoFlag", comment: "")

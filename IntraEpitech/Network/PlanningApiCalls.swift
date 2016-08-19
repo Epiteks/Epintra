@@ -25,28 +25,23 @@ class PlanningApiCalls: APICalls {
 						errorMessage = (errorDict["message"]?.stringValue)
 						errorMessage = errorMessage!.stringByReplacingOccurrencesOfString("<[^>]+>", withString: "", options: .RegularExpressionSearch, range: nil)
 						onCompletion(false, nil, errorMessage!)
-					}
-					else
-					{
+					} else {
 						var planningMan = Dictionary<String, [Planning]>()
 						
 						
 						
 						var date = first.shortToDate()
 						
-						while (date.earlierDate(last.shortToDate()) == date)
-						{
+						while (date.earlierDate(last.shortToDate()) == date) {
 							planningMan[date.toAPIString()] = [Planning]()
 							date = date.fs_dateByAddingDays(1)
 						}
 						
 						
-						for tmpPlanning in responseCall.arrayValue
-						{
+						for tmpPlanning in responseCall.arrayValue {
 							let tmp = Planning(dict: tmpPlanning)
 							
-							if (planningMan[tmp.getOnlyDay()] == nil)
-							{
+							if (planningMan[tmp.getOnlyDay()] == nil) {
 								planningMan[tmp.getOnlyDay()] = [Planning]()
 							}
 							
@@ -57,8 +52,7 @@ class PlanningApiCalls: APICalls {
 						}
 						onCompletion(true, planningMan, "")
 					}
-				}
-				else {
+				} else {
 					onCompletion(false, nil, (response.result.error?.localizedDescription)!)
 				}
 		}
@@ -83,13 +77,10 @@ class PlanningApiCalls: APICalls {
 					if (errorMessage.characters.count > 0) {
 						errorMessage = errorMessage.stringByReplacingOccurrencesOfString("<[^>]+>", withString: "", options: .RegularExpressionSearch, range: nil)
 						onCompletion(false, errorMessage)
-					}
-					else
-					{
+					} else {
 						onCompletion(true, NSLocalizedString("SuccessfullyValidated", comment: ""))
 					}
-				}
-				else {
+				} else {
 					onCompletion(false, (response.result.error?.localizedDescription)!)
 				}
 		}
@@ -113,13 +104,10 @@ class PlanningApiCalls: APICalls {
 					if (errorMessage.characters.count > 0) {
 						errorMessage = errorMessage.stringByReplacingOccurrencesOfString("<[^>]+>", withString: "", options: .RegularExpressionSearch, range: nil)
 						onCompletion(false, errorMessage)
-					}
-					else
-					{
+					} else {
 						onCompletion(true, NSLocalizedString("SuccessfullyRegistered", comment: ""))
 					}
-				}
-				else {
+				} else {
 					onCompletion(false, (response.result.error?.localizedDescription)!)
 				}
 		}
@@ -143,13 +131,10 @@ class PlanningApiCalls: APICalls {
 					if (errorMessage.characters.count > 0) {
 						errorMessage = errorMessage.stringByReplacingOccurrencesOfString("<[^>]+>", withString: "", options: .RegularExpressionSearch, range: nil)
 						onCompletion(false, errorMessage)
-					}
-					else
-					{
+					} else {
 						onCompletion(true, NSLocalizedString("SuccessfullyUnregistered", comment: ""))
 					}
-				}
-				else {
+				} else {
 					onCompletion(false, (response.result.error?.localizedDescription)!)
 				}
 		}
@@ -170,12 +155,9 @@ class PlanningApiCalls: APICalls {
 						errorMessage = errorMessage!.stringByReplacingOccurrencesOfString("<[^>]+>", withString: "", options: .RegularExpressionSearch, range: nil)
 						
 						onCompletion(false, nil, errorMessage!)
-					}
-					else
-					{
+					} else {
 						var res : Planning?
-						for tmpPlanning in responseCall.arrayValue
-						{
+						for tmpPlanning in responseCall.arrayValue {
 							let tmp = Planning(dict: tmpPlanning)
 							
 							if (tmp.startTime == "") {
@@ -189,8 +171,7 @@ class PlanningApiCalls: APICalls {
 						}
 						onCompletion(true, res, "")
 					}
-				}
-				else {
+				} else {
 					onCompletion(false, nil, (response.result.error?.localizedDescription)!)
 				}
 		}
@@ -216,20 +197,16 @@ class PlanningApiCalls: APICalls {
 						errorMessage = errorMessage!.stringByReplacingOccurrencesOfString("<[^>]+>", withString: "", options: .RegularExpressionSearch, range: nil)
 						
 						onCompletion(false, nil, errorMessage!)
-					}
-					else
-					{
+					} else {
 						var res = [RegisteredStudent]()
 						
-						for tmpUsers in responseCall.arrayValue
-						{
+						for tmpUsers in responseCall.arrayValue {
 							let tmp = RegisteredStudent(dict: tmpUsers)
 							res.append(tmp)
 						}
 						onCompletion(true, res, "")
 					}
-				}
-				else {
+				} else {
 					onCompletion(false, nil, (response.result.error?.localizedDescription)!)
 				}
 		}
@@ -254,9 +231,7 @@ class PlanningApiCalls: APICalls {
 						errorMessage = errorMessage!.stringByReplacingOccurrencesOfString("<[^>]+>", withString: "", options: .RegularExpressionSearch, range: nil)
 						
 						onCompletion(false, nil, errorMessage!)
-					}
-					else
-					{
+					} else {
 						
 						let res = AppointmentEvent(dict: responseCall)
 						res.eventStart = planning.startTime?.toDate()
@@ -264,8 +239,7 @@ class PlanningApiCalls: APICalls {
 						res.addAppointments(responseCall)
 						onCompletion(true, res, "")
 					}
-				}
-				else {
+				} else {
 					onCompletion(false, nil, (response.result.error?.localizedDescription)!)
 				}
 		}
@@ -302,14 +276,11 @@ class PlanningApiCalls: APICalls {
 						errorMessage = errorMessage!.stringByReplacingOccurrencesOfString("<[^>]+>", withString: "", options: .RegularExpressionSearch, range: nil)
 						
 						onCompletion(false, nil, errorMessage!)
-					}
-					else
-					{
+					} else {
 						print(responseCall)
 						onCompletion(true, nil, "")
 					}
-				}
-				else {
+				} else {
 					onCompletion(false, nil, (response.result.error?.localizedDescription)!)
 				}
 		}
@@ -346,9 +317,7 @@ class PlanningApiCalls: APICalls {
 						errorMessage = errorMessage!.stringByReplacingOccurrencesOfString("<[^>]+>", withString: "", options: .RegularExpressionSearch, range: nil)
 						
 						onCompletion(false, nil, errorMessage!)
-					}
-					else
-					{
+					} else {
 						print(responseCall)
 						let err = errorDict["message"]
 						
@@ -362,13 +331,11 @@ class PlanningApiCalls: APICalls {
 							errorMessage = errorMessage!.stringByReplacingOccurrencesOfString("<[^>]+>", withString: "", options: .RegularExpressionSearch, range: nil)
 							
 							onCompletion(false, nil, errorMessage!)
-						}
-						else {
+						} else {
 							onCompletion(true, nil, "")
 						}
 					}
-				}
-				else {
+				} else {
 					onCompletion(false, nil, (response.result.error?.localizedDescription)!)
 				}
 		}

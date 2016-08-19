@@ -64,8 +64,7 @@ class Project: NSObject {
 		registered = dict["registered"].boolValue
 	}
 	
-	init(detail :JSON)
-	{
+	init(detail :JSON) {
 		codeActi = detail["codeacti"].stringValue
 		typeActiCode = detail["type_code"].stringValue
 		actiTitle = detail["title"].stringValue

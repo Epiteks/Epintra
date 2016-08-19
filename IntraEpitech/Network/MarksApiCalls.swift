@@ -25,20 +25,17 @@ class MarksApiCalls: APICalls {
 					if (errorDict.count > 0) {
 						errorMessage = (errorDict["message"]?.stringValue)
 						onCompletion(false, nil, errorMessage!)
-					}
-					else
-					{
+					} else {
 						let arr = responseCall.arrayValue
 						var resp = [Mark]()
 						for tmp in arr {
 							resp.insert(Mark(dict: tmp), atIndex: 0)
 							//							resp.append(Mark(dict: tmp))
 						}
-						onCompletion(true, resp,  "Ok")
+						onCompletion(true, resp, "Ok")
 					}
 					
-				}
-				else {
+				} else {
 					print("-----\(response.result.error?.debugDescription)")
 					onCompletion(false, nil, (response.result.error?.localizedDescription)!)
 				}
@@ -62,19 +59,16 @@ class MarksApiCalls: APICalls {
 					if (errorDict.count > 0) {
 						errorMessage = (errorDict["message"]?.stringValue)
 						onCompletion(false, nil, errorMessage!)
-					}
-					else
-					{
+					} else {
 						let arr = responseCall.arrayValue
 						var resp = [Mark]()
 						for tmp in arr {
 							resp.append(Mark(little: tmp))
 						}
-						onCompletion(true, resp,  "Ok")
+						onCompletion(true, resp, "Ok")
 					}
 					
-				}
-				else {
+				} else {
 					print("-----\(response.result.error?.debugDescription)")
 					onCompletion(false, nil, (response.result.error?.localizedDescription)!)
 				}
@@ -98,19 +92,16 @@ class MarksApiCalls: APICalls {
 					if (errorDict.count > 0) {
 						errorMessage = (errorDict["message"]?.stringValue)
 						onCompletion(false, nil, errorMessage!)
-					}
-					else
-					{
+					} else {
 						let arr = responseCall.arrayValue
 						var resp = [Mark]()
 						for tmp in arr {
 							resp.append(Mark(little: tmp))
 						}
-						onCompletion(true, resp,  "Ok")
+						onCompletion(true, resp, "Ok")
 					}
 					
-				}
-				else {
+				} else {
 					print("-----\(response.result.error?.debugDescription)")
 					onCompletion(false, nil, (response.result.error?.localizedDescription)!)
 				}
@@ -130,20 +121,17 @@ class MarksApiCalls: APICalls {
 					if (errorDict.count > 0) {
 						errorMessage = (errorDict["message"]?.stringValue)
 						onCompletion(false, nil, errorMessage!)
-					}
-					else
-					{
+					} else {
 						let arr = responseCall.arrayValue
 						var resp = [Mark]()
 						for tmp in arr {
 							resp.insert(Mark(dict: tmp), atIndex: 0)
 							//							resp.append(Mark(dict: tmp))
 						}
-						onCompletion(true, resp,  "Ok")
+						onCompletion(true, resp, "Ok")
 					}
 					
-				}
-				else {
+				} else {
 					print("-----\(response.result.error?.debugDescription)")
 					onCompletion(false, nil, (response.result.error?.localizedDescription)!)
 				}

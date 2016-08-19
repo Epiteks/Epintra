@@ -42,11 +42,9 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 			members = (grp?.members)!
 			masterName.text = grp?.master?.title
 			setUIIfRegistered(grp)
-		}
-		else {
+		} else {
 			masterName.text = NSLocalizedString("NotRegisteredProject", comment: "")
-			if let img = ApplicationManager.sharedInstance.downloadedImages![(ApplicationManager.sharedInstance.user?.imageUrl)!]
-			{
+			if let img = ApplicationManager.sharedInstance.downloadedImages![(ApplicationManager.sharedInstance.user?.imageUrl)!] {
 				self.masterImage.image = img
 				self.masterImage.cropToSquare()
 			}
@@ -59,14 +57,12 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 	
 	func setUIIfRegistered(grp :ProjectGroup?) {
 		
-		if let img = ApplicationManager.sharedInstance.downloadedImages![(grp?.master?.imageUrl)!]
-		{
+		if let img = ApplicationManager.sharedInstance.downloadedImages![(grp?.master?.imageUrl)!] {
 			self.masterImage.image = img
 			self.masterImage.cropToSquare()
 		} else {
 			ImageDownloader.downloadFrom(link: (grp?.master?.imageUrl)!) {
-				if let img = ApplicationManager.sharedInstance.downloadedImages![(grp?.master?.imageUrl)!]
-				{
+				if let img = ApplicationManager.sharedInstance.downloadedImages![(grp?.master?.imageUrl)!] {
 					self.masterImage.image = img
 					self.masterImage.cropToSquare()
 					self.masterImage.toCircle()
@@ -101,8 +97,7 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 		
 		if (percent > 0.8) {
 			self.projectProgressView.progressTintColor = UIUtils.planningOrangeColor()
-		}
-		else {
+		} else {
 			self.projectProgressView.progressTintColor = UIUtils.planningGreenColor()
 		}
 	}
@@ -160,22 +155,18 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 			if (usr.status == "confirmed") {
 				statusImgView.image = UIImage(named: "Done")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
 				statusImgView.tintColor = UIUtils.planningGreenColor()
-			}
-			else {
+			} else {
 				statusImgView.image = UIImage(named: "Delete")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
 				statusImgView.tintColor = UIUtils.planningRedColor()
 			}
 			
-			if let img = ApplicationManager.sharedInstance.downloadedImages![usr.imageUrl!]
-			{
+			if let img = ApplicationManager.sharedInstance.downloadedImages![usr.imageUrl!] {
 				if (cell.tag == (indexPath.row + 100)) {
 					imgView.image = img
 				}
-			}
-			else {
+			} else {
 				ImageDownloader.downloadFrom(link: usr.imageUrl!) {
-					if let img = ApplicationManager.sharedInstance.downloadedImages![usr.imageUrl!]
-					{
+					if let img = ApplicationManager.sharedInstance.downloadedImages![usr.imageUrl!] {
 						if (cell.tag == (indexPath.row + 100)) {
 							imgView.image = img
 							
@@ -193,8 +184,7 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 	}
 	
 	func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		if (section == 0)
-		{
+		if (section == 0) {
 			return NSLocalizedString("Files", comment: "")
 		}
 		return NSLocalizedString("Members", comment: "")
@@ -209,28 +199,27 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 		}
 	}
 	
-//	@IBAction func allMarksButtonPressed(sender :AnyObject) {
-//		
-//		MarksApiCalls.getProjectMarksForProject(self.project!) { (isOk :Bool, resp :[Mark]?, mess :String) in
-//			
-//			if (!isOk) {
-//				ErrorViewer.errorPresent(self, mess: mess) {}
-//			}
-//			else {
-//				self.marksData = resp!
-//				self.performSegueWithIdentifier("allMarksSegue", sender: self)
-//			}
-//		}
-//		
-//	}
+	//	@IBAction func allMarksButtonPressed(sender :AnyObject) {
+	//		
+	//		MarksApiCalls.getProjectMarksForProject(self.project!) { (isOk :Bool, resp :[Mark]?, mess :String) in
+	//			
+	//			if (!isOk) {
+	//				ErrorViewer.errorPresent(self, mess: mess) {}
+	//			}
+	//			else {
+	//				self.marksData = resp!
+	//				self.performSegueWithIdentifier("allMarksSegue", sender: self)
+	//			}
+	//		}
+	//		
+	//	}
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		if (segue.identifier == "webViewSegue") {
 			let vc :WebViewViewController = segue.destinationViewController as! WebViewViewController
 			vc.file = webViewData!
 			vc.isUrl = true
-		}
-		else if (segue.identifier == "allMarksSegue") {
+		} else if (segue.identifier == "allMarksSegue") {
 			let vc = segue.destinationViewController as! ProjectMarksViewController
 			vc.marks = marksData
 		}

@@ -56,11 +56,9 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 		
 		if (today.earlierDate(registerLimit!) == today) {
 			remainingTime.text = NSLocalizedString("InscriptionEnd", comment: "") + (registerLimit?.toTitleString())!
-		}
-		else if (today.earlierDate(end!) == today) {
+		} else if (today.earlierDate(end!) == today) {
 			remainingTime.text = NSLocalizedString("ModuleEnd", comment: "") + (end?.toTitleString())!
-		}
-		else {
+		} else {
 			remainingTime.text = NSLocalizedString("ModuleEndedSince", comment: "") + (end?.toTitleString())!
 		}
 		
@@ -88,8 +86,7 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 		
 		if (percent > 0.8) {
 			self.progressBar.progressTintColor = UIUtils.planningOrangeColor()
-		}
-		else {
+		} else {
 			self.progressBar.progressTintColor = UIUtils.planningGreenColor()
 		}
 	}
@@ -134,8 +131,7 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 		
 		if (acti!.noteActi != nil) {
 			noteLabel.text = acti!.noteActi!
-		}
-		else {
+		} else {
 			noteLabel.text = ""
 		}
 		
@@ -146,8 +142,7 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 		
 		if (acti!.typeActiCode! == "proj" || acti!.typeActiCode! == "rdv" || acti!.noteActi!.characters.count > 0) {
 			cell?.accessoryType = .DisclosureIndicator
-		}
-		else {
+		} else {
 			cell?.accessoryType = .None
 		}
 		
@@ -176,8 +171,7 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 		
 		if (acti?.typeActiCode == "proj") {
 			projectStart(proj)
-		}
-		else {
+		} else {
 			appointmentStart(proj)
 		}
 	}
@@ -188,14 +182,12 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 			
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
-			}
-			else {
+			} else {
 				ProjectsApiCall.getProjectFiles(proj!) { (isOk :Bool, files :[File]?, mess :String) in
 					
 					if (!isOk) {
 						ErrorViewer.errorPresent(self, mess: mess) {}
-					}
-					else {
+					} else {
 						self.selectedProj = proj!
 						self.selectedProj!.files = files
 						self.performSegueWithIdentifier("projectDetailSegue", sender: self)
@@ -213,8 +205,7 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 			
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
-			}
-			else {
+			} else {
 				self.marksData = resp!
 				self.performSegueWithIdentifier("allMarksSegue", sender: self)
 			}
@@ -231,8 +222,7 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 			self.studentsBarButton.enabled = true
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
-			}
-			else {
+			} else {
 				self.studentsData = resp!
 				self.performSegueWithIdentifier("allRegisteredSegue", sender: self)
 			}
@@ -246,12 +236,10 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 			let vc = segue.destinationViewController as! ProjectsDetailsViewController
 			vc.project = selectedProj
 			vc.marksAllowed = true
-		}
-		else if (segue.identifier == "allMarksSegue") {
+		} else if (segue.identifier == "allMarksSegue") {
 			let vc = segue.destinationViewController as! ProjectMarksViewController
 			vc.marks = marksData
-		}
-		else if (segue.identifier == "allRegisteredSegue") {
+		} else if (segue.identifier == "allRegisteredSegue") {
 			let vc = segue.destinationViewController as! RegisteredStudentsViewController
 			vc.students = studentsData
 		}

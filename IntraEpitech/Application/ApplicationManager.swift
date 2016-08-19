@@ -51,7 +51,7 @@ class ApplicationManager: NSObject {
 	}
 
 	func addImageToCache(url: String, image: UIImage) {
-		if (downloadedImages == nil) {
+		if downloadedImages == nil {
 			downloadedImages = [String : UIImage]()
 		}
 		downloadedImages![url] = image
@@ -77,7 +77,7 @@ class ApplicationManager: NSObject {
 		planningSemesters.append(false)
 		planningSemesters.append(false)
 
-		if (user != nil) {
+		if user != nil {
 			planningSemesters[(user?.semester!)!] = true
 		}
 	}

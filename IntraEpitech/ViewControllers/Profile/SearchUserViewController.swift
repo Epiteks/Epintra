@@ -63,8 +63,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 			//				self.tableView.reloadData()
 			//				self.downloadingView.hidden = true
 			//			}
-		}
-		else {
+		} else {
 			self.downloadingView.hidden = true
 			self.navigationItem.titleView = resultSearchController.searchBar
 		}
@@ -117,8 +116,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 	}
 	
 	
-	func refreshData(sender:AnyObject)
-	{
+	func refreshData(sender:AnyObject) {
 		self.tableView.userInteractionEnabled = false
 		self.tableView.scrollEnabled = false
 		showConfirmationAlert()
@@ -152,7 +150,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 		if(resultSearchController.active) {
 			return filteredData.count
 		}
-		return users.count;
+		return users.count
 	}
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -164,7 +162,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 		let promo = cell?.viewWithTag(2) as! UILabel
 		let city = cell?.viewWithTag(3) as! UILabel
 		
-		if(resultSearchController.active){
+		if(resultSearchController.active) {
 			loginTitle.text = filteredData[indexPath.row].login
 			promo.text = NSLocalizedString(String(filteredData[indexPath.row].promo!), comment: "")
 			city.text = filteredData[indexPath.row].city
@@ -184,8 +182,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 			filteredData = array
 			tableView.reloadData()
 			
-		}
-		else {
+		} else {
 			
 			filteredData.removeAll(keepCapacity: false)
 			
@@ -220,8 +217,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 				MJProgressView.instance.hideProgress()
 				tableView.userInteractionEnabled = false
 				tableView.scrollEnabled = false
-			}
-			else {
+			} else {
 				self.selectedUser = resp
 				print(self.selectedUser?.login)
 				MJProgressView.instance.hideProgress()
@@ -261,5 +257,3 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 	}
 	
 }
-
-

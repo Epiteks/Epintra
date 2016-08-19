@@ -4,7 +4,8 @@ disabled_rules: # rule identifiers to exclude from running
   - force_cast
   - variable_name
   - colon
-  
+  - control_statement
+  - legacy_constructor  
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Carthage
   - Pods

@@ -22,8 +22,7 @@ class Mark: NSObject {
 	var codeacti :String?
 	var login :String?
 	
-	init(dict :JSON)
-	{
+	init(dict :JSON) {
 		titleModule = dict["titlemodule"].stringValue
 		title = dict["title"].stringValue
 		correcteur = dict["correcteur"].stringValue
@@ -36,8 +35,7 @@ class Mark: NSObject {
 		login = dict["login"].stringValue
 	}
 	
-	init(little :JSON)
-	{
+	init(little :JSON) {
 		correcteur = little["grader"].stringValue
 		finalNote = little["note"].stringValue
 		login = little["login"].stringValue

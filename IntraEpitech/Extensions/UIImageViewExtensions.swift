@@ -14,13 +14,11 @@ extension UIImageView {
 	
 	public var imageAtIndexPath : NSIndexPath {
 		
-		get
-		{
+		get {
 			return _imageAtIndexPath!
 		}
 		
-		set(newValue)
-		{
+		set(newValue) {
 			_imageAtIndexPath = newValue
 			// What do you want to do here?
 		}
@@ -111,6 +109,4 @@ extension UIImageView {
 		self.layer.cornerRadius = self.frame.size.height / 2
 		
 	}
-	
-	
 }

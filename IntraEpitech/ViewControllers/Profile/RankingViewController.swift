@@ -32,7 +32,7 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		// Do any additional setup after loading the view.
 		self.title = NSLocalizedString("Ranking", comment: "")
-
+		
 		let db = DBManager.getInstance()
 		
 		promoSelection.setTitle(NSLocalizedString(teks[0], comment: ""), forSegmentAtIndex: 0)
@@ -68,8 +68,7 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 			//                self.tableView.reloadData()
 			//                self.downloadingView.hidden = true
 			//            }
-		}
-		else {
+		} else {
 			self.downloadingView.hidden = true
 			self.navigationItem.titleView = resultSearchController.searchBar
 		}
@@ -126,8 +125,7 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 		self.resultSearchController.searchBar.endEditing(true)
 	}
 	
-	func refreshData(sender:AnyObject)
-	{
+	func refreshData(sender:AnyObject) {
 		self.tableView.userInteractionEnabled = false
 		self.tableView.scrollEnabled = false
 		self.promoSelection.userInteractionEnabled = false
@@ -201,8 +199,7 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 			login.text = filteredData[indexPath.row].login!
 			city.text = String(filteredData[indexPath.row].position!) + " - " + filteredData[indexPath.row].city!
 			gpa.text = String(filteredData[indexPath.row].gpa!)
-		}
-		else {
+		} else {
 			login.text = students[indexPath.row].login!
 			city.text = String(students[indexPath.row].position!) + " - " + students[indexPath.row].city!
 			gpa.text = String(students[indexPath.row].gpa!)
@@ -211,8 +208,7 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 				login.textColor = UIUtils.planningRedColor()
 				city.textColor = UIUtils.planningRedColor()
 				gpa.textColor = UIUtils.planningRedColor()
-			}
-			else {
+			} else {
 				login.textColor = UIColor.blackColor()
 				city.textColor = UIColor.lightGrayColor()
 				gpa.textColor = UIColor.blackColor()
@@ -239,8 +235,7 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
 				MJProgressView.instance.hideProgress()
-			}
-			else {
+			} else {
 				self.selectedUser = resp
 				print(self.selectedUser?.login)
 				MJProgressView.instance.hideProgress()
@@ -260,8 +255,7 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 			filteredData = array
 			tableView.reloadData()
 			
-		}
-		else {
+		} else {
 			
 			filteredData.removeAll(keepCapacity: false)
 			

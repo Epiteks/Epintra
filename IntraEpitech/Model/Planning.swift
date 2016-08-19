@@ -35,8 +35,7 @@ class Planning: NSObject {
 	var past :Bool?
 	var semester :Int?
 	
-	init(dict :JSON)
-	{
+	init(dict :JSON) {
 		titleModule = dict["titlemodule"].stringValue
 		startTime = dict["start"].stringValue
 		endTime = dict["end"].stringValue
@@ -67,8 +66,7 @@ class Planning: NSObject {
 	}
 	
 	func canEnterToken() -> Bool {
-		if (self.allowToken == true && self.eventRegisteredStatus == "registered")
-		{
+		if (self.allowToken == true && self.eventRegisteredStatus == "registered") {
 			return true
 		}
 		return false
@@ -76,8 +74,7 @@ class Planning: NSObject {
 	
 	func canRegister() -> Bool {
 		
-		if (self.moduleRegistered == true && self.eventRegisteredStatus == "false" && self.allowRegister! == true && room != nil && room?.seats != nil)
-		{
+		if (self.moduleRegistered == true && self.eventRegisteredStatus == "false" && self.allowRegister! == true && room != nil && room?.seats != nil) {
 			return true
 		}
 		return false
@@ -85,8 +82,7 @@ class Planning: NSObject {
 	
 	func canUnregister() -> Bool {
 		
-		if (self.moduleRegistered == true && self.eventRegisteredStatus == "registered" && self.allowRegister! == true)
-		{
+		if (self.moduleRegistered == true && self.eventRegisteredStatus == "registered" && self.allowRegister! == true) {
 			return true
 		}
 		return false
@@ -128,16 +124,13 @@ class Planning: NSObject {
 		
 		startTime?.toDate().toEventHour()
 		
-		if (rdvGroupRegistered!.characters.count > 0)
-		{
+		if (rdvGroupRegistered!.characters.count > 0) {
 			let arr = rdvGroupRegistered?.componentsSeparatedByString("|")
 			return (arr![0].toDate().toEventHour(), arr![1].toDate().toEventHour())
-		}
-		else if (rdvIndividuelRegistered!.characters.count > 0) {
+		} else if (rdvIndividuelRegistered!.characters.count > 0) {
 			let arr = rdvIndividuelRegistered?.componentsSeparatedByString("|")
 			return (arr![0].toDate().toEventHour(), arr![1].toDate().toEventHour())
-		}
-		else {
+		} else {
 			return ((startTime?.toDate().toEventHour())!, (endTime?.toDate().toEventHour())!)
 		}
 	}

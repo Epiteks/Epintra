@@ -25,19 +25,16 @@ class ModulesApiCalls: APICalls {
 					if (errorDict.count > 0) {
 						errorMessage = (errorDict["message"]?.stringValue)
 						onCompletion(false, nil, errorMessage!)
-					}
-					else
-					{
+					} else {
 						let arr = responseCall.arrayValue
 						var resp = [Module]()
 						for tmp in arr {
 							resp.insert(Module(dict: tmp), atIndex: 0)
 						}
-						onCompletion(true, resp,  "Ok")
+						onCompletion(true, resp, "Ok")
 					}
 					
-				}
-				else {
+				} else {
 					onCompletion(false, nil, (response.result.error?.localizedDescription)!)
 				}
 		}
@@ -56,19 +53,16 @@ class ModulesApiCalls: APICalls {
 					if (errorDict.count > 0) {
 						errorMessage = (errorDict["message"]?.stringValue)
 						onCompletion(false, nil, errorMessage!)
-					}
-					else
-					{
+					} else {
 						let arr = responseCall.arrayValue
 						var resp = [Module]()
 						for tmp in arr {
 							resp.insert(Module(dict: tmp), atIndex: 0)
 						}
-						onCompletion(true, resp,  "Ok")
+						onCompletion(true, resp, "Ok")
 					}
 					
-				}
-				else {
+				} else {
 					onCompletion(false, nil, (response.result.error?.localizedDescription)!)
 				}
 		}
@@ -91,15 +85,12 @@ class ModulesApiCalls: APICalls {
 					if (errorDict.count > 0) {
 						errorMessage = (errorDict["message"]?.stringValue)
 						onCompletion(false, nil, errorMessage!)
-					}
-					else
-					{
+					} else {
 						let resp = Module(detail: responseCall)
-						onCompletion(true, resp,  "Ok")
+						onCompletion(true, resp, "Ok")
 					}
 					
-				}
-				else {
+				} else {
 					onCompletion(false, nil, (response.result.error?.localizedDescription)!)
 				}
 		}
@@ -121,9 +112,7 @@ class ModulesApiCalls: APICalls {
 					if (errorDict.count > 0) {
 						errorMessage = (errorDict["message"]?.stringValue)
 						onCompletion(false, nil, errorMessage!)
-					}
-					else
-					{
+					} else {
 						let arr = responseCall.arrayValue
 						
 						var resp = [RegisteredStudent]()
@@ -131,11 +120,10 @@ class ModulesApiCalls: APICalls {
 							resp.append(RegisteredStudent(dict :tmp))
 						}
 						
-						onCompletion(true, resp,  "Ok")
+						onCompletion(true, resp, "Ok")
 					}
 					
-				}
-				else {
+				} else {
 					onCompletion(false, nil, (response.result.error?.localizedDescription)!)
 				}
 		}

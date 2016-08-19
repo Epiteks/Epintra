@@ -13,8 +13,7 @@ class Netsoul: NSObject {
 	var	timeActive :Int
 	var timeNormal :Int
 	
-	init(dict :JSON)
-	{
+	init(dict :JSON) {
 		timeActive = dict["active"].intValue
 		timeNormal = dict["nslog_norm"].intValue
 	}
@@ -24,8 +23,7 @@ class Netsoul: NSObject {
 		let current = Int(timeActive)
 		let normal = Int(timeNormal)
 		
-		if (current >= normal)
-		{
+		if (current >= normal) {
 			return UIUtils.netsoulGreenColor()
 		}
 		return UIUtils.netsoulRedColor()
