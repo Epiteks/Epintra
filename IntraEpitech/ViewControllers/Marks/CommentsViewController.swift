@@ -10,8 +10,8 @@ import UIKit
 
 class CommentsViewController: UIViewController {
 	
-	var _mark :Mark?
-	@IBOutlet weak var _textView: UITextView!
+	var mark :Mark?
+	@IBOutlet weak var textView: UITextView!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -20,9 +20,9 @@ class CommentsViewController: UIViewController {
 		
 		// Do any additional setup after loading the view.
 		
-		let str = (_mark?._comment)!// + "\n\n" + (_mark?._correcteur)!
+		let str = (mark?.comment)!// + "\n\n" + (mark?.correcteur)!
 		print(str)
-		_textView.text = str
+		textView.text = str
 		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: (#selector(CommentsViewController.backButtonAction(_:))))
 		self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
 		

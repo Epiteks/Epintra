@@ -11,20 +11,20 @@ import SwiftyJSON
 
 class RegisteredStudent: NSObject {
 	
-	var _login :String!
-	var _grade :String!
-	var _status :String!
-	var _imageURL :String!
+	var login :String!
+	var grade :String!
+	var status :String!
+	var imageURL :String!
 	
 	init(dict :JSON) {
 		
-		_login = dict["login"].stringValue
-		_grade = dict["grade"].stringValue
-		_status = dict["present"].stringValue
-		_imageURL = dict["picture"].stringValue
+		login = dict["login"].stringValue
+		grade = dict["grade"].stringValue
+		status = dict["present"].stringValue
+		imageURL = dict["picture"].stringValue
 
 		if (dict["picture"].stringValue.characters.count > 0 && dict["picture"].stringValue.characters.count <= 12) {
-			_imageURL = APICalls.getProfilePictureURL() + _login + ".bmp"
+			imageURL = APICalls.getProfilePictureURL() + login + ".bmp"
 		}
 	}
 	

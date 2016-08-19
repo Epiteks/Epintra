@@ -16,7 +16,7 @@ class ProjectsApiCall: APICalls {
 		
 		let url = super.getApiUrl() + "projects"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance._token!])
+		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)
@@ -50,11 +50,11 @@ class ProjectsApiCall: APICalls {
 		
 		let url = super.getApiUrl() + "project"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance._token!,
-			"scolaryear": proj._scolaryear!,
-			"codemodule": proj._codeModule!,
-			"codeinstance": proj._codeInstance!,
-			"codeacti": proj._codeActi!])
+		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+			"scolaryear": proj.scolaryear!,
+			"codemodule": proj.codeModule!,
+			"codeinstance": proj.codeInstance!,
+			"codeacti": proj.codeActi!])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)
@@ -81,11 +81,11 @@ class ProjectsApiCall: APICalls {
 		
 		let url = super.getApiUrl() + "project/files"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance._token!,
-			"scolaryear": proj._scolaryear!,
-			"codemodule": proj._codeModule!,
-			"codeinstance": proj._codeInstance!,
-			"codeacti": proj._codeActi!])
+		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+			"scolaryear": proj.scolaryear!,
+			"codemodule": proj.codeModule!,
+			"codeinstance": proj.codeInstance!,
+			"codeacti": proj.codeActi!])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)

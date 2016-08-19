@@ -10,19 +10,19 @@ import SwiftyJSON
 
 class Netsoul: NSObject {
 	
-	var	_timeActive :Int
-	var _timeNormal :Int
+	var	timeActive :Int
+	var timeNormal :Int
 	
 	init(dict :JSON)
 	{
-		_timeActive = dict["active"].intValue
-		_timeNormal = dict["nslog_norm"].intValue
+		timeActive = dict["active"].intValue
+		timeNormal = dict["nslog_norm"].intValue
 	}
 	
 	func getColor() -> UIColor {
 		
-		let current = Int(_timeActive)
-		let normal = Int(_timeNormal)
+		let current = Int(timeActive)
+		let normal = Int(timeNormal)
 		
 		if (current >= normal)
 		{

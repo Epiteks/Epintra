@@ -15,7 +15,7 @@ class PlanningApiCalls: APICalls {
 		
 		let url = super.getApiUrl() + "planning"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance._token!, "start" :first, "end" :last])
+		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!, "start" :first, "end" :last])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)
@@ -50,8 +50,8 @@ class PlanningApiCalls: APICalls {
 								planningMan[tmp.getOnlyDay()] = [Planning]()
 							}
 							
-							let allowedCalendars = ApplicationManager.sharedInstance._planningSemesters
-							if (allowedCalendars[tmp._semester!] == true) {
+							let allowedCalendars = ApplicationManager.sharedInstance.planningSemesters
+							if (allowedCalendars[tmp.semester!] == true) {
 								planningMan[tmp.getOnlyDay()]?.append(tmp)	
 							}
 						}
@@ -68,12 +68,12 @@ class PlanningApiCalls: APICalls {
 		
 		let url = super.getApiUrl() + "token"
 		
-		Alamofire.request(.POST, url, parameters: ["token": ApplicationManager.sharedInstance._token!,
-			"scolaryear" :planning._scolaryear!,
-			"codemodule" :planning._codeModule!,
-			"codeinstance" :planning._codeInstance!,
-			"codeacti" :planning._codeActi!,
-			"codeevent" :planning._codeEvent!,
+		Alamofire.request(.POST, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+			"scolaryear" :planning.scolaryear!,
+			"codemodule" :planning.codeModule!,
+			"codeinstance" :planning.codeInstance!,
+			"codeacti" :planning.codeActi!,
+			"codeevent" :planning.codeEvent!,
 			"tokenvalidationcode" :token])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
@@ -99,12 +99,12 @@ class PlanningApiCalls: APICalls {
 		
 		let url = super.getApiUrl() + "event"
 		
-		Alamofire.request(.POST, url, parameters: ["token": ApplicationManager.sharedInstance._token!,
-			"scolaryear" :planning._scolaryear!,
-			"codemodule" :planning._codeModule!,
-			"codeinstance" :planning._codeInstance!,
-			"codeacti" :planning._codeActi!,
-			"codeevent" :planning._codeEvent!])
+		Alamofire.request(.POST, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+			"scolaryear" :planning.scolaryear!,
+			"codemodule" :planning.codeModule!,
+			"codeinstance" :planning.codeInstance!,
+			"codeacti" :planning.codeActi!,
+			"codeevent" :planning.codeEvent!])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)
@@ -129,12 +129,12 @@ class PlanningApiCalls: APICalls {
 		
 		let url = super.getApiUrl() + "event"
 		
-		Alamofire.request(.DELETE, url, parameters: ["token": ApplicationManager.sharedInstance._token!,
-			"scolaryear" :planning._scolaryear!,
-			"codemodule" :planning._codeModule!,
-			"codeinstance" :planning._codeInstance!,
-			"codeacti" :planning._codeActi!,
-			"codeevent" :planning._codeEvent!])
+		Alamofire.request(.DELETE, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+			"scolaryear" :planning.scolaryear!,
+			"codemodule" :planning.codeModule!,
+			"codeinstance" :planning.codeInstance!,
+			"codeacti" :planning.codeActi!,
+			"codeevent" :planning.codeEvent!])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)
@@ -159,7 +159,7 @@ class PlanningApiCalls: APICalls {
 		
 		let url = super.getApiUrl() + "planning"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance._token!, "start" :(planning._startTime?.toDate().toAPIString())!, "end" :(planning._startTime?.toDate().toAPIString())!])
+		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!, "start" :(planning.startTime?.toDate().toAPIString())!, "end" :(planning.startTime?.toDate().toAPIString())!])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)
@@ -178,11 +178,11 @@ class PlanningApiCalls: APICalls {
 						{
 							let tmp = Planning(dict: tmpPlanning)
 							
-							if (tmp._startTime == "") {
+							if (tmp.startTime == "") {
 								print("PUTAIN")
 							}
 							
-							if (tmp._codeActi! == planning._codeActi! && tmp._codeEvent! == planning._codeEvent!) {
+							if (tmp.codeActi! == planning.codeActi! && tmp.codeEvent! == planning.codeEvent!) {
 								res = tmp
 								break
 							}
@@ -200,12 +200,12 @@ class PlanningApiCalls: APICalls {
 		
 		let url = super.getApiUrl() + "event/registered"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance._token!,
-			"scolaryear": planning._scolaryear!,
-			"codemodule" : planning._codeModule!,
-			"codeinstance": planning._codeInstance!,
-			"codeacti": planning._codeActi!,
-			"codeevent": planning._codeEvent!])
+		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+			"scolaryear": planning.scolaryear!,
+			"codemodule" : planning.codeModule!,
+			"codeinstance": planning.codeInstance!,
+			"codeacti": planning.codeActi!,
+			"codeevent": planning.codeEvent!])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)
@@ -239,11 +239,11 @@ class PlanningApiCalls: APICalls {
 		
 		let url = super.getApiUrl() + "event/rdv"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance._token!,
-			"scolaryear": planning._scolaryear!,
-			"codemodule" : planning._codeModule!,
-			"codeinstance": planning._codeInstance!,
-			"codeacti": planning._codeActi!])
+		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+			"scolaryear": planning.scolaryear!,
+			"codemodule" : planning.codeModule!,
+			"codeinstance": planning.codeInstance!,
+			"codeacti": planning.codeActi!])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)
@@ -259,8 +259,8 @@ class PlanningApiCalls: APICalls {
 					{
 						
 						let res = AppointmentEvent(dict: responseCall)
-						res._eventStart = planning._startTime?.toDate()
-						res._eventEnd = planning._endTime?.toDate()
+						res.eventStart = planning.startTime?.toDate()
+						res.eventEnd = planning.endTime?.toDate()
 						res.addAppointments(responseCall)
 						onCompletion(true, res, "")
 					}
@@ -275,15 +275,15 @@ class PlanningApiCalls: APICalls {
 		
 		let url = super.getApiUrl() + "event/rdv"
 		
-		let lastParamName = (appointment._groupId == "" ? "login" : "idteam")
-		let lastParamValue = (appointment._groupId == "" ? ApplicationManager.sharedInstance._currentLogin! : appointment._groupId!)
+		let lastParamName = (appointment.groupId == "" ? "login" : "idteam")
+		let lastParamValue = (appointment.groupId == "" ? ApplicationManager.sharedInstance.currentLogin! : appointment.groupId!)
 		
-		Alamofire.request(.POST, url, parameters: ["token": ApplicationManager.sharedInstance._token!,
-			"scolaryear": appointment._scolaryear!,
-			"codemodule" : appointment._codeModule!,
-			"codeinstance": appointment._codeInstance!,
-			"codeacti": appointment._codeActi!,
-			"idcreneau": slot._id!,
+		Alamofire.request(.POST, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+			"scolaryear": appointment.scolaryear!,
+			"codemodule" : appointment.codeModule!,
+			"codeinstance": appointment.codeInstance!,
+			"codeacti": appointment.codeActi!,
+			"idcreneau": slot.id!,
 			lastParamName: lastParamValue])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
@@ -319,15 +319,15 @@ class PlanningApiCalls: APICalls {
 		
 		let url = super.getApiUrl() + "event/rdv"
 		
-		let lastParamName = (appointment._groupId == "" ? "login" : "idteam")
-		let lastParamValue = (appointment._groupId == "" ? ApplicationManager.sharedInstance._currentLogin! : appointment._groupId!)
+		let lastParamName = (appointment.groupId == "" ? "login" : "idteam")
+		let lastParamValue = (appointment.groupId == "" ? ApplicationManager.sharedInstance.currentLogin! : appointment.groupId!)
 		
-		Alamofire.request(.DELETE, url, parameters: ["token": ApplicationManager.sharedInstance._token!,
-			"scolaryear": appointment._scolaryear!,
-			"codemodule" : appointment._codeModule!,
-			"codeinstance": appointment._codeInstance!,
-			"codeacti": appointment._codeActi!,
-			"idcreneau": slot._id!,
+		Alamofire.request(.DELETE, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+			"scolaryear": appointment.scolaryear!,
+			"codemodule" : appointment.codeModule!,
+			"codeinstance": appointment.codeInstance!,
+			"codeacti": appointment.codeActi!,
+			"idcreneau": slot.id!,
 			lastParamName: lastParamValue])
 			.responseJSON { response in
 				if (response.result.isSuccess) {

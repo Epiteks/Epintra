@@ -9,31 +9,31 @@
 import UIKit
 
 class SplashScreenViewController: UIViewController {
-	@IBOutlet weak var _statusLabel: UILabel!
+	@IBOutlet weak var statusLabel: UILabel!
 
 	let app = ApplicationManager.sharedInstance
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		_statusLabel.textColor = UIColor.whiteColor()
-		_statusLabel.text = ""
+		statusLabel.textColor = UIColor.whiteColor()
+		statusLabel.text = ""
 		self.view.backgroundColor = UIUtils.backgroundColor()
 
 		if (UserPreferences.checkIfWantsDownloadingExists()) {
-			app._canDownload = UserPreferences.getWantsDownloading()
+			app.canDownload = UserPreferences.getWantsDownloading()
 		}
 		if (UserPreferences.checkIfDefaultCalendarExists()) {
-			app._defaultCalendar = UserPreferences.getDefaultCalendar()
+			app.defaultCalendar = UserPreferences.getDefaultCalendar()
 		}
 	}
 
 	override func viewDidAppear(animated: Bool) {
 
-		_statusLabel.text = NSLocalizedString("GettingUserData", comment: "")
+		statusLabel.text = NSLocalizedString("GettingUserData", comment: "")
 		MJProgressView.instance.showProgress(self.view, white: true)
-		UserApiCalls.getUserData(ApplicationManager.sharedInstance._currentLogin!) { (isOk: Bool, s: String) in
-		 self._statusLabel.text = NSLocalizedString("FinishedGettingUserData", comment: "")
+		UserApiCalls.getUserData(ApplicationManager.sharedInstance.currentLogin!) { (isOk: Bool, s: String) in
+		 self.statusLabel.text = NSLocalizedString("FinishedGettingUserData", comment: "")
 			if (!isOk) {
 				MJProgressView.instance.hideProgress()
 				ErrorViewer.errorPresent(self, mess: s) {
@@ -41,11 +41,11 @@ class SplashScreenViewController: UIViewController {
 				}
 
 			} else {
-				self._statusLabel.text = NSLocalizedString("DownloadingPicture", comment: "")
-				//ImageDownloader.downloadFrom(link: (ApplicationManager.sharedInstance._user?._imageUrl!)!) {
-				//	self._statusLabel.text = NSLocalizedString("GettingUserHistory", comment: "")
+				self.statusLabel.text = NSLocalizedString("DownloadingPicture", comment: "")
+				//ImageDownloader.downloadFrom(link: (ApplicationManager.sharedInstance.user?.imageUrl!)!) {
+				//	self.statusLabel.text = NSLocalizedString("GettingUserHistory", comment: "")
 				UserApiCalls.getUserHistory() { (isOk: Bool, s: String) in
-					self._statusLabel.text = NSLocalizedString("FinishedGettingUserHistory", comment: "")
+					self.statusLabel.text = NSLocalizedString("FinishedGettingUserHistory", comment: "")
 					MJProgressView.instance.hideProgress()
 					if (!isOk) {
 						ErrorViewer.errorPresent(self, mess: s) {
@@ -60,7 +60,7 @@ class SplashScreenViewController: UIViewController {
 				}
 				//}
 				if (UserPreferences.checkSemestersExist() == true) {
-					ApplicationManager.sharedInstance._planningSemesters = UserPreferences.getSemesters()
+					ApplicationManager.sharedInstance.planningSemesters = UserPreferences.getSemesters()
 				}
 			}
 		}

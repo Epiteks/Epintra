@@ -26,7 +26,7 @@ class DBManager: NSObject {
 	
 	func addStudentData(studentInfo: StudentInfo) -> Bool {
 		database!.open()
-		let isInserted = database!.executeUpdate("INSERT INTO student_info (login, ville, gpa, promo) VALUES (?, ?, ?, ?)", withArgumentsInArray: [studentInfo._login!, studentInfo._city!, studentInfo._gpa!, studentInfo._promo!])
+		let isInserted = database!.executeUpdate("INSERT INTO student_info (login, ville, gpa, promo) VALUES (?, ?, ?, ?)", withArgumentsInArray: [studentInfo.login!, studentInfo.city!, studentInfo.gpa!, studentInfo.promo!])
 		database!.close()
 		return isInserted
 	}
@@ -40,7 +40,7 @@ class DBManager: NSObject {
 	
 	func deleteStudentData(studentInfo: StudentInfo) -> Bool {
 		database!.open()
-		let isDeleted = database!.executeUpdate("DELETE FROM student_info WHERE login=?", withArgumentsInArray: [studentInfo._login!])
+		let isDeleted = database!.executeUpdate("DELETE FROM student_info WHERE login=?", withArgumentsInArray: [studentInfo.login!])
 		database!.close()
 		return isDeleted
 	}
@@ -59,10 +59,10 @@ class DBManager: NSObject {
 		if (resultSet != nil) {
 			while resultSet.next() {
 				let studentInfo : StudentInfo = StudentInfo()
-				studentInfo._login = resultSet.stringForColumn("login")
-				studentInfo._city = resultSet.stringForColumn("ville")
-				studentInfo._gpa = Float(resultSet.stringForColumn("gpa"))
-				studentInfo._promo = resultSet.stringForColumn("promo")
+				studentInfo.login = resultSet.stringForColumn("login")
+				studentInfo.city = resultSet.stringForColumn("ville")
+				studentInfo.gpa = Float(resultSet.stringForColumn("gpa"))
+				studentInfo.promo = resultSet.stringForColumn("promo")
 				marrStudentInfo.addObject(studentInfo)
 			}
 		}
@@ -78,11 +78,11 @@ class DBManager: NSObject {
 		if (resultSet != nil) {
 			while resultSet.next() {
 				let studentInfo : StudentInfo = StudentInfo()
-				studentInfo._login = resultSet.stringForColumn("login")
-				studentInfo._city = resultSet.stringForColumn("ville")
-				studentInfo._gpa = Float(resultSet.stringForColumn("gpa"))
-				studentInfo._promo = resultSet.stringForColumn("promo")
-				studentInfo._position = i
+				studentInfo.login = resultSet.stringForColumn("login")
+				studentInfo.city = resultSet.stringForColumn("ville")
+				studentInfo.gpa = Float(resultSet.stringForColumn("gpa"))
+				studentInfo.promo = resultSet.stringForColumn("promo")
+				studentInfo.position = i
 				i += 1
 				marrStudentInfo.addObject(studentInfo)
 			}

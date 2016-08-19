@@ -14,7 +14,7 @@ class ImageDownloader: NSObject {
 		
 		print(link)
 		
-		if (ApplicationManager.sharedInstance._canDownload == false) {
+		if (ApplicationManager.sharedInstance.canDownload == false) {
 			onCompletion()
 			return
 		}
@@ -38,7 +38,7 @@ class ImageDownloader: NSObject {
 	
 	class func downloadFromCallback(link link:String, onCompletion :(String) -> () ) {
 		
-		if (ApplicationManager.sharedInstance._canDownload == false) {
+		if (ApplicationManager.sharedInstance.canDownload == false) {
 			onCompletion("")
 			return
 		}

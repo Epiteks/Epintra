@@ -75,11 +75,11 @@ class CalendarManager: NSObject {
 		// 1
 		let eventStore = EKEventStore()
 		
-		if (ApplicationManager.sharedInstance._defaultCalendar == nil) {
+		if (ApplicationManager.sharedInstance.defaultCalendar == nil) {
 			onCompletion(false, "NoDefaultCalendar")
 			return
 		}
-		else if ((eventStore.calendarWithIdentifier(ApplicationManager.sharedInstance._defaultCalendar!)) != nil) {
+		else if ((eventStore.calendarWithIdentifier(ApplicationManager.sharedInstance.defaultCalendar!)) != nil) {
 			onCompletion(false, "DefaultCalendarWrong")
 			return
 		}
@@ -119,30 +119,30 @@ class CalendarManager: NSObject {
 		
 		for calendar in calendars {
 			// 2
-			if calendar.title == ApplicationManager.sharedInstance._defaultCalendar {
+			if calendar.title == ApplicationManager.sharedInstance.defaultCalendar {
 				// 3
 				
 				var startDate = NSDate()
 				var endDate = NSDate()
 				
-				if (planning._rdvGroupRegistered!.characters.count > 0)
+				if (planning.rdvGroupRegistered!.characters.count > 0)
 				{
-					let arr = planning._rdvGroupRegistered?.componentsSeparatedByString("|")
+					let arr = planning.rdvGroupRegistered?.componentsSeparatedByString("|")
 					//					let resp = (arr![0].toDate().toEventHour(), arr![1].toDate().toEventHour())
 					startDate = arr![0].toDate()
 					endDate = arr![1].toDate()
 					
 				}
-				else if (planning._rdvIndividuelRegistered!.characters.count > 0) {
-					let arr = planning._rdvIndividuelRegistered?.componentsSeparatedByString("|")
+				else if (planning.rdvIndividuelRegistered!.characters.count > 0) {
+					let arr = planning.rdvIndividuelRegistered?.componentsSeparatedByString("|")
 					startDate = arr![0].toDate()
 					endDate = arr![1].toDate()
 					
 				}
 				else {
-					startDate = (planning._startTime?.toDate())!
+					startDate = (planning.startTime?.toDate())!
 					// 2 hours
-					endDate = (planning._endTime?.toDate())!
+					endDate = (planning.endTime?.toDate())!
 				}
 				// 4
 				
@@ -150,12 +150,12 @@ class CalendarManager: NSObject {
 				let event = EKEvent(eventStore: store)
 				event.calendar = calendar
 				
-				event.title = planning._actiTitle!
+				event.title = planning.actiTitle!
 				event.startDate = startDate
 				event.endDate = endDate
 				
-				if (planning._room != nil) {
-					event.location = planning._room!.getRoomCleaned()
+				if (planning.room != nil) {
+					event.location = planning.room!.getRoomCleaned()
 				}
 				
 				// 5

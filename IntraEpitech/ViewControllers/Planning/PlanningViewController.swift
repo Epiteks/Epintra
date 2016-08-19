@@ -13,17 +13,17 @@ import MGSwipeTableCell
 class PlanningViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MGSwipeTableCellDelegate {
 	
 	@IBOutlet weak var menuButton: UIBarButtonItem!
-	@IBOutlet weak var _tableView: UITableView!
-	@IBOutlet weak var _calendar: FSCalendar!
+	@IBOutlet weak var tableView: UITableView!
+	@IBOutlet weak var calendar: FSCalendar!
 	
-	var _swipeAllowed :Bool?
+	var swipeAllowed :Bool?
 	
-	var _currentDate = NSDate()
+	var currentDate = NSDate()
 	
-	var _currentData = Dictionary<String, [Planning]>()
-	var _tableViewData = [(String, [Planning])]()
+	var currentData = Dictionary<String, [Planning]>()
+	var tableViewData = [(String, [Planning])]()
 	
-	let _typeColors = [
+	let typeColors = [
 		"proj" : UIUtils.planningBlueColor(),
 		"rdv" : UIUtils.planningOrangeColor(),
 		"tp" : UIUtils.planningPurpleColor(),
@@ -32,48 +32,42 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		"class" : UIUtils.planningBlueColor()
 	]
 	
-	var _refreshControl = UIRefreshControl()
-	var _savedSemesters :[Bool]? = nil
-	var _registeredStudentToSend :[RegisteredStudent]?
-	var _appointmentsToSend :AppointmentEvent? = nil
+	var refreshControl = UIRefreshControl()
+	var savedSemesters :[Bool]? = nil
+	var registeredStudentToSend :[RegisteredStudent]?
+	var appointmentsToSend :AppointmentEvent? = nil
 	
-	@IBOutlet weak var _selectSemestersButton: UIBarButtonItem!
+	@IBOutlet weak var selectSemestersButton: UIBarButtonItem!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		_swipeAllowed = true
+		swipeAllowed = true
 		
-		if self.revealViewController() != nil {
-			menuButton.target = self.revealViewController()
-			menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
-			self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-		}
+		tableView.separatorInset = UIEdgeInsetsZero
 		
-		_tableView.separatorInset = UIEdgeInsetsZero
+		calendar.scope = FSCalendarScope.Week
+		calendar.firstWeekday = 2
+		calendar.weekdayTextColor = UIUtils.backgroundColor()
+		calendar.headerTitleColor = UIUtils.backgroundColor()
+		calendar.weekdayTextColor = UIUtils.backgroundColor()
+		calendar.todayColor = UIUtils.backgroundColor()
+		calendar.selectionColor = UIUtils.lightBackgroundColor()
+		//calendar.allowsSelection = false
 		
-		_calendar.scope = FSCalendarScope.Week
-		_calendar.firstWeekday = 2
-		_calendar.weekdayTextColor = UIUtils.backgroundColor()
-		_calendar.headerTitleColor = UIUtils.backgroundColor()
-		_calendar.weekdayTextColor = UIUtils.backgroundColor()
-		_calendar.todayColor = UIUtils.backgroundColor()
-		_calendar.selectionColor = UIUtils.lightBackgroundColor()
-		//_calendar.allowsSelection = false
+		self.refreshControl.tintColor = UIUtils.backgroundColor()
+		self.refreshControl.addTarget(self, action: #selector(PlanningViewController.refreshData(_:)), forControlEvents: .ValueChanged)
+		self.tableView.addSubview(refreshControl)
+		self.tableView.allowsMultipleSelectionDuringEditing = true
 		
-		self._refreshControl.tintColor = UIUtils.backgroundColor()
-		self._refreshControl.addTarget(self, action: #selector(PlanningViewController.refreshData(_:)), forControlEvents: .ValueChanged)
-		self._tableView.addSubview(_refreshControl)
-		self._tableView.allowsMultipleSelectionDuringEditing = true
+		selectSemestersButton.title = NSLocalizedString("Semesters", comment :"")
 		
-		_selectSemestersButton.title = NSLocalizedString("Semesters", comment :"")
-		
-		if (_currentDate.fs_weekday == 1) {
-			_currentDate = _currentDate.fs_dateBySubtractingDays(1)
+		if (currentDate.fs_weekday == 1) {
+			currentDate = currentDate.fs_dateBySubtractingDays(1)
 		}
 		
 		MJProgressView.instance.showProgress(self.view, white: false)
-		loadData((_currentDate.startOfWeek()?.toAPIString())!, end: (_currentDate.endOfWeek()?.toAPIString())!) { _ in
+		loadData((currentDate.startOfWeek()?.toAPIString())!, end: (currentDate.endOfWeek()?.toAPIString())!) { _ in
 			MJProgressView.instance.hideProgress()
 		}
 	}
@@ -87,42 +81,35 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 	
 	override func viewWillAppear(animated: Bool) {
 		
-		// Google Analytics Data
-		let tracker = GAI.sharedInstance().defaultTracker
-		tracker.set(kGAIScreenName, value: "Planning")
-		
-		let builder = GAIDictionaryBuilder.createScreenView()
-		tracker.send(builder.build() as [NSObject : AnyObject])
-		
-		if (self._appointmentsToSend != nil) {
+		if (self.appointmentsToSend != nil) {
 			
 			MJProgressView.instance.showProgress(self.view, white: false)
-			let cal = _calendar.currentPage
-			print(_calendar.currentPage)
-			_tableView.userInteractionEnabled = false
-			_tableView.scrollEnabled = false
-			_calendar.userInteractionEnabled = false
+			let cal = calendar.currentPage
+			print(calendar.currentPage)
+			tableView.userInteractionEnabled = false
+			tableView.scrollEnabled = false
+			calendar.userInteractionEnabled = false
 			PlanningApiCalls.getPlanning((cal.startOfWeek()?.toAPIString())!, last: (cal.endOfWeek()?.toAPIString())!) { (isOk :Bool, planningArray :Dictionary<String, [Planning]>?, mess :String?) in
 				
 				MJProgressView.instance.hideProgress()
 				if (isOk)
 				{
-					self._currentData = planningArray!
+					self.currentData = planningArray!
 					self.sortDict()
-					self._tableView.reloadData()
+					self.tableView.reloadData()
 				}
 				else {
 				}
-				self._tableView.userInteractionEnabled = true
-				self._tableView.scrollEnabled = true
-				self._calendar.userInteractionEnabled = true
+				self.tableView.userInteractionEnabled = true
+				self.tableView.scrollEnabled = true
+				self.calendar.userInteractionEnabled = true
 			}
 		}
 		
-		if (_savedSemesters != nil && _savedSemesters! != ApplicationManager.sharedInstance._planningSemesters) {
+		if (savedSemesters != nil && savedSemesters! != ApplicationManager.sharedInstance.planningSemesters) {
 			MJProgressView.instance.showProgress(self.view, white: false)
-			let cal = _calendar.currentPage
-			print(_calendar.currentPage)
+			let cal = calendar.currentPage
+			print(calendar.currentPage)
 			loadData((cal.startOfWeek()?.toAPIString())!, end: (cal.endOfWeek()?.toAPIString())!) { _ in
 				MJProgressView.instance.hideProgress()
 			}
@@ -131,47 +118,47 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 	
 	func refreshData(sender:AnyObject)
 	{
-		let week = _calendar.currentPage
+		let week = calendar.currentPage
 		
 		loadData((week.startOfWeek()?.toAPIString())!, end: (week.endOfWeek()?.toAPIString())!) { _ in
-			self._refreshControl.endRefreshing()
+			self.refreshControl.endRefreshing()
 		}
 	}
 	
 	func loadData(first :String, end :String, onCompletion :() -> ()) {
-		_tableView.userInteractionEnabled = false
-		_tableView.scrollEnabled = false
-		_calendar.userInteractionEnabled = false
+		tableView.userInteractionEnabled = false
+		tableView.scrollEnabled = false
+		calendar.userInteractionEnabled = false
 		PlanningApiCalls.getPlanning(first, last: end) { (isOk :Bool, planningArray :Dictionary<String, [Planning]>?, mess :String?) in
 			
 			MJProgressView.instance.hideProgress()
 			if (isOk)
 			{
-				self._currentData = planningArray!
+				self.currentData = planningArray!
 				self.sortDict()
 				onCompletion()
-				self._tableView.reloadData()
-				self._tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: self.getCurrentDateInData()), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+				self.tableView.reloadData()
+				self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: self.getCurrentDateInData()), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
 			}
 			else {
 				onCompletion()
 			}
-			self._tableView.userInteractionEnabled = true
-			self._tableView.scrollEnabled = true
-			self._calendar.userInteractionEnabled = true
+			self.tableView.userInteractionEnabled = true
+			self.tableView.scrollEnabled = true
+			self.calendar.userInteractionEnabled = true
 		}
 	}
 	
 	func calendarCurrentPageDidChange(calendar: FSCalendar!) {
-		let week = _calendar.currentPage
+		let week = calendar.currentPage
 		MJProgressView.instance.showProgress(self.view, white: false)
 		loadData((week.startOfWeek()?.toAPIString())!, end: (week.endOfWeek()?.toAPIString())!) { _ in
-			self._refreshControl.endRefreshing()
+			self.refreshControl.endRefreshing()
 		}
 	}
 	
 	func calendar(calendar: FSCalendar!, didSelectDate date: NSDate!) {
-		self._tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: self.getDateInArray(date)), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+		self.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: self.getDateInArray(date)), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
 	}
 	
 	
@@ -179,15 +166,15 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 	{
 		var res = 0
 		
-		for data in _tableViewData
+		for data in tableViewData
 		{
-			if (data.0 == _currentDate.toAPIString()) {
+			if (data.0 == currentDate.toAPIString()) {
 				return res
 			}
 			res += 1
 		}
 		
-		if (_currentDate.toAPIString() != _tableViewData[_tableViewData.count - 1].0.shortToDate().toAPIString()) {
+		if (currentDate.toAPIString() != tableViewData[tableViewData.count - 1].0.shortToDate().toAPIString()) {
 			return 0
 		}
 		
@@ -197,7 +184,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 	func getDateInArray(date :NSDate) -> Int {
 		var res = 0
 		
-		for data in _tableViewData
+		for data in tableViewData
 		{
 			if (data.0 == date.toAPIString()) {
 				return res
@@ -205,7 +192,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 			res += 1
 		}
 		
-		if (date.toAPIString() != _tableViewData[_tableViewData.count - 1].0.shortToDate().toAPIString()) {
+		if (date.toAPIString() != tableViewData[tableViewData.count - 1].0.shortToDate().toAPIString()) {
 			return 0
 		}
 		
@@ -217,9 +204,9 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		let df = NSDateFormatter()
 		df.dateFormat = "yyyy-MM-dd"
 		
-		let myArrayOfTuples = _currentData.sort{ df.dateFromString($0.0)!.compare(df.dateFromString($1.0)!) == .OrderedAscending}
+		let myArrayOfTuples = currentData.sort{ df.dateFromString($0.0)!.compare(df.dateFromString($1.0)!) == .OrderedAscending}
 		
-		_tableViewData = myArrayOfTuples
+		tableViewData = myArrayOfTuples
 		
 		sortArrays()
 	}
@@ -230,10 +217,10 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		df.dateFormat = "yyyy-MM-dd HH:mm:ss"
 		
 		
-		for (var i = 0; i < _tableViewData.count; i += 1)
+		for (var i = 0; i < tableViewData.count; i += 1)
 		{
-			let val = _tableViewData[i].1
-			_tableViewData[i].1 = val.sort{ df.dateFromString($0._startTime!)!.compare(df.dateFromString($1._startTime!)!) == .OrderedAscending }
+			let val = tableViewData[i].1
+			tableViewData[i].1 = val.sort{ df.dateFromString($0.startTime!)!.compare(df.dateFromString($1.startTime!)!) == .OrderedAscending }
 		}
 		
 		
@@ -242,18 +229,18 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 	
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 		
-		let res = _tableViewData.count
+		let res = tableViewData.count
 		
-		_tableView.separatorStyle = .SingleLine
+		tableView.separatorStyle = .SingleLine
 		if (res == 0) {
-			_tableView.separatorStyle = .None
+			tableView.separatorStyle = .None
 		}
 		
 		return res
 	}
 	
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		let arr = _tableViewData[section].1
+		let arr = tableViewData[section].1
 		
 		if (arr.count == 0)
 		{
@@ -277,7 +264,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		
 		cell.delegate = self
 		
-		if (_tableViewData[indexPath.section].1.count == 0) {
+		if (tableViewData[indexPath.section].1.count == 0) {
 			
 			let cell2 = tableView.dequeueReusableCellWithIdentifier("EmptyCell")
 			
@@ -289,18 +276,18 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		}
 		cell.userInteractionEnabled = true
 		
-		let data = _tableViewData[indexPath.section].1[indexPath.row]
+		let data = tableViewData[indexPath.section].1[indexPath.row]
 		
 		let eventTimes = data.getEventTime()
 		
-		titleEventLabel.text = data._actiTitle
-		roomEventLabel.text = data._room?.getRoomCleaned()
+		titleEventLabel.text = data.actiTitle
+		roomEventLabel.text = data.room?.getRoomCleaned()
 		startEventLabel.text = eventTimes.start
 		endEventLabel.text = eventTimes.end
-		typeView?.backgroundColor = _typeColors[data._eventType!]
-		moduleTitle.text = data._titleModule!
+		typeView?.backgroundColor = typeColors[data.eventType!]
+		moduleTitle.text = data.titleModule!
 		
-		if (data._eventType == "rdv" && eventTimes.start != data._startTime?.toDate().toEventHour() || eventTimes.end != data._endTime?.toDate().toEventHour()) {
+		if (data.eventType == "rdv" && eventTimes.start != data.startTime?.toDate().toEventHour() || eventTimes.end != data.endTime?.toDate().toEventHour()) {
 			typeView?.backgroundColor = UIUtils.planningDarkOrangeColor()
 		}
 		
@@ -321,7 +308,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 	}
 	
 	func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		let date = _tableViewData[section].0
+		let date = tableViewData[section].0
 		
 		return "  " + date.shortToDate().toTitleString()
 	}
@@ -336,7 +323,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		let createEvent = MGSwipeButton(title: NSLocalizedString("AddInCalendar", comment: ""), icon: nil, backgroundColor: UIUtils.planningBlueColor(), callback: { (sender: MGSwipeTableCell!) -> Bool in
 			
 			let calman = CalendarManager()
-			calman.createEvent(self._tableViewData[indexPath.section].1[indexPath.row]) { (isOk :Bool, mess :String) in
+			calman.createEvent(self.tableViewData[indexPath.section].1[indexPath.row]) { (isOk :Bool, mess :String) in
 				
 				if (!isOk) {
 					self.showMessage(NSLocalizedString(mess, comment: ""))
@@ -354,7 +341,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 	
 	func changeImageToDisplay(data :Planning, imageView :UIImageView) {
 		
-		if (data._eventType == "rdv") {
+		if (data.eventType == "rdv") {
 			imageView.image = UIImage(named: "rightArrow")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
 			imageView.tintColor = UIUtils.planningGrayColor()
 			return
@@ -396,12 +383,12 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 	
 	func actionOnImageView(sender :UIGestureRecognizer)
 	{
-		let tapLocation = sender.locationInView(self._tableView)
-		let indexPath = self._tableView.indexPathForRowAtPoint(tapLocation)
-		let data = _tableViewData[indexPath!.section].1[indexPath!.row]
+		let tapLocation = sender.locationInView(self.tableView)
+		let indexPath = self.tableView.indexPathForRowAtPoint(tapLocation)
+		let data = tableViewData[indexPath!.section].1[indexPath!.row]
 		
 		
-		if (data._eventType == "rdv") {
+		if (data.eventType == "rdv") {
 			return
 		}
 		
@@ -442,7 +429,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		
 		let alertController = UIAlertController(title: NSLocalizedString("Token", comment: ""), message: NSLocalizedString("EnterToken", comment: ""), preferredStyle: .Alert)
 		
-		let confirmAction = UIAlertAction(title: NSLocalizedString("Enter", comment: ""), style: .Default) { (_) in
+		let confirmAction = UIAlertAction(title: NSLocalizedString("Enter", comment: ""), style: .Default) { _ in
 			if let field = alertController.textFields![0] as UITextField? {
 				// store your data
 				
@@ -463,7 +450,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 			self.view.endEditing(true)
 		}
 		
-		let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (_) in
+		let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { _ in
 			
 			self.view.endEditing(true)
 			
@@ -496,9 +483,9 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 	
 	func updateEventCell(indexPath :NSIndexPath, event :Planning) {
 		
-		self._tableView.beginUpdates()
+		self.tableView.beginUpdates()
 		
-		let cell = self._tableView.cellForRowAtIndexPath(indexPath)
+		let cell = self.tableView.cellForRowAtIndexPath(indexPath)
 		
 		MJProgressView.instance.showCellProgress(cell!)
 		
@@ -513,13 +500,13 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 				self.showMessage(mess)
 			}
 			else {
-				self._tableViewData[indexPath.section].1[indexPath.row] = pl!
+				self.tableViewData[indexPath.section].1[indexPath.row] = pl!
 				
-				self._tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
-				self._tableView.endUpdates()
+				self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
+				self.tableView.endUpdates()
 			}
 			
-			self._tableView.endUpdates()
+			self.tableView.endUpdates()
 			MJProgressView.instance.hideProgress()
 		}
 		
@@ -527,21 +514,21 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 	}
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		
-		let data = _tableViewData[indexPath.section].1[indexPath.row]
+		let data = tableViewData[indexPath.section].1[indexPath.row]
 		MJProgressView.instance.showProgress(self.view, white: false)
-		_tableView.userInteractionEnabled = false
-		_tableView.scrollEnabled = false
-		if (data._eventType != "rdv") {
+		tableView.userInteractionEnabled = false
+		tableView.scrollEnabled = false
+		if (data.eventType != "rdv") {
 			
 			PlanningApiCalls.getStudentsRegistered(data) { (isOk :Bool, res :[RegisteredStudent]?, mess :String) in
 				MJProgressView.instance.hideProgress()
-				self._tableView.userInteractionEnabled = true
-				self._tableView.scrollEnabled = true
+				self.tableView.userInteractionEnabled = true
+				self.tableView.scrollEnabled = true
 				if (!isOk) {
 					ErrorViewer.errorPresent(self, mess: mess) {}
 				}
 				else {
-					self._registeredStudentToSend = res!
+					self.registeredStudentToSend = res!
 					self.performSegueWithIdentifier("showStudentsRegistered", sender: self)
 				}
 			}
@@ -549,14 +536,14 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		else {
 			PlanningApiCalls.getEventDetails(data) { (isOk :Bool, resp :AppointmentEvent?, mess :String) in
 				MJProgressView.instance.hideProgress()
-				self._tableView.userInteractionEnabled = true
-				self._tableView.scrollEnabled = true
+				self.tableView.userInteractionEnabled = true
+				self.tableView.scrollEnabled = true
 				if (!isOk) {
 					ErrorViewer.errorPresent(self, mess: mess) {}
 				}
 				else {
-					resp?._eventName = data._actiTitle!
-					self._appointmentsToSend = resp!
+					resp?.eventName = data.actiTitle!
+					self.appointmentsToSend = resp!
 					self.performSegueWithIdentifier("appointmentDetailSegue", sender: self)
 				}
 			}
@@ -566,24 +553,24 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		if (segue.identifier == "showStudentsRegistered") {
 			let vc = segue.destinationViewController as! StudentRegisteredViewController
-			vc._data = _registeredStudentToSend!
+			vc.data = registeredStudentToSend!
 		}
 		else if (segue.identifier == "appointmentDetailSegue") {
 			let vc = segue.destinationViewController as! AppointmentDetailViewController
-			vc._appointment = _appointmentsToSend!
+			vc.appointment = appointmentsToSend!
 		}
 	}
 	
 	func swipeTableCell(cell: MGSwipeTableCell!, canSwipe direction: MGSwipeDirection) -> Bool {
 		
 		if (direction == .RightToLeft) {
-			return _swipeAllowed!
+			return swipeAllowed!
 		}
 		return false
 	}
 	
 	@IBAction func selectSemestersButtonClicked(sender :AnyObject) {
-		_savedSemesters = ApplicationManager.sharedInstance._planningSemesters
+		savedSemesters = ApplicationManager.sharedInstance.planningSemesters
 		performSegueWithIdentifier("selectSemestersSegue", sender: self)
 	}
 }

@@ -11,47 +11,41 @@ import SAConfettiView
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
-	@IBOutlet weak var _searchBarButton: UIBarButtonItem!
+	@IBOutlet weak var searchBarButton: UIBarButtonItem!
 	@IBOutlet weak var menuButton: UIBarButtonItem!
-	@IBOutlet weak var _profileViewContainer: UIView!
-	@IBOutlet weak var _tableView: UITableView!
+	@IBOutlet weak var profileViewContainer: UIView!
+	@IBOutlet weak var tableView: UITableView!
 	
-	var _profileImageView :UIImageView!
-	var _creditsTitleLabel :UILabel!
-	var _creditsLabel :UILabel!
-	var _spicesLabel :UILabel!
-	var _logLabel :UILabel!
-	var _gpaTitleLabel :UILabel!
-	var _gpaLabel :UILabel!
-	var	_gpaTypeLabel :UILabel!
-	var _currentUser :User?
+	var profileImageView :UIImageView!
+	var creditsTitleLabel :UILabel!
+	var creditsLabel :UILabel!
+	var spicesLabel :UILabel!
+	var logLabel :UILabel!
+	var gpaTitleLabel :UILabel!
+	var gpaLabel :UILabel!
+	var	gpaTypeLabel :UILabel!
+	var currentUser :User?
 	
-	var _files :[File]?
-	var _flags :[Flags]?
-	var _webViewData :File?
-	var _refreshControl = UIRefreshControl()
+	var files :[File]?
+	var flags :[Flags]?
+	var webViewData :File?
+	var refreshControl = UIRefreshControl()
 	
 	var confettiView: SAConfettiView!
 	
 	
 	override func viewDidLoad() {
 		
-		_currentUser = ApplicationManager.sharedInstance._user
-		
-		if self.revealViewController() != nil {
-			menuButton.target = self.revealViewController()
-			menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
-			self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-		}
+		currentUser = ApplicationManager.sharedInstance.user
 		
 		loadProfileView()
 		setUIElements()
 		
 		MJProgressView.instance.showProgress(self.view, white: false)
 		
-		if let img = ApplicationManager.sharedInstance._downloadedImages![(ApplicationManager.sharedInstance._user?._imageUrl!)!]
+		if let img = ApplicationManager.sharedInstance.downloadedImages![(ApplicationManager.sharedInstance.user?.imageUrl!)!]
 		{
-			self._profileImageView.image = img
+			self.profileImageView.image = img
 		}
 		
 		UserApiCalls.getUserDocuments() { (isOk :Bool, resp :[File]?, mess :String) in
@@ -60,26 +54,26 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 				ErrorViewer.errorPresent(self, mess: mess) {}
 			}
 			else {
-				self._files = resp!
-				UserApiCalls.getUserFlags(ApplicationManager.sharedInstance._user?._login) { (isOk :Bool, resp :[Flags]?, mess :String) in
+				self.files = resp!
+				UserApiCalls.getUserFlags(ApplicationManager.sharedInstance.user?.login) { (isOk :Bool, resp :[Flags]?, mess :String) in
 					
 					if (!isOk) {
 						ErrorViewer.errorPresent(self, mess: mess) {}
 					}
 					else {
-						self._flags = resp!
-						self._tableView.reloadData()
+						self.flags = resp!
+						self.tableView.reloadData()
 					}
 					MJProgressView.instance.hideProgress()
 				}
 			}	
 		}
-		self._profileImageView.cropToSquare()
-		self._profileImageView.toCircle()
+		self.profileImageView.cropToSquare()
+		self.profileImageView.toCircle()
 		
-		self._refreshControl.tintColor = UIUtils.backgroundColor()
-		self._refreshControl.addTarget(self, action: #selector(ProfileViewController.refreshData(_:)), forControlEvents: .ValueChanged)
-		self._tableView.addSubview(_refreshControl)
+		self.refreshControl.tintColor = UIUtils.backgroundColor()
+		self.refreshControl.addTarget(self, action: #selector(ProfileViewController.refreshData(_:)), forControlEvents: .ValueChanged)
+		self.tableView.addSubview(refreshControl)
 		
 		confettiConf()
 	}
@@ -106,10 +100,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		// Set type
 		//		confettiView.type = .Confetti
 		
-		if (Float(_gpaLabel.text!) > 3.00 && Float(_gpaLabel.text!) <= 3.50) {
+		if (Float(gpaLabel.text!) > 3.00 && Float(gpaLabel.text!) <= 3.50) {
 			confettiView.type = .Star
 		}
-		else if (Float(_gpaLabel.text!) > 3.50) {
+		else if (Float(gpaLabel.text!) > 3.50) {
 			confettiView.type = .Image(UIImage(named: "cup")!)
 		}
 		else {
@@ -145,32 +139,21 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 				ErrorViewer.errorPresent(self, mess: mess) {}
 			}
 			else {
-				self._files = resp!
-				UserApiCalls.getUserFlags(ApplicationManager.sharedInstance._user?._login) { (isOk :Bool, resp :[Flags]?, mess :String) in
+				self.files = resp!
+				UserApiCalls.getUserFlags(ApplicationManager.sharedInstance.user?.login) { (isOk :Bool, resp :[Flags]?, mess :String) in
 					
 					if (!isOk) {
 						ErrorViewer.errorPresent(self, mess: mess) {}
 					}
 					else {
-						self._flags = resp!
-						self._tableView.reloadData()
+						self.flags = resp!
+						self.tableView.reloadData()
 					}
 					MJProgressView.instance.hideProgress()
-					self._refreshControl.endRefreshing()
+					self.refreshControl.endRefreshing()
 				}
 			}
 		}
-		
-	}
-	
-	override func viewWillAppear(animated: Bool) {
-		
-		// Google Analytics Data
-		let tracker = GAI.sharedInstance().defaultTracker
-		tracker.set(kGAIScreenName, value: "Profile")
-		
-		let builder = GAIDictionaryBuilder.createScreenView()
-		tracker.send(builder.build() as [NSObject : AnyObject])
 		
 	}
 	
@@ -180,36 +163,36 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 	
 	func loadProfileView() {
 		let nibView = NSBundle.mainBundle().loadNibNamed("ProfileView", owner: self, options: nil)[0] as! UIView
-		_profileViewContainer.addSubview(nibView)
+		profileViewContainer.addSubview(nibView)
 		
-		_profileImageView = nibView.viewWithTag(1) as? UIImageView
-		_creditsTitleLabel = nibView.viewWithTag(2) as? UILabel!
-		_creditsLabel = nibView.viewWithTag(3) as? UILabel!
-		_spicesLabel = nibView.viewWithTag(4) as? UILabel!
-		_logLabel = nibView.viewWithTag(5) as? UILabel!
-		_gpaTitleLabel = nibView.viewWithTag(6) as? UILabel!
-		_gpaLabel = nibView.viewWithTag(7) as? UILabel!
-		_gpaTypeLabel = nibView.viewWithTag(8) as? UILabel!
+		profileImageView = nibView.viewWithTag(1) as? UIImageView
+		creditsTitleLabel = nibView.viewWithTag(2) as? UILabel!
+		creditsLabel = nibView.viewWithTag(3) as? UILabel!
+		spicesLabel = nibView.viewWithTag(4) as? UILabel!
+		logLabel = nibView.viewWithTag(5) as? UILabel!
+		gpaTitleLabel = nibView.viewWithTag(6) as? UILabel!
+		gpaLabel = nibView.viewWithTag(7) as? UILabel!
+		gpaTypeLabel = nibView.viewWithTag(8) as? UILabel!
 	}
 	
 	func setUIElements()
 	{
-		_creditsTitleLabel.text = NSLocalizedString("credits", comment: "")
-		_creditsLabel.text = String(_currentUser!._credits!)
-		_spicesLabel.text =  _currentUser!._spices!._currentSpices + " " + NSLocalizedString("spices", comment: "")
-		_logLabel.text = "Log : " + String(_currentUser!._log!._timeActive)
-		_logLabel.textColor = _currentUser?._log?.getColor()
+		creditsTitleLabel.text = NSLocalizedString("credits", comment: "")
+		creditsLabel.text = String(currentUser!.credits!)
+		spicesLabel.text =  currentUser!.spices!.currentSpices + " " + NSLocalizedString("spices", comment: "")
+		logLabel.text = "Log : " + String(currentUser!.log!.timeActive)
+		logLabel.textColor = currentUser?.log?.getColor()
 		
 		
 		let singleTap = UITapGestureRecognizer(target: self, action:#selector(ProfileViewController.gpaTapDetected(_:)))
 		singleTap.numberOfTapsRequired = 1
-		_gpaLabel.userInteractionEnabled = true
-		_gpaLabel.addGestureRecognizer(singleTap)
+		gpaLabel.userInteractionEnabled = true
+		gpaLabel.addGestureRecognizer(singleTap)
 		
-		let gpa = _currentUser?.getLatestGPA()
-		_gpaTitleLabel.text = NSLocalizedString("gpa", comment: "")
-		_gpaLabel.text = gpa?._value
-		_gpaTypeLabel.text = gpa?._cycle
+		let gpa = currentUser?.getLatestGPA()
+		gpaTitleLabel.text = NSLocalizedString("gpa", comment: "")
+		gpaLabel.text = gpa?.value
+		gpaTypeLabel.text = gpa?.cycle
 		
 		
 	}
@@ -222,22 +205,22 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		var res = 0
 		
-		if (_flags == nil || _files == nil) { return 0 }
+		if (flags == nil || files == nil) { return 0 }
 		
 		if (section == 0)
 		{
-			if (_files?.count == 0)
+			if (files?.count == 0)
 			{
 				res = 1
 			}
-			else { res = (_files?.count)! }
+			else { res = (files?.count)! }
 		}
 		else {
-			if ((_flags![section - 1]._modules.count) == 0)
+			if ((flags![section - 1].modules.count) == 0)
 			{
 				res = 1
 			}
-			else { res = (_flags![section - 1]._modules.count) }
+			else { res = (flags![section - 1].modules.count) }
 		}
 		
 		return res
@@ -247,26 +230,26 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		var cell = UITableViewCell()
 		
-		if (indexPath.section == 0 && _files?.count > 0) {
+		if (indexPath.section == 0 && files?.count > 0) {
 			cell = tableView.dequeueReusableCellWithIdentifier("fileCell")!
 			let titleLabel = cell.viewWithTag(1) as! UILabel
-			titleLabel.text = _files![indexPath.row]._title!
+			titleLabel.text = files![indexPath.row].title!
 			cell.accessoryType = .DisclosureIndicator
 		}
-		else if (indexPath.section == 0 && _files?.count == 0) {
+		else if (indexPath.section == 0 && files?.count == 0) {
 			cell = tableView.dequeueReusableCellWithIdentifier("emptyCell")!
 			let titleLabel = cell.viewWithTag(1) as! UILabel
 			titleLabel.text = NSLocalizedString("NoFile", comment: "")
 		}
-		else if (_flags![indexPath.section - 1]._modules.count > 0) {
+		else if (flags![indexPath.section - 1].modules.count > 0) {
 			cell = tableView.dequeueReusableCellWithIdentifier("flagCell")!
 			let titleLabel = cell.viewWithTag(1) as! UILabel
 			let gradeLabel = cell.viewWithTag(2) as! UILabel
-			let module = _flags![indexPath.section - 1]._modules[indexPath.row]
-			titleLabel.text = module._title
-			gradeLabel.text = module._grade
+			let module = flags![indexPath.section - 1].modules[indexPath.row]
+			titleLabel.text = module.title
+			gradeLabel.text = module.grade
 		}
-		else if (indexPath.section > 0 && _flags![indexPath.section - 1]._modules.count == 0) {
+		else if (indexPath.section > 0 && flags![indexPath.section - 1].modules.count == 0) {
 			cell = tableView.dequeueReusableCellWithIdentifier("emptyCell")!
 			let titleLabel = cell.viewWithTag(1) as! UILabel
 			titleLabel.text = NSLocalizedString("NoFlag", comment: "")
@@ -302,7 +285,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		if (indexPath.section == 0)
 		{
-			_webViewData = _files![indexPath.row]
+			webViewData = files![indexPath.row]
 			self.performSegueWithIdentifier("webViewSegue", sender: self)
 		}
 	}
@@ -310,8 +293,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		if (segue.identifier == "webViewSegue") {
 			let vc :WebViewViewController = segue.destinationViewController as! WebViewViewController
-			vc._file = _webViewData!
-			vc._isUrl = true
+			vc.file = webViewData!
+			vc.isUrl = true
 		}
 	}
 	

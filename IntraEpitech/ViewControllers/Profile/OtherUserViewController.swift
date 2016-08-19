@@ -14,40 +14,40 @@ import ContactsUI
 
 class OtherUserViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate, CNContactViewControllerDelegate {
 	
-	@IBOutlet weak var _profileViewContainer: UIView!
+	@IBOutlet weak var profileViewContainer: UIView!
 	
-	var _profileImageView :UIImageView!
-	var _creditsTitleLabel :UILabel!
-	var _creditsLabel :UILabel!
-	var _spicesLabel :UILabel!
-	var _logLabel :UILabel!
-	var _gpaTitleLabel :UILabel!
-	var _gpaLabel :UILabel!
-	var	_gpaTypeLabel :UILabel!
-	var _currentUser :User?
+	var profileImageView :UIImageView!
+	var creditsTitleLabel :UILabel!
+	var creditsLabel :UILabel!
+	var spicesLabel :UILabel!
+	var logLabel :UILabel!
+	var gpaTitleLabel :UILabel!
+	var gpaLabel :UILabel!
+	var	gpaTypeLabel :UILabel!
+	var currentUser :User?
 	
-	var _isModuleDownloading :Bool?
-	var _isMarksDownloading :Bool?
-	var _isFlagsDownloading :Bool?
+	var isModuleDownloading :Bool?
+	var isMarksDownloading :Bool?
+	var isFlagsDownloading :Bool?
 	
-	var _flags :[Flags]?
+	var flags :[Flags]?
 	
-	@IBOutlet weak var _tableView: UITableView!
-	@IBOutlet weak var _segmentedControl: UISegmentedControl!
+	@IBOutlet weak var tableView: UITableView!
+	@IBOutlet weak var segmentedControl: UISegmentedControl!
 	
-	@IBOutlet weak var _actionButton: UIBarButtonItem!
+	@IBOutlet weak var actionButton: UIBarButtonItem!
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		// Do any additional setup after loading the view.
-		_segmentedControl.setTitle(NSLocalizedString("Modules", comment: ""), forSegmentAtIndex: 0)
-		_segmentedControl.setTitle(NSLocalizedString("Marks", comment: ""), forSegmentAtIndex: 1)
-		_segmentedControl.setTitle(NSLocalizedString("Flags", comment: ""), forSegmentAtIndex: 2)
+		segmentedControl.setTitle(NSLocalizedString("Modules", comment: ""), forSegmentAtIndex: 0)
+		segmentedControl.setTitle(NSLocalizedString("Marks", comment: ""), forSegmentAtIndex: 1)
+		segmentedControl.setTitle(NSLocalizedString("Flags", comment: ""), forSegmentAtIndex: 2)
 		loadProfileView()
 		setUIElements()
-		self.title = _currentUser?._login
+		self.title = currentUser?.login
 		
-		self._segmentedControl.tintColor = UIUtils.backgroundColor()
+		self.segmentedControl.tintColor = UIUtils.backgroundColor()
 		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: (#selector(OtherUserViewController.backButtonAction(_:))))
 		self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
 		
@@ -56,47 +56,47 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 	}
 	
 	override func viewWillAppear(animated: Bool) {
-		_isMarksDownloading = true
-		MarksApiCalls.getMarksFor(user: self._currentUser!._login!) { (isOk :Bool, resp :[Mark]?, mess :String) in
-			self._isMarksDownloading = false
+		isMarksDownloading = true
+		MarksApiCalls.getMarksFor(user: self.currentUser!.login!) { (isOk :Bool, resp :[Mark]?, mess :String) in
+			self.isMarksDownloading = false
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
 				MJProgressView.instance.hideProgress()
 			}
 			else {
-				self._currentUser?._marks = resp
-				if (self._segmentedControl.selectedSegmentIndex == 1) {
+				self.currentUser?.marks = resp
+				if (self.segmentedControl.selectedSegmentIndex == 1) {
 					MJProgressView.instance.hideProgress()
-					self._tableView.reloadData()
+					self.tableView.reloadData()
 				}
 			}
 		}
-		self._isModuleDownloading = true
-		ModulesApiCalls.getRegisteredModulesFor(user: self._currentUser!._login!) { (isOk :Bool, resp :[Module]?, mess :String) in
-			self._isModuleDownloading = false
+		self.isModuleDownloading = true
+		ModulesApiCalls.getRegisteredModulesFor(user: self.currentUser!.login!) { (isOk :Bool, resp :[Module]?, mess :String) in
+			self.isModuleDownloading = false
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
 				MJProgressView.instance.hideProgress()
 			}
 			else {
-				self._currentUser?._modules = resp!
-				if (self._segmentedControl.selectedSegmentIndex == 0) {
+				self.currentUser?.modules = resp!
+				if (self.segmentedControl.selectedSegmentIndex == 0) {
 					MJProgressView.instance.hideProgress()
-					self._tableView.reloadData()
+					self.tableView.reloadData()
 				}
 			}
 		}
-		self._isFlagsDownloading = true
-		UserApiCalls.getUserFlags(self._currentUser!._login!) { (isOk :Bool, resp :[Flags]?, mess :String) in
-			self._isFlagsDownloading = false
+		self.isFlagsDownloading = true
+		UserApiCalls.getUserFlags(self.currentUser!.login!) { (isOk :Bool, resp :[Flags]?, mess :String) in
+			self.isFlagsDownloading = false
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
 			}
 			else {
-				self._flags = resp!
-				if (self._segmentedControl.selectedSegmentIndex == 2) {
+				self.flags = resp!
+				if (self.segmentedControl.selectedSegmentIndex == 2) {
 					MJProgressView.instance.hideProgress()
-					self._tableView.reloadData()
+					self.tableView.reloadData()
 				}
 			}
 		}
@@ -108,12 +108,12 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 	
 	
 	override func viewDidAppear(animated: Bool) {
-		MJProgressView.instance.showProgress(self._tableView, white: false)
-		self._profileImageView.image = UIImage(named: "userProfile")
-		ImageDownloader.downloadFrom(link: (_currentUser?._imageUrl)!) {
-			if let img = ApplicationManager.sharedInstance._downloadedImages![self._currentUser!._imageUrl!] {
-				self._profileImageView.image = img
-				self._profileImageView.cropToSquare()
+		MJProgressView.instance.showProgress(self.tableView, white: false)
+		self.profileImageView.image = UIImage(named: "userProfile")
+		ImageDownloader.downloadFrom(link: (currentUser?.imageUrl)!) {
+			if let img = ApplicationManager.sharedInstance.downloadedImages![self.currentUser!.imageUrl!] {
+				self.profileImageView.image = img
+				self.profileImageView.cropToSquare()
 			}
 		}
 		
@@ -126,32 +126,32 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 	
 	func loadProfileView() {
 		let nibView = NSBundle.mainBundle().loadNibNamed("ProfileView", owner: self, options: nil)[0] as! UIView
-		_profileViewContainer.addSubview(nibView)
+		profileViewContainer.addSubview(nibView)
 		
-		_profileImageView = nibView.viewWithTag(1) as? UIImageView
-		_creditsTitleLabel = nibView.viewWithTag(2) as? UILabel!
-		_creditsLabel = nibView.viewWithTag(3) as? UILabel!
-		_spicesLabel = nibView.viewWithTag(4) as? UILabel!
-		_logLabel = nibView.viewWithTag(5) as? UILabel!
-		_gpaTitleLabel = nibView.viewWithTag(6) as? UILabel!
-		_gpaLabel = nibView.viewWithTag(7) as? UILabel!
-		_gpaTypeLabel = nibView.viewWithTag(8) as? UILabel!
+		profileImageView = nibView.viewWithTag(1) as? UIImageView
+		creditsTitleLabel = nibView.viewWithTag(2) as? UILabel!
+		creditsLabel = nibView.viewWithTag(3) as? UILabel!
+		spicesLabel = nibView.viewWithTag(4) as? UILabel!
+		logLabel = nibView.viewWithTag(5) as? UILabel!
+		gpaTitleLabel = nibView.viewWithTag(6) as? UILabel!
+		gpaLabel = nibView.viewWithTag(7) as? UILabel!
+		gpaTypeLabel = nibView.viewWithTag(8) as? UILabel!
 	}
 	
 	func setUIElements()
 	{
-		_creditsTitleLabel.text = NSLocalizedString("credits", comment: "")
-		_creditsLabel.text = String(_currentUser!._credits!)
-		_spicesLabel.text =  _currentUser!._spices!._currentSpices + " " + NSLocalizedString("spices", comment: "")
-		_logLabel.text = "Log : " + String(_currentUser!._log!._timeActive)
-		_logLabel.textColor = _currentUser?._log?.getColor()
+		creditsTitleLabel.text = NSLocalizedString("credits", comment: "")
+		creditsLabel.text = String(currentUser!.credits!)
+		spicesLabel.text =  currentUser!.spices!.currentSpices + " " + NSLocalizedString("spices", comment: "")
+		logLabel.text = "Log : " + String(currentUser!.log!.timeActive)
+		logLabel.textColor = currentUser?.log?.getColor()
 		
-		let gpa = _currentUser?.getLatestGPA()
-		_gpaTitleLabel.text = NSLocalizedString("gpa", comment: "")
-		_gpaLabel.text = gpa?._value
-		_gpaTypeLabel.text = gpa?._cycle
-		_profileImageView.cropToSquare()
-		_profileImageView.toCircle()
+		let gpa = currentUser?.getLatestGPA()
+		gpaTitleLabel.text = NSLocalizedString("gpa", comment: "")
+		gpaLabel.text = gpa?.value
+		gpaTypeLabel.text = gpa?.cycle
+		profileImageView.cropToSquare()
+		profileImageView.toCircle()
 	}
 	
 	
@@ -167,74 +167,74 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 	
 	@IBAction func segmentedChanged(sender: UISegmentedControl) {
 		
-		if (sender.selectedSegmentIndex == 0 && self._isModuleDownloading == true) {
-			MJProgressView.instance.showProgress(self._tableView, white: false)
+		if (sender.selectedSegmentIndex == 0 && self.isModuleDownloading == true) {
+			MJProgressView.instance.showProgress(self.tableView, white: false)
 		}
-		else if (sender.selectedSegmentIndex == 1 && self._isMarksDownloading == true) {
-			MJProgressView.instance.showProgress(self._tableView, white: false)
+		else if (sender.selectedSegmentIndex == 1 && self.isMarksDownloading == true) {
+			MJProgressView.instance.showProgress(self.tableView, white: false)
 		}
-		else if (sender.selectedSegmentIndex == 2 && self._isFlagsDownloading == true) {
-			MJProgressView.instance.showProgress(self._tableView, white: false)
+		else if (sender.selectedSegmentIndex == 2 && self.isFlagsDownloading == true) {
+			MJProgressView.instance.showProgress(self.tableView, white: false)
 		}
 		else {
 			MJProgressView.instance.hideProgress()
 		}
 		
-		self._tableView.reloadData()
+		self.tableView.reloadData()
 	}
 	
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-		if (_segmentedControl.selectedSegmentIndex == 2) {
-			return (_flags?.count)!
+		if (segmentedControl.selectedSegmentIndex == 2) {
+			return (flags?.count)!
 		}
 		return 1
 	}
 	
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		
-		if ((_currentUser?._modules == nil && _segmentedControl.selectedSegmentIndex == 0)
-			|| (_currentUser?._marks == nil && _segmentedControl.selectedSegmentIndex == 1)
-			|| (_flags == nil && _segmentedControl.selectedSegmentIndex == 2)) {
-				self._tableView.separatorStyle = .None
+		if ((currentUser?.modules == nil && segmentedControl.selectedSegmentIndex == 0)
+			|| (currentUser?.marks == nil && segmentedControl.selectedSegmentIndex == 1)
+			|| (flags == nil && segmentedControl.selectedSegmentIndex == 2)) {
+				self.tableView.separatorStyle = .None
 				return 0
 		}
-		self._tableView.separatorStyle = .SingleLine
-		switch (_segmentedControl.selectedSegmentIndex)
+		self.tableView.separatorStyle = .SingleLine
+		switch (segmentedControl.selectedSegmentIndex)
 		{
 		case 0:
-			return (_currentUser?._modules?.count)!
+			return (currentUser?.modules?.count)!
 		case 1:
-			return (_currentUser?._marks?.count)!
+			return (currentUser?.marks?.count)!
 		case 2:
-			let cnt = _flags![section]._modules.count
+			let cnt = flags![section].modules.count
 			return (cnt == 0 ? 1 : cnt)
 		default:
 			return 0
 		}
 		
-		//		return (_segmentedControl.selectedSegmentIndex == 0 ? _currentUser?._modules!.count : _currentUser?._marks!.count)!
+		//		return (segmentedControl.selectedSegmentIndex == 0 ? currentUser?.modules!.count : currentUser?.marks!.count)!
 	}
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		
 		var cell = tableView.dequeueReusableCellWithIdentifier("marksCell")
 		
-		if (_segmentedControl.selectedSegmentIndex == 0) {
+		if (segmentedControl.selectedSegmentIndex == 0) {
 			cell = tableView.dequeueReusableCellWithIdentifier("moduleCell")
 			
 			let titleLabel = cell?.viewWithTag(1) as! UILabel
 			let creditsLabel = cell?.viewWithTag(2) as! UILabel
 			let gradeLabel = cell?.viewWithTag(3) as! UILabel
 			
-			let module = _currentUser?._modules![indexPath.row]
+			let module = currentUser?.modules![indexPath.row]
 			
-			creditsLabel.text = NSLocalizedString("AvailableCredits", comment: "") + module!._credits!
-			if (module!._grade != nil) {
-				gradeLabel.text = module!._grade!
+			creditsLabel.text = NSLocalizedString("AvailableCredits", comment: "") + module!.credits!
+			if (module!.grade != nil) {
+				gradeLabel.text = module!.grade!
 			}
-			titleLabel.text = module!._title!
+			titleLabel.text = module!.title!
 		}
-		else if (_segmentedControl.selectedSegmentIndex == 1) {
+		else if (segmentedControl.selectedSegmentIndex == 1) {
 			
 			cell = tableView.dequeueReusableCellWithIdentifier("marksCell")
 			
@@ -242,22 +242,22 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 			let moduleTitle = cell?.viewWithTag(2) as! UILabel
 			let markLabel = cell?.viewWithTag(3) as! UILabel
 			
-			let mark = _currentUser?._marks![indexPath.row]
+			let mark = currentUser?.marks![indexPath.row]
 			
-			actiTitle.text = mark?._title!
-			moduleTitle.text = mark?._titleModule!
-			markLabel.text = mark?._finalNote!
+			actiTitle.text = mark?.title!
+			moduleTitle.text = mark?.titleModule!
+			markLabel.text = mark?.finalNote!
 		}
 		else {
-			if (_flags![indexPath.section]._modules.count > 0) {
+			if (flags![indexPath.section].modules.count > 0) {
 				cell = tableView.dequeueReusableCellWithIdentifier("flagCell")!
 				let titleLabel = cell!.viewWithTag(1) as! UILabel
 				let gradeLabel = cell!.viewWithTag(2) as! UILabel
-				let module = _flags![indexPath.section]._modules[indexPath.row]
-				titleLabel.text = module._title
-				gradeLabel.text = module._grade
+				let module = flags![indexPath.section].modules[indexPath.row]
+				titleLabel.text = module.title
+				gradeLabel.text = module.grade
 			}
-			else if (indexPath.section > 0 && _flags![indexPath.section]._modules.count == 0) {
+			else if (indexPath.section > 0 && flags![indexPath.section].modules.count == 0) {
 				cell = tableView.dequeueReusableCellWithIdentifier("emptyCell")!
 				let titleLabel = cell!.viewWithTag(1) as! UILabel
 				titleLabel.text = NSLocalizedString("NoFlag", comment: "")
@@ -279,11 +279,11 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 		}
 		alertController.addAction(cancelAction)
 		
-		if (_currentUser?._phone != nil && _currentUser?._phone?.characters.count > 0) {
+		if (currentUser?.phone != nil && currentUser?.phone?.characters.count > 0) {
 			
-			let callAction = UIAlertAction(title: NSLocalizedString("Call", comment: "") + " " + (_currentUser?._phone!)!, style: .Default) { (action) in
+			let callAction = UIAlertAction(title: NSLocalizedString("Call", comment: "") + " " + (currentUser?.phone!)!, style: .Default) { (action) in
 				
-				let nbr = self._currentUser?._phone!.stringByReplacingOccurrencesOfString(" ", withString: "")
+				let nbr = self.currentUser?.phone!.stringByReplacingOccurrencesOfString(" ", withString: "")
 				
 				let numberToCall = "tel://" + nbr!
 				UIApplication.sharedApplication().openURL(NSURL(string: numberToCall)!)
@@ -296,7 +296,7 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 			if (MFMailComposeViewController.canSendMail()) {
 				let mailComposerVC = MFMailComposeViewController()
 				mailComposerVC.mailComposeDelegate = self
-				mailComposerVC.setToRecipients([(self._currentUser?._internalEmail!)!])
+				mailComposerVC.setToRecipients([(self.currentUser?.internalEmail!)!])
 				self.presentViewController(mailComposerVC, animated: true, completion: nil)
 			}
 			
@@ -314,8 +314,7 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 	
 	func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		
-		if (_segmentedControl.selectedSegmentIndex != 2)
-		{
+		if segmentedControl.selectedSegmentIndex != 2 {
 			return nil
 		}
 		

@@ -9,10 +9,10 @@
 import SwiftyJSON
 
 class Spices: NSObject {
-	var _currentSpices :String
+	var currentSpices :String
 	
 	init(dict :JSON)
 	{
-		_currentSpices = dict["available_spice"].stringValue
+		currentSpices = dict["available_spice"].stringValue
 	}
 }

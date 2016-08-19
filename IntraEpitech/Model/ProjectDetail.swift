@@ -11,47 +11,47 @@ import SwiftyJSON
 
 class ProjectDetail: Project {
 	
-	var _description :String?
-	var _userProjectStatus :String?
-	var _note :String?
-	var _userProjectCode :String?
-	var _userProjectTitle :String?
-	var _registeredGroups :[ProjectGroup]?
-	var _projectStatus :String?
-	var _files :[File]?
+	var projectDescription :String?
+	var userProjectStatus :String?
+	var note :String?
+	var userProjectCode :String?
+	var userProjectTitle :String?
+	var registeredGroups :[ProjectGroup]?
+	var projectStatus :String?
+	var files :[File]?
 	
 	override init(dict :JSON) {
 		super.init(dict: dict)
 		
-		_description = dict["description"].stringValue
-		_userProjectStatus = dict["user_project_status"].stringValue
-		_note = dict["note"].stringValue
-		_userProjectCode = dict["user_project_code"].stringValue
-		_userProjectTitle = dict["user_project_title"].stringValue
-		_beginActi = dict["begin"].stringValue
-		_endActi = dict["end"].stringValue
-		_actiTitle = dict["title"].stringValue
-		_registered =  dict["instance_registered"].boolValue
-		_projectStatus = dict["user_project_status"].stringValue
+		projectDescription = dict["description"].stringValue
+		userProjectStatus = dict["user_project_status"].stringValue
+		note = dict["note"].stringValue
+		userProjectCode = dict["user_project_code"].stringValue
+		userProjectTitle = dict["user_project_title"].stringValue
+		beginActi = dict["begin"].stringValue
+		endActi = dict["end"].stringValue
+		actiTitle = dict["title"].stringValue
+		registered =  dict["instance_registered"].boolValue
+		projectStatus = dict["user_project_status"].stringValue
 		fillProjectGroups(dict["registered"])
 	}
 	
 	func fillProjectGroups(dict :JSON)
 	{
-		_registeredGroups = [ProjectGroup]()
+		registeredGroups = [ProjectGroup]()
 		let arr = dict.arrayValue
 		print(arr.count)
 		for tmp in arr {
-			_registeredGroups?.append(ProjectGroup(dict: tmp))
+			registeredGroups?.append(ProjectGroup(dict: tmp))
 		}
 	}
 	
 	func findGroup(code :String) -> ProjectGroup?
 	{
 		var res : ProjectGroup?
-		for tmp in _registeredGroups!
+		for tmp in registeredGroups!
 		{
-			if (tmp._code == code) {
+			if (tmp.code == code) {
 				res = tmp
 				break
 			}
@@ -61,7 +61,7 @@ class ProjectDetail: Project {
 	}
 	
 	func isRegistered() -> Bool {
-		if (_projectStatus == "project_confirmed") {
+		if (projectStatus == "project_confirmed") {
 			return true
 		}
 		return false

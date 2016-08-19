@@ -11,36 +11,36 @@ import SwiftyJSON
 
 class Mark: NSObject {
 	
-	var _titleModule :String?
-	var _title :String?
-	var _correcteur :String?
-	var _finalNote :String?
-	var _comment :String?
-	var _scolaryear :String?
-	var _codemodule :String?
-	var _codeinstance :String?
-	var _codeacti :String?
-	var _login :String?
+	var titleModule :String?
+	var title :String?
+	var correcteur :String?
+	var finalNote :String?
+	var comment :String?
+	var scolaryear :String?
+	var codemodule :String?
+	var codeinstance :String?
+	var codeacti :String?
+	var login :String?
 	
 	init(dict :JSON)
 	{
-		_titleModule = dict["titlemodule"].stringValue
-		_title = dict["title"].stringValue
-		_correcteur = dict["correcteur"].stringValue
-		_finalNote = dict["final_note"].stringValue
-		_comment = dict["comment"].stringValue
-		_scolaryear = dict["scolaryear"].stringValue
-		_codemodule = dict["codemodule"].stringValue
-		_codeinstance = dict["codeinstance"].stringValue
-		_codeacti = dict["codeacti"].stringValue
-		_login = dict["login"].stringValue
+		titleModule = dict["titlemodule"].stringValue
+		title = dict["title"].stringValue
+		correcteur = dict["correcteur"].stringValue
+		finalNote = dict["final_note"].stringValue
+		comment = dict["comment"].stringValue
+		scolaryear = dict["scolaryear"].stringValue
+		codemodule = dict["codemodule"].stringValue
+		codeinstance = dict["codeinstance"].stringValue
+		codeacti = dict["codeacti"].stringValue
+		login = dict["login"].stringValue
 	}
 	
 	init(little :JSON)
 	{
-		_correcteur = little["grader"].stringValue
-		_finalNote = little["note"].stringValue
-		_login = little["login"].stringValue
-		_comment = little["comment"].stringValue
+		correcteur = little["grader"].stringValue
+		finalNote = little["note"].stringValue
+		login = little["login"].stringValue
+		comment = little["comment"].stringValue
 	}
 }

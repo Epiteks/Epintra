@@ -10,10 +10,10 @@ import UIKit
 
 class ProjectMarksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
-	var _marks :[Mark]?
-	var _selectedMark :Mark?
+	var marks :[Mark]?
+	var selectedMark :Mark?
 	
-	@IBOutlet weak var _tableView: UITableView!
+	@IBOutlet weak var tableView: UITableView!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -45,27 +45,27 @@ class ProjectMarksViewController: UIViewController, UITableViewDelegate, UITable
 		
 		var i = 0
 		
-		for tmp in _marks! {
-			if (tmp._login == ApplicationManager.sharedInstance._currentLogin!) {
+		for tmp in marks! {
+			if (tmp.login == ApplicationManager.sharedInstance.currentLogin!) {
 				index = NSIndexPath(forRow: i, inSection: 0)
 				break
 			}
 			i += 1
 		}
 		
-		_tableView.scrollToRowAtIndexPath(index, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+		tableView.scrollToRowAtIndexPath(index, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
 	}
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		if (segue.identifier == "commentsSegue") {
 			let vc = segue.destinationViewController as! CommentsViewController
-			vc._mark = _selectedMark
+			vc.mark = selectedMark
 		}
 	}
 	
 	
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-		if (_marks == nil || _marks!.count == 0) {
+		if (marks == nil || marks!.count == 0) {
 			tableView.separatorStyle = .None
 			let nibView = NSBundle.mainBundle().loadNibNamed("EmptyTableView", owner: self, options: nil)[0] as! UIView
 			let titleLabel = nibView.viewWithTag(1) as! UILabel
@@ -78,7 +78,7 @@ class ProjectMarksViewController: UIViewController, UITableViewDelegate, UITable
 	}
 	
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return _marks!.count
+		return marks!.count
 	}
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -87,10 +87,10 @@ class ProjectMarksViewController: UIViewController, UITableViewDelegate, UITable
 		let user = cell?.viewWithTag(1) as! UILabel
 		let mark = cell?.viewWithTag(2) as! UILabel
 		
-		user.text = _marks![indexPath.row]._login
-		mark.text = _marks![indexPath.row]._finalNote
+		user.text = marks![indexPath.row].login
+		mark.text = marks![indexPath.row].finalNote
 		
-		if (_marks![indexPath.row]._login == ApplicationManager.sharedInstance._currentLogin) {
+		if (marks![indexPath.row].login == ApplicationManager.sharedInstance.currentLogin) {
 			user.textColor = UIColor.redColor()
 			mark.textColor = UIColor.redColor()
 		} else {
@@ -105,7 +105,7 @@ class ProjectMarksViewController: UIViewController, UITableViewDelegate, UITable
 	
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)
-		_selectedMark = _marks![indexPath.row]
+		selectedMark = marks![indexPath.row]
 		performSegueWithIdentifier("commentsSegue", sender: self)
 	}
 }

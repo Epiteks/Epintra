@@ -35,43 +35,43 @@ import SwiftyJSON
 
 class Project: NSObject {
 	
-	var _typeActiCode :String?
-	var _projectName :String?
-	var _codeInstance :String?
-	var _scolaryear :String?
-	var _actiTitle :String?
-	var _titleModule :String?
-	var _beginActi :String?
-	var _codeModule :String?
-	var _codeActi :String?
-	var _endActi :String?
-	var _registered :Bool?
-	var _noteActi :String?
+	var typeActiCode :String?
+	var projectName :String?
+	var codeInstance :String?
+	var scolaryear :String?
+	var actiTitle :String?
+	var titleModule :String?
+	var beginActi :String?
+	var codeModule :String?
+	var codeActi :String?
+	var endActi :String?
+	var registered :Bool?
+	var noteActi :String?
 	
 	
 	init(dict :JSON) {
 		
-		_typeActiCode = dict["type_acti_code"].stringValue
-		_projectName = dict["project"].stringValue
-		_codeInstance = dict["codeinstance"].stringValue
-		_scolaryear = dict["scolaryear"].stringValue
-		_actiTitle = dict["acti_title"].stringValue
-		_titleModule = dict["title_module"].stringValue
-		_beginActi = dict["begin_acti"].stringValue
-		_codeModule = dict["codemodule"].stringValue
-		_codeActi = dict["codeacti"].stringValue
-		_endActi = dict["end_acti"].stringValue
-		_registered = dict["registered"].boolValue
+		typeActiCode = dict["type_acti_code"].stringValue
+		projectName = dict["project"].stringValue
+		codeInstance = dict["codeinstance"].stringValue
+		scolaryear = dict["scolaryear"].stringValue
+		actiTitle = dict["acti_title"].stringValue
+		titleModule = dict["title_module"].stringValue
+		beginActi = dict["begin_acti"].stringValue
+		codeModule = dict["codemodule"].stringValue
+		codeActi = dict["codeacti"].stringValue
+		endActi = dict["end_acti"].stringValue
+		registered = dict["registered"].boolValue
 	}
 	
 	init(detail :JSON)
 	{
-		_codeActi = detail["codeacti"].stringValue
-		_typeActiCode = detail["type_code"].stringValue
-		_actiTitle = detail["title"].stringValue
-		_titleModule = detail["module_title"].stringValue
-		_beginActi = detail["begin"].stringValue
-		_endActi = detail["end"].stringValue
-		_noteActi = detail["note"].stringValue
+		codeActi = detail["codeacti"].stringValue
+		typeActiCode = detail["type_code"].stringValue
+		actiTitle = detail["title"].stringValue
+		titleModule = detail["module_title"].stringValue
+		beginActi = detail["begin"].stringValue
+		endActi = detail["end"].stringValue
+		noteActi = detail["note"].stringValue
 	}
 }

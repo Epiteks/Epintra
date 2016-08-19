@@ -10,18 +10,18 @@ import UIKit
 
 class AppointmentDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 	
-	@IBOutlet weak var _tableView: UITableView!
+	@IBOutlet weak var tableView: UITableView!
 	
-	var _appointment : AppointmentEvent!
-	var _appointments = [Appointment]()
+	var appointment : AppointmentEvent!
+	var appointments = [Appointment]()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		_appointments = _appointment._slots!
+		appointments = appointment.slots!
 		
 		// Do any additional setup after loading the view.
-		self.title = _appointment._eventName!
+		self.title = appointment.eventName!
 		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: (#selector(AppointmentDetailViewController.backButtonAction(_:))))
 		self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
 		
@@ -41,7 +41,7 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 	}
 	
 	func setAppointments(inout app :AppointmentEvent) {
-		_appointment = app
+		appointment = app
 	}
 	
 	
@@ -56,7 +56,7 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 	*/
 	
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-		return _appointments.count
+		return appointments.count
 	}
 	
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -64,20 +64,20 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 	}
 	
 	func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		return _appointments[section]._date!.toEventHour()
+		return appointments[section].date!.toEventHour()
 	}
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		var cell :UITableViewCell!
 		
-		if (_appointments[indexPath.section]._master == nil && _appointment.canRegister()) {// _appointments[indexPath.section]._master == nil && _appointment._groupId != "") {
+		if (appointments[indexPath.section].master == nil && appointment.canRegister()) {// appointments[indexPath.section].master == nil && appointment.groupId != "") {
 			cell = createRegisterCell()
 		}
-		else if (_appointments[indexPath.section]._master == nil && !_appointment.canRegister()) {
+		else if (appointments[indexPath.section].master == nil && !appointment.canRegister()) {
 			cell = UITableViewCell()
 			cell.selectionStyle = .None
 		}
-		else if (_appointments[indexPath.section]._title?.characters.count == 0) {
+		else if (appointments[indexPath.section].title?.characters.count == 0) {
 			cell = createFollowUpCell(indexPath)
 		}
 		else {
@@ -89,16 +89,16 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 	
 	func createFollowUpCell(indexPath :NSIndexPath) -> UITableViewCell {
 		
-		let cell = _tableView.dequeueReusableCellWithIdentifier("followUpCell")!
+		let cell = tableView.dequeueReusableCellWithIdentifier("followUpCell")!
 		
 		let scrollView = cell.viewWithTag(2) as! UIScrollView
-		let data = _appointments[indexPath.section]
+		let data = appointments[indexPath.section]
 		
 		for subview in scrollView.subviews {
 			subview.removeFromSuperview()
 		}
 		
-		for (var i = 0; i < data._members?.count; i += 1) {
+		for (var i = 0; i < data.members?.count; i += 1) {
 			let nibView = NSBundle.mainBundle().loadNibNamed("LittleUserView", owner: self, options: nil)[0] as! UIView
 			var profileViewFrame = nibView.frame
 			profileViewFrame.origin.x = profileViewFrame.size.width * CGFloat(i)
@@ -112,15 +112,15 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 			
 			nibView.tag = indexPath.section * 100 + i
 			
-			if (data._members![i]._imageURL.characters.count > 0) {
-				if let img = ApplicationManager.sharedInstance._downloadedImages![data._members![i]._imageURL]
+			if (data.members![i].imageURL.characters.count > 0) {
+				if let img = ApplicationManager.sharedInstance.downloadedImages![data.members![i].imageURL]
 				{
 					userProfileImage.image = img
 					userProfileImage.cropToSquare()
 				}
 				else {
-					ImageDownloader.downloadFromCallback(link: data._members![i]._imageURL) { (link :String) in
-						if let img = ApplicationManager.sharedInstance._downloadedImages![link]
+					ImageDownloader.downloadFromCallback(link: data.members![i].imageURL) { (link :String) in
+						if let img = ApplicationManager.sharedInstance.downloadedImages![link]
 						{
 							userProfileImage.image = img
 							userProfileImage.cropToSquare()
@@ -132,7 +132,7 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 			}
 			
 			
-			login.text = data._members![i]._login
+			login.text = data.members![i].login
 			
 			scrollView.contentSize.width = nibView.frame.origin.x + nibView.frame.size.width
 			scrollView.addSubview(nibView)
@@ -144,7 +144,7 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 	
 	func createRegisterCell() -> UITableViewCell {
 		
-		let cell = _tableView.dequeueReusableCellWithIdentifier("registerCell")!
+		let cell = tableView.dequeueReusableCellWithIdentifier("registerCell")!
 		
 		let title = cell.viewWithTag(1) as! UILabel
 		
@@ -156,21 +156,21 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 	
 	func createGroupCell(indexPath :NSIndexPath) -> UITableViewCell {
 		
-		let cell = _tableView.dequeueReusableCellWithIdentifier("groupCell")!
+		let cell = tableView.dequeueReusableCellWithIdentifier("groupCell")!
 		
 		let title = cell.viewWithTag(40) as! UILabel
 		
 		let scrollView = cell.viewWithTag(41) as! UIScrollView
-		let data = _appointments[indexPath.section]
+		let data = appointments[indexPath.section]
 		
 		
-		title.text = data._title!
+		title.text = data.title!
 		
 		for subview in scrollView.subviews {
 			subview.removeFromSuperview()
 		}
 		
-		for (var i = 0; i < data._members?.count; i += 1) {
+		for (var i = 0; i < data.members?.count; i += 1) {
 			let nibView = NSBundle.mainBundle().loadNibNamed("LittleUserView", owner: self, options: nil)[0] as! UIView
 			var profileViewFrame = nibView.frame
 			profileViewFrame.origin.x = profileViewFrame.size.width * CGFloat(i)
@@ -184,15 +184,15 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 			
 			nibView.tag = indexPath.section * 100 + i
 			
-			if (data._members![i]._imageURL.characters.count > 0) {
-				if let img = ApplicationManager.sharedInstance._downloadedImages![data._members![i]._imageURL]
+			if (data.members![i].imageURL.characters.count > 0) {
+				if let img = ApplicationManager.sharedInstance.downloadedImages![data.members![i].imageURL]
 				{
 					userProfileImage.image = img
 					userProfileImage.cropToSquare()
 				}
 				else {
-					ImageDownloader.downloadFromCallback(link: data._members![i]._imageURL) { (link :String) in
-						if let img = ApplicationManager.sharedInstance._downloadedImages![link]
+					ImageDownloader.downloadFromCallback(link: data.members![i].imageURL) { (link :String) in
+						if let img = ApplicationManager.sharedInstance.downloadedImages![link]
 						{
 							userProfileImage.image = img
 							userProfileImage.cropToSquare()
@@ -204,7 +204,7 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 			}
 			
 			
-			login.text = data._members![i]._login
+			login.text = data.members![i].login
 			
 			scrollView.contentSize.width = nibView.frame.origin.x + nibView.frame.size.width
 			scrollView.addSubview(nibView)
@@ -216,36 +216,36 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 	
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)
-		let data = _appointments[indexPath.section]
-		if (_appointment.canRegister() && data._master == nil) {
-			self._tableView.userInteractionEnabled = false
-			self._tableView.scrollEnabled = false
+		let data = appointments[indexPath.section]
+		if (appointment.canRegister() && data.master == nil) {
+			self.tableView.userInteractionEnabled = false
+			self.tableView.scrollEnabled = false
 			MJProgressView.instance.showProgress(self.view, white: false)
-			PlanningApiCalls.subscribeToSlot(_appointment, slot: data) { (isOk :Bool, _, mess :String) in
+			PlanningApiCalls.subscribeToSlot(appointment, slot: data) { (isOk :Bool, _, mess :String) in
 				
 				if (!isOk) {
 					MJProgressView.instance.hideProgress()
-					self._tableView.userInteractionEnabled = true
-					self._tableView.scrollEnabled = true
+					self.tableView.userInteractionEnabled = true
+					self.tableView.scrollEnabled = true
 					ErrorViewer.errorPresent(self, mess: mess) {}
 				}
 				else {
-					let tmp = Planning(appointment: self._appointment)
-					tmp._startTime = self._appointment._eventStart?.toAppointmentString()
-					tmp._endTime = self._appointment._eventEnd?.toAppointmentString()
+					let tmp = Planning(appointment: self.appointment)
+					tmp.startTime = self.appointment.eventStart?.toAppointmentString()
+					tmp.endTime = self.appointment.eventEnd?.toAppointmentString()
 					PlanningApiCalls.getEventDetails(tmp) { (isOk :Bool, resp :AppointmentEvent?, mess :String) in
 						MJProgressView.instance.hideProgress()
-						self._tableView.userInteractionEnabled = true
-						self._tableView.scrollEnabled = true
+						self.tableView.userInteractionEnabled = true
+						self.tableView.scrollEnabled = true
 						if (!isOk) {
 							ErrorViewer.errorPresent(self, mess: mess) {}
 						}
 						else {
-							//self._appointment = resp!
-							self._appointment._registered = true
-							self._appointment._slots = resp!._slots
-							self._appointments = self._appointment._slots!
-							self._tableView.reloadData()
+							//self.appointment = resp!
+							self.appointment.registered = true
+							self.appointment.slots = resp!.slots
+							self.appointments = self.appointment.slots!
+							self.tableView.reloadData()
 						}
 					}
 				}
@@ -257,7 +257,7 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 	
 	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 		
-		if (_appointments[indexPath.section]._title! == "" || _appointments[indexPath.section]._master == nil) {
+		if (appointments[indexPath.section].title! == "" || appointments[indexPath.section].master == nil) {
 			return 70
 		}
 		else {
@@ -267,33 +267,33 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 	
 	func actionOnImageView(sender :UIGestureRecognizer)
 	{
-		let tapLocation = sender.locationInView(self._tableView)
-		let indexPath = self._tableView.indexPathForRowAtPoint(tapLocation)
-		let data = _appointments[indexPath!.section]
+		let tapLocation = sender.locationInView(self.tableView)
+		let indexPath = self.tableView.indexPathForRowAtPoint(tapLocation)
+		let data = appointments[indexPath!.section]
 		
-		print(data._master?._login)
+		print(data.master?.login)
 		MJProgressView.instance.showProgress(self.view, white: false)
-		PlanningApiCalls.unsubscribeToSlot(self._appointment, slot: data) { (isOk :Bool, _, mess :String) in
+		PlanningApiCalls.unsubscribeToSlot(self.appointment, slot: data) { (isOk :Bool, _, mess :String) in
 			
 			if (!isOk) {
 				MJProgressView.instance.hideProgress()
 				ErrorViewer.errorPresent(self, mess: mess) {}
 			}
 			else {
-				let tmp = Planning(appointment: self._appointment)
-				tmp._startTime = self._appointment._eventStart?.toAppointmentString()
-				tmp._endTime = self._appointment._eventEnd?.toAppointmentString()
+				let tmp = Planning(appointment: self.appointment)
+				tmp.startTime = self.appointment.eventStart?.toAppointmentString()
+				tmp.endTime = self.appointment.eventEnd?.toAppointmentString()
 				PlanningApiCalls.getEventDetails(tmp) { (isOk :Bool, resp :AppointmentEvent?, mess :String) in
 					MJProgressView.instance.hideProgress()
-					self._tableView.userInteractionEnabled = true
-					self._tableView.scrollEnabled = true
+					self.tableView.userInteractionEnabled = true
+					self.tableView.scrollEnabled = true
 					if (!isOk) {
 						ErrorViewer.errorPresent(self, mess: mess) {}
 					}
 					else {
-						self._appointment = resp!
-						self._appointments = self._appointment._slots!
-						self._tableView.reloadData()
+						self.appointment = resp!
+						self.appointments = self.appointment.slots!
+						self.tableView.reloadData()
 					}
 				}
 			}

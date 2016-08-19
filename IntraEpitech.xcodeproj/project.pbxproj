@@ -78,7 +78,6 @@
 		79892EF61C5024E000F83669 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79892EF51C5024E000F83669 /* UserPreferences.swift */; };
 		798DFF271C6E68CD00110981 /* LittleUserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 798DFF261C6E68CD00110981 /* LittleUserView.xib */; };
 		79A5AE7D1C56B432004B3FB9 /* PlanningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5AE7C1C56B432004B3FB9 /* PlanningViewController.swift */; };
-		79A5AE801C56CB2E004B3FB9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 79A5AE7F1C56CB2E004B3FB9 /* GoogleService-Info.plist */; };
 		79B05FD91C68BC1C0032DB0C /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B05FD81C68BC1C0032DB0C /* IAPHelper.swift */; };
 		79B05FDD1C68BEB90032DB0C /* IntraProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B05FDC1C68BEB90032DB0C /* IntraProduct.swift */; };
 		79DE549C1C5BABFF00E2ADDE /* EmptyPlanningTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79DE549B1C5BABFF00E2ADDE /* EmptyPlanningTableView.xib */; };
@@ -90,8 +89,6 @@
 		79DE54A81C5BAF6600E2ADDE /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79DE54A71C5BAF6600E2ADDE /* EventKit.framework */; };
 		79DE54AA1C5BBA5B00E2ADDE /* SelectCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DE54A91C5BBA5B00E2ADDE /* SelectCalendarViewController.swift */; };
 		79DF37081C4D7B3B00EF69A3 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79DF37071C4D7B3B00EF69A3 /* MainStoryboard.storyboard */; };
-		79DF37111C4D7CB300EF69A3 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DF37101C4D7CB300EF69A3 /* SWRevealViewController.m */; };
-		79DF37131C4D7EBD00EF69A3 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DF37121C4D7EBD00EF69A3 /* MenuViewController.swift */; };
 		79DF37151C4D831200EF69A3 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DF37141C4D831200EF69A3 /* TestViewController.swift */; };
 		79E4C5C51C6E1C140003DA56 /* StudentRegisteredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E4C5C41C6E1C140003DA56 /* StudentRegisteredViewController.swift */; };
 		79E4C5C71C6E35440003DA56 /* AppointmentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E4C5C61C6E35440003DA56 /* AppointmentDetailViewController.swift */; };
@@ -216,7 +213,6 @@
 		79892EF51C5024E000F83669 /* UserPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 		798DFF261C6E68CD00110981 /* LittleUserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LittleUserView.xib; sourceTree = "<group>"; };
 		79A5AE7C1C56B432004B3FB9 /* PlanningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanningViewController.swift; path = Planning/PlanningViewController.swift; sourceTree = "<group>"; };
-		79A5AE7F1C56CB2E004B3FB9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		79B05FD81C68BC1C0032DB0C /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		79B05FDC1C68BEB90032DB0C /* IntraProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntraProduct.swift; sourceTree = "<group>"; };
 		79DE549B1C5BABFF00E2ADDE /* EmptyPlanningTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EmptyPlanningTableView.xib; path = Views/EmptyPlanningTableView.xib; sourceTree = "<group>"; };
@@ -228,10 +224,6 @@
 		79DE54A71C5BAF6600E2ADDE /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		79DE54A91C5BBA5B00E2ADDE /* SelectCalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectCalendarViewController.swift; path = Settings/SelectCalendarViewController.swift; sourceTree = "<group>"; };
 		79DF37071C4D7B3B00EF69A3 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
-		79DF370E1C4D7CB200EF69A3 /* IntraEpitech-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IntraEpitech-Bridging-Header.h"; sourceTree = "<group>"; };
-		79DF370F1C4D7CB300EF69A3 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
-		79DF37101C4D7CB300EF69A3 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
-		79DF37121C4D7EBD00EF69A3 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		79DF37141C4D831200EF69A3 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		79E4C5C41C6E1C140003DA56 /* StudentRegisteredViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudentRegisteredViewController.swift; path = Planning/StudentRegisteredViewController.swift; sourceTree = "<group>"; };
 		79E4C5C61C6E35440003DA56 /* AppointmentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppointmentDetailViewController.swift; path = Planning/AppointmentDetailViewController.swift; sourceTree = "<group>"; };
@@ -439,7 +431,6 @@
 				798850391C4AC51C00BAA888 /* ViewController.swift */,
 				7988503E1C4AC51C00BAA888 /* Assets.xcassets */,
 				798850431C4AC51C00BAA888 /* Info.plist */,
-				79A5AE7F1C56CB2E004B3FB9 /* GoogleService-Info.plist */,
 				793C52C31C5E2D9600C33328 /* thirdParty.html */,
 				79306D551C4AEBF300708BED /* Localizable.strings */,
 				795954A61C58166A00734F91 /* CustomSegues.swift */,
@@ -512,7 +503,6 @@
 				79F826541C55275B0002DCC8 /* Home */,
 				795994451C52E0B2007BE7C5 /* Settings */,
 				79F8ADDC1C52A75C00F4FDD4 /* Menu */,
-				79DF370D1C4D7C9000EF69A3 /* SWRevealViewController */,
 				7988506F1C4ACD9200BAA888 /* Connexion */,
 				79DF37141C4D831200EF69A3 /* TestViewController.swift */,
 				795CC3311C5D00B0007AFE87 /* WebViewViewController.swift */,
@@ -539,16 +529,6 @@
 				79E4C5C61C6E35440003DA56 /* AppointmentDetailViewController.swift */,
 			);
 			name = Planning;
-			sourceTree = "<group>";
-		};
-		79DF370D1C4D7C9000EF69A3 /* SWRevealViewController */ = {
-			isa = PBXGroup;
-			children = (
-				79DF370F1C4D7CB300EF69A3 /* SWRevealViewController.h */,
-				79DF37101C4D7CB300EF69A3 /* SWRevealViewController.m */,
-				79DF370E1C4D7CB200EF69A3 /* IntraEpitech-Bridging-Header.h */,
-			);
-			name = SWRevealViewController;
 			sourceTree = "<group>";
 		};
 		79EA5CB41D5E49AE00DA7C30 /* New */ = {
@@ -582,7 +562,6 @@
 		79F8ADDC1C52A75C00F4FDD4 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				79DF37121C4D7EBD00EF69A3 /* MenuViewController.swift */,
 			);
 			name = Menu;
 			sourceTree = "<group>";
@@ -770,7 +749,6 @@
 				793C52C41C5E2D9600C33328 /* thirdParty.html in Resources */,
 				79EA5CCA1D5E78EF00DA7C30 /* LearnStoryboard.storyboard in Resources */,
 				798850681C4ACC1400BAA888 /* ConnexionStoryboard.storyboard in Resources */,
-				79A5AE801C56CB2E004B3FB9 /* GoogleService-Info.plist in Resources */,
 				79EA5CC41D5E789A00DA7C30 /* NotificationsStoryboard.storyboard in Resources */,
 				79EA5CC61D5E78BF00DA7C30 /* PlanningStoryboard.storyboard in Resources */,
 				79EA5CBC1D5E64C700DA7C30 /* MainViewStoryboard.storyboard in Resources */,
@@ -878,7 +856,6 @@
 				7988503A1C4AC51C00BAA888 /* ViewController.swift in Sources */,
 				795F1EA61C560F4A00B8C347 /* DateExtensions.swift in Sources */,
 				79152D851C666A0B00513E0F /* SelectSemestersViewController.swift in Sources */,
-				79DF37131C4D7EBD00EF69A3 /* MenuViewController.swift in Sources */,
 				795CC32E1C5CCAED007AFE87 /* ProjectsDetailsViewController.swift in Sources */,
 				795D81C31C6226D200187E43 /* RegisteredStudentsViewController.swift in Sources */,
 				79622E9D1C5D582200FBA456 /* MarksViewController.swift in Sources */,
@@ -898,7 +875,6 @@
 				79F8ADE91C52A8E400F4FDD4 /* APICalls.swift in Sources */,
 				795994441C52DA35007BE7C5 /* SplashScreenViewController.swift in Sources */,
 				79F826531C5521AE0002DCC8 /* GPA.swift in Sources */,
-				79DF37111C4D7CB300EF69A3 /* SWRevealViewController.m in Sources */,
 				792B7A5F1C57EB3300F988BB /* ProfileViewController.swift in Sources */,
 				79F1F2731C5902B700AAFB69 /* Planning.swift in Sources */,
 				79F8265E1C552C5F0002DCC8 /* UIImageViewExtensions.swift in Sources */,
@@ -1076,7 +1052,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Shakarang.IntraEpitech;
 				PRODUCT_NAME = Epintra;
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "IntraEpitech/ViewControllers/IntraEpitech-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1096,7 +1072,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Shakarang.IntraEpitech;
 				PRODUCT_NAME = Epintra;
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "IntraEpitech/ViewControllers/IntraEpitech-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};

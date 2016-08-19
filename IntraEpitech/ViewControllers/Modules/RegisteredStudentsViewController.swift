@@ -10,9 +10,9 @@ import UIKit
 
 class RegisteredStudentsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
-	var _students :[RegisteredStudent]?
+	var students :[RegisteredStudent]?
 	
-	@IBOutlet weak var _tableView: UITableView!
+	@IBOutlet weak var tableView: UITableView!
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -41,14 +41,14 @@ class RegisteredStudentsViewController: UIViewController, UITableViewDelegate, U
 		
 		var i = 0
 		
-		for tmp in _students! {
-			if (tmp._login == ApplicationManager.sharedInstance._currentLogin!) {
+		for tmp in students! {
+			if (tmp.login == ApplicationManager.sharedInstance.currentLogin!) {
 				index = NSIndexPath(forRow: i, inSection: 0)
 				break
 			}
 			i += 1
 		}
-		_tableView.scrollToRowAtIndexPath(index, atScrollPosition: .Top, animated: true)
+		tableView.scrollToRowAtIndexPath(index, atScrollPosition: .Top, animated: true)
 	}
 	
 	/*
@@ -67,7 +67,7 @@ class RegisteredStudentsViewController: UIViewController, UITableViewDelegate, U
 	}
 	
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return (_students?.count)!
+		return (students?.count)!
 	}
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -77,10 +77,10 @@ class RegisteredStudentsViewController: UIViewController, UITableViewDelegate, U
 		let studentNameLabel = cell?.viewWithTag(1) as! UILabel
 		let gradeLabel = cell?.viewWithTag(2) as! UILabel
 		
-		studentNameLabel.text = _students![indexPath.row]._login
-		gradeLabel.text = _students![indexPath.row]._grade
+		studentNameLabel.text = students![indexPath.row].login
+		gradeLabel.text = students![indexPath.row].grade
 		
-		if (_students![indexPath.row]._login == ApplicationManager.sharedInstance._currentLogin) {
+		if (students![indexPath.row].login == ApplicationManager.sharedInstance.currentLogin) {
 			studentNameLabel.textColor = UIColor.redColor()
 			gradeLabel.textColor = UIColor.redColor()
 		} else {

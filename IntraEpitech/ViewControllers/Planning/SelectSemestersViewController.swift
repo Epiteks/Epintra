@@ -10,7 +10,7 @@ import UIKit
 
 class SelectSemestersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
-	var _semesters = ApplicationManager.sharedInstance._planningSemesters
+	var _semesters = ApplicationManager.sharedInstance.planningSemesters
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -76,7 +76,7 @@ class SelectSemestersViewController: UIViewController, UITableViewDelegate, UITa
 		tableView.beginUpdates()
 		let cell = tableView.cellForRowAtIndexPath(indexPath)
 		_semesters[indexPath.row] = !_semesters[indexPath.row]
-		ApplicationManager.sharedInstance._planningSemesters = _semesters
+		ApplicationManager.sharedInstance.planningSemesters = _semesters
 		cell?.accessoryType = (cell?.accessoryType == .Checkmark ? .None : .Checkmark)
 		UserPreferences.saveSemesters(_semesters)
 		tableView.endUpdates()

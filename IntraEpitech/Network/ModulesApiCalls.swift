@@ -16,7 +16,7 @@ class ModulesApiCalls: APICalls {
 		
 		let url = super.getApiUrl() + "modules"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance._token!])
+		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)
@@ -47,7 +47,7 @@ class ModulesApiCalls: APICalls {
 		
 		let url = super.getApiUrl() + "modules"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance._token!, "login" :login])
+		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!, "login" :login])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)
@@ -79,10 +79,10 @@ class ModulesApiCalls: APICalls {
 		
 		let url = super.getApiUrl() + "module"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance._token!,
-			"scolaryear" :mod._scolaryear!,
-			"codemodule" :mod._codemodule!,
-			"codeinstance" :mod._codeinstance!])
+		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+			"scolaryear" :mod.scolaryear!,
+			"codemodule" :mod.codemodule!,
+			"codeinstance" :mod.codeinstance!])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)
@@ -109,10 +109,10 @@ class ModulesApiCalls: APICalls {
 		
 		let url = super.getApiUrl() + "module/registered"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance._token!,
-			"scolaryear" :mod._scolaryear!,
-			"codemodule" :mod._codemodule!,
-			"codeinstance" :mod._codeinstance!])
+		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+			"scolaryear" :mod.scolaryear!,
+			"codemodule" :mod.codemodule!,
+			"codeinstance" :mod.codeinstance!])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)

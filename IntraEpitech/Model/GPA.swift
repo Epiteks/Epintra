@@ -10,17 +10,17 @@ import UIKit
 import SwiftyJSON
 
 class GPA: NSObject {
-	internal var _value :String
-	internal var _cycle :String
+	internal var value :String
+	internal var cycle :String
 	
 	init(dict :JSON) {
-		_value = dict["gpa"].stringValue
-		_cycle = dict["cycle"].stringValue
+		value = dict["gpa"].stringValue
+		cycle = dict["cycle"].stringValue
 	}
 	
 	override init()
 	{
-		_value = "0"
-		_cycle = NSLocalizedString("unknown", comment: "")
+		value = "0"
+		cycle = NSLocalizedString("unknown", comment: "")
 	}
 }

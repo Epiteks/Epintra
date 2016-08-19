@@ -48,7 +48,7 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 			}
 			else {
 				self._calendars = calman.getAllCalendars()
-				self._currentCalendar = ApplicationManager.sharedInstance._defaultCalendar
+				self._currentCalendar = ApplicationManager.sharedInstance.defaultCalendar
 				self._tableView.reloadData()
 			}
 		}
@@ -103,7 +103,7 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 		newCell?.accessoryType = .Checkmark
 		
 		
-		ApplicationManager.sharedInstance._defaultCalendar = _calendars[indexPath.row]
+		ApplicationManager.sharedInstance.defaultCalendar = _calendars[indexPath.row]
 		_currentCalendar = _calendars[indexPath.row]
 		_currentCalendarIndex = indexPath.row
 		UserPreferences.savDefaultCalendar(_calendars[indexPath.row])

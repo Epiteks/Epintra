@@ -11,28 +11,28 @@ import SwiftyJSON
 
 class AppointmentEvent: NSObject {
 	
-	var _scolaryear :String?
-	var _codeModule :String?
-	var _codeActi :String?
-	var _codeInstance :String?
-	var _registeredByBlock :Bool?
-	var _slots :[Appointment]?
-	var _groupId :String?
-	var _registered :Bool?
-	var _studentRegistered :String?
+	var scolaryear :String?
+	var codeModule :String?
+	var codeActi :String?
+	var codeInstance :String?
+	var registeredByBlock :Bool?
+	var slots :[Appointment]?
+	var groupId :String?
+	var registered :Bool?
+	var studentRegistered :String?
 	
-	var _eventName :String?
-	var _eventStart :NSDate?
-	var _eventEnd :NSDate?
+	var eventName :String?
+	var eventStart :NSDate?
+	var eventEnd :NSDate?
 	
 	init(dict :JSON) {
 		super.init()
-		_scolaryear = dict["scolaryear"].string
-		_codeModule = dict["codemodule"].stringValue
-		_codeActi = dict["codeacti"].stringValue
-		_codeInstance = dict["codeinstance"].stringValue
+		scolaryear = dict["scolaryear"].string
+		codeModule = dict["codemodule"].stringValue
+		codeActi = dict["codeacti"].stringValue
+		codeInstance = dict["codeinstance"].stringValue
 		
-		_registeredByBlock = dict["registered_by_block"].boolValue
+		registeredByBlock = dict["registered_by_block"].boolValue
 		
 		
 		
@@ -46,13 +46,13 @@ class AppointmentEvent: NSObject {
 		//			}
 		//		}
 		
-		_groupId = dict["group"]["id"].stringValue
-		_registered = dict["group"]["inscrit"].boolValue
-		_studentRegistered = dict["student_registered"].stringValue
+		groupId = dict["group"]["id"].stringValue
+		registered = dict["group"]["inscrit"].boolValue
+		studentRegistered = dict["student_registered"].stringValue
 	}
 	
 	func addAppointments(dict :JSON) {
-		_slots = [Appointment]()
+		self.slots = [Appointment]()
 		
 		var slots = dict["slots"].arrayValue
 		
@@ -67,16 +67,16 @@ class AppointmentEvent: NSObject {
 			for tmpA in slots.arrayValue
 			{
 				let tmp = Appointment(dict: tmpA)
-				tmp._date?.dateByAddingTimeInterval(NSTimeInterval(-1))
-				if (tmp._date?.earlierDate(_eventStart!) == _eventStart && tmp._date?.laterDate(_eventEnd!) == _eventEnd) {
-					_slots!.append(tmp)
+				tmp.date?.dateByAddingTimeInterval(NSTimeInterval(-1))
+				if (tmp.date?.earlierDate(eventStart!) == eventStart && tmp.date?.laterDate(eventEnd!) == eventEnd) {
+					self.slots!.append(tmp)
 				}
 			}
 		}
 	}
 	
 	func canRegister() -> Bool {
-		if (_studentRegistered! == "") {
+		if (studentRegistered! == "") {
 			return false
 		}
 		return true
@@ -85,7 +85,7 @@ class AppointmentEvent: NSObject {
 
 func ==(left :AppointmentEvent, right :AppointmentEvent) -> Bool {
 	
-	if (left._registered == right._registered) {
+	if (left.registered == right.registered) {
 		return true
 	}
 	

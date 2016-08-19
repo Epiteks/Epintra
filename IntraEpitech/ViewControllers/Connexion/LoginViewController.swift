@@ -148,7 +148,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 			MJProgressView.instance.hideProgress()
 
 			if (isOk == true && response.characters.count > 0) {
-				ApplicationManager.sharedInstance._token = response
+				ApplicationManager.sharedInstance.token = response
 
 				UserPreferences.saveData(self._login, password: self._password)
 				self.goToNextView()
@@ -239,7 +239,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 	}
 
 	func goToNextView() {
-		ApplicationManager.sharedInstance._currentLogin = _login
+		ApplicationManager.sharedInstance.currentLogin = _login
 		performSegueWithIdentifier("splashSegue", sender: self)
 	}
 

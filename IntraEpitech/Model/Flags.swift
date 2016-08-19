@@ -11,20 +11,20 @@ import SwiftyJSON
 
 class Flags: NSObject {
 	
-	var _name :String?
-	var _label :String?
-	var _modules :[Module]
+	var name :String?
+	var label :String?
+	var modules :[Module]
 	
 	init(name :String, dict :JSON)
 	{
-		_name = name
-		_label = dict["label"].stringValue
+		self.name = name
+		label = dict["label"].stringValue
 		
 		let arr = dict["modules"].arrayValue
-		_modules = [Module]()
+		modules = [Module]()
 		for tmp in arr {
 			let tmp2 = Module(dict: tmp)
-			_modules.append(tmp2)
+			modules.append(tmp2)
 		}
 	}
 }

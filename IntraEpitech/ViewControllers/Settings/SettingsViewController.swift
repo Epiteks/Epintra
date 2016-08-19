@@ -27,12 +27,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		if self.revealViewController() != nil {
-			menuButton.target = self.revealViewController()
-			menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
-			self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-		}
-		//self.title = NSLocalizedString("Settings", comment: "")
+				//self.title = NSLocalizedString("Settings", comment: "")
 //self.navigationItem.backBarButtonItem?.tintColor = UIColor.redColor()
 
 	}
@@ -93,12 +88,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 			let uiswitch = cell.viewWithTag(1) as! UISwitch
 			let label = cell.viewWithTag(2) as! UILabel
 			uiswitch.onTintColor = UIUtils.backgroundColor()
-			uiswitch.on = ApplicationManager.sharedInstance._canDownload!
+			uiswitch.on = ApplicationManager.sharedInstance.canDownload!
 			uiswitch.addTarget(self, action: #selector(SettingsViewController.switchClicked(_:)), forControlEvents: .ValueChanged)
 			label.text = NSLocalizedString(_settingsItems[indexPath.section][indexPath.row], comment: "")
 		} else if (_settingsItems[indexPath.section][indexPath.row] == "DefaultCalendar") {
 
-			if let cal = ApplicationManager.sharedInstance._defaultCalendar {
+			if let cal = ApplicationManager.sharedInstance.defaultCalendar {
 				cell = tableView.dequeueReusableCellWithIdentifier("CalendarCell")!
 				let titleLabel = cell.viewWithTag(1) as! UILabel
 				let calendarName = cell.viewWithTag(2) as! UILabel
@@ -178,7 +173,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 
 	func switchClicked(sender: UISwitch?) {
 		print(sender?.on)
-		ApplicationManager.sharedInstance._canDownload = sender!.on
+		ApplicationManager.sharedInstance.canDownload = sender!.on
 		UserPreferences.saveWantToDownloadImage(sender!.on)
 	}
 
@@ -202,9 +197,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		if (segue.identifier == "webViewSegue") {
 			let vc: WebViewViewController = segue.destinationViewController as! WebViewViewController
-			vc._fileName = "thirdParty"
-			vc._title = NSLocalizedString("ThirdParty", comment: "")
-			vc._isUrl = false
+			vc.fileName = "thirdParty"
+			vc.title = NSLocalizedString("ThirdParty", comment: "")
+			vc.isUrl = false
 		}
 	}
 

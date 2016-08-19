@@ -16,7 +16,7 @@ class MarksApiCalls: APICalls {
 		
 		let url = super.getApiUrl() + "marks"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance._token!])
+		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)
@@ -49,11 +49,11 @@ class MarksApiCalls: APICalls {
 		
 		let url = super.getApiUrl() + "project/marks"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance._token!,
-			"scolaryear": mark._scolaryear!,
-			"codemodule": mark._codemodule!,
-			"codeinstance": mark._codeinstance!,
-			"codeacti": mark._codeacti!])
+		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+			"scolaryear": mark.scolaryear!,
+			"codemodule": mark.codemodule!,
+			"codeinstance": mark.codeinstance!,
+			"codeacti": mark.codeacti!])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)
@@ -85,11 +85,11 @@ class MarksApiCalls: APICalls {
 		
 		let url = super.getApiUrl() + "project/marks"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance._token!,
-			"scolaryear": proj._scolaryear!,
-			"codemodule": proj._codeModule!,
-			"codeinstance": proj._codeInstance!,
-			"codeacti": proj._codeActi!])
+		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+			"scolaryear": proj.scolaryear!,
+			"codemodule": proj.codeModule!,
+			"codeinstance": proj.codeInstance!,
+			"codeacti": proj.codeActi!])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)
@@ -121,7 +121,7 @@ class MarksApiCalls: APICalls {
 		
 		let url = super.getApiUrl() + "marks"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance._token!, "login" :login])
+		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!, "login" :login])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)

@@ -12,62 +12,62 @@ import SwiftyJSON
 
 class Planning: NSObject {
 	
-	var _titleModule :String?
-	var _startTime :String?
-	var _endTime :String?
-	var _totalStudentsRegistered :Int?
-	var _allowRegister :Bool?
-	var _allowToken :Bool?
-	var _eventRegisteredStatus :String?
-	var _eventType :String?
-	var _typeTitle :String?
-	var _actiTitle :String?
-	var _scolaryear :Int?
-	var _codeModule :String?
-	var _codeActi :String?
-	var _codeEvent :String?
-	var _codeInstance :String?
-	var _room :Room?
-	var _moduleRegistered :Bool?
-	var _isRdv :Int?
-	var _rdvGroupRegistered :String?
-	var _rdvIndividuelRegistered :String?
-	var _past :Bool?
-	var _semester :Int?
+	var titleModule :String?
+	var startTime :String?
+	var endTime :String?
+	var totalStudentsRegistered :Int?
+	var allowRegister :Bool?
+	var allowToken :Bool?
+	var eventRegisteredStatus :String?
+	var eventType :String?
+	var typeTitle :String?
+	var actiTitle :String?
+	var scolaryear :Int?
+	var codeModule :String?
+	var codeActi :String?
+	var codeEvent :String?
+	var codeInstance :String?
+	var room :Room?
+	var moduleRegistered :Bool?
+	var isRdv :Int?
+	var rdvGroupRegistered :String?
+	var rdvIndividuelRegistered :String?
+	var past :Bool?
+	var semester :Int?
 	
 	init(dict :JSON)
 	{
-		_titleModule = dict["titlemodule"].stringValue
-		_startTime = dict["start"].stringValue
-		_endTime = dict["end"].stringValue
-		_totalStudentsRegistered = dict["total_students_registered"].intValue
-		_allowRegister = dict["allow_register"].boolValue
-		_allowToken = dict["allow_token"].boolValue
-		_eventRegisteredStatus = dict["event_registered"].stringValue
-		_eventType = dict["type_code"].stringValue
-		_typeTitle = dict["type_title"].stringValue
-		_actiTitle = dict["acti_title"].stringValue
-		_scolaryear = dict["scolaryear"].intValue
-		_codeModule = dict["codemodule"].stringValue
-		_codeActi = dict["codeacti"].stringValue
-		_codeEvent = dict["codeevent"].stringValue
-		_codeInstance = dict["codeinstance"].stringValue
-		_room = Room(dict: dict["room"])
-		_moduleRegistered = dict["module_registered"].boolValue
-		_isRdv = dict["is_rdv"].intValue
-		_rdvGroupRegistered = dict["rdv_group_registered"].stringValue
-		_rdvIndividuelRegistered = dict["rdv_indiv_registered"].stringValue
-		_past = dict["past"].boolValue
-		_semester = dict["semester"].intValue
+		titleModule = dict["titlemodule"].stringValue
+		startTime = dict["start"].stringValue
+		endTime = dict["end"].stringValue
+		totalStudentsRegistered = dict["total_students_registered"].intValue
+		allowRegister = dict["allow_register"].boolValue
+		allowToken = dict["allow_token"].boolValue
+		eventRegisteredStatus = dict["event_registered"].stringValue
+		eventType = dict["type_code"].stringValue
+		typeTitle = dict["type_title"].stringValue
+		actiTitle = dict["acti_title"].stringValue
+		scolaryear = dict["scolaryear"].intValue
+		codeModule = dict["codemodule"].stringValue
+		codeActi = dict["codeacti"].stringValue
+		codeEvent = dict["codeevent"].stringValue
+		codeInstance = dict["codeinstance"].stringValue
+		room = Room(dict: dict["room"])
+		moduleRegistered = dict["module_registered"].boolValue
+		isRdv = dict["is_rdv"].intValue
+		rdvGroupRegistered = dict["rdv_group_registered"].stringValue
+		rdvIndividuelRegistered = dict["rdv_indiv_registered"].stringValue
+		past = dict["past"].boolValue
+		semester = dict["semester"].intValue
 	}
 	
 	func getOnlyDay() -> String {
-		let array = _startTime?.componentsSeparatedByString(" ")
+		let array = startTime?.componentsSeparatedByString(" ")
 		return array![0]
 	}
 	
 	func canEnterToken() -> Bool {
-		if (self._allowToken == true && self._eventRegisteredStatus == "registered")
+		if (self.allowToken == true && self.eventRegisteredStatus == "registered")
 		{
 			return true
 		}
@@ -76,7 +76,7 @@ class Planning: NSObject {
 	
 	func canRegister() -> Bool {
 		
-		if (self._moduleRegistered == true && self._eventRegisteredStatus == "false" && self._allowRegister! == true && _room != nil && _room?._seats != nil)
+		if (self.moduleRegistered == true && self.eventRegisteredStatus == "false" && self.allowRegister! == true && room != nil && room?.seats != nil)
 		{
 			return true
 		}
@@ -85,7 +85,7 @@ class Planning: NSObject {
 	
 	func canUnregister() -> Bool {
 		
-		if (self._moduleRegistered == true && self._eventRegisteredStatus == "registered" && self._allowRegister! == true)
+		if (self.moduleRegistered == true && self.eventRegisteredStatus == "registered" && self.allowRegister! == true)
 		{
 			return true
 		}
@@ -94,7 +94,7 @@ class Planning: NSObject {
 	
 	func isRegistered() -> Bool {
 		
-		if (self._eventRegisteredStatus == "registered") {
+		if (self.eventRegisteredStatus == "registered") {
 			return true
 		}
 		return false
@@ -102,7 +102,7 @@ class Planning: NSObject {
 	
 	func isUnregistered() -> Bool {
 		
-		if (self._eventRegisteredStatus == "false") {
+		if (self.eventRegisteredStatus == "false") {
 			return true
 		}
 		return false
@@ -110,7 +110,7 @@ class Planning: NSObject {
 	
 	func wasPresent() -> Bool {
 		
-		if (self._eventRegisteredStatus == "present") {
+		if (self.eventRegisteredStatus == "present") {
 			return true
 		}
 		return false
@@ -118,7 +118,7 @@ class Planning: NSObject {
 	
 	func wasAbsent() -> Bool {
 		
-		if (self._eventRegisteredStatus == "failed" || self._eventRegisteredStatus == "absent") {
+		if (self.eventRegisteredStatus == "failed" || self.eventRegisteredStatus == "absent") {
 			return true
 		}
 		return false
@@ -126,27 +126,27 @@ class Planning: NSObject {
 	
 	func getEventTime() -> (start :String, end :String) {
 		
-		_startTime?.toDate().toEventHour()
+		startTime?.toDate().toEventHour()
 		
-		if (_rdvGroupRegistered!.characters.count > 0)
+		if (rdvGroupRegistered!.characters.count > 0)
 		{
-			let arr = _rdvGroupRegistered?.componentsSeparatedByString("|")
+			let arr = rdvGroupRegistered?.componentsSeparatedByString("|")
 			return (arr![0].toDate().toEventHour(), arr![1].toDate().toEventHour())
 		}
-		else if (_rdvIndividuelRegistered!.characters.count > 0) {
-			let arr = _rdvIndividuelRegistered?.componentsSeparatedByString("|")
+		else if (rdvIndividuelRegistered!.characters.count > 0) {
+			let arr = rdvIndividuelRegistered?.componentsSeparatedByString("|")
 			return (arr![0].toDate().toEventHour(), arr![1].toDate().toEventHour())
 		}
 		else {
-			return ((_startTime?.toDate().toEventHour())!, (_endTime?.toDate().toEventHour())!)
+			return ((startTime?.toDate().toEventHour())!, (endTime?.toDate().toEventHour())!)
 		}
 	}
 	
 	init(appointment :AppointmentEvent) {
-		_scolaryear = Int(appointment._scolaryear!)
-		_codeModule = appointment._codeModule!
-		_codeActi = appointment._codeActi!
-		_codeInstance = appointment._codeInstance!
+		scolaryear = Int(appointment.scolaryear!)
+		codeModule = appointment.codeModule!
+		codeActi = appointment.codeActi!
+		codeInstance = appointment.codeInstance!
 		
 	}
 	

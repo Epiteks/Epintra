@@ -12,26 +12,21 @@ class MarksViewController: UIViewController, UITableViewDataSource, UITableViewD
 	
 	@IBOutlet weak var menuButton: UIBarButtonItem!
 	
-	@IBOutlet weak var _tableView: UITableView!
-	var _marks = [Mark]()
+	@IBOutlet weak var tableView: UITableView!
+	var marks = [Mark]()
 	
-	var _marksData : [Mark]?
-	var _selectedMark :Mark?
+	var marksData : [Mark]?
+	var selectedMark :Mark?
 	
-	var _refreshControl = UIRefreshControl()
+	var refreshControl = UIRefreshControl()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		if self.revealViewController() != nil {
-			menuButton.target = self.revealViewController()
-			menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
-			self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-		}
 		self.title = NSLocalizedString("Marks", comment: "")
 		
-		if (ApplicationManager.sharedInstance._marks != nil) {
-			_marks = ApplicationManager.sharedInstance._marks!
+		if (ApplicationManager.sharedInstance.marks != nil) {
+			marks = ApplicationManager.sharedInstance.marks!
 		}
 		else {
 			MJProgressView.instance.showProgress(self.view, white: false)
@@ -41,34 +36,23 @@ class MarksViewController: UIViewController, UITableViewDataSource, UITableViewD
 					ErrorViewer.errorPresent(self, mess: mess) {}
 				}
 				else {
-					self._marks = resp!
-					ApplicationManager.sharedInstance._marks = resp!
-					self._tableView.reloadData()
+					self.marks = resp!
+					ApplicationManager.sharedInstance.marks = resp!
+					self.tableView.reloadData()
 				}
 				MJProgressView.instance.hideProgress()
 			}
 		}
 		
-		self._refreshControl.tintColor = UIUtils.backgroundColor()
-		self._refreshControl.addTarget(self, action: #selector(MarksViewController.refreshData(_:)), forControlEvents: .ValueChanged)
-		self._tableView.addSubview(_refreshControl)
+		self.refreshControl.tintColor = UIUtils.backgroundColor()
+		self.refreshControl.addTarget(self, action: #selector(MarksViewController.refreshData(_:)), forControlEvents: .ValueChanged)
+		self.tableView.addSubview(self.refreshControl)
 		// Do any additional setup after loading the view.
 	}
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
-	}
-	
-	override func viewWillAppear(animated: Bool) {
-		
-		// Google Analytics Data
-		let tracker = GAI.sharedInstance().defaultTracker
-		tracker.set(kGAIScreenName, value: "Marks")
-		
-		let builder = GAIDictionaryBuilder.createScreenView()
-		tracker.send(builder.build() as [NSObject : AnyObject])
-		
 	}
 	
 	func refreshData(sender :AnyObject) {
@@ -78,11 +62,11 @@ class MarksViewController: UIViewController, UITableViewDataSource, UITableViewD
 				ErrorViewer.errorPresent(self, mess: mess) {}
 			}
 			else {
-				self._marks = resp!
-				ApplicationManager.sharedInstance._marks = resp!
-				self._tableView.reloadData()
+				self.marks = resp!
+				ApplicationManager.sharedInstance.marks = resp!
+				self.tableView.reloadData()
 			}
-			self._refreshControl.endRefreshing()
+			self.refreshControl.endRefreshing()
 		}
 	}
 	
@@ -92,14 +76,14 @@ class MarksViewController: UIViewController, UITableViewDataSource, UITableViewD
 		
 		if (segue.identifier == "allMarksSegue") {
 			let vc = segue.destinationViewController as! ProjectMarksViewController
-			vc._marks = _marksData
+			vc.marks = marksData
 		}
 		
 	}
 	
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 		
-		if (_marks.count == 0) {
+		if (marks.count == 0) {
 			tableView.separatorStyle = .None
 			return 0
 		}
@@ -108,7 +92,7 @@ class MarksViewController: UIViewController, UITableViewDataSource, UITableViewD
 	}
 	
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return _marks.count
+		return marks.count
 	}
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -119,11 +103,11 @@ class MarksViewController: UIViewController, UITableViewDataSource, UITableViewD
 		let moduleLabel = cell?.viewWithTag(2) as! UILabel
 		let markLabel = cell?.viewWithTag(3) as! UILabel
 		
-		let mark = _marks[indexPath.row]
+		let mark = marks[indexPath.row]
 		
-		titleLabel.text = mark._title
-		moduleLabel.text = mark._titleModule
-		markLabel.text = mark._finalNote
+		titleLabel.text = mark.title
+		moduleLabel.text = mark.titleModule
+		markLabel.text = mark.finalNote
 		
 		cell?.accessoryType = .DisclosureIndicator
 		
@@ -137,7 +121,7 @@ class MarksViewController: UIViewController, UITableViewDataSource, UITableViewD
 		tableView.scrollEnabled = false
 		
 		MJProgressView.instance.showProgress(self.view, white: false)
-		MarksApiCalls.getProjectMarks(_marks[indexPath.row]) { (isOk :Bool, resp :[Mark]?, mess :String) in
+		MarksApiCalls.getProjectMarks(marks[indexPath.row]) { (isOk :Bool, resp :[Mark]?, mess :String) in
 			tableView.userInteractionEnabled = true
 			tableView.scrollEnabled = true
 			MJProgressView.instance.hideProgress()
@@ -145,8 +129,8 @@ class MarksViewController: UIViewController, UITableViewDataSource, UITableViewD
 				ErrorViewer.errorPresent(self, mess: mess) {}
 			}
 			else {
-				self._selectedMark = self._marks[indexPath.row]
-				self._marksData = resp!
+				self.selectedMark = self.marks[indexPath.row]
+				self.marksData = resp!
 				self.performSegueWithIdentifier("allMarksSegue", sender: self)
 			}
 		}

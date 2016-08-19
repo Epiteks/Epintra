@@ -9,7 +9,7 @@
 import UIKit
 import Log
 
-let Log = Logger(formatter: Formatter("%@: %@", .Level, .Message),
+let logger = Logger(formatter: Formatter("%@: %@", .Level, .Message),
                  theme:     .TomorrowNightEighties,
                  minLevel:  .Info)
 
@@ -17,68 +17,68 @@ class ApplicationManager: NSObject {
 
 	internal static let sharedInstance = ApplicationManager()
 
-	internal var _token: String?
-	internal var _user: User?
-	internal var _currentLogin: String?
-	internal var _downloadedImages: [String : UIImage]?
-	internal var _canDownload: Bool?
-	internal var _defaultCalendar: String?
+	internal var token: String?
+	internal var user: User?
+	internal var currentLogin: String?
+	internal var downloadedImages: [String : UIImage]?
+	internal var canDownload: Bool?
+	internal var defaultCalendar: String?
 
 	// DATA
-	internal var _projects: [Project]?
-	internal var _modules: [Module]?
-	internal var _marks: [Mark]?
-	internal var _allUsers: [User]?
+	internal var projects: [Project]?
+	internal var modules: [Module]?
+	internal var marks: [Mark]?
+	internal var allUsers: [User]?
 
 
-	var _lastUserApiCall: Double?
+	var lastUserApiCall: Double?
 
-	var _planningSemesters = [Bool]()
+	var planningSemesters = [Bool]()
 
 	override init() {
 		super.init()
-		_downloadedImages = [String : UIImage]()
-		_canDownload = true
-		_lastUserApiCall = 0
+		downloadedImages = [String : UIImage]()
+		canDownload = true
+		lastUserApiCall = 0
 		fillPlanningSemesters()
 	}
 
 	func resetInstance() {
-		_token = nil
-		_user = nil
-		_currentLogin = nil
-		_lastUserApiCall = 0
+		token = nil
+		user = nil
+		currentLogin = nil
+		lastUserApiCall = 0
 	}
 
 	func addImageToCache(url: String, image: UIImage) {
-		if (_downloadedImages == nil) {
-			_downloadedImages = [String : UIImage]()
+		if (downloadedImages == nil) {
+			downloadedImages = [String : UIImage]()
 		}
-		_downloadedImages![url] = image
+		downloadedImages![url] = image
 	}
 
 	func fillPlanningSemesters() {
-		_planningSemesters = [Bool]()
+		planningSemesters = [Bool]()
 
-		if (UserPreferences.checkSemestersExist()) {
-			_planningSemesters = UserPreferences.getSemesters()
+		if UserPreferences.checkSemestersExist() {
+			planningSemesters = UserPreferences.getSemesters()
 			return
 		}
 
-		_planningSemesters.append(true)
-		_planningSemesters.append(false)
-		_planningSemesters.append(false)
-		_planningSemesters.append(false)
-		_planningSemesters.append(false)
-		_planningSemesters.append(false)
-		_planningSemesters.append(false)
-		_planningSemesters.append(false)
-		_planningSemesters.append(false)
-		_planningSemesters.append(false)
-		_planningSemesters.append(false)
+		planningSemesters.append(true)
+		planningSemesters.append(false)
+		planningSemesters.append(false)
+		planningSemesters.append(false)
+		planningSemesters.append(false)
+		planningSemesters.append(false)
+		planningSemesters.append(false)
+		planningSemesters.append(false)
+		planningSemesters.append(false)
+		planningSemesters.append(false)
+		planningSemesters.append(false)
 
-		if (_user != nil) {
-			_planningSemesters[(_user?._semester!)!] = true
+		if (user != nil) {
+			planningSemesters[(user?.semester!)!] = true
 		}
 	}
 

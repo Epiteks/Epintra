@@ -11,32 +11,32 @@ import SwiftyJSON
 
 class Appointment: NSObject {
 	
-	var _date :NSDate?
-	var _master :RegisteredStudent?
-	var _members :[RegisteredStudent]?
-	var _title :String?
-	var _id :String?
+	var date :NSDate?
+	var master :RegisteredStudent?
+	var members :[RegisteredStudent]?
+	var title :String?
+	var id :String?
 	
 	init(dict :JSON) {
 		
-		_date = dict["date"].stringValue.toDate()
+		date = dict["date"].stringValue.toDate()
 		
 		if (dict["master"] != nil) {
-			_master = RegisteredStudent(dict: dict["master"])
-			_members = [RegisteredStudent]()
-			_members?.append(_master!)
+			master = RegisteredStudent(dict: dict["master"])
+			members = [RegisteredStudent]()
+			members?.append(master!)
 			
 			if (dict["members"] != nil) {
 				
 				let tmp = dict["members"].arrayValue
 				for regtmp in tmp {
-					_members?.append(RegisteredStudent(dict: regtmp))
+					members?.append(RegisteredStudent(dict: regtmp))
 				}
 				
 			}
 			
 		}
-		_title = dict["title"].stringValue
-		_id = dict["id"].stringValue
+		title = dict["title"].stringValue
+		id = dict["id"].stringValue
 	}
 }

@@ -12,25 +12,20 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
 	
 	@IBOutlet weak var menuButton: UIBarButtonItem!
 	
-	@IBOutlet weak var _tableView: UITableView!
+	@IBOutlet weak var tableView: UITableView!
 	
-	var _modules = [Module]()
-	var _selectedModule :Module?
+	var modules = [Module]()
+	var selectedModule :Module?
 	
-	var _refreshControl = UIRefreshControl()
+	var refreshControl = UIRefreshControl()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		if self.revealViewController() != nil {
-			menuButton.target = self.revealViewController()
-			menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
-			self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-		}
 		self.title = NSLocalizedString("Modules", comment: "")
 		
-		if (ApplicationManager.sharedInstance._modules != nil) {
-			_modules = ApplicationManager.sharedInstance._modules!
+		if (ApplicationManager.sharedInstance.modules != nil) {
+			modules = ApplicationManager.sharedInstance.modules!
 		}
 		else {
 			MJProgressView.instance.showProgress(self.view, white: false)
@@ -40,17 +35,17 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
 					ErrorViewer.errorPresent(self, mess: mess) {}
 				}
 				else {
-					self._modules = resp!
-					ApplicationManager.sharedInstance._modules = resp!
-					self._tableView.reloadData()
+					self.modules = resp!
+					ApplicationManager.sharedInstance.modules = resp!
+					self.tableView.reloadData()
 					MJProgressView.instance.hideProgress()
 				}
 			}
 		}
 		
-		self._refreshControl.tintColor = UIUtils.backgroundColor()
-		self._refreshControl.addTarget(self, action: #selector(ModulesViewController.refreshData(_:)), forControlEvents: .ValueChanged)
-		self._tableView.addSubview(_refreshControl)
+		self.refreshControl.tintColor = UIUtils.backgroundColor()
+		self.refreshControl.addTarget(self, action: #selector(ModulesViewController.refreshData(_:)), forControlEvents: .ValueChanged)
+		self.tableView.addSubview(refreshControl)
 		
 		// Do any additional setup after loading the view.
 	}
@@ -62,10 +57,10 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
 				ErrorViewer.errorPresent(self, mess: mess) {}
 			}
 			else {
-				self._modules = resp!
-				ApplicationManager.sharedInstance._modules = resp!
-				self._tableView.reloadData()
-				self._refreshControl.endRefreshing()
+				self.modules = resp!
+				ApplicationManager.sharedInstance.modules = resp!
+				self.tableView.reloadData()
+				self.refreshControl.endRefreshing()
 			}
 		}
 	}
@@ -75,29 +70,18 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
 		// Dispose of any resources that can be recreated.
 	}
 	
-	override func viewWillAppear(animated: Bool) {
-		
-		// Google Analytics Data
-		let tracker = GAI.sharedInstance().defaultTracker
-		tracker.set(kGAIScreenName, value: "Modules")
-		
-		let builder = GAIDictionaryBuilder.createScreenView()
-		tracker.send(builder.build() as [NSObject : AnyObject])
-		
-	}
-	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		
 		if (segue.identifier == "moduleDetailSegue") {
 			let vc = segue.destinationViewController as! ModuleDetailsViewController
-			vc._module = _selectedModule
+			vc.module = selectedModule
 		}
 		
 	}
 	
 	
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-		if (_modules.count == 0) {
+		if (modules.count == 0) {
 			tableView.separatorStyle = .None
 			return 0
 		}
@@ -106,7 +90,7 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
 	}
 	
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return _modules.count
+		return modules.count
 	}
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -117,15 +101,15 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
 		let creditsLabel = cell?.viewWithTag(2) as! UILabel
 		let gradeLabel = cell?.viewWithTag(3) as! UILabel
 		
-		let module = _modules[indexPath.row]
+		let module = modules[indexPath.row]
 		
 		
-		creditsLabel.text = NSLocalizedString("AvailableCredits", comment: "") + module._credits!
-		if (module._grade != nil) {
-			gradeLabel.text = module._grade!
+		creditsLabel.text = NSLocalizedString("AvailableCredits", comment: "") + module.credits!
+		if (module.grade != nil) {
+			gradeLabel.text = module.grade!
 		}
-		titleLabel.text = module._title!
-		//cell!.textLabel!.text = _modules![indexPath.row]._title!
+		titleLabel.text = module.title!
+		//cell!.textLabel!.text = modules![indexPath.row].title!
 		cell?.accessoryType = .DisclosureIndicator
 		return cell!
 	}
@@ -137,7 +121,7 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
 		tableView.scrollEnabled = false
 		
 		MJProgressView.instance.showProgress(self.view, white: false)
-		ModulesApiCalls.getModule(_modules[indexPath.row]) { (isOk :Bool, resp :Module?, mess :String) in
+		ModulesApiCalls.getModule(modules[indexPath.row]) { (isOk :Bool, resp :Module?, mess :String) in
 			MJProgressView.instance.hideProgress()
 			tableView.userInteractionEnabled = true
 			tableView.scrollEnabled = true
@@ -145,7 +129,7 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
 				ErrorViewer.errorPresent(self, mess: mess) {}
 			}
 			else {
-				self._selectedModule = resp!
+				self.selectedModule = resp!
 				self.performSegueWithIdentifier("moduleDetailSegue", sender: self)
 			}
 		}

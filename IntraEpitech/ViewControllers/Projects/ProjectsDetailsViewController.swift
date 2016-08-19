@@ -10,50 +10,50 @@ import UIKit
 
 class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIWebViewDelegate {
 	
-	@IBOutlet weak var _masterImage: UIImageView!
-	@IBOutlet weak var _masterName: UILabel!
-	@IBOutlet weak var _projectEnd: UILabel!
-	@IBOutlet weak var _projectProgressView: UIProgressView!
+	@IBOutlet weak var masterImage: UIImageView!
+	@IBOutlet weak var masterName: UILabel!
+	@IBOutlet weak var projectEnd: UILabel!
+	@IBOutlet weak var projectProgressView: UIProgressView!
 	
-	var _project : ProjectDetail?
+	var project : ProjectDetail?
 	
-	var _members = [User]()
-	var _files = [File]()
+	var members = [User]()
+	var files = [File]()
 	
-	var _webViewData : File?
+	var webViewData : File?
 	
-	var _marksData : [Mark]?
+	var marksData : [Mark]?
 	
-	var _marksAllowed = false
+	var marksAllowed = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		// Do any additional setup after loading the view.
 		
-		_projectEnd.text = _project?._endActi?.toDate().toProjectEnding()
+		projectEnd.text = project?.endActi?.toDate().toProjectEnding()
 		
-		self.title = _project?._actiTitle
+		self.title = project?.actiTitle
 		
-		_files = (_project?._files)!
+		files = (project?.files)!
 		
-		if (_project?.isRegistered() == true) {
-			let grp = _project?.findGroup((_project?._userProjectCode!)!)
-			_members = (grp?._members)!
-			_masterName.text = grp?._master?._title
+		if (project?.isRegistered() == true) {
+			let grp = project?.findGroup((project?.userProjectCode!)!)
+			members = (grp?.members)!
+			masterName.text = grp?.master?.title
 			setUIIfRegistered(grp)
 		}
 		else {
-			_masterName.text = NSLocalizedString("NotRegisteredProject", comment: "")
-			if let img = ApplicationManager.sharedInstance._downloadedImages![(ApplicationManager.sharedInstance._user?._imageUrl)!]
+			masterName.text = NSLocalizedString("NotRegisteredProject", comment: "")
+			if let img = ApplicationManager.sharedInstance.downloadedImages![(ApplicationManager.sharedInstance.user?.imageUrl)!]
 			{
-				self._masterImage.image = img
-				self._masterImage.cropToSquare()
+				self.masterImage.image = img
+				self.masterImage.cropToSquare()
 			}
 		}
 		
-		self._masterImage.cropToSquare()
-		self._masterImage.toCircle()
+		self.masterImage.cropToSquare()
+		self.masterImage.toCircle()
 		fillProgressView()
 		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: (#selector(ProjectsDetailsViewController.backButtonAction(_:))))
 		self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
@@ -66,32 +66,20 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 	func backButtonAction(sender :AnyObject) {
 		self.navigationController?.popViewControllerAnimated(true)
 	}
-
-	
-	override func viewWillAppear(animated: Bool) {
-		
-		// Google Analytics Data
-		let tracker = GAI.sharedInstance().defaultTracker
-		tracker.set(kGAIScreenName, value: "ProjectDetails")
-		
-		let builder = GAIDictionaryBuilder.createScreenView()
-		tracker.send(builder.build() as [NSObject : AnyObject])
-		
-	}
 	
 	func setUIIfRegistered(grp :ProjectGroup?) {
 		
-		if let img = ApplicationManager.sharedInstance._downloadedImages![(grp?._master?._imageUrl)!]
+		if let img = ApplicationManager.sharedInstance.downloadedImages![(grp?.master?.imageUrl)!]
 		{
-			self._masterImage.image = img
-			self._masterImage.cropToSquare()
+			self.masterImage.image = img
+			self.masterImage.cropToSquare()
 		} else {
-			ImageDownloader.downloadFrom(link: (grp?._master?._imageUrl)!) {
-				if let img = ApplicationManager.sharedInstance._downloadedImages![(grp?._master?._imageUrl)!]
+			ImageDownloader.downloadFrom(link: (grp?.master?.imageUrl)!) {
+				if let img = ApplicationManager.sharedInstance.downloadedImages![(grp?.master?.imageUrl)!]
 				{
-					self._masterImage.image = img
-					self._masterImage.cropToSquare()
-					self._masterImage.toCircle()
+					self.masterImage.image = img
+					self.masterImage.cropToSquare()
+					self.masterImage.toCircle()
 				}
 			}
 		}
@@ -104,8 +92,8 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 	
 	func fillProgressView() {
 		
-		let begin = self._project?._beginActi?.toDate()
-		let end = self._project?._endActi?.toDate()
+		let begin = self.project?.beginActi?.toDate()
+		let end = self.project?.endActi?.toDate()
 		let today = NSDate()
 		
 		let totalTime = end?.timeIntervalSinceDate(begin!)
@@ -114,18 +102,18 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 		let percent = 1 - (currentTime! * 100 / totalTime!) / 100
 		
 		if (end?.earlierDate(today) == end) {
-			self._projectProgressView.setProgress(1.0, animated: true)
-			self._projectProgressView.progressTintColor = UIUtils.planningRedColor()
+			self.projectProgressView.setProgress(1.0, animated: true)
+			self.projectProgressView.progressTintColor = UIUtils.planningRedColor()
 			return
 		}
 		
-		self._projectProgressView.setProgress(Float(percent), animated: true)
+		self.projectProgressView.setProgress(Float(percent), animated: true)
 		
 		if (percent > 0.8) {
-			self._projectProgressView.progressTintColor = UIUtils.planningOrangeColor()
+			self.projectProgressView.progressTintColor = UIUtils.planningOrangeColor()
 		}
 		else {
-			self._projectProgressView.progressTintColor = UIUtils.planningGreenColor()
+			self.projectProgressView.progressTintColor = UIUtils.planningGreenColor()
 		}
 	}
 	
@@ -146,9 +134,9 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 	
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		if (section == 0) {
-			return _files.count
+			return files.count
 		}
-		return _members.count
+		return members.count
 	}
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -160,7 +148,7 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 			
 			let titleLabel = cell.viewWithTag(1) as! UILabel
 			
-			titleLabel.text = _files[indexPath.row]._title!
+			titleLabel.text = files[indexPath.row].title!
 			
 			cell.accessoryType = .DisclosureIndicator
 			
@@ -173,13 +161,13 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 			
 			imgView.image = UIImage(named: "userProfile")
 			
-			let usr = _members[indexPath.row]
+			let usr = members[indexPath.row]
 			
-			userLabel.text = usr._title
+			userLabel.text = usr.title
 			
 			cell.tag = indexPath.row + 100
 			
-			if (usr._status == "confirmed") {
+			if (usr.status == "confirmed") {
 				statusImgView.image = UIImage(named: "Done")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
 				statusImgView.tintColor = UIUtils.planningGreenColor()
 			}
@@ -188,15 +176,15 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 				statusImgView.tintColor = UIUtils.planningRedColor()
 			}
 			
-			if let img = ApplicationManager.sharedInstance._downloadedImages![usr._imageUrl!]
+			if let img = ApplicationManager.sharedInstance.downloadedImages![usr.imageUrl!]
 			{
 				if (cell.tag == (indexPath.row + 100)) {
 					imgView.image = img
 				}
 			}
 			else {
-				ImageDownloader.downloadFrom(link: usr._imageUrl!) {
-					if let img = ApplicationManager.sharedInstance._downloadedImages![usr._imageUrl!]
+				ImageDownloader.downloadFrom(link: usr.imageUrl!) {
+					if let img = ApplicationManager.sharedInstance.downloadedImages![usr.imageUrl!]
 					{
 						if (cell.tag == (indexPath.row + 100)) {
 							imgView.image = img
@@ -226,20 +214,20 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)
 		
 		if (indexPath.section == 0) {
-			_webViewData = _files[indexPath.row]
+			webViewData = files[indexPath.row]
 			self.performSegueWithIdentifier("webViewSegue", sender: self)
 		}
 	}
 	
 //	@IBAction func allMarksButtonPressed(sender :AnyObject) {
 //		
-//		MarksApiCalls.getProjectMarksForProject(self._project!) { (isOk :Bool, resp :[Mark]?, mess :String) in
+//		MarksApiCalls.getProjectMarksForProject(self.project!) { (isOk :Bool, resp :[Mark]?, mess :String) in
 //			
 //			if (!isOk) {
 //				ErrorViewer.errorPresent(self, mess: mess) {}
 //			}
 //			else {
-//				self._marksData = resp!
+//				self.marksData = resp!
 //				self.performSegueWithIdentifier("allMarksSegue", sender: self)
 //			}
 //		}
@@ -249,12 +237,12 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		if (segue.identifier == "webViewSegue") {
 			let vc :WebViewViewController = segue.destinationViewController as! WebViewViewController
-			vc._file = _webViewData!
-			vc._isUrl = true
+			vc.file = webViewData!
+			vc.isUrl = true
 		}
 		else if (segue.identifier == "allMarksSegue") {
 			let vc = segue.destinationViewController as! ProjectMarksViewController
-			vc._marks = _marksData
+			vc.marks = marksData
 		}
 		
 	}

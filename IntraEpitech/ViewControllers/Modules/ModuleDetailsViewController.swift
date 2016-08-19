@@ -10,18 +10,18 @@ import UIKit
 
 class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
-	var _module :Module?
+	var module :Module?
 	
-	@IBOutlet weak var _remainingTime: UILabel!
-	@IBOutlet weak var _progressBar: UIProgressView!
-	@IBOutlet weak var _tableView: UITableView!
-	@IBOutlet weak var _studentsBarButton: UIBarButtonItem!
+	@IBOutlet weak var remainingTime: UILabel!
+	@IBOutlet weak var progressBar: UIProgressView!
+	@IBOutlet weak var tableView: UITableView!
+	@IBOutlet weak var studentsBarButton: UIBarButtonItem!
 	
-	var _selectedProj :ProjectDetail?
-	var _marksData : [Mark]?
-	var _studentsData :[RegisteredStudent]?
+	var selectedProj :ProjectDetail?
+	var marksData : [Mark]?
+	var studentsData :[RegisteredStudent]?
 	
-	let _typeColors = [
+	let typeColors = [
 		"proj" : UIUtils.planningBlueColor(),
 		"rdv" : UIUtils.planningOrangeColor(),
 		"tp" : UIUtils.planningPurpleColor(),
@@ -34,14 +34,14 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 		super.viewDidLoad()
 		
 		// Do any additional setup after loading the view.
-		self.title = _module?._title!
+		self.title = module?.title!
 		
 		setTimeLabel()
 		
 		fillProgressView()
-		_tableView.separatorInset.left = 0
+		tableView.separatorInset.left = 0
 		
-		self._studentsBarButton.title = NSLocalizedString("Grades", comment: "")
+		self.studentsBarButton.title = NSLocalizedString("Grades", comment: "")
 		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: (#selector(ModuleDetailsViewController.backButtonAction(_:))))
 		self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
 		
@@ -62,17 +62,17 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 	
 	func setTimeLabel() {
 		let today = NSDate()
-		let registerLimit = self._module?._endRegister?.shortToDate()
-		let end = self._module?._end!.shortToDate()
+		let registerLimit = self.module?.endRegister?.shortToDate()
+		let end = self.module?.end!.shortToDate()
 		
 		if (today.earlierDate(registerLimit!) == today) {
-			_remainingTime.text = NSLocalizedString("InscriptionEnd", comment: "") + (registerLimit?.toTitleString())!
+			remainingTime.text = NSLocalizedString("InscriptionEnd", comment: "") + (registerLimit?.toTitleString())!
 		}
 		else if (today.earlierDate(end!) == today) {
-			_remainingTime.text = NSLocalizedString("ModuleEnd", comment: "") + (end?.toTitleString())!
+			remainingTime.text = NSLocalizedString("ModuleEnd", comment: "") + (end?.toTitleString())!
 		}
 		else {
-			_remainingTime.text = NSLocalizedString("ModuleEndedSince", comment: "") + (end?.toTitleString())!
+			remainingTime.text = NSLocalizedString("ModuleEndedSince", comment: "") + (end?.toTitleString())!
 		}
 		
 		
@@ -80,8 +80,8 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 	
 	func fillProgressView() {
 		
-		let begin = self._module?._begin!.shortToDate()
-		let end = self._module?._end!.shortToDate()
+		let begin = self.module?.begin!.shortToDate()
+		let end = self.module?.end!.shortToDate()
 		let today = NSDate()
 		
 		let totalTime = end?.timeIntervalSinceDate(begin!)
@@ -90,18 +90,18 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 		let percent = 1 - (currentTime! * 100 / totalTime!) / 100
 		
 		if (end?.earlierDate(today) == end) {
-			self._progressBar.setProgress(1.0, animated: true)
-			self._progressBar.progressTintColor = UIUtils.planningRedColor()
+			self.progressBar.setProgress(1.0, animated: true)
+			self.progressBar.progressTintColor = UIUtils.planningRedColor()
 			return
 		}
 		
-		self._progressBar.setProgress(Float(percent), animated: true)
+		self.progressBar.setProgress(Float(percent), animated: true)
 		
 		if (percent > 0.8) {
-			self._progressBar.progressTintColor = UIUtils.planningOrangeColor()
+			self.progressBar.progressTintColor = UIUtils.planningOrangeColor()
 		}
 		else {
-			self._progressBar.progressTintColor = UIUtils.planningGreenColor()
+			self.progressBar.progressTintColor = UIUtils.planningGreenColor()
 		}
 	}
 	
@@ -122,8 +122,8 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 	
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		
-		if (_module != nil) {
-			return (_module?._activities.count)!
+		if (module != nil) {
+			return (module?.activities.count)!
 		}
 		
 		return 1
@@ -139,23 +139,23 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 		let endLabel = cell?.viewWithTag(4) as! UILabel
 		let eventType = cell?.viewWithTag(5)
 		
-		titleLabel.text = _module?._activities[indexPath.row]._actiTitle!
+		titleLabel.text = module?.activities[indexPath.row].actiTitle!
 		
-		let acti = _module?._activities[indexPath.row]
+		let acti = module?.activities[indexPath.row]
 		
-		if (acti!._noteActi != nil) {
-			noteLabel.text = acti!._noteActi!
+		if (acti!.noteActi != nil) {
+			noteLabel.text = acti!.noteActi!
 		}
 		else {
 			noteLabel.text = ""
 		}
 		
-		beginLabel.text = acti!._beginActi?.toDate().toActiDate()
-		endLabel.text = acti!._endActi?.toDate().toActiDate()
+		beginLabel.text = acti!.beginActi?.toDate().toActiDate()
+		endLabel.text = acti!.endActi?.toDate().toActiDate()
 		
-		eventType?.backgroundColor = _typeColors[acti!._typeActiCode!]
+		eventType?.backgroundColor = typeColors[acti!.typeActiCode!]
 		
-		if (acti!._typeActiCode! == "proj" || acti!._typeActiCode! == "rdv" || acti!._noteActi!.characters.count > 0) {
+		if (acti!.typeActiCode! == "proj" || acti!.typeActiCode! == "rdv" || acti!.noteActi!.characters.count > 0) {
 			cell?.accessoryType = .DisclosureIndicator
 		}
 		else {
@@ -170,22 +170,22 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)
 		
-		let acti = _module?._activities[indexPath.row]
+		let acti = module?.activities[indexPath.row]
 		
-		if (!(acti!._typeActiCode! == "proj" || acti!._typeActiCode! == "rdv" || acti!._noteActi?.characters.count > 0)) {
+		if (!(acti!.typeActiCode! == "proj" || acti!.typeActiCode! == "rdv" || acti!.noteActi?.characters.count > 0)) {
 			return
 		}
 		
-		self._tableView.userInteractionEnabled = false
+		self.tableView.userInteractionEnabled = false
 		
 		MJProgressView.instance.showProgress(self.view, white: false)
 		
-		let proj = _module?._activities[indexPath.row]
-		proj?._scolaryear = _module?._scolaryear
-		proj?._codeModule = _module?._codemodule
-		proj?._codeInstance = _module?._codeinstance
+		let proj = module?.activities[indexPath.row]
+		proj?.scolaryear = module?.scolaryear
+		proj?.codeModule = module?.codemodule
+		proj?.codeInstance = module?.codeinstance
 		
-		if (acti?._typeActiCode == "proj") {
+		if (acti?.typeActiCode == "proj") {
 			projectStart(proj)
 		}
 		else {
@@ -207,14 +207,14 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 						ErrorViewer.errorPresent(self, mess: mess) {}
 					}
 					else {
-						self._selectedProj = proj!
-						self._selectedProj!._files = files
+						self.selectedProj = proj!
+						self.selectedProj!.files = files
 						self.performSegueWithIdentifier("projectDetailSegue", sender: self)
 					}
-					self._tableView.userInteractionEnabled = true
+					self.tableView.userInteractionEnabled = true
 				}
 			}
-			self._tableView.userInteractionEnabled = true
+			self.tableView.userInteractionEnabled = true
 			MJProgressView.instance.hideProgress()
 		}
 	}
@@ -226,10 +226,10 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 				ErrorViewer.errorPresent(self, mess: mess) {}
 			}
 			else {
-				self._marksData = resp!
+				self.marksData = resp!
 				self.performSegueWithIdentifier("allMarksSegue", sender: self)
 			}
-			self._tableView.userInteractionEnabled = true
+			self.tableView.userInteractionEnabled = true
 			MJProgressView.instance.hideProgress()
 		}
 	}
@@ -237,14 +237,14 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 	@IBAction func registeredButtonClicked(sender :AnyObject) {
 		
 		MJProgressView.instance.showProgress(self.view, white: false)
-		_studentsBarButton.enabled = false
-		ModulesApiCalls.getRegistered(self._module!) { (isOk :Bool, resp :[RegisteredStudent]?, mess :String) in
-			self._studentsBarButton.enabled = true
+		studentsBarButton.enabled = false
+		ModulesApiCalls.getRegistered(self.module!) { (isOk :Bool, resp :[RegisteredStudent]?, mess :String) in
+			self.studentsBarButton.enabled = true
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
 			}
 			else {
-				self._studentsData = resp!
+				self.studentsData = resp!
 				self.performSegueWithIdentifier("allRegisteredSegue", sender: self)
 			}
 			MJProgressView.instance.hideProgress()
@@ -255,16 +255,16 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		if (segue.identifier == "projectDetailSegue") {
 			let vc = segue.destinationViewController as! ProjectsDetailsViewController
-			vc._project = _selectedProj
-			vc._marksAllowed = true
+			vc.project = selectedProj
+			vc.marksAllowed = true
 		}
 		else if (segue.identifier == "allMarksSegue") {
 			let vc = segue.destinationViewController as! ProjectMarksViewController
-			vc._marks = _marksData
+			vc.marks = marksData
 		}
 		else if (segue.identifier == "allRegisteredSegue") {
 			let vc = segue.destinationViewController as! RegisteredStudentsViewController
-			vc._students = _studentsData
+			vc.students = studentsData
 		}
 	}
 	

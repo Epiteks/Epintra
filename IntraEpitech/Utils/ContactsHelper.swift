@@ -51,11 +51,11 @@ class ContactsHelper: NSObject {
 	
 	func createUserRecord(usr: User) -> ABRecordRef {
 		let usrRecord: ABRecordRef = ABPersonCreate().takeRetainedValue()
-		ABRecordSetValue(usrRecord, kABPersonFirstNameProperty, usr._firstname, nil)
-		ABRecordSetValue(usrRecord, kABPersonLastNameProperty, usr._lastname, nil)
+		ABRecordSetValue(usrRecord, kABPersonFirstNameProperty, usr.firstname, nil)
+		ABRecordSetValue(usrRecord, kABPersonLastNameProperty, usr.lastname, nil)
 		
-		if (ApplicationManager.sharedInstance._canDownload == true) {
-			let img = ApplicationManager.sharedInstance._downloadedImages![usr._imageUrl!]
+		if (ApplicationManager.sharedInstance.canDownload == true) {
+			let img = ApplicationManager.sharedInstance.downloadedImages![usr.imageUrl!]
 			ABPersonSetImageData(usrRecord, UIImagePNGRepresentation(img!), nil)
 		}
 		return usrRecord

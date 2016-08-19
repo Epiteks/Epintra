@@ -11,48 +11,48 @@ import SwiftyJSON
 
 class Module: NSObject {
 	
-	var _scolaryear :String?
-	var _codemodule :String?
-	var _codeinstance :String?
-	var _title :String?
-	var _semester :String?
-	var _grade :String?
-	var _credits :String?
+	var scolaryear :String?
+	var codemodule :String?
+	var codeinstance :String?
+	var title :String?
+	var semester :String?
+	var grade :String?
+	var credits :String?
 	
-	var _begin :String?
-	var _end :String?
-	var _endRegister :String?
-	var _registered :Bool?
-	var _activities = [Project]()
+	var begin :String?
+	var end :String?
+	var endRegister :String?
+	var registered :Bool?
+	var activities = [Project]()
 	
 	init(dict :JSON) {
-		_scolaryear = dict["scolaryear"].stringValue
-		_codemodule = dict["codemodule"].stringValue
-		_codeinstance = dict["codeinstance"].stringValue
-		_title = dict["title"].stringValue
-		_semester = dict["semester"].stringValue
-		_grade = dict["grade"].stringValue
-		_credits = dict["credits"].stringValue
+		scolaryear = dict["scolaryear"].stringValue
+		codemodule = dict["codemodule"].stringValue
+		codeinstance = dict["codeinstance"].stringValue
+		title = dict["title"].stringValue
+		semester = dict["semester"].stringValue
+		grade = dict["grade"].stringValue
+		credits = dict["credits"].stringValue
 	}
 	
 	init(detail :JSON) {
-		_scolaryear = detail["scolaryear"].stringValue
-		_codemodule = detail["codemodule"].stringValue
-		_codeinstance = detail["codeinstance"].stringValue
-		_title = detail["title"].stringValue
-		_semester = detail["semester"].stringValue
-		_grade = detail["student_grade"].stringValue
-		_credits = detail["credits"].stringValue
+		scolaryear = detail["scolaryear"].stringValue
+		codemodule = detail["codemodule"].stringValue
+		codeinstance = detail["codeinstance"].stringValue
+		title = detail["title"].stringValue
+		semester = detail["semester"].stringValue
+		grade = detail["student_grade"].stringValue
+		credits = detail["credits"].stringValue
 		
-		_begin = detail["begin"].stringValue
-		_end = detail["end"].stringValue
-		_endRegister = detail["end_register"].stringValue
-		_registered = detail["student_registered"].boolValue
+		begin = detail["begin"].stringValue
+		end = detail["end"].stringValue
+		endRegister = detail["end_register"].stringValue
+		registered = detail["student_registered"].boolValue
 		
 		let arr = detail["activites"].arrayValue
 		
 		for tmp in arr {
-			_activities.append(Project(detail: tmp))
+			activities.append(Project(detail: tmp))
 		}
 		
 	}

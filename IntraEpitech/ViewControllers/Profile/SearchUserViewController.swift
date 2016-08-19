@@ -10,19 +10,19 @@ import UIKit
 
 class SearchUserViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchControllerDelegate, UISearchResultsUpdating {
 	
-	var _users = [StudentInfo]()
-	var _filteredData = [StudentInfo]()
+	var users = [StudentInfo]()
+	var filteredData = [StudentInfo]()
 	
-	var _selectedUser :User?
+	var selectedUser :User?
 	
 	var resultSearchController:UISearchController!
 	
-	@IBOutlet weak var _tableView: UITableView!
+	@IBOutlet weak var tableView: UITableView!
 	
-	@IBOutlet weak var _downloadingView :UIView!
-	@IBOutlet weak var _downloadingLabel :UILabel!
+	@IBOutlet weak var downloadingView :UIView!
+	@IBOutlet weak var downloadingLabel :UILabel!
 	
-	var _refreshControl = UIRefreshControl()
+	var refreshControl = UIRefreshControl()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -36,7 +36,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 		resultSearchController.dimsBackgroundDuringPresentation = false
 		resultSearchController.searchBar.searchBarStyle = UISearchBarStyle.Prominent
 		resultSearchController.searchBar.sizeToFit()
-		//self._tableView.tableHeaderView = resultSearchController.searchBar
+		//self.tableView.tableHeaderView = resultSearchController.searchBar
 		
 		
 		resultSearchController.searchBar.barTintColor = UIUtils.backgroundColor()
@@ -57,31 +57,31 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 		//self.navigationItem.titleView = resultSearchController.searchBar
 		
 		let dbManager = DBManager.getInstance()
-		_downloadingLabel.text = NSLocalizedString("DownloadingAllUsers", comment :"")
-		_users = dbManager.getAllStudentData() as AnyObject as! [StudentInfo]
+		downloadingLabel.text = NSLocalizedString("DownloadingAllUsers", comment :"")
+		users = dbManager.getAllStudentData() as AnyObject as! [StudentInfo]
 		
-		if (_users.count == 0) {
+		if (users.count == 0) {
 			showConfirmationAlert()
-			//			self._downloadingView.hidden = false
+			//			self.downloadingView.hidden = false
 			//			MJProgressView.instance.showProgress(self.view, white: true)
 			//			UserApiCalls.getAllUsers() { (isOk :Bool, res :[StudentInfo]?, mess :String) in
 			//				
-			//				self._users = dbManager.getAllStudentData() as AnyObject as! [StudentInfo]
+			//				self.users = dbManager.getAllStudentData() as AnyObject as! [StudentInfo]
 			//				MJProgressView.instance.hideProgress()
 			//				self.navigationItem.titleView = self.resultSearchController.searchBar
-			//				self._tableView.reloadData()
-			//				self._downloadingView.hidden = true
+			//				self.tableView.reloadData()
+			//				self.downloadingView.hidden = true
 			//			}
 		}
 		else {
-			self._downloadingView.hidden = true
+			self.downloadingView.hidden = true
 			self.navigationItem.titleView = resultSearchController.searchBar
 		}
 		
-		self._refreshControl.tintColor = UIUtils.backgroundColor()
-		self._refreshControl.addTarget(self, action: #selector(SearchUserViewController.refreshData(_:)), forControlEvents: .ValueChanged)
+		self.refreshControl.tintColor = UIUtils.backgroundColor()
+		self.refreshControl.addTarget(self, action: #selector(SearchUserViewController.refreshData(_:)), forControlEvents: .ValueChanged)
 		
-		self._tableView.addSubview(_refreshControl)
+		self.tableView.addSubview(refreshControl)
 		
 	}
 	
@@ -94,30 +94,30 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 		let alertController = UIAlertController(title: NSLocalizedString("DataDownload", comment: ""), message: NSLocalizedString("SureWantsDownloadData", comment: ""), preferredStyle: .Alert)
 		
 		let cancelAction = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .Cancel) { (action:UIAlertAction!) in
-			self._refreshControl.endRefreshing()
-			self._downloadingView.hidden = true
-			self._tableView.scrollEnabled = true
-			self._tableView.userInteractionEnabled = true
-			if (self._users.count == 0) {
+			self.refreshControl.endRefreshing()
+			self.downloadingView.hidden = true
+			self.tableView.scrollEnabled = true
+			self.tableView.userInteractionEnabled = true
+			if (self.users.count == 0) {
 				self.navigationController?.popViewControllerAnimated(true)
 			}
 		}
 		alertController.addAction(cancelAction)
 		
 		let OKAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .Default) { (action:UIAlertAction!) in
-			self._refreshControl.endRefreshing()
+			self.refreshControl.endRefreshing()
 			let db = DBManager.getInstance()
-			self._downloadingView.hidden = false
+			self.downloadingView.hidden = false
 			MJProgressView.instance.showProgress(self.view, white: true)
 			UserApiCalls.getAllUsers() { (isOk :Bool, res :[StudentInfo]?, mess :String) in
-				self._users = db.getAllStudentData() as AnyObject as! [StudentInfo]
-				self._refreshControl.endRefreshing()
+				self.users = db.getAllStudentData() as AnyObject as! [StudentInfo]
+				self.refreshControl.endRefreshing()
 				MJProgressView.instance.hideProgress()
-				self._downloadingView.hidden = true
+				self.downloadingView.hidden = true
 				self.navigationItem.titleView = self.resultSearchController.searchBar
-				self._tableView.reloadData()
-				self._tableView.userInteractionEnabled = true
-				self._tableView.scrollEnabled = true
+				self.tableView.reloadData()
+				self.tableView.userInteractionEnabled = true
+				self.tableView.scrollEnabled = true
 			}
 		}
 		alertController.addAction(OKAction)
@@ -128,17 +128,17 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 	
 	func refreshData(sender:AnyObject)
 	{
-		self._tableView.userInteractionEnabled = false
-		self._tableView.scrollEnabled = false
+		self.tableView.userInteractionEnabled = false
+		self.tableView.scrollEnabled = false
 		showConfirmationAlert()
 		//		let db = DBManager.getInstance()
 		//		UserApiCalls.getAllUsers() { (isOk :Bool, res :[StudentInfo]?, mess :String) in
-		//			self._users = db.getAllStudentData() as AnyObject as! [StudentInfo]
-		//			self._refreshControl.endRefreshing()
+		//			self.users = db.getAllStudentData() as AnyObject as! [StudentInfo]
+		//			self.refreshControl.endRefreshing()
 		//			self.navigationItem.titleView = self.resultSearchController.searchBar
-		//			self._tableView.reloadData()
-		//			self._tableView.userInteractionEnabled = true
-		//			self._tableView.scrollEnabled = true
+		//			self.tableView.reloadData()
+		//			self.tableView.userInteractionEnabled = true
+		//			self.tableView.scrollEnabled = true
 		//		}
 		
 	}
@@ -155,8 +155,8 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 	}
 	
 	override func viewDidAppear(animated: Bool) {
-		_tableView.userInteractionEnabled = true
-		_tableView.scrollEnabled = true
+		tableView.userInteractionEnabled = true
+		tableView.scrollEnabled = true
 	}
 	
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -165,9 +165,9 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 	
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		if(resultSearchController.active) {
-			return _filteredData.count
+			return filteredData.count
 		}
-		return _users.count;
+		return users.count;
 	}
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -180,13 +180,13 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 		let city = cell?.viewWithTag(3) as! UILabel
 		
 		if(resultSearchController.active){
-			loginTitle.text = _filteredData[indexPath.row]._login
-			promo.text = NSLocalizedString(String(_filteredData[indexPath.row]._promo!), comment: "")
-			city.text = _filteredData[indexPath.row]._city
+			loginTitle.text = filteredData[indexPath.row].login
+			promo.text = NSLocalizedString(String(filteredData[indexPath.row].promo!), comment: "")
+			city.text = filteredData[indexPath.row].city
 		} else {
-			loginTitle.text = _users[indexPath.row]._login
-			promo.text = NSLocalizedString(String(_users[indexPath.row]._promo!), comment: "")
-			city.text = _users[indexPath.row]._city
+			loginTitle.text = users[indexPath.row].login
+			promo.text = NSLocalizedString(String(users[indexPath.row].promo!), comment: "")
+			city.text = users[indexPath.row].city
 		}
 		
 		return cell!
@@ -194,19 +194,19 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 	
 	func updateSearchResultsForSearchController(searchController: UISearchController) {
 		if searchController.searchBar.text?.characters.count > 0 {
-			_filteredData.removeAll(keepCapacity: false)
-			let array = _users.filter() { ($0._login?.containsString(searchController.searchBar.text!.lowercaseString))! }
-			_filteredData = array
-			_tableView.reloadData()
+			filteredData.removeAll(keepCapacity: false)
+			let array = users.filter() { ($0.login?.containsString(searchController.searchBar.text!.lowercaseString))! }
+			filteredData = array
+			tableView.reloadData()
 			
 		}
 		else {
 			
-			_filteredData.removeAll(keepCapacity: false)
+			filteredData.removeAll(keepCapacity: false)
 			
-			_filteredData = _users
+			filteredData = users
 			
-			_tableView.reloadData()
+			tableView.reloadData()
 			
 		}
 		
@@ -216,19 +216,19 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 		resultSearchController.active = false
 		if (segue.identifier == "otherUserProfileSegue") {
 			let vc = segue.destinationViewController as! OtherUserViewController
-			vc._currentUser = _selectedUser
+			vc.currentUser = selectedUser
 		}
 	}
 	
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)
 		self.view.endEditing(true)
-		let usr = (self.resultSearchController.active == true ? _filteredData[indexPath.row] : _users[indexPath.row])
+		let usr = (self.resultSearchController.active == true ? filteredData[indexPath.row] : users[indexPath.row])
 		
 		tableView.userInteractionEnabled = false
 		tableView.scrollEnabled = false
 		MJProgressView.instance.showProgress(self.view, white: false)
-		UserApiCalls.getSelectedUserData(usr._login!) { (isOk :Bool, resp :User?, mess :String) in
+		UserApiCalls.getSelectedUserData(usr.login!) { (isOk :Bool, resp :User?, mess :String) in
 			
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
@@ -237,12 +237,12 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 				tableView.scrollEnabled = false
 			}
 			else {
-				self._selectedUser = resp
-				print(self._selectedUser?._login)
+				self.selectedUser = resp
+				print(self.selectedUser?.login)
 				MJProgressView.instance.hideProgress()
 				self.performSegueWithIdentifier("otherUserProfileSegue", sender: self)
 				
-				//				MarksApiCalls.getMarksFor(user: self._selectedUser!._login!) { (isOk :Bool, resp :[Mark]?, mess :String) in
+				//				MarksApiCalls.getMarksFor(user: self.selectedUser!.login!) { (isOk :Bool, resp :[Mark]?, mess :String) in
 				//					
 				//					if (!isOk) {
 				//						ErrorViewer.errorPresent(self, mess: mess) {}
@@ -251,9 +251,9 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 				//						tableView.scrollEnabled = false
 				//					}
 				//					else {
-				//						self._selectedUser?._marks = resp
+				//						self.selectedUser?.marks = resp
 				//						
-				//						ModulesApiCalls.getRegisteredModulesFor(user: self._selectedUser!._login!) { (isOk :Bool, resp :[Module]?, mess :String) in
+				//						ModulesApiCalls.getRegisteredModulesFor(user: self.selectedUser!.login!) { (isOk :Bool, resp :[Module]?, mess :String) in
 				//							if (!isOk) {
 				//								ErrorViewer.errorPresent(self, mess: mess) {}
 				//								MJProgressView.instance.hideProgress()
@@ -261,7 +261,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 				//								tableView.scrollEnabled = false
 				//							}
 				//							else {
-				//								self._selectedUser?._modules = resp!
+				//								self.selectedUser?.modules = resp!
 				//								MJProgressView.instance.hideProgress()
 				//								self.performSegueWithIdentifier("otherUserProfileSegue", sender: self)		
 				//							}

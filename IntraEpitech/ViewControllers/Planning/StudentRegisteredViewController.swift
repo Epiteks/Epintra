@@ -10,7 +10,7 @@ import UIKit
 
 class StudentRegisteredViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 	
-	var _data = [RegisteredStudent]()
+	var data = [RegisteredStudent]()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -52,7 +52,7 @@ class StudentRegisteredViewController: UIViewController, UITableViewDelegate, UI
 	}
 	
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return _data.count
+		return data.count
 	}
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -61,10 +61,10 @@ class StudentRegisteredViewController: UIViewController, UITableViewDelegate, UI
 		let login = cell?.viewWithTag(1) as! UILabel
 		let status = cell?.viewWithTag(2) as! UILabel
 		
-		login.text = _data[indexPath.row]._login
-		status.text = _data[indexPath.row]._status
+		login.text = data[indexPath.row].login
+		status.text = data[indexPath.row].status
 		
-		if (_data[indexPath.row]._login == ApplicationManager.sharedInstance._user?._login) {
+		if (data[indexPath.row].login == ApplicationManager.sharedInstance.user?.login) {
 			login.textColor = UIColor.redColor()
 			status.textColor = UIColor.redColor()
 		}

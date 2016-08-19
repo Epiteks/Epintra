@@ -16,11 +16,7 @@ class TestViewController: UIViewController {
 		super.viewDidLoad()
 		
 		// Do any additional setup after loading the view.
-		if self.revealViewController() != nil {
-			menuButton.target = self.revealViewController()
-			menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
-			self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-		}
+		
 	}
 	
 	override func didReceiveMemoryWarning() {

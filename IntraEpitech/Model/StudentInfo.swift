@@ -11,25 +11,25 @@ import SwiftyJSON
 
 class StudentInfo: NSObject {
 	
-	var _login :String?
-	var _city :String?
-	var _gpa :Float?
-	var _promo :String?
+	var login :String?
+	var city :String?
+	var gpa :Float?
+	var promo :String?
 	
-	var _position :Int?
+	var position :Int?
 	
 	init(dict :JSON, promo :String) {
 		
-		_login = dict["login"].stringValue
-		_city = dict["ville"].stringValue
+		login = dict["login"].stringValue
+		city = dict["ville"].stringValue
 		
 		let cit = dict["ville"].stringValue
 		if (cit.containsString("/")) {
-			_city = cit.componentsSeparatedByString("/")[1]
+			city = cit.componentsSeparatedByString("/")[1]
 		}
 		
-		_gpa = dict["gpa"].floatValue
-		_promo = promo
+		gpa = dict["gpa"].floatValue
+		self.promo = promo
 	}
 	
 	override init() {

@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class UserApiCalls: APICalls {
 	
-	class func loginCall(login :String, password :String, onCompletion :(Bool, String) ->()) {
+	class func loginCall(login: String, password :String, onCompletion: (Bool, String) ->()) {
 		
 		let url = super.getApiUrl() + "login"
 		
@@ -26,24 +26,21 @@ class UserApiCalls: APICalls {
 					if (errorDict.count > 0) {
 						errorMessage = (errorDict["message"]?.stringValue)
 						onCompletion(false, errorMessage!)
-					}
-					else
-					{
+					} else {
 						print(token)
 						onCompletion(true, token)
 					}
-				}
-				else {
+				} else {
 					onCompletion(false, (response.result.error?.localizedDescription)!)
 				}
 		}
 	}
 	
-	class func getUserData(login :String, onCompletion :(Bool, String) ->()) {
+	class func getUserData(login: String, onCompletion: (Bool, String) ->()) {
 		
 		let url = super.getApiUrl() + "user"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance._token!, "user" : login])
+		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!, "user" : login])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)
@@ -56,9 +53,9 @@ class UserApiCalls: APICalls {
 					else
 					{
 						let app = ApplicationManager.sharedInstance
-						app._user = User(dict: responseCall)
-						app._lastUserApiCall = NSDate().timeIntervalSince1970
-						app._planningSemesters[(app._user?._semester!)!] = true
+						app.user = User(dict: responseCall)
+						app.lastUserApiCall = NSDate().timeIntervalSince1970
+						app.planningSemesters[(app.user?.semester!)!] = true
 						onCompletion(true, "Ok")
 					}
 				}
@@ -71,7 +68,7 @@ class UserApiCalls: APICalls {
 		
 		let url = super.getApiUrl() + "user"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance._token!, "user" : login])
+		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!, "user" : login])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)
@@ -99,7 +96,7 @@ class UserApiCalls: APICalls {
 		
 		let url = super.getApiUrl() + "infos"
 		
-		Alamofire.request(.POST, url, parameters: ["token": ApplicationManager.sharedInstance._token!])
+		Alamofire.request(.POST, url, parameters: ["token": ApplicationManager.sharedInstance.token!])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)
@@ -111,7 +108,7 @@ class UserApiCalls: APICalls {
 					}
 					else
 					{	
-						ApplicationManager.sharedInstance._user?.fillHistory(responseCall)
+						ApplicationManager.sharedInstance.user?.fillHistory(responseCall)
 						onCompletion(true, "Ok")
 					}
 				}
@@ -125,8 +122,8 @@ class UserApiCalls: APICalls {
 		
 		let url = super.getApiUrl() + "user/files"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance._token!,
-			"login" :(ApplicationManager.sharedInstance._user?._login)!])
+		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+			"login" :(ApplicationManager.sharedInstance.user?.login)!])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)
@@ -157,7 +154,7 @@ class UserApiCalls: APICalls {
 		
 		let url = super.getApiUrl() + "user/flags"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance._token!,
+		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
 			"login" :login!])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
@@ -191,8 +188,8 @@ class UserApiCalls: APICalls {
 		
 		let url = super.getRankingUrl()
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance._token!,
-			"login" :(ApplicationManager.sharedInstance._user?._login)!])
+		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+			"login" :(ApplicationManager.sharedInstance.user?.login)!])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)

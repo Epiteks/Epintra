@@ -10,18 +10,18 @@ import UIKit
 
 class WebViewViewController: UIViewController, UIWebViewDelegate {
     
-    @IBOutlet weak var _webView: UIWebView!
-    var _file :File?
-    var _fileName :String?
-    var _title :String?
-    var _isUrl :Bool?
+    @IBOutlet weak var webView: UIWebView!
+    var file :File?
+    var fileName :String?
+    var pageTitle :String?
+    var isUrl :Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         
-        if (_isUrl == true) {
+        if (isUrl == true) {
             loadURL()
         }
         else {
@@ -41,17 +41,17 @@ class WebViewViewController: UIViewController, UIWebViewDelegate {
     
     
     func loadURL() {
-        self.title = _file?._title!
-        let url : NSURL! = NSURL(string: (_file?._url!)!)
-        _webView.loadRequest(NSURLRequest(URL: url))
+        self.pageTitle = file?.title!
+        let url : NSURL! = NSURL(string: (file?.url!)!)
+        webView.loadRequest(NSURLRequest(URL: url))
     }
     
     func loadLocal() {
-        self.title = _title!
-        let htmlFile = NSBundle.mainBundle().pathForResource(_fileName, ofType: "html")
+        self.pageTitle = title!
+        let htmlFile = NSBundle.mainBundle().pathForResource(fileName, ofType: "html")
         do {
             let htmlString = try NSString.init(contentsOfFile: htmlFile!, encoding: NSUTF8StringEncoding)
-            _webView.loadHTMLString(htmlString as String, baseURL: nil)
+            webView.loadHTMLString(htmlString as String, baseURL: nil)
         }
         catch {}
         

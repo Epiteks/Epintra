@@ -11,20 +11,20 @@ import SwiftyJSON
 
 class Room: NSObject {
 	
-	var _type :String?
-	var _code :String?
-	var _seats :Int?
+	var type :String?
+	var code :String?
+	var seats :Int?
 	
 	init(dict :JSON)
 	{
-		_type = dict["type"].stringValue
-		_code = dict["code"].stringValue
-		_seats = dict["seats"].intValue
+		type = dict["type"].stringValue
+		code = dict["code"].stringValue
+		seats = dict["seats"].intValue
 	}
 	
 	func getRoomCleaned() -> String {
 		
-		let arr = _code?.componentsSeparatedByString("/")
+		let arr = code?.componentsSeparatedByString("/")
 		
 		if (arr != nil && arr!.count == 0)
 		{

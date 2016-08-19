@@ -10,24 +10,24 @@ import SwiftyJSON
 
 class History: NSObject {
 	
-	var _title :String?
-	var _userName :String?
-	var _userPicture :String?
-	var _content :String?
-	var _date :NSDate?
+	var title :String?
+	var userName :String?
+	var userPicture :String?
+	var content :String?
+	var date :NSDate?
 	
 	init(dict :JSON) {
 		
 		super.init()
 		
-		_title = dict["title"].stringValue
-		_userName = dict["user"]["title"].stringValue
-		_userPicture = dict["user"]["picture"].stringValue
-		_content = dict["content"].stringValue
-		_date = dict["date"].stringValue.toDate()
+		title = dict["title"].stringValue
+		userName = dict["user"]["title"].stringValue
+		userPicture = dict["user"]["picture"].stringValue
+		content = dict["content"].stringValue
+		date = dict["date"].stringValue.toDate()
 		
-		if (_userPicture != nil && (_userPicture?.characters.count)! > 0 && ApplicationManager.sharedInstance._downloadedImages![_userPicture!] == nil) {
-			ImageDownloader.downloadFrom(link: _userPicture!) {}
+		if (userPicture != nil && (userPicture?.characters.count)! > 0 && ApplicationManager.sharedInstance.downloadedImages![userPicture!] == nil) {
+			ImageDownloader.downloadFrom(link: userPicture!) {}
 		}
 	}
 }
