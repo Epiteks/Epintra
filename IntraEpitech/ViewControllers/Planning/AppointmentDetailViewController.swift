@@ -22,18 +22,7 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 		
 		// Do any additional setup after loading the view.
 		self.title = appointment.eventName!
-		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: (#selector(AppointmentDetailViewController.backButtonAction(_:))))
-		self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
-		
-		self.navigationItem.setHidesBackButton(true, animated: false)
-		self.navigationItem.backBarButtonItem = nil
-		
 	}
-	
-	func backButtonAction(sender :AnyObject) {
-		self.navigationController?.popViewControllerAnimated(true)
-	}
-	
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()

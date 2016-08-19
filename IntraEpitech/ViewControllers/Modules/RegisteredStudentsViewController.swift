@@ -18,16 +18,6 @@ class RegisteredStudentsViewController: UIViewController, UITableViewDelegate, U
 		
 		// Do any additional setup after loading the view.
 		self.title = NSLocalizedString("Grades", comment: "")
-		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: (#selector(RegisteredStudentsViewController.backButtonAction(_:))))
-		self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
-		
-		self.navigationItem.setHidesBackButton(true, animated: false)
-		self.navigationItem.backBarButtonItem = nil
-		
-	}
-	
-	func backButtonAction(sender :AnyObject) {
-		self.navigationController?.popViewControllerAnimated(true)
 	}
 
 	

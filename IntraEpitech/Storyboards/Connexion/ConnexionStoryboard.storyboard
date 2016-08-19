@@ -137,7 +137,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="_statusLabel" destination="wuj-lN-BRa" id="UFN-PI-dgd"/>
+                        <outlet property="statusLabel" destination="wuj-lN-BRa" id="6Hx-YL-iMG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GWo-TE-15U" userLabel="First Responder" sceneMemberID="firstResponder"/>

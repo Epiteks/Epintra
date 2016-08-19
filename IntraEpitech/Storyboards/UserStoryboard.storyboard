@@ -6,11 +6,11 @@
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
-        <!--lol-->
+        <!--Navigation Controller-->
         <scene sceneID="iVU-Wm-GrF">
             <objects>
                 <navigationController id="huG-Oi-Ba2" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="lol" image="user" selectedImage="user_filled" id="wWY-lu-5o4"/>
+                    <tabBarItem key="tabBarItem" title="" image="user" selectedImage="user_filled" id="wWY-lu-5o4"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="SRN-4y-jOa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -157,8 +157,8 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="_profileViewContainer" destination="97e-it-SYJ" id="PN3-eQ-NEi"/>
-                        <outlet property="_tableView" destination="ZJS-Om-a61" id="MKM-PJ-0uD"/>
+                        <outlet property="profileViewContainer" destination="97e-it-SYJ" id="nBm-5j-VF5"/>
+                        <outlet property="tableView" destination="ZJS-Om-a61" id="LRP-pZ-Pic"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OHo-k4-bPL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -361,9 +361,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="_actionButton" destination="Q3S-Ou-ozb" id="9qR-M2-fMh"/>
-                        <outlet property="_profileViewContainer" destination="Yvr-PL-TLW" id="l18-rP-TDL"/>
-                        <outlet property="_segmentedControl" destination="ykO-gZ-LTf" id="QW0-n1-vth"/>
-                        <outlet property="_tableView" destination="be2-k5-yWT" id="fC2-wM-QAq"/>
+                        <outlet property="profileViewContainer" destination="Yvr-PL-TLW" id="bwJ-h3-dcD"/>
+                        <outlet property="segmentedControl" destination="ykO-gZ-LTf" id="YKV-wV-shx"/>
+                        <outlet property="tableView" destination="be2-k5-yWT" id="Hkf-pH-hTd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FrD-mC-Hfc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -482,10 +482,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="_downloadingLabel" destination="Qfu-ds-Bh4" id="kbR-N3-Ncu"/>
-                        <outlet property="_downloadingView" destination="72s-Xj-tHw" id="36C-FN-3B7"/>
-                        <outlet property="_promoSelection" destination="6Ft-WC-6tB" id="jLP-t7-COp"/>
-                        <outlet property="_tableView" destination="Ggw-po-ljM" id="EQe-wg-trG"/>
+                        <outlet property="downloadingLabel" destination="Qfu-ds-Bh4" id="uI2-7t-1v2"/>
+                        <outlet property="downloadingView" destination="72s-Xj-tHw" id="Bip-6V-0mA"/>
+                        <outlet property="promoSelection" destination="6Ft-WC-6tB" id="xV9-IS-c5J"/>
+                        <outlet property="tableView" destination="Ggw-po-ljM" id="12M-4T-sBU"/>
                         <segue destination="rW3-sy-niZ" kind="show" identifier="otherUserProfileSegue" id="VM1-hF-0BR">
                             <nil key="action"/>
                         </segue>
@@ -578,7 +578,7 @@
                                 </variation>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.038631465519999998" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="KyC-TT-n5S" firstAttribute="top" secondItem="hLW-nM-Nbs" secondAttribute="bottom" id="5Ta-fB-6sV"/>
                             <constraint firstItem="KyC-TT-n5S" firstAttribute="top" secondItem="1eo-Ee-PUA" secondAttribute="bottom" constant="-1" id="7vo-16-Ono"/>
@@ -591,9 +591,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="_downloadingLabel" destination="lq0-ML-TIF" id="p3G-mn-Uhg"/>
-                        <outlet property="_downloadingView" destination="1eo-Ee-PUA" id="Bug-iX-vnI"/>
-                        <outlet property="_tableView" destination="hLW-nM-Nbs" id="kGm-vw-yns"/>
+                        <outlet property="downloadingLabel" destination="lq0-ML-TIF" id="cCa-Od-QYz"/>
+                        <outlet property="downloadingView" destination="1eo-Ee-PUA" id="CnP-Bd-A54"/>
+                        <outlet property="tableView" destination="hLW-nM-Nbs" id="HZk-0T-j3o"/>
                         <segue destination="rW3-sy-niZ" kind="show" identifier="otherUserProfileSegue" id="lRC-I8-BtB">
                             <nil key="action"/>
                         </segue>

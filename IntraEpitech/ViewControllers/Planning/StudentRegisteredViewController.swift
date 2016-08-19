@@ -17,19 +17,7 @@ class StudentRegisteredViewController: UIViewController, UITableViewDelegate, UI
 		
 		// Do any additional setup after loading the view.
 		self.title = NSLocalizedString("Registered", comment: "")
-		
-		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: (#selector(StudentRegisteredViewController.backButtonAction(_:))))
-		self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
-		
-		self.navigationItem.setHidesBackButton(true, animated: false)
-		self.navigationItem.backBarButtonItem = nil
-		
 	}
-	
-	func backButtonAction(sender :AnyObject) {
-		self.navigationController?.popViewControllerAnimated(true)
-	}
-
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()

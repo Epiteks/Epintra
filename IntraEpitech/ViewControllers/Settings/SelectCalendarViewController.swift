@@ -21,19 +21,7 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 		// Do any additional setup after loading the view.
 		
 		self.title = NSLocalizedString("Calendars", comment: "")
-		
-		//self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: ("backButtonAction:"))
-		self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
-		
-		//self.navigationItem.setHidesBackButton(true, animated: false)
-		self.navigationItem.backBarButtonItem?.tintColor = UIColor.redColor()
-		
 	}
-	
-	func backButtonAction(sender :AnyObject) {
-		self.navigationController?.popViewControllerAnimated(true)
-	}
-
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()

@@ -41,7 +41,7 @@
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="alertCell" rowHeight="80" id="qX7-gd-HuP">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="80"/>
+                                        <rect key="frame" x="0.0" y="92" width="600" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qX7-gd-HuP" id="AXl-WV-ORb">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="79.5"/>
@@ -106,8 +106,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="3SB-rj-Fv8"/>
                     <connections>
-                        <outlet property="_alertTableView" destination="oZF-k0-afA" id="qad-bk-mGi"/>
-                        <outlet property="_profileViewContainer" destination="bEa-Cf-Dpd" id="hg4-BT-olf"/>
+                        <outlet property="alertTableView" destination="oZF-k0-afA" id="Zop-Gb-QEI"/>
+                        <outlet property="profileViewContainer" destination="bEa-Cf-Dpd" id="btl-YJ-eSy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Iw-OD-QbQ" userLabel="First Responder" sceneMemberID="firstResponder"/>

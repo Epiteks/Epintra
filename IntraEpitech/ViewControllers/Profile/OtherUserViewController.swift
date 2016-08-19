@@ -48,11 +48,6 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 		self.title = currentUser?.login
 		
 		self.segmentedControl.tintColor = UIUtils.backgroundColor()
-		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: (#selector(OtherUserViewController.backButtonAction(_:))))
-		self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
-		
-		self.navigationItem.setHidesBackButton(true, animated: false)
-		self.navigationItem.backBarButtonItem = nil
 	}
 	
 	override func viewWillAppear(animated: Bool) {
@@ -101,11 +96,6 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 			}
 		}
 	}
-	
-	func backButtonAction(sender :AnyObject) {
-		self.navigationController?.popViewControllerAnimated(true)
-	}
-	
 	
 	override func viewDidAppear(animated: Bool) {
 		MJProgressView.instance.showProgress(self.tableView, white: false)

@@ -47,15 +47,6 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 		// Uncomment the following line to preserve selection between presentations
 		// self.clearsSelectionOnViewWillAppear = false
 		
-		// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-		// self.navigationItem.rightBarButtonItem = self.editButtonItem()
-		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: (#selector(SearchUserViewController.backButtonAction(_:))))
-		self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
-		
-		self.navigationItem.setHidesBackButton(true, animated: false)
-		self.navigationItem.backBarButtonItem = nil
-		//self.navigationItem.titleView = resultSearchController.searchBar
-		
 		let dbManager = DBManager.getInstance()
 		downloadingLabel.text = NSLocalizedString("DownloadingAllUsers", comment :"")
 		users = dbManager.getAllStudentData() as AnyObject as! [StudentInfo]
@@ -142,12 +133,6 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 		//		}
 		
 	}
-	
-	
-	func backButtonAction(sender :AnyObject) {
-		self.navigationController?.popViewControllerAnimated(true)
-	}
-	
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()

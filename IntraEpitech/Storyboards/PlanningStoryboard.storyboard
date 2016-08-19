@@ -191,9 +191,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="_calendar" destination="p2J-fl-Wbo" id="Ghh-yk-NPI"/>
-                        <outlet property="_selectSemestersButton" destination="rXZ-cq-eha" id="dS1-kY-Lol"/>
-                        <outlet property="_tableView" destination="Bcr-Lf-3MV" id="7ip-wg-4re"/>
+                        <outlet property="calendar" destination="p2J-fl-Wbo" id="5H2-hB-jWD"/>
+                        <outlet property="selectSemestersButton" destination="rXZ-cq-eha" id="RyJ-EX-rf0"/>
+                        <outlet property="tableView" destination="Bcr-Lf-3MV" id="fDS-i0-bKK"/>
                         <segue destination="WuK-z4-4Kj" kind="show" identifier="selectSemestersSegue" id="CXI-d4-XC6">
                             <nil key="action"/>
                         </segue>
@@ -222,7 +222,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Cdp-uf-gNE">
-                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="WuK-z4-4Kj" id="F0s-Cr-erG"/>
@@ -234,7 +234,7 @@
                         <constraints>
                             <constraint firstItem="WyY-tZ-XQZ" firstAttribute="top" secondItem="Cdp-uf-gNE" secondAttribute="bottom" id="3LO-1F-Skd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Cdp-uf-gNE" secondAttribute="trailing" constant="-20" id="M3z-ww-O3H"/>
-                            <constraint firstItem="Cdp-uf-gNE" firstAttribute="top" secondItem="UEe-ry-6pU" secondAttribute="bottom" id="RfG-LK-6je"/>
+                            <constraint firstItem="Cdp-uf-gNE" firstAttribute="top" secondItem="UEe-ry-6pU" secondAttribute="bottom" constant="-64" id="RfG-LK-6je"/>
                             <constraint firstItem="Cdp-uf-gNE" firstAttribute="leading" secondItem="iTE-hk-ciC" secondAttribute="leadingMargin" constant="-20" id="V4x-qa-PXg"/>
                         </constraints>
                     </view>

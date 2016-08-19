@@ -27,18 +27,7 @@ class WebViewViewController: UIViewController, UIWebViewDelegate {
         else {
             loadLocal()
         }
-        
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: (#selector(WebViewViewController.backButtonAction(_:))))
-        self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
-        
-        self.navigationItem.setHidesBackButton(true, animated: false)
-        self.navigationItem.backBarButtonItem = nil
-    }
-    
-    func backButtonAction(sender :AnyObject) {
-        self.navigationController?.popViewControllerAnimated(true)
-    }
-    
+	}
     
     func loadURL() {
         self.pageTitle = file?.title!

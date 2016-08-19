@@ -23,18 +23,7 @@ class CommentsViewController: UIViewController {
 		let str = (mark?.comment)!// + "\n\n" + (mark?.correcteur)!
 		print(str)
 		textView.text = str
-		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: (#selector(CommentsViewController.backButtonAction(_:))))
-		self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
-		
-		self.navigationItem.setHidesBackButton(true, animated: false)
-		self.navigationItem.backBarButtonItem = nil
-		
 	}
-	
-	func backButtonAction(sender :AnyObject) {
-		self.navigationController?.popViewControllerAnimated(true)
-	}
-
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()

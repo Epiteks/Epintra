@@ -32,11 +32,7 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		// Do any additional setup after loading the view.
 		self.title = NSLocalizedString("Ranking", comment: "")
-		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: (#selector(RankingViewController.backButtonAction(_:))))
-		self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
-		
-		self.navigationItem.setHidesBackButton(true, animated: false)
-		self.navigationItem.backBarButtonItem = nil
+
 		let db = DBManager.getInstance()
 		
 		promoSelection.setTitle(NSLocalizedString(teks[0], comment: ""), forSegmentAtIndex: 0)
@@ -80,10 +76,6 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 		self.refreshControl.tintColor = UIUtils.backgroundColor()
 		self.refreshControl.addTarget(self, action: #selector(RankingViewController.refreshData(_:)), forControlEvents: .ValueChanged)
 		self.tableView.addSubview(refreshControl)
-	}
-	
-	func backButtonAction(sender :AnyObject) {
-		self.navigationController?.popViewControllerAnimated(true)
 	}
 	
 	override func didReceiveMemoryWarning() {

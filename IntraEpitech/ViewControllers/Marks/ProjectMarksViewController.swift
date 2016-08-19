@@ -19,20 +19,7 @@ class ProjectMarksViewController: UIViewController, UITableViewDelegate, UITable
 		super.viewDidLoad()
 		
 		self.title = NSLocalizedString("Marks", comment: "")
-		
-		// Do any additional setup after loading the view.
-		self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .Plain, target: self, action: (#selector(ProjectMarksViewController.backButtonAction(_:))))
-		self.navigationItem.leftBarButtonItem?.tintColor = UIColor.whiteColor()
-		
-		self.navigationItem.setHidesBackButton(true, animated: false)
-		self.navigationItem.backBarButtonItem = nil
-		
 	}
-	
-	func backButtonAction(sender :AnyObject) {
-		self.navigationController?.popViewControllerAnimated(true)
-	}
-
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
