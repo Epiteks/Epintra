@@ -7,7 +7,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="RHu-nZ-KQ0">
             <objects>
-                <tabBarController id="Z0r-jy-Ua2" customClass="TabBarController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="Z0r-jy-Ua2" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="9zN-3w-CME">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
