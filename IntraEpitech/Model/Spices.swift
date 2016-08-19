@@ -11,8 +11,7 @@ import SwiftyJSON
 class Spices: NSObject {
 	var currentSpices :String
 	
-	init(dict :JSON)
-	{
+	init(dict :JSON) {
 		currentSpices = dict["available_spice"].stringValue
 	}
 }

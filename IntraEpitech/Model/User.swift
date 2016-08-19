@@ -1,4 +1,3 @@
-
 //
 //  User.swift
 //  IntraEpitech
@@ -75,7 +74,7 @@ class User: NSObject {
 	
 	func getLatestGPA() -> GPA {
 		
-		if gpa?.count == 1	{
+		if gpa?.count == 1 {
 			return gpa![0]
 		} else if gpa?.count == 2 {
 			return gpa![1]

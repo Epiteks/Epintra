@@ -17,8 +17,7 @@ class ProjectGroup: NSObject {
 	var master :User?
 	var members :[User]?
 	
-	init(dict :JSON)
-	{
+	init(dict: JSON) {
 		super.init()
 		title = dict["title"].stringValue
 		code = dict["code"].stringValue

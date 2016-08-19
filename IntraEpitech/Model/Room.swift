@@ -15,8 +15,7 @@ class Room: NSObject {
 	var code :String?
 	var seats :Int?
 	
-	init(dict :JSON)
-	{
+	init(dict :JSON) {
 		type = dict["type"].stringValue
 		code = dict["code"].stringValue
 		seats = dict["seats"].intValue

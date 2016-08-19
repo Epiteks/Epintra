@@ -18,7 +18,7 @@ class SelectSemestersViewController: UIViewController, UITableViewDelegate, UITa
 		// Do any additional setup after loading the view.
 		
 		self.title = NSLocalizedString("Semesters", comment :"")
-
+		
 	}
 	
 	override func didReceiveMemoryWarning() {
@@ -50,14 +50,13 @@ class SelectSemestersViewController: UIViewController, UITableViewDelegate, UITa
 		
 		if (_semesters[indexPath.row] == true) {
 			cell.accessoryType = .Checkmark
-		}
-		else {
+		} else {
 			cell.accessoryType = .None
 		}
 		
 		cell.textLabel!.text = NSLocalizedString("Semester", comment :"") + " " + String(indexPath.row)
 		
-		return cell;
+		return cell
 	}
 	
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

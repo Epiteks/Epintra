@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StudentRegisteredViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class StudentRegisteredViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
 	var data = [RegisteredStudent]()
 	
@@ -55,8 +55,7 @@ class StudentRegisteredViewController: UIViewController, UITableViewDelegate, UI
 		if (data[indexPath.row].login == ApplicationManager.sharedInstance.user?.login) {
 			login.textColor = UIColor.redColor()
 			status.textColor = UIColor.redColor()
-		}
-		else {
+		} else {
 			login.textColor = UIColor.blackColor()
 			status.textColor = UIColor.blackColor()
 		}

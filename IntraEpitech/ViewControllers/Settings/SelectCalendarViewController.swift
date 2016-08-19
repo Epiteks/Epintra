@@ -33,8 +33,7 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 		calman.hasRights() { (granted :Bool, mess :String?) in
 			if (!granted) {
 				ErrorViewer.errorPresent(self, mess: NSLocalizedString(mess!, comment: "")) {}
-			}
-			else {
+			} else {
 				self._calendars = calman.getAllCalendars()
 				self._currentCalendar = ApplicationManager.sharedInstance.defaultCalendar
 				self._tableView.reloadData()

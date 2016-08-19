@@ -10,8 +10,7 @@ import UIKit
 
 class ErrorViewer: NSObject {
 	
-	class func errorShow(viewController :UIViewController, mess :String, onCompletion :() -> ())
-	{
+	class func errorShow(viewController :UIViewController, mess :String, onCompletion :() -> ()) {
 		let _alert = UIAlertController(title: "", message: "", preferredStyle: .Alert)
 		
 		_alert.title = NSLocalizedString("Error", comment: "")
@@ -25,8 +24,7 @@ class ErrorViewer: NSObject {
 		viewController.showViewController(_alert, sender: viewController)
 	}
 	
-	class func errorPresent(viewController :UIViewController, mess :String, onCompletion :() -> ())
-	{
+	class func errorPresent(viewController :UIViewController, mess :String, onCompletion :() -> ()) {
 		let _alert = UIAlertController(title: "", message: "", preferredStyle: .Alert)
 		
 		_alert.title = NSLocalizedString("Error", comment: "")
