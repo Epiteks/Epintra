@@ -51,9 +51,6 @@ class UserPreferences: NSObject {
 		let log = def.stringForKey("login")
 		let pass = def.stringForKey("password")
 		
-		print(log)
-		print(pass)
-		
 		return (log!, pass!)
 	}
 	
