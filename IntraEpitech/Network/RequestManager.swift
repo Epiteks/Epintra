@@ -15,10 +15,18 @@ class RequestManager: NSObject {
 	func call(requestID: String, params: [String: AnyObject]?, completion: CompletionHandlerType) {
 		
 		let req = Requests.routes[requestID]
+		var parameters = params
 		
 		logger.info("Request \(requestID) with parameters :\n\(params)\n")
 		
-		Alamofire.request((req?.method)!, configurationInstance.apiURL + (req?.endpoint)!, parameters: params)
+		if req!.secured == true {
+			if parameters == nil {
+				parameters = [String: AnyObject]()
+			}
+			parameters!["token"] = ApplicationManager.sharedInstance.token!
+		}
+		
+		Alamofire.request((req?.method)!, configurationInstance.apiURL + (req?.endpoint)!, parameters: parameters)
 			//.validate(statusCode: 200..<300)
 			.responseJSON { res in
 				
