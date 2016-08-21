@@ -6,6 +6,7 @@
  Copyright © 2016 Maxime Junger. All rights reserved.
  */
 
+"unknownApiError" = "Erreur de l'API. Verifiez si l'intranet est en ligne.";
 
 /**
  ** Login View
@@ -18,6 +19,7 @@
 "Error" = "Erreur";
 "pleaseFillEverything" = "Merci de remplir tous les champs";
 "noOfficialApp" = "Application non officielle.";
+"invalidCombinaison" = "Mauvaise combinaison login / mot de passe";
 
 /**
  ** Splash screen
