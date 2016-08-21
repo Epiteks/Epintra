@@ -17,6 +17,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mVO-Bp-FGm">
+                                <rect key="frame" x="288" y="569" width="24" height="11"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jth-Yn-jGd">
                                 <rect key="frame" x="0.0" y="210" width="600" height="180"/>
                                 <subviews>
@@ -78,13 +84,7 @@
                                     <constraint firstItem="AAm-28-bNv" firstAttribute="leading" secondItem="jth-Yn-jGd" secondAttribute="leading" constant="20" id="nGL-O0-4UL"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mVO-Bp-FGm">
-                                <rect key="frame" x="288" y="569" width="24" height="11"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="9"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h0R-on-X5i">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h0R-on-X5i">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="0.086274509799999996" green="0.62745098040000002" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -92,10 +92,14 @@
                         <color key="backgroundColor" red="1" green="0.1019607843" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="mVO-Bp-FGm" firstAttribute="centerX" secondItem="4jn-IQ-vDX" secondAttribute="centerX" id="6uF-OD-Dto"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="h0R-on-X5i" secondAttribute="trailing" constant="-20" id="8D6-bD-uhh"/>
                             <constraint firstItem="jth-Yn-jGd" firstAttribute="centerY" secondItem="4jn-IQ-vDX" secondAttribute="centerY" id="AuV-28-8Rf"/>
+                            <constraint firstItem="h0R-on-X5i" firstAttribute="leading" secondItem="4jn-IQ-vDX" secondAttribute="leadingMargin" constant="-20" id="Itd-fU-0TT"/>
                             <constraint firstItem="jth-Yn-jGd" firstAttribute="leading" secondItem="4jn-IQ-vDX" secondAttribute="leadingMargin" constant="-20" id="JHs-ye-VSj"/>
                             <constraint firstAttribute="trailingMargin" secondItem="jth-Yn-jGd" secondAttribute="trailing" constant="-20" id="KSm-Hr-CFC"/>
                             <constraint firstItem="4ZR-Vj-9vd" firstAttribute="top" secondItem="mVO-Bp-FGm" secondAttribute="bottom" constant="20" id="NOo-RN-0ud"/>
+                            <constraint firstItem="4ZR-Vj-9vd" firstAttribute="top" secondItem="h0R-on-X5i" secondAttribute="bottom" id="lWc-C2-bB3"/>
+                            <constraint firstItem="h0R-on-X5i" firstAttribute="top" secondItem="gQT-JU-1eB" secondAttribute="bottom" constant="-20" id="nI2-i6-lei"/>
                         </constraints>
                     </view>
                     <connections>
@@ -104,7 +108,7 @@
                         <outlet property="loginButton" destination="AAm-28-bNv" id="WA4-jf-Jqq"/>
                         <outlet property="loginTableView" destination="CNe-yu-Wby" id="BLG-Iy-eXh"/>
                         <outlet property="waitingView" destination="h0R-on-X5i" id="otz-n3-3hX"/>
-                        <segue destination="O9D-wL-Cq5" kind="show" identifier="splashSegue" id="R0k-aY-34Q"/>
+                        <segue destination="O9D-wL-Cq5" kind="showDetail" identifier="splashSegue" action="showViewController:sender:" id="R0k-aY-34Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Bf-cE-lWZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
