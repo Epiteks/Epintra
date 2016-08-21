@@ -84,8 +84,8 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h0R-on-X5i">
-                                <rect key="frame" x="394" y="411" width="600" height="600"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h0R-on-X5i">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="0.086274509799999996" green="0.62745098040000002" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
@@ -99,11 +99,11 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="_infoLabel" destination="mVO-Bp-FGm" id="8w2-m8-8Bk"/>
-                        <outlet property="_loginButton" destination="AAm-28-bNv" id="Cq5-r4-WsZ"/>
-                        <outlet property="_loginTableView" destination="CNe-yu-Wby" id="En7-tX-yXP"/>
-                        <outlet property="_waitingView" destination="h0R-on-X5i" id="Z9s-Ww-JIg"/>
                         <outlet property="connexionBlockView" destination="jth-Yn-jGd" id="pla-bP-iWk"/>
+                        <outlet property="infoLabel" destination="mVO-Bp-FGm" id="61g-pO-uno"/>
+                        <outlet property="loginButton" destination="AAm-28-bNv" id="WA4-jf-Jqq"/>
+                        <outlet property="loginTableView" destination="CNe-yu-Wby" id="BLG-Iy-eXh"/>
+                        <outlet property="waitingView" destination="h0R-on-X5i" id="otz-n3-3hX"/>
                         <segue destination="O9D-wL-Cq5" kind="show" identifier="splashSegue" id="R0k-aY-34Q"/>
                     </connections>
                 </viewController>
@@ -126,7 +126,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wuj-lN-BRa">
                                 <rect key="frame" x="279" y="559.5" width="42" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
