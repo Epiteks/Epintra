@@ -28,7 +28,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 		self.setNeedsStatusBarAppearanceUpdate()
 		
 		waitingView.backgroundColor = UIUtils.backgroundColor()
-		waitingView.hidden = true
+		
 		
 		if (UserPreferences.checkIfDataExists()) {
 			waitingView.hidden = false
@@ -36,21 +36,22 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 			login = data.login
 			password = data.password
 			loginCall()
+		} else {
+			waitingView.hidden = true
+			self.view.backgroundColor = UIUtils.backgroundColor()
+			
+			// Set UITableView properties
+			self.loginTableView.scrollEnabled = false
+			self.loginTableView.layer.cornerRadius = 3
+			self.loginTableView.separatorInset = UIEdgeInsetsZero
+			
+			
+			// Set different texts
+			self.loginButton.setTitle(NSLocalizedString("login", comment: ""), forState: .Normal)
+			self.infoLabel.text = NSLocalizedString("noOfficialApp", comment: "")
+			
+			self.registerForKeyboardNotifications()
 		}
-		
-		self.view.backgroundColor = UIUtils.backgroundColor()
-		
-		// Set UITableView properties
-		self.loginTableView.scrollEnabled = false
-		self.loginTableView.layer.cornerRadius = 3
-		self.loginTableView.separatorInset = UIEdgeInsetsZero
-		
-		
-		// Set different texts
-		self.loginButton.setTitle(NSLocalizedString("login", comment: ""), forState: .Normal)
-		self.infoLabel.text = NSLocalizedString("noOfficialApp", comment: "")
-		
-		self.registerForKeyboardNotifications()
 	}
 	
 	override func viewDidAppear(animated: Bool) {
@@ -152,7 +153,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 			MJProgressView.instance.hideProgress()
 			
 			switch (result) {
-			case .Success(let val):
+			case .Success(_):
 				UserPreferences.saveData(self.login, password: self.password)
 				self.goToNextView()
 				break
@@ -165,25 +166,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 				self.waitingView.hidden = true
 				break
 			}
-		}
-		//
-		//		UserApiCalls.loginCall(login, password: password) { (isOk: Bool, response: String) in
-		//			
-		//			// Login Callback
-		//			
-		//			MJProgressView.instance.hideProgress()
-		//			
-		//			if (isOk == true && response.characters.count > 0) {
-		//				ApplicationManager.sharedInstance.token = response
-		//				
-		//				UserPreferences.saveData(self.login, password: self.password)
-		//				self.goToNextView()
-		//			} else {
-		//				ErrorViewer.errorShow(self, mess: response) { _ in }
-		//				self.waitingView.hidden = true
-		//			}
-		//		}
-		
+		}		
 	}
 	
 	/**

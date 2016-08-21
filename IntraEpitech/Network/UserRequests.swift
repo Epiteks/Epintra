@@ -41,6 +41,33 @@ class UserRequests: RequestManager {
 		}
 	}
 	
+	func getCurrentUserData(completion: CompletionHandlerType) {
+		
+		let app = ApplicationManager.sharedInstance
+		
+		super.call("userData", params: ["user": app.currentLogin!]) { (response) in
+			switch response {
+			case .Success(let res):
+				
+				let responseJSON = JSON(res!)
+				
+				
+				app.user = User(dict: responseJSON)
+				app.lastUserApiCall = NSDate().timeIntervalSince1970
+				app.planningSemesters[(app.user?.semester!)!] = true
+				completion(Result.Success(nil))
+				
+				
+				break
+			case .Failure(let err):
+				completion(Result.Failure(type: err.type, message: err.message))
+				logger.error("GetCurrentUserData : \(err)")
+				break
+			}
+		}
+	}
+	
+	
 }
 
 let userRequests = UserRequests()
