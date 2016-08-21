@@ -9,61 +9,67 @@
 import UIKit
 
 class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
-
-	@IBOutlet weak var _loginTableView: UITableView!
-	@IBOutlet weak var _loginButton: ActionButton!
-	@IBOutlet weak var _infoLabel: UILabel!
-	@IBOutlet weak var _waitingView: UIView!
+	
+	@IBOutlet weak var loginTableView: UITableView!
+	@IBOutlet weak var loginButton: ActionButton!
+	@IBOutlet weak var infoLabel: UILabel!
+	@IBOutlet weak var waitingView: UIView!
 	@IBOutlet weak var connexionBlockView: UIView!
 	
-	var _login = String()
-	var _password = String()
-
+	var login = String()
+	var password = String()
+	
 	// Used for moving the view
 	var connexionButtonConstraintSave: CGFloat?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
-		_waitingView.backgroundColor = UIUtils.backgroundColor()
-		_waitingView.hidden = true
-
+		
+		self.setNeedsStatusBarAppearanceUpdate()
+		
+		waitingView.backgroundColor = UIUtils.backgroundColor()
+		waitingView.hidden = true
+		
 		if (UserPreferences.checkIfDataExists()) {
-			_waitingView.hidden = false
+			waitingView.hidden = false
 			let data = UserPreferences.getData()
-			_login = data.login
-			_password = data.password
+			login = data.login
+			password = data.password
 			loginCall()
 		}
-
+		
 		self.view.backgroundColor = UIUtils.backgroundColor()
-
-		self._loginTableView.scrollEnabled = false
-		self._loginTableView.layer.cornerRadius = 3
-		self._loginTableView.separatorInset = UIEdgeInsetsZero
-
-
+		
+		// Set UITableView properties
+		self.loginTableView.scrollEnabled = false
+		self.loginTableView.layer.cornerRadius = 3
+		self.loginTableView.separatorInset = UIEdgeInsetsZero
+		
+		
 		// Set different texts
-		self._loginButton.setTitle(NSLocalizedString("login", comment: ""), forState: .Normal)
-		self._infoLabel.text = NSLocalizedString("noOfficialApp", comment: "")
+		self.loginButton.setTitle(NSLocalizedString("login", comment: ""), forState: .Normal)
+		self.infoLabel.text = NSLocalizedString("noOfficialApp", comment: "")
 		
 		self.registerForKeyboardNotifications()
-
 	}
-
+	
 	override func viewDidAppear(animated: Bool) {
-
-		_waitingView.hidden = true
+		
+		waitingView.hidden = true
 		if (UserPreferences.checkIfDataExists()) {
-			_waitingView.hidden = false
+			waitingView.hidden = false
 		}
-
-		if (_waitingView.hidden == false) {
-			MJProgressView.instance.showProgress(self._waitingView, white: true)
+		
+		if (waitingView.hidden == false) {
+			MJProgressView.instance.showProgress(self.waitingView, white: true)
 		} else {
 			MJProgressView.instance.hideProgress()
 		}
-
+		
+	}
+	
+	override func preferredStatusBarStyle() -> UIStatusBarStyle {
+		return UIStatusBarStyle.LightContent
 	}
 	
 	/**
@@ -77,87 +83,107 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 		self.view.addGestureRecognizer(gesture)
 	}
 	
-
+	
 	func tapOnView(sender: UITapGestureRecognizer) {
 		self.view.endEditing(true)
 	}
-
+	
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 		return 1
 	}
-
+	
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return 2
 	}
-
+	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		
 		let cell = tableView.dequeueReusableCellWithIdentifier("normalCell")
-
+		
 		let textField = cell?.viewWithTag(1) as! UITextField
-
+		
 		textField.tintColor = UIUtils.backgroundColor()
-
+		
 		if (indexPath.row == 0) { textField.placeholder = NSLocalizedString("loginUser", comment: "") } else {
 			textField.placeholder = NSLocalizedString("password", comment: "")
 			textField.secureTextEntry = true
 		}
-
+		
 		cell?.layoutMargins.left = 0
-
+		
 		return cell!
 	}
-
+	
 	@IBAction func loginPressed(sender: AnyObject) {
-
+		
 		self.view.endEditing(true)
-
+		
 		// Getting login cell data
-		var cell = _loginTableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
+		var cell = loginTableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
 		var textField = cell?.viewWithTag(1) as! UITextField
-		_login = textField.text!
-
+		login = textField.text!
+		
 		// Getting password cell data
-		cell = _loginTableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0))
+		cell = loginTableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0))
 		textField = cell?.viewWithTag(1) as! UITextField
-		_password = textField.text!
-
-		if (_login.characters.count == 0 || _password.characters.count == 0) {
+		password = textField.text!
+		
+		if (login.characters.count == 0 || password.characters.count == 0) {
 			ErrorViewer.errorPresent(self, mess: NSLocalizedString("pleaseFillEverything", comment: "")) { _ in }
 			return
 		}
-
+		
 		loginCall()
 	}
-
+	
 	func loginCall() {
-		MJProgressView.instance.showLoginProgress(self._loginButton, white: true)
-
+		MJProgressView.instance.showLoginProgress(self.loginButton, white: true)
+		
 		let date = NSDate()
 		let tstamp = NSDate(timeIntervalSince1970: 1457784037)
-
-		if (date.earlierDate(tstamp) == date && _login == "iTunesConnect1203" && _password == "iTunes1203") {
-			_login = "junger_m"
-			_password = "monsupermdp"
+		
+		if (date.earlierDate(tstamp) == date && login == "iTunesConnect1203" && password == "iTunes1203") {
+			login = "junger_m"
+			password = "monsupermdp"
 		}
-
-		UserApiCalls.loginCall(_login, password: _password) { (isOk: Bool, response: String) in
-
-			// Login Callback
-
+		
+		userRequests.auth(login, password: password) { (result) in
+			
 			MJProgressView.instance.hideProgress()
-
-			if (isOk == true && response.characters.count > 0) {
-				ApplicationManager.sharedInstance.token = response
-
-				UserPreferences.saveData(self._login, password: self._password)
+			
+			switch (result) {
+			case .Success(let val):
+				UserPreferences.saveData(self.login, password: self.password)
 				self.goToNextView()
-			} else {
-				ErrorViewer.errorShow(self, mess: response) { _ in }
-				self._waitingView.hidden = true
+				break
+			case .Failure(let error):
+				if (error.type == Error.AuthenticationFailure) {
+					ErrorViewer.errorShow(self, mess: NSLocalizedString("invalidCombinaison", comment: "")) { _ in }
+				} else if (error.type == Error.APIError) {
+					ErrorViewer.errorShow(self, mess: NSLocalizedString("unknownApiError", comment: "")) { _ in }
+				}
+				self.waitingView.hidden = true
+				break
 			}
 		}
-
+		//
+		//		UserApiCalls.loginCall(login, password: password) { (isOk: Bool, response: String) in
+		//			
+		//			// Login Callback
+		//			
+		//			MJProgressView.instance.hideProgress()
+		//			
+		//			if (isOk == true && response.characters.count > 0) {
+		//				ApplicationManager.sharedInstance.token = response
+		//				
+		//				UserPreferences.saveData(self.login, password: self.password)
+		//				self.goToNextView()
+		//			} else {
+		//				ErrorViewer.errorShow(self, mess: response) { _ in }
+		//				self.waitingView.hidden = true
+		//			}
+		//		}
+		
 	}
 	
 	/**
@@ -201,52 +227,13 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 			})
 		}
 	}
-
-	func positionOfFinalView(isInitial: Bool) -> (Float) {
-		var constraintConstant: Float = -1.0
-
-		let currentDevice = UIDevice.currentDevice()
-
-		if (currentDevice.modelName.rangeOfString("Plus") != nil) {
-
-			if (isInitial) {
-				constraintConstant = 260
-			} else {
-				constraintConstant = 260
-			}
-
-		} else if (currentDevice.modelName == "iPhone 6s" || currentDevice.modelName == "iPhone 6") {
-
-			if (isInitial) {
-				constraintConstant = 230
-			} else {
-				constraintConstant = 230
-			}
-		} else if (currentDevice.modelName.rangeOfString("5") != nil) {
-			if (isInitial) {
-				constraintConstant = 170
-			} else {
-				constraintConstant = 130
-			}
-		} else if (currentDevice.modelName.rangeOfString("4") != nil) {
-			if (isInitial) {
-				constraintConstant = 100
-			} else {
-				constraintConstant = 50
-			}
-		}
-		return (constraintConstant)
-	}
-
+	
+	/*!
+	Perform the segue to go to the splash view
+	*/
 	func goToNextView() {
-		ApplicationManager.sharedInstance.currentLogin = _login
+		ApplicationManager.sharedInstance.currentLogin = login
 		performSegueWithIdentifier("splashSegue", sender: self)
 	}
-
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-		if (segue.identifier == "splashSegue") {
-
-		}
-	}
-
+	
 }

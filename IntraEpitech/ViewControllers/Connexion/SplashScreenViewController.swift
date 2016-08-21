@@ -16,6 +16,8 @@ class SplashScreenViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
+		self.setNeedsStatusBarAppearanceUpdate()
+		
 		statusLabel.textColor = UIColor.whiteColor()
 		statusLabel.text = ""
 		self.view.backgroundColor = UIUtils.backgroundColor()
@@ -66,12 +68,10 @@ class SplashScreenViewController: UIViewController {
 		}
 
 	}
-
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
+	
+	override func preferredStatusBarStyle() -> UIStatusBarStyle {
+		return UIStatusBarStyle.LightContent
 	}
-
 
 	func goBackToLogin() {
 		UserPreferences.deleteData()
