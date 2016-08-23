@@ -61,7 +61,7 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 			self.masterImage.image = img
 			self.masterImage.cropToSquare()
 		} else {
-			ImageDownloader.downloadFrom(link: (grp?.master?.imageUrl)!) {
+			ImageDownloader.downloadFrom(link: (grp?.master?.imageUrl)!) {_ in 
 				if let img = ApplicationManager.sharedInstance.downloadedImages![(grp?.master?.imageUrl)!] {
 					self.masterImage.image = img
 					self.masterImage.cropToSquare()
@@ -165,7 +165,7 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 					imgView.image = img
 				}
 			} else {
-				ImageDownloader.downloadFrom(link: usr.imageUrl!) {
+				ImageDownloader.downloadFrom(link: usr.imageUrl!) {_ in 
 					if let img = ApplicationManager.sharedInstance.downloadedImages![usr.imageUrl!] {
 						if (cell.tag == (indexPath.row + 100)) {
 							imgView.image = img

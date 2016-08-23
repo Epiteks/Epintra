@@ -17,5 +17,6 @@ enum Result {
 
 enum Error: ErrorType {
 	case APIError
+	case UnauthorizedByUser
 	case AuthenticationFailure
 }

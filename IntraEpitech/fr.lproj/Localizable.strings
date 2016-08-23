@@ -29,6 +29,10 @@
 "DownloadingPicture" = "Téléchargement de la photo";
 "GettingUserHistory" = "Récupération de l'historique";
 "FinishedGettingUserHistory" = "Fin de la récupération de l'historique";
+"GettingData" = "Récupération des données";
+"FetchedHistory" = "Historique récupér";
+"FetchedUserData" = "Données récupérées";
+
 /**
  ** Menu
  */

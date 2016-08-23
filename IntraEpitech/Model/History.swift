@@ -27,7 +27,7 @@ class History: NSObject {
 		date = dict["date"].stringValue.toDate()
 		
 		if (userPicture != nil && (userPicture?.characters.count)! > 0 && ApplicationManager.sharedInstance.downloadedImages![userPicture!] == nil) {
-			ImageDownloader.downloadFrom(link: userPicture!) {}
+			ImageDownloader.downloadFrom(link: userPicture!) {_ in }
 		}
 	}
 }

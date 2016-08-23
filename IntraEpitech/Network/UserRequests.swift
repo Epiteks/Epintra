@@ -35,12 +35,18 @@ class UserRequests: RequestManager {
 				break
 			case .Failure(let err):
 				completion(Result.Failure(type: err.type, message: err.message))
-				logger.error(err)
+				logger.error("Authentication : \(err)")
 				break
 			}
 		}
 	}
 	
+	/*!
+	Get current user informations to fill the profile.
+	Fills the user object in manager, the completion takes nil in param.
+	Set the user planning semester to allow him to see his current calendar.
+	- parameter completion: Request completion action
+	*/
 	func getCurrentUserData(completion: CompletionHandlerType) {
 		
 		let app = ApplicationManager.sharedInstance
@@ -51,17 +57,68 @@ class UserRequests: RequestManager {
 				
 				let responseJSON = JSON(res!)
 				
-				
 				app.user = User(dict: responseJSON)
 				app.lastUserApiCall = NSDate().timeIntervalSince1970
 				app.planningSemesters[(app.user?.semester!)!] = true
-				completion(Result.Success(nil))
 				
+				completion(Result.Success(nil))
 				
 				break
 			case .Failure(let err):
 				completion(Result.Failure(type: err.type, message: err.message))
 				logger.error("GetCurrentUserData : \(err)")
+				break
+			}
+		}
+	}
+	
+	/*!
+	Get passed user data.
+	Completion provides the user object.
+	- parameter login:			wanted user
+	- parameter completion:	Request completion action
+	*/
+	func getUserData(login: String, completion: CompletionHandlerType) {
+		
+		super.call("userData", params: ["user": login]) { (response) in
+			switch response {
+			case .Success(let res):
+				
+				let responseJSON = JSON(res!)
+				let usr = User(dict: responseJSON)
+				
+				completion(Result.Success(usr))
+				
+				break
+			case .Failure(let err):
+				completion(Result.Failure(type: err.type, message: err.message))
+				logger.error("GetUserData : \(err)")
+				break
+			}
+		}
+	}
+	
+	/*!
+	Get user history.
+	Fills the history in manager, the completion takes nil in param.
+	- parameter completion:	Request completion action
+	*/
+	func getHistory(completion: CompletionHandlerType) {
+		
+		let app = ApplicationManager.sharedInstance
+		
+		super.call("userHistory", params: nil) { (response) in
+			switch response {
+			case .Success(let res):
+				
+				let responseJSON = JSON(res!)
+				
+				app.user?.fillHistory(responseJSON)
+				completion(Result.Success(nil))
+				break
+			case .Failure(let err):
+				completion(Result.Failure(type: err.type, message: err.message))
+				logger.error("GetHistory : \(err)")
 				break
 			}
 		}

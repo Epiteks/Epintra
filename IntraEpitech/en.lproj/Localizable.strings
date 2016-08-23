@@ -29,6 +29,9 @@
 "DownloadingPicture" = "Picture downloading";
 "GettingUserHistory" = "Getting alerts";
 "FinishedGettingUserHistory" = "End of getting history";
+"GettingData" = "Getting data";
+"FetchedHistory" = "Fetched history";
+"FetchedUserData" = "Fetched user data";
 
 /**
  ** Menu

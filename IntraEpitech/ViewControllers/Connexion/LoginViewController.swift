@@ -28,6 +28,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 		self.setNeedsStatusBarAppearanceUpdate()
 		
 		waitingView.backgroundColor = UIUtils.backgroundColor()
+		waitingView.hidden = true
 		
 		
 		if (UserPreferences.checkIfDataExists()) {
@@ -36,22 +37,22 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 			login = data.login
 			password = data.password
 			loginCall()
-		} else {
-			waitingView.hidden = true
-			self.view.backgroundColor = UIUtils.backgroundColor()
-			
-			// Set UITableView properties
-			self.loginTableView.scrollEnabled = false
-			self.loginTableView.layer.cornerRadius = 3
-			self.loginTableView.separatorInset = UIEdgeInsetsZero
-			
-			
-			// Set different texts
-			self.loginButton.setTitle(NSLocalizedString("login", comment: ""), forState: .Normal)
-			self.infoLabel.text = NSLocalizedString("noOfficialApp", comment: "")
-			
-			self.registerForKeyboardNotifications()
 		}
+		
+		self.view.backgroundColor = UIUtils.backgroundColor()
+		
+		// Set UITableView properties
+		self.loginTableView.scrollEnabled = false
+		self.loginTableView.layer.cornerRadius = 3
+		self.loginTableView.separatorInset = UIEdgeInsetsZero
+		
+		
+		// Set different texts
+		self.loginButton.setTitle(NSLocalizedString("login", comment: ""), forState: .Normal)
+		self.infoLabel.text = NSLocalizedString("noOfficialApp", comment: "")
+		
+		self.registerForKeyboardNotifications()
+		
 	}
 	
 	override func viewDidAppear(animated: Bool) {

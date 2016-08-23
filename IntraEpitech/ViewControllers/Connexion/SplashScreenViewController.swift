@@ -13,6 +13,8 @@ class SplashScreenViewController: UIViewController {
 	
 	let app = ApplicationManager.sharedInstance
 	
+	var errorDuringFetching = false
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -28,56 +30,53 @@ class SplashScreenViewController: UIViewController {
 		if (UserPreferences.checkIfDefaultCalendarExists()) {
 			app.defaultCalendar = UserPreferences.getDefaultCalendar()
 		}
+		if (UserPreferences.checkSemestersExist() == true) {
+			ApplicationManager.sharedInstance.planningSemesters = UserPreferences.getSemesters()
+		}
 	}
 	
 	override func viewDidAppear(animated: Bool) {
 		
-		statusLabel.text = NSLocalizedString("GettingUserData", comment: "")
+		
 		MJProgressView.instance.showProgress(self.view, white: true)
 		
-		userRequests.getCurrentUserData { result in
-			switch (result) {
-			case .Success(let data):
-				logger.info("Success !")
-				break
-			case .Failure(let error):
-				logger.error("Failed :'(")
-				break
-			}
-
-		}
+		fetchAllData()
 		
-		//		UserApiCalls.getUserData(ApplicationManager.sharedInstance.currentLogin!) { (isOk: Bool, s: String) in
-		//		 self.statusLabel.text = NSLocalizedString("FinishedGettingUserData", comment: "")
-		//			if (!isOk) {
-		//				MJProgressView.instance.hideProgress()
-		//				ErrorViewer.errorPresent(self, mess: s) {
-		//					self.goBackToLogin()
-		//				}
-		//
-		//			} else {
-		//				self.statusLabel.text = NSLocalizedString("DownloadingPicture", comment: "")
-		//				ImageDownloader.downloadFrom(link: (ApplicationManager.sharedInstance.user?.imageUrl!)!) {
-		//					self.statusLabel.text = NSLocalizedString("GettingUserHistory", comment: "")
-		//				UserApiCalls.getUserHistory() { (isOk: Bool, s: String) in
-		//					self.statusLabel.text = NSLocalizedString("FinishedGettingUserHistory", comment: "")
+		return
+		
+		
+		
+		//			UserApiCalls.getUserData(ApplicationManager.sharedInstance.currentLogin!) { (isOk: Bool, s: String) in
+		//				self.statusLabel.text = NSLocalizedString("FinishedGettingUserData", comment: "")
+		//				if (!isOk) {
 		//					MJProgressView.instance.hideProgress()
-		//					if (!isOk) {
-		//						ErrorViewer.errorPresent(self, mess: s) {
-		//							self.goBackToLogin()
+		//					ErrorViewer.errorPresent(self, mess: s) {
+		//						self.goBackToLogin()
+		//					}
+		//					
+		//				} else {
+		//					self.statusLabel.text = NSLocalizedString("DownloadingPicture", comment: "")
+		//					ImageDownloader.downloadFrom(link: (ApplicationManager.sharedInstance.user?.imageUrl!)!) {
+		//						self.statusLabel.text = NSLocalizedString("GettingUserHistory", comment: "")
+		//						UserApiCalls.getUserHistory() { (isOk: Bool, s: String) in
+		//							self.statusLabel.text = NSLocalizedString("FinishedGettingUserHistory", comment: "")
+		//							MJProgressView.instance.hideProgress()
+		//							if (!isOk) {
+		//								ErrorViewer.errorPresent(self, mess: s) {
+		//									self.goBackToLogin()
+		//								}
+		//								
+		//							} else {
+		//								let storyboard = UIStoryboard(name: "MainViewStoryboard", bundle: nil)
+		//								let vc = storyboard.instantiateInitialViewController()
+		//								self.presentViewController(vc!, animated: true, completion: nil)
+		//							}
 		//						}
-		//
-		//					} else {
-		//						let storyboard = UIStoryboard(name: "MainViewStoryboard", bundle: nil)
-		//						let vc = storyboard.instantiateInitialViewController()
-		//						self.presentViewController(vc!, animated: true, completion: nil)
+		//					}
+		//					if (UserPreferences.checkSemestersExist() == true) {
+		//						ApplicationManager.sharedInstance.planningSemesters = UserPreferences.getSemesters()
 		//					}
 		//				}
-		//				}
-		//				if (UserPreferences.checkSemestersExist() == true) {
-		//					ApplicationManager.sharedInstance.planningSemesters = UserPreferences.getSemesters()
-		//				}
-		//			}
 		//		}
 		
 	}
@@ -86,21 +85,90 @@ class SplashScreenViewController: UIViewController {
 		return UIStatusBarStyle.LightContent
 	}
 	
+	func fetchAllData() {
+		
+		let dispatchGroup = dispatch_group_create()
+		
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+			dispatch_group_async(dispatchGroup, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+				self.statusLabel.text = NSLocalizedString("GettingData", comment: "")
+				self.userDataCall(dispatchGroup)
+				self.userHistoryCall(dispatchGroup)
+				self.getUserImage(dispatchGroup)
+			})
+			dispatch_group_notify(dispatchGroup, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+				if self.errorDuringFetching == true {
+					self.goBackToLogin()
+				} else {
+					let storyboard = UIStoryboard(name: "MainViewStoryboard", bundle: nil)
+					let vc = storyboard.instantiateInitialViewController()
+					self.presentViewController(vc!, animated: true, completion: nil)
+				}
+			})
+		})
+		
+	}
+	
 	func goBackToLogin() {
 		UserPreferences.deleteData()
 		ApplicationManager.sharedInstance.resetInstance()
 		self.dismissViewControllerAnimated(true, completion: nil)
-		self.dismissViewControllerAnimated(true, completion: nil)
 	}
 	
-	/*
-	// MARK: - Navigation
-	
-	// In a storyboard-based application, you will often want to do a little preparation before navigation
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-	// Get the new view controller using segue.destinationViewController.
-	// Pass the selected object to the new view controller.
+	func userDataCall(group: dispatch_group_t) {
+		dispatch_group_enter(group)
+		userRequests.getCurrentUserData { result in
+			self.statusLabel.text = NSLocalizedString("FetchedUserData", comment: "")
+			switch (result) {
+			case .Success(_):
+				logger.info("Get user data ok")
+				break
+			case .Failure(let error):
+				MJProgressView.instance.hideProgress()
+				ErrorViewer.errorPresent(self, mess: error.message!) { }
+				self.errorDuringFetching = true
+				break
+			}
+			dispatch_group_leave(group)
+		}
 	}
-	*/
 	
+	func userHistoryCall(group: dispatch_group_t) {
+		dispatch_group_enter(group)
+		self.statusLabel.text = NSLocalizedString("GettingUserHistory", comment: "")
+		userRequests.getHistory() { result in
+			self.statusLabel.text = NSLocalizedString("FetchedHistory", comment: "")
+			switch (result) {
+			case .Success(_):
+				logger.info("Get user history")
+				break
+			case .Failure(let error):
+				MJProgressView.instance.hideProgress()
+				ErrorViewer.errorPresent(self, mess: error.message!) {}
+				self.errorDuringFetching = true
+				break
+			}
+			dispatch_group_leave(group)
+		}
+	}
+	
+	func getUserImage(group: dispatch_group_t) {
+		dispatch_group_enter(group)
+		
+		let url = configurationInstance.profilePictureURL + app.currentLogin! + ".bmp"
+		
+		ImageDownloader.downloadFrom(link: url) { result in
+			switch(result) {
+			case .Success(_):
+				logger.info("Image downloaded")
+				break
+			case .Failure(let error):
+				if (error.type == Error.APIError) {
+					//ErrorViewer.errorPresent(self, mess: NSLocalizedString("unknownApiError", comment: "")) { }
+				}
+				break
+			}
+			dispatch_group_leave(group)
+		}
+	}
 }

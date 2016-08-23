@@ -10,12 +10,10 @@ import UIKit
 
 class ImageDownloader: NSObject {
 	
-	class func downloadFrom(link link:String, onCompletion :() -> () ) {
-		
-		print(link)
+	class func downloadFrom(link link:String, onCompletion :CompletionHandlerType ) {
 		
 		if (ApplicationManager.sharedInstance.canDownload == false) {
-			onCompletion()
+			onCompletion(Result.Failure(type: Error.UnauthorizedByUser, message: ""))
 			return
 		}
 		
@@ -29,12 +27,12 @@ class ImageDownloader: NSObject {
 				let data = data where error == nil,
 				let image = UIImage(data: data)
 				else {
-					onCompletion()
+					onCompletion(Result.Failure(type: Error.APIError, message: ""))
 					return
-				}
+			}
 			dispatch_async(dispatch_get_main_queue()) { () -> Void in
 				ApplicationManager.sharedInstance.addImageToCache(link, image: image)
-				onCompletion()
+				onCompletion(Result.Success(nil))
 			}
 		}).resume()
 	}

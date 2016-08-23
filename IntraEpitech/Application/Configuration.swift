@@ -23,6 +23,12 @@ public class Configuration {
 			return "http://epitech.hug33k.fr"
 		}
 	}
+	
+	var profilePictureURL: String {
+		get {
+			return "https://cdn.local.epitech.eu/userprofil/"
+		}
+	}
 }
 
 let configurationInstance = Configuration()

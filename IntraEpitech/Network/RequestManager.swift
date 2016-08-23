@@ -17,7 +17,7 @@ class RequestManager: NSObject {
 		let req = Requests.routes[requestID]
 		var parameters = params
 		
-		logger.info("Request \(requestID) with parameters :\n\(params)\n")
+		logger.info("Request \(requestID) with parameters :\n\t\(params)\n")
 		
 		if req!.secured == true {
 			if parameters == nil {

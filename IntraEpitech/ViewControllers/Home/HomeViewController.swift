@@ -73,7 +73,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 				self.refreshControl.endRefreshing()
 				self.alertTableView.reloadData()
 			} else {
-				ImageDownloader.downloadFrom(link: (ApplicationManager.sharedInstance.user?.imageUrl!)!) {
+				ImageDownloader.downloadFrom(link: (ApplicationManager.sharedInstance.user?.imageUrl!)!) {_ in 
 					UserApiCalls.getUserHistory() { (isOk :Bool, s :String) in
 						MJProgressView.instance.hideProgress()
 						if (!isOk) {
@@ -186,7 +186,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 					profileImage.image = img
 				}
 			} else {
-				ImageDownloader.downloadFrom(link: history!.userPicture!) {
+				ImageDownloader.downloadFrom(link: history!.userPicture!) {_ in 
 					if let img = ApplicationManager.sharedInstance.downloadedImages![history!.userPicture!] {
 						if (cell.tag == (indexPath.row + 100)) {
 							profileImage.image = img
