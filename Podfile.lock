@@ -2,6 +2,8 @@ PODS:
   - Alamofire (3.4.1)
   - AlamofireImage (2.4.1):
     - Alamofire (~> 3.3)
+  - AlamofireNetworkActivityIndicator (1.0.1):
+    - Alamofire (~> 3.3)
   - FMDB (2.6):
     - FMDB/standard (= 2.6)
   - FMDB/SQLCipher (2.6):
@@ -22,6 +24,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 3.0)
   - AlamofireImage (~> 2.0)
+  - AlamofireNetworkActivityIndicator (~> 1.0)
   - FMDB
   - FMDB/SQLCipher
   - FSCalendar
@@ -43,6 +46,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
   AlamofireImage: 3ccf3347d9ea24580dc11fb892770a0be6a29826
+  AlamofireNetworkActivityIndicator: 49a6e39afb947136f7b1872bae2d684957c26697
   FMDB: c1968bab3ab0aed38f66cb778ae1e7fa9a652b6e
   FSCalendar: a283f4d9c4249a0ce43a08c3f4f7ad27b295e4cf
   HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
