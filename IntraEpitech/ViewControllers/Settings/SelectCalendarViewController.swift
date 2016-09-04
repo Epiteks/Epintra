@@ -49,7 +49,10 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 				self.isLoading = false
 				self.hasRight = false
 				self.generateBackgroundView()
-				ErrorViewer.errorPresent(self, mess: NSLocalizedString(mess!, comment: "")) {}
+				
+				self.accessNotGrantedError()
+				
+				
 			} else {
 				self.isLoading = true
 				self.generateBackgroundView()
@@ -60,6 +63,28 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 				self._tableView.reloadData()
 			}
 		}
+	}
+	
+	func accessNotGrantedError() {
+		
+		let alertController = UIAlertController (title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("CalendarAccessDenied", comment: ""), preferredStyle: .Alert)
+		
+		let settingsAction = UIAlertAction(title: NSLocalizedString("Settings", comment: ""), style: .Default) { (_) -> Void in
+			
+			dispatch_async(dispatch_get_main_queue(), {
+				let settingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
+				if let url = settingsUrl {
+					UIApplication.sharedApplication().openURL(url)
+				}
+			})
+		}
+		
+		let cancelAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .Default, handler: nil)
+		alertController.addAction(settingsAction)
+		alertController.addAction(cancelAction)
+		
+		self.presentViewController(alertController, animated: true, completion: nil)
+		
 	}
 	
 	/*
