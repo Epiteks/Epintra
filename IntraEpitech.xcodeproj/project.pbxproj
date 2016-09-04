@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		18A64726A8A3EF67E05A8C24 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F850461F157F431C9CB699 /* Pods.framework */; };
 		7906842A1C6FC1E10067B26F /* AppointmentEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790684291C6FC1E10067B26F /* AppointmentEvent.swift */; };
+		7907951E1D7CC1EB001299B1 /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7907951D1D7CC1EB001299B1 /* LoadingView.xib */; };
+		790795201D7CC8B2001299B1 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7907951F1D7CC8B2001299B1 /* LoadingView.swift */; };
+		790795231D7CD702001299B1 /* NoDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 790795221D7CD702001299B1 /* NoDataView.xib */; };
+		790795251D7CD87D001299B1 /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790795241D7CD87D001299B1 /* NoDataView.swift */; };
 		791172E51C5FAD4800581DF3 /* ProjectMarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791172E41C5FAD4800581DF3 /* ProjectMarksViewController.swift */; };
 		791172E71C5FB7B800581DF3 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791172E61C5FB7B800581DF3 /* CommentsViewController.swift */; };
 		791172E91C5FC85000581DF3 /* ModuleDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791172E81C5FC85000581DF3 /* ModuleDetailsViewController.swift */; };
@@ -139,6 +143,10 @@
 		66F400B651BD64C9AA64405C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		74F850461F157F431C9CB699 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		790684291C6FC1E10067B26F /* AppointmentEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppointmentEvent.swift; path = Model/AppointmentEvent.swift; sourceTree = "<group>"; };
+		7907951D1D7CC1EB001299B1 /* LoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoadingView.xib; path = Views/LoadingView.xib; sourceTree = "<group>"; };
+		7907951F1D7CC8B2001299B1 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadingView.swift; path = Views/LoadingView.swift; sourceTree = "<group>"; };
+		790795221D7CD702001299B1 /* NoDataView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NoDataView.xib; path = Views/NoDataView.xib; sourceTree = "<group>"; };
+		790795241D7CD87D001299B1 /* NoDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoDataView.swift; path = Views/NoDataView.swift; sourceTree = "<group>"; };
 		791172E41C5FAD4800581DF3 /* ProjectMarksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectMarksViewController.swift; path = Marks/ProjectMarksViewController.swift; sourceTree = "<group>"; };
 		791172E61C5FB7B800581DF3 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommentsViewController.swift; path = Marks/CommentsViewController.swift; sourceTree = "<group>"; };
 		791172E81C5FC85000581DF3 /* ModuleDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModuleDetailsViewController.swift; path = Modules/ModuleDetailsViewController.swift; sourceTree = "<group>"; };
@@ -306,6 +314,15 @@
 				74F850461F157F431C9CB699 /* Pods.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		790795211D7CD620001299B1 /* LoadingView */ = {
+			isa = PBXGroup;
+			children = (
+				7907951D1D7CC1EB001299B1 /* LoadingView.xib */,
+				7907951F1D7CC8B2001299B1 /* LoadingView.swift */,
+			);
+			name = LoadingView;
 			sourceTree = "<group>";
 		};
 		7959943E1C52C8D1007BE7C5 /* Application */ = {
@@ -552,6 +569,9 @@
 				79F826591C5527ED0002DCC8 /* ProfileView.xib */,
 				79DE549B1C5BABFF00E2ADDE /* EmptyPlanningTableView.xib */,
 				79F2B1011C60FAE600244AC6 /* EmptyTableView.xib */,
+				790795211D7CD620001299B1 /* LoadingView */,
+				790795221D7CD702001299B1 /* NoDataView.xib */,
+				790795241D7CD87D001299B1 /* NoDataView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -730,11 +750,13 @@
 				79EA5CC81D5E78D500DA7C30 /* UserStoryboard.storyboard in Resources */,
 				79EA5CC01D5E696000DA7C30 /* SettingsStoryboard.storyboard in Resources */,
 				797DC7F71C7A1BF900ED095E /* Students1.0.1.sqlite in Resources */,
+				7907951E1D7CC1EB001299B1 /* LoadingView.xib in Resources */,
 				79306D531C4AEBF300708BED /* Localizable.strings in Resources */,
 				79DF37081C4D7B3B00EF69A3 /* MainStoryboard.storyboard in Resources */,
 				79F8265A1C5527ED0002DCC8 /* ProfileView.xib in Resources */,
 				79F42BE51D68BE1B008DF047 /* LittleUserView.xib in Resources */,
 				79F42BE31D68BDF6008DF047 /* LearnStoryboard.storyboard in Resources */,
+				790795231D7CD702001299B1 /* NoDataView.xib in Resources */,
 				798850421C4AC51C00BAA888 /* LaunchScreen.storyboard in Resources */,
 				79DE549C1C5BABFF00E2ADDE /* EmptyPlanningTableView.xib in Resources */,
 				7988503F1C4AC51C00BAA888 /* Assets.xcassets in Resources */,
@@ -842,6 +864,7 @@
 				7976955B1C562730001772A2 /* ImageDownloader.swift in Sources */,
 				79152D871C67726800513E0F /* OtherUserViewController.swift in Sources */,
 				795F1EA21C56019E00B8C347 /* History.swift in Sources */,
+				790795201D7CC8B2001299B1 /* LoadingView.swift in Sources */,
 				795954A71C58166A00734F91 /* CustomSegues.swift in Sources */,
 				791172E71C5FB7B800581DF3 /* CommentsViewController.swift in Sources */,
 				795CC3251C5CB2A7007AFE87 /* Project.swift in Sources */,
@@ -873,6 +896,7 @@
 				795CC3281C5CB585007AFE87 /* ProjectsViewController.swift in Sources */,
 				79F42BE91D68C5D7008DF047 /* RequestManager.swift in Sources */,
 				798850381C4AC51C00BAA888 /* AppDelegate.swift in Sources */,
+				790795251D7CD87D001299B1 /* NoDataView.swift in Sources */,
 				79E4C5C51C6E1C140003DA56 /* StudentRegisteredViewController.swift in Sources */,
 				79306D5F1C4AF21100708BED /* AlertController.swift in Sources */,
 				791172E91C5FC85000581DF3 /* ModuleDetailsViewController.swift in Sources */,
