@@ -14,13 +14,24 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 	var _currentCalendar :String?
 	var _currentCalendarIndex :Int?
 	
+	var isLoading: Bool?
+	
+	var tableFooterSave: UIView!
+	var hasRight: Bool!
+	
 	@IBOutlet weak var _tableView: UITableView!
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		// Do any additional setup after loading the view.
 		
+		self.tableFooterSave = self._tableView.tableFooterView
+		
 		self.title = NSLocalizedString("Calendars", comment: "")
+		//self.isLoading = false
+		self.isLoading = true
+		self.generateBackgroundView()
+		self.hasRight = true
 	}
 	
 	override func didReceiveMemoryWarning() {
@@ -30,12 +41,22 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 	
 	override func viewDidAppear(animated: Bool) {
 		let calman = CalendarManager()
+		
+		
+		
 		calman.hasRights() { (granted :Bool, mess :String?) in
 			if (!granted) {
+				self.isLoading = false
+				self.hasRight = false
+				self.generateBackgroundView()
 				ErrorViewer.errorPresent(self, mess: NSLocalizedString(mess!, comment: "")) {}
 			} else {
+				self.isLoading = true
+				self.generateBackgroundView()
 				self._calendars = calman.getAllCalendars()
 				self._currentCalendar = ApplicationManager.sharedInstance.defaultCalendar
+				self.isLoading = false
+				self.generateBackgroundView()
 				self._tableView.reloadData()
 			}
 		}
@@ -96,5 +117,29 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 		UserPreferences.savDefaultCalendar(_calendars[indexPath.row])
 		
 		tableView.endUpdates()
+	}
+	
+	func generateBackgroundView() {
+		
+		if self.isLoading == true {
+			self._tableView.tableFooterView = UIView()
+			self._tableView.backgroundView = LoadingView()
+		} else {
+			if self._calendars.count <= 0 && self.hasRight == true {
+				self._tableView.tableFooterView = UIView()
+				let noData = NoDataView(info:  NSLocalizedString("NoCalendar", comment: ""))
+				self._tableView.backgroundView = noData
+			} else if self.hasRight == false {
+				self._tableView.tableFooterView = UIView()
+				let noData = NoDataView(info:  NSLocalizedString("NoAccessCalendar", comment: ""))
+				self._tableView.backgroundView = noData
+				
+			} else {
+				self._tableView.tableFooterView = self.tableFooterSave
+				self._tableView.backgroundView = nil
+			}
+			
+			
+		}
 	}
 }
