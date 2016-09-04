@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fRJ-V7-rZ9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fRJ-V7-rZ9">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -26,7 +26,7 @@
         <!--Settings View Controller-->
         <scene sceneID="VRo-tk-xlg">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="AFq-lT-m7e" customClass="SettingsViewController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="AFq-lT-m7e" customClass="SettingsViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aHt-WA-MIK"/>
                         <viewControllerLayoutGuide type="bottom" id="YI9-Vw-aAY"/>
@@ -129,7 +129,7 @@
         <!--Select Calendar View Controller-->
         <scene sceneID="AIq-2T-9BR">
             <objects>
-                <viewController id="aUR-WV-F7o" customClass="SelectCalendarViewController" customModule="IntraEpitech" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="aUR-WV-F7o" customClass="SelectCalendarViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cbK-c4-O7O"/>
                         <viewControllerLayoutGuide type="bottom" id="0D1-6f-pga"/>
