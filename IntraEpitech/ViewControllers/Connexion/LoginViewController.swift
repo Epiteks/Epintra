@@ -25,7 +25,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		self.setNeedsStatusBarAppearanceUpdate()
+		//self.setNeedsStatusBarAppearanceUpdate()
 		
 		waitingView.backgroundColor = UIUtils.backgroundColor()
 		waitingView.hidden = true
@@ -70,9 +70,9 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 		
 	}
 	
-	override func preferredStatusBarStyle() -> UIStatusBarStyle {
-		return UIStatusBarStyle.LightContent
-	}
+	//	override func preferredStatusBarStyle() -> UIStatusBarStyle {
+	//		return UIStatusBarStyle.LightContent
+	//	}
 	
 	/**
 	Register Notification to get when keyboard is shown and hidden.

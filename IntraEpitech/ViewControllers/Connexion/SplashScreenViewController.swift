@@ -18,7 +18,7 @@ class SplashScreenViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		self.setNeedsStatusBarAppearanceUpdate()
+		//self.setNeedsStatusBarAppearanceUpdate()
 		
 		statusLabel.textColor = UIColor.whiteColor()
 		statusLabel.text = ""
@@ -43,47 +43,11 @@ class SplashScreenViewController: UIViewController {
 		fetchAllData()
 		
 		return
-		
-		
-		
-		//			UserApiCalls.getUserData(ApplicationManager.sharedInstance.currentLogin!) { (isOk: Bool, s: String) in
-		//				self.statusLabel.text = NSLocalizedString("FinishedGettingUserData", comment: "")
-		//				if (!isOk) {
-		//					MJProgressView.instance.hideProgress()
-		//					ErrorViewer.errorPresent(self, mess: s) {
-		//						self.goBackToLogin()
-		//					}
-		//					
-		//				} else {
-		//					self.statusLabel.text = NSLocalizedString("DownloadingPicture", comment: "")
-		//					ImageDownloader.downloadFrom(link: (ApplicationManager.sharedInstance.user?.imageUrl!)!) {
-		//						self.statusLabel.text = NSLocalizedString("GettingUserHistory", comment: "")
-		//						UserApiCalls.getUserHistory() { (isOk: Bool, s: String) in
-		//							self.statusLabel.text = NSLocalizedString("FinishedGettingUserHistory", comment: "")
-		//							MJProgressView.instance.hideProgress()
-		//							if (!isOk) {
-		//								ErrorViewer.errorPresent(self, mess: s) {
-		//									self.goBackToLogin()
-		//								}
-		//								
-		//							} else {
-		//								let storyboard = UIStoryboard(name: "MainViewStoryboard", bundle: nil)
-		//								let vc = storyboard.instantiateInitialViewController()
-		//								self.presentViewController(vc!, animated: true, completion: nil)
-		//							}
-		//						}
-		//					}
-		//					if (UserPreferences.checkSemestersExist() == true) {
-		//						ApplicationManager.sharedInstance.planningSemesters = UserPreferences.getSemesters()
-		//					}
-		//				}
-		//		}
-		
 	}
 	
-	override func preferredStatusBarStyle() -> UIStatusBarStyle {
-		return UIStatusBarStyle.LightContent
-	}
+	//	override func preferredStatusBarStyle() -> UIStatusBarStyle {
+	//		return UIStatusBarStyle.LightContent
+	//	}
 	
 	func fetchAllData() {
 		
