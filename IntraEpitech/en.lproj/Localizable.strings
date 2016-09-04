@@ -32,6 +32,7 @@
 "GettingData" = "Getting data";
 "FetchedHistory" = "Fetched history";
 "FetchedUserData" = "Fetched user data";
+"Loading" = "Loading...";
 
 /**
  ** Menu
@@ -58,6 +59,8 @@
 "Calendars" = "Calendars";
 "ThirdParty" = "Third-Party Notices";
 "BugQuestion" = "Any bug or a feature idea ?";
+"NoCalendar" = "No calendar found.";
+"NoAccessCalendar" = "You haven't granted the access to the calendar.\nIf you want to, go to Settings -> Epintra.";
 
 /**
  ** Profile View

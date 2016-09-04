@@ -32,6 +32,7 @@
 "GettingData" = "Récupération des données";
 "FetchedHistory" = "Historique récupér";
 "FetchedUserData" = "Données récupérées";
+"Loading" = "Chargement";
 
 /**
  ** Menu
@@ -58,6 +59,8 @@
 "Calendars" = "Calendriers";
 "ThirdParty" = "Licences";
 "BugQuestion" = "Un bug ou une idée d'amélioration ?";
+"NoCalendar" = "Aucun calendrier trouvé.";
+"NoAccessCalendar" = "Vous n'avez pas donné l'accès aux calendriers.\nSi vous souhaitez le donner, aller dans Réglages -> Epintra.";
 
 /**
  ** Home
