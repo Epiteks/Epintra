@@ -156,7 +156,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="_tableView" destination="bqe-rc-Egn" id="YE3-J1-yNP"/>
+                        <outlet property="tableView" destination="bqe-rc-Egn" id="7WF-6d-SBt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a0V-F8-dkS" userLabel="First Responder" sceneMemberID="firstResponder"/>
