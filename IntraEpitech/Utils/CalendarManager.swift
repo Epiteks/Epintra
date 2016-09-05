@@ -167,17 +167,17 @@ class CalendarManager: NSObject {
 		}
 	}
 	
-	func getAllCalendars() -> [String] {
+	func getAllCalendars() -> [(title: String, color: CGColor)] {
 		
 		let calendars = EKEventStore().calendarsForEntityType(EKEntityType.Event)
 		//EKCalendar
 		
-		var arr = [String]()
+		var arr = [(title: String, color: CGColor)]()
 		
 		for calendar in calendars {
 			// 2
 			if (calendar.allowsContentModifications == true) {
-				arr.append(calendar.title)
+				arr.append((calendar.title, calendar.CGColor))
 			}
 			
 		}

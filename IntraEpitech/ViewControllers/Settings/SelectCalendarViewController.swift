@@ -10,7 +10,7 @@ import UIKit
 
 class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
-	var calendars = [String]()
+	var calendars = [(title: String, color: CGColor)]()
 	var currentCalendar :String?
 	var currentCalendarIndex :Int?
 	
@@ -113,8 +113,9 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 		let cell = UITableViewCell()
 		
 		cell.selectionStyle = .None
-		cell.textLabel?.text = calendars[indexPath.row]
-		if (calendars[indexPath.row] == currentCalendar) {
+		cell.textLabel?.text = calendars[indexPath.row].title
+		cell.textLabel?.textColor = UIColor(CGColor: calendars[indexPath.row].color)
+		if (calendars[indexPath.row].title == currentCalendar) {
 			cell.accessoryType = .Checkmark
 			currentCalendarIndex = indexPath.row
 		}
@@ -139,10 +140,10 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 		newCell?.accessoryType = .Checkmark
 		
 		
-		ApplicationManager.sharedInstance.defaultCalendar = calendars[indexPath.row]
-		currentCalendar = calendars[indexPath.row]
+		ApplicationManager.sharedInstance.defaultCalendar = calendars[indexPath.row].title
+		currentCalendar = calendars[indexPath.row].title
 		currentCalendarIndex = indexPath.row
-		UserPreferences.savDefaultCalendar(calendars[indexPath.row])
+		UserPreferences.savDefaultCalendar(calendars[indexPath.row].title)
 		
 		tableView.endUpdates()
 	}
