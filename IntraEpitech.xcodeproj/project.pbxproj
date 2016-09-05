@@ -79,6 +79,8 @@
 		79A5AE7D1C56B432004B3FB9 /* PlanningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5AE7C1C56B432004B3FB9 /* PlanningViewController.swift */; };
 		79B05FD91C68BC1C0032DB0C /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B05FD81C68BC1C0032DB0C /* IAPHelper.swift */; };
 		79B05FDD1C68BEB90032DB0C /* IntraProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B05FDC1C68BEB90032DB0C /* IntraProduct.swift */; };
+		79C8DD311D7E16980088EF80 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C8DD2F1D7E16980088EF80 /* ProfileTableViewCell.swift */; };
+		79C8DD321D7E16980088EF80 /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79C8DD301D7E16980088EF80 /* ProfileTableViewCell.xib */; };
 		79DE549C1C5BABFF00E2ADDE /* EmptyPlanningTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79DE549B1C5BABFF00E2ADDE /* EmptyPlanningTableView.xib */; };
 		79DE549E1C5BAF3300E2ADDE /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DE549D1C5BAF3300E2ADDE /* CalendarManager.swift */; };
 		79DE54A31C5BAF5300E2ADDE /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79DE549F1C5BAF5300E2ADDE /* Alamofire.framework */; };
@@ -220,6 +222,8 @@
 		79A5AE7C1C56B432004B3FB9 /* PlanningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanningViewController.swift; path = Planning/PlanningViewController.swift; sourceTree = "<group>"; };
 		79B05FD81C68BC1C0032DB0C /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		79B05FDC1C68BEB90032DB0C /* IntraProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntraProduct.swift; sourceTree = "<group>"; };
+		79C8DD2F1D7E16980088EF80 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileTableViewCell.swift; path = Views/ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		79C8DD301D7E16980088EF80 /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProfileTableViewCell.xib; path = Views/ProfileTableViewCell.xib; sourceTree = "<group>"; };
 		79DE549B1C5BABFF00E2ADDE /* EmptyPlanningTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EmptyPlanningTableView.xib; path = Views/EmptyPlanningTableView.xib; sourceTree = "<group>"; };
 		79DE549D1C5BAF3300E2ADDE /* CalendarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		79DE549F1C5BAF5300E2ADDE /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "Pods/../build/Debug-iphoneos/Alamofire.framework"; sourceTree = "<group>"; };
@@ -572,6 +576,8 @@
 				790795211D7CD620001299B1 /* LoadingView */,
 				790795221D7CD702001299B1 /* NoDataView.xib */,
 				790795241D7CD87D001299B1 /* NoDataView.swift */,
+				79C8DD2F1D7E16980088EF80 /* ProfileTableViewCell.swift */,
+				79C8DD301D7E16980088EF80 /* ProfileTableViewCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -755,6 +761,7 @@
 				79DF37081C4D7B3B00EF69A3 /* MainStoryboard.storyboard in Resources */,
 				79F8265A1C5527ED0002DCC8 /* ProfileView.xib in Resources */,
 				79F42BE51D68BE1B008DF047 /* LittleUserView.xib in Resources */,
+				79C8DD321D7E16980088EF80 /* ProfileTableViewCell.xib in Resources */,
 				79F42BE31D68BDF6008DF047 /* LearnStoryboard.storyboard in Resources */,
 				790795231D7CD702001299B1 /* NoDataView.xib in Resources */,
 				798850421C4AC51C00BAA888 /* LaunchScreen.storyboard in Resources */,
@@ -926,6 +933,7 @@
 				79622E931C5D4C4B00FBA456 /* ModulesApiCalls.swift in Sources */,
 				79DF37151C4D831200EF69A3 /* TestViewController.swift in Sources */,
 				79EA5CB61D5E49E800DA7C30 /* Requests.swift in Sources */,
+				79C8DD311D7E16980088EF80 /* ProfileTableViewCell.swift in Sources */,
 				79A5AE7D1C56B432004B3FB9 /* PlanningViewController.swift in Sources */,
 				791172E51C5FAD4800581DF3 /* ProjectMarksViewController.swift in Sources */,
 				795D81C51C623A1000187E43 /* RegisteredStudent.swift in Sources */,

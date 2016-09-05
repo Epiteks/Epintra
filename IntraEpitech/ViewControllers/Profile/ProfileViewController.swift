@@ -38,14 +38,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		currentUser = ApplicationManager.sharedInstance.user
 		
-		loadProfileView()
-		setUIElements()
+		//loadProfileView()
+		//setUIElements()
 		
 		MJProgressView.instance.showProgress(self.view, white: false)
 		
-		if let img = ApplicationManager.sharedInstance.downloadedImages![(ApplicationManager.sharedInstance.user?.imageUrl!)!] {
-			self.profileImageView.image = img
-		}
+		//		if let img = ApplicationManager.sharedInstance.downloadedImages![(ApplicationManager.sharedInstance.user?.imageUrl!)!] {
+		//			self.profileImageView.image = img
+		//		}
 		
 		UserApiCalls.getUserDocuments() { (isOk :Bool, resp :[File]?, mess :String) in
 			
@@ -65,14 +65,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 				}
 			}	
 		}
-		self.profileImageView.cropToSquare()
-		self.profileImageView.toCircle()
+		//		self.profileImageView.cropToSquare()
+		//		self.profileImageView.toCircle()
 		
 		self.refreshControl.tintColor = UIUtils.backgroundColor()
 		self.refreshControl.addTarget(self, action: #selector(ProfileViewController.refreshData(_:)), forControlEvents: .ValueChanged)
 		self.tableView.addSubview(refreshControl)
 		
-		confettiConf()
+		//confettiConf()
 	}
 	
 	override func awakeFromNib() {
@@ -190,7 +190,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 	}
 	
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-		return 5
+		return 6
 	}
 	
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -199,14 +199,16 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		if (flags == nil || files == nil) { return 0 }
 		
-		if (section == 0) {
+		if section == 0 {
+			res = 1
+		} else if (section == 1) {
 			if (files?.count == 0) {
 				res = 1
 			} else { res = (files?.count)! }
 		} else {
-			if ((flags![section - 1].modules.count) == 0) {
+			if ((flags![section - 2].modules.count) == 0) {
 				res = 1
-			} else { res = (flags![section - 1].modules.count) }
+			} else { res = (flags![section - 2].modules.count) }
 		}
 		
 		return res
@@ -216,23 +218,29 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		var cell = UITableViewCell()
 		
-		if (indexPath.section == 0 && files?.count > 0) {
+		
+		if (indexPath.section == 0) { // Profile Cell, the first one
+			cell = tableView.dequeueReusableCellWithIdentifier("profileCell")! as! ProfileTableViewCell
+			//let nibView = NSBundle.mainBundle().loadNibNamed("ProfileView", owner: self, options: nil)[0] as! UIView
+			//cell.addSubview(nibView)
+			cell.sizeToFit()
+		} else if (indexPath.section == 1 && files?.count > 0) {
 			cell = tableView.dequeueReusableCellWithIdentifier("fileCell")!
 			let titleLabel = cell.viewWithTag(1) as! UILabel
 			titleLabel.text = files![indexPath.row].title!
 			cell.accessoryType = .DisclosureIndicator
-		} else if (indexPath.section == 0 && files?.count == 0) {
+		} else if (indexPath.section == 1 && files?.count == 0) {
 			cell = tableView.dequeueReusableCellWithIdentifier("emptyCell")!
 			let titleLabel = cell.viewWithTag(1) as! UILabel
 			titleLabel.text = NSLocalizedString("NoFile", comment: "")
-		} else if (flags![indexPath.section - 1].modules.count > 0) {
+		} else if (flags![indexPath.section - 2].modules.count > 0) {
 			cell = tableView.dequeueReusableCellWithIdentifier("flagCell")!
 			let titleLabel = cell.viewWithTag(1) as! UILabel
 			let gradeLabel = cell.viewWithTag(2) as! UILabel
-			let module = flags![indexPath.section - 1].modules[indexPath.row]
+			let module = flags![indexPath.section - 2].modules[indexPath.row]
 			titleLabel.text = module.title
 			gradeLabel.text = module.grade
-		} else if (indexPath.section > 0 && flags![indexPath.section - 1].modules.count == 0) {
+		} else if (indexPath.section > 1 && flags![indexPath.section - 2].modules.count == 0) {
 			cell = tableView.dequeueReusableCellWithIdentifier("emptyCell")!
 			let titleLabel = cell.viewWithTag(1) as! UILabel
 			titleLabel.text = NSLocalizedString("NoFlag", comment: "")
@@ -241,21 +249,28 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		return cell
 	}
 	
+	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+		if indexPath.section == 0 {
+			return 110
+		} else {
+			return 44
+		}
+	}
 	
 	func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		
 		var str = ""
 		
 		switch section {
-		case 0 : str = "Files"
+		case 1 : str = "Files"
 			break
-		case 1 : str = "Medals"
+		case 2 : str = "Medals"
 			break
-		case 2 : str = "Remarkables"
+		case 3 : str = "Remarkables"
 			break
-		case 3 : str = "Difficulty"
+		case 4 : str = "Difficulty"
 			break
-		case 4 : str = "Ghost"
+		case 5 : str = "Ghost"
 			break
 		default: str = ""
 			break
@@ -266,7 +281,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)
 		
-		if (indexPath.section == 0) {
+		if (indexPath.section == 1) {
 			webViewData = files![indexPath.row]
 			self.performSegueWithIdentifier("webViewSegue", sender: self)
 		}
