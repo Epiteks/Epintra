@@ -10,22 +10,22 @@ import UIKit
 
 class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
-	var _calendars = [String]()
-	var _currentCalendar :String?
-	var _currentCalendarIndex :Int?
+	var calendars = [String]()
+	var currentCalendar :String?
+	var currentCalendarIndex :Int?
 	
 	var isLoading: Bool?
 	
 	var tableFooterSave: UIView!
 	var hasRight: Bool!
 	
-	@IBOutlet weak var _tableView: UITableView!
+	@IBOutlet weak var tableView: UITableView!
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		// Do any additional setup after loading the view.
 		
-		self.tableFooterSave = self._tableView.tableFooterView
+		self.tableFooterSave = self.tableView.tableFooterView
 		
 		self.title = NSLocalizedString("Calendars", comment: "")
 		//self.isLoading = false
@@ -56,11 +56,11 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 			} else {
 				self.isLoading = true
 				self.generateBackgroundView()
-				self._calendars = calman.getAllCalendars()
-				self._currentCalendar = ApplicationManager.sharedInstance.defaultCalendar
+				self.calendars = calman.getAllCalendars()
+				self.currentCalendar = ApplicationManager.sharedInstance.defaultCalendar
 				self.isLoading = false
 				self.generateBackgroundView()
-				self._tableView.reloadData()
+				self.tableView.reloadData()
 			}
 		}
 	}
@@ -76,10 +76,13 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 				if let url = settingsUrl {
 					UIApplication.sharedApplication().openURL(url)
 				}
+				self.navigationController?.popViewControllerAnimated(true)
 			})
 		}
 		
-		let cancelAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .Default, handler: nil)
+		let cancelAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .Default) { (_) -> Void in
+			self.navigationController?.popViewControllerAnimated(true)
+		}
 		alertController.addAction(settingsAction)
 		alertController.addAction(cancelAction)
 		
@@ -102,7 +105,7 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 	}
 	
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return _calendars.count
+		return calendars.count
 	}
 	
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -110,10 +113,10 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 		let cell = UITableViewCell()
 		
 		cell.selectionStyle = .None
-		cell.textLabel?.text = _calendars[indexPath.row]
-		if (_calendars[indexPath.row] == _currentCalendar) {
+		cell.textLabel?.text = calendars[indexPath.row]
+		if (calendars[indexPath.row] == currentCalendar) {
 			cell.accessoryType = .Checkmark
-			_currentCalendarIndex = indexPath.row
+			currentCalendarIndex = indexPath.row
 		}
 		
 		return cell
@@ -128,18 +131,18 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 		var prevCell :UITableViewCell?
 		var newCell :UITableViewCell?
 		
-		if (_currentCalendarIndex != nil) {
-			prevCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: _currentCalendarIndex!, inSection: 0))
+		if (currentCalendarIndex != nil) {
+			prevCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: currentCalendarIndex!, inSection: 0))
 			prevCell?.accessoryType = .None
 		}
 		newCell = tableView.cellForRowAtIndexPath(indexPath)
 		newCell?.accessoryType = .Checkmark
 		
 		
-		ApplicationManager.sharedInstance.defaultCalendar = _calendars[indexPath.row]
-		_currentCalendar = _calendars[indexPath.row]
-		_currentCalendarIndex = indexPath.row
-		UserPreferences.savDefaultCalendar(_calendars[indexPath.row])
+		ApplicationManager.sharedInstance.defaultCalendar = calendars[indexPath.row]
+		currentCalendar = calendars[indexPath.row]
+		currentCalendarIndex = indexPath.row
+		UserPreferences.savDefaultCalendar(calendars[indexPath.row])
 		
 		tableView.endUpdates()
 	}
@@ -147,21 +150,21 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 	func generateBackgroundView() {
 		
 		if self.isLoading == true {
-			self._tableView.tableFooterView = UIView()
-			self._tableView.backgroundView = LoadingView()
+			self.tableView.tableFooterView = UIView()
+			self.tableView.backgroundView = LoadingView()
 		} else {
-			if self._calendars.count <= 0 && self.hasRight == true {
-				self._tableView.tableFooterView = UIView()
+			if self.calendars.count <= 0 && self.hasRight == true {
+				self.tableView.tableFooterView = UIView()
 				let noData = NoDataView(info:  NSLocalizedString("NoCalendar", comment: ""))
-				self._tableView.backgroundView = noData
+				self.tableView.backgroundView = noData
 			} else if self.hasRight == false {
-				self._tableView.tableFooterView = UIView()
+				self.tableView.tableFooterView = UIView()
 				let noData = NoDataView(info:  NSLocalizedString("NoAccessCalendar", comment: ""))
-				self._tableView.backgroundView = noData
+				self.tableView.backgroundView = noData
 				
 			} else {
-				self._tableView.tableFooterView = self.tableFooterSave
-				self._tableView.backgroundView = nil
+				self.tableView.tableFooterView = self.tableFooterSave
+				self.tableView.backgroundView = nil
 			}
 			
 			
