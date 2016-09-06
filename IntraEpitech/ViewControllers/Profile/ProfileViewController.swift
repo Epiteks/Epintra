@@ -179,6 +179,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 	*/
 	func cellFlag(indexPath: NSIndexPath) -> UITableViewCell {
 		
+		let cellIdentifier = "flagCell"
+		
 		if self.downloadingFlags == true {
 			return cellLoading()
 		}
@@ -187,14 +189,20 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 			return cellEmpty(data: "NoFlag")
 		}
 		
-		let cell = tableView.dequeueReusableCellWithIdentifier("flagCell")!
+		var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? FlagTableViewCell
 		
-		let titleLabel = cell.viewWithTag(1) as! UILabel
-		let gradeLabel = cell.viewWithTag(2) as! UILabel
+		if cell == nil {
+			let nib = UINib(nibName: "FlagTableViewCell", bundle:nil)
+			tableView.registerNib(nib, forCellReuseIdentifier: cellIdentifier)
+			cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? FlagTableViewCell
+		}
+		
 		let module = flags![indexPath.section - 2].modules[indexPath.row]
-		titleLabel.text = module.title
-		gradeLabel.text = module.grade
-		return cell
+		
+		cell?.moduleLabel.text = module.title
+		cell?.gradeLabel.text = module.grade
+		
+		return cell!
 	}
 	
 	/*!
@@ -206,12 +214,19 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 	*/
 	func cellEmpty(data str: String) -> UITableViewCell {
 		
-		let cell = tableView.dequeueReusableCellWithIdentifier("emptyCell")!
+		let cellIdentifier = "emptyCell"
 		
-		let titleLabel = cell.viewWithTag(1) as! UILabel
-		titleLabel.text = NSLocalizedString(str, comment: "")
+		var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? EmptyDataTableViewCell
 		
-		return cell
+		if cell == nil {
+			let nib = UINib(nibName: "EmptyDataTableViewCell", bundle:nil)
+			tableView.registerNib(nib, forCellReuseIdentifier: cellIdentifier)
+			cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? EmptyDataTableViewCell
+		}
+		
+		cell?.infoLabel.text = NSLocalizedString(str, comment: "")
+		
+		return cell!
 	}
 	
 	/*!
@@ -221,12 +236,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 	*/
 	func cellLoading() -> UITableViewCell {
 		
-		var cell = tableView.dequeueReusableCellWithIdentifier("loadingDataCell")
+		let cellIdentifier = "loadingDataCell"
+		
+		var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)
 		
 		if cell == nil {
 			let nib = UINib(nibName: "LoadingDataTableViewCell", bundle:nil)
-			tableView.registerNib(nib, forCellReuseIdentifier: "loadingDataCell")
-			cell = tableView.dequeueReusableCellWithIdentifier("loadingDataCell")!
+			tableView.registerNib(nib, forCellReuseIdentifier: cellIdentifier)
+			cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)!
 		}
 		
 		return cell!
