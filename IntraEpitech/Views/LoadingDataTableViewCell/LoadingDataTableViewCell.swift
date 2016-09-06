@@ -9,16 +9,24 @@
 import UIKit
 
 class LoadingDataTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
+	
+	@IBOutlet private var loadingLabel: UILabel?
+	@IBOutlet private var activityIndicator: UIActivityIndicatorView?
+	
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		// Initialization code
+		
+		loadingLabel?.text = NSLocalizedString("Loading", comment: "")
+		dispatch_async(dispatch_get_main_queue(), {
+			self.activityIndicator?.startAnimating()
+		})
+	}
+	
+	override func setSelected(selected: Bool, animated: Bool) {
+		super.setSelected(selected, animated: animated)
+		
+		// Configure the view for the selected state
+	}
+	
 }

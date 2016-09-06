@@ -69,6 +69,8 @@
 		797DC7F11C7A0AE700ED095E /* StudentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797DC7F01C7A0AE700ED095E /* StudentInfo.swift */; };
 		797DC7F31C7A0B4E00ED095E /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797DC7F21C7A0B4E00ED095E /* DBManager.swift */; };
 		797DC7F71C7A1BF900ED095E /* Students1.0.1.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 797DC7F61C7A1BF900ED095E /* Students1.0.1.sqlite */; };
+		79836AC01D7F59A3009134EF /* LoadingDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79836ABE1D7F59A3009134EF /* LoadingDataTableViewCell.swift */; };
+		79836AC11D7F59A3009134EF /* LoadingDataTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79836ABF1D7F59A3009134EF /* LoadingDataTableViewCell.xib */; };
 		798850381C4AC51C00BAA888 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798850371C4AC51C00BAA888 /* AppDelegate.swift */; };
 		7988503F1C4AC51C00BAA888 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7988503E1C4AC51C00BAA888 /* Assets.xcassets */; };
 		798850421C4AC51C00BAA888 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 798850401C4AC51C00BAA888 /* LaunchScreen.storyboard */; };
@@ -206,6 +208,8 @@
 		797DC7F01C7A0AE700ED095E /* StudentInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudentInfo.swift; path = Model/StudentInfo.swift; sourceTree = "<group>"; };
 		797DC7F21C7A0B4E00ED095E /* DBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DBManager.swift; path = Application/DBManager.swift; sourceTree = "<group>"; };
 		797DC7F61C7A1BF900ED095E /* Students1.0.1.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Students1.0.1.sqlite; sourceTree = "<group>"; };
+		79836ABE1D7F59A3009134EF /* LoadingDataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadingDataTableViewCell.swift; path = Views/LoadingDataTableViewCell/LoadingDataTableViewCell.swift; sourceTree = "<group>"; };
+		79836ABF1D7F59A3009134EF /* LoadingDataTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoadingDataTableViewCell.xib; path = Views/LoadingDataTableViewCell/LoadingDataTableViewCell.xib; sourceTree = "<group>"; };
 		798850341C4AC51C00BAA888 /* Epintra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Epintra.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		798850371C4AC51C00BAA888 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7988503E1C4AC51C00BAA888 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -419,6 +423,15 @@
 			path = CustomViews;
 			sourceTree = "<group>";
 		};
+		79836AC21D7F59CA009134EF /* LoadingDataTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				79836ABE1D7F59A3009134EF /* LoadingDataTableViewCell.swift */,
+				79836ABF1D7F59A3009134EF /* LoadingDataTableViewCell.xib */,
+			);
+			name = LoadingDataTableViewCell;
+			sourceTree = "<group>";
+		};
 		7988502B1C4AC51C00BAA888 = {
 			isa = PBXGroup;
 			children = (
@@ -578,6 +591,7 @@
 				790795241D7CD87D001299B1 /* NoDataView.swift */,
 				79C8DD2F1D7E16980088EF80 /* ProfileTableViewCell.swift */,
 				79C8DD301D7E16980088EF80 /* ProfileTableViewCell.xib */,
+				79836AC21D7F59CA009134EF /* LoadingDataTableViewCell */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -753,6 +767,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79836AC11D7F59A3009134EF /* LoadingDataTableViewCell.xib in Resources */,
 				79EA5CC81D5E78D500DA7C30 /* UserStoryboard.storyboard in Resources */,
 				79EA5CC01D5E696000DA7C30 /* SettingsStoryboard.storyboard in Resources */,
 				797DC7F71C7A1BF900ED095E /* Students1.0.1.sqlite in Resources */,
@@ -902,6 +917,7 @@
 				79F42BEB1D68C65A008DF047 /* Configuration.swift in Sources */,
 				795CC3281C5CB585007AFE87 /* ProjectsViewController.swift in Sources */,
 				79F42BE91D68C5D7008DF047 /* RequestManager.swift in Sources */,
+				79836AC01D7F59A3009134EF /* LoadingDataTableViewCell.swift in Sources */,
 				798850381C4AC51C00BAA888 /* AppDelegate.swift in Sources */,
 				790795251D7CD87D001299B1 /* NoDataView.swift in Sources */,
 				79E4C5C51C6E1C140003DA56 /* StudentRegisteredViewController.swift in Sources */,

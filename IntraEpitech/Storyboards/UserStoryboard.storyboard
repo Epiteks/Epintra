@@ -37,7 +37,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="ZJS-Om-a61">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="fileCell" id="Lb2-tT-NIY">
@@ -129,7 +129,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ZJS-Om-a61" firstAttribute="leading" secondItem="aIT-Ev-nn3" secondAttribute="leadingMargin" constant="-20" id="7Yw-mI-U2D"/>
-                            <constraint firstItem="xkx-cQ-s1E" firstAttribute="top" secondItem="ZJS-Om-a61" secondAttribute="bottom" id="EFV-GE-Nv0"/>
+                            <constraint firstItem="xkx-cQ-s1E" firstAttribute="top" secondItem="ZJS-Om-a61" secondAttribute="bottom" constant="-49" id="EFV-GE-Nv0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ZJS-Om-a61" secondAttribute="trailing" constant="-20" id="HAu-Fb-FTB"/>
                             <constraint firstItem="ZJS-Om-a61" firstAttribute="top" secondItem="QNz-MC-tPl" secondAttribute="bottom" constant="-64" id="eDk-cG-4vN"/>
                         </constraints>
