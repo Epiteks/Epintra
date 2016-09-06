@@ -18,9 +18,6 @@ class LoadingDataTableViewCell: UITableViewCell {
 		// Initialization code
 		
 		loadingLabel?.text = NSLocalizedString("Loading", comment: "")
-		dispatch_async(dispatch_get_main_queue(), {
-			self.activityIndicator?.startAnimating()
-		})
 	}
 	
 	override func setSelected(selected: Bool, animated: Bool) {
@@ -28,5 +25,7 @@ class LoadingDataTableViewCell: UITableViewCell {
 		
 		// Configure the view for the selected state
 	}
+	
+	
 	
 }

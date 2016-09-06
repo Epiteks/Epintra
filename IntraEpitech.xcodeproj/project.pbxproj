@@ -458,6 +458,24 @@
 			name = LoadingView;
 			sourceTree = "<group>";
 		};
+		79836AE41D7F7568009134EF /* FlagTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				79836AC71D7F6E8C009134EF /* FlagTableViewCell.swift */,
+				79836AC81D7F6E8C009134EF /* FlagTableViewCell.xib */,
+			);
+			name = FlagTableViewCell;
+			sourceTree = "<group>";
+		};
+		79836AE51D7F7571009134EF /* EmptyDataTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				79836ACB1D7F72D3009134EF /* EmptyDataTableViewCell.swift */,
+				79836ACC1D7F72D3009134EF /* EmptyDataTableViewCell.xib */,
+			);
+			name = EmptyDataTableViewCell;
+			sourceTree = "<group>";
+		};
 		7988502B1C4AC51C00BAA888 = {
 			isa = PBXGroup;
 			children = (
@@ -616,10 +634,8 @@
 				79DE549B1C5BABFF00E2ADDE /* EmptyPlanningTableView.xib */,
 				79F2B1011C60FAE600244AC6 /* EmptyTableView.xib */,
 				79836AC21D7F59CA009134EF /* LoadingDataTableViewCell */,
-				79836AC71D7F6E8C009134EF /* FlagTableViewCell.swift */,
-				79836AC81D7F6E8C009134EF /* FlagTableViewCell.xib */,
-				79836ACB1D7F72D3009134EF /* EmptyDataTableViewCell.swift */,
-				79836ACC1D7F72D3009134EF /* EmptyDataTableViewCell.xib */,
+				79836AE41D7F7568009134EF /* FlagTableViewCell */,
+				79836AE51D7F7571009134EF /* EmptyDataTableViewCell */,
 			);
 			name = Views;
 			sourceTree = "<group>";
