@@ -9,10 +9,6 @@
 /* Begin PBXBuildFile section */
 		18A64726A8A3EF67E05A8C24 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F850461F157F431C9CB699 /* Pods.framework */; };
 		7906842A1C6FC1E10067B26F /* AppointmentEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790684291C6FC1E10067B26F /* AppointmentEvent.swift */; };
-		7907951E1D7CC1EB001299B1 /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7907951D1D7CC1EB001299B1 /* LoadingView.xib */; };
-		790795201D7CC8B2001299B1 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7907951F1D7CC8B2001299B1 /* LoadingView.swift */; };
-		790795231D7CD702001299B1 /* NoDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 790795221D7CD702001299B1 /* NoDataView.xib */; };
-		790795251D7CD87D001299B1 /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790795241D7CD87D001299B1 /* NoDataView.swift */; };
 		791172E51C5FAD4800581DF3 /* ProjectMarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791172E41C5FAD4800581DF3 /* ProjectMarksViewController.swift */; };
 		791172E71C5FB7B800581DF3 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791172E61C5FB7B800581DF3 /* CommentsViewController.swift */; };
 		791172E91C5FC85000581DF3 /* ModuleDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791172E81C5FC85000581DF3 /* ModuleDetailsViewController.swift */; };
@@ -75,6 +71,12 @@
 		79836ACA1D7F6E8C009134EF /* FlagTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79836AC81D7F6E8C009134EF /* FlagTableViewCell.xib */; };
 		79836ACD1D7F72D3009134EF /* EmptyDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79836ACB1D7F72D3009134EF /* EmptyDataTableViewCell.swift */; };
 		79836ACE1D7F72D3009134EF /* EmptyDataTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79836ACC1D7F72D3009134EF /* EmptyDataTableViewCell.xib */; };
+		79836AD71D7F74C2009134EF /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79836AD51D7F74C2009134EF /* LoadingView.swift */; };
+		79836AD81D7F74C2009134EF /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79836AD61D7F74C2009134EF /* LoadingView.xib */; };
+		79836ADB1D7F74C8009134EF /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79836AD91D7F74C8009134EF /* ProfileTableViewCell.swift */; };
+		79836ADC1D7F74C8009134EF /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79836ADA1D7F74C8009134EF /* ProfileTableViewCell.xib */; };
+		79836ADF1D7F74CE009134EF /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79836ADD1D7F74CE009134EF /* NoDataView.swift */; };
+		79836AE01D7F74CE009134EF /* NoDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79836ADE1D7F74CE009134EF /* NoDataView.xib */; };
 		798850381C4AC51C00BAA888 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798850371C4AC51C00BAA888 /* AppDelegate.swift */; };
 		7988503F1C4AC51C00BAA888 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7988503E1C4AC51C00BAA888 /* Assets.xcassets */; };
 		798850421C4AC51C00BAA888 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 798850401C4AC51C00BAA888 /* LaunchScreen.storyboard */; };
@@ -85,8 +87,6 @@
 		79A5AE7D1C56B432004B3FB9 /* PlanningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5AE7C1C56B432004B3FB9 /* PlanningViewController.swift */; };
 		79B05FD91C68BC1C0032DB0C /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B05FD81C68BC1C0032DB0C /* IAPHelper.swift */; };
 		79B05FDD1C68BEB90032DB0C /* IntraProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B05FDC1C68BEB90032DB0C /* IntraProduct.swift */; };
-		79C8DD311D7E16980088EF80 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C8DD2F1D7E16980088EF80 /* ProfileTableViewCell.swift */; };
-		79C8DD321D7E16980088EF80 /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79C8DD301D7E16980088EF80 /* ProfileTableViewCell.xib */; };
 		79DE549C1C5BABFF00E2ADDE /* EmptyPlanningTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79DE549B1C5BABFF00E2ADDE /* EmptyPlanningTableView.xib */; };
 		79DE549E1C5BAF3300E2ADDE /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DE549D1C5BAF3300E2ADDE /* CalendarManager.swift */; };
 		79DE54A31C5BAF5300E2ADDE /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79DE549F1C5BAF5300E2ADDE /* Alamofire.framework */; };
@@ -151,10 +151,6 @@
 		66F400B651BD64C9AA64405C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		74F850461F157F431C9CB699 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		790684291C6FC1E10067B26F /* AppointmentEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppointmentEvent.swift; path = Model/AppointmentEvent.swift; sourceTree = "<group>"; };
-		7907951D1D7CC1EB001299B1 /* LoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoadingView.xib; path = Views/LoadingView.xib; sourceTree = "<group>"; };
-		7907951F1D7CC8B2001299B1 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadingView.swift; path = Views/LoadingView.swift; sourceTree = "<group>"; };
-		790795221D7CD702001299B1 /* NoDataView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NoDataView.xib; path = Views/NoDataView.xib; sourceTree = "<group>"; };
-		790795241D7CD87D001299B1 /* NoDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoDataView.swift; path = Views/NoDataView.swift; sourceTree = "<group>"; };
 		791172E41C5FAD4800581DF3 /* ProjectMarksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectMarksViewController.swift; path = Marks/ProjectMarksViewController.swift; sourceTree = "<group>"; };
 		791172E61C5FB7B800581DF3 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommentsViewController.swift; path = Marks/CommentsViewController.swift; sourceTree = "<group>"; };
 		791172E81C5FC85000581DF3 /* ModuleDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModuleDetailsViewController.swift; path = Modules/ModuleDetailsViewController.swift; sourceTree = "<group>"; };
@@ -218,6 +214,12 @@
 		79836AC81D7F6E8C009134EF /* FlagTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FlagTableViewCell.xib; path = Views/FlagTableViewCell/FlagTableViewCell.xib; sourceTree = "<group>"; };
 		79836ACB1D7F72D3009134EF /* EmptyDataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmptyDataTableViewCell.swift; path = Views/EmptyDataTableViewCell/EmptyDataTableViewCell.swift; sourceTree = "<group>"; };
 		79836ACC1D7F72D3009134EF /* EmptyDataTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EmptyDataTableViewCell.xib; path = Views/EmptyDataTableViewCell/EmptyDataTableViewCell.xib; sourceTree = "<group>"; };
+		79836AD51D7F74C2009134EF /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadingView.swift; path = Views/LoadingView/LoadingView.swift; sourceTree = "<group>"; };
+		79836AD61D7F74C2009134EF /* LoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoadingView.xib; path = Views/LoadingView/LoadingView.xib; sourceTree = "<group>"; };
+		79836AD91D7F74C8009134EF /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileTableViewCell.swift; path = Views/ProfileTableViewCell/ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		79836ADA1D7F74C8009134EF /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProfileTableViewCell.xib; path = Views/ProfileTableViewCell/ProfileTableViewCell.xib; sourceTree = "<group>"; };
+		79836ADD1D7F74CE009134EF /* NoDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoDataView.swift; path = Views/NoDataView/NoDataView.swift; sourceTree = "<group>"; };
+		79836ADE1D7F74CE009134EF /* NoDataView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NoDataView.xib; path = Views/NoDataView/NoDataView.xib; sourceTree = "<group>"; };
 		798850341C4AC51C00BAA888 /* Epintra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Epintra.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		798850371C4AC51C00BAA888 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7988503E1C4AC51C00BAA888 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -234,8 +236,6 @@
 		79A5AE7C1C56B432004B3FB9 /* PlanningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanningViewController.swift; path = Planning/PlanningViewController.swift; sourceTree = "<group>"; };
 		79B05FD81C68BC1C0032DB0C /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		79B05FDC1C68BEB90032DB0C /* IntraProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntraProduct.swift; sourceTree = "<group>"; };
-		79C8DD2F1D7E16980088EF80 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileTableViewCell.swift; path = Views/ProfileTableViewCell.swift; sourceTree = "<group>"; };
-		79C8DD301D7E16980088EF80 /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProfileTableViewCell.xib; path = Views/ProfileTableViewCell.xib; sourceTree = "<group>"; };
 		79DE549B1C5BABFF00E2ADDE /* EmptyPlanningTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EmptyPlanningTableView.xib; path = Views/EmptyPlanningTableView.xib; sourceTree = "<group>"; };
 		79DE549D1C5BAF3300E2ADDE /* CalendarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		79DE549F1C5BAF5300E2ADDE /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "Pods/../build/Debug-iphoneos/Alamofire.framework"; sourceTree = "<group>"; };
@@ -330,15 +330,6 @@
 				74F850461F157F431C9CB699 /* Pods.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		790795211D7CD620001299B1 /* LoadingView */ = {
-			isa = PBXGroup;
-			children = (
-				7907951D1D7CC1EB001299B1 /* LoadingView.xib */,
-				7907951F1D7CC8B2001299B1 /* LoadingView.swift */,
-			);
-			name = LoadingView;
 			sourceTree = "<group>";
 		};
 		7959943E1C52C8D1007BE7C5 /* Application */ = {
@@ -438,6 +429,33 @@
 				79836ABF1D7F59A3009134EF /* LoadingDataTableViewCell.xib */,
 			);
 			name = LoadingDataTableViewCell;
+			sourceTree = "<group>";
+		};
+		79836AE11D7F74E0009134EF /* NoDataView */ = {
+			isa = PBXGroup;
+			children = (
+				79836ADD1D7F74CE009134EF /* NoDataView.swift */,
+				79836ADE1D7F74CE009134EF /* NoDataView.xib */,
+			);
+			name = NoDataView;
+			sourceTree = "<group>";
+		};
+		79836AE21D7F74ED009134EF /* ProfileTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				79836AD91D7F74C8009134EF /* ProfileTableViewCell.swift */,
+				79836ADA1D7F74C8009134EF /* ProfileTableViewCell.xib */,
+			);
+			name = ProfileTableViewCell;
+			sourceTree = "<group>";
+		};
+		79836AE31D7F74FA009134EF /* LoadingView */ = {
+			isa = PBXGroup;
+			children = (
+				79836AD51D7F74C2009134EF /* LoadingView.swift */,
+				79836AD61D7F74C2009134EF /* LoadingView.xib */,
+			);
+			name = LoadingView;
 			sourceTree = "<group>";
 		};
 		7988502B1C4AC51C00BAA888 = {
@@ -589,16 +607,14 @@
 		79F8265C1C5529F20002DCC8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				79836AE11D7F74E0009134EF /* NoDataView */,
+				79836AE21D7F74ED009134EF /* ProfileTableViewCell */,
+				79836AE31D7F74FA009134EF /* LoadingView */,
 				79F42BE61D68BE32008DF047 /* DownloadingAllUsersView.xib */,
 				79F42BE41D68BE1B008DF047 /* LittleUserView.xib */,
 				79F826591C5527ED0002DCC8 /* ProfileView.xib */,
 				79DE549B1C5BABFF00E2ADDE /* EmptyPlanningTableView.xib */,
 				79F2B1011C60FAE600244AC6 /* EmptyTableView.xib */,
-				790795211D7CD620001299B1 /* LoadingView */,
-				790795221D7CD702001299B1 /* NoDataView.xib */,
-				790795241D7CD87D001299B1 /* NoDataView.swift */,
-				79C8DD2F1D7E16980088EF80 /* ProfileTableViewCell.swift */,
-				79C8DD301D7E16980088EF80 /* ProfileTableViewCell.xib */,
 				79836AC21D7F59CA009134EF /* LoadingDataTableViewCell */,
 				79836AC71D7F6E8C009134EF /* FlagTableViewCell.swift */,
 				79836AC81D7F6E8C009134EF /* FlagTableViewCell.xib */,
@@ -780,17 +796,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				79836AC11D7F59A3009134EF /* LoadingDataTableViewCell.xib in Resources */,
+				79836ADC1D7F74C8009134EF /* ProfileTableViewCell.xib in Resources */,
 				79EA5CC81D5E78D500DA7C30 /* UserStoryboard.storyboard in Resources */,
 				79EA5CC01D5E696000DA7C30 /* SettingsStoryboard.storyboard in Resources */,
 				797DC7F71C7A1BF900ED095E /* Students1.0.1.sqlite in Resources */,
-				7907951E1D7CC1EB001299B1 /* LoadingView.xib in Resources */,
 				79306D531C4AEBF300708BED /* Localizable.strings in Resources */,
 				79DF37081C4D7B3B00EF69A3 /* MainStoryboard.storyboard in Resources */,
 				79F8265A1C5527ED0002DCC8 /* ProfileView.xib in Resources */,
 				79F42BE51D68BE1B008DF047 /* LittleUserView.xib in Resources */,
-				79C8DD321D7E16980088EF80 /* ProfileTableViewCell.xib in Resources */,
+				79836AE01D7F74CE009134EF /* NoDataView.xib in Resources */,
 				79F42BE31D68BDF6008DF047 /* LearnStoryboard.storyboard in Resources */,
-				790795231D7CD702001299B1 /* NoDataView.xib in Resources */,
+				79836AD81D7F74C2009134EF /* LoadingView.xib in Resources */,
 				798850421C4AC51C00BAA888 /* LaunchScreen.storyboard in Resources */,
 				79836ACA1D7F6E8C009134EF /* FlagTableViewCell.xib in Resources */,
 				79DE549C1C5BABFF00E2ADDE /* EmptyPlanningTableView.xib in Resources */,
@@ -900,7 +916,6 @@
 				7976955B1C562730001772A2 /* ImageDownloader.swift in Sources */,
 				79152D871C67726800513E0F /* OtherUserViewController.swift in Sources */,
 				795F1EA21C56019E00B8C347 /* History.swift in Sources */,
-				790795201D7CC8B2001299B1 /* LoadingView.swift in Sources */,
 				795954A71C58166A00734F91 /* CustomSegues.swift in Sources */,
 				791172E71C5FB7B800581DF3 /* CommentsViewController.swift in Sources */,
 				795CC3251C5CB2A7007AFE87 /* Project.swift in Sources */,
@@ -934,7 +949,6 @@
 				79F42BE91D68C5D7008DF047 /* RequestManager.swift in Sources */,
 				79836AC01D7F59A3009134EF /* LoadingDataTableViewCell.swift in Sources */,
 				798850381C4AC51C00BAA888 /* AppDelegate.swift in Sources */,
-				790795251D7CD87D001299B1 /* NoDataView.swift in Sources */,
 				79E4C5C51C6E1C140003DA56 /* StudentRegisteredViewController.swift in Sources */,
 				79306D5F1C4AF21100708BED /* AlertController.swift in Sources */,
 				791172E91C5FC85000581DF3 /* ModuleDetailsViewController.swift in Sources */,
@@ -948,11 +962,13 @@
 				792B7A5F1C57EB3300F988BB /* ProfileViewController.swift in Sources */,
 				79F1F2731C5902B700AAFB69 /* Planning.swift in Sources */,
 				79F8265E1C552C5F0002DCC8 /* UIImageViewExtensions.swift in Sources */,
+				79836ADB1D7F74C8009134EF /* ProfileTableViewCell.swift in Sources */,
 				79779A9E1C5912DA008803C5 /* SystemUtils.swift in Sources */,
 				795CC3301C5CF840007AFE87 /* File.swift in Sources */,
 				797DC7F31C7A0B4E00ED095E /* DBManager.swift in Sources */,
 				79622E961C5D4D4B00FBA456 /* ModulesViewController.swift in Sources */,
 				79E4C5C71C6E35440003DA56 /* AppointmentDetailViewController.swift in Sources */,
+				79836AD71D7F74C2009134EF /* LoadingView.swift in Sources */,
 				79892EF61C5024E000F83669 /* UserPreferences.swift in Sources */,
 				79306D611C4AF46600708BED /* MJProgressView.swift in Sources */,
 				79284F5D1C5F3FC500349628 /* Flags.swift in Sources */,
@@ -963,9 +979,9 @@
 				79F826621C554BED0002DCC8 /* Netsoul.swift in Sources */,
 				795CC32C1C5CC3A6007AFE87 /* ProjectGroup.swift in Sources */,
 				79622E931C5D4C4B00FBA456 /* ModulesApiCalls.swift in Sources */,
+				79836ADF1D7F74CE009134EF /* NoDataView.swift in Sources */,
 				79DF37151C4D831200EF69A3 /* TestViewController.swift in Sources */,
 				79EA5CB61D5E49E800DA7C30 /* Requests.swift in Sources */,
-				79C8DD311D7E16980088EF80 /* ProfileTableViewCell.swift in Sources */,
 				79A5AE7D1C56B432004B3FB9 /* PlanningViewController.swift in Sources */,
 				791172E51C5FAD4800581DF3 /* ProjectMarksViewController.swift in Sources */,
 				795D81C51C623A1000187E43 /* RegisteredStudent.swift in Sources */,
