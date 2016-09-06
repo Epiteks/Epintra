@@ -23,33 +23,32 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 	var webViewData :File?
 	var refreshControl = UIRefreshControl()
 	
-	var confettiView: SAConfettiView!
-	
-	
 	override func viewDidLoad() {
 		
 		currentUser = ApplicationManager.sharedInstance.user
 		
-		MJProgressView.instance.showProgress(self.view, white: false)
+		//MJProgressView.instance.showProgress(self.view, white: false)
 		
-		UserApiCalls.getUserDocuments() { (isOk :Bool, resp :[File]?, mess :String) in
-			
-			if (!isOk) {
-				ErrorViewer.errorPresent(self, mess: mess) {}
-			} else {
-				self.files = resp!
-				UserApiCalls.getUserFlags(ApplicationManager.sharedInstance.user?.login) { (isOk :Bool, resp :[Flags]?, mess :String) in
-					
-					if (!isOk) {
-						ErrorViewer.errorPresent(self, mess: mess) {}
-					} else {
-						self.flags = resp!
-						self.tableView.reloadData()
-					}
-					MJProgressView.instance.hideProgress()
-				}
-			}	
-		}
+		calls()
+		//		
+		//		UserApiCalls.getUserDocuments() { (isOk :Bool, resp :[File]?, mess :String) in
+		//			
+		//			if (!isOk) {
+		//				ErrorViewer.errorPresent(self, mess: mess) {}
+		//			} else {
+		//				self.files = resp!
+		//				UserApiCalls.getUserFlags(ApplicationManager.sharedInstance.user?.login) { (isOk :Bool, resp :[Flags]?, mess :String) in
+		//					
+		//					if (!isOk) {
+		//						ErrorViewer.errorPresent(self, mess: mess) {}
+		//					} else {
+		//						self.flags = resp!
+		//						self.tableView.reloadData()
+		//					}
+		//					MJProgressView.instance.hideProgress()
+		//				}
+		//			}	
+		//		}
 		
 		self.refreshControl.tintColor = UIUtils.backgroundColor()
 		self.refreshControl.addTarget(self, action: #selector(ProfileViewController.refreshData(_:)), forControlEvents: .ValueChanged)
@@ -58,6 +57,50 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 	
 	override func awakeFromNib() {
 		self.title = NSLocalizedString("Profile", comment: "")
+	}
+	
+	func calls() {
+		
+		self.callFlags()
+		self.callDocuments()
+	}
+	
+	func callFlags() {
+		
+		userRequests.getUserFlags("junger_m") { (result) in
+			switch (result) {
+			case .Success(let data):
+				if let flgs = data as? [Flags] {
+					self.flags = flgs
+				}
+				logger.info("User flags fetched")
+				break
+			case .Failure(let error):
+				ErrorViewer.errorPresent(self, mess: error.message!) { }
+				break
+			}
+			self.tableView.reloadData()
+			
+		}
+	}
+	
+	func callDocuments() {
+		userRequests.getUserDocuments() { (result) in
+			switch (result) {
+			case .Success(let data):
+				if let documents = data as? [File] {
+					self.files = documents
+				}
+				logger.info("User documents fetched")
+				break
+			case .Failure(let error):
+				ErrorViewer.errorPresent(self, mess: error.message!) { }
+				break
+			}
+			self.tableView.reloadData()
+			
+		}
+		
 	}
 	
 	func refreshData(sender :AnyObject) {
@@ -100,9 +143,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		if section == 0 {
 			res = 1
 		} else if (section == 1) {
-			if (files?.count == 0) {
+			if (files == nil || files?.count == 0) {
 				res = 1
-			} else { res = (files?.count)! }
+			} else {
+				res = (files?.count)!
+			}
 		} else {
 			if ((flags![section - 2].modules.count) == 0) {
 				res = 1
@@ -186,13 +231,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 			let vc :WebViewViewController = segue.destinationViewController as! WebViewViewController
 			vc.file = webViewData!
 			vc.isUrl = true
-		}
-	}
-	
-	override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-		if (confettiView.isActive()) {
-			confettiView.stopConfetti()
-			confettiView.removeFromSuperview()
 		}
 	}
 }

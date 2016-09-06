@@ -124,6 +124,54 @@ class UserRequests: RequestManager {
 		}
 	}
 	
+	func getUserFlags(login: String, completion: CompletionHandlerType) {
+		
+		super.call("userFlags", params: ["login": login]) { (response) in
+			switch response {
+			case .Success(let res):
+				
+				let responseJSON = JSON(res!)
+				let flags = responseJSON["flags"]
+				var resp = [Flags]()
+				
+				resp.append(Flags(name: "medal", dict: flags["medal"]))
+				resp.append(Flags(name: "remarkable", dict: flags["remarkable"]))
+				resp.append(Flags(name: "difficulty", dict: flags["difficulty"]))
+				resp.append(Flags(name: "ghost", dict: flags["ghost"]))
+				
+				completion(Result.Success(resp))
+				
+				break
+			case .Failure(let err):
+				completion(Result.Failure(type: err.type, message: err.message))
+				logger.error("GetUserFlags : \(err)")
+				break
+			}
+		}
+	}
+	
+	func getUserDocuments(completion: CompletionHandlerType) {
+		
+		super.call("userFiles", params: ["login": (ApplicationManager.sharedInstance.user?.login)!]) { (response) in
+			switch response {
+			case .Success(let res):
+				
+				let responseJSON = JSON(res!)
+				let responseArray = responseJSON.arrayValue
+				var resp = [File]()
+				for tmp in responseArray {
+					resp.append(File(dict: tmp))
+				}
+				completion(Result.Success(resp))
+				
+				break
+			case .Failure(let err):
+				completion(Result.Failure(type: err.type, message: err.message))
+				logger.error("GetUserDocuments : \(err)")
+				break
+			}
+		}
+	}
 	
 }
 
