@@ -11,9 +11,6 @@ import SAConfettiView
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
-	@IBOutlet weak var searchBarButton: UIBarButtonItem!
-	@IBOutlet weak var menuButton: UIBarButtonItem!
-	@IBOutlet weak var profileViewContainer: UIView!
 	@IBOutlet weak var tableView: UITableView!
 	
 	var currentUser :User?
@@ -21,51 +18,44 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 	var files :[File]?
 	var flags :[Flags]?
 	var webViewData :File?
-	var refreshControl = UIRefreshControl()
+	
+	var downloadingFiles: Bool = false
+	var downloadingFlags: Bool = false
+	
+	let sectionsTitles = [
+		"",
+		"Files",
+		"Medals",
+		"Remarkables",
+		"Difficulty",
+		"Ghost"
+	]
 	
 	override func viewDidLoad() {
 		
 		currentUser = ApplicationManager.sharedInstance.user
 		
-		//MJProgressView.instance.showProgress(self.view, white: false)
-		
 		calls()
-		//		
-		//		UserApiCalls.getUserDocuments() { (isOk :Bool, resp :[File]?, mess :String) in
-		//			
-		//			if (!isOk) {
-		//				ErrorViewer.errorPresent(self, mess: mess) {}
-		//			} else {
-		//				self.files = resp!
-		//				UserApiCalls.getUserFlags(ApplicationManager.sharedInstance.user?.login) { (isOk :Bool, resp :[Flags]?, mess :String) in
-		//					
-		//					if (!isOk) {
-		//						ErrorViewer.errorPresent(self, mess: mess) {}
-		//					} else {
-		//						self.flags = resp!
-		//						self.tableView.reloadData()
-		//					}
-		//					MJProgressView.instance.hideProgress()
-		//				}
-		//			}	
-		//		}
-		
-		self.refreshControl.tintColor = UIUtils.backgroundColor()
-		self.refreshControl.addTarget(self, action: #selector(ProfileViewController.refreshData(_:)), forControlEvents: .ValueChanged)
-		self.tableView.addSubview(refreshControl)
 	}
 	
 	override func awakeFromNib() {
 		self.title = NSLocalizedString("Profile", comment: "")
 	}
 	
+	/*!
+	All needed calls
+	*/
 	func calls() {
-		
 		self.callFlags()
 		self.callDocuments()
 	}
 	
+	/*!
+	Fetch all flags of current user and update tableview
+	*/
 	func callFlags() {
+		
+		self.downloadingFlags = true
 		
 		userRequests.getUserFlags("junger_m") { (result) in
 			switch (result) {
@@ -79,12 +69,18 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 				ErrorViewer.errorPresent(self, mess: error.message!) { }
 				break
 			}
+			self.downloadingFlags = false
 			self.tableView.reloadData()
-			
 		}
 	}
 	
+	/*!
+	Fetch all documents of current user and update tableview
+	*/
 	func callDocuments() {
+		
+		self.downloadingFiles = true
+		
 		userRequests.getUserDocuments() { (result) in
 			switch (result) {
 			case .Success(let data):
@@ -97,37 +93,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 				ErrorViewer.errorPresent(self, mess: error.message!) { }
 				break
 			}
+			self.downloadingFiles = false
 			self.tableView.reloadData()
 			
 		}
 		
-	}
-	
-	func refreshData(sender :AnyObject) {
-		UserApiCalls.getUserDocuments() { (isOk :Bool, resp :[File]?, mess :String) in
-			
-			if (!isOk) {
-				ErrorViewer.errorPresent(self, mess: mess) {}
-			} else {
-				self.files = resp!
-				UserApiCalls.getUserFlags(ApplicationManager.sharedInstance.user?.login) { (isOk :Bool, resp :[Flags]?, mess :String) in
-					
-					if (!isOk) {
-						ErrorViewer.errorPresent(self, mess: mess) {}
-					} else {
-						self.flags = resp!
-						self.tableView.reloadData()
-					}
-					MJProgressView.instance.hideProgress()
-					self.refreshControl.endRefreshing()
-				}
-			}
-		}
-		
-	}
-	
-	@IBAction func searchProfileButtonPressed(sender: AnyObject) {
-		//performSegueWithIdentifier("searchProfileSegue", sender: self)
 	}
 	
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -138,22 +108,24 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		var res = 0
 		
-		if (flags == nil || files == nil) { return 0 }
-		
-		if section == 0 {
+		switch section {
+		case 0: // User informations
 			res = 1
-		} else if (section == 1) {
-			if (files == nil || files?.count == 0) {
+			break
+		case 1: // Documents
+			if files == nil || files?.count == 0 {
 				res = 1
 			} else {
 				res = (files?.count)!
 			}
-		} else {
-			if ((flags![section - 2].modules.count) == 0) {
+			break
+		default: // Other sections for flags
+			if (flags == nil || flags![section - 2].modules.count == 0) {
 				res = 1
-			} else { res = (flags![section - 2].modules.count) }
+			} else {
+				res = (flags![section - 2].modules.count)
+			}
 		}
-		
 		return res
 	}
 	
@@ -161,32 +133,105 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		var cell = UITableViewCell()
 		
-		if (indexPath.section == 0) { // Profile Cell, the first one
+		if indexPath.section == 0 { // Profile Cell, the first one
 			cell = tableView.dequeueReusableCellWithIdentifier("profileCell")! as! ProfileTableViewCell
-		} else if (indexPath.section == 1 && files?.count > 0) {
-			cell = tableView.dequeueReusableCellWithIdentifier("fileCell")!
-			let titleLabel = cell.viewWithTag(1) as! UILabel
-			titleLabel.text = files![indexPath.row].title!
-			cell.accessoryType = .DisclosureIndicator
-		} else if (indexPath.section == 1 && files?.count == 0) {
-			cell = tableView.dequeueReusableCellWithIdentifier("emptyCell")!
-			let titleLabel = cell.viewWithTag(1) as! UILabel
-			titleLabel.text = NSLocalizedString("NoFile", comment: "")
-		} else if (flags![indexPath.section - 2].modules.count > 0) {
-			cell = tableView.dequeueReusableCellWithIdentifier("flagCell")!
-			let titleLabel = cell.viewWithTag(1) as! UILabel
-			let gradeLabel = cell.viewWithTag(2) as! UILabel
-			let module = flags![indexPath.section - 2].modules[indexPath.row]
-			titleLabel.text = module.title
-			gradeLabel.text = module.grade
-		} else if (indexPath.section > 1 && flags![indexPath.section - 2].modules.count == 0) {
-			cell = tableView.dequeueReusableCellWithIdentifier("emptyCell")!
-			let titleLabel = cell.viewWithTag(1) as! UILabel
-			titleLabel.text = NSLocalizedString("NoFlag", comment: "")
+		} else if indexPath.section == 1 { // Files
+			cell = cellFiles(indexPath.row)
+		} else { // Flags
+			cell = cellFlag(indexPath)
 		}
 		
 		return cell
 	}
+	
+	/*!
+	Returns the cell for file data
+	
+	- parameter index:	row index
+	
+	- returns: cell
+	*/
+	func cellFiles(index: Int) -> UITableViewCell {
+		
+		if self.downloadingFiles == true {
+			return cellLoading()
+		}
+		
+		if self.files == nil || self.files?.count <= 0 {
+			return cellEmpty(data: "NoFile")
+		}
+		
+		let cell = tableView.dequeueReusableCellWithIdentifier("fileCell")!
+		
+		let titleLabel = cell.viewWithTag(1) as! UILabel
+		titleLabel.text = files![index].title!
+		cell.accessoryType = .DisclosureIndicator
+		
+		return cell
+	}
+	
+	/*!
+	Returns the cell for flag data
+	
+	- parameter indexPath:	index
+	
+	- returns: cell
+	*/
+	func cellFlag(indexPath: NSIndexPath) -> UITableViewCell {
+		
+		if self.downloadingFlags == true {
+			return cellLoading()
+		}
+		
+		if self.flags == nil || self.flags?.count <= 0 || self.flags![indexPath.section - 2].modules.count <= 0 {
+			return cellEmpty(data: "NoFlag")
+		}
+		
+		let cell = tableView.dequeueReusableCellWithIdentifier("flagCell")!
+		
+		let titleLabel = cell.viewWithTag(1) as! UILabel
+		let gradeLabel = cell.viewWithTag(2) as! UILabel
+		let module = flags![indexPath.section - 2].modules[indexPath.row]
+		titleLabel.text = module.title
+		gradeLabel.text = module.grade
+		return cell
+	}
+	
+	/*!
+	Returns the cell for empty data
+	
+	- parameter str:	data type
+	
+	- returns: cell
+	*/
+	func cellEmpty(data str: String) -> UITableViewCell {
+		
+		let cell = tableView.dequeueReusableCellWithIdentifier("emptyCell")!
+		
+		let titleLabel = cell.viewWithTag(1) as! UILabel
+		titleLabel.text = NSLocalizedString(str, comment: "")
+		
+		return cell
+	}
+	
+	/*!
+	Returns the cell for loading data
+	
+	- returns: cell
+	*/
+	func cellLoading() -> UITableViewCell {
+		
+		var cell = tableView.dequeueReusableCellWithIdentifier("loadingDataCell")
+		
+		if cell == nil {
+			let nib = UINib(nibName: "LoadingDataTableViewCell", bundle:nil)
+			tableView.registerNib(nib, forCellReuseIdentifier: "loadingDataCell")
+			cell = tableView.dequeueReusableCellWithIdentifier("loadingDataCell")!
+		}
+		
+		return cell!
+	}
+	
 	
 	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 		if indexPath.section == 0 {
@@ -197,24 +242,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 	}
 	
 	func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		
-		var str = ""
-		
-		switch section {
-		case 1 : str = "Files"
-			break
-		case 2 : str = "Medals"
-			break
-		case 3 : str = "Remarkables"
-			break
-		case 4 : str = "Difficulty"
-			break
-		case 5 : str = "Ghost"
-			break
-		default: str = ""
-			break
-		}
-		return NSLocalizedString(str, comment: "")
+		return NSLocalizedString(sectionsTitles[section], comment: "")
 	}
 	
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
