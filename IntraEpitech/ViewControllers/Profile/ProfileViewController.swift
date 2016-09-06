@@ -16,14 +16,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 	@IBOutlet weak var profileViewContainer: UIView!
 	@IBOutlet weak var tableView: UITableView!
 	
-	var profileImageView :UIImageView!
-	var creditsTitleLabel :UILabel!
-	var creditsLabel :UILabel!
-	var spicesLabel :UILabel!
-	var logLabel :UILabel!
-	var gpaTitleLabel :UILabel!
-	var gpaLabel :UILabel!
-	var	gpaTypeLabel :UILabel!
 	var currentUser :User?
 	
 	var files :[File]?
@@ -38,14 +30,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		currentUser = ApplicationManager.sharedInstance.user
 		
-		//loadProfileView()
-		//setUIElements()
-		
 		MJProgressView.instance.showProgress(self.view, white: false)
-		
-		//		if let img = ApplicationManager.sharedInstance.downloadedImages![(ApplicationManager.sharedInstance.user?.imageUrl!)!] {
-		//			self.profileImageView.image = img
-		//		}
 		
 		UserApiCalls.getUserDocuments() { (isOk :Bool, resp :[File]?, mess :String) in
 			
@@ -65,66 +50,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 				}
 			}	
 		}
-		//		self.profileImageView.cropToSquare()
-		//		self.profileImageView.toCircle()
 		
 		self.refreshControl.tintColor = UIUtils.backgroundColor()
 		self.refreshControl.addTarget(self, action: #selector(ProfileViewController.refreshData(_:)), forControlEvents: .ValueChanged)
 		self.tableView.addSubview(refreshControl)
-		
-		//confettiConf()
 	}
 	
 	override func awakeFromNib() {
 		self.title = NSLocalizedString("Profile", comment: "")
-	}
-	
-	
-	func confettiConf() {
-		// Create confetti view
-		confettiView = SAConfettiView(frame: self.view.bounds)
-		
-		// Set colors (default colors are red, green and blue)
-		confettiView.colors = [UIColor(red:0.95, green:0.40, blue:0.27, alpha:1.0),
-		                       UIColor(red:1.00, green:0.78, blue:0.36, alpha:1.0),
-		                       UIColor(red:0.48, green:0.78, blue:0.64, alpha:1.0),
-		                       UIColor(red:0.30, green:0.76, blue:0.85, alpha:1.0),
-		                       UIColor(red:0.58, green:0.39, blue:0.55, alpha:1.0)]
-		
-		// Set intensity (from 0 - 1, default intensity is 0.5)
-		confettiView.intensity = 0.7
-		
-		// Set type
-		//		confettiView.type = .Confetti
-		
-		if (Float(gpaLabel.text!) > 3.00 && Float(gpaLabel.text!) <= 3.50) {
-			confettiView.type = .Star
-		} else if (Float(gpaLabel.text!) > 3.50) {
-			confettiView.type = .Image(UIImage(named: "cup")!)
-		} else {
-			
-			confettiView.colors = [UIColor(hexString: "#6D4C41ff")!,
-			                       UIColor(hexString: "#5D4037ff")!,
-			                       UIColor(hexString: "#4E342Eff")!,
-			                       UIColor(hexString: "#3E2723ff")!]
-			
-			confettiView.type = .Image(UIImage(named: "bug")!)
-		}
-	}
-	
-	
-	// For custom image
-	// confettiView.type = .Custom
-	// confettiView.customImage = UIImage(named: "diamond")
-	
-	// Add subview
-	//view.addSubview(confettiView)
-	
-	func gpaTapDetected(gesture :UIGestureRecognizer) {
-		if (!confettiView.isActive()) {
-			view.addSubview(confettiView)
-			confettiView.startConfetti()
-		}
 	}
 	
 	func refreshData(sender :AnyObject) {
@@ -152,41 +85,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 	
 	@IBAction func searchProfileButtonPressed(sender: AnyObject) {
 		//performSegueWithIdentifier("searchProfileSegue", sender: self)
-	}
-	
-	func loadProfileView() {
-		let nibView = NSBundle.mainBundle().loadNibNamed("ProfileView", owner: self, options: nil)[0] as! UIView
-		profileViewContainer.addSubview(nibView)
-		
-		profileImageView = nibView.viewWithTag(1) as? UIImageView
-		creditsTitleLabel = nibView.viewWithTag(2) as? UILabel!
-		creditsLabel = nibView.viewWithTag(3) as? UILabel!
-		spicesLabel = nibView.viewWithTag(4) as? UILabel!
-		logLabel = nibView.viewWithTag(5) as? UILabel!
-		gpaTitleLabel = nibView.viewWithTag(6) as? UILabel!
-		gpaLabel = nibView.viewWithTag(7) as? UILabel!
-		gpaTypeLabel = nibView.viewWithTag(8) as? UILabel!
-	}
-	
-	func setUIElements() {
-		creditsTitleLabel.text = NSLocalizedString("credits", comment: "")
-		creditsLabel.text = String(currentUser!.credits!)
-		spicesLabel.text =  currentUser!.spices!.currentSpices + " " + NSLocalizedString("spices", comment: "")
-		logLabel.text = "Log : " + String(currentUser!.log!.timeActive)
-		logLabel.textColor = currentUser?.log?.getColor()
-		
-		
-		let singleTap = UITapGestureRecognizer(target: self, action:#selector(ProfileViewController.gpaTapDetected(_:)))
-		singleTap.numberOfTapsRequired = 1
-		gpaLabel.userInteractionEnabled = true
-		gpaLabel.addGestureRecognizer(singleTap)
-		
-		let gpa = currentUser?.getLatestGPA()
-		gpaTitleLabel.text = NSLocalizedString("gpa", comment: "")
-		gpaLabel.text = gpa?.value
-		gpaTypeLabel.text = gpa?.cycle
-		
-		
 	}
 	
 	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -218,12 +116,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		var cell = UITableViewCell()
 		
-		
 		if (indexPath.section == 0) { // Profile Cell, the first one
 			cell = tableView.dequeueReusableCellWithIdentifier("profileCell")! as! ProfileTableViewCell
-			//let nibView = NSBundle.mainBundle().loadNibNamed("ProfileView", owner: self, options: nil)[0] as! UIView
-			//cell.addSubview(nibView)
-			cell.sizeToFit()
 		} else if (indexPath.section == 1 && files?.count > 0) {
 			cell = tableView.dequeueReusableCellWithIdentifier("fileCell")!
 			let titleLabel = cell.viewWithTag(1) as! UILabel

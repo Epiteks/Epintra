@@ -39,6 +39,7 @@ class ProfileTableViewCell: UITableViewCell {
 	
 	
 	func loadProfileView() {
+		
 		let nibView = NSBundle.mainBundle().loadNibNamed("ProfileView", owner: self, options: nil)[0] as! UIView
 		nibView.frame = self.frame
 		self.addSubview(nibView)
