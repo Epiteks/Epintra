@@ -48,12 +48,12 @@ class User: NSObject {
 		for gpa in gpas {
 			if self.gpa == nil {
 				self.gpa = [GPA]()
-			} else {
-				
-				let gpaObject = GPA(dict: gpa)
-				
-				self.gpa?.append(gpaObject)
 			}
+			
+			let gpaObject = GPA(dict: gpa)
+			
+			self.gpa?.append(gpaObject)
+			
 		}
 		spices = Spices(dict: dict["spice"])
 		log = Netsoul(dict: dict["nsstat"])

@@ -14,12 +14,16 @@ class ProfileView: UIView {
 	@IBOutlet weak var logLabel: UILabel!
 	@IBOutlet weak var userProfileImage: UIImageView!
 	@IBOutlet weak var creditsNumberLabel: UILabel!
-	@IBOutlet weak var gpaNumberLabel: UILabel!
 	@IBOutlet weak var creditsTitleLabel: UILabel! // Set here
 	@IBOutlet weak var spicesLabel: UILabel!
+	
+	@IBOutlet weak var gpaNumberLabel: UILabel!
 	@IBOutlet weak var gpaTypeLabel: UILabel!
 	@IBOutlet weak var gpaTitleLabel: UILabel! // Set here
 	
+	@IBOutlet weak var gpaCurrentNumberLabel: UILabel!
+	@IBOutlet weak var gpaCurrentTypeLabel: UILabel!
+	@IBOutlet weak var gpaCurrentTitleLabel: UILabel! // Set here
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -42,6 +46,7 @@ class ProfileView: UIView {
 		self.addSubview(content)
 		self.creditsTitleLabel.text = NSLocalizedString("credits", comment: "")
 		self.gpaTitleLabel.text = NSLocalizedString("gpa", comment: "")
+		self.gpaCurrentTitleLabel.text = NSLocalizedString("gpa", comment: "")
 		
 		// Round and crop for default image
 		self.userProfileImage.toCircle()
@@ -54,10 +59,24 @@ class ProfileView: UIView {
 		self.logLabel.text = "Log : " + String(user.log!.timeActive)
 		self.logLabel.textColor = user.log?.getColor()
 		
+		if user.gpa?.count <= 1 {
+			gpaNumberLabel.hidden = true
+			gpaTypeLabel.hidden = true
+			gpaTitleLabel.hidden = true
+		} else {
+			let gpa = user.gpa![0]
+			
+			gpaTypeLabel.text = gpa.cycle
+			gpaNumberLabel.text = gpa.value
+		}
+		
 		let gpa = user.getLatestGPA()
 		gpaTitleLabel.text = NSLocalizedString("gpa", comment: "")
-		self.gpaNumberLabel.text = gpa.value
-		self.gpaTypeLabel.text = gpa.cycle
+		self.gpaCurrentNumberLabel.text = gpa.value
+		self.gpaCurrentTypeLabel.text = gpa.cycle
+		
+		
+		
 		
 		self.creditsNumberLabel.text = String(user.credits!)
 	}
