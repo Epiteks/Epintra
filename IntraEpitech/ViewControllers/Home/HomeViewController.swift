@@ -14,14 +14,15 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 	@IBOutlet weak var alertTableView: UITableView!
 	
 	var currentUser :User?
-	
-	var refreshControl = UIRefreshControl()
+	var tableFooterSave: UIView!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		currentUser = ApplicationManager.sharedInstance.user!
 		
+		self.generateBackgroundView()
+		self.tableFooterSave = self.alertTableView.tableFooterView
 	}
 	
 	override func awakeFromNib() {
@@ -54,6 +55,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 					// Update tableview if changes
 					
 					if (historySave! != self.currentUser!.history!) {
+						self.generateBackgroundView()
 						self.alertTableView.reloadData()
 					}
 					
@@ -125,19 +127,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 			rows = 0
 		}
 		
-		if (rows == 0) {
-			let messageLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
-			
-			messageLabel.text =  NSLocalizedString("NoAlerts", comment: "")
-			messageLabel.textColor = UIColor.blackColor()
-			messageLabel.numberOfLines = 0
-			messageLabel.textAlignment = .Center
-			messageLabel.font = UIFont.systemFontOfSize(13)
-			messageLabel.sizeToFit()
-			
-			alertTableView.backgroundView = messageLabel
-			alertTableView.separatorStyle = UITableViewCellSeparatorStyle.None
-		}
 		return rows!
 	}
 	
@@ -183,5 +172,19 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 		date.text = (history?.userName!)! + " - " +  (history?.date!.toAlertString())!
 		
 		return cell
+	}
+	
+	func generateBackgroundView() {
+		
+		let usr = ApplicationManager.sharedInstance.user!
+		
+		if usr.history != nil && usr.history?.count <= 0 {
+			self.alertTableView.tableFooterView = UIView()
+			let noData = NoDataView(info:  NSLocalizedString("NoNotification", comment: ""))
+			self.alertTableView.backgroundView = noData
+		} else {
+			self.alertTableView.tableFooterView = self.tableFooterSave
+			self.alertTableView.backgroundView = nil
+		}
 	}
 }
