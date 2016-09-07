@@ -61,13 +61,15 @@ class SplashScreenViewController: UIViewController {
 				self.getUserImage(dispatchGroup)
 			})
 			dispatch_group_notify(dispatchGroup, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
-				if self.errorDuringFetching == true {
-					self.goBackToLogin()
-				} else {
-					let storyboard = UIStoryboard(name: "MainViewStoryboard", bundle: nil)
-					let vc = storyboard.instantiateInitialViewController()
-					self.presentViewController(vc!, animated: true, completion: nil)
-				}
+				dispatch_async(dispatch_get_main_queue(), {
+					if self.errorDuringFetching == true {
+						self.goBackToLogin()
+					} else {
+						let storyboard = UIStoryboard(name: "MainViewStoryboard", bundle: nil)
+						let vc = storyboard.instantiateInitialViewController()
+						self.presentViewController(vc!, animated: true, completion: nil)
+					}
+				})
 			})
 		})
 		
@@ -108,7 +110,9 @@ class SplashScreenViewController: UIViewController {
 				break
 			case .Failure(let error):
 				MJProgressView.instance.hideProgress()
-				ErrorViewer.errorPresent(self, mess: error.message!) {}
+				if error.message != nil {
+					ErrorViewer.errorPresent(self, mess: error.message!) {}
+				}
 				self.errorDuringFetching = true
 				break
 			}

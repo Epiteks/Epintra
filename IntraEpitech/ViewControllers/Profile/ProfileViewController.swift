@@ -134,7 +134,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		var cell = UITableViewCell()
 		
 		if indexPath.section == 0 { // Profile Cell, the first one
-			cell = tableView.dequeueReusableCellWithIdentifier("profileCell")! as! ProfileTableViewCell
+			cell = tableView.dequeueReusableCellWithIdentifier("profileCell")!
+			let profileView = cell.viewWithTag(1) as! ProfileView
+			profileView.setUserData(currentUser!)
+			if let img = ApplicationManager.sharedInstance.downloadedImages![(ApplicationManager.sharedInstance.user?.imageUrl!)!] {
+				profileView.setUserImage(img)
+			}
 		} else if indexPath.section == 1 { // Files
 			cell = cellFiles(indexPath.row)
 		} else { // Flags

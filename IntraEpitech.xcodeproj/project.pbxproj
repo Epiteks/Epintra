@@ -24,6 +24,7 @@
 		79306D5F1C4AF21100708BED /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79306D5E1C4AF21100708BED /* AlertController.swift */; };
 		79306D611C4AF46600708BED /* MJProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79306D601C4AF46600708BED /* MJProgressView.swift */; };
 		79306D631C4AF79400708BED /* ModelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79306D621C4AF79400708BED /* ModelName.swift */; };
+		7939FBFF1D80A1CC004EA871 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7939FBFE1D80A1CC004EA871 /* ProfileView.swift */; };
 		793C52C21C5E1BE500C33328 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 793C52C11C5E1BE500C33328 /* MessageUI.framework */; };
 		793C52C41C5E2D9600C33328 /* thirdParty.html in Resources */ = {isa = PBXBuildFile; fileRef = 793C52C31C5E2D9600C33328 /* thirdParty.html */; };
 		793C52C61C5E311300C33328 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 793C52C51C5E311300C33328 /* SystemConfiguration.framework */; };
@@ -167,6 +168,7 @@
 		79306D5E1C4AF21100708BED /* AlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		79306D601C4AF46600708BED /* MJProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MJProgressView.swift; sourceTree = "<group>"; };
 		79306D621C4AF79400708BED /* ModelName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelName.swift; sourceTree = "<group>"; };
+		7939FBFE1D80A1CC004EA871 /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileView.swift; path = Views/ProfileView/ProfileView.swift; sourceTree = "<group>"; };
 		793C52C11C5E1BE500C33328 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		793C52C31C5E2D9600C33328 /* thirdParty.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = thirdParty.html; sourceTree = "<group>"; };
 		793C52C51C5E311300C33328 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -330,6 +332,15 @@
 				74F850461F157F431C9CB699 /* Pods.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7939FC001D80A1D8004EA871 /* ProfileView */ = {
+			isa = PBXGroup;
+			children = (
+				79F826591C5527ED0002DCC8 /* ProfileView.xib */,
+				7939FBFE1D80A1CC004EA871 /* ProfileView.swift */,
+			);
+			name = ProfileView;
 			sourceTree = "<group>";
 		};
 		7959943E1C52C8D1007BE7C5 /* Application */ = {
@@ -630,7 +641,7 @@
 				79836AE31D7F74FA009134EF /* LoadingView */,
 				79F42BE61D68BE32008DF047 /* DownloadingAllUsersView.xib */,
 				79F42BE41D68BE1B008DF047 /* LittleUserView.xib */,
-				79F826591C5527ED0002DCC8 /* ProfileView.xib */,
+				7939FC001D80A1D8004EA871 /* ProfileView */,
 				79DE549B1C5BABFF00E2ADDE /* EmptyPlanningTableView.xib */,
 				79F2B1011C60FAE600244AC6 /* EmptyTableView.xib */,
 				79836AC21D7F59CA009134EF /* LoadingDataTableViewCell */,
@@ -961,6 +972,7 @@
 				79622E981C5D567A00FBA456 /* MarksApiCalls.swift in Sources */,
 				79622EA21C5D66BB00FBA456 /* SearchUserViewController.swift in Sources */,
 				79F42BEB1D68C65A008DF047 /* Configuration.swift in Sources */,
+				7939FBFF1D80A1CC004EA871 /* ProfileView.swift in Sources */,
 				795CC3281C5CB585007AFE87 /* ProjectsViewController.swift in Sources */,
 				79F42BE91D68C5D7008DF047 /* RequestManager.swift in Sources */,
 				79836AC01D7F59A3009134EF /* LoadingDataTableViewCell.swift in Sources */,

@@ -4,7 +4,19 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileView" customModule="Epintra" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="NZ0-AA-mu5"/>
+                <outlet property="creditsNumberLabel" destination="s3d-M2-clm" id="J99-xs-4h0"/>
+                <outlet property="creditsTitleLabel" destination="p1I-N5-CCq" id="yu2-gU-F9j"/>
+                <outlet property="gpaNumberLabel" destination="iS0-nM-B0V" id="Oia-Sy-qBr"/>
+                <outlet property="gpaTitleLabel" destination="AiF-g3-JaL" id="tAB-jX-5CS"/>
+                <outlet property="gpaTypeLabel" destination="zEl-XR-dcc" id="JWT-n2-xeM"/>
+                <outlet property="logLabel" destination="fro-Zn-1bE" id="DnM-iu-hSv"/>
+                <outlet property="spicesLabel" destination="XJB-Ap-nQy" id="LlR-CW-wOO"/>
+                <outlet property="userProfileImage" destination="ps4-H6-cc3" id="woa-fP-gHA"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="600" height="110"/>

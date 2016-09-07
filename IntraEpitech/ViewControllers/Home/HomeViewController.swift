@@ -11,18 +11,9 @@ import Haneke
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
-	@IBOutlet weak var menuButton: UIBarButtonItem!
-	@IBOutlet weak var profileViewContainer: UIView!
 	@IBOutlet weak var alertTableView: UITableView!
+	@IBOutlet weak var profileView: ProfileView!
 	
-	var profileImageView :UIImageView!
-	var creditsTitleLabel :UILabel!
-	var creditsLabel :UILabel!
-	var spicesLabel :UILabel!
-	var logLabel :UILabel!
-	var gpaTitleLabel :UILabel!
-	var gpaLabel :UILabel!
-	var	gpaTypeLabel :UILabel!
 	var currentUser :User?
 	
 	var refreshControl = UIRefreshControl()
@@ -32,21 +23,21 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 		
 		currentUser = ApplicationManager.sharedInstance.user!
 		
-		loadProfileView()
+		//		loadProfileView()
 		
-		if let img = ApplicationManager.sharedInstance.downloadedImages![(ApplicationManager.sharedInstance.user?.imageUrl!)!] {
-			self.profileImageView.image = img
-			self.profileImageView.cropToSquare()
+		//		if let img = ApplicationManager.sharedInstance.downloadedImages![(ApplicationManager.sharedInstance.user?.imageUrl!)!] {
+		//			self.profileImageView.image = img
+		//			self.profileImageView.cropToSquare()
+		//		}
+		//		
+		//		profileImageView.toCircle()
+		//		profileImageView.cropToSquare()
+		
+		//		setUIElements()
+		
+		if (currentUser != nil) {
+			self.profileView.setUserData(currentUser!)
 		}
-		
-		profileImageView.toCircle()
-		profileImageView.cropToSquare()
-		
-		setUIElements()
-		
-		self.refreshControl.tintColor = UIUtils.backgroundColor()
-		self.refreshControl.addTarget(self, action: #selector(HomeViewController.refreshData(_:)), forControlEvents: .ValueChanged)
-		self.alertTableView.addSubview(refreshControl)
 		
 	}
 	
@@ -85,45 +76,37 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 				}
 			}
 		}
-		
-		
-		
-		
-		/*UserApiCalls.getUserHistory() { (isOk :Bool, s :String) in
-		self._refreshControl.endRefreshing()
-		self._alertTableView.reloadData()
-		}*/
 	}
 	
-	func loadProfileView() {
-		let nibView = NSBundle.mainBundle().loadNibNamed("ProfileView", owner: self, options: nil)[0] as! UIView
-		profileViewContainer.addSubview(nibView)
-		
-		profileImageView = nibView.viewWithTag(1) as? UIImageView
-		creditsTitleLabel = nibView.viewWithTag(2) as? UILabel!
-		creditsLabel = nibView.viewWithTag(3) as? UILabel!
-		spicesLabel = nibView.viewWithTag(4) as? UILabel!
-		logLabel = nibView.viewWithTag(5) as? UILabel!
-		gpaTitleLabel = nibView.viewWithTag(6) as? UILabel!
-		gpaLabel = nibView.viewWithTag(7) as? UILabel!
-		gpaTypeLabel = nibView.viewWithTag(8) as? UILabel!
-	}
-	
-	func setUIElements() {
-		creditsTitleLabel.text = NSLocalizedString("credits", comment: "")
-		creditsLabel.text = String(currentUser!.credits!)
-		spicesLabel.text =  currentUser!.spices!.currentSpices + " " + NSLocalizedString("spices", comment: "")
-		logLabel.text = "Log : " + String(currentUser!.log!.timeActive)
-		logLabel.textColor = currentUser?.log?.getColor()
-		
-		
-		let gpa = currentUser?.getLatestGPA()
-		gpaTitleLabel.text = NSLocalizedString("gpa", comment: "")
-		gpaLabel.text = gpa?.value
-		gpaTypeLabel.text = gpa?.cycle
-	}
-	
-	
+	//	func loadProfileView() {
+	//		let nibView = NSBundle.mainBundle().loadNibNamed("ProfileView", owner: self, options: nil)[0] as! UIView
+	//		profileViewContainer.addSubview(nibView)
+	//		
+	//		profileImageView = nibView.viewWithTag(1) as? UIImageView
+	//		creditsTitleLabel = nibView.viewWithTag(2) as? UILabel!
+	//		creditsLabel = nibView.viewWithTag(3) as? UILabel!
+	//		spicesLabel = nibView.viewWithTag(4) as? UILabel!
+	//		logLabel = nibView.viewWithTag(5) as? UILabel!
+	//		gpaTitleLabel = nibView.viewWithTag(6) as? UILabel!
+	//		gpaLabel = nibView.viewWithTag(7) as? UILabel!
+	//		gpaTypeLabel = nibView.viewWithTag(8) as? UILabel!
+	//	}
+	//	
+	//	func setUIElements() {
+	//		creditsTitleLabel.text = NSLocalizedString("credits", comment: "")
+	//		creditsLabel.text = String(currentUser!.credits!)
+	//		spicesLabel.text =  currentUser!.spices!.currentSpices + " " + NSLocalizedString("spices", comment: "")
+	//		logLabel.text = "Log : " + String(currentUser!.log!.timeActive)
+	//		logLabel.textColor = currentUser?.log?.getColor()
+	//		
+	//		
+	//		let gpa = currentUser?.getLatestGPA()
+	//		gpaTitleLabel.text = NSLocalizedString("gpa", comment: "")
+	//		gpaLabel.text = gpa?.value
+	//		gpaTypeLabel.text = gpa?.cycle
+	//	}
+	//	
+	//	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
@@ -146,7 +129,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 	
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		
-		let rows = currentUser?.history?.count
+		var rows = currentUser?.history?.count
+		
+		if rows == nil {
+			rows = 0
+		}
 		
 		if (rows == 0) {
 			let messageLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
