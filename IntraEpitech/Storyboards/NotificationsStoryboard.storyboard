@@ -35,8 +35,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MwS-Fz-mdK">
-                                <rect key="frame" x="0.0" y="375" width="600" height="176"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MwS-Fz-mdK">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="alertCell" rowHeight="80" id="jDm-sd-RBT">
@@ -84,25 +84,18 @@
                                     <outlet property="delegate" destination="e6C-k5-WmP" id="kch-s8-Iad"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yh6-8n-TRr" customClass="ProfileView" customModule="Epintra" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="600" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="RMh-ac-isV" firstAttribute="top" secondItem="MwS-Fz-mdK" secondAttribute="bottom" id="6V9-Hv-KDa"/>
+                            <constraint firstItem="RMh-ac-isV" firstAttribute="top" secondItem="MwS-Fz-mdK" secondAttribute="bottom" constant="-49" id="6V9-Hv-KDa"/>
                             <constraint firstAttribute="trailingMargin" secondItem="MwS-Fz-mdK" secondAttribute="trailing" constant="-20" id="9rB-ux-gBS"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Yh6-8n-TRr" secondAttribute="trailing" constant="-20" id="CKg-ge-nIl"/>
-                            <constraint firstItem="Yh6-8n-TRr" firstAttribute="leading" secondItem="DZc-fU-fPH" secondAttribute="leadingMargin" constant="-20" id="UBl-ml-kdT"/>
-                            <constraint firstItem="Yh6-8n-TRr" firstAttribute="top" secondItem="2Y1-VB-8Ut" secondAttribute="bottom" id="bJR-M6-ver"/>
+                            <constraint firstItem="MwS-Fz-mdK" firstAttribute="top" secondItem="2Y1-VB-8Ut" secondAttribute="bottom" constant="-64" id="DHQ-qa-J88"/>
                             <constraint firstItem="MwS-Fz-mdK" firstAttribute="leading" secondItem="DZc-fU-fPH" secondAttribute="leadingMargin" constant="-20" id="yDe-vK-AXZ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="3SB-rj-Fv8"/>
                     <connections>
                         <outlet property="alertTableView" destination="MwS-Fz-mdK" id="wXM-yO-qZ5"/>
-                        <outlet property="profileView" destination="Yh6-8n-TRr" id="7Td-ss-4C6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Iw-OD-QbQ" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -12,7 +12,6 @@ import Haneke
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
 	@IBOutlet weak var alertTableView: UITableView!
-	@IBOutlet weak var profileView: ProfileView!
 	
 	var currentUser :User?
 	
@@ -22,22 +21,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 		super.viewDidLoad()
 		
 		currentUser = ApplicationManager.sharedInstance.user!
-		
-		//		loadProfileView()
-		
-		//		if let img = ApplicationManager.sharedInstance.downloadedImages![(ApplicationManager.sharedInstance.user?.imageUrl!)!] {
-		//			self.profileImageView.image = img
-		//			self.profileImageView.cropToSquare()
-		//		}
-		//		
-		//		profileImageView.toCircle()
-		//		profileImageView.cropToSquare()
-		
-		//		setUIElements()
-		
-		if (currentUser != nil) {
-			self.profileView.setUserData(currentUser!)
-		}
 		
 	}
 	
@@ -49,67 +32,74 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 		
 		let app = ApplicationManager.sharedInstance
 		
-		if (NSDate().timeIntervalSince1970 > ((5 * 60 * 1000) + app.lastUserApiCall!)) {
+		// If it's 5 minutes from the last call
+		if (NSDate().timeIntervalSince1970 > ((300000) + app.lastUserApiCall!)) {
 			refreshData(self)
 		}
 	}
 	
 	func refreshData(sender:AnyObject) {
 		
-		UserApiCalls.getUserData(ApplicationManager.sharedInstance.currentLogin!) { (isOk :Bool, s :String) in
-		 
-			if (!isOk) {
-				MJProgressView.instance.hideProgress()
-				ErrorViewer.errorPresent(self, mess: s) {}
-				self.refreshControl.endRefreshing()
-				self.alertTableView.reloadData()
-			} else {
-				ImageDownloader.downloadFrom(link: (ApplicationManager.sharedInstance.user?.imageUrl!)!) {_ in 
-					UserApiCalls.getUserHistory() { (isOk :Bool, s :String) in
-						MJProgressView.instance.hideProgress()
-						if (!isOk) {
-							ErrorViewer.errorPresent(self, mess: s) {}
-						}
-						self.refreshControl.endRefreshing()
+		let dispatchGroup = dispatch_group_create()
+		
+		let historySave = currentUser?.history
+		
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+			dispatch_group_async(dispatchGroup, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+				self.userDataCall(dispatchGroup)
+				self.userHistoryCall(dispatchGroup)
+			})
+			dispatch_group_notify(dispatchGroup, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+				dispatch_async(dispatch_get_main_queue(), {
+					// Update tableview if changes
+					
+					if (historySave! != self.currentUser!.history!) {
 						self.alertTableView.reloadData()
 					}
-				}
-			}
-		}
+					
+				})
+			})
+		})
 	}
 	
-	//	func loadProfileView() {
-	//		let nibView = NSBundle.mainBundle().loadNibNamed("ProfileView", owner: self, options: nil)[0] as! UIView
-	//		profileViewContainer.addSubview(nibView)
-	//		
-	//		profileImageView = nibView.viewWithTag(1) as? UIImageView
-	//		creditsTitleLabel = nibView.viewWithTag(2) as? UILabel!
-	//		creditsLabel = nibView.viewWithTag(3) as? UILabel!
-	//		spicesLabel = nibView.viewWithTag(4) as? UILabel!
-	//		logLabel = nibView.viewWithTag(5) as? UILabel!
-	//		gpaTitleLabel = nibView.viewWithTag(6) as? UILabel!
-	//		gpaLabel = nibView.viewWithTag(7) as? UILabel!
-	//		gpaTypeLabel = nibView.viewWithTag(8) as? UILabel!
-	//	}
-	//	
-	//	func setUIElements() {
-	//		creditsTitleLabel.text = NSLocalizedString("credits", comment: "")
-	//		creditsLabel.text = String(currentUser!.credits!)
-	//		spicesLabel.text =  currentUser!.spices!.currentSpices + " " + NSLocalizedString("spices", comment: "")
-	//		logLabel.text = "Log : " + String(currentUser!.log!.timeActive)
-	//		logLabel.textColor = currentUser?.log?.getColor()
-	//		
-	//		
-	//		let gpa = currentUser?.getLatestGPA()
-	//		gpaTitleLabel.text = NSLocalizedString("gpa", comment: "")
-	//		gpaLabel.text = gpa?.value
-	//		gpaTypeLabel.text = gpa?.cycle
-	//	}
-	//	
-	//	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
+	}
+	
+	func userDataCall(group: dispatch_group_t) {
+		dispatch_group_enter(group)
+		userRequests.getCurrentUserData { result in
+			
+			switch (result) {
+			case .Success(_):
+				logger.info("Get user data ok")
+				break
+			case .Failure(let error):
+				MJProgressView.instance.hideProgress()
+				ErrorViewer.errorPresent(self, mess: error.message!) { }
+				break
+			}
+			dispatch_group_leave(group)
+		}
+	}
+	
+	func userHistoryCall(group: dispatch_group_t) {
+		dispatch_group_enter(group)
+		userRequests.getHistory() { result in
+			switch (result) {
+			case .Success(_):
+				logger.info("Get user history")
+				break
+			case .Failure(let error):
+				MJProgressView.instance.hideProgress()
+				if error.message != nil {
+					ErrorViewer.errorPresent(self, mess: error.message!) {}
+				}
+				break
+			}
+			dispatch_group_leave(group)
+		}
 	}
 	
 	
