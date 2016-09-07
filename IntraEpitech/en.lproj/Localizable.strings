@@ -110,10 +110,10 @@
 
 "Ranking" = "Ranking";
 "Files" = "Files";
-"Medals" = "Medals";
-"Remarkables" = "Remarkables";
-"Difficulty" = "Difficulties";
-"Ghost" = "Ghosts";
+"Medals" = "Medals 🏅";
+"Remarkables" = "Remarkables 👍";
+"Difficulty" = "Difficulties 🏊";
+"Ghost" = "Ghosts 👻";
 "NoFile" = "No file";
 "NoFlag" = "No flag";
 "AddContact" = "Ajouter aux contacts";

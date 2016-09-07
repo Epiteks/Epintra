@@ -104,13 +104,12 @@
 /**
  ** Profile
  */
-
 "Ranking" = "Classement";
 "Files" = "Documents";
-"Medals" = "Médailles";
-"Remarkables" = "Encouragements";
-"Difficulty" = "Difficultés";
-"Ghost" = "Fantômes";
+"Medals" = "Médailles 🏅";
+"Remarkables" = "Encouragements 👍";
+"Difficulty" = "Difficultés 🏊";
+"Ghost" = "Fantômes 👻";
 "NoFile" = "Aucun Document";
 "NoFlag" = "Aucun Flag";
 "AddContact" = "Ajouter aux contacts";
