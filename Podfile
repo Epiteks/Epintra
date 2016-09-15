@@ -10,6 +10,5 @@ pod 'HanekeSwift'
 pod 'Log'
 pod 'FSCalendar'
 pod 'MGSwipeTableCell'
-pod "SAConfettiView"
 pod 'FMDB'
 pod 'FMDB/SQLCipher'

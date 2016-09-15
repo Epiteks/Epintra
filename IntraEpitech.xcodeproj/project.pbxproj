@@ -74,8 +74,6 @@
 		79836ACE1D7F72D3009134EF /* EmptyDataTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79836ACC1D7F72D3009134EF /* EmptyDataTableViewCell.xib */; };
 		79836AD71D7F74C2009134EF /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79836AD51D7F74C2009134EF /* LoadingView.swift */; };
 		79836AD81D7F74C2009134EF /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79836AD61D7F74C2009134EF /* LoadingView.xib */; };
-		79836ADB1D7F74C8009134EF /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79836AD91D7F74C8009134EF /* ProfileTableViewCell.swift */; };
-		79836ADC1D7F74C8009134EF /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79836ADA1D7F74C8009134EF /* ProfileTableViewCell.xib */; };
 		79836ADF1D7F74CE009134EF /* NoDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79836ADD1D7F74CE009134EF /* NoDataView.swift */; };
 		79836AE01D7F74CE009134EF /* NoDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79836ADE1D7F74CE009134EF /* NoDataView.xib */; };
 		798850381C4AC51C00BAA888 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798850371C4AC51C00BAA888 /* AppDelegate.swift */; };
@@ -218,8 +216,6 @@
 		79836ACC1D7F72D3009134EF /* EmptyDataTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EmptyDataTableViewCell.xib; path = Views/EmptyDataTableViewCell/EmptyDataTableViewCell.xib; sourceTree = "<group>"; };
 		79836AD51D7F74C2009134EF /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadingView.swift; path = Views/LoadingView/LoadingView.swift; sourceTree = "<group>"; };
 		79836AD61D7F74C2009134EF /* LoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoadingView.xib; path = Views/LoadingView/LoadingView.xib; sourceTree = "<group>"; };
-		79836AD91D7F74C8009134EF /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileTableViewCell.swift; path = Views/ProfileTableViewCell/ProfileTableViewCell.swift; sourceTree = "<group>"; };
-		79836ADA1D7F74C8009134EF /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProfileTableViewCell.xib; path = Views/ProfileTableViewCell/ProfileTableViewCell.xib; sourceTree = "<group>"; };
 		79836ADD1D7F74CE009134EF /* NoDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoDataView.swift; path = Views/NoDataView/NoDataView.swift; sourceTree = "<group>"; };
 		79836ADE1D7F74CE009134EF /* NoDataView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NoDataView.xib; path = Views/NoDataView/NoDataView.xib; sourceTree = "<group>"; };
 		798850341C4AC51C00BAA888 /* Epintra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Epintra.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -451,15 +447,6 @@
 			name = NoDataView;
 			sourceTree = "<group>";
 		};
-		79836AE21D7F74ED009134EF /* ProfileTableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				79836AD91D7F74C8009134EF /* ProfileTableViewCell.swift */,
-				79836ADA1D7F74C8009134EF /* ProfileTableViewCell.xib */,
-			);
-			name = ProfileTableViewCell;
-			sourceTree = "<group>";
-		};
 		79836AE31D7F74FA009134EF /* LoadingView */ = {
 			isa = PBXGroup;
 			children = (
@@ -637,7 +624,6 @@
 			isa = PBXGroup;
 			children = (
 				79836AE11D7F74E0009134EF /* NoDataView */,
-				79836AE21D7F74ED009134EF /* ProfileTableViewCell */,
 				79836AE31D7F74FA009134EF /* LoadingView */,
 				79F42BE61D68BE32008DF047 /* DownloadingAllUsersView.xib */,
 				79F42BE41D68BE1B008DF047 /* LittleUserView.xib */,
@@ -823,7 +809,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				79836AC11D7F59A3009134EF /* LoadingDataTableViewCell.xib in Resources */,
-				79836ADC1D7F74C8009134EF /* ProfileTableViewCell.xib in Resources */,
 				79EA5CC81D5E78D500DA7C30 /* UserStoryboard.storyboard in Resources */,
 				79EA5CC01D5E696000DA7C30 /* SettingsStoryboard.storyboard in Resources */,
 				797DC7F71C7A1BF900ED095E /* Students1.0.1.sqlite in Resources */,
@@ -990,7 +975,6 @@
 				792B7A5F1C57EB3300F988BB /* ProfileViewController.swift in Sources */,
 				79F1F2731C5902B700AAFB69 /* Planning.swift in Sources */,
 				79F8265E1C552C5F0002DCC8 /* UIImageViewExtensions.swift in Sources */,
-				79836ADB1D7F74C8009134EF /* ProfileTableViewCell.swift in Sources */,
 				79779A9E1C5912DA008803C5 /* SystemUtils.swift in Sources */,
 				795CC3301C5CF840007AFE87 /* File.swift in Sources */,
 				797DC7F31C7A0B4E00ED095E /* DBManager.swift in Sources */,
