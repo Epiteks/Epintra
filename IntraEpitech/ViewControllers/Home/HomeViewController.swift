@@ -187,4 +187,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 			self.alertTableView.backgroundView = nil
 		}
 	}
+	
+	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+		return 80.0
+	}
 }
