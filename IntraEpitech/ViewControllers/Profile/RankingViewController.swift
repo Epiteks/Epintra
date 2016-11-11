@@ -7,6 +7,26 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class RankingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchControllerDelegate, UISearchResultsUpdating {
 	
@@ -35,11 +55,11 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		let db = DBManager.getInstance()
 		
-		promoSelection.setTitle(NSLocalizedString(teks[0], comment: ""), forSegmentAtIndex: 0)
-		promoSelection.setTitle(NSLocalizedString(teks[1], comment: ""), forSegmentAtIndex: 1)
-		promoSelection.setTitle(NSLocalizedString(teks[2], comment: ""), forSegmentAtIndex: 2)
-		promoSelection.setTitle(NSLocalizedString(teks[3], comment: ""), forSegmentAtIndex: 3)
-		promoSelection.setTitle(NSLocalizedString(teks[4], comment: ""), forSegmentAtIndex: 4)
+		promoSelection.setTitle(NSLocalizedString(teks[0], comment: ""), forSegmentAt: 0)
+		promoSelection.setTitle(NSLocalizedString(teks[1], comment: ""), forSegmentAt: 1)
+		promoSelection.setTitle(NSLocalizedString(teks[2], comment: ""), forSegmentAt: 2)
+		promoSelection.setTitle(NSLocalizedString(teks[3], comment: ""), forSegmentAt: 3)
+		promoSelection.setTitle(NSLocalizedString(teks[4], comment: ""), forSegmentAt: 4)
 		promoSelection.tintColor = UIUtils.backgroundColor()
 		
 		downloadingLabel.text = NSLocalizedString("DownloadingAllUsers", comment :"")
@@ -51,11 +71,11 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 		resultSearchController.searchResultsUpdater = self
 		resultSearchController.hidesNavigationBarDuringPresentation = false
 		resultSearchController.dimsBackgroundDuringPresentation = false
-		resultSearchController.searchBar.searchBarStyle = UISearchBarStyle.Prominent
+		resultSearchController.searchBar.searchBarStyle = UISearchBarStyle.prominent
 		resultSearchController.searchBar.sizeToFit()
 		
 		resultSearchController.searchBar.barTintColor = UIUtils.backgroundColor()
-		resultSearchController.searchBar.tintColor = UIColor.whiteColor()
+		resultSearchController.searchBar.tintColor = UIColor.white
 		
 		if (students.count == 0) {
 			showConfirmationAlert()
@@ -69,11 +89,11 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 			//                self.downloadingView.hidden = true
 			//            }
 		} else {
-			self.downloadingView.hidden = true
+			self.downloadingView.isHidden = true
 			self.navigationItem.titleView = resultSearchController.searchBar
 		}
 		self.refreshControl.tintColor = UIUtils.backgroundColor()
-		self.refreshControl.addTarget(self, action: #selector(RankingViewController.refreshData(_:)), forControlEvents: .ValueChanged)
+		self.refreshControl.addTarget(self, action: #selector(RankingViewController.refreshData(_:)), for: .valueChanged)
 		self.tableView.addSubview(refreshControl)
 	}
 	
@@ -85,50 +105,50 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 	
 	func showConfirmationAlert() {
 		
-		let alertController = UIAlertController(title: NSLocalizedString("DataDownload", comment: ""), message: NSLocalizedString("SureWantsDownloadData", comment: ""), preferredStyle: .Alert)
+		let alertController = UIAlertController(title: NSLocalizedString("DataDownload", comment: ""), message: NSLocalizedString("SureWantsDownloadData", comment: ""), preferredStyle: .alert)
 		
-		let cancelAction = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .Cancel) { (action:UIAlertAction!) in
+		let cancelAction = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .cancel) { (action:UIAlertAction!) in
 			self.refreshControl.endRefreshing()
-			self.downloadingView.hidden = true
-			self.tableView.scrollEnabled = true
-			self.tableView.userInteractionEnabled = true
-			self.promoSelection.userInteractionEnabled = true
+			self.downloadingView.isHidden = true
+			self.tableView.isScrollEnabled = true
+			self.tableView.isUserInteractionEnabled = true
+			self.promoSelection.isUserInteractionEnabled = true
 			if (self.students.count == 0) {
-				self.navigationController?.popViewControllerAnimated(true)
+				self.navigationController?.popViewController(animated: true)
 			}
 		}
 		alertController.addAction(cancelAction)
 		
-		let OKAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .Default) { (action:UIAlertAction!) in
+		let OKAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { (action:UIAlertAction!) in
 			self.refreshControl.endRefreshing()
 			let db = DBManager.getInstance()
-			self.downloadingView.hidden = false
+			self.downloadingView.isHidden = false
 			MJProgressView.instance.showProgress(self.view, white: true)
 			UserApiCalls.getAllUsers() { (isOk :Bool, res :[StudentInfo]?, mess :String) in
 				self.students = db.getStudentDataFor(Promo: self.teks[self.promoSelection.selectedSegmentIndex]) as AnyObject as! [StudentInfo]
 				MJProgressView.instance.hideProgress()
 				self.navigationItem.titleView = self.resultSearchController.searchBar
 				self.tableView.reloadData()
-				self.downloadingView.hidden = true
-				self.tableView.scrollEnabled = true
-				self.tableView.userInteractionEnabled = true
-				self.promoSelection.userInteractionEnabled = true
+				self.downloadingView.isHidden = true
+				self.tableView.isScrollEnabled = true
+				self.tableView.isUserInteractionEnabled = true
+				self.promoSelection.isUserInteractionEnabled = true
 			}
 			
 		}
 		alertController.addAction(OKAction)
 		
-		self.presentViewController(alertController, animated: true, completion:nil)
+		self.present(alertController, animated: true, completion:nil)
 	}
 	
-	func scrollViewDidScroll(scrollView: UIScrollView) {
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		self.resultSearchController.searchBar.endEditing(true)
 	}
 	
-	func refreshData(sender:AnyObject) {
-		self.tableView.userInteractionEnabled = false
-		self.tableView.scrollEnabled = false
-		self.promoSelection.userInteractionEnabled = false
+	func refreshData(_ sender:AnyObject) {
+		self.tableView.isUserInteractionEnabled = false
+		self.tableView.isScrollEnabled = false
+		self.promoSelection.isUserInteractionEnabled = false
 		// let db = DBManager.getInstance()
 		
 		showConfirmationAlert()
@@ -146,12 +166,12 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 	}
 	
 	
-	@IBAction func segmentedChanged(sender: UISegmentedControl) {
+	@IBAction func segmentedChanged(_ sender: UISegmentedControl) {
 		
 		let selected = teks[sender.selectedSegmentIndex]
 		
 		self.resultSearchController.searchBar.endEditing(true)
-		self.resultSearchController.dismissViewControllerAnimated(true) { () -> Void in
+		self.resultSearchController.dismiss(animated: true) { () -> Void in
 			
 		}
 		let db = DBManager.getInstance()
@@ -169,49 +189,49 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 	}
 	*/
 	
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-		resultSearchController.active = false
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		resultSearchController.isActive = false
 		if (segue.identifier == "otherUserProfileSegue") {
-			let vc = segue.destinationViewController as! OtherUserViewController
+			let vc = segue.destination as! OtherUserViewController
 			vc.currentUser = selectedUser
 		}
 	}
 	
-	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
 	}
 	
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		if(resultSearchController.active) {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		if(resultSearchController.isActive) {
 			return filteredData.count
 		}
 		return students.count
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCellWithIdentifier("studentCell")!
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "studentCell")!
 		
 		let login = cell.viewWithTag(1) as! UILabel
 		let city = cell.viewWithTag(2) as! UILabel
 		let gpa = cell.viewWithTag(3) as! UILabel
 		
-		if(resultSearchController.active) {
-			login.text = filteredData[indexPath.row].login!
-			city.text = String(filteredData[indexPath.row].position!) + " - " + filteredData[indexPath.row].city!
-			gpa.text = String(filteredData[indexPath.row].gpa!)
+		if(resultSearchController.isActive) {
+			login.text = filteredData[(indexPath as NSIndexPath).row].login!
+			city.text = String(filteredData[(indexPath as NSIndexPath).row].position!) + " - " + filteredData[(indexPath as NSIndexPath).row].city!
+			gpa.text = String(filteredData[(indexPath as NSIndexPath).row].gpa!)
 		} else {
-			login.text = students[indexPath.row].login!
-			city.text = String(students[indexPath.row].position!) + " - " + students[indexPath.row].city!
-			gpa.text = String(students[indexPath.row].gpa!)
+			login.text = students[(indexPath as NSIndexPath).row].login!
+			city.text = String(students[(indexPath as NSIndexPath).row].position!) + " - " + students[(indexPath as NSIndexPath).row].city!
+			gpa.text = String(students[(indexPath as NSIndexPath).row].gpa!)
 			
 			if (login.text == ApplicationManager.sharedInstance.user?.login!) {
 				login.textColor = UIUtils.planningRedColor()
 				city.textColor = UIUtils.planningRedColor()
 				gpa.textColor = UIUtils.planningRedColor()
 			} else {
-				login.textColor = UIColor.blackColor()
-				city.textColor = UIColor.lightGrayColor()
-				gpa.textColor = UIColor.blackColor()
+				login.textColor = UIColor.black
+				city.textColor = UIColor.lightGray
+				gpa.textColor = UIColor.black
 			}
 			
 		}
@@ -219,16 +239,16 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 		return cell
 	}
 	
-	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
 		
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+		tableView.deselectRow(at: indexPath, animated: true)
 		self.view.endEditing(true)
-		let usr = (self.resultSearchController.active == true ? filteredData[indexPath.row] : students[indexPath.row])
+		let usr = (self.resultSearchController.isActive == true ? filteredData[(indexPath as NSIndexPath).row] : students[(indexPath as NSIndexPath).row])
 		
-		tableView.userInteractionEnabled = false
-		tableView.scrollEnabled = false
-		self.promoSelection.userInteractionEnabled = false
+		tableView.isUserInteractionEnabled = false
+		tableView.isScrollEnabled = false
+		self.promoSelection.isUserInteractionEnabled = false
 		MJProgressView.instance.showProgress(self.view, white: false)
 		UserApiCalls.getSelectedUserData(usr.login!) { (isOk :Bool, resp :User?, mess :String) in
 			
@@ -239,25 +259,25 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 				self.selectedUser = resp
 				print(self.selectedUser?.login)
 				MJProgressView.instance.hideProgress()
-				self.performSegueWithIdentifier("otherUserProfileSegue", sender: self)
+				self.performSegue(withIdentifier: "otherUserProfileSegue", sender: self)
 			}
-			tableView.userInteractionEnabled = true
-			tableView.scrollEnabled = true
-			self.promoSelection.userInteractionEnabled = true
+			tableView.isUserInteractionEnabled = true
+			tableView.isScrollEnabled = true
+			self.promoSelection.isUserInteractionEnabled = true
 		}
 		
 	}
 	
-	func updateSearchResultsForSearchController(searchController: UISearchController) {
+	func updateSearchResults(for searchController: UISearchController) {
 		if searchController.searchBar.text?.characters.count > 0 {
-			filteredData.removeAll(keepCapacity: false)
-			let array = students.filter() { ($0.login?.containsString(searchController.searchBar.text!.lowercaseString))! }
+			filteredData.removeAll(keepingCapacity: false)
+			let array = students.filter() { ($0.login?.contains(searchController.searchBar.text!.lowercased()))! }
 			filteredData = array
 			tableView.reloadData()
 			
 		} else {
 			
-			filteredData.removeAll(keepCapacity: false)
+			filteredData.removeAll(keepingCapacity: false)
 			
 			filteredData = students
 			

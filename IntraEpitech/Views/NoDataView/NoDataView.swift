@@ -10,8 +10,8 @@ import UIKit
 
 class NoDataView: UIView {
 	
-	@IBOutlet private var contentView: UIView?
-	@IBOutlet private var informationLabel: UILabel?
+	@IBOutlet fileprivate var contentView: UIView?
+	@IBOutlet fileprivate var informationLabel: UILabel?
 	
 	var informationText: String?
 	
@@ -31,11 +31,11 @@ class NoDataView: UIView {
 		commonInit()
 	}
 	
-	private func commonInit() {
-		NSBundle.mainBundle().loadNibNamed("NoDataView", owner: self, options: nil)
+	fileprivate func commonInit() {
+		Bundle.main.loadNibNamed("NoDataView", owner: self, options: nil)
 		guard let content = contentView else { return }
 		content.frame = self.bounds
-		content.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
+		content.autoresizingMask = [.flexibleHeight, .flexibleWidth]
 		
 		if informationText != nil {
 			informationLabel?.text = informationText!

@@ -13,18 +13,18 @@ class ContactsHelper: NSObject {
 	
 	let addressBookRef: ABAddressBook = ABAddressBookCreateWithOptions(nil, nil).takeRetainedValue()
 	
-	func authorize(onCompletion :(Bool) -> ()) {
+	func authorize(_ onCompletion :@escaping (Bool) -> ()) {
 		
 		let authorizationStatus = ABAddressBookGetAuthorizationStatus()
 		
 		switch authorizationStatus {
-		case .Denied, .Restricted:
+		case .denied, .restricted:
 			//1
 			onCompletion(false)
-		case .Authorized:
+		case .authorized:
 			//2
 			onCompletion(true)
-		case .NotDetermined:
+		case .notDetermined:
 			//3
 			promptForAddressBookRequestAccess() { (res :Bool) in
 				onCompletion(res)
@@ -33,11 +33,11 @@ class ContactsHelper: NSObject {
 		}
 	}
 	
-	func promptForAddressBookRequestAccess(onCompletion :(Bool) -> ()) {
+	func promptForAddressBookRequestAccess(_ onCompletion :@escaping (Bool) -> ()) {
 		//let err: Unmanaged<CFError>? = nil
 		ABAddressBookRequestAccessWithCompletion(addressBookRef) {
-			(granted: Bool, error: CFError!) in
-			dispatch_async(dispatch_get_main_queue()) {
+			(granted: Bool, error: CFError?) in
+			DispatchQueue.main.async {
 				if !granted {
 					print("Just denied")
 					onCompletion(false)
@@ -49,14 +49,14 @@ class ContactsHelper: NSObject {
 		}
 	}
 	
-	func createUserRecord(usr: User) -> ABRecordRef {
-		let usrRecord: ABRecordRef = ABPersonCreate().takeRetainedValue()
-		ABRecordSetValue(usrRecord, kABPersonFirstNameProperty, usr.firstname, nil)
-		ABRecordSetValue(usrRecord, kABPersonLastNameProperty, usr.lastname, nil)
+	func createUserRecord(_ usr: User) -> ABRecord {
+		let usrRecord: ABRecord = ABPersonCreate().takeRetainedValue()
+		ABRecordSetValue(usrRecord, kABPersonFirstNameProperty, usr.firstname as CFTypeRef!, nil)
+		ABRecordSetValue(usrRecord, kABPersonLastNameProperty, usr.lastname as CFTypeRef!, nil)
 		
 		if (ApplicationManager.sharedInstance.canDownload == true) {
 			let img = ApplicationManager.sharedInstance.downloadedImages![usr.imageUrl!]
-			ABPersonSetImageData(usrRecord, UIImagePNGRepresentation(img!), nil)
+			ABPersonSetImageData(usrRecord, UIImagePNGRepresentation(img!) as CFData!, nil)
 		}
 		return usrRecord
 	}

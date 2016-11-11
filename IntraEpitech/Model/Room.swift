@@ -23,7 +23,7 @@ class Room: NSObject {
 	
 	func getRoomCleaned() -> String {
 		
-		let arr = code?.componentsSeparatedByString("/")
+		let arr = code?.components(separatedBy: "/")
 		
 		if arr != nil && arr!.count == 0 {
 			return ""
@@ -31,5 +31,5 @@ class Room: NSObject {
 		
 		let res :String = arr![arr!.count - 1]
 		
-		return res.stringByReplacingOccurrencesOfString("-", withString: " ")	}
+		return res.replacingOccurrences(of: "-", with: " ")	}
 }

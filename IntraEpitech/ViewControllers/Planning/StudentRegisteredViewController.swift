@@ -35,35 +35,35 @@ class StudentRegisteredViewController: UIViewController, UITableViewDelegate, UI
 	}
 	*/
 	
-	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
 	}
 	
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return data.count
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCellWithIdentifier("studentCell")
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "studentCell")
 		
 		let login = cell?.viewWithTag(1) as! UILabel
 		let status = cell?.viewWithTag(2) as! UILabel
 		
-		login.text = data[indexPath.row].login
-		status.text = data[indexPath.row].status
+		login.text = data[(indexPath as NSIndexPath).row].login
+		status.text = data[(indexPath as NSIndexPath).row].status
 		
-		if (data[indexPath.row].login == ApplicationManager.sharedInstance.user?.login) {
-			login.textColor = UIColor.redColor()
-			status.textColor = UIColor.redColor()
+		if (data[(indexPath as NSIndexPath).row].login == ApplicationManager.sharedInstance.user?.login) {
+			login.textColor = UIColor.red
+			status.textColor = UIColor.red
 		} else {
-			login.textColor = UIColor.blackColor()
-			status.textColor = UIColor.blackColor()
+			login.textColor = UIColor.black
+			status.textColor = UIColor.black
 		}
 		
 		return cell!
 	}
 	
-	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
 	}
 }

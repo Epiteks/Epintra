@@ -11,7 +11,7 @@ import UIKit
 class APICalls: NSObject {
 
 	class func getApiUrl() -> String {
-		return "http://epitech.hug33k.fr/"
+		return "http://epitech.hug33k.fr/intra/"
 
 		//		return "https://epitech-api.herokuapp.com/"
 	}

@@ -14,7 +14,7 @@ class History: NSObject {
 	var userName :String?
 	var userPicture :String?
 	var content :String?
-	var date :NSDate?
+	var date :Date?
 	
 	init(dict :JSON) {
 		

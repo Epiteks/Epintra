@@ -39,7 +39,7 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 		// Dispose of any resources that can be recreated.
 	}
 	
-	override func viewDidAppear(animated: Bool) {
+	override func viewDidAppear(_ animated: Bool) {
 		let calman = CalendarManager()
 		
 		
@@ -67,26 +67,26 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 	
 	func accessNotGrantedError() {
 		
-		let alertController = UIAlertController (title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("CalendarAccessDenied", comment: ""), preferredStyle: .Alert)
+		let alertController = UIAlertController (title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("CalendarAccessDenied", comment: ""), preferredStyle: .alert)
 		
-		let settingsAction = UIAlertAction(title: NSLocalizedString("Settings", comment: ""), style: .Default) { (_) -> Void in
+		let settingsAction = UIAlertAction(title: NSLocalizedString("Settings", comment: ""), style: .default) { (_) -> Void in
 			
-			dispatch_async(dispatch_get_main_queue(), {
-				let settingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
+			DispatchQueue.main.async(execute: {
+				let settingsUrl = URL(string: UIApplicationOpenSettingsURLString)
 				if let url = settingsUrl {
-					UIApplication.sharedApplication().openURL(url)
+					UIApplication.shared.openURL(url)
 				}
-				self.navigationController?.popViewControllerAnimated(true)
+				self.navigationController?.popViewController(animated: true)
 			})
 		}
 		
-		let cancelAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .Default) { (_) -> Void in
-			self.navigationController?.popViewControllerAnimated(true)
+		let cancelAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { (_) -> Void in
+			self.navigationController?.popViewController(animated: true)
 		}
 		alertController.addAction(settingsAction)
 		alertController.addAction(cancelAction)
 		
-		self.presentViewController(alertController, animated: true, completion: nil)
+		self.present(alertController, animated: true, completion: nil)
 		
 	}
 	
@@ -100,32 +100,32 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 	}
 	*/
 	
-	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
 	}
 	
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return calendars.count
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		let cell = UITableViewCell()
 		
-		cell.selectionStyle = .None
-		cell.textLabel?.text = calendars[indexPath.row].title
-		cell.textLabel?.textColor = UIColor(CGColor: calendars[indexPath.row].color)
-		if (calendars[indexPath.row].title == currentCalendar) {
-			cell.accessoryType = .Checkmark
-			currentCalendarIndex = indexPath.row
+		cell.selectionStyle = .none
+		cell.textLabel?.text = calendars[(indexPath as NSIndexPath).row].title
+		cell.textLabel?.textColor = UIColor(cgColor: calendars[(indexPath as NSIndexPath).row].color)
+		if (calendars[(indexPath as NSIndexPath).row].title == currentCalendar) {
+			cell.accessoryType = .checkmark
+			currentCalendarIndex = (indexPath as NSIndexPath).row
 		}
 		
 		return cell
 	}
 	
 	
-	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
 		
 		tableView.beginUpdates()
 		
@@ -133,17 +133,17 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 		var newCell :UITableViewCell?
 		
 		if (currentCalendarIndex != nil) {
-			prevCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: currentCalendarIndex!, inSection: 0))
-			prevCell?.accessoryType = .None
+			prevCell = tableView.cellForRow(at: IndexPath(row: currentCalendarIndex!, section: 0))
+			prevCell?.accessoryType = .none
 		}
-		newCell = tableView.cellForRowAtIndexPath(indexPath)
-		newCell?.accessoryType = .Checkmark
+		newCell = tableView.cellForRow(at: indexPath)
+		newCell?.accessoryType = .checkmark
 		
 		
-		ApplicationManager.sharedInstance.defaultCalendar = calendars[indexPath.row].title
-		currentCalendar = calendars[indexPath.row].title
-		currentCalendarIndex = indexPath.row
-		UserPreferences.savDefaultCalendar(calendars[indexPath.row].title)
+		ApplicationManager.sharedInstance.defaultCalendar = calendars[(indexPath as NSIndexPath).row].title
+		currentCalendar = calendars[(indexPath as NSIndexPath).row].title
+		currentCalendarIndex = (indexPath as NSIndexPath).row
+		UserPreferences.savDefaultCalendar(calendars[(indexPath as NSIndexPath).row].title)
 		
 		tableView.endUpdates()
 	}

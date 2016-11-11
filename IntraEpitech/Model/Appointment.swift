@@ -11,7 +11,7 @@ import SwiftyJSON
 
 class Appointment: NSObject {
 	
-	var date :NSDate?
+	var date :Date?
 	var master :RegisteredStudent?
 	var members :[RegisteredStudent]?
 	var title :String?

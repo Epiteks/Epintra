@@ -12,11 +12,11 @@ import Alamofire
 
 class MarksApiCalls: APICalls {
 	
-	class func getMarks(onCompletion :(Bool, [Mark]?, String) ->()) {
+	class func getMarks(_ onCompletion :@escaping (Bool, [Mark]?, String) ->()) {
 		
 		let url = super.getApiUrl() + "marks"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!])
+		Alamofire.request(url, method: .get, parameters: ["token": ApplicationManager.sharedInstance.token!])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)
@@ -29,24 +29,24 @@ class MarksApiCalls: APICalls {
 						let arr = responseCall.arrayValue
 						var resp = [Mark]()
 						for tmp in arr {
-							resp.insert(Mark(dict: tmp), atIndex: 0)
+							resp.insert(Mark(dict: tmp), at: 0)
 							//							resp.append(Mark(dict: tmp))
 						}
 						onCompletion(true, resp, "Ok")
 					}
 					
 				} else {
-					print("-----\(response.result.error?.debugDescription)")
+					//print("-----\(response.result.error?.debugDescription)")
 					onCompletion(false, nil, (response.result.error?.localizedDescription)!)
 				}
 		}
 	}
 	
-	class func getProjectMarks(mark :Mark, onCompletion :(Bool, [Mark]?, String) ->()) {
+	class func getProjectMarks(_ mark :Mark, onCompletion :@escaping (Bool, [Mark]?, String) ->()) {
 		
 		let url = super.getApiUrl() + "project/marks"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+		Alamofire.request(url, method: .get, parameters: ["token": ApplicationManager.sharedInstance.token!,
 			"scolaryear": mark.scolaryear!,
 			"codemodule": mark.codemodule!,
 			"codeinstance": mark.codeinstance!,
@@ -69,17 +69,17 @@ class MarksApiCalls: APICalls {
 					}
 					
 				} else {
-					print("-----\(response.result.error?.debugDescription)")
+					//print("-----\(response.result.error?.debugDescription)")
 					onCompletion(false, nil, (response.result.error?.localizedDescription)!)
 				}
 		}
 	}
 	
-	class func getProjectMarksForProject(proj :Project, onCompletion :(Bool, [Mark]?, String) ->()) {
+	class func getProjectMarksForProject(_ proj :Project, onCompletion :@escaping (Bool, [Mark]?, String) ->()) {
 		
 		let url = super.getApiUrl() + "project/marks"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+		Alamofire.request(url, method: .get, parameters: ["token": ApplicationManager.sharedInstance.token!,
 			"scolaryear": proj.scolaryear!,
 			"codemodule": proj.codeModule!,
 			"codeinstance": proj.codeInstance!,
@@ -102,17 +102,17 @@ class MarksApiCalls: APICalls {
 					}
 					
 				} else {
-					print("-----\(response.result.error?.debugDescription)")
+					//print("-----\(response.result.error?.debugDescription)")
 					onCompletion(false, nil, (response.result.error?.localizedDescription)!)
 				}
 		}
 	}
 	
-	class func getMarksFor(user login :String, onCompletion :(Bool, [Mark]?, String) ->()) {
+	class func getMarksFor(user login :String, onCompletion :@escaping (Bool, [Mark]?, String) ->()) {
 		
 		let url = super.getApiUrl() + "marks"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!, "login" :login])
+		Alamofire.request(url, method: .get, parameters: ["token": ApplicationManager.sharedInstance.token!, "login": login])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)
@@ -125,14 +125,14 @@ class MarksApiCalls: APICalls {
 						let arr = responseCall.arrayValue
 						var resp = [Mark]()
 						for tmp in arr {
-							resp.insert(Mark(dict: tmp), atIndex: 0)
+							resp.insert(Mark(dict: tmp), at: 0)
 							//							resp.append(Mark(dict: tmp))
 						}
 						onCompletion(true, resp, "Ok")
 					}
 					
 				} else {
-					print("-----\(response.result.error?.debugDescription)")
+					//print("-----\(response.result.error?.debugDescription)")
 					onCompletion(false, nil, (response.result.error?.localizedDescription)!)
 				}
 		}

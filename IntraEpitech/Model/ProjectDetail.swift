@@ -36,7 +36,7 @@ class ProjectDetail: Project {
 		fillProjectGroups(dict["registered"])
 	}
 	
-	func fillProjectGroups(dict :JSON) {
+	func fillProjectGroups(_ dict :JSON) {
 		registeredGroups = [ProjectGroup]()
 		let arr = dict.arrayValue
 		print(arr.count)
@@ -45,7 +45,7 @@ class ProjectDetail: Project {
 		}
 	}
 	
-	func findGroup(code :String) -> ProjectGroup? {
+	func findGroup(_ code :String) -> ProjectGroup? {
 		var res : ProjectGroup?
 		for tmp in registeredGroups! {
 			if (tmp.code == code) {

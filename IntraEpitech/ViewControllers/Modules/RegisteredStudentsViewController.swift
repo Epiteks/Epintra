@@ -26,19 +26,19 @@ class RegisteredStudentsViewController: UIViewController, UITableViewDelegate, U
 		// Dispose of any resources that can be recreated.
 	}
 	
-	override func viewDidAppear(animated: Bool) {
-		var index :NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+	override func viewDidAppear(_ animated: Bool) {
+		var index :IndexPath = IndexPath(row: 0, section: 0)
 		
 		var i = 0
 		
 		for tmp in students! {
 			if (tmp.login == ApplicationManager.sharedInstance.currentLogin!) {
-				index = NSIndexPath(forRow: i, inSection: 0)
+				index = IndexPath(row: i, section: 0)
 				break
 			}
 			i += 1
 		}
-		tableView.scrollToRowAtIndexPath(index, atScrollPosition: .Top, animated: true)
+		tableView.scrollToRow(at: index, at: .top, animated: true)
 	}
 	
 	/*
@@ -52,30 +52,30 @@ class RegisteredStudentsViewController: UIViewController, UITableViewDelegate, U
 	*/
 	
 	
-	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
 	}
 	
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return (students?.count)!
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
-		let cell = tableView.dequeueReusableCellWithIdentifier("studentCell")
+		let cell = tableView.dequeueReusableCell(withIdentifier: "studentCell")
 		
 		let studentNameLabel = cell?.viewWithTag(1) as! UILabel
 		let gradeLabel = cell?.viewWithTag(2) as! UILabel
 		
-		studentNameLabel.text = students![indexPath.row].login
-		gradeLabel.text = students![indexPath.row].grade
+		studentNameLabel.text = students![(indexPath as NSIndexPath).row].login
+		gradeLabel.text = students![(indexPath as NSIndexPath).row].grade
 		
-		if (students![indexPath.row].login == ApplicationManager.sharedInstance.currentLogin) {
-			studentNameLabel.textColor = UIColor.redColor()
-			gradeLabel.textColor = UIColor.redColor()
+		if (students![(indexPath as NSIndexPath).row].login == ApplicationManager.sharedInstance.currentLogin) {
+			studentNameLabel.textColor = UIColor.red
+			gradeLabel.textColor = UIColor.red
 		} else {
-			studentNameLabel.textColor = UIColor.blackColor()
-			gradeLabel.textColor = UIColor.blackColor()
+			studentNameLabel.textColor = UIColor.black
+			gradeLabel.textColor = UIColor.black
 		}
 
 		

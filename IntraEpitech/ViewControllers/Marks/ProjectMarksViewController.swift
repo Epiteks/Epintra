@@ -26,73 +26,73 @@ class ProjectMarksViewController: UIViewController, UITableViewDelegate, UITable
 		// Dispose of any resources that can be recreated.
 	}
 	
-	override func viewDidAppear(animated: Bool) {
+	override func viewDidAppear(_ animated: Bool) {
 		
-		var index :NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+		var index :IndexPath = IndexPath(row: 0, section: 0)
 		
 		var i = 0
 		
 		for tmp in marks! {
 			if (tmp.login == ApplicationManager.sharedInstance.currentLogin!) {
-				index = NSIndexPath(forRow: i, inSection: 0)
+				index = IndexPath(row: i, section: 0)
 				break
 			}
 			i += 1
 		}
 		
-		tableView.scrollToRowAtIndexPath(index, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+		tableView.scrollToRow(at: index, at: UITableViewScrollPosition.top, animated: true)
 	}
 	
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if (segue.identifier == "commentsSegue") {
-			let vc = segue.destinationViewController as! CommentsViewController
+			let vc = segue.destination as! CommentsViewController
 			vc.mark = selectedMark
 		}
 	}
 	
 	
-	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	func numberOfSections(in tableView: UITableView) -> Int {
 		if (marks == nil || marks!.count == 0) {
-			tableView.separatorStyle = .None
-			let nibView = NSBundle.mainBundle().loadNibNamed("EmptyTableView", owner: self, options: nil)[0] as! UIView
+			tableView.separatorStyle = .none
+			let nibView = Bundle.main.loadNibNamed("EmptyTableView", owner: self, options: nil)?[0] as! UIView
 			let titleLabel = nibView.viewWithTag(1) as! UILabel
 			titleLabel.text = NSLocalizedString("NoMarks", comment: "")
 			tableView.backgroundView = nibView
 			return 0
 		}
-		tableView.separatorStyle = .SingleLine
+		tableView.separatorStyle = .singleLine
 		return 1
 	}
 	
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return marks!.count
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCellWithIdentifier("markCell")
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "markCell")
 		
 		let user = cell?.viewWithTag(1) as! UILabel
 		let mark = cell?.viewWithTag(2) as! UILabel
 		
-		user.text = marks![indexPath.row].login
-		mark.text = marks![indexPath.row].finalNote
+		user.text = marks![(indexPath as NSIndexPath).row].login
+		mark.text = marks![(indexPath as NSIndexPath).row].finalNote
 		
-		if (marks![indexPath.row].login == ApplicationManager.sharedInstance.currentLogin) {
-			user.textColor = UIColor.redColor()
-			mark.textColor = UIColor.redColor()
+		if (marks![(indexPath as NSIndexPath).row].login == ApplicationManager.sharedInstance.currentLogin) {
+			user.textColor = UIColor.red
+			mark.textColor = UIColor.red
 		} else {
-			user.textColor = UIColor.blackColor()
-			mark.textColor = UIColor.blackColor()
+			user.textColor = UIColor.black
+			mark.textColor = UIColor.black
 		}
 		
-		cell?.accessoryType = .DisclosureIndicator
+		cell?.accessoryType = .disclosureIndicator
 		
 		return cell!
 	}
 	
-	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
-		selectedMark = marks![indexPath.row]
-		performSegueWithIdentifier("commentsSegue", sender: self)
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
+		selectedMark = marks![(indexPath as NSIndexPath).row]
+		performSegue(withIdentifier: "commentsSegue", sender: self)
 	}
 }

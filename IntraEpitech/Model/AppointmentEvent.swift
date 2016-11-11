@@ -22,8 +22,8 @@ class AppointmentEvent: NSObject {
 	var studentRegistered :String?
 	
 	var eventName :String?
-	var eventStart :NSDate?
-	var eventEnd :NSDate?
+	var eventStart :Date?
+	var eventEnd :Date?
 	
 	init(dict :JSON) {
 		super.init()
@@ -51,7 +51,7 @@ class AppointmentEvent: NSObject {
 		studentRegistered = dict["student_registered"].stringValue
 	}
 	
-	func addAppointments(dict :JSON) {
+	func addAppointments(_ dict :JSON) {
 		self.slots = [Appointment]()
 		
 		var slots = dict["slots"].arrayValue
@@ -66,8 +66,8 @@ class AppointmentEvent: NSObject {
 			
 			for tmpA in slots.arrayValue {
 				let tmp = Appointment(dict: tmpA)
-				tmp.date?.dateByAddingTimeInterval(NSTimeInterval(-1))
-				if (tmp.date?.earlierDate(eventStart!) == eventStart && tmp.date?.laterDate(eventEnd!) == eventEnd) {
+				tmp.date?.addingTimeInterval(TimeInterval(-1))
+				if ((tmp.date as NSDate?)?.earlierDate(eventStart!) == eventStart && (tmp.date as NSDate?)?.laterDate(eventEnd!) == eventEnd) {
 					self.slots!.append(tmp)
 				}
 			}

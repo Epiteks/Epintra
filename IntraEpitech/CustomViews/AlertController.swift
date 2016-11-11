@@ -13,7 +13,7 @@ class AlertController: UIAlertController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-		self.view.tintColor = UIColor.redColor()
+		self.view.tintColor = UIColor.red
 
     }
 

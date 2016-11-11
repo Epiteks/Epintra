@@ -1,14 +1,16 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
+platform :ios, '9.0'
 use_frameworks!
 
-pod 'Alamofire', '~> 3.0'
-pod 'AlamofireImage', '~> 2.0'
-pod 'AlamofireNetworkActivityIndicator', '~> 1.0'
-pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
-pod 'HanekeSwift'
-pod 'Log'
-pod 'FSCalendar'
-pod 'MGSwipeTableCell'
-pod 'FMDB'
-pod 'FMDB/SQLCipher'
+target 'IntraEpitech' do
+	pod 'Alamofire', '~> 4.0'
+	pod 'AlamofireImage', '~> 3.1'
+	pod 'AlamofireNetworkActivityIndicator', '~> 2.0'
+	pod 'SwiftyJSON'
+#	pod 'HanekeSwift'
+	pod 'SwiftyBeaver'
+	pod 'FSCalendar'
+	pod 'MGSwipeTableCell'
+	pod 'FMDB'
+	pod 'FMDB/SQLCipher'
+end

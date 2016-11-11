@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Haneke
+
 
 class CustomUITableViewCell: UITableViewCell {
 	

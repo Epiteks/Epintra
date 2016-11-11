@@ -86,7 +86,7 @@ class User: NSObject {
 		return GPA()
 	}
 	
-	func fillHistory(dict: JSON) {
+	func fillHistory(_ dict: JSON) {
 		
 		let array = dict["history"].arrayValue
 		

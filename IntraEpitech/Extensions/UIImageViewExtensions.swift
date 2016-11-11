@@ -8,11 +8,11 @@
 
 import UIKit
 
-private var _imageAtIndexPath :NSIndexPath?
+private var _imageAtIndexPath :IndexPath?
 
 extension UIImageView {
 	
-	public var imageAtIndexPath : NSIndexPath {
+	public var imageAtIndexPath : IndexPath {
 		
 		get {
 			return _imageAtIndexPath!
@@ -24,19 +24,19 @@ extension UIImageView {
 		}
 	}
 	
-	func downloadedFrom(link link:String, contentMode mode: UIViewContentMode) {
+	func downloadedFrom(link:String, contentMode mode: UIViewContentMode) {
 		guard
-			let url = NSURL(string: link)
+			let url = URL(string: link)
 			else {return}
 		contentMode = mode
-		NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: { (data, response, error) -> Void in
+		URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) -> Void in
 			guard
-				let httpURLResponse = response as? NSHTTPURLResponse where httpURLResponse.statusCode == 200,
-				let mimeType = response?.MIMEType where mimeType.hasPrefix("image"),
-				let data = data where error == nil,
+				let httpURLResponse = response as? HTTPURLResponse , httpURLResponse.statusCode == 200,
+				let mimeType = response?.mimeType , mimeType.hasPrefix("image"),
+				let data = data , error == nil,
 				let image = UIImage(data: data)
 				else { return }
-			dispatch_async(dispatch_get_main_queue()) { () -> Void in
+			DispatchQueue.main.async { () -> Void in
 				self.image = image
 				self.cropToSquare()
 				self.clipsToBounds = true
@@ -44,19 +44,19 @@ extension UIImageView {
 		}).resume()
 	}
 	
-	func downloadFrom(link link:String, contentMode mode: UIViewContentMode, onCompletion :(UIImage) -> ()) {
+	func downloadFrom(link:String, contentMode mode: UIViewContentMode, onCompletion :@escaping (UIImage) -> ()) {
 		guard
-			let url = NSURL(string: link)
+			let url = URL(string: link)
 			else {return}
 		contentMode = mode
-		NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: { (data, response, error) -> Void in
+		URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) -> Void in
 			guard
-				let httpURLResponse = response as? NSHTTPURLResponse where httpURLResponse.statusCode == 200,
-				let mimeType = response?.MIMEType where mimeType.hasPrefix("image"),
-				let data = data where error == nil,
+				let httpURLResponse = response as? HTTPURLResponse , httpURLResponse.statusCode == 200,
+				let mimeType = response?.mimeType , mimeType.hasPrefix("image"),
+				let data = data , error == nil,
 				let image = UIImage(data: data)
 				else { return }
-			dispatch_async(dispatch_get_main_queue()) { () -> Void in
+			DispatchQueue.main.async { () -> Void in
 				//				self.image = image
 				onCompletion(image)
 				//self.cropToSquare()
@@ -68,7 +68,7 @@ extension UIImageView {
 	
 	func cropToSquare() {
 		// Create a copy of the image without the imageOrientation property so it is in its native orientation (landscape)
-		let contextImage: UIImage = UIImage(CGImage: self.image!.CGImage!)
+		let contextImage: UIImage = UIImage(cgImage: self.image!.cgImage!)
 		
 		// Get the size of the contextImage
 		let contextSize: CGSize = contextImage.size
@@ -91,13 +91,13 @@ extension UIImageView {
 			height = contextSize.width
 		}
 		
-		let rect: CGRect = CGRectMake(posX, posY, width, height)
+		let rect: CGRect = CGRect(x: posX, y: posY, width: width, height: height)
 		
 		// Create bitmap image from context using the rect
-		let imageRef: CGImageRef = CGImageCreateWithImageInRect(contextImage.CGImage, rect)!
+		let imageRef: CGImage = (contextImage.cgImage)!.cropping(to: rect)!
 		
 		// Create a new image based on the imageRef and rotate back to the original orientation
-		let image: UIImage = UIImage(CGImage: imageRef, scale: self.image!.scale, orientation: self.image!.imageOrientation)
+		let image: UIImage = UIImage(cgImage: imageRef, scale: self.image!.scale, orientation: self.image!.imageOrientation)
 		
 		self.image = image
 		self.clipsToBounds = true
@@ -105,7 +105,7 @@ extension UIImageView {
 	
 	func toCircle() {
 		self.layer.borderWidth = 1.0
-		self.layer.borderColor = UIUtils.lightBackgroundColor().CGColor
+		self.layer.borderColor = UIUtils.lightBackgroundColor().cgColor
 		self.layer.cornerRadius = self.frame.size.height / 2
 		
 	}

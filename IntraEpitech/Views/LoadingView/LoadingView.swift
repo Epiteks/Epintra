@@ -10,9 +10,9 @@ import UIKit
 
 class LoadingView: UIView {
 	
-	@IBOutlet private var contentView: UIView?
-	@IBOutlet private var loadingLabel: UILabel?
-	@IBOutlet private var activityIndicator: UIActivityIndicatorView?
+	@IBOutlet fileprivate var contentView: UIView?
+	@IBOutlet fileprivate var loadingLabel: UILabel?
+	@IBOutlet fileprivate var activityIndicator: UIActivityIndicatorView?
 	
 	override init(frame: CGRect) { // for using CustomView in code
 		super.init(frame: frame)
@@ -24,11 +24,11 @@ class LoadingView: UIView {
 		self.commonInit()
 	}
 	
-	private func commonInit() {
-		NSBundle.mainBundle().loadNibNamed("LoadingView", owner: self, options: nil)
+	fileprivate func commonInit() {
+		Bundle.main.loadNibNamed("LoadingView", owner: self, options: nil)
 		guard let content = contentView else { return }
 		content.frame = self.bounds
-		content.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
+		content.autoresizingMask = [.flexibleHeight, .flexibleWidth]
 		
 		loadingLabel?.text = NSLocalizedString("Loading", comment: "")
 		activityIndicator?.startAnimating()

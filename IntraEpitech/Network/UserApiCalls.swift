@@ -12,11 +12,11 @@ import SwiftyJSON
 
 class UserApiCalls: APICalls {
 	
-	class func loginCall(login: String, password: String, onCompletion: (Bool, String) ->()) {
+	class func loginCall(_ login: String, password: String, onCompletion: @escaping (Bool, String) ->()) {
 		
 		let url = super.getApiUrl() + "login"
 		
-		Alamofire.request(.POST, url, parameters: ["login": login, "password": password])
+		Alamofire.request(url, method: .post, parameters: ["login": login, "password": password])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)
@@ -36,11 +36,11 @@ class UserApiCalls: APICalls {
 		}
 	}
 	
-	class func getUserData(login: String, onCompletion: (Bool, String) ->()) {
+	class func getUserData(_ login: String, onCompletion: @escaping (Bool, String) ->()) {
 		
 		let url = super.getApiUrl() + "user"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!, "user" : login])
+		Alamofire.request(url, method: .get, parameters: ["token": ApplicationManager.sharedInstance.token!, "user" : login])
 			.responseJSON { response in
 				if response.result.isSuccess {
 					let responseCall = JSON(response.result.value!)
@@ -52,7 +52,7 @@ class UserApiCalls: APICalls {
 					} else {
 						let app = ApplicationManager.sharedInstance
 						app.user = User(dict: responseCall)
-						app.lastUserApiCall = NSDate().timeIntervalSince1970
+						app.lastUserApiCall = Date().timeIntervalSince1970
 						app.planningSemesters[(app.user?.semester!)!] = true
 						onCompletion(true, "Ok")
 					}
@@ -61,11 +61,11 @@ class UserApiCalls: APICalls {
 				}
 		}
 	}
-	class func getSelectedUserData(login: String, onCompletion: (Bool, User?, String) ->()) {
+	class func getSelectedUserData(_ login: String, onCompletion: @escaping (Bool, User?, String) ->()) {
 		
 		let url = super.getApiUrl() + "user"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!, "user" : login])
+		Alamofire.request(url, method: .get, parameters: ["token": ApplicationManager.sharedInstance.token!, "user" : login])
 			.responseJSON { response in
 				if response.result.isSuccess {
 					let responseCall = JSON(response.result.value!)
@@ -86,11 +86,11 @@ class UserApiCalls: APICalls {
 	
 	
 	
-	class func getUserHistory(onCompletion: (Bool, String) ->()) {
+	class func getUserHistory(_ onCompletion: @escaping (Bool, String) ->()) {
 		
 		let url = super.getApiUrl() + "infos"
 		
-		Alamofire.request(.POST, url, parameters: ["token": ApplicationManager.sharedInstance.token!])
+		Alamofire.request(url, method: .post, parameters: ["token": ApplicationManager.sharedInstance.token!])
 			.responseJSON { response in
 				if response.result.isSuccess {
 					let responseCall = JSON(response.result.value!)
@@ -109,11 +109,11 @@ class UserApiCalls: APICalls {
 		}
 	}
 	
-	class func getUserDocuments(onCompletion: (Bool, [File]?, String) ->()) {
+	class func getUserDocuments(_ onCompletion: @escaping (Bool, [File]?, String) ->()) {
 		
 		let url = super.getApiUrl() + "user/files"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+		Alamofire.request(url, method: .get, parameters: ["token": ApplicationManager.sharedInstance.token!,
 			"login" :(ApplicationManager.sharedInstance.user?.login)!])
 			.responseJSON { response in
 				if response.result.isSuccess {
@@ -138,11 +138,11 @@ class UserApiCalls: APICalls {
 		}
 	}
 	
-	class func getUserFlags(login: String?, onCompletion: (Bool, [Flags]?, String) ->()) {
+	class func getUserFlags(_ login: String?, onCompletion: @escaping (Bool, [Flags]?, String) ->()) {
 		
 		let url = super.getApiUrl() + "user/flags"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+		Alamofire.request(url, method: .get, parameters: ["token": ApplicationManager.sharedInstance.token!,
 			"login" :login!])
 			.responseJSON { response in
 				if response.result.isSuccess {
@@ -170,11 +170,11 @@ class UserApiCalls: APICalls {
 		}
 	}
 	
-	class func getAllUsers(onCompletion: (Bool, [StudentInfo]?, String) ->()) {
+	class func getAllUsers(_ onCompletion: @escaping (Bool, [StudentInfo]?, String) ->()) {
 		
 		let url = super.getRankingUrl()
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+		Alamofire.request(url, method: .get, parameters: ["token": ApplicationManager.sharedInstance.token!,
 			"login" :(ApplicationManager.sharedInstance.user?.login)!])
 			.responseJSON { response in
 				if response.result.isSuccess {
@@ -203,7 +203,8 @@ class UserApiCalls: APICalls {
 		}
 	}
 	
-	class func addPromo(name: String, responseCall: JSON, var arr: [StudentInfo]) -> [StudentInfo] {
+	class func addPromo(_ name: String, responseCall: JSON, arr: [StudentInfo]) -> [StudentInfo] {
+		var arr = arr
 		let db = DBManager.getInstance()
 		let tek = responseCall[name].arrayValue
 		
@@ -215,3 +216,4 @@ class UserApiCalls: APICalls {
 		return arr
 	}
 }
+

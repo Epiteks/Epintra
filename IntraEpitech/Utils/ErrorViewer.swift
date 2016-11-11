@@ -10,31 +10,31 @@ import UIKit
 
 class ErrorViewer: NSObject {
 	
-	class func errorShow(viewController :UIViewController, mess :String, onCompletion :() -> ()) {
-		let _alert = UIAlertController(title: "", message: "", preferredStyle: .Alert)
+	class func errorShow(_ viewController :UIViewController, mess :String, onCompletion :@escaping () -> ()) {
+		let _alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
 		
 		_alert.title = NSLocalizedString("Error", comment: "")
 		_alert.message = mess
 		
-		let defaultAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .Default) { _ in
+		let defaultAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { _ in
 			onCompletion()
 		}
 		_alert.addAction(defaultAction)
 		
-		viewController.showViewController(_alert, sender: viewController)
+		viewController.show(_alert, sender: viewController)
 	}
 	
-	class func errorPresent(viewController :UIViewController, mess :String, onCompletion :() -> ()) {
-		let _alert = UIAlertController(title: "", message: "", preferredStyle: .Alert)
+	class func errorPresent(_ viewController :UIViewController, mess :String, onCompletion :@escaping () -> ()) {
+		let _alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
 		
 		_alert.title = NSLocalizedString("Error", comment: "")
 		_alert.message = mess
 		
-		let defaultAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .Default) { _ in
+		let defaultAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { _ in
 			onCompletion()
 		}
 		_alert.addAction(defaultAction)
 		
-		viewController.presentViewController(_alert, animated: true) {}
+		viewController.present(_alert, animated: true) {}
 	}
 }

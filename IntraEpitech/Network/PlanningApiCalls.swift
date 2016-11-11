@@ -11,11 +11,11 @@ import SwiftyJSON
 
 class PlanningApiCalls: APICalls {
 	
-	class func getPlanning(first :String, last :String, onCompletion :(Bool, Dictionary<String, [Planning]>?, String) ->()) {
+	class func getPlanning(_ first :String, last :String, onCompletion :@escaping (Bool, Dictionary<String, [Planning]>?, String) ->()) {
 		
 		let url = super.getApiUrl() + "planning"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!, "start" :first, "end" :last])
+		Alamofire.request(url, method: .get, parameters: ["token": ApplicationManager.sharedInstance.token!, "start" :first, "end" :last])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)
@@ -23,7 +23,7 @@ class PlanningApiCalls: APICalls {
 					var errorMessage :String?
 					if (errorDict.count > 0) {
 						errorMessage = (errorDict["message"]?.stringValue)
-						errorMessage = errorMessage!.stringByReplacingOccurrencesOfString("<[^>]+>", withString: "", options: .RegularExpressionSearch, range: nil)
+						errorMessage = errorMessage!.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
 						onCompletion(false, nil, errorMessage!)
 					} else {
 						var planningMan = Dictionary<String, [Planning]>()
@@ -31,12 +31,15 @@ class PlanningApiCalls: APICalls {
 						
 						
 						var date = first.shortToDate()
+						let lol = NSDate()
 						
-						while (date.earlierDate(last.shortToDate()) == date) {
+						// TODO
+						/*
+						while (date < last.shortToDate()) {
 							planningMan[date.toAPIString()] = [Planning]()
-							date = date.fs_dateByAddingDays(1)
+							date = date.fs_date(byAddingDays: 1)
 						}
-						
+						*/
 						
 						for tmpPlanning in responseCall.arrayValue {
 							let tmp = Planning(dict: tmpPlanning)
@@ -58,11 +61,11 @@ class PlanningApiCalls: APICalls {
 		}
 	}
 	
-	class func enterToken(planning :Planning, token :String, onCompletion :(Bool, String) ->()) {
+	class func enterToken(_ planning :Planning, token :String, onCompletion :@escaping (Bool, String) ->()) {
 		
 		let url = super.getApiUrl() + "token"
 		
-		Alamofire.request(.POST, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+		Alamofire.request(url, method: .post, parameters: ["token": ApplicationManager.sharedInstance.token!,
 			"scolaryear" :planning.scolaryear!,
 			"codemodule" :planning.codeModule!,
 			"codeinstance" :planning.codeInstance!,
@@ -75,7 +78,7 @@ class PlanningApiCalls: APICalls {
 					var errorMessage = responseCall["error"].stringValue
 					
 					if (errorMessage.characters.count > 0) {
-						errorMessage = errorMessage.stringByReplacingOccurrencesOfString("<[^>]+>", withString: "", options: .RegularExpressionSearch, range: nil)
+						errorMessage = errorMessage.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
 						onCompletion(false, errorMessage)
 					} else {
 						onCompletion(true, NSLocalizedString("SuccessfullyValidated", comment: ""))
@@ -86,11 +89,11 @@ class PlanningApiCalls: APICalls {
 		}
 	}
 	
-	class func registerToEvent(planning :Planning, onCompletion :(Bool, String) ->()) {
+	class func registerToEvent(_ planning :Planning, onCompletion :@escaping (Bool, String) ->()) {
 		
 		let url = super.getApiUrl() + "event"
 		
-		Alamofire.request(.POST, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+		Alamofire.request(url, method: .post, parameters: ["token": ApplicationManager.sharedInstance.token!,
 			"scolaryear" :planning.scolaryear!,
 			"codemodule" :planning.codeModule!,
 			"codeinstance" :planning.codeInstance!,
@@ -102,7 +105,7 @@ class PlanningApiCalls: APICalls {
 					var errorMessage = responseCall["error"].stringValue
 					
 					if (errorMessage.characters.count > 0) {
-						errorMessage = errorMessage.stringByReplacingOccurrencesOfString("<[^>]+>", withString: "", options: .RegularExpressionSearch, range: nil)
+						errorMessage = errorMessage.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
 						onCompletion(false, errorMessage)
 					} else {
 						onCompletion(true, NSLocalizedString("SuccessfullyRegistered", comment: ""))
@@ -113,11 +116,11 @@ class PlanningApiCalls: APICalls {
 		}
 	}
 	
-	class func unregisterToEvent(planning :Planning, onCompletion :(Bool, String) ->()) {
+	class func unregisterToEvent(_ planning :Planning, onCompletion :@escaping (Bool, String) ->()) {
 		
 		let url = super.getApiUrl() + "event"
 		
-		Alamofire.request(.DELETE, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+		Alamofire.request(url, method: .delete, parameters: ["token": ApplicationManager.sharedInstance.token!,
 			"scolaryear" :planning.scolaryear!,
 			"codemodule" :planning.codeModule!,
 			"codeinstance" :planning.codeInstance!,
@@ -129,7 +132,7 @@ class PlanningApiCalls: APICalls {
 					var errorMessage = responseCall["error"].stringValue
 					
 					if (errorMessage.characters.count > 0) {
-						errorMessage = errorMessage.stringByReplacingOccurrencesOfString("<[^>]+>", withString: "", options: .RegularExpressionSearch, range: nil)
+						errorMessage = errorMessage.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
 						onCompletion(false, errorMessage)
 					} else {
 						onCompletion(true, NSLocalizedString("SuccessfullyUnregistered", comment: ""))
@@ -140,11 +143,11 @@ class PlanningApiCalls: APICalls {
 		}
 	}
 	
-	class func getSpecialEvent(planning :Planning, onCompletion :(Bool, Planning?, String) ->()) {
+	class func getSpecialEvent(_ planning :Planning, onCompletion :@escaping (Bool, Planning?, String) ->()) {
 		
 		let url = super.getApiUrl() + "planning"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!, "start" :(planning.startTime?.toDate().toAPIString())!, "end" :(planning.startTime?.toDate().toAPIString())!])
+		Alamofire.request(url, method: .get, parameters: ["token": ApplicationManager.sharedInstance.token!, "start" :(planning.startTime?.toDate().toAPIString())!, "end" :(planning.startTime?.toDate().toAPIString())!])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)
@@ -152,7 +155,7 @@ class PlanningApiCalls: APICalls {
 					var errorMessage :String?
 					if (errorDict.count > 0) {
 						errorMessage = (errorDict["message"]?.stringValue)
-						errorMessage = errorMessage!.stringByReplacingOccurrencesOfString("<[^>]+>", withString: "", options: .RegularExpressionSearch, range: nil)
+						errorMessage = errorMessage!.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
 						
 						onCompletion(false, nil, errorMessage!)
 					} else {
@@ -177,11 +180,11 @@ class PlanningApiCalls: APICalls {
 		}
 	}
 	
-	class func getStudentsRegistered(planning :Planning, onCompletion :(Bool, [RegisteredStudent]?, String) ->()) {
+	class func getStudentsRegistered(_ planning :Planning, onCompletion :@escaping (Bool, [RegisteredStudent]?, String) ->()) {
 		
 		let url = super.getApiUrl() + "event/registered"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+		Alamofire.request(url, method: .get, parameters: ["token": ApplicationManager.sharedInstance.token!,
 			"scolaryear": planning.scolaryear!,
 			"codemodule" : planning.codeModule!,
 			"codeinstance": planning.codeInstance!,
@@ -194,7 +197,7 @@ class PlanningApiCalls: APICalls {
 					var errorMessage :String?
 					if (errorDict.count > 0) {
 						errorMessage = (errorDict["message"]?.stringValue)
-						errorMessage = errorMessage!.stringByReplacingOccurrencesOfString("<[^>]+>", withString: "", options: .RegularExpressionSearch, range: nil)
+						errorMessage = errorMessage!.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
 						
 						onCompletion(false, nil, errorMessage!)
 					} else {
@@ -212,11 +215,11 @@ class PlanningApiCalls: APICalls {
 		}
 	}
 	
-	class func getEventDetails(planning :Planning, onCompletion :(Bool, AppointmentEvent?, String) ->()) {
+	class func getEventDetails(_ planning :Planning, onCompletion :@escaping (Bool, AppointmentEvent?, String) ->()) {
 		
 		let url = super.getApiUrl() + "event/rdv"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+		Alamofire.request(url, method: .get, parameters: ["token": ApplicationManager.sharedInstance.token!,
 			"scolaryear": planning.scolaryear!,
 			"codemodule" : planning.codeModule!,
 			"codeinstance": planning.codeInstance!,
@@ -228,7 +231,7 @@ class PlanningApiCalls: APICalls {
 					var errorMessage :String?
 					if (errorDict.count > 0) {
 						errorMessage = (errorDict["message"]?.stringValue)
-						errorMessage = errorMessage!.stringByReplacingOccurrencesOfString("<[^>]+>", withString: "", options: .RegularExpressionSearch, range: nil)
+						errorMessage = errorMessage!.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
 						
 						onCompletion(false, nil, errorMessage!)
 					} else {
@@ -245,14 +248,14 @@ class PlanningApiCalls: APICalls {
 		}
 	}
 	
-	class func subscribeToSlot(appointment :AppointmentEvent, slot :Appointment, onCompletion :(Bool, AppointmentEvent?, String) ->()) {
+	class func subscribeToSlot(_ appointment :AppointmentEvent, slot :Appointment, onCompletion :@escaping (Bool, AppointmentEvent?, String) ->()) {
 		
 		let url = super.getApiUrl() + "event/rdv"
 		
 		let lastParamName = (appointment.groupId == "" ? "login" : "idteam")
 		let lastParamValue = (appointment.groupId == "" ? ApplicationManager.sharedInstance.currentLogin! : appointment.groupId!)
 		
-		Alamofire.request(.POST, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+		Alamofire.request(url, method: .post, parameters: ["token": ApplicationManager.sharedInstance.token!,
 			"scolaryear": appointment.scolaryear!,
 			"codemodule" : appointment.codeModule!,
 			"codeinstance": appointment.codeInstance!,
@@ -269,11 +272,11 @@ class PlanningApiCalls: APICalls {
 						
 						errorMessage = (err!.stringValue)
 						
-						if let dataFromString = errorMessage!.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
+						if let dataFromString = errorMessage!.data(using: String.Encoding.utf8, allowLossyConversion: false) {
 							let json = JSON(data: dataFromString)
 							errorMessage = json["message"].stringValue
 						}
-						errorMessage = errorMessage!.stringByReplacingOccurrencesOfString("<[^>]+>", withString: "", options: .RegularExpressionSearch, range: nil)
+						errorMessage = errorMessage!.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
 						
 						onCompletion(false, nil, errorMessage!)
 					} else {
@@ -286,14 +289,14 @@ class PlanningApiCalls: APICalls {
 		}
 	}
 	
-	class func unsubscribeToSlot(appointment :AppointmentEvent, slot :Appointment, onCompletion :(Bool, AppointmentEvent?, String) ->()) {
+	class func unsubscribeToSlot(_ appointment :AppointmentEvent, slot :Appointment, onCompletion :@escaping (Bool, AppointmentEvent?, String) ->()) {
 		
 		let url = super.getApiUrl() + "event/rdv"
 		
 		let lastParamName = (appointment.groupId == "" ? "login" : "idteam")
 		let lastParamValue = (appointment.groupId == "" ? ApplicationManager.sharedInstance.currentLogin! : appointment.groupId!)
 		
-		Alamofire.request(.DELETE, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+		Alamofire.request(url, method: .delete, parameters: ["token": ApplicationManager.sharedInstance.token!,
 			"scolaryear": appointment.scolaryear!,
 			"codemodule" : appointment.codeModule!,
 			"codeinstance": appointment.codeInstance!,
@@ -310,11 +313,11 @@ class PlanningApiCalls: APICalls {
 						
 						errorMessage = (err!.stringValue)
 						
-						if let dataFromString = errorMessage!.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
+						if let dataFromString = errorMessage!.data(using: String.Encoding.utf8, allowLossyConversion: false) {
 							let json = JSON(data: dataFromString)
 							errorMessage = json["message"].stringValue
 						}
-						errorMessage = errorMessage!.stringByReplacingOccurrencesOfString("<[^>]+>", withString: "", options: .RegularExpressionSearch, range: nil)
+						errorMessage = errorMessage!.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
 						
 						onCompletion(false, nil, errorMessage!)
 					} else {
@@ -324,11 +327,11 @@ class PlanningApiCalls: APICalls {
 					 
 						errorMessage = (err!.stringValue)
 						if (errorMessage != "") {
-							if let dataFromString = errorMessage!.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
+							if let dataFromString = errorMessage!.data(using: String.Encoding.utf8, allowLossyConversion: false) {
 								let json = JSON(data: dataFromString)
 								errorMessage = json["message"].stringValue
 							}
-							errorMessage = errorMessage!.stringByReplacingOccurrencesOfString("<[^>]+>", withString: "", options: .RegularExpressionSearch, range: nil)
+							errorMessage = errorMessage!.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
 							
 							onCompletion(false, nil, errorMessage!)
 						} else {

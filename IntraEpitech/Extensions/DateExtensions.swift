@@ -10,56 +10,56 @@
 import Foundation
 import UIKit
 
-public extension NSDate {
+public extension Date {
 	
 	func toAlertString() -> String {
-		let dateFormatter = NSDateFormatter()
+		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "dd/MM/yyy HH:mm"
-		let str = dateFormatter.stringFromDate(self)
+		let str = dateFormatter.string(from: self)
 		return str
 	}
 	
 	func toTitleString() -> String {
-		let dateFormatter = NSDateFormatter()
+		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "EEEE dd MMMM"
-		let str = dateFormatter.stringFromDate(self)
+		let str = dateFormatter.string(from: self)
 		return str
 	}
 	
 	func toAPIString() -> String {
-		let dateFormatter = NSDateFormatter()
+		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd"
-		let str = dateFormatter.stringFromDate(self)
+		let str = dateFormatter.string(from: self)
 		return str
 	}
 	
-	func startOfWeek() -> NSDate? {
+	func startOfWeek() -> Date? {
 		
 		guard
-			let cal: NSCalendar = NSCalendar.currentCalendar(),
-			let comp: NSDateComponents = cal.components([.YearForWeekOfYear, .WeekOfYear], fromDate: self) else { return nil }
+			var cal: Calendar = Calendar.current,
+			var comp: DateComponents = (cal as NSCalendar).components([.yearForWeekOfYear, .weekOfYear], from: self) else { return nil }
 		cal.firstWeekday = 2// ?? 1
-		return cal.dateFromComponents(comp)!
+		return cal.date(from: comp)!
 	}
 	
-	func endOfWeek() -> NSDate? {
+	func endOfWeek() -> Date? {
 		guard
-			let cal: NSCalendar = NSCalendar.currentCalendar(),
-			let comp: NSDateComponents = cal.components([.WeekOfYear], fromDate: self) else { return nil }
+			var cal: Calendar = Calendar.current,
+			var comp: DateComponents = (cal as NSCalendar).components([.weekOfYear], from: self) else { return nil }
 		cal.firstWeekday = 2
 		comp.weekOfYear = 1
 		comp.day = -1
-		return cal.dateByAddingComponents(comp, toDate: self.startOfWeek()!, options: [])!
+		return (cal as NSCalendar).date(byAdding: comp, to: self.startOfWeek()!, options: [])!
 	}
 	
 	func toEventHour() -> String {
 		
 		var str = String()
 		
-		let formatter = NSDateFormatter()
+		let formatter = DateFormatter()
 		formatter.dateFormat = "HH:mm"
 		
-		str = formatter.stringFromDate(self)
+		str = formatter.string(from: self)
 		
 		return str
 	}
@@ -68,10 +68,10 @@ public extension NSDate {
 		
 		var str = String()
 		
-		let formatter = NSDateFormatter()
+		let formatter = DateFormatter()
 		formatter.dateFormat = "dd/MM/yyyy HH:mm"
 		
-		str = formatter.stringFromDate(self)
+		str = formatter.string(from: self)
 		
 		return str
 	}
@@ -80,10 +80,10 @@ public extension NSDate {
 		
 		var str = String()
 		
-		let formatter = NSDateFormatter()
+		let formatter = DateFormatter()
 		formatter.dateFormat = "dd/MM"
 		
-		str = formatter.stringFromDate(self)
+		str = formatter.string(from: self)
 		
 		return str
 	}
@@ -92,10 +92,10 @@ public extension NSDate {
 		
 		var str = String()
 		
-		let formatter = NSDateFormatter()
+		let formatter = DateFormatter()
 		formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
 		
-		str = formatter.stringFromDate(self)
+		str = formatter.string(from: self)
 		
 		return str
 	}

@@ -7,6 +7,26 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class SearchUserViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchControllerDelegate, UISearchResultsUpdating {
 	
@@ -34,13 +54,13 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 		resultSearchController.searchResultsUpdater = self
 		resultSearchController.hidesNavigationBarDuringPresentation = false
 		resultSearchController.dimsBackgroundDuringPresentation = false
-		resultSearchController.searchBar.searchBarStyle = UISearchBarStyle.Prominent
+		resultSearchController.searchBar.searchBarStyle = UISearchBarStyle.prominent
 		resultSearchController.searchBar.sizeToFit()
 		//self.tableView.tableHeaderView = resultSearchController.searchBar
 		
 		
 		resultSearchController.searchBar.barTintColor = UIUtils.backgroundColor()
-		resultSearchController.searchBar.tintColor = UIColor.whiteColor()
+		resultSearchController.searchBar.tintColor = UIColor.white
 		resultSearchController.searchBar.backgroundColor = UIUtils.backgroundColor()
 		
 		self.title = NSLocalizedString("Search", comment: "")
@@ -64,61 +84,62 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 			//				self.downloadingView.hidden = true
 			//			}
 		} else {
-			self.downloadingView.hidden = true
+			self.downloadingView.isHidden = true
 			self.navigationItem.titleView = resultSearchController.searchBar
 		}
 		
 		self.refreshControl.tintColor = UIUtils.backgroundColor()
-		self.refreshControl.addTarget(self, action: #selector(SearchUserViewController.refreshData(_:)), forControlEvents: .ValueChanged)
+		self.refreshControl.addTarget(self, action: #selector(SearchUserViewController.refreshData(_:)), for: .valueChanged)
 		
 		self.tableView.addSubview(refreshControl)
 		
 	}
 	
-	func scrollViewDidScroll(scrollView: UIScrollView) {
+	func scrollViewDidScroll(_ scrollView: UIScrollView) {
 		self.resultSearchController.searchBar.endEditing(true)
 	}
 	
 	func showConfirmationAlert() {
 		
-		let alertController = UIAlertController(title: NSLocalizedString("DataDownload", comment: ""), message: NSLocalizedString("SureWantsDownloadData", comment: ""), preferredStyle: .Alert)
+		let alertController = UIAlertController(title: NSLocalizedString("DataDownload", comment: ""), message: NSLocalizedString("SureWantsDownloadData", comment: ""), preferredStyle: .alert)
 		
-		let cancelAction = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .Cancel) { (action:UIAlertAction!) in
+		let cancelAction = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .cancel) { (action:UIAlertAction!) in
 			self.refreshControl.endRefreshing()
-			self.downloadingView.hidden = true
-			self.tableView.scrollEnabled = true
-			self.tableView.userInteractionEnabled = true
+			self.downloadingView.isHidden = true
+			self.tableView.isScrollEnabled = true
+			self.tableView.isUserInteractionEnabled = true
 			if (self.users.count == 0) {
-				self.navigationController?.popViewControllerAnimated(true)
+				self.navigationController?.popViewController(animated: true)
 			}
 		}
 		alertController.addAction(cancelAction)
 		
-		let OKAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .Default) { (action:UIAlertAction!) in
+		let OKAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { (action:UIAlertAction!) in
 			self.refreshControl.endRefreshing()
 			let db = DBManager.getInstance()
-			self.downloadingView.hidden = false
+			self.downloadingView.isHidden = false
 			MJProgressView.instance.showProgress(self.view, white: true)
+			/*
 			UserApiCalls.getAllUsers() { (isOk :Bool, res :[StudentInfo]?, mess :String) in
 				self.users = db.getAllStudentData() as AnyObject as! [StudentInfo]
 				self.refreshControl.endRefreshing()
 				MJProgressView.instance.hideProgress()
-				self.downloadingView.hidden = true
+				self.downloadingView.isHidden = true
 				self.navigationItem.titleView = self.resultSearchController.searchBar
 				self.tableView.reloadData()
-				self.tableView.userInteractionEnabled = true
-				self.tableView.scrollEnabled = true
-			}
+				self.tableView.isUserInteractionEnabled = true
+				self.tableView.isScrollEnabled = true
+			}*/
 		}
 		alertController.addAction(OKAction)
 		
-		self.presentViewController(alertController, animated: true, completion:nil)
+		self.present(alertController, animated: true, completion:nil)
 	}
 	
 	
-	func refreshData(sender:AnyObject) {
-		self.tableView.userInteractionEnabled = false
-		self.tableView.scrollEnabled = false
+	func refreshData(_ sender:AnyObject) {
+		self.tableView.isUserInteractionEnabled = false
+		self.tableView.isScrollEnabled = false
 		showConfirmationAlert()
 		//		let db = DBManager.getInstance()
 		//		UserApiCalls.getAllUsers() { (isOk :Bool, res :[StudentInfo]?, mess :String) in
@@ -137,54 +158,54 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 		// Dispose of any resources that can be recreated.
 	}
 	
-	override func viewDidAppear(animated: Bool) {
-		tableView.userInteractionEnabled = true
-		tableView.scrollEnabled = true
+	override func viewDidAppear(_ animated: Bool) {
+		tableView.isUserInteractionEnabled = true
+		tableView.isScrollEnabled = true
 	}
 	
-	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
 	}
 	
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		if(resultSearchController.active) {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		if(resultSearchController.isActive) {
 			return filteredData.count
 		}
 		return users.count
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		//let cell = tableView.dequeueReusableCellWithIdentifier("Cell")! as UITableViewCell;
 		
-		let cell = tableView.dequeueReusableCellWithIdentifier("userCell")
+		let cell = tableView.dequeueReusableCell(withIdentifier: "userCell")
 		
 		let loginTitle = cell?.viewWithTag(1) as! UILabel
 		let promo = cell?.viewWithTag(2) as! UILabel
 		let city = cell?.viewWithTag(3) as! UILabel
 		
-		if(resultSearchController.active) {
-			loginTitle.text = filteredData[indexPath.row].login
-			promo.text = NSLocalizedString(String(filteredData[indexPath.row].promo!), comment: "")
-			city.text = filteredData[indexPath.row].city
+		if(resultSearchController.isActive) {
+			loginTitle.text = filteredData[(indexPath as NSIndexPath).row].login
+			promo.text = NSLocalizedString(String(filteredData[(indexPath as NSIndexPath).row].promo!), comment: "")
+			city.text = filteredData[(indexPath as NSIndexPath).row].city
 		} else {
-			loginTitle.text = users[indexPath.row].login
-			promo.text = NSLocalizedString(String(users[indexPath.row].promo!), comment: "")
-			city.text = users[indexPath.row].city
+			loginTitle.text = users[(indexPath as NSIndexPath).row].login
+			promo.text = NSLocalizedString(String(users[(indexPath as NSIndexPath).row].promo!), comment: "")
+			city.text = users[(indexPath as NSIndexPath).row].city
 		}
 		
 		return cell!
 	}
 	
-	func updateSearchResultsForSearchController(searchController: UISearchController) {
+	func updateSearchResults(for searchController: UISearchController) {
 		if searchController.searchBar.text?.characters.count > 0 {
-			filteredData.removeAll(keepCapacity: false)
-			let array = users.filter() { ($0.login?.containsString(searchController.searchBar.text!.lowercaseString))! }
+			filteredData.removeAll(keepingCapacity: false)
+			let array = users.filter() { ($0.login?.contains(searchController.searchBar.text!.lowercased()))! }
 			filteredData = array
 			tableView.reloadData()
 			
 		} else {
 			
-			filteredData.removeAll(keepCapacity: false)
+			filteredData.removeAll(keepingCapacity: false)
 			
 			filteredData = users
 			
@@ -194,34 +215,34 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 		
 	}
 	
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-		resultSearchController.active = false
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		resultSearchController.isActive = false
 		if (segue.identifier == "otherUserProfileSegue") {
-			let vc = segue.destinationViewController as! OtherUserViewController
+			let vc = segue.destination as! OtherUserViewController
 			vc.currentUser = selectedUser
 		}
 	}
 	
-	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
 		self.view.endEditing(true)
-		let usr = (self.resultSearchController.active == true ? filteredData[indexPath.row] : users[indexPath.row])
+		let usr = (self.resultSearchController.isActive == true ? filteredData[(indexPath as NSIndexPath).row] : users[(indexPath as NSIndexPath).row])
 		
-		tableView.userInteractionEnabled = false
-		tableView.scrollEnabled = false
+		tableView.isUserInteractionEnabled = false
+		tableView.isScrollEnabled = false
 		MJProgressView.instance.showProgress(self.view, white: false)
-		UserApiCalls.getSelectedUserData(usr.login!) { (isOk :Bool, resp :User?, mess :String) in
+		/*UserApiCalls.getSelectedUserData(usr.login!) { (isOk :Bool, resp :User?, mess :String) in
 			
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
 				MJProgressView.instance.hideProgress()
-				tableView.userInteractionEnabled = false
-				tableView.scrollEnabled = false
+				tableView.isUserInteractionEnabled = false
+				tableView.isScrollEnabled = false
 			} else {
 				self.selectedUser = resp
 				print(self.selectedUser?.login)
 				MJProgressView.instance.hideProgress()
-				self.performSegueWithIdentifier("otherUserProfileSegue", sender: self)
+				self.performSegue(withIdentifier: "otherUserProfileSegue", sender: self)
 				
 				//				MarksApiCalls.getMarksFor(user: self.selectedUser!.login!) { (isOk :Bool, resp :[Mark]?, mess :String) in
 				//					
@@ -254,6 +275,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 			}
 		}
 		
-	}
+	}*/
 	
+}
 }

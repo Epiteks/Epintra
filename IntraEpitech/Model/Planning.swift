@@ -60,7 +60,7 @@ class Planning: NSObject {
 	}
 	
 	func getOnlyDay() -> String {
-		let array = startTime?.componentsSeparatedByString(" ")
+		let array = startTime?.components(separatedBy: " ")
 		return array![0]
 	}
 	
@@ -124,10 +124,10 @@ class Planning: NSObject {
 		startTime?.toDate().toEventHour()
 		
 		if (rdvGroupRegistered!.characters.count > 0) {
-			let arr = rdvGroupRegistered?.componentsSeparatedByString("|")
+			let arr = rdvGroupRegistered?.components(separatedBy: "|")
 			return (arr![0].toDate().toEventHour(), arr![1].toDate().toEventHour())
 		} else if (rdvIndividuelRegistered!.characters.count > 0) {
-			let arr = rdvIndividuelRegistered?.componentsSeparatedByString("|")
+			let arr = rdvIndividuelRegistered?.components(separatedBy: "|")
 			return (arr![0].toDate().toEventHour(), arr![1].toDate().toEventHour())
 		} else {
 			return ((startTime?.toDate().toEventHour())!, (endTime?.toDate().toEventHour())!)

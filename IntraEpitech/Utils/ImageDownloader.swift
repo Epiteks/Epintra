@@ -10,34 +10,34 @@ import UIKit
 
 class ImageDownloader: NSObject {
 	
-	class func downloadFrom(link link:String, onCompletion :CompletionHandlerType ) {
+	class func downloadFrom(link:String, onCompletion :@escaping CompletionHandlerType ) {
 		
 		if (ApplicationManager.sharedInstance.canDownload == false) {
-			onCompletion(Result.Failure(type: Error.UnauthorizedByUser, message: ""))
+			onCompletion(Result.failure(type: AppError.unauthorizedByUser, message: ""))
 			return
 		}
 		
 		guard
-			let url = NSURL(string: link)
+			let url = URL(string: link)
 			else {return}
-		NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: { (data, response, error) -> Void in
+		URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) -> Void in
 			guard
-				let httpURLResponse = response as? NSHTTPURLResponse where httpURLResponse.statusCode == 200,
-				let mimeType = response?.MIMEType where mimeType.hasPrefix("image"),
-				let data = data where error == nil,
+				let httpURLResponse = response as? HTTPURLResponse , httpURLResponse.statusCode == 200,
+				let mimeType = response?.mimeType , mimeType.hasPrefix("image"),
+				let data = data , error == nil,
 				let image = UIImage(data: data)
 				else {
-					onCompletion(Result.Failure(type: Error.APIError, message: ""))
+					onCompletion(Result.failure(type: AppError.apiError, message: ""))
 					return
 			}
-			dispatch_async(dispatch_get_main_queue()) { () -> Void in
+			DispatchQueue.main.async { () -> Void in
 				ApplicationManager.sharedInstance.addImageToCache(link, image: image)
-				onCompletion(Result.Success(nil))
+				onCompletion(Result.success(nil))
 			}
 		}).resume()
 	}
 	
-	class func downloadFromCallback(link link:String, onCompletion :(String) -> () ) {
+	class func downloadFromCallback(link:String, onCompletion :@escaping (String) -> () ) {
 		
 		if (ApplicationManager.sharedInstance.canDownload == false) {
 			onCompletion("")
@@ -45,16 +45,16 @@ class ImageDownloader: NSObject {
 		}
 		
 		guard
-			let url = NSURL(string: link)
+			let url = URL(string: link)
 			else {return}
-		NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: { (data, response, error) -> Void in
+		URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) -> Void in
 			guard
-				let httpURLResponse = response as? NSHTTPURLResponse where httpURLResponse.statusCode == 200,
-				let mimeType = response?.MIMEType where mimeType.hasPrefix("image"),
-				let data = data where error == nil,
+				let httpURLResponse = response as? HTTPURLResponse , httpURLResponse.statusCode == 200,
+				let mimeType = response?.mimeType , mimeType.hasPrefix("image"),
+				let data = data , error == nil,
 				let image = UIImage(data: data)
 				else { return }
-			dispatch_async(dispatch_get_main_queue()) { () -> Void in
+			DispatchQueue.main.async { () -> Void in
 				ApplicationManager.sharedInstance.addImageToCache(link, image: image)
 				onCompletion(link)
 			}

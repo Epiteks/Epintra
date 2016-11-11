@@ -55,7 +55,7 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 		fillProgressView()
 	}
 	
-	func setUIIfRegistered(grp :ProjectGroup?) {
+	func setUIIfRegistered(_ grp :ProjectGroup?) {
 		
 		if let img = ApplicationManager.sharedInstance.downloadedImages![(grp?.master?.imageUrl)!] {
 			self.masterImage.image = img
@@ -80,14 +80,14 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 		
 		let begin = self.project?.beginActi?.toDate()
 		let end = self.project?.endActi?.toDate()
-		let today = NSDate()
+		let today = Date()
 		
-		let totalTime = end?.timeIntervalSinceDate(begin!)
-		let currentTime = end?.timeIntervalSinceDate(today)
+		let totalTime = end?.timeIntervalSince(begin! as Date)
+		let currentTime = end?.timeIntervalSince(today)
 		
 		let percent = 1 - (currentTime! * 100 / totalTime!) / 100
 		
-		if (end?.earlierDate(today) == end) {
+		if ((end as NSDate?)?.earlierDate(today) == end) {
 			self.projectProgressView.setProgress(1.0, animated: true)
 			self.projectProgressView.progressTintColor = UIUtils.planningRedColor()
 			return
@@ -113,32 +113,32 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 	}
 	*/
 	
-	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	func numberOfSections(in tableView: UITableView) -> Int {
 		return 2
 	}
 	
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		if (section == 0) {
 			return files.count
 		}
 		return members.count
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		var cell = tableView.dequeueReusableCellWithIdentifier("userCell")!
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		var cell = tableView.dequeueReusableCell(withIdentifier: "userCell")!
 		
-		if (indexPath.section == 0) {
+		if ((indexPath as NSIndexPath).section == 0) {
 			
-			cell = tableView.dequeueReusableCellWithIdentifier("fileCell")!
+			cell = tableView.dequeueReusableCell(withIdentifier: "fileCell")!
 			
 			let titleLabel = cell.viewWithTag(1) as! UILabel
 			
-			titleLabel.text = files[indexPath.row].title!
+			titleLabel.text = files[(indexPath as NSIndexPath).row].title!
 			
-			cell.accessoryType = .DisclosureIndicator
+			cell.accessoryType = .disclosureIndicator
 			
-		} else if (indexPath.section == 1) {
-			cell = tableView.dequeueReusableCellWithIdentifier("userCell")!
+		} else if ((indexPath as NSIndexPath).section == 1) {
+			cell = tableView.dequeueReusableCell(withIdentifier: "userCell")!
 			
 			let imgView = cell.viewWithTag(1) as! UIImageView
 			let userLabel = cell.viewWithTag(2) as! UILabel
@@ -146,28 +146,28 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 			
 			imgView.image = UIImage(named: "userProfile")
 			
-			let usr = members[indexPath.row]
+			let usr = members[(indexPath as NSIndexPath).row]
 			
 			userLabel.text = usr.title
 			
-			cell.tag = indexPath.row + 100
+			cell.tag = (indexPath as NSIndexPath).row + 100
 			
 			if (usr.status == "confirmed") {
-				statusImgView.image = UIImage(named: "Done")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+				statusImgView.image = UIImage(named: "Done")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
 				statusImgView.tintColor = UIUtils.planningGreenColor()
 			} else {
-				statusImgView.image = UIImage(named: "Delete")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+				statusImgView.image = UIImage(named: "Delete")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
 				statusImgView.tintColor = UIUtils.planningRedColor()
 			}
 			
 			if let img = ApplicationManager.sharedInstance.downloadedImages![usr.imageUrl!] {
-				if (cell.tag == (indexPath.row + 100)) {
+				if (cell.tag == ((indexPath as NSIndexPath).row + 100)) {
 					imgView.image = img
 				}
 			} else {
 				ImageDownloader.downloadFrom(link: usr.imageUrl!) {_ in 
 					if let img = ApplicationManager.sharedInstance.downloadedImages![usr.imageUrl!] {
-						if (cell.tag == (indexPath.row + 100)) {
+						if (cell.tag == ((indexPath as NSIndexPath).row + 100)) {
 							imgView.image = img
 							
 							imgView.cropToSquare()
@@ -183,19 +183,19 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 		return cell
 	}
 	
-	func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		if (section == 0) {
 			return NSLocalizedString("Files", comment: "")
 		}
 		return NSLocalizedString("Members", comment: "")
 	}
 	
-	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
 		
-		if (indexPath.section == 0) {
-			webViewData = files[indexPath.row]
-			self.performSegueWithIdentifier("webViewSegue", sender: self)
+		if ((indexPath as NSIndexPath).section == 0) {
+			webViewData = files[(indexPath as NSIndexPath).row]
+			self.performSegue(withIdentifier: "webViewSegue", sender: self)
 		}
 	}
 	
@@ -214,13 +214,13 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 	//		
 	//	}
 	
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if (segue.identifier == "webViewSegue") {
-			let vc :WebViewViewController = segue.destinationViewController as! WebViewViewController
+			let vc :WebViewViewController = segue.destination as! WebViewViewController
 			vc.file = webViewData!
 			vc.isUrl = true
 		} else if (segue.identifier == "allMarksSegue") {
-			let vc = segue.destinationViewController as! ProjectMarksViewController
+			let vc = segue.destination as! ProjectMarksViewController
 			vc.marks = marksData
 		}
 		

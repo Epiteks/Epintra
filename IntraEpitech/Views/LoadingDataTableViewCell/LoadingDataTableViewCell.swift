@@ -10,8 +10,8 @@ import UIKit
 
 class LoadingDataTableViewCell: UITableViewCell {
 	
-	@IBOutlet private var loadingLabel: UILabel?
-	@IBOutlet private var activityIndicator: UIActivityIndicatorView?
+	@IBOutlet fileprivate var loadingLabel: UILabel?
+	@IBOutlet fileprivate var activityIndicator: UIActivityIndicatorView?
 	
 	override func awakeFromNib() {
 		super.awakeFromNib()
@@ -20,7 +20,7 @@ class LoadingDataTableViewCell: UITableViewCell {
 		loadingLabel?.text = NSLocalizedString("Loading", comment: "")
 	}
 	
-	override func setSelected(selected: Bool, animated: Bool) {
+	override func setSelected(_ selected: Bool, animated: Bool) {
 		super.setSelected(selected, animated: animated)
 		
 		// Configure the view for the selected state

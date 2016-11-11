@@ -12,11 +12,11 @@ import SwiftyJSON
 
 class ProjectsApiCall: APICalls {
 	
-	class func getCurrentProjects(onCompletion :(Bool, [Project]?, String) ->()) {
+	class func getCurrentProjects(_ onCompletion :@escaping (Bool, [Project]?, String) ->()) {
 		
 		let url = super.getApiUrl() + "projects"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!])
+		Alamofire.request(url, method: .get, parameters: ["token": ApplicationManager.sharedInstance.token!])
 			.responseJSON { response in
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)
@@ -43,11 +43,11 @@ class ProjectsApiCall: APICalls {
 	}
 	
 	
-	class func getProjectDetails(proj :Project, onCompletion :(Bool, ProjectDetail?, String) ->()) {
+	class func getProjectDetails(_ proj :Project, onCompletion :@escaping (Bool, ProjectDetail?, String) ->()) {
 		
 		let url = super.getApiUrl() + "project"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+		Alamofire.request(url, method: .get, parameters: ["token": ApplicationManager.sharedInstance.token!,
 			"scolaryear": proj.scolaryear!,
 			"codemodule": proj.codeModule!,
 			"codeinstance": proj.codeInstance!,
@@ -71,11 +71,11 @@ class ProjectsApiCall: APICalls {
 	}
 	
 	
-	class func getProjectFiles(proj :Project, onCompletion :(Bool, [File]?, String) ->()) {
+	class func getProjectFiles(_ proj :Project, onCompletion :@escaping (Bool, [File]?, String) ->()) {
 		
 		let url = super.getApiUrl() + "project/files"
 		
-		Alamofire.request(.GET, url, parameters: ["token": ApplicationManager.sharedInstance.token!,
+		Alamofire.request(url, method: .get, parameters: ["token": ApplicationManager.sharedInstance.token!,
 			"scolaryear": proj.scolaryear!,
 			"codemodule": proj.codeModule!,
 			"codeinstance": proj.codeInstance!,

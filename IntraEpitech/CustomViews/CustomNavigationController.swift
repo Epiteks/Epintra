@@ -13,12 +13,12 @@ class CustomNavigationController: UINavigationController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		self.navigationBar.translucent = false
+		self.navigationBar.isTranslucent = false
 		
 		// Dark Style
 		self.navigationBar.barTintColor = UIUtils.backgroundColor()
-		self.navigationBar.tintColor = UIColor.whiteColor()
-		self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+		self.navigationBar.tintColor = UIColor.white
+		self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
 		
 		// White Style
 //		self.navigationBar.tintColor = UIUtils.backgroundColor()

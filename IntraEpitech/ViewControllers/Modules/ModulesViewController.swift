@@ -42,13 +42,13 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
 		}
 		
 		self.refreshControl.tintColor = UIUtils.backgroundColor()
-		self.refreshControl.addTarget(self, action: #selector(ModulesViewController.refreshData(_:)), forControlEvents: .ValueChanged)
+		self.refreshControl.addTarget(self, action: #selector(ModulesViewController.refreshData(_:)), for: .valueChanged)
 		self.tableView.addSubview(refreshControl)
 		
 		// Do any additional setup after loading the view.
 	}
 	
-	func refreshData(sender :AnyObject) {
+	func refreshData(_ sender :AnyObject) {
 		ModulesApiCalls.getRegisteredModules() { (isOk :Bool, resp :[Module]?, mess :String) in
 			
 			if (!isOk) {
@@ -67,38 +67,38 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
 		// Dispose of any resources that can be recreated.
 	}
 	
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		
 		if (segue.identifier == "moduleDetailSegue") {
-			let vc = segue.destinationViewController as! ModuleDetailsViewController
+			let vc = segue.destination as! ModuleDetailsViewController
 			vc.module = selectedModule
 		}
 		
 	}
 	
 	
-	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	func numberOfSections(in tableView: UITableView) -> Int {
 		if (modules.count == 0) {
-			tableView.separatorStyle = .None
+			tableView.separatorStyle = .none
 			return 0
 		}
-		tableView.separatorStyle = .SingleLine
+		tableView.separatorStyle = .singleLine
 		return 1
 	}
 	
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return modules.count
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
-		let cell = tableView.dequeueReusableCellWithIdentifier("moduleCell")
+		let cell = tableView.dequeueReusableCell(withIdentifier: "moduleCell")
 		
 		let titleLabel = cell?.viewWithTag(1) as! UILabel
 		let creditsLabel = cell?.viewWithTag(2) as! UILabel
 		let gradeLabel = cell?.viewWithTag(3) as! UILabel
 		
-		let module = modules[indexPath.row]
+		let module = modules[(indexPath as NSIndexPath).row]
 		
 		
 		creditsLabel.text = NSLocalizedString("AvailableCredits", comment: "") + module.credits!
@@ -107,26 +107,26 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
 		}
 		titleLabel.text = module.title!
 		//cell!.textLabel!.text = modules![indexPath.row].title!
-		cell?.accessoryType = .DisclosureIndicator
+		cell?.accessoryType = .disclosureIndicator
 		return cell!
 	}
 	
-	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
 		
-		tableView.userInteractionEnabled = false
-		tableView.scrollEnabled = false
+		tableView.isUserInteractionEnabled = false
+		tableView.isScrollEnabled = false
 		
 		MJProgressView.instance.showProgress(self.view, white: false)
-		ModulesApiCalls.getModule(modules[indexPath.row]) { (isOk :Bool, resp :Module?, mess :String) in
+		ModulesApiCalls.getModule(modules[(indexPath as NSIndexPath).row]) { (isOk :Bool, resp :Module?, mess :String) in
 			MJProgressView.instance.hideProgress()
-			tableView.userInteractionEnabled = true
-			tableView.scrollEnabled = true
+			tableView.isUserInteractionEnabled = true
+			tableView.isScrollEnabled = true
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
 			} else {
 				self.selectedModule = resp!
-				self.performSegueWithIdentifier("moduleDetailSegue", sender: self)
+				self.performSegue(withIdentifier: "moduleDetailSegue", sender: self)
 			}
 		}
 	}

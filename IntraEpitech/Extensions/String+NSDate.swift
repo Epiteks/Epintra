@@ -10,11 +10,11 @@ import Foundation
 
 public extension String {
 	
-	func toSortedDate() -> NSDate {
+	func toSortedDate() -> Date {
 		
-		let formater = NSDateFormatter()
+		let formater = DateFormatter()
 		formater.dateFormat = "yyyy-MM-dd"
-		let res = formater.dateFromString(self)
+		let res = formater.date(from: self)
 		
 		return res!
 		

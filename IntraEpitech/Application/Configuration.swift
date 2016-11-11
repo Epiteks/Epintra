@@ -8,19 +8,19 @@
 
 import Foundation
 
-public class Configuration {
+open class Configuration {
 	
 	enum ConfigType {
-		case DEV, PROD
+		case dev, prod
 	}
 	
 	/// Sets the application mode to use differents things if we are in DEV or PROD
-	let applicationMode: ConfigType = .DEV
+	let applicationMode: ConfigType = .dev
 	
 	// URL of the API
 	var apiURL: String {
 		get {
-			return "http://epitech.hug33k.fr"
+			return "http://epitech.hug33k.fr/intra/"
 		}
 	}
 	

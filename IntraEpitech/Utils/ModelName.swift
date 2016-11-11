@@ -15,7 +15,7 @@ public extension UIDevice {
 		uname(&systemInfo)
 		let machineMirror = Mirror(reflecting: systemInfo.machine)
 		let identifier = machineMirror.children.reduce("") { identifier, element in
-			guard let value = element.value as? Int8 where value != 0 else { return identifier }
+			guard let value = element.value as? Int8 , value != 0 else { return identifier }
 			return identifier + String(UnicodeScalar(UInt8(value)))
 		}
 		switch identifier {
@@ -49,9 +49,9 @@ public extension UIDevice {
 	func isZoomed() -> Bool {
 		
 		let model = self.modelName
-		let mainScreen = UIScreen.mainScreen()
+		let mainScreen = UIScreen.main
 		
-		if ((model.rangeOfString("Plus")) != nil) {
+		if ((model.range(of: "Plus")) != nil) {
 			if (mainScreen.bounds.size.height < 720.0) {
 				return true
 			}

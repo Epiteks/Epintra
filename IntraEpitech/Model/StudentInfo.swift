@@ -24,8 +24,8 @@ class StudentInfo: NSObject {
 		city = dict["ville"].stringValue
 		
 		let cit = dict["ville"].stringValue
-		if (cit.containsString("/")) {
-			city = cit.componentsSeparatedByString("/")[1]
+		if (cit.contains("/")) {
+			city = cit.components(separatedBy: "/")[1]
 		}
 		
 		gpa = dict["gpa"].floatValue

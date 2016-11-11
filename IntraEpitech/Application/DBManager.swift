@@ -22,9 +22,9 @@ class DBManager: NSObject {
 		return sharedInstance
 	}
 	
-	func addStudentData(studentInfo: StudentInfo) -> Bool {
+	func addStudentData(_ studentInfo: StudentInfo) -> Bool {
 		database!.open()
-		let isInserted = database!.executeUpdate("INSERT INTO student_info (login, ville, gpa, promo) VALUES (?, ?, ?, ?)", withArgumentsInArray: [studentInfo.login!, studentInfo.city!, studentInfo.gpa!, studentInfo.promo!])
+		let isInserted = database!.executeUpdate("INSERT INTO student_info (login, ville, gpa, promo) VALUES (?, ?, ?, ?)", withArgumentsIn: [studentInfo.login!, studentInfo.city!, studentInfo.gpa!, studentInfo.promo!])
 		database!.close()
 		return isInserted
 	}
@@ -36,32 +36,32 @@ class DBManager: NSObject {
 	//		return isUpdated
 	//	}
 	
-	func deleteStudentData(studentInfo: StudentInfo) -> Bool {
+	func deleteStudentData(_ studentInfo: StudentInfo) -> Bool {
 		database!.open()
-		let isDeleted = database!.executeUpdate("DELETE FROM student_info WHERE login=?", withArgumentsInArray: [studentInfo.login!])
+		let isDeleted = database!.executeUpdate("DELETE FROM student_info WHERE login=?", withArgumentsIn: [studentInfo.login!])
 		database!.close()
 		return isDeleted
 	}
 	
 	func cleanStudentData() -> Bool {
 		database!.open()
-		let isDeleted = database!.executeUpdate("DELETE FROM student_info", withArgumentsInArray: [AnyObject]())
+		let isDeleted = database!.executeUpdate("DELETE FROM student_info", withArgumentsIn: [AnyObject]())
 		database!.close()
 		return isDeleted
 	}
 	
 	func getAllStudentData() -> NSMutableArray {
 		database!.open()
-		let resultSet: FMResultSet! = database!.executeQuery("SELECT * FROM student_info ORDER BY login", withArgumentsInArray: nil)
+		let resultSet: FMResultSet! = database!.executeQuery("SELECT * FROM student_info ORDER BY login", withArgumentsIn: nil)
 		let marrStudentInfo : NSMutableArray = NSMutableArray()
 		if (resultSet != nil) {
 			while resultSet.next() {
 				let studentInfo : StudentInfo = StudentInfo()
-				studentInfo.login = resultSet.stringForColumn("login")
-				studentInfo.city = resultSet.stringForColumn("ville")
-				studentInfo.gpa = Float(resultSet.stringForColumn("gpa"))
-				studentInfo.promo = resultSet.stringForColumn("promo")
-				marrStudentInfo.addObject(studentInfo)
+				studentInfo.login = resultSet.string(forColumn: "login")
+				studentInfo.city = resultSet.string(forColumn: "ville")
+				studentInfo.gpa = Float(resultSet.string(forColumn: "gpa"))
+				studentInfo.promo = resultSet.string(forColumn: "promo")
+				marrStudentInfo.add(studentInfo)
 			}
 		}
 		database!.close()
@@ -70,19 +70,19 @@ class DBManager: NSObject {
 	
 	func getStudentDataFor(Promo promo:String) -> NSMutableArray {
 		database!.open()
-		let resultSet: FMResultSet! = database!.executeQuery("SELECT * FROM student_info WHERE promo=?", withArgumentsInArray: [promo])
+		let resultSet: FMResultSet! = database!.executeQuery("SELECT * FROM student_info WHERE promo=?", withArgumentsIn: [promo])
 		let marrStudentInfo : NSMutableArray = NSMutableArray()
 		var i = 1
 		if (resultSet != nil) {
 			while resultSet.next() {
 				let studentInfo : StudentInfo = StudentInfo()
-				studentInfo.login = resultSet.stringForColumn("login")
-				studentInfo.city = resultSet.stringForColumn("ville")
-				studentInfo.gpa = Float(resultSet.stringForColumn("gpa"))
-				studentInfo.promo = resultSet.stringForColumn("promo")
+				studentInfo.login = resultSet.string(forColumn: "login")
+				studentInfo.city = resultSet.string(forColumn: "ville")
+				studentInfo.gpa = Float(resultSet.string(forColumn: "gpa"))
+				studentInfo.promo = resultSet.string(forColumn: "promo")
 				studentInfo.position = i
 				i += 1
-				marrStudentInfo.addObject(studentInfo)
+				marrStudentInfo.add(studentInfo)
 			}
 		}
 		database!.close()

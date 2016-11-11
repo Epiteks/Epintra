@@ -11,12 +11,12 @@ import Foundation
 typealias CompletionHandlerType = (Result) -> Void
 
 enum Result {
-	case Success(AnyObject?)
-	case Failure(type: Error, message: String?)
+	case success(AnyObject?)
+	case failure(type: AppError, message: String?)
 }
 
-enum Error: ErrorType {
-	case APIError
-	case UnauthorizedByUser
-	case AuthenticationFailure
+enum AppError: Error {
+	case apiError
+	case unauthorizedByUser
+	case authenticationFailure
 }

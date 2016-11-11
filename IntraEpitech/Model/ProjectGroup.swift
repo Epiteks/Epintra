@@ -26,7 +26,7 @@ class ProjectGroup: NSObject {
 		fillMembers(dict)
 	}
 	
-	func fillMembers(dict :JSON) {
+	func fillMembers(_ dict :JSON) {
 		members = [User]()
 		
 		let arr = dict["members"].arrayValue

@@ -10,26 +10,26 @@ import AVFoundation
 
 class UserPreferences: NSObject {
 	
-	class func saveData(login : String, password : String) {
+	class func saveData(_ login : String, password : String) {
 		
-		let def = NSUserDefaults.standardUserDefaults()
+		let def = UserDefaults.standard
 		
-		def.setObject(login, forKey: "login")
-		def.setObject(password, forKey: "password")
+		def.set(login, forKey: "login")
+		def.set(password, forKey: "password")
 	}
 	
-	class func saveWantToDownloadImage(wants : Bool) {
+	class func saveWantToDownloadImage(_ wants : Bool) {
 		
-		let def = NSUserDefaults.standardUserDefaults()
+		let def = UserDefaults.standard
 		
-		def.setObject(wants, forKey: "wantsDownloading")
+		def.set(wants, forKey: "wantsDownloading")
 	}
 	
 	class func checkIfWantsDownloadingExists() -> Bool {
 		
-		let def = NSUserDefaults.standardUserDefaults()
+		let def = UserDefaults.standard
 		
-		let wants = def.stringForKey("wantsDownloading")
+		let wants = def.string(forKey: "wantsDownloading")
 		
 		if (wants == nil) {
 			return false
@@ -38,28 +38,28 @@ class UserPreferences: NSObject {
 	}
 	
 	class func getWantsDownloading() -> Bool {
-		let def = NSUserDefaults.standardUserDefaults()
+		let def = UserDefaults.standard
 		
-		return def.boolForKey("wantsDownloading")
+		return def.bool(forKey: "wantsDownloading")
 	}
 	
 	
 	class func getData() -> (login :String, password :String) {
 		
-		let def = NSUserDefaults.standardUserDefaults()
+		let def = UserDefaults.standard
 		
-		let log = def.stringForKey("login")
-		let pass = def.stringForKey("password")
+		let log = def.string(forKey: "login")
+		let pass = def.string(forKey: "password")
 		
 		return (log!, pass!)
 	}
 	
 	class func checkIfDataExists() -> Bool {
 		
-		let def = NSUserDefaults.standardUserDefaults()
+		let def = UserDefaults.standard
 		
-		let login = def.stringForKey("login")
-		let password = def.stringForKey("password")
+		let login = def.string(forKey: "login")
+		let password = def.string(forKey: "password")
 		
 		if (login == nil || password == nil) {
 			return false
@@ -69,24 +69,24 @@ class UserPreferences: NSObject {
 	
 	class func deleteData() {
 		
-		let def = NSUserDefaults.standardUserDefaults()
+		let def = UserDefaults.standard
 		
-		def.removeObjectForKey("login")
-		def.removeObjectForKey("password")
+		def.removeObject(forKey: "login")
+		def.removeObject(forKey: "password")
 	}
 	
-	class func savDefaultCalendar(name : String) {
+	class func savDefaultCalendar(_ name : String) {
 		
-		let def = NSUserDefaults.standardUserDefaults()
+		let def = UserDefaults.standard
 		
-		def.setObject(name, forKey: "defaultCalendar")
+		def.set(name, forKey: "defaultCalendar")
 	}
 	
 	class func checkIfDefaultCalendarExists() -> Bool {
 		
-		let def = NSUserDefaults.standardUserDefaults()
+		let def = UserDefaults.standard
 		
-		let wants = def.stringForKey("defaultCalendar")
+		let wants = def.string(forKey: "defaultCalendar")
 		
 		if (wants == nil) {
 			return false
@@ -95,33 +95,33 @@ class UserPreferences: NSObject {
 	}
 	
 	class func getDefaultCalendar() -> String {
-		let def = NSUserDefaults.standardUserDefaults()
+		let def = UserDefaults.standard
 		
-		return def.stringForKey("defaultCalendar")!
+		return def.string(forKey: "defaultCalendar")!
 	}
 	
 	class func getSemesters() -> [Bool] {
 		
-		let def = NSUserDefaults.standardUserDefaults()
+		let def = UserDefaults.standard
 		
-		let dict = def.arrayForKey("semesters") as! [Bool]
+		let dict = def.array(forKey: "semesters") as! [Bool]
 		
 		return dict
 	}
 	
-	class func saveSemesters(data : [Bool]) {
+	class func saveSemesters(_ data : [Bool]) {
 		
-		let def = NSUserDefaults.standardUserDefaults()
+		let def = UserDefaults.standard
 		
-		def.setObject(data, forKey: "semesters")
+		def.set(data, forKey: "semesters")
 	}
 	
 	
 	class func checkSemestersExist() -> Bool {
 		
-		let def = NSUserDefaults.standardUserDefaults()
+		let def = UserDefaults.standard
 		
-		let dict = def.arrayForKey("semesters")
+		let dict = def.array(forKey: "semesters")
 		
 		if (dict == nil) {
 			return false
@@ -131,8 +131,8 @@ class UserPreferences: NSObject {
 	
 	class func deleteSemesters() {
 		
-		let def = NSUserDefaults.standardUserDefaults()
+		let def = UserDefaults.standard
 		
-		def.removeObjectForKey("semesters")
+		def.removeObject(forKey: "semesters")
 	}
 }

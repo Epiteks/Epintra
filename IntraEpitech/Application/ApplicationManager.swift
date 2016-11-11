@@ -7,12 +7,11 @@
 //
 
 import UIKit
-import Log
 
-let logger = Logger(formatter: Formatter("%@: %@", .Level, .Message),
+/*let logger = Logger(formatter: Log.Formatter("%@: %@", .level, .message),
                  theme:     .TomorrowNightEighties,
-                 minLevel:  .Info)
-
+                 minLevel:  .info)
+*/
 class ApplicationManager: NSObject {
 
 	internal static let sharedInstance = ApplicationManager()
@@ -50,7 +49,7 @@ class ApplicationManager: NSObject {
 		lastUserApiCall = 0
 	}
 
-	func addImageToCache(url: String, image: UIImage) {
+	func addImageToCache(_ url: String, image: UIImage) {
 		if downloadedImages == nil {
 			downloadedImages = [String : UIImage]()
 		}

@@ -7,7 +7,27 @@
 //
 
 import UIKit
-import Haneke
+
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l <= r
+  default:
+    return !(rhs < lhs)
+  }
+}
+
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
@@ -29,29 +49,29 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 		self.title = NSLocalizedString("Notifications", comment: "")
 	}
 	
-	override func viewDidAppear(animated: Bool) {
+	override func viewDidAppear(_ animated: Bool) {
 		
 		let app = ApplicationManager.sharedInstance
 		
 		// If it's 5 minutes from the last call
-		if (NSDate().timeIntervalSince1970 > ((300000) + app.lastUserApiCall!)) {
+		if (Date().timeIntervalSince1970 > ((300000) + app.lastUserApiCall!)) {
 			refreshData(self)
 		}
 	}
 	
-	func refreshData(sender:AnyObject) {
+	func refreshData(_ sender:AnyObject) {
 		
-		let dispatchGroup = dispatch_group_create()
+		let dispatchGroup = DispatchGroup()
 		
 		let historySave = currentUser?.history
 		
-		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
-			dispatch_group_async(dispatchGroup, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+		DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.high).async(execute: {
+			DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.high).async(group: dispatchGroup, execute: {
 				self.userDataCall(dispatchGroup)
 				self.userHistoryCall(dispatchGroup)
 			})
-			dispatch_group_notify(dispatchGroup, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
-				dispatch_async(dispatch_get_main_queue(), {
+			dispatchGroup.notify(queue: DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.high), execute: {
+				DispatchQueue.main.async(execute: {
 					// Update tableview if changes
 					
 					if (historySave! != self.currentUser!.history!) {
@@ -69,38 +89,38 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 		// Dispose of any resources that can be recreated.
 	}
 	
-	func userDataCall(group: dispatch_group_t) {
-		dispatch_group_enter(group)
+	func userDataCall(_ group: DispatchGroup) {
+		group.enter()
 		userRequests.getCurrentUserData { result in
 			
 			switch (result) {
-			case .Success(_):
-				logger.info("Get user data ok")
+			case .success(_):
+				log.info("Get user data ok")
 				break
-			case .Failure(let error):
+			case .failure(let error):
 				MJProgressView.instance.hideProgress()
 				ErrorViewer.errorPresent(self, mess: error.message!) { }
 				break
 			}
-			dispatch_group_leave(group)
+			group.leave()
 		}
 	}
 	
-	func userHistoryCall(group: dispatch_group_t) {
-		dispatch_group_enter(group)
+	func userHistoryCall(_ group: DispatchGroup) {
+		group.enter()
 		userRequests.getHistory() { result in
 			switch (result) {
-			case .Success(_):
-				logger.info("Get user history")
+			case .success(_):
+				log.info("Get user history")
 				break
-			case .Failure(let error):
+			case .failure(let error):
 				MJProgressView.instance.hideProgress()
 				if error.message != nil {
 					ErrorViewer.errorPresent(self, mess: error.message!) {}
 				}
 				break
 			}
-			dispatch_group_leave(group)
+			group.leave()
 		}
 	}
 	
@@ -115,11 +135,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 	}
 	*/
 	
-	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
 	}
 	
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		
 		var rows = currentUser?.history?.count
 		
@@ -130,31 +150,31 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 		return rows!
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		
 		var cell = UITableViewCell()
-		cell = tableView.dequeueReusableCellWithIdentifier("alertCell")!
+		cell = tableView.dequeueReusableCell(withIdentifier: "alertCell")!
 		
-		cell.tag = indexPath.row + 100
+		cell.tag = (indexPath as NSIndexPath).row + 100
 		
 		let profileImage = cell.viewWithTag(1) as! UIImageView
 		let content = cell.viewWithTag(2) as! UILabel
 		let date = cell.viewWithTag(3) as! UILabel
 		
-		let history = currentUser?.history![indexPath.row]
+		let history = currentUser?.history![(indexPath as NSIndexPath).row]
 		
 		profileImage.image = UIImage(named: "userProfile")
 		
 		if (history!.userPicture!.characters.count > 0) {
 			if let img = ApplicationManager.sharedInstance.downloadedImages![history!.userPicture!] {
-				if (cell.tag == (indexPath.row + 100)) {
+				if (cell.tag == ((indexPath as NSIndexPath).row + 100)) {
 					profileImage.image = img
 				}
 			} else {
 				ImageDownloader.downloadFrom(link: history!.userPicture!) {_ in 
 					if let img = ApplicationManager.sharedInstance.downloadedImages![history!.userPicture!] {
-						if (cell.tag == (indexPath.row + 100)) {
+						if (cell.tag == ((indexPath as NSIndexPath).row + 100)) {
 							profileImage.image = img
 						}
 						profileImage.cropToSquare()
@@ -167,7 +187,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 		profileImage.cropToSquare()
 		profileImage.toCircle()
 		
-		content.text = history?.title!.stringByReplacingOccurrencesOfString("<[^>]+>", withString: "", options: .RegularExpressionSearch, range: nil)
+		content.text = history?.title!.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
 		
 		date.text = (history?.userName!)! + " - " +  (history?.date!.toAlertString())!
 		
@@ -188,7 +208,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 		}
 	}
 	
-	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return 80.0
 	}
 }

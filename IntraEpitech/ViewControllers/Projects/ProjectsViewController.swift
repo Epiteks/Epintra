@@ -43,7 +43,7 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
 			}
 		}
 		self.refreshControl.tintColor = UIUtils.backgroundColor()
-		self.refreshControl.addTarget(self, action: #selector(ProjectsViewController.refreshData(_:)), forControlEvents: .ValueChanged)
+		self.refreshControl.addTarget(self, action: #selector(ProjectsViewController.refreshData(_:)), for: .valueChanged)
 		self.tableView.addSubview(refreshControl)
 		
 		// Do any additional setup after loading the view.
@@ -54,7 +54,7 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
 		// Dispose of any resources that can be recreated.
 	}
 	
-	func refreshData(sender :AnyObject) {
+	func refreshData(_ sender :AnyObject) {
 		
 		ProjectsApiCall.getCurrentProjects() { (isOk :Bool, proj :[Project]?, mess :String) in
 			if (!isOk) {
@@ -77,74 +77,74 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
 	}
 	*/
 	
-	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	func numberOfSections(in tableView: UITableView) -> Int {
 		
 		if (projects.count == 0) {
-			tableView.separatorStyle = .None
+			tableView.separatorStyle = .none
 		} else {
-			tableView.separatorStyle = .SingleLine
+			tableView.separatorStyle = .singleLine
 			tableView.backgroundView = nil
 		}
 		return 1
 	}
 	
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		if (projects.count == 0) {
-			tableView.separatorStyle = .None
-			let nibView = NSBundle.mainBundle().loadNibNamed("EmptyTableView", owner: self, options: nil)[0] as! UIView
+			tableView.separatorStyle = .none
+			let nibView = Bundle.main.loadNibNamed("EmptyTableView", owner: self, options: nil)?[0] as! UIView
 			let titleLabel = nibView.viewWithTag(1) as! UILabel
 			titleLabel.text = NSLocalizedString("NoCurrentProject", comment: "")
 			tableView.backgroundView = nibView
 			return 0
 		}
-		tableView.separatorStyle = .SingleLine
+		tableView.separatorStyle = .singleLine
 		return projects.count
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
-		let cell = tableView.dequeueReusableCellWithIdentifier("projectCell")
+		let cell = tableView.dequeueReusableCell(withIdentifier: "projectCell")
 		
 		let titleProject = cell?.viewWithTag(1) as! UILabel
 		let titleModule = cell?.viewWithTag(2) as! UILabel
 		
-		cell?.accessoryType = .DisclosureIndicator
+		cell?.accessoryType = .disclosureIndicator
 		
-		titleProject.text = projects[indexPath.row].actiTitle!
-		titleModule.text = projects[indexPath.row].titleModule!
+		titleProject.text = projects[(indexPath as NSIndexPath).row].actiTitle!
+		titleModule.text = projects[(indexPath as NSIndexPath).row].titleModule!
 		
 		return cell!
 	}
 	
-	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
 		
 		if (!canPress) { return }
 		canPress = false
 		
 		MJProgressView.instance.showProgress(self.view, white: false)
-		tableView.userInteractionEnabled = false
-		tableView.scrollEnabled = false
-		ProjectsApiCall.getProjectDetails(projects[indexPath.row]) { (isOk :Bool, proj :ProjectDetail?, mess :String) in
+		tableView.isUserInteractionEnabled = false
+		tableView.isScrollEnabled = false
+		ProjectsApiCall.getProjectDetails(projects[(indexPath as NSIndexPath).row]) { (isOk :Bool, proj :ProjectDetail?, mess :String) in
 			
-			tableView.userInteractionEnabled = true
-			tableView.scrollEnabled = true
+			tableView.isUserInteractionEnabled = true
+			tableView.isScrollEnabled = true
 			
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
 			} else {
 				
 				self.selectedProject = proj!
-				tableView.userInteractionEnabled = false
-				tableView.scrollEnabled = false
-				ProjectsApiCall.getProjectFiles(self.projects[indexPath.row]) { (isOk :Bool, files :[File]?, mess :String) in
-					tableView.userInteractionEnabled = true
-					tableView.scrollEnabled = true
+				tableView.isUserInteractionEnabled = false
+				tableView.isScrollEnabled = false
+				ProjectsApiCall.getProjectFiles(self.projects[(indexPath as NSIndexPath).row]) { (isOk :Bool, files :[File]?, mess :String) in
+					tableView.isUserInteractionEnabled = true
+					tableView.isScrollEnabled = true
 					if (!isOk) {
 						ErrorViewer.errorPresent(self, mess: mess) {}
 					} else {
 						self.selectedProject?.files = files
-						self.performSegueWithIdentifier("detailsProjectSegue", sender: self)
+						self.performSegue(withIdentifier: "detailsProjectSegue", sender: self)
 					}
 					self.canPress = true
 				}
@@ -157,9 +157,9 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
 		
 	}
 	
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if (segue.identifier == "detailsProjectSegue") {
-			let vc :ProjectsDetailsViewController = segue.destinationViewController as! ProjectsDetailsViewController
+			let vc :ProjectsDetailsViewController = segue.destination as! ProjectsDetailsViewController
 			vc.project = selectedProject
 		}
 	}

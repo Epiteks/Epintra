@@ -9,7 +9,7 @@
 import Foundation
 
 public enum IntraProduct {
-	private static let Prefix = "com.maximejunger.epintra."
+	fileprivate static let Prefix = "com.maximejunger.epintra."
 	
 	/// MARK: - Supported Product Identifiers
 	public static let Premium = Prefix + "premium"
@@ -22,6 +22,6 @@ public enum IntraProduct {
 }
 
 /// Return the resourcename for the product identifier.
-func resourceNameForProductIdentifier(productIdentifier: String) -> String? {
-	return productIdentifier.componentsSeparatedByString(".").last
+func resourceNameForProductIdentifier(_ productIdentifier: String) -> String? {
+	return productIdentifier.components(separatedBy: ".").last
 }

@@ -43,7 +43,7 @@ class MarksViewController: UIViewController, UITableViewDataSource, UITableViewD
 		}
 		
 		self.refreshControl.tintColor = UIUtils.backgroundColor()
-		self.refreshControl.addTarget(self, action: #selector(MarksViewController.refreshData(_:)), forControlEvents: .ValueChanged)
+		self.refreshControl.addTarget(self, action: #selector(MarksViewController.refreshData(_:)), for: .valueChanged)
 		self.tableView.addSubview(self.refreshControl)
 		// Do any additional setup after loading the view.
 	}
@@ -53,7 +53,7 @@ class MarksViewController: UIViewController, UITableViewDataSource, UITableViewD
 		// Dispose of any resources that can be recreated.
 	}
 	
-	func refreshData(sender :AnyObject) {
+	func refreshData(_ sender :AnyObject) {
 		MarksApiCalls.getMarks() { (isOk :Bool, resp :[Mark]?, mess :String) in
 			
 			if (!isOk) {
@@ -67,67 +67,67 @@ class MarksViewController: UIViewController, UITableViewDataSource, UITableViewD
 		}
 	}
 	
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		// Get the new view controller using segue.destinationViewController.
 		// Pass the selected object to the new view controller.
 		
 		if (segue.identifier == "allMarksSegue") {
-			let vc = segue.destinationViewController as! ProjectMarksViewController
+			let vc = segue.destination as! ProjectMarksViewController
 			vc.marks = marksData
 		}
 		
 	}
 	
-	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	func numberOfSections(in tableView: UITableView) -> Int {
 		
 		if (marks.count == 0) {
-			tableView.separatorStyle = .None
+			tableView.separatorStyle = .none
 			return 0
 		}
-		tableView.separatorStyle = .SingleLine
+		tableView.separatorStyle = .singleLine
 		return 1
 	}
 	
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return marks.count
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
-		let cell = tableView.dequeueReusableCellWithIdentifier("marksCell")
+		let cell = tableView.dequeueReusableCell(withIdentifier: "marksCell")
 		
 		let titleLabel = cell?.viewWithTag(1) as! UILabel
 		let moduleLabel = cell?.viewWithTag(2) as! UILabel
 		let markLabel = cell?.viewWithTag(3) as! UILabel
 		
-		let mark = marks[indexPath.row]
+		let mark = marks[(indexPath as NSIndexPath).row]
 		
 		titleLabel.text = mark.title
 		moduleLabel.text = mark.titleModule
 		markLabel.text = mark.finalNote
 		
-		cell?.accessoryType = .DisclosureIndicator
+		cell?.accessoryType = .disclosureIndicator
 		
 		return cell!
 	}
 	
-	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
 		
-		tableView.userInteractionEnabled = false
-		tableView.scrollEnabled = false
+		tableView.isUserInteractionEnabled = false
+		tableView.isScrollEnabled = false
 		
 		MJProgressView.instance.showProgress(self.view, white: false)
-		MarksApiCalls.getProjectMarks(marks[indexPath.row]) { (isOk :Bool, resp :[Mark]?, mess :String) in
-			tableView.userInteractionEnabled = true
-			tableView.scrollEnabled = true
+		MarksApiCalls.getProjectMarks(marks[(indexPath as NSIndexPath).row]) { (isOk :Bool, resp :[Mark]?, mess :String) in
+			tableView.isUserInteractionEnabled = true
+			tableView.isScrollEnabled = true
 			MJProgressView.instance.hideProgress()
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
 			} else {
-				self.selectedMark = self.marks[indexPath.row]
+				self.selectedMark = self.marks[(indexPath as NSIndexPath).row]
 				self.marksData = resp!
-				self.performSegueWithIdentifier("allMarksSegue", sender: self)
+				self.performSegue(withIdentifier: "allMarksSegue", sender: self)
 			}
 		}
 	}

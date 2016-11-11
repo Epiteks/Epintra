@@ -9,13 +9,13 @@
 import UIKit
 
 class ActionButton: UIButton {
-	override func drawRect(rect: CGRect) {
+	override func draw(_ rect: CGRect) {
 		
 		self.layer.cornerRadius = 3
 		
-		self.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+		self.setTitleColor(UIColor.white, for: UIControlState())
 		
-		self.setBackgroundImage(UIUtils.lightBackgroundColor().toImage(), forState: .Normal)
+		self.setBackgroundImage(UIUtils.lightBackgroundColor().toImage(), for: UIControlState())
 		
 		self.layer.masksToBounds = true
 	}

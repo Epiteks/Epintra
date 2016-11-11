@@ -11,6 +11,26 @@ import MessageUI
 import AddressBookUI
 import Contacts
 import ContactsUI
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class OtherUserViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate, CNContactViewControllerDelegate {
 	
@@ -40,9 +60,9 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 		super.viewDidLoad()
 		
 		// Do any additional setup after loading the view.
-		segmentedControl.setTitle(NSLocalizedString("Modules", comment: ""), forSegmentAtIndex: 0)
-		segmentedControl.setTitle(NSLocalizedString("Marks", comment: ""), forSegmentAtIndex: 1)
-		segmentedControl.setTitle(NSLocalizedString("Flags", comment: ""), forSegmentAtIndex: 2)
+		segmentedControl.setTitle(NSLocalizedString("Modules", comment: ""), forSegmentAt: 0)
+		segmentedControl.setTitle(NSLocalizedString("Marks", comment: ""), forSegmentAt: 1)
+		segmentedControl.setTitle(NSLocalizedString("Flags", comment: ""), forSegmentAt: 2)
 		loadProfileView()
 		setUIElements()
 		self.title = currentUser?.login
@@ -50,7 +70,7 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 		self.segmentedControl.tintColor = UIUtils.backgroundColor()
 	}
 	
-	override func viewWillAppear(animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
 		isMarksDownloading = true
 		MarksApiCalls.getMarksFor(user: self.currentUser!.login!) { (isOk :Bool, resp :[Mark]?, mess :String) in
 			self.isMarksDownloading = false
@@ -80,7 +100,7 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 			}
 		}
 		self.isFlagsDownloading = true
-		UserApiCalls.getUserFlags(self.currentUser!.login!) { (isOk :Bool, resp :[Flags]?, mess :String) in
+		/*UserApiCalls.getUserFlags(self.currentUser!.login!) { (isOk :Bool, resp :[Flags]?, mess :String) in
 			self.isFlagsDownloading = false
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
@@ -91,10 +111,10 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 					self.tableView.reloadData()
 				}
 			}
-		}
+		}*/
 	}
 	
-	override func viewDidAppear(animated: Bool) {
+	override func viewDidAppear(_ animated: Bool) {
 		MJProgressView.instance.showProgress(self.tableView, white: false)
 		self.profileImageView.image = UIImage(named: "userProfile")
 		ImageDownloader.downloadFrom(link: (currentUser?.imageUrl)!) {_ in 
@@ -112,7 +132,7 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 	}
 	
 	func loadProfileView() {
-		let nibView = NSBundle.mainBundle().loadNibNamed("ProfileView", owner: self, options: nil)[0] as! UIView
+		let nibView = Bundle.main.loadNibNamed("ProfileView", owner: self, options: nil)?[0] as! UIView
 		profileViewContainer.addSubview(nibView)
 		
 		profileImageView = nibView.viewWithTag(1) as? UIImageView
@@ -151,7 +171,7 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 	}
 	*/
 	
-	@IBAction func segmentedChanged(sender: UISegmentedControl) {
+	@IBAction func segmentedChanged(_ sender: UISegmentedControl) {
 		
 		if (sender.selectedSegmentIndex == 0 && self.isModuleDownloading == true) {
 			MJProgressView.instance.showProgress(self.tableView, white: false)
@@ -166,22 +186,22 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 		self.tableView.reloadData()
 	}
 	
-	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	func numberOfSections(in tableView: UITableView) -> Int {
 		if (segmentedControl.selectedSegmentIndex == 2) {
 			return (flags?.count)!
 		}
 		return 1
 	}
 	
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		
 		if ((currentUser?.modules == nil && segmentedControl.selectedSegmentIndex == 0)
 			|| (currentUser?.marks == nil && segmentedControl.selectedSegmentIndex == 1)
 			|| (flags == nil && segmentedControl.selectedSegmentIndex == 2)) {
-			self.tableView.separatorStyle = .None
+			self.tableView.separatorStyle = .none
 			return 0
 		}
-		self.tableView.separatorStyle = .SingleLine
+		self.tableView.separatorStyle = .singleLine
 		switch (segmentedControl.selectedSegmentIndex) {
 		case 0:
 			return (currentUser?.modules?.count)!
@@ -197,18 +217,18 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 		//		return (segmentedControl.selectedSegmentIndex == 0 ? currentUser?.modules!.count : currentUser?.marks!.count)!
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
-		var cell = tableView.dequeueReusableCellWithIdentifier("marksCell")
+		var cell = tableView.dequeueReusableCell(withIdentifier: "marksCell")
 		
 		if (segmentedControl.selectedSegmentIndex == 0) {
-			cell = tableView.dequeueReusableCellWithIdentifier("moduleCell")
+			cell = tableView.dequeueReusableCell(withIdentifier: "moduleCell")
 			
 			let titleLabel = cell?.viewWithTag(1) as! UILabel
 			let creditsLabel = cell?.viewWithTag(2) as! UILabel
 			let gradeLabel = cell?.viewWithTag(3) as! UILabel
 			
-			let module = currentUser?.modules![indexPath.row]
+			let module = currentUser?.modules![(indexPath as NSIndexPath).row]
 			
 			creditsLabel.text = NSLocalizedString("AvailableCredits", comment: "") + module!.credits!
 			if (module!.grade != nil) {
@@ -217,27 +237,27 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 			titleLabel.text = module!.title!
 		} else if (segmentedControl.selectedSegmentIndex == 1) {
 			
-			cell = tableView.dequeueReusableCellWithIdentifier("marksCell")
+			cell = tableView.dequeueReusableCell(withIdentifier: "marksCell")
 			
 			let actiTitle = cell?.viewWithTag(1) as! UILabel
 			let moduleTitle = cell?.viewWithTag(2) as! UILabel
 			let markLabel = cell?.viewWithTag(3) as! UILabel
 			
-			let mark = currentUser?.marks![indexPath.row]
+			let mark = currentUser?.marks![(indexPath as NSIndexPath).row]
 			
 			actiTitle.text = mark?.title!
 			moduleTitle.text = mark?.titleModule!
 			markLabel.text = mark?.finalNote!
 		} else {
-			if (flags![indexPath.section].modules.count > 0) {
-				cell = tableView.dequeueReusableCellWithIdentifier("flagCell")!
+			if (flags![(indexPath as NSIndexPath).section].modules.count > 0) {
+				cell = tableView.dequeueReusableCell(withIdentifier: "flagCell")!
 				let titleLabel = cell!.viewWithTag(1) as! UILabel
 				let gradeLabel = cell!.viewWithTag(2) as! UILabel
-				let module = flags![indexPath.section].modules[indexPath.row]
+				let module = flags![(indexPath as NSIndexPath).section].modules[(indexPath as NSIndexPath).row]
 				titleLabel.text = module.title
 				gradeLabel.text = module.grade
-			} else if (indexPath.section > 0 && flags![indexPath.section].modules.count == 0) {
-				cell = tableView.dequeueReusableCellWithIdentifier("emptyCell")!
+			} else if ((indexPath as NSIndexPath).section > 0 && flags![(indexPath as NSIndexPath).section].modules.count == 0) {
+				cell = tableView.dequeueReusableCell(withIdentifier: "emptyCell")!
 				let titleLabel = cell!.viewWithTag(1) as! UILabel
 				titleLabel.text = NSLocalizedString("NoFlag", comment: "")
 			}
@@ -246,52 +266,52 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 		return cell!
 	}
 	
-	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
 	}
 	
-	@IBAction func actionButtonClicked(sender: AnyObject) {
-		let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+	@IBAction func actionButtonClicked(_ sender: AnyObject) {
+		let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 		
-		let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
 			
 		}
 		alertController.addAction(cancelAction)
 		
 		if (currentUser?.phone != nil && currentUser?.phone?.characters.count > 0) {
 			
-			let callAction = UIAlertAction(title: NSLocalizedString("Call", comment: "") + " " + (currentUser?.phone!)!, style: .Default) { (action) in
+			let callAction = UIAlertAction(title: NSLocalizedString("Call", comment: "") + " " + (currentUser?.phone!)!, style: .default) { (action) in
 				
-				let nbr = self.currentUser?.phone!.stringByReplacingOccurrencesOfString(" ", withString: "")
+				let nbr = self.currentUser?.phone!.replacingOccurrences(of: " ", with: "")
 				
 				let numberToCall = "tel://" + nbr!
-				UIApplication.sharedApplication().openURL(NSURL(string: numberToCall)!)
+				UIApplication.shared.openURL(URL(string: numberToCall)!)
 			}
 			alertController.addAction(callAction)
 		}
 		
-		let emailAction = UIAlertAction(title: NSLocalizedString("Email", comment: ""), style: .Default) { (action) in
+		let emailAction = UIAlertAction(title: NSLocalizedString("Email", comment: ""), style: .default) { (action) in
 			
 			if (MFMailComposeViewController.canSendMail()) {
 				let mailComposerVC = MFMailComposeViewController()
 				mailComposerVC.mailComposeDelegate = self
 				mailComposerVC.setToRecipients([(self.currentUser?.internalEmail!)!])
-				self.presentViewController(mailComposerVC, animated: true, completion: nil)
+				self.present(mailComposerVC, animated: true, completion: nil)
 			}
 			
 		}
 		alertController.addAction(emailAction)
 		
-		self.presentViewController(alertController, animated: true) {
+		self.present(alertController, animated: true) {
 		}
 		
 	}
 	
-	func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-		controller.dismissViewControllerAnimated(true, completion: nil)
+	func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+		controller.dismiss(animated: true, completion: nil)
 	}
 	
-	func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		
 		if segmentedControl.selectedSegmentIndex != 2 {
 			return nil

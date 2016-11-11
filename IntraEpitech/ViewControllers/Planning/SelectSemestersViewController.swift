@@ -37,36 +37,36 @@ class SelectSemestersViewController: UIViewController, UITableViewDelegate, UITa
 	}
 	*/
 	
-	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
 	}
 	
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return _semesters.count
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = UITableViewCell()
 		
-		if (_semesters[indexPath.row] == true) {
-			cell.accessoryType = .Checkmark
+		if (_semesters[(indexPath as NSIndexPath).row] == true) {
+			cell.accessoryType = .checkmark
 		} else {
-			cell.accessoryType = .None
+			cell.accessoryType = .none
 		}
 		
-		cell.textLabel!.text = NSLocalizedString("Semester", comment :"") + " " + String(indexPath.row)
+		cell.textLabel!.text = NSLocalizedString("Semester", comment :"") + " " + String((indexPath as NSIndexPath).row)
 		
 		return cell
 	}
 	
-	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
 		
 		tableView.beginUpdates()
-		let cell = tableView.cellForRowAtIndexPath(indexPath)
-		_semesters[indexPath.row] = !_semesters[indexPath.row]
+		let cell = tableView.cellForRow(at: indexPath)
+		_semesters[(indexPath as NSIndexPath).row] = !_semesters[(indexPath as NSIndexPath).row]
 		ApplicationManager.sharedInstance.planningSemesters = _semesters
-		cell?.accessoryType = (cell?.accessoryType == .Checkmark ? .None : .Checkmark)
+		cell?.accessoryType = (cell?.accessoryType == .checkmark ? .none : .checkmark)
 		UserPreferences.saveSemesters(_semesters)
 		tableView.endUpdates()
 	}

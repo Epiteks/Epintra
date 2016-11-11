@@ -18,24 +18,24 @@ class UserRequests: RequestManager {
 	- parameter password:		user password
 	- parameter completion:	Request completion action
 	*/
-	func auth(login: String, password: String, completion: CompletionHandlerType) {
+	func auth(_ login: String, password: String, completion: @escaping CompletionHandlerType) {
 		
 		super.call("authentication", params: ["login": login, "password": password]) { (response) in
 			switch response {
-			case .Success(let res):
+			case .success(let res):
 				
 				let responseJSON = JSON(res!)
 				
 				if let token = responseJSON["token"].string {
-					logger.info("Token : \(token)")
+					log.info("Token : \(token)")
 					ApplicationManager.sharedInstance.token = token
-					completion(Result.Success(nil))
+					completion(Result.success(nil))
 				}
 				
 				break
-			case .Failure(let err):
-				completion(Result.Failure(type: err.type, message: err.message))
-				logger.error("Authentication : \(err)")
+			case .failure(let err):
+				completion(Result.failure(type: err.type, message: err.message))
+				log.error("Authentication : \(err)")
 				break
 			}
 		}
@@ -47,26 +47,26 @@ class UserRequests: RequestManager {
 	Set the user planning semester to allow him to see his current calendar.
 	- parameter completion: Request completion action
 	*/
-	func getCurrentUserData(completion: CompletionHandlerType) {
+	func getCurrentUserData(_ completion: @escaping CompletionHandlerType) {
 		
 		let app = ApplicationManager.sharedInstance
 		
-		super.call("userData", params: ["user": app.currentLogin!]) { (response) in
+		super.call("userData", params: ["user": app.currentLogin! as AnyObject]) { (response) in
 			switch response {
-			case .Success(let res):
+			case .success(let res):
 				
 				let responseJSON = JSON(res!)
 				
 				app.user = User(dict: responseJSON)
-				app.lastUserApiCall = NSDate().timeIntervalSince1970
+				app.lastUserApiCall = Date().timeIntervalSince1970
 				app.planningSemesters[(app.user?.semester!)!] = true
 				
-				completion(Result.Success(nil))
+				completion(Result.success(nil))
 				
 				break
-			case .Failure(let err):
-				completion(Result.Failure(type: err.type, message: err.message))
-				logger.error("GetCurrentUserData : \(err)")
+			case .failure(let err):
+				completion(Result.failure(type: err.type, message: err.message))
+				log.error("GetCurrentUserData : \(err)")
 				break
 			}
 		}
@@ -78,21 +78,21 @@ class UserRequests: RequestManager {
 	- parameter login:			wanted user
 	- parameter completion:	Request completion action
 	*/
-	func getUserData(login: String, completion: CompletionHandlerType) {
+	func getUserData(_ login: String, completion: @escaping CompletionHandlerType) {
 		
-		super.call("userData", params: ["user": login]) { (response) in
+		super.call("userData", params: ["user": login as AnyObject]) { (response) in
 			switch response {
-			case .Success(let res):
+			case .success(let res):
 				
 				let responseJSON = JSON(res!)
 				let usr = User(dict: responseJSON)
 				
-				completion(Result.Success(usr))
+				completion(Result.success(usr))
 				
 				break
-			case .Failure(let err):
-				completion(Result.Failure(type: err.type, message: err.message))
-				logger.error("GetUserData : \(err)")
+			case .failure(let err):
+				completion(Result.failure(type: err.type, message: err.message))
+				log.error("GetUserData : \(err)")
 				break
 			}
 		}
@@ -103,32 +103,32 @@ class UserRequests: RequestManager {
 	Fills the history in manager, the completion takes nil in param.
 	- parameter completion:	Request completion action
 	*/
-	func getHistory(completion: CompletionHandlerType) {
+	func getHistory(_ completion: @escaping CompletionHandlerType) {
 		
 		let app = ApplicationManager.sharedInstance
 		
 		super.call("userHistory", params: nil) { (response) in
 			switch response {
-			case .Success(let res):
+			case .success(let res):
 				
 				let responseJSON = JSON(res!)
 				
 				app.user?.fillHistory(responseJSON)
-				completion(Result.Success(nil))
+				completion(Result.success(nil))
 				break
-			case .Failure(let err):
-				completion(Result.Failure(type: err.type, message: err.message))
-				logger.error("GetHistory : \(err)")
+			case .failure(let err):
+				completion(Result.failure(type: err.type, message: err.message))
+				log.error("GetHistory : \(err)")
 				break
 			}
 		}
 	}
 	
-	func getUserFlags(login: String, completion: CompletionHandlerType) {
+	func getUserFlags(_ login: String, completion: @escaping CompletionHandlerType) {
 		
-		super.call("userFlags", params: ["login": login]) { (response) in
+		super.call("userFlags", params: ["login": login as AnyObject]) { (response) in
 			switch response {
-			case .Success(let res):
+			case .success(let res):
 				
 				let responseJSON = JSON(res!)
 				let flags = responseJSON["flags"]
@@ -139,22 +139,22 @@ class UserRequests: RequestManager {
 				resp.append(Flags(name: "difficulty", dict: flags["difficulty"]))
 				resp.append(Flags(name: "ghost", dict: flags["ghost"]))
 				
-				completion(Result.Success(resp))
+				completion(Result.success(resp as AnyObject?))
 				
 				break
-			case .Failure(let err):
-				completion(Result.Failure(type: err.type, message: err.message))
-				logger.error("GetUserFlags : \(err)")
+			case .failure(let err):
+				completion(Result.failure(type: err.type, message: err.message))
+				log.error("GetUserFlags : \(err)")
 				break
 			}
 		}
 	}
 	
-	func getUserDocuments(completion: CompletionHandlerType) {
+	func getUserDocuments(_ completion: @escaping CompletionHandlerType) {
 		
-		super.call("userFiles", params: ["login": (ApplicationManager.sharedInstance.user?.login)!]) { (response) in
+		super.call("userFiles", params: ["login": (ApplicationManager.sharedInstance.user?.login)! as AnyObject]) { (response) in
 			switch response {
-			case .Success(let res):
+			case .success(let res):
 				
 				let responseJSON = JSON(res!)
 				let responseArray = responseJSON.arrayValue
@@ -162,12 +162,12 @@ class UserRequests: RequestManager {
 				for tmp in responseArray {
 					resp.append(File(dict: tmp))
 				}
-				completion(Result.Success(resp))
+				completion(Result.success(resp as AnyObject?))
 				
 				break
-			case .Failure(let err):
-				completion(Result.Failure(type: err.type, message: err.message))
-				logger.error("GetUserDocuments : \(err)")
+			case .failure(let err):
+				completion(Result.failure(type: err.type, message: err.message))
+				log.error("GetUserDocuments : \(err)")
 				break
 			}
 		}

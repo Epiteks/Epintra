@@ -28,11 +28,11 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 		//self.setNeedsStatusBarAppearanceUpdate()
 		
 		waitingView.backgroundColor = UIUtils.backgroundColor()
-		waitingView.hidden = true
+		waitingView.isHidden = true
 		
 		
 		if (UserPreferences.checkIfDataExists()) {
-			waitingView.hidden = false
+			waitingView.isHidden = false
 			let data = UserPreferences.getData()
 			login = data.login
 			password = data.password
@@ -42,27 +42,27 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 		self.view.backgroundColor = UIUtils.backgroundColor()
 		
 		// Set UITableView properties
-		self.loginTableView.scrollEnabled = false
+		self.loginTableView.isScrollEnabled = false
 		self.loginTableView.layer.cornerRadius = 3
-		self.loginTableView.separatorInset = UIEdgeInsetsZero
+		self.loginTableView.separatorInset = UIEdgeInsets.zero
 		
 		
 		// Set different texts
-		self.loginButton.setTitle(NSLocalizedString("login", comment: ""), forState: .Normal)
+		self.loginButton.setTitle(NSLocalizedString("login", comment: ""), for: UIControlState())
 		self.infoLabel.text = NSLocalizedString("noOfficialApp", comment: "")
 		
 		self.registerForKeyboardNotifications()
 		
 	}
 	
-	override func viewDidAppear(animated: Bool) {
+	override func viewDidAppear(_ animated: Bool) {
 		
-		waitingView.hidden = true
+		waitingView.isHidden = true
 		if (UserPreferences.checkIfDataExists()) {
-			waitingView.hidden = false
+			waitingView.isHidden = false
 		}
 		
-		if (waitingView.hidden == false) {
+		if (waitingView.isHidden == false) {
 			MJProgressView.instance.showProgress(self.waitingView, white: true)
 		} else {
 			MJProgressView.instance.hideProgress()
@@ -78,37 +78,37 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 	Register Notification to get when keyboard is shown and hidden.
 	*/
 	func registerForKeyboardNotifications() {
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
-		NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 		
 		let gesture = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.tapOnView(_:)))
 		self.view.addGestureRecognizer(gesture)
 	}
 	
 	
-	func tapOnView(sender: UITapGestureRecognizer) {
+	func tapOnView(_ sender: UITapGestureRecognizer) {
 		self.view.endEditing(true)
 	}
 	
-	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
 	}
 	
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return 2
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
-		let cell = tableView.dequeueReusableCellWithIdentifier("normalCell")
+		let cell = tableView.dequeueReusableCell(withIdentifier: "normalCell")
 		
 		let textField = cell?.viewWithTag(1) as! UITextField
 		
 		textField.tintColor = UIUtils.backgroundColor()
 		
-		if (indexPath.row == 0) { textField.placeholder = NSLocalizedString("loginUser", comment: "") } else {
+		if ((indexPath as NSIndexPath).row == 0) { textField.placeholder = NSLocalizedString("loginUser", comment: "") } else {
 			textField.placeholder = NSLocalizedString("password", comment: "")
-			textField.secureTextEntry = true
+			textField.isSecureTextEntry = true
 		}
 		
 		cell?.layoutMargins.left = 0
@@ -116,17 +116,17 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 		return cell!
 	}
 	
-	@IBAction func loginPressed(sender: AnyObject) {
+	@IBAction func loginPressed(_ sender: AnyObject) {
 		
 		self.view.endEditing(true)
 		
 		// Getting login cell data
-		var cell = loginTableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
+		var cell = loginTableView.cellForRow(at: IndexPath(row: 0, section: 0))
 		var textField = cell?.viewWithTag(1) as! UITextField
 		login = textField.text!
 		
 		// Getting password cell data
-		cell = loginTableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0))
+		cell = loginTableView.cellForRow(at: IndexPath(row: 1, section: 0))
 		textField = cell?.viewWithTag(1) as! UITextField
 		password = textField.text!
 		
@@ -141,10 +141,10 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 	func loginCall() {
 		MJProgressView.instance.showLoginProgress(self.loginButton, white: true)
 		
-		let date = NSDate()
-		let tstamp = NSDate(timeIntervalSince1970: 1457784037)
+		let date = Date()
+		let tstamp = Date(timeIntervalSince1970: 1457784037)
 		
-		if (date.earlierDate(tstamp) == date && login == "iTunesConnect1203" && password == "iTunes1203") {
+		if ((date as NSDate).earlierDate(tstamp) == date && login == "iTunesConnect1203" && password == "iTunes1203") {
 			login = "junger_m"
 			password = "monsupermdp"
 		}
@@ -154,17 +154,17 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 			MJProgressView.instance.hideProgress()
 			
 			switch (result) {
-			case .Success(_):
+			case .success(_):
 				UserPreferences.saveData(self.login, password: self.password)
 				self.goToNextView()
 				break
-			case .Failure(let error):
-				if (error.type == Error.AuthenticationFailure) {
+			case .failure(let error):
+				if (error.type == AppError.authenticationFailure) {
 					ErrorViewer.errorShow(self, mess: NSLocalizedString("invalidCombinaison", comment: "")) { _ in }
-				} else if (error.type == Error.APIError) {
+				} else if (error.type == AppError.apiError) {
 					ErrorViewer.errorShow(self, mess: NSLocalizedString("unknownApiError", comment: "")) { _ in }
 				}
-				self.waitingView.hidden = true
+				self.waitingView.isHidden = true
 				break
 			}
 		}		
@@ -175,19 +175,17 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 	Handles the connexion input positon.
 	- parameter notification
 	*/
-	func keyboardWillShow(notification: NSNotification) {
+	func keyboardWillShow(_ notification: Notification) {
 		
-		let userInfo: NSDictionary = notification.userInfo!
-		let keyboardFrame: NSValue = (userInfo.valueForKey(UIKeyboardFrameEndUserInfoKey) as? NSValue)!
-		let keyboardRectangle = keyboardFrame.CGRectValue()
+		let userInfo: NSDictionary = (notification as NSNotification).userInfo! as NSDictionary
+		let keyboardFrame: NSValue = (userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as? NSValue)!
+		let keyboardRectangle = keyboardFrame.cgRectValue
 		let verticalPoint = connexionBlockView.frame.origin.y + connexionBlockView.frame.size.height
-		
-		keyboardRectangle.origin.y
 		
 		if keyboardRectangle.origin.y < verticalPoint {
 			
 			self.connexionButtonConstraintSave = self.view.frame.origin.y
-			UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 2.0, initialSpringVelocity: 0.0, options: .CurveLinear, animations: {
+			UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 2.0, initialSpringVelocity: 0.0, options: .curveLinear, animations: {
 				let diff = verticalPoint - keyboardRectangle.origin.y
 				self.view.frame.origin.y = diff * -1
 				self.view.layoutIfNeeded()
@@ -200,10 +198,10 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 	Handles the connexion input positon.
 	- parameter notification
 	*/
-	func keyboardWillHide(notification: NSNotification) {
+	func keyboardWillHide(_ notification: Notification) {
 		
 		if self.connexionButtonConstraintSave != nil {
-			UIView.animateWithDuration(0.5, delay: 0.0, usingSpringWithDamping: 2.0, initialSpringVelocity: 0.0, options: .CurveLinear, animations: {
+			UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 2.0, initialSpringVelocity: 0.0, options: .curveLinear, animations: {
 				self.view.frame.origin.y = self.connexionButtonConstraintSave!
 				self.view.layoutIfNeeded()
 				}, completion: { (complete: Bool) in
@@ -217,7 +215,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 	*/
 	func goToNextView() {
 		ApplicationManager.sharedInstance.currentLogin = login
-		performSegueWithIdentifier("splashSegue", sender: self)
+		performSegue(withIdentifier: "splashSegue", sender: self)
 	}
 	
 }

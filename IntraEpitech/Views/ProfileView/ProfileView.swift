@@ -7,10 +7,30 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l <= r
+  default:
+    return !(rhs < lhs)
+  }
+}
+
 
 class ProfileView: UIView {
 	
-	@IBOutlet private var contentView: UIView?
+	@IBOutlet fileprivate var contentView: UIView?
 	@IBOutlet weak var logLabel: UILabel!
 	@IBOutlet weak var userProfileImage: UIImageView!
 	@IBOutlet weak var creditsNumberLabel: UILabel!
@@ -38,10 +58,10 @@ class ProfileView: UIView {
 	}
 	
 	func commonInit() {
-		NSBundle.mainBundle().loadNibNamed("ProfileView", owner: self, options: nil)
+		Bundle.main.loadNibNamed("ProfileView", owner: self, options: nil)
 		guard let content = contentView else { return }
 		content.frame = self.bounds
-		content.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
+		content.autoresizingMask = [.flexibleHeight, .flexibleWidth]
 		
 		self.addSubview(content)
 		self.creditsTitleLabel.text = NSLocalizedString("credits", comment: "")
@@ -53,16 +73,16 @@ class ProfileView: UIView {
 		self.userProfileImage.cropToSquare()
 	}
 	
-	func setUserData(user: User) {
+	func setUserData(_ user: User) {
 		
 		self.spicesLabel.text =  user.spices!.currentSpices + " " + NSLocalizedString("spices", comment: "")
 		self.logLabel.text = "Log : " + String(user.log!.timeActive)
 		self.logLabel.textColor = user.log?.getColor()
 		
 		if user.gpa?.count <= 1 {
-			gpaNumberLabel.hidden = true
-			gpaTypeLabel.hidden = true
-			gpaTitleLabel.hidden = true
+			gpaNumberLabel.isHidden = true
+			gpaTypeLabel.isHidden = true
+			gpaTitleLabel.isHidden = true
 		} else {
 			let gpa = user.gpa![0]
 			
@@ -81,7 +101,7 @@ class ProfileView: UIView {
 		self.creditsNumberLabel.text = String(user.credits!)
 	}
 	
-	func setUserImage(image: UIImage) {
+	func setUserImage(_ image: UIImage) {
 		
 		self.userProfileImage.image = image
 		self.userProfileImage.toCircle()

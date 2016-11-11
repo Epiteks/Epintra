@@ -10,14 +10,14 @@ import UIKit
 
 public extension UIColor {
 	func toImage() -> UIImage {
-		let rect : CGRect = CGRectMake(0, 0, 1, 1)
+		let rect : CGRect = CGRect(x: 0, y: 0, width: 1, height: 1)
 		UIGraphicsBeginImageContext(rect.size)
-		let context : CGContextRef = UIGraphicsGetCurrentContext()!
+		let context : CGContext = UIGraphicsGetCurrentContext()!
 		
-		CGContextSetFillColorWithColor(context, self.CGColor)
-		CGContextFillRect(context, rect)
+		context.setFillColor(self.cgColor)
+		context.fill(rect)
 		
-		let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+		let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
 		UIGraphicsEndImageContext()
 		return image
 	}
@@ -26,14 +26,14 @@ public extension UIColor {
 		let r, g, b, a: CGFloat
 		
 		if hexString.hasPrefix("#") {
-			let start = hexString.startIndex.advancedBy(1)
-			let hexColor = hexString.substringFromIndex(start)
+			let start = hexString.characters.index(hexString.startIndex, offsetBy: 1)
+			let hexColor = hexString.substring(from: start)
 			
 			if hexColor.characters.count == 8 {
-				let scanner = NSScanner(string: hexColor)
+				let scanner = Scanner(string: hexColor)
 				var hexNumber: UInt64 = 0
 				
-				if scanner.scanHexLongLong(&hexNumber) {
+				if scanner.scanHexInt64(&hexNumber) {
 					r = CGFloat((hexNumber & 0xff000000) >> 24) / 255
 					g = CGFloat((hexNumber & 0x00ff0000) >> 16) / 255
 					b = CGFloat((hexNumber & 0x0000ff00) >> 8) / 255

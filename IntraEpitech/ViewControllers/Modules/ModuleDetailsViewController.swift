@@ -7,6 +7,26 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
@@ -50,13 +70,13 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 	}
 	
 	func setTimeLabel() {
-		let today = NSDate()
+		let today = Date()
 		let registerLimit = self.module?.endRegister?.shortToDate()
 		let end = self.module?.end!.shortToDate()
 		
-		if (today.earlierDate(registerLimit!) == today) {
+		if ((today as NSDate).earlierDate(registerLimit! as Date) == today) {
 			remainingTime.text = NSLocalizedString("InscriptionEnd", comment: "") + (registerLimit?.toTitleString())!
-		} else if (today.earlierDate(end!) == today) {
+		} else if ((today as NSDate).earlierDate(end! as Date) == today) {
 			remainingTime.text = NSLocalizedString("ModuleEnd", comment: "") + (end?.toTitleString())!
 		} else {
 			remainingTime.text = NSLocalizedString("ModuleEndedSince", comment: "") + (end?.toTitleString())!
@@ -69,14 +89,14 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 		
 		let begin = self.module?.begin!.shortToDate()
 		let end = self.module?.end!.shortToDate()
-		let today = NSDate()
+		let today = Date()
 		
-		let totalTime = end?.timeIntervalSinceDate(begin!)
-		let currentTime = end?.timeIntervalSinceDate(today)
+		let totalTime = end?.timeIntervalSince(begin! as Date)
+		let currentTime = end?.timeIntervalSince(today)
 		
 		let percent = 1 - (currentTime! * 100 / totalTime!) / 100
 		
-		if (end?.earlierDate(today) == end) {
+		if ((end as NSDate?)?.earlierDate(today) == end) {
 			self.progressBar.setProgress(1.0, animated: true)
 			self.progressBar.progressTintColor = UIUtils.planningRedColor()
 			return
@@ -102,11 +122,11 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 	}
 	*/
 	
-	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
 	}
 	
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		
 		if (module != nil) {
 			return (module?.activities.count)!
@@ -115,9 +135,9 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 		return 1
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
-		let cell = tableView.dequeueReusableCellWithIdentifier("moduleCell")
+		let cell = tableView.dequeueReusableCell(withIdentifier: "moduleCell")
 		
 		let titleLabel = cell?.viewWithTag(1) as! UILabel
 		let noteLabel = cell?.viewWithTag(2) as! UILabel
@@ -125,9 +145,9 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 		let endLabel = cell?.viewWithTag(4) as! UILabel
 		let eventType = cell?.viewWithTag(5)
 		
-		titleLabel.text = module?.activities[indexPath.row].actiTitle!
+		titleLabel.text = module?.activities[(indexPath as NSIndexPath).row].actiTitle!
 		
-		let acti = module?.activities[indexPath.row]
+		let acti = module?.activities[(indexPath as NSIndexPath).row]
 		
 		if (acti!.noteActi != nil) {
 			noteLabel.text = acti!.noteActi!
@@ -141,9 +161,9 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 		eventType?.backgroundColor = typeColors[acti!.typeActiCode!]
 		
 		if (acti!.typeActiCode! == "proj" || acti!.typeActiCode! == "rdv" || acti!.noteActi!.characters.count > 0) {
-			cell?.accessoryType = .DisclosureIndicator
+			cell?.accessoryType = .disclosureIndicator
 		} else {
-			cell?.accessoryType = .None
+			cell?.accessoryType = .none
 		}
 		
 		
@@ -151,20 +171,20 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 		return cell!
 	}
 	
-	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
 		
-		let acti = module?.activities[indexPath.row]
+		let acti = module?.activities[(indexPath as NSIndexPath).row]
 		
 		if (!(acti!.typeActiCode! == "proj" || acti!.typeActiCode! == "rdv" || acti!.noteActi?.characters.count > 0)) {
 			return
 		}
 		
-		self.tableView.userInteractionEnabled = false
+		self.tableView.isUserInteractionEnabled = false
 		
 		MJProgressView.instance.showProgress(self.view, white: false)
 		
-		let proj = module?.activities[indexPath.row]
+		let proj = module?.activities[(indexPath as NSIndexPath).row]
 		proj?.scolaryear = module?.scolaryear
 		proj?.codeModule = module?.codemodule
 		proj?.codeInstance = module?.codeinstance
@@ -177,7 +197,7 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 	}
 	
 	
-	func projectStart(proj :Project?) {
+	func projectStart(_ proj :Project?) {
 		ProjectsApiCall.getProjectDetails(proj!) { (isOk :Bool, proj :ProjectDetail?, mess :String) in
 			
 			if (!isOk) {
@@ -190,57 +210,57 @@ class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITabl
 					} else {
 						self.selectedProj = proj!
 						self.selectedProj!.files = files
-						self.performSegueWithIdentifier("projectDetailSegue", sender: self)
+						self.performSegue(withIdentifier: "projectDetailSegue", sender: self)
 					}
-					self.tableView.userInteractionEnabled = true
+					self.tableView.isUserInteractionEnabled = true
 				}
 			}
-			self.tableView.userInteractionEnabled = true
+			self.tableView.isUserInteractionEnabled = true
 			MJProgressView.instance.hideProgress()
 		}
 	}
 	
-	func appointmentStart(proj :Project?) {
+	func appointmentStart(_ proj :Project?) {
 		MarksApiCalls.getProjectMarksForProject(proj!) { (isOk :Bool, resp :[Mark]?, mess :String) in
 			
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
 			} else {
 				self.marksData = resp!
-				self.performSegueWithIdentifier("allMarksSegue", sender: self)
+				self.performSegue(withIdentifier: "allMarksSegue", sender: self)
 			}
-			self.tableView.userInteractionEnabled = true
+			self.tableView.isUserInteractionEnabled = true
 			MJProgressView.instance.hideProgress()
 		}
 	}
 	
-	@IBAction func registeredButtonClicked(sender :AnyObject) {
+	@IBAction func registeredButtonClicked(_ sender :AnyObject) {
 		
 		MJProgressView.instance.showProgress(self.view, white: false)
-		studentsBarButton.enabled = false
+		studentsBarButton.isEnabled = false
 		ModulesApiCalls.getRegistered(self.module!) { (isOk :Bool, resp :[RegisteredStudent]?, mess :String) in
-			self.studentsBarButton.enabled = true
+			self.studentsBarButton.isEnabled = true
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
 			} else {
 				self.studentsData = resp!
-				self.performSegueWithIdentifier("allRegisteredSegue", sender: self)
+				self.performSegue(withIdentifier: "allRegisteredSegue", sender: self)
 			}
 			MJProgressView.instance.hideProgress()
 		}
 		
 	}
 	
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if (segue.identifier == "projectDetailSegue") {
-			let vc = segue.destinationViewController as! ProjectsDetailsViewController
+			let vc = segue.destination as! ProjectsDetailsViewController
 			vc.project = selectedProj
 			vc.marksAllowed = true
 		} else if (segue.identifier == "allMarksSegue") {
-			let vc = segue.destinationViewController as! ProjectMarksViewController
+			let vc = segue.destination as! ProjectMarksViewController
 			vc.marks = marksData
 		} else if (segue.identifier == "allRegisteredSegue") {
-			let vc = segue.destinationViewController as! RegisteredStudentsViewController
+			let vc = segue.destination as! RegisteredStudentsViewController
 			vc.students = studentsData
 		}
 	}

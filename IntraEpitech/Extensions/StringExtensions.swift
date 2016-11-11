@@ -9,29 +9,29 @@
 import UIKit
 
 extension String {
-	func toDate() -> NSDate {
+	func toDate() -> Date {
 		let strTime: String? = self
-		let dateFormatter = NSDateFormatter()
+		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-		let date = dateFormatter.dateFromString(strTime!)
+		let date = dateFormatter.date(from: strTime!)
 		return date!
 		
 	}
 	
-	func shortToDate() -> NSDate {
+	func shortToDate() -> Date {
 		let strTime: String? = self
-		let dateFormatter = NSDateFormatter()
+		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd"
-		let date = dateFormatter.dateFromString(strTime!)
+		let date = dateFormatter.date(from: strTime!)
 		return date!
 		
 	}
 	
-	func toAppointmentDate() -> NSDate {
+	func toAppointmentDate() -> Date {
 		let strTime: String? = self
-		let dateFormatter = NSDateFormatter()
+		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-		let date = dateFormatter.dateFromString(strTime!)
+		let date = dateFormatter.date(from: strTime!)
 		return date!
 	}
 	

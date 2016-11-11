@@ -30,15 +30,15 @@ class WebViewViewController: UIViewController, UIWebViewDelegate {
 	
 	func loadURL() {
 		self.pageTitle = file?.title!
-		let url : NSURL! = NSURL(string: (file?.url!)!)
-		webView.loadRequest(NSURLRequest(URL: url))
+		let url : URL! = URL(string: (file?.url!)!)
+		webView.loadRequest(URLRequest(url: url))
 	}
 	
 	func loadLocal() {
 		self.pageTitle = title!
-		let htmlFile = NSBundle.mainBundle().pathForResource(fileName, ofType: "html")
+		let htmlFile = Bundle.main.path(forResource: fileName, ofType: "html")
 		do {
-			let htmlString = try NSString.init(contentsOfFile: htmlFile!, encoding: NSUTF8StringEncoding)
+			let htmlString = try NSString.init(contentsOfFile: htmlFile!, encoding: String.Encoding.utf8.rawValue)
 			webView.loadHTMLString(htmlString as String, baseURL: nil)
 		} catch {}
 		

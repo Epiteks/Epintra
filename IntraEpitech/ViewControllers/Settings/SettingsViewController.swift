@@ -28,40 +28,40 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 		self.title = NSLocalizedString("Settings", comment: "")
 	}
 	
-	override func viewDidAppear(animated: Bool) {
+	override func viewDidAppear(_ animated: Bool) {
 		self._tableView.reloadData()
 	}
 	
-	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	func numberOfSections(in tableView: UITableView) -> Int {
 		return _settingsItems.count
 	}
 	
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return _settingsItems[section].count
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		var cell = UITableViewCell()
 		
-		cell.accessoryType = .None
+		cell.accessoryType = .none
 		
-		if (_settingsItems[indexPath.section][indexPath.row] == "Disconnect") {
-			cell.textLabel?.textAlignment = .Center
+		if (_settingsItems[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row] == "Disconnect") {
+			cell.textLabel?.textAlignment = .center
 			cell.textLabel?.textColor = UIColor(hexString: "#c0392bff")
-			cell.textLabel?.text = NSLocalizedString(_settingsItems[indexPath.section][indexPath.row], comment: "")
-		} else if (_settingsItems[indexPath.section][indexPath.row] == "DownloadOnData") {
-			cell = tableView.dequeueReusableCellWithIdentifier("switchCell")!
+			cell.textLabel?.text = NSLocalizedString(_settingsItems[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row], comment: "")
+		} else if (_settingsItems[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row] == "DownloadOnData") {
+			cell = tableView.dequeueReusableCell(withIdentifier: "switchCell")!
 			let uiswitch = cell.viewWithTag(1) as! UISwitch
 			let label = cell.viewWithTag(2) as! UILabel
 			uiswitch.onTintColor = UIUtils.backgroundColor()
-			uiswitch.on = ApplicationManager.sharedInstance.canDownload!
-			uiswitch.addTarget(self, action: #selector(SettingsViewController.switchClicked(_:)), forControlEvents: .ValueChanged)
-			label.text = NSLocalizedString(_settingsItems[indexPath.section][indexPath.row], comment: "")
-		} else if (_settingsItems[indexPath.section][indexPath.row] == "DefaultCalendar") {
+			uiswitch.isOn = ApplicationManager.sharedInstance.canDownload!
+			uiswitch.addTarget(self, action: #selector(SettingsViewController.switchClicked(_:)), for: .valueChanged)
+			label.text = NSLocalizedString(_settingsItems[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row], comment: "")
+		} else if (_settingsItems[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row] == "DefaultCalendar") {
 			
 			if let cal = ApplicationManager.sharedInstance.defaultCalendar {
-				cell = tableView.dequeueReusableCellWithIdentifier("CalendarCell")!
+				cell = tableView.dequeueReusableCell(withIdentifier: "CalendarCell")!
 				let titleLabel = cell.viewWithTag(1) as! UILabel
 				let calendarName = cell.viewWithTag(2) as! UILabel
 				titleLabel.text = NSLocalizedString("DefaultCalendar", comment: "")
@@ -69,12 +69,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 			} else {
 				cell.textLabel?.text = NSLocalizedString("DefaultCalendar", comment: "")
 			}
-			cell.accessoryType = .DisclosureIndicator
+			cell.accessoryType = .disclosureIndicator
 			
-		} else if (_settingsItems[indexPath.section][indexPath.row] == "ThirdParty") {
-			cell.accessoryType = .DisclosureIndicator
+		} else if (_settingsItems[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row] == "ThirdParty") {
+			cell.accessoryType = .disclosureIndicator
 			cell.textLabel?.text = NSLocalizedString("ThirdParty", comment: "")
-		} else if (_settingsItems[indexPath.section][indexPath.row] == "BugQuestion") {
+		} else if (_settingsItems[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row] == "BugQuestion") {
 			cell.textLabel?.text = NSLocalizedString("BugQuestion", comment: "")
 		}
 		
@@ -91,19 +91,19 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 	}
 	*/
 	
-	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+		tableView.deselectRow(at: indexPath, animated: true)
 		
-		if (_settingsItems[indexPath.section][indexPath.row] == "Disconnect") {
+		if (_settingsItems[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row] == "Disconnect") {
 			disconnectAction()
-		} else if (_settingsItems[indexPath.section][indexPath.row] == "DefaultCalendar") {
+		} else if (_settingsItems[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row] == "DefaultCalendar") {
 			
-			performSegueWithIdentifier("SelectCalendarSegue", sender: self)
+			performSegue(withIdentifier: "SelectCalendarSegue", sender: self)
 			
-		} else if (_settingsItems[indexPath.section][indexPath.row] == "ThirdParty") {
+		} else if (_settingsItems[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row] == "ThirdParty") {
 			showThirdParty()
-		} else if (_settingsItems[indexPath.section][indexPath.row] == "BugQuestion") {
+		} else if (_settingsItems[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row] == "BugQuestion") {
 			sendEmail()
 		} else {
 			//productTest()
@@ -115,19 +115,19 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 	
 	func disconnectAction() {
 		
-		let confirmationMenu = UIAlertController(title: nil, message: NSLocalizedString("WantToDisconnect", comment: ""), preferredStyle: .ActionSheet)
+		let confirmationMenu = UIAlertController(title: nil, message: NSLocalizedString("WantToDisconnect", comment: ""), preferredStyle: .actionSheet)
 		
-		let disconnect = UIAlertAction(title: NSLocalizedString("Disconnect", comment: ""), style: .Destructive, handler: {
+		let disconnect = UIAlertAction(title: NSLocalizedString("Disconnect", comment: ""), style: .destructive, handler: {
 			(alert: UIAlertAction!) -> Void in
 			
 			UserPreferences.deleteData()
 			
 			let storyboard = UIStoryboard(name: "ConnexionStoryboard", bundle: nil)
 			let vc = storyboard.instantiateInitialViewController()
-			self.presentViewController(vc!, animated: true, completion: nil)
+			self.present(vc!, animated: true, completion: nil)
 		})
 		
-		let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .Cancel, handler: {
+		let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: {
 			(alert: UIAlertAction!) -> Void in
 			print("Cancelled")
 		})
@@ -135,13 +135,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 		confirmationMenu.addAction(disconnect)
 		confirmationMenu.addAction(cancelAction)
 		
-		self.presentViewController(confirmationMenu, animated: true, completion: nil)
+		self.present(confirmationMenu, animated: true, completion: nil)
 	}
 	
-	func switchClicked(sender: UISwitch?) {
-		print(sender?.on)
-		ApplicationManager.sharedInstance.canDownload = sender!.on
-		UserPreferences.saveWantToDownloadImage(sender!.on)
+	func switchClicked(_ sender: UISwitch?) {
+		print(sender?.isOn)
+		ApplicationManager.sharedInstance.canDownload = sender!.isOn
+		UserPreferences.saveWantToDownloadImage(sender!.isOn)
 	}
 	
 	func sendEmail() {
@@ -152,25 +152,25 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 			mailComposerVC.setToRecipients(["maxime.junger@epitech.eu"])
 			mailComposerVC.setSubject("IntraEpitech")
 			mailComposerVC.setMessageBody(SystemUtils.getAllMailData(), isHTML: false)
-			self.presentViewController(mailComposerVC, animated: true, completion: nil)
+			self.present(mailComposerVC, animated: true, completion: nil)
 		}
 		
 	}
 	
 	func showThirdParty() {
-		self.performSegueWithIdentifier("webViewSegue", sender: self)
+		self.performSegue(withIdentifier: "webViewSegue", sender: self)
 	}
 	
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if (segue.identifier == "webViewSegue") {
-			let vc: WebViewViewController = segue.destinationViewController as! WebViewViewController
+			let vc: WebViewViewController = segue.destination as! WebViewViewController
 			vc.fileName = "thirdParty"
 			vc.title = NSLocalizedString("ThirdParty", comment: "")
 			vc.isUrl = false
 		}
 	}
 	
-	func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-		controller.dismissViewControllerAnimated(true, completion: nil)
+	func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+		controller.dismiss(animated: true, completion: nil)
 	}
 }

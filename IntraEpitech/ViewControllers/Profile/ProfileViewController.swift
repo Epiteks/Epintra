@@ -7,7 +7,27 @@
 //
 
 import UIKit
-import SAConfettiView
+
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l <= r
+  default:
+    return !(rhs < lhs)
+  }
+}
+
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
@@ -59,13 +79,13 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		userRequests.getUserFlags("junger_m") { (result) in
 			switch (result) {
-			case .Success(let data):
+			case .success(let data):
 				if let flgs = data as? [Flags] {
 					self.flags = flgs
 				}
-				logger.info("User flags fetched")
+				log.info("User flags fetched")
 				break
-			case .Failure(let error):
+			case .failure(let error):
 				ErrorViewer.errorPresent(self, mess: error.message!) { }
 				break
 			}
@@ -83,13 +103,13 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		userRequests.getUserDocuments() { (result) in
 			switch (result) {
-			case .Success(let data):
+			case .success(let data):
 				if let documents = data as? [File] {
 					self.files = documents
 				}
-				logger.info("User documents fetched")
+				log.info("User documents fetched")
 				break
-			case .Failure(let error):
+			case .failure(let error):
 				ErrorViewer.errorPresent(self, mess: error.message!) { }
 				break
 			}
@@ -100,11 +120,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 	}
 	
-	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+	func numberOfSections(in tableView: UITableView) -> Int {
 		return 6
 	}
 	
-	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		
 		var res = 0
 		
@@ -129,19 +149,19 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		return res
 	}
 	
-	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
 		var cell = UITableViewCell()
 		
-		if indexPath.section == 0 { // Profile Cell, the first one
-			cell = tableView.dequeueReusableCellWithIdentifier("profileCell")!
+		if (indexPath as NSIndexPath).section == 0 { // Profile Cell, the first one
+			cell = tableView.dequeueReusableCell(withIdentifier: "profileCell")!
 			let profileView = cell.viewWithTag(1) as! ProfileView
 			profileView.setUserData(currentUser!)
 			if let img = ApplicationManager.sharedInstance.downloadedImages![(ApplicationManager.sharedInstance.user?.imageUrl!)!] {
 				profileView.setUserImage(img)
 			}
-		} else if indexPath.section == 1 { // Files
-			cell = cellFiles(indexPath.row)
+		} else if (indexPath as NSIndexPath).section == 1 { // Files
+			cell = cellFiles((indexPath as NSIndexPath).row)
 		} else { // Flags
 			cell = cellFlag(indexPath)
 		}
@@ -156,7 +176,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 	
 	- returns: cell
 	*/
-	func cellFiles(index: Int) -> UITableViewCell {
+	func cellFiles(_ index: Int) -> UITableViewCell {
 		
 		if self.downloadingFiles == true {
 			return cellLoading()
@@ -166,11 +186,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 			return cellEmpty(data: "NoFile")
 		}
 		
-		let cell = tableView.dequeueReusableCellWithIdentifier("fileCell")!
+		let cell = tableView.dequeueReusableCell(withIdentifier: "fileCell")!
 		
 		let titleLabel = cell.viewWithTag(1) as! UILabel
 		titleLabel.text = files![index].title!
-		cell.accessoryType = .DisclosureIndicator
+		cell.accessoryType = .disclosureIndicator
 		
 		return cell
 	}
@@ -182,7 +202,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 	
 	- returns: cell
 	*/
-	func cellFlag(indexPath: NSIndexPath) -> UITableViewCell {
+	func cellFlag(_ indexPath: IndexPath) -> UITableViewCell {
 		
 		let cellIdentifier = "flagCell"
 		
@@ -190,19 +210,19 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 			return cellLoading()
 		}
 		
-		if self.flags == nil || self.flags?.count <= 0 || self.flags![indexPath.section - 2].modules.count <= 0 {
+		if self.flags == nil || self.flags?.count <= 0 || self.flags![(indexPath as NSIndexPath).section - 2].modules.count <= 0 {
 			return cellEmpty(data: "NoFlag")
 		}
 		
-		var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? FlagTableViewCell
+		var cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? FlagTableViewCell
 		
 		if cell == nil {
 			let nib = UINib(nibName: "FlagTableViewCell", bundle:nil)
-			tableView.registerNib(nib, forCellReuseIdentifier: cellIdentifier)
-			cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? FlagTableViewCell
+			tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
+			cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? FlagTableViewCell
 		}
 		
-		let module = flags![indexPath.section - 2].modules[indexPath.row]
+		let module = flags![(indexPath as NSIndexPath).section - 2].modules[(indexPath as NSIndexPath).row]
 		
 		cell?.moduleLabel.text = module.title
 		cell?.gradeLabel.text = module.grade
@@ -221,12 +241,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		let cellIdentifier = "emptyCell"
 		
-		var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? EmptyDataTableViewCell
+		var cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? EmptyDataTableViewCell
 		
 		if cell == nil {
 			let nib = UINib(nibName: "EmptyDataTableViewCell", bundle:nil)
-			tableView.registerNib(nib, forCellReuseIdentifier: cellIdentifier)
-			cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? EmptyDataTableViewCell
+			tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
+			cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? EmptyDataTableViewCell
 		}
 		
 		cell?.infoLabel.text = NSLocalizedString(str, comment: "")
@@ -243,42 +263,42 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		let cellIdentifier = "loadingDataCell"
 		
-		var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)
+		var cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)
 		
 		if cell == nil {
 			let nib = UINib(nibName: "LoadingDataTableViewCell", bundle:nil)
-			tableView.registerNib(nib, forCellReuseIdentifier: cellIdentifier)
-			cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)!
+			tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
+			cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)!
 		}
 		
 		return cell!
 	}
 	
 	
-	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-		if indexPath.section == 0 {
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		if (indexPath as NSIndexPath).section == 0 {
 			return 110
 		} else {
 			return 44
 		}
 	}
 	
-	func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		return NSLocalizedString(sectionsTitles[section], comment: "")
 	}
 	
-	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		tableView.deselectRow(at: indexPath, animated: true)
 		
-		if (indexPath.section == 1) {
-			webViewData = files![indexPath.row]
-			self.performSegueWithIdentifier("webViewSegue", sender: self)
+		if ((indexPath as NSIndexPath).section == 1) {
+			webViewData = files![(indexPath as NSIndexPath).row]
+			self.performSegue(withIdentifier: "webViewSegue", sender: self)
 		}
 	}
 	
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if (segue.identifier == "webViewSegue") {
-			let vc :WebViewViewController = segue.destinationViewController as! WebViewViewController
+			let vc :WebViewViewController = segue.destination as! WebViewViewController
 			vc.file = webViewData!
 			vc.isUrl = true
 		}

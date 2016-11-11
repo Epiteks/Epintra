@@ -37,24 +37,24 @@ class CalendarManager: NSObject {
 	//		}
 	//	}
 	
-	func hasRights(onCompletion :(Bool, String?)->()) {
+	func hasRights(_ onCompletion :@escaping (Bool, String?)->()) {
 		
 		let eventStore = EKEventStore()
 		var res = false
 		var mess = "CalendarAccessDenied"		
 		
-		switch (EKEventStore.authorizationStatusForEntityType(EKEntityType.Event)) {
-		case .Authorized:
+		switch (EKEventStore.authorizationStatus(for: EKEntityType.event)) {
+		case .authorized:
 			res = true
 			onCompletion(res, mess)
 			break
-		case .Denied:
+		case .denied:
 			res = false
 			mess = "CalendarAccessDenied"
 			onCompletion(res, mess)
 			break
-		case .NotDetermined:
-			eventStore.requestAccessToEntityType(EKEntityType.Event) { (granted :Bool, error :NSError?) in
+		case .notDetermined:
+			eventStore.requestAccess(to: EKEntityType.event) { (granted :Bool, error :Error?) in
 				if (granted) {
 					res = true
 				} else {
@@ -70,31 +70,31 @@ class CalendarManager: NSObject {
 		
 	}
 	
-	func createEvent(planning :Planning, onCompletion : (Bool, String) -> ()) {
+	func createEvent(_ planning :Planning, onCompletion : @escaping (Bool, String) -> ()) {
 		// 1
 		let eventStore = EKEventStore()
 		
 		if (ApplicationManager.sharedInstance.defaultCalendar == nil) {
 			onCompletion(false, "NoDefaultCalendar")
 			return
-		} else if ((eventStore.calendarWithIdentifier(ApplicationManager.sharedInstance.defaultCalendar!)) != nil) {
+		} else if ((eventStore.calendar(withIdentifier: ApplicationManager.sharedInstance.defaultCalendar!)) != nil) {
 			onCompletion(false, "DefaultCalendarWrong")
 			return
 		}
 		
 		// 2
-		switch (EKEventStore.authorizationStatusForEntityType(EKEntityType.Event)) {
-		case .Authorized:
+		switch (EKEventStore.authorizationStatus(for: EKEntityType.event)) {
+		case .authorized:
 			insertEvent(eventStore, planning: planning) { (isOk :Bool) in
 				onCompletion(isOk, "SomethingDidntWorkedCorrectly")
 			}
 			break
-		case .Denied:
+		case .denied:
 			print("Access denied")
 			onCompletion(false, "CalendarAccessDenied")
 			break
-		case .NotDetermined:
-			eventStore.requestAccessToEntityType(EKEntityType.Event) { (granted :Bool, error :NSError?) in
+		case .notDetermined:
+			eventStore.requestAccess(to: EKEntityType.event) { (granted :Bool, error :Error?) in
 				if (granted) {
 					self.insertEvent(eventStore, planning: planning) { (isOk :Bool) in
 						onCompletion(isOk, "SomethingDidntWorkedCorrectly")
@@ -110,33 +110,33 @@ class CalendarManager: NSObject {
 		}
 	}
 	
-	func insertEvent(store: EKEventStore, planning :Planning, onCompletion :(Bool) -> ()) {
+	func insertEvent(_ store: EKEventStore, planning :Planning, onCompletion :(Bool) -> ()) {
 		// 1
-		let calendars = store.calendarsForEntityType(EKEntityType.Event)
+		let calendars = store.calendars(for: EKEntityType.event)
 		
 		for calendar in calendars {
 			// 2
 			if calendar.title == ApplicationManager.sharedInstance.defaultCalendar {
 				// 3
 				
-				var startDate = NSDate()
-				var endDate = NSDate()
+				var startDate = Date()
+				var endDate = Date()
 				
 				if (planning.rdvGroupRegistered!.characters.count > 0) {
-					let arr = planning.rdvGroupRegistered?.componentsSeparatedByString("|")
+					let arr = planning.rdvGroupRegistered?.components(separatedBy: "|")
 					//					let resp = (arr![0].toDate().toEventHour(), arr![1].toDate().toEventHour())
-					startDate = arr![0].toDate()
-					endDate = arr![1].toDate()
+					startDate = arr![0].toDate() as Date
+					endDate = arr![1].toDate() as Date
 					
 				} else if (planning.rdvIndividuelRegistered!.characters.count > 0) {
-					let arr = planning.rdvIndividuelRegistered?.componentsSeparatedByString("|")
-					startDate = arr![0].toDate()
-					endDate = arr![1].toDate()
+					let arr = planning.rdvIndividuelRegistered?.components(separatedBy: "|")
+					startDate = arr![0].toDate() as Date
+					endDate = arr![1].toDate() as Date
 					
 				} else {
-					startDate = (planning.startTime?.toDate())!
+					startDate = (planning.startTime?.toDate())! as Date
 					// 2 hours
-					endDate = (planning.endTime?.toDate())!
+					endDate = (planning.endTime?.toDate())! as Date
 				}
 				// 4
 				
@@ -156,7 +156,7 @@ class CalendarManager: NSObject {
 				// Save Event in Calendar
 				
 				do {
-					try store.saveEvent(event, span: EKSpan.ThisEvent)
+					try store.save(event, span: EKSpan.thisEvent)
 					
 				} catch {
 					onCompletion(false)
@@ -169,7 +169,7 @@ class CalendarManager: NSObject {
 	
 	func getAllCalendars() -> [(title: String, color: CGColor)] {
 		
-		let calendars = EKEventStore().calendarsForEntityType(EKEntityType.Event)
+		let calendars = EKEventStore().calendars(for: EKEntityType.event)
 		//EKCalendar
 		
 		var arr = [(title: String, color: CGColor)]()
@@ -177,7 +177,7 @@ class CalendarManager: NSObject {
 		for calendar in calendars {
 			// 2
 			if (calendar.allowsContentModifications == true) {
-				arr.append((calendar.title, calendar.CGColor))
+				arr.append((calendar.title, calendar.cgColor))
 			}
 			
 		}
