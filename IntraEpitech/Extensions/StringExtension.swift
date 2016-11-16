@@ -8,6 +8,15 @@
 
 import UIKit
 
-class StringExtension: NSObject {
+extension String {
+	
+	func removeDomainEmailPart() -> String {
 
+		if let index = self.characters.index(of: "@") {
+			return self.substring(to: index)
+		}
+		
+		return self
+	}
+	
 }

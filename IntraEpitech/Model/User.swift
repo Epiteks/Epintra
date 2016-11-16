@@ -39,7 +39,7 @@ class User: NSObject {
 		firstname = dict["firstname"].stringValue
 		lastname = dict["lastname"].stringValue
 		semester = dict["semester"].intValue
-		imageUrl = APICalls.getProfilePictureURL() + login! + ".bmp"
+		imageUrl = configurationInstance.profilePictureURL + login!.removeDomainEmailPart() + ".jpg"
 		promotion = dict["promo"].intValue
 		credits = dict["credits"].intValue
 		city = dict["location"].stringValue

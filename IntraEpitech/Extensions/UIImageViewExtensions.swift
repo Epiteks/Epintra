@@ -86,7 +86,7 @@ extension UIImageView {
 			height = contextSize.height
 		} else {
 			posX = 0
-			posY = ((contextSize.height - contextSize.width) / 2)
+			posY = ((contextSize.height - contextSize.width) / 2) - 10
 			width = contextSize.width
 			height = contextSize.width
 		}
