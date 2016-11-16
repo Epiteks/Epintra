@@ -53,14 +53,17 @@ class SplashScreenViewController: UIViewController {
 		
 		let dispatchGroup = DispatchGroup()
 		
-		DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.high).async(execute: {
-			DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.high).async(group: dispatchGroup, execute: {
-				self.statusLabel.text = NSLocalizedString("GettingData", comment: "")
+		DispatchQueue.global(qos: .utility).async {
+			
+		
+		
+			DispatchQueue.global(qos: .utility).async(group: dispatchGroup, execute: {
+				//self.statusLabel.text = NSLocalizedString("GettingData", comment: "")
 				self.userDataCall(dispatchGroup)
 				self.userHistoryCall(dispatchGroup)
 				self.getUserImage(dispatchGroup)
 			})
-			dispatchGroup.notify(queue: DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.high), execute: {
+			dispatchGroup.notify(queue: DispatchQueue.global(qos: .utility), execute: {
 				DispatchQueue.main.async(execute: {
 					if self.errorDuringFetching == true {
 						self.goBackToLogin()
@@ -71,8 +74,7 @@ class SplashScreenViewController: UIViewController {
 					}
 				})
 			})
-		})
-		
+		}
 	}
 	
 	func goBackToLogin() {
@@ -84,46 +86,67 @@ class SplashScreenViewController: UIViewController {
 	func userDataCall(_ group: DispatchGroup) {
 		group.enter()
 		userRequests.getCurrentUserData { result in
-			self.statusLabel.text = NSLocalizedString("FetchedUserData", comment: "")
+			self.setStatusLabel(message: "FetchedUserData")
 			switch (result) {
 			case .success(_):
 				log.info("Get user data ok")
+				group.leave()
 				break
 			case .failure(let error):
-				MJProgressView.instance.hideProgress()
-				ErrorViewer.errorPresent(self, mess: error.message!) { }
-				self.errorDuringFetching = true
+				DispatchQueue.main.async {
+					self.errorDuringFetching = true
+					MJProgressView.instance.hideProgress()
+					if error.message != nil {
+						ErrorViewer.errorPresent(self, mess: error.message!) {
+							group.leave()
+						}
+					} else {
+						ErrorViewer.errorPresent(self, mess: NSLocalizedString("unknownApiError", comment: "")) {
+							group.leave()
+						}
+					}
+				}
 				break
 			}
-			group.leave()
 		}
 	}
 	
 	func userHistoryCall(_ group: DispatchGroup) {
 		group.enter()
-		self.statusLabel.text = NSLocalizedString("GettingUserHistory", comment: "")
+		setStatusLabel(message: "GettingUserHistory")
 		userRequests.getHistory() { result in
-			self.statusLabel.text = NSLocalizedString("FetchedHistory", comment: "")
+			self.setStatusLabel(message: "FetchedHistory")
 			switch (result) {
 			case .success(_):
-				log.info("Get user history")
+				log.info("Have user history")
+				group.leave()
 				break
 			case .failure(let error):
-				MJProgressView.instance.hideProgress()
-				if error.message != nil {
-					ErrorViewer.errorPresent(self, mess: error.message!) {}
+				DispatchQueue.main.async {
+					self.errorDuringFetching = true
+					MJProgressView.instance.hideProgress()
+					if error.message != nil {
+						ErrorViewer.errorPresent(self, mess: error.message!) {
+							group.leave()
+						}
+					} else {
+						ErrorViewer.errorPresent(self, mess: NSLocalizedString("unknownApiError", comment: "")) {
+							group.leave()
+						}
+					}
 				}
-				self.errorDuringFetching = true
 				break
 			}
-			group.leave()
+			
 		}
 	}
 	
 	func getUserImage(_ group: DispatchGroup) {
 		group.enter()
 		
-		let url = configurationInstance.profilePictureURL + app.currentLogin! + ".bmp"
+		let userProfileUrl = app.currentLogin!.removeDomainEmailPart()
+		
+		let url = configurationInstance.profilePictureURL + userProfileUrl + ".jpg"
 		
 		ImageDownloader.downloadFrom(link: url) { result in
 			switch(result) {
@@ -137,6 +160,14 @@ class SplashScreenViewController: UIViewController {
 				break
 			}
 			group.leave()
+		}
+	}
+	
+	func setStatusLabel(message: String) {
+		DispatchQueue.main.async {
+			
+			self.statusLabel.text = NSLocalizedString(message, comment: "")
+			
 		}
 	}
 }

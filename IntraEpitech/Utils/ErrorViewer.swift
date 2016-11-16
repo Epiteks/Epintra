@@ -11,30 +11,44 @@ import UIKit
 class ErrorViewer: NSObject {
 	
 	class func errorShow(_ viewController :UIViewController, mess :String, onCompletion :@escaping () -> ()) {
-		let _alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
 		
-		_alert.title = NSLocalizedString("Error", comment: "")
-		_alert.message = mess
-		
-		let defaultAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { _ in
-			onCompletion()
+		DispatchQueue.main.async {
+			let _alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
+			
+			_alert.title = NSLocalizedString("Error", comment: "")
+			_alert.message = mess
+			
+			let defaultAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { _ in
+				onCompletion()
+			}
+			_alert.addAction(defaultAction)
+			
+			viewController.show(_alert, sender: viewController)
 		}
-		_alert.addAction(defaultAction)
-		
-		viewController.show(_alert, sender: viewController)
 	}
 	
 	class func errorPresent(_ viewController :UIViewController, mess :String, onCompletion :@escaping () -> ()) {
-		let _alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
 		
-		_alert.title = NSLocalizedString("Error", comment: "")
-		_alert.message = mess
 		
-		let defaultAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { _ in
-			onCompletion()
+		
+		DispatchQueue.main.async {
+			
+			if viewController.presentedViewController != nil {
+				onCompletion()
+				return
+			}
+			
+			let _alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
+			
+			_alert.title = NSLocalizedString("Error", comment: "")
+			_alert.message = mess
+			
+			let defaultAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { _ in
+				onCompletion()
+			}
+			_alert.addAction(defaultAction)
+			
+			viewController.present(_alert, animated: true) {}
 		}
-		_alert.addAction(defaultAction)
-		
-		viewController.present(_alert, animated: true) {}
 	}
 }
