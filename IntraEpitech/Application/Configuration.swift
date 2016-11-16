@@ -20,13 +20,13 @@ open class Configuration {
 	// URL of the API
 	var apiURL: String {
 		get {
-			return "http://epitech.hug33k.fr/intra/"
+			return "http://epitech.hug33k.fr/intra"
 		}
 	}
 	
 	var profilePictureURL: String {
 		get {
-			return "https://cdn.local.epitech.eu/userprofil/"
+			return "https://cdn.local.epitech.eu/userprofil/profilview/"
 		}
 	}
 }

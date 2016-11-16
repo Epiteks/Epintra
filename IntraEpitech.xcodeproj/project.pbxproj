@@ -83,6 +83,7 @@
 		798850581C4AC51D00BAA888 /* IntraEpitechUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798850571C4AC51D00BAA888 /* IntraEpitechUITests.swift */; };
 		7988506D1C4ACD4500BAA888 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988506C1C4ACD4500BAA888 /* UIColorExtensions.swift */; };
 		79892EF61C5024E000F83669 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79892EF51C5024E000F83669 /* UserPreferences.swift */; };
+		798AF18D1DDC61B9002B8A8C /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798AF18C1DDC61B9002B8A8C /* StringExtension.swift */; };
 		79A5AE7D1C56B432004B3FB9 /* PlanningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5AE7C1C56B432004B3FB9 /* PlanningViewController.swift */; };
 		79B05FD91C68BC1C0032DB0C /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B05FD81C68BC1C0032DB0C /* IAPHelper.swift */; };
 		79B05FDD1C68BEB90032DB0C /* IntraProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B05FDC1C68BEB90032DB0C /* IntraProduct.swift */; };
@@ -230,6 +231,7 @@
 		798850591C4AC51D00BAA888 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7988506C1C4ACD4500BAA888 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		79892EF51C5024E000F83669 /* UserPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
+		798AF18C1DDC61B9002B8A8C /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		79A5AE7C1C56B432004B3FB9 /* PlanningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanningViewController.swift; path = Planning/PlanningViewController.swift; sourceTree = "<group>"; };
 		79B05FD81C68BC1C0032DB0C /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		79B05FDC1C68BEB90032DB0C /* IntraProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntraProduct.swift; sourceTree = "<group>"; };
@@ -570,6 +572,7 @@
 				795F1EA31C5602DC00B8C347 /* StringExtensions.swift */,
 				795F1EA51C560F4A00B8C347 /* DateExtensions.swift */,
 				79779AA51C592355008803C5 /* String+NSDate.swift */,
+				798AF18C1DDC61B9002B8A8C /* StringExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -928,6 +931,7 @@
 				79F1F2751C59044200AAFB69 /* Room.swift in Sources */,
 				79DE549E1C5BAF3300E2ADDE /* CalendarManager.swift in Sources */,
 				79F42BEF1D68CCC6008DF047 /* CompletionHandlerType.swift in Sources */,
+				798AF18D1DDC61B9002B8A8C /* StringExtension.swift in Sources */,
 				7976955B1C562730001772A2 /* ImageDownloader.swift in Sources */,
 				79152D871C67726800513E0F /* OtherUserViewController.swift in Sources */,
 				795F1EA21C56019E00B8C347 /* History.swift in Sources */,
