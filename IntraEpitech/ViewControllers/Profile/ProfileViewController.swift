@@ -77,6 +77,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		self.downloadingFlags = true
 		
+		// TODO REMOVE THIS SHIT
 		userRequests.getUserFlags("junger_m") { (result) in
 			switch (result) {
 			case .success(let data):
@@ -86,8 +87,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 				log.info("User flags fetched")
 				break
 			case .failure(let error):
-				ErrorViewer.errorPresent(self, mess: error.message!) { }
+				if error.message != nil {
+					ErrorViewer.errorPresent(self, mess: error.message!) { }
+				}
 				break
+					
 			}
 			self.downloadingFlags = false
 			self.tableView.reloadData()
@@ -110,7 +114,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 				log.info("User documents fetched")
 				break
 			case .failure(let error):
-				ErrorViewer.errorPresent(self, mess: error.message!) { }
+				if error.message != nil {
+					ErrorViewer.errorPresent(self, mess: error.message!) { }
+				}
 				break
 			}
 			self.downloadingFiles = false
@@ -157,6 +163,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 			cell = tableView.dequeueReusableCell(withIdentifier: "profileCell")!
 			let profileView = cell.viewWithTag(1) as! ProfileView
 			profileView.setUserData(currentUser!)
+			
 			if let img = ApplicationManager.sharedInstance.downloadedImages![(ApplicationManager.sharedInstance.user?.imageUrl!)!] {
 				profileView.setUserImage(img)
 			}
