@@ -9,50 +9,34 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-fileprivate func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l >= r
-  default:
-    return !(lhs < rhs)
-  }
-}
-
 
 class RequestManager: NSObject {
 	
-	func call(_ requestID: String, params: [String: Any]?, completion: @escaping CompletionHandlerType) {
+	func call(_ requestID: String, params: [String: Any]? = nil, urlParams: String? = nil, completion: @escaping CompletionHandlerType) {
 		
 		let req = Requests.routes[requestID]
-		var parameters = params
-		
-		log.info("Request \(requestID) with parameters :\n\t\(params)\n")
+		var headers = [String: String]()
+		var newURL = configurationInstance.apiURL + (req?.endpoint)!
 		
 		if req!.secured == true {
-			if parameters == nil {
-				parameters = [String: AnyObject]()
-			}
-			parameters!["token"] = ApplicationManager.sharedInstance.token! as AnyObject?
+			headers["token"] = ApplicationManager.sharedInstance.token!
 		}
-		log.info(configurationInstance.apiURL)
 		
-		Alamofire.request((configurationInstance.apiURL + (req?.endpoint)!), method: (req?.method)!, parameters: parameters, encoding: JSONEncoding.default)
-		//Alamofire.request(configurationInstance.apiURL + (req?.endpoint)!, method: (req?.method)!, parameters: parameters)
-			//.validate(statusCode: 200..<300)
+		if (urlParams != nil) {
+			newURL +=  urlParams!
+		}
+		
+		log.info("Request \(requestID) with parameters :\n\t\(params)\n\tWith URL \(newURL)")
+		
+		Alamofire.request(newURL, method: (req?.method!)!, parameters: params, encoding: JSONEncoding.default, headers: headers)
 			.responseJSON { res in
-				let st = res.response?.statusCode
-				if res.response?.statusCode >= 200 && res.response?.statusCode < 300 {
+				
+				if res.response == nil || res.response?.statusCode == nil {
+					completion(Result.failure(type: AppError.apiError, message: nil))
+					return
+				}
+				
+				if (res.response?.statusCode)! >= 200 && (res.response?.statusCode)! < 300 {
 					if let val = res.result.value {
 						let responseJSON = JSON(val)
 						completion(Result.success(responseJSON.object as AnyObject?))
@@ -62,16 +46,17 @@ class RequestManager: NSObject {
 						let responseJSON = JSON(val)
 						if let errorDictionary = responseJSON["error"].dictionary {
 							if let errorMessage = errorDictionary["message"]?.string {
-								completion(Result.failure(type: AppError.authenticationFailure, message: errorMessage))
+								completion(Result.failure(type: AppError.apiError, message: errorMessage))
 								
 							}
+						} else {
+							completion(Result.failure(type: AppError.apiError, message: nil))
 						}
+						
 					} else {
-						completion(Result.failure(type: AppError.authenticationFailure, message: nil))
+						completion(Result.failure(type: AppError.apiError, message: nil))
 					}
 				}
 		}
-		
 	}
-	
 }

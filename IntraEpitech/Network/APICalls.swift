@@ -27,7 +27,7 @@ class APICalls: NSObject {
 	}
 
 	class func getProfilePictureURL() -> String {
-		return "https://cdn.local.epitech.eu/userprofil/"
+		return "https://cdn.local.epitech.eu/userprofil/profilview"
 	}
 
 	class func getEpitechURL() -> String {

@@ -51,7 +51,9 @@ class UserRequests: RequestManager {
 		
 		let app = ApplicationManager.sharedInstance
 		
-		super.call("userData", params: ["user": app.currentLogin! as AnyObject]) { (response) in
+		let param = "?login=" + app.currentLogin!
+		
+		super.call("userData", params: nil, urlParams: param) { (response) in
 			switch response {
 			case .success(let res):
 				
@@ -80,7 +82,9 @@ class UserRequests: RequestManager {
 	*/
 	func getUserData(_ login: String, completion: @escaping CompletionHandlerType) {
 		
-		super.call("userData", params: ["user": login as AnyObject]) { (response) in
+		let param = "?login=" + login
+		
+		super.call("userData", params: nil, urlParams: param) { (response) in
 			switch response {
 			case .success(let res):
 				
@@ -126,7 +130,9 @@ class UserRequests: RequestManager {
 	
 	func getUserFlags(_ login: String, completion: @escaping CompletionHandlerType) {
 		
-		super.call("userFlags", params: ["login": login as AnyObject]) { (response) in
+		let params = "?login=" + login
+		
+		super.call("userFlags", urlParams: params) { (response) in
 			switch response {
 			case .success(let res):
 				
@@ -152,7 +158,9 @@ class UserRequests: RequestManager {
 	
 	func getUserDocuments(_ completion: @escaping CompletionHandlerType) {
 		
-		super.call("userFiles", params: ["login": (ApplicationManager.sharedInstance.user?.login)! as AnyObject]) { (response) in
+		let params = "?login=" +  (ApplicationManager.sharedInstance.user?.login)!
+		
+		super.call("userFiles", urlParams: params) { (response) in
 			switch response {
 			case .success(let res):
 				

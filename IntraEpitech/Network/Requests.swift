@@ -12,7 +12,6 @@ import Alamofire
 struct Request {
 	var endpoint: String! // Endpoint of the call
 	var method: Alamofire.HTTPMethod! // post / patch / get / ...
-	var description: String! // Description of the call
 	var secured: Bool! // Know if we need token or not
 }
 
@@ -22,40 +21,40 @@ class Requests {
 	static let routes = [
 		
 		// Authentication requests
-		"authentication": Request(endpoint: "/login", method: .post, description: "Authenticate user", secured: false),
+		"authentication": Request(endpoint: "/login", method: .post, secured: false), // Authenticates user
 		
 		// User data
-		"userData": Request(endpoint: "/user", method: .get, description: "get selected user data", secured: true),
-		"userHistory": Request(endpoint: "/infos", method: .post, description: "get user history", secured: true),
-		"userFiles": Request(endpoint: "/user/files", method: .get, description: "get user files", secured: true),
-		"userFlags": Request(endpoint: "/user/flags", method: .get, description: "get user flags", secured: true),
-		"allPromos": Request(endpoint: "", method: .get, description: "get all users for data, currently on other URL", secured: true),
+		"userData": Request(endpoint: "/user", method: .get, secured: true), // Get selected user data
+		"userHistory": Request(endpoint: "/infos", method: .get, secured: true), // Get user history
+		"userFiles": Request(endpoint: "/user/files", method: .get, secured: true), // Get user files
+		"userFlags": Request(endpoint: "/user/flags", method: .get, secured: true), // Get slected user flags
+		"allPromos": Request(endpoint: "", method: .get, secured: true), // Epirank, get all users for data
 		
 		
 		// Planning
-		"planning": Request(endpoint: "/planning", method: .get, description: "get planning between two dates", secured: true),
-		"tokenValidation": Request(endpoint: "/token", method: .post, description: "Token validation", secured: true),
-		"subscribeEvent": Request(endpoint: "/event", method: .post, description: "Register to planning event", secured: true),
-		"unsubscribeEvent": Request(endpoint: "/event", method: .delete, description: "Unregister to planning event", secured: true),
-		"eventRegistered": Request(endpoint: "/event/registered", method: .get, description: "get users registered to an event", secured: true),
-		"eventDetails": Request(endpoint: "/event/rdv", method: .get, description: "get event details like slots", secured: true),
-		"subscribeSlot": Request(endpoint: "/event/rdv", method: .post, description: "Subscribe to a slot", secured: true),
-		"unsubscribeSlot": Request(endpoint: "/event/rdv", method: .delete, description: "Subscribe to a slot", secured: true),
+		"planning": Request(endpoint: "/planning", method: .get, secured: true), // Get planning between two dates
+		"tokenValidation": Request(endpoint: "/token", method: .post, secured: true), // Token validation
+		"subscribeEvent": Request(endpoint: "/event", method: .post, secured: true), // Register to planning event
+		"unsubscribeEvent": Request(endpoint: "/event", method: .delete, secured: true), // Unregister to planning event,
+		"eventRegistered": Request(endpoint: "/event/registered", method: .get, secured: true), // Get users registered to an event
+		"eventDetails": Request(endpoint: "/event/rdv", method: .get, secured: true), // Get event details like slots
+		"subscribeSlot": Request(endpoint: "/event/rdv", method: .post, secured: true), // Subscribe to a slot
+		"unsubscribeSlot": Request(endpoint: "/event/rdv", method: .delete, secured: true), // Unsubscribe from a slot
 		
 		
 		// Modules
-		"modulesRegistered": Request(endpoint: "/modules", method: .get, description: "get modules registered", secured: true),
-		"moduleDetails": Request(endpoint: "/module", method: .get, description: "get module details", secured: true),
-		"moduleUsersRegistered": Request(endpoint: "/module/registered", method: .get, description: "get users registered on module", secured: true),
+		"modulesRegistered": Request(endpoint: "/modules", method: .get, secured: true), // Get modules registered
+		"moduleDetails": Request(endpoint: "/module", method: .get, secured: true), // Get module details
+		"moduleUsersRegistered": Request(endpoint: "/module/registered", method: .get, secured: true), // Get users registered on module
 		
 		// Projects
-		"currentProjects": Request(endpoint: "/projects", method: .get, description: "get current projects", secured: true),
-		"projectDetail": Request(endpoint: "/project", method: .get, description: "get project details", secured: true),
-		"projectFiles": Request(endpoint: "/project/files", method: .get, description: "get project linked files", secured: true),
+		"currentProjects": Request(endpoint: "/projects", method: .get, secured: true), // Get current projects
+		"projectDetail": Request(endpoint: "/project", method: .get, secured: true), // Get project details
+		"projectFiles": Request(endpoint: "/project/files", method: .get, secured: true), // Get project linked files
 		
 		// Marks
-		"allMarks": Request(endpoint: "/marks", method: .get, description: "get all marks of user", secured: true),
-		"projectMarks": Request(endpoint: "/project/marks", method: .get, description: "get all marks of a project", secured: true),
+		"allMarks": Request(endpoint: "/marks", method: .get, secured: true), // Get all marks of user
+		"projectMarks": Request(endpoint: "/project/marks", method: .get, secured: true), // Get all marks of a project
 		]
 	
 }
