@@ -20,7 +20,7 @@ open class Configuration {
 	// URL of the API
 	var apiURL: String {
 		get {
-			return "http://epitech.hug33k.fr/intra"
+			return "https://epitech.hug33k.fr/intra"
 		}
 	}
 	

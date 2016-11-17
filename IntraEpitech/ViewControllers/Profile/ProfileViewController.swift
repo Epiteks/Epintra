@@ -78,7 +78,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		self.downloadingFlags = true
 		
 		// TODO REMOVE THIS SHIT
-		userRequests.getUserFlags("junger_m") { (result) in
+		userRequests.getUserFlags(ApplicationManager.sharedInstance.currentLogin!) { (result) in
 			switch (result) {
 			case .success(let data):
 				if let flgs = data as? [Flags] {
