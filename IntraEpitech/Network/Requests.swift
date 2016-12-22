@@ -30,6 +30,8 @@ class Requests {
 		"userFlags": Request(endpoint: "/user/flags", method: .get, secured: true), // Get slected user flags
 		"allPromos": Request(endpoint: "", method: .get, secured: true), // Epirank, get all users for data
 		
+		// Epirank
+		"epirank": Request(endpoint: "/", method: .get, secured: false), // Epirank, get users data
 		
 		// Planning
 		"planning": Request(endpoint: "/planning", method: .get, secured: true), // Get planning between two dates
@@ -43,7 +45,7 @@ class Requests {
 		
 		
 		// Modules
-		"modulesRegistered": Request(endpoint: "/modules", method: .get, secured: true), // Get modules registered
+		"userModules": Request(endpoint: "/modules", method: .get, secured: true), // Get modules registered
 		"moduleDetails": Request(endpoint: "/module", method: .get, secured: true), // Get module details
 		"moduleUsersRegistered": Request(endpoint: "/module/registered", method: .get, secured: true), // Get users registered on module
 		

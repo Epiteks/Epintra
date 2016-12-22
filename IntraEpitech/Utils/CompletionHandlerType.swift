@@ -8,10 +8,8 @@
 
 import Foundation
 
-typealias CompletionHandlerType = (Result) -> Void
-
-enum Result {
-	case success(AnyObject?)
+enum Result<T> {
+	case success(T)
 	case failure(type: AppError, message: String?)
 }
 

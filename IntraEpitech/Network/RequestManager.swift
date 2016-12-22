@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class RequestManager: NSObject {
 	
-	func call(_ requestID: String, params: [String: Any]? = nil, urlParams: String? = nil, completion: @escaping CompletionHandlerType) {
+	func call(_ requestID: String, params: [String: Any]? = nil, urlParams: String? = nil, completion: @escaping (Result<JSON>) -> ()) {
 		
 		let req = Requests.routes[requestID]
 		var headers = [String: String]()
@@ -39,7 +39,7 @@ class RequestManager: NSObject {
 				if (res.response?.statusCode)! >= 200 && (res.response?.statusCode)! < 300 {
 					if let val = res.result.value {
 						let responseJSON = JSON(val)
-						completion(Result.success(responseJSON.object as AnyObject?))
+						completion(Result.success(responseJSON))
 					}
 				} else {
 					if let val = res.result.value {

@@ -25,9 +25,15 @@
 		79306D611C4AF46600708BED /* MJProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79306D601C4AF46600708BED /* MJProgressView.swift */; };
 		79306D631C4AF79400708BED /* ModelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79306D621C4AF79400708BED /* ModelName.swift */; };
 		7939FBFF1D80A1CC004EA871 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7939FBFE1D80A1CC004EA871 /* ProfileView.swift */; };
+		793B77931E0C6DD2006FFD16 /* StudentModulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793B77921E0C6DD2006FFD16 /* StudentModulesViewController.swift */; };
+		793B77951E0C71AE006FFD16 /* ModulesRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793B77941E0C71AE006FFD16 /* ModulesRequests.swift */; };
+		793B77991E0C79FE006FFD16 /* ModuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793B77971E0C79FE006FFD16 /* ModuleTableViewCell.swift */; };
+		793B779A1E0C79FE006FFD16 /* ModuleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 793B77981E0C79FE006FFD16 /* ModuleTableViewCell.xib */; };
+		793B779C1E0C83E2006FFD16 /* DZNEmptyDataSet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 793B779B1E0C83E2006FFD16 /* DZNEmptyDataSet.framework */; };
 		793C52C21C5E1BE500C33328 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 793C52C11C5E1BE500C33328 /* MessageUI.framework */; };
 		793C52C41C5E2D9600C33328 /* thirdParty.html in Resources */ = {isa = PBXBuildFile; fileRef = 793C52C31C5E2D9600C33328 /* thirdParty.html */; };
 		793C52C61C5E311300C33328 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 793C52C51C5E311300C33328 /* SystemConfiguration.framework */; };
+		79486F9B1E0C58ED00950F36 /* SchoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79486F9A1E0C58ED00950F36 /* SchoolViewController.swift */; };
 		795954A71C58166A00734F91 /* CustomSegues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795954A61C58166A00734F91 /* CustomSegues.swift */; };
 		795994401C52C8F2007BE7C5 /* ApplicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7959943F1C52C8F2007BE7C5 /* ApplicationManager.swift */; };
 		795994421C52CED9007BE7C5 /* ErrorViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795994411C52CED9007BE7C5 /* ErrorViewer.swift */; };
@@ -167,9 +173,15 @@
 		79306D601C4AF46600708BED /* MJProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MJProgressView.swift; sourceTree = "<group>"; };
 		79306D621C4AF79400708BED /* ModelName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelName.swift; sourceTree = "<group>"; };
 		7939FBFE1D80A1CC004EA871 /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileView.swift; path = Views/ProfileView/ProfileView.swift; sourceTree = "<group>"; };
+		793B77921E0C6DD2006FFD16 /* StudentModulesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudentModulesViewController.swift; path = School/StudentModulesViewController.swift; sourceTree = "<group>"; };
+		793B77941E0C71AE006FFD16 /* ModulesRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModulesRequests.swift; path = Network/ModulesRequests.swift; sourceTree = "<group>"; };
+		793B77971E0C79FE006FFD16 /* ModuleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModuleTableViewCell.swift; path = Views/ModuleTableViewCell/ModuleTableViewCell.swift; sourceTree = "<group>"; };
+		793B77981E0C79FE006FFD16 /* ModuleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ModuleTableViewCell.xib; path = Views/ModuleTableViewCell/ModuleTableViewCell.xib; sourceTree = "<group>"; };
+		793B779B1E0C83E2006FFD16 /* DZNEmptyDataSet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DZNEmptyDataSet.framework; path = "Pods/../build/Debug-iphoneos/DZNEmptyDataSet/DZNEmptyDataSet.framework"; sourceTree = "<group>"; };
 		793C52C11C5E1BE500C33328 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		793C52C31C5E2D9600C33328 /* thirdParty.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = thirdParty.html; sourceTree = "<group>"; };
 		793C52C51C5E311300C33328 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		79486F9A1E0C58ED00950F36 /* SchoolViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SchoolViewController.swift; path = School/SchoolViewController.swift; sourceTree = "<group>"; };
 		795954A61C58166A00734F91 /* CustomSegues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomSegues.swift; path = Segues/CustomSegues.swift; sourceTree = "<group>"; };
 		7959943F1C52C8F2007BE7C5 /* ApplicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApplicationManager.swift; path = Application/ApplicationManager.swift; sourceTree = "<group>"; };
 		795994411C52CED9007BE7C5 /* ErrorViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorViewer.swift; sourceTree = "<group>"; };
@@ -283,6 +295,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				793B779C1E0C83E2006FFD16 /* DZNEmptyDataSet.framework in Frameworks */,
 				79152D8C1C67A47100513E0F /* AddressBook.framework in Frameworks */,
 				79152D8D1C67A47100513E0F /* AddressBookUI.framework in Frameworks */,
 				793C52C61C5E311300C33328 /* SystemConfiguration.framework in Frameworks */,
@@ -316,6 +329,7 @@
 		331ED8344BD2BA7948788795 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				793B779B1E0C83E2006FFD16 /* DZNEmptyDataSet.framework */,
 				79152D8A1C67A47100513E0F /* AddressBook.framework */,
 				79152D8B1C67A47100513E0F /* AddressBookUI.framework */,
 				793C52C51C5E311300C33328 /* SystemConfiguration.framework */,
@@ -348,6 +362,24 @@
 				7939FBFE1D80A1CC004EA871 /* ProfileView.swift */,
 			);
 			name = ProfileView;
+			sourceTree = "<group>";
+		};
+		793B77961E0C79D3006FFD16 /* ModuleTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				793B77971E0C79FE006FFD16 /* ModuleTableViewCell.swift */,
+				793B77981E0C79FE006FFD16 /* ModuleTableViewCell.xib */,
+			);
+			name = ModuleTableViewCell;
+			sourceTree = "<group>";
+		};
+		79486F991E0C58B400950F36 /* School */ = {
+			isa = PBXGroup;
+			children = (
+				79486F9A1E0C58ED00950F36 /* SchoolViewController.swift */,
+				793B77921E0C6DD2006FFD16 /* StudentModulesViewController.swift */,
+			);
+			name = School;
 			sourceTree = "<group>";
 		};
 		7959943E1C52C8D1007BE7C5 /* Application */ = {
@@ -580,6 +612,7 @@
 		7988506E1C4ACD9200BAA888 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				79486F991E0C58B400950F36 /* School */,
 				79622E9E1C5D60F700FBA456 /* Profile */,
 				79622E9B1C5D580E00FBA456 /* Marks */,
 				79622E941C5D4D3600FBA456 /* Modules */,
@@ -620,6 +653,7 @@
 				79EA5CB51D5E49E800DA7C30 /* Requests.swift */,
 				79F42BE81D68C5D7008DF047 /* RequestManager.swift */,
 				79F42BEC1D68C7C9008DF047 /* UserRequests.swift */,
+				793B77941E0C71AE006FFD16 /* ModulesRequests.swift */,
 			);
 			name = New;
 			sourceTree = "<group>";
@@ -635,6 +669,7 @@
 		79F8265C1C5529F20002DCC8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				793B77961E0C79D3006FFD16 /* ModuleTableViewCell */,
 				79836AE11D7F74E0009134EF /* NoDataView */,
 				79836AE31D7F74FA009134EF /* LoadingView */,
 				79F42BE61D68BE32008DF047 /* DownloadingAllUsersView.xib */,
@@ -831,6 +866,7 @@
 				79836ACE1D7F72D3009134EF /* EmptyDataTableViewCell.xib in Resources */,
 				7988503F1C4AC51C00BAA888 /* Assets.xcassets in Resources */,
 				793C52C41C5E2D9600C33328 /* thirdParty.html in Resources */,
+				793B779A1E0C79FE006FFD16 /* ModuleTableViewCell.xib in Resources */,
 				79EA5CC41D5E789A00DA7C30 /* NotificationsStoryboard.storyboard in Resources */,
 				79EA5CC61D5E78BF00DA7C30 /* PlanningStoryboard.storyboard in Resources */,
 				79F42BE21D68BDF6008DF047 /* ConnexionStoryboard.storyboard in Resources */,
@@ -930,11 +966,13 @@
 				79622E911C5D4AF100FBA456 /* Module.swift in Sources */,
 				79F1F2751C59044200AAFB69 /* Room.swift in Sources */,
 				79DE549E1C5BAF3300E2ADDE /* CalendarManager.swift in Sources */,
+				79486F9B1E0C58ED00950F36 /* SchoolViewController.swift in Sources */,
 				79F42BEF1D68CCC6008DF047 /* CompletionHandlerType.swift in Sources */,
 				798AF18D1DDC61B9002B8A8C /* StringExtension.swift in Sources */,
 				7976955B1C562730001772A2 /* ImageDownloader.swift in Sources */,
 				79152D871C67726800513E0F /* OtherUserViewController.swift in Sources */,
 				795F1EA21C56019E00B8C347 /* History.swift in Sources */,
+				793B77991E0C79FE006FFD16 /* ModuleTableViewCell.swift in Sources */,
 				795954A71C58166A00734F91 /* CustomSegues.swift in Sources */,
 				791172E71C5FB7B800581DF3 /* CommentsViewController.swift in Sources */,
 				795CC3251C5CB2A7007AFE87 /* Project.swift in Sources */,
@@ -990,6 +1028,8 @@
 				79836AD71D7F74C2009134EF /* LoadingView.swift in Sources */,
 				79892EF61C5024E000F83669 /* UserPreferences.swift in Sources */,
 				79306D611C4AF46600708BED /* MJProgressView.swift in Sources */,
+				793B77931E0C6DD2006FFD16 /* StudentModulesViewController.swift in Sources */,
+				793B77951E0C71AE006FFD16 /* ModulesRequests.swift in Sources */,
 				79284F5D1C5F3FC500349628 /* Flags.swift in Sources */,
 				7906842A1C6FC1E10067B26F /* AppointmentEvent.swift in Sources */,
 				79DE54AA1C5BBA5B00E2ADDE /* SelectCalendarViewController.swift in Sources */,
@@ -1160,6 +1200,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/DZNEmptyDataSet",
+				);
 				INFOPLIST_FILE = IntraEpitech/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1182,6 +1226,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/DZNEmptyDataSet",
+				);
 				INFOPLIST_FILE = IntraEpitech/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

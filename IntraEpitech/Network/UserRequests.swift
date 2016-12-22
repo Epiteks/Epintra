@@ -18,13 +18,11 @@ class UserRequests: RequestManager {
 	- parameter password:		user password
 	- parameter completion:	Request completion action
 	*/
-	func auth(_ login: String, password: String, completion: @escaping CompletionHandlerType) {
+	func auth(_ login: String, password: String, completion: @escaping (Result<Any?>) -> ()) {
 		
 		super.call("authentication", params: ["login": login, "password": password]) { (response) in
 			switch response {
-			case .success(let res):
-				
-				let responseJSON = JSON(res!)
+			case .success(let responseJSON):
 				
 				if let token = responseJSON["token"].string {
 					log.info("Token : \(token)")
@@ -47,7 +45,7 @@ class UserRequests: RequestManager {
 	Set the user planning semester to allow him to see his current calendar.
 	- parameter completion: Request completion action
 	*/
-	func getCurrentUserData(_ completion: @escaping CompletionHandlerType) {
+	func getCurrentUserData(_ completion: @escaping (Result<Any?>) -> ()) {
 		
 		let app = ApplicationManager.sharedInstance
 		
@@ -55,9 +53,7 @@ class UserRequests: RequestManager {
 		
 		super.call("userData", params: nil, urlParams: param) { (response) in
 			switch response {
-			case .success(let res):
-				
-				let responseJSON = JSON(res!)
+			case .success(let responseJSON):
 				
 				app.user = User(dict: responseJSON)
 				app.lastUserApiCall = Date().timeIntervalSince1970
@@ -80,15 +76,14 @@ class UserRequests: RequestManager {
 	- parameter login:			wanted user
 	- parameter completion:	Request completion action
 	*/
-	func getUserData(_ login: String, completion: @escaping CompletionHandlerType) {
+	func getUserData(_ login: String, completion: @escaping (Result<User>) -> ()) {
 		
 		let param = "?login=" + login
 		
 		super.call("userData", params: nil, urlParams: param) { (response) in
 			switch response {
-			case .success(let res):
+			case .success(let responseJSON):
 				
-				let responseJSON = JSON(res!)
 				let usr = User(dict: responseJSON)
 				
 				completion(Result.success(usr))
@@ -107,16 +102,13 @@ class UserRequests: RequestManager {
 	Fills the history in manager, the completion takes nil in param.
 	- parameter completion:	Request completion action
 	*/
-	func getHistory(_ completion: @escaping CompletionHandlerType) {
+	func getHistory(_ completion: @escaping (Result<Any?>) -> ()) {
 		
 		let app = ApplicationManager.sharedInstance
 		
 		super.call("userHistory", params: nil) { (response) in
 			switch response {
-			case .success(let res):
-				
-				let responseJSON = JSON(res!)
-				
+			case .success(let responseJSON):
 				app.user?.fillHistory(responseJSON)
 				completion(Result.success(nil))
 				break
@@ -128,15 +120,13 @@ class UserRequests: RequestManager {
 		}
 	}
 	
-	func getUserFlags(_ login: String, completion: @escaping CompletionHandlerType) {
+	func getUserFlags(_ login: String, completion: @escaping (Result<[Flags]>) -> ()) {
 		
 		let params = "?login=" + login
 		
 		super.call("userFlags", urlParams: params) { (response) in
 			switch response {
-			case .success(let res):
-				
-				let responseJSON = JSON(res!)
+			case .success(let responseJSON):
 				let flags = responseJSON["flags"]
 				var resp = [Flags]()
 				
@@ -145,7 +135,7 @@ class UserRequests: RequestManager {
 				resp.append(Flags(name: "difficulty", dict: flags["difficulty"]))
 				resp.append(Flags(name: "ghost", dict: flags["ghost"]))
 				
-				completion(Result.success(resp as AnyObject?))
+				completion(Result.success(resp))
 				
 				break
 			case .failure(let err):
@@ -156,21 +146,19 @@ class UserRequests: RequestManager {
 		}
 	}
 	
-	func getUserDocuments(_ completion: @escaping CompletionHandlerType) {
+	func getUserDocuments(_ completion: @escaping (Result<[File]>) -> ()) {
 		
 		let params = "?login=" +  (ApplicationManager.sharedInstance.user?.login)!
 		
 		super.call("userFiles", urlParams: params) { (response) in
 			switch response {
-			case .success(let res):
-				
-				let responseJSON = JSON(res!)
+			case .success(let responseJSON):
 				let responseArray = responseJSON.arrayValue
 				var resp = [File]()
 				for tmp in responseArray {
 					resp.append(File(dict: tmp))
 				}
-				completion(Result.success(resp as AnyObject?))
+				completion(Result.success(resp))
 				
 				break
 			case .failure(let err):

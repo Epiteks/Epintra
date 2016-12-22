@@ -13,4 +13,8 @@ target 'IntraEpitech' do
 	pod 'MGSwipeTableCell'
 	pod 'FMDB'
 	pod 'FMDB/SQLCipher'
+	pod 'RealmSwift'
+	pod 'BetterSegmentedControl', '~> 0.7'
+	pod 'DZNEmptyDataSet'
+
 end

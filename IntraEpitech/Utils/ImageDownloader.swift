@@ -10,7 +10,7 @@ import UIKit
 
 class ImageDownloader: NSObject {
 	
-	class func downloadFrom(link:String, onCompletion :@escaping CompletionHandlerType ) {
+	class func downloadFrom(link:String, onCompletion :@escaping (Result<Any?>) -> () ) {
 		
 		if (ApplicationManager.sharedInstance.canDownload == false) {
 			onCompletion(Result.failure(type: AppError.unauthorizedByUser, message: ""))
