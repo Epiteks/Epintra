@@ -93,6 +93,7 @@
 		79A5AE7D1C56B432004B3FB9 /* PlanningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5AE7C1C56B432004B3FB9 /* PlanningViewController.swift */; };
 		79B05FD91C68BC1C0032DB0C /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B05FD81C68BC1C0032DB0C /* IAPHelper.swift */; };
 		79B05FDD1C68BEB90032DB0C /* IntraProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B05FDC1C68BEB90032DB0C /* IntraProduct.swift */; };
+		79D958341E0D327A00C003E8 /* SchoolDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D958331E0D327A00C003E8 /* SchoolDataViewController.swift */; };
 		79DE549C1C5BABFF00E2ADDE /* EmptyPlanningTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79DE549B1C5BABFF00E2ADDE /* EmptyPlanningTableView.xib */; };
 		79DE549E1C5BAF3300E2ADDE /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DE549D1C5BAF3300E2ADDE /* CalendarManager.swift */; };
 		79DE54A31C5BAF5300E2ADDE /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79DE549F1C5BAF5300E2ADDE /* Alamofire.framework */; };
@@ -247,6 +248,7 @@
 		79A5AE7C1C56B432004B3FB9 /* PlanningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanningViewController.swift; path = Planning/PlanningViewController.swift; sourceTree = "<group>"; };
 		79B05FD81C68BC1C0032DB0C /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		79B05FDC1C68BEB90032DB0C /* IntraProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntraProduct.swift; sourceTree = "<group>"; };
+		79D958331E0D327A00C003E8 /* SchoolDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SchoolDataViewController.swift; path = School/SchoolDataViewController.swift; sourceTree = "<group>"; };
 		79DE549B1C5BABFF00E2ADDE /* EmptyPlanningTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EmptyPlanningTableView.xib; path = Views/EmptyPlanningTableView.xib; sourceTree = "<group>"; };
 		79DE549D1C5BAF3300E2ADDE /* CalendarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		79DE549F1C5BAF5300E2ADDE /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "Pods/../build/Debug-iphoneos/Alamofire.framework"; sourceTree = "<group>"; };
@@ -378,6 +380,7 @@
 			children = (
 				79486F9A1E0C58ED00950F36 /* SchoolViewController.swift */,
 				793B77921E0C6DD2006FFD16 /* StudentModulesViewController.swift */,
+				79D958331E0D327A00C003E8 /* SchoolDataViewController.swift */,
 			);
 			name = School;
 			sourceTree = "<group>";
@@ -1001,6 +1004,7 @@
 				79779AA41C591A0D008803C5 /* PlanningApiCalls.swift in Sources */,
 				79622E981C5D567A00FBA456 /* MarksApiCalls.swift in Sources */,
 				79622EA21C5D66BB00FBA456 /* SearchUserViewController.swift in Sources */,
+				79D958341E0D327A00C003E8 /* SchoolDataViewController.swift in Sources */,
 				79F42BEB1D68C65A008DF047 /* Configuration.swift in Sources */,
 				7939FBFF1D80A1CC004EA871 /* ProfileView.swift in Sources */,
 				795CC3281C5CB585007AFE87 /* ProjectsViewController.swift in Sources */,

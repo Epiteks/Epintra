@@ -23,7 +23,6 @@ class SchoolViewController: UIViewController {
         self.menuControl.setTitle(NSLocalizedString("Marks", comment: ""), forSegmentAt: 2)
         
         showSpecificView(atIndex: 0)
-        
     }
 
     override func didReceiveMemoryWarning() {

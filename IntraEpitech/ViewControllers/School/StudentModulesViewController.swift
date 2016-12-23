@@ -10,24 +10,15 @@ import UIKit
 
 import DZNEmptyDataSet
 
-class StudentModulesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class StudentModulesViewController: SchoolDataViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var modulesTableView: UITableView!
 
     var modules: [Module]? = nil
-
-    var isFetching: Bool = false
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        print("Hello modules")
-        // Do any additional setup after loading the view.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         getModules()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 
@@ -100,4 +91,6 @@ class StudentModulesViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    
 }

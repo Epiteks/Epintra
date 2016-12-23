@@ -90,6 +90,10 @@
         <scene sceneID="hmb-u9-pmF">
             <objects>
                 <viewController id="bat-pb-3Wl" customClass="StudentModulesViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Rel-v6-Ujc"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZIF-O2-bMc"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="PuQ-tO-Dka">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -97,16 +101,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qS6-d9-E5m">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="moduleeeeCell" rowHeight="50" id="4mH-7P-b83" customClass="ModuleTableViewCell" customModule="Epintra" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="50"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4mH-7P-b83" id="3Hf-ei-Dgk">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="bat-pb-3Wl" id="aFl-9u-ddx"/>
                                     <outlet property="delegate" destination="bat-pb-3Wl" id="j1k-wT-GwK"/>
@@ -133,6 +127,10 @@
         <scene sceneID="6gk-0e-f3l">
             <objects>
                 <viewController id="IHZ-VN-RMd" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fVW-Ty-MdZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="5F4-OU-QgT"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="wnE-lH-9Hx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
