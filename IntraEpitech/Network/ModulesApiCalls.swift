@@ -86,8 +86,8 @@ class ModulesApiCalls: APICalls {
 						errorMessage = (errorDict["message"]?.stringValue)
 						onCompletion(false, nil, errorMessage!)
 					} else {
-						let resp = Module(detail: responseCall)
-						onCompletion(true, resp, "Ok")
+//						let resp = Module(detail: responseCall)
+//						onCompletion(true, resp, "Ok")
 					}
 					
 				} else {

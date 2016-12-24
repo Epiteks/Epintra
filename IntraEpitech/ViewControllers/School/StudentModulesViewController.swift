@@ -13,24 +13,32 @@ import DZNEmptyDataSet
 class StudentModulesViewController: SchoolDataViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var modulesTableView: UITableView!
-
+    
     var modules: [Module]? = nil
+    
+    override func viewDidLoad() {
+        self.modulesTableView.rowHeight = UITableViewAutomaticDimension
+        self.modulesTableView.estimatedRowHeight = 140
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getModules()
+        
+        if ApplicationManager.sharedInstance.user?.modules == nil {
+            getModules()
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "moduleDetailsSegue" {
+            if let vc = segue.destination as? StudentModuleDetailsViewController {
+                if let selectedIndex = self.modulesTableView.indexPathForSelectedRow?.row, let module = self.modules?[selectedIndex] {
+                    vc.module = module
+                }
+            }
+        }
     }
-    */
     
     func getModules() {
         
@@ -42,7 +50,9 @@ class StudentModulesViewController: SchoolDataViewController, UITableViewDataSou
                 
                 log.info("User modules fetched")
                 self.modules = data
+                ApplicationManager.sharedInstance.user?.modules = data
                 self.modulesTableView.reloadData()
+                
                 
                 break
             case .failure(let error):
@@ -84,12 +94,20 @@ class StudentModulesViewController: SchoolDataViewController, UITableViewDataSou
             cell?.accessoryType = .disclosureIndicator
         }
         
-
+        
         return cell ?? UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        
+        
+        
+        if let selectedIndex = self.modulesTableView.indexPathForSelectedRow?.row, let module = self.modules?[selectedIndex] {
+            module.getDetails() { _ in
+                self.performSegue(withIdentifier: "moduleDetailsSegue", sender: self)
+                tableView.deselectRow(at: indexPath, animated: true)
+            }
+        }
     }
     
     

@@ -70,8 +70,8 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		
 		if (segue.identifier == "moduleDetailSegue") {
-			let vc = segue.destination as! ModuleDetailsViewController
-			vc.module = selectedModule
+//			let vc = segue.destination as! ModuleDetailsViewController
+//			vc.module = selectedModule
 		}
 		
 	}

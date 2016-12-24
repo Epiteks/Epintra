@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="StudentGradeTableViewCell" customModule="Epintra" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KuB-6C-dFx">
+                        <rect key="frame" x="8" y="11" width="260" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ngi-lZ-Cgo">
+                        <rect key="frame" x="270" y="11" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ngi-lZ-Cgo" firstAttribute="leading" secondItem="KuB-6C-dFx" secondAttribute="trailing" constant="2" id="7Uq-Fb-MpG"/>
+                    <constraint firstItem="ngi-lZ-Cgo" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Mcx-gQ-y9J"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="ngi-lZ-Cgo" secondAttribute="trailing" id="UPh-2Q-tZo"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="KuB-6C-dFx" secondAttribute="leading" id="VFR-40-HVY"/>
+                    <constraint firstItem="KuB-6C-dFx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="dbt-IV-Hzd"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="KuB-6C-dFx" secondAttribute="bottom" constant="3" id="r4d-OT-kTI"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="gradeLabel" destination="ngi-lZ-Cgo" id="vWa-vi-gW1"/>
+                <outlet property="nameLabel" destination="KuB-6C-dFx" id="RJM-iB-cCN"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

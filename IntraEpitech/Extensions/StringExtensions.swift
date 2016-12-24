@@ -18,13 +18,15 @@ extension String {
 		
 	}
 	
-	func shortToDate() -> Date {
-		let strTime: String? = self
+	func shortToDate() -> Date? {
+		let strTime: String = self
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd"
-		let date = dateFormatter.date(from: strTime!)
-		return date!
-		
+        
+        if let date = dateFormatter.date(from: strTime) {
+            return date
+        }
+        return nil
 	}
 	
 	func toAppointmentDate() -> Date {

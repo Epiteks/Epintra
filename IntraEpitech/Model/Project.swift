@@ -46,7 +46,7 @@ class Project: NSObject {
 	var codeActi :String?
 	var endActi :String?
 	var registered :Bool?
-	var noteActi :String?
+	var mark :String?
 	
 	
 	init(dict :JSON) {
@@ -71,6 +71,6 @@ class Project: NSObject {
 		titleModule = detail["module_title"].stringValue
 		beginActi = detail["begin"].stringValue
 		endActi = detail["end"].stringValue
-		noteActi = detail["note"].stringValue
+		mark = detail["note"].stringValue
 	}
 }

@@ -23,7 +23,7 @@ class RequestManager: NSObject {
 		}
 		
 		if (urlParams != nil) {
-			newURL +=  urlParams!
+			newURL += urlParams!
 		}
 		
 		log.info("Request \(requestID) with parameters :\n\t\(params)\n\tWith URL \(newURL)")
@@ -44,13 +44,10 @@ class RequestManager: NSObject {
 				} else {
 					if let val = res.result.value {
 						let responseJSON = JSON(val)
-						if let errorDictionary = responseJSON["error"].dictionary {
-							if let errorMessage = errorDictionary["message"]?.string {
-								completion(Result.failure(type: AppError.apiError, message: errorMessage))
-								
-							}
-						} else {
-							completion(Result.failure(type: AppError.apiError, message: nil))
+                        if let errorDictionary = responseJSON["error"].dictionary, let errorMessage = errorDictionary["message"]?.string {
+                            completion(Result.failure(type: AppError.apiError, message: errorMessage))
+                        } else {
+                            completion(Result.failure(type: AppError.apiError, message: nil))
 						}
 						
 					} else {

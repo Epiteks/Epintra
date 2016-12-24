@@ -172,7 +172,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 			res += 1
 		}
 		
-		if (currentDate.toAPIString() != tableViewData[tableViewData.count - 1].0.shortToDate().toAPIString()) {
+		if (currentDate.toAPIString() != tableViewData[tableViewData.count - 1].0.shortToDate()?.toAPIString()) {
 			return 0
 		}
 		
@@ -189,7 +189,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 			res += 1
 		}
 		
-		if (date.toAPIString() != tableViewData[tableViewData.count - 1].0.shortToDate().toAPIString()) {
+		if (date.toAPIString() != tableViewData[tableViewData.count - 1].0.shortToDate()?.toAPIString()) {
 			return 0
 		}
 		
@@ -305,7 +305,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		let date = tableViewData[section].0
 		
-		return "  " + date.shortToDate().toTitleString()
+		return "  " + (date.shortToDate()?.toTitleString())!
 	}
 	
 	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
