@@ -8,12 +8,14 @@
 
 import UIKit
 
-class StudentModuleDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+class StudentModuleDetailsViewController: SchoolDataViewController, UITableViewDelegate, UITableViewDataSource {
+    
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var moduleProgressView: UIProgressView!
     @IBOutlet weak var moduleEndLabel: UILabel!
     @IBOutlet weak var activitiesTableView: UITableView!
+    
+    var barButtonItem: UIBarButtonItem!
     
     var module: Module? = nil
     
@@ -32,8 +34,10 @@ class StudentModuleDetailsViewController: UIViewController, UITableViewDelegate,
         
         self.title = NSLocalizedString("Module", comment: "")
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Grades", comment: ""), style: .plain, target: self, action: #selector(registeredStudentsButtonTouched))
-
+        self.barButtonItem = UIBarButtonItem(title: NSLocalizedString("Grades", comment: ""), style: .plain, target: self, action: #selector(registeredStudentsButtonTouched))
+        
+        navigationItem.rightBarButtonItem = self.barButtonItem
+        
         setModuleEndLabel()
         setProgressView()
         
@@ -41,15 +45,15 @@ class StudentModuleDetailsViewController: UIViewController, UITableViewDelegate,
         self.activitiesTableView.estimatedRowHeight = 50
         self.activitiesTableView.tableFooterView = UIView()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    
+        
         if segue.identifier == "gradesSegue" {
             if let vc = segue.destination as? ModuleRegisteredStudentsViewController {
                 vc.students = module?.registeredStudents
@@ -69,7 +73,7 @@ class StudentModuleDetailsViewController: UIViewController, UITableViewDelegate,
     func setProgressView() {
         
         if let begin = self.module?.begin!.shortToDate(), let end = self.module?.end!.shortToDate() {
-          
+            
             let today = Date()
             
             let totalTime = end.timeIntervalSince(begin)
@@ -90,7 +94,7 @@ class StudentModuleDetailsViewController: UIViewController, UITableViewDelegate,
             }
         }
     }
-
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -124,17 +128,46 @@ class StudentModuleDetailsViewController: UIViewController, UITableViewDelegate,
             cell?.endDateLabel.text = activity.endActi?.toDate().toActiDate()
             
             cell?.activityColor = self.typeColors[activity.typeActiCode!]
+            
+            if let characters = activity.mark?.characters, characters.count > 0 {
+                cell?.accessoryType = .disclosureIndicator
+            }
+            
         }
         
         return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        if let activity = self.module?.activities[indexPath.row], let characters = activity.mark?.characters, characters.count > 0 {
+            self.addActivityIndicator()
+            projectRequests.details(forProject: activity, completion: { result in
+                switch (result) {
+                case .success(let data):
+                    
+                    
+                    //self.performSegue(withIdentifier: "gradesSegue", sender: self)
+                    break
+                case .failure(let err):
+                    if err.message != nil {
+                        ErrorViewer.errorPresent(self, mess: err.message!) {}
+                    }
+                    log.error("Fetching project details error : \(err)")
+                }
+                self.removeActivityIndicator()
+                self.barButtonItem.isEnabled = true
+            })
+            
+        }
+        
     }
     
     func registeredStudentsButtonTouched() {
-        
+        self.barButtonItem.isEnabled = false
+        self.addActivityIndicator()
         modulesRequests.registeredStudents(for: self.module!) { result in
             switch (result) {
             case .success(let registeredStudents):
@@ -143,14 +176,15 @@ class StudentModuleDetailsViewController: UIViewController, UITableViewDelegate,
                 self.performSegue(withIdentifier: "gradesSegue", sender: self)
             case .failure(let err):
                 if err.message != nil {
-                ErrorViewer.errorPresent(self, mess: err.message!) {}
+                    ErrorViewer.errorPresent(self, mess: err.message!) {}
                 }
-                log.error("Fetching modules : \(err)")
+                log.error("Fetching modules error : \(err)")
             }
-
-            }
+            self.removeActivityIndicator()
+            self.barButtonItem.isEnabled = true
+            
         }
-        
-    
     }
+    
+}
 

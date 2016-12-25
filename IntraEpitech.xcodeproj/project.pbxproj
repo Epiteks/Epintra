@@ -90,6 +90,7 @@
 		7988506D1C4ACD4500BAA888 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988506C1C4ACD4500BAA888 /* UIColorExtensions.swift */; };
 		79892EF61C5024E000F83669 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79892EF51C5024E000F83669 /* UserPreferences.swift */; };
 		798AF18D1DDC61B9002B8A8C /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798AF18C1DDC61B9002B8A8C /* StringExtension.swift */; };
+		798CF1B81E0FCE8D00BAB754 /* ProjectRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798CF1B71E0FCE8D00BAB754 /* ProjectRequests.swift */; };
 		79A5AE7D1C56B432004B3FB9 /* PlanningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5AE7C1C56B432004B3FB9 /* PlanningViewController.swift */; };
 		79B05FD91C68BC1C0032DB0C /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B05FD81C68BC1C0032DB0C /* IAPHelper.swift */; };
 		79B05FDD1C68BEB90032DB0C /* IntraProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B05FDC1C68BEB90032DB0C /* IntraProduct.swift */; };
@@ -251,6 +252,7 @@
 		7988506C1C4ACD4500BAA888 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		79892EF51C5024E000F83669 /* UserPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 		798AF18C1DDC61B9002B8A8C /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		798CF1B71E0FCE8D00BAB754 /* ProjectRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectRequests.swift; path = Network/ProjectRequests.swift; sourceTree = "<group>"; };
 		79A5AE7C1C56B432004B3FB9 /* PlanningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanningViewController.swift; path = Planning/PlanningViewController.swift; sourceTree = "<group>"; };
 		79B05FD81C68BC1C0032DB0C /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		79B05FDC1C68BEB90032DB0C /* IntraProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntraProduct.swift; sourceTree = "<group>"; };
@@ -680,6 +682,7 @@
 				79F42BE81D68C5D7008DF047 /* RequestManager.swift */,
 				79F42BEC1D68C7C9008DF047 /* UserRequests.swift */,
 				793B77941E0C71AE006FFD16 /* ModulesRequests.swift */,
+				798CF1B71E0FCE8D00BAB754 /* ProjectRequests.swift */,
 			);
 			name = New;
 			sourceTree = "<group>";
@@ -1009,6 +1012,7 @@
 				79F42BEF1D68CCC6008DF047 /* CompletionHandlerType.swift in Sources */,
 				798AF18D1DDC61B9002B8A8C /* StringExtension.swift in Sources */,
 				7976955B1C562730001772A2 /* ImageDownloader.swift in Sources */,
+				798CF1B81E0FCE8D00BAB754 /* ProjectRequests.swift in Sources */,
 				79E9D4981E0D51B7006A3910 /* StudentModuleDetailsViewController.swift in Sources */,
 				79152D871C67726800513E0F /* OtherUserViewController.swift in Sources */,
 				795F1EA21C56019E00B8C347 /* History.swift in Sources */,
