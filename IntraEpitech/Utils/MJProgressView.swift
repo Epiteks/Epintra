@@ -23,7 +23,6 @@ class MJProgressView {
 	
 	fileprivate init() { }
 	
-	
 	internal func showProgress(_ view: UIView, white : Bool) {
 		_isRunning = true
 		
@@ -68,7 +67,6 @@ class MJProgressView {
 		
 		indicator.startAnimating()
 	}
-	
 	
 	internal func hideProgress() {
 		_isRunning = false

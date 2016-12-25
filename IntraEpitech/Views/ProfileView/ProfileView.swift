@@ -27,7 +27,6 @@ fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-
 class ProfileView: UIView {
 	
 	@IBOutlet fileprivate var contentView: UIView?
@@ -95,9 +94,6 @@ class ProfileView: UIView {
 		self.gpaCurrentNumberLabel.text = gpa.value
 		self.gpaCurrentTypeLabel.text = gpa.cycle
 		
-		
-		
-		
 		self.creditsNumberLabel.text = String(user.credits!)
 	}
 	
@@ -107,6 +103,5 @@ class ProfileView: UIView {
 		self.userProfileImage.toCircle()
 		self.userProfileImage.cropToSquare()
 	}
-	
 	
 }

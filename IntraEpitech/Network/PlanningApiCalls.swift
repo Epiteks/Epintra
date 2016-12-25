@@ -11,7 +11,7 @@ import SwiftyJSON
 
 class PlanningApiCalls: APICalls {
 	
-	class func getPlanning(_ first :String, last :String, onCompletion :@escaping (Bool, Dictionary<String, [Planning]>?, String) ->()) {
+	class func getPlanning(_ first :String, last :String, onCompletion :@escaping (Bool, Dictionary<String, [Planning]>?, String) ->Void) {
 		
 		let url = super.getApiUrl() + "planning"
 		
@@ -27,8 +27,6 @@ class PlanningApiCalls: APICalls {
 						onCompletion(false, nil, errorMessage!)
 					} else {
 						var planningMan = Dictionary<String, [Planning]>()
-						
-						
 						
 						var date = first.shortToDate()
 						let lol = NSDate()
@@ -61,7 +59,7 @@ class PlanningApiCalls: APICalls {
 		}
 	}
 	
-	class func enterToken(_ planning :Planning, token :String, onCompletion :@escaping (Bool, String) ->()) {
+	class func enterToken(_ planning :Planning, token :String, onCompletion :@escaping (Bool, String) ->Void) {
 		
 		let url = super.getApiUrl() + "token"
 		
@@ -89,7 +87,7 @@ class PlanningApiCalls: APICalls {
 		}
 	}
 	
-	class func registerToEvent(_ planning :Planning, onCompletion :@escaping (Bool, String) ->()) {
+	class func registerToEvent(_ planning :Planning, onCompletion :@escaping (Bool, String) ->Void) {
 		
 		let url = super.getApiUrl() + "event"
 		
@@ -116,7 +114,7 @@ class PlanningApiCalls: APICalls {
 		}
 	}
 	
-	class func unregisterToEvent(_ planning :Planning, onCompletion :@escaping (Bool, String) ->()) {
+	class func unregisterToEvent(_ planning :Planning, onCompletion :@escaping (Bool, String) ->Void) {
 		
 		let url = super.getApiUrl() + "event"
 		
@@ -143,7 +141,7 @@ class PlanningApiCalls: APICalls {
 		}
 	}
 	
-	class func getSpecialEvent(_ planning :Planning, onCompletion :@escaping (Bool, Planning?, String) ->()) {
+	class func getSpecialEvent(_ planning :Planning, onCompletion :@escaping (Bool, Planning?, String) ->Void) {
 		
 		let url = super.getApiUrl() + "planning"
 		
@@ -180,7 +178,7 @@ class PlanningApiCalls: APICalls {
 		}
 	}
 	
-	class func getStudentsRegistered(_ planning :Planning, onCompletion :@escaping (Bool, [RegisteredStudent]?, String) ->()) {
+	class func getStudentsRegistered(_ planning :Planning, onCompletion :@escaping (Bool, [RegisteredStudent]?, String) ->Void) {
 		
 		let url = super.getApiUrl() + "event/registered"
 		
@@ -215,7 +213,7 @@ class PlanningApiCalls: APICalls {
 		}
 	}
 	
-	class func getEventDetails(_ planning :Planning, onCompletion :@escaping (Bool, AppointmentEvent?, String) ->()) {
+	class func getEventDetails(_ planning :Planning, onCompletion :@escaping (Bool, AppointmentEvent?, String) ->Void) {
 		
 		let url = super.getApiUrl() + "event/rdv"
 		
@@ -248,7 +246,7 @@ class PlanningApiCalls: APICalls {
 		}
 	}
 	
-	class func subscribeToSlot(_ appointment :AppointmentEvent, slot :Appointment, onCompletion :@escaping (Bool, AppointmentEvent?, String) ->()) {
+	class func subscribeToSlot(_ appointment :AppointmentEvent, slot :Appointment, onCompletion :@escaping (Bool, AppointmentEvent?, String) ->Void) {
 		
 		let url = super.getApiUrl() + "event/rdv"
 		
@@ -289,7 +287,7 @@ class PlanningApiCalls: APICalls {
 		}
 	}
 	
-	class func unsubscribeToSlot(_ appointment :AppointmentEvent, slot :Appointment, onCompletion :@escaping (Bool, AppointmentEvent?, String) ->()) {
+	class func unsubscribeToSlot(_ appointment :AppointmentEvent, slot :Appointment, onCompletion :@escaping (Bool, AppointmentEvent?, String) ->Void) {
 		
 		let url = super.getApiUrl() + "event/rdv"
 		
@@ -323,7 +321,6 @@ class PlanningApiCalls: APICalls {
 					} else {
 						print(responseCall)
 						let err = errorDict["message"]
-						
 					 
 						errorMessage = (err!.stringValue)
 						if (errorMessage != "") {
@@ -343,6 +340,5 @@ class PlanningApiCalls: APICalls {
 				}
 		}
 	}
-	
 	
 }

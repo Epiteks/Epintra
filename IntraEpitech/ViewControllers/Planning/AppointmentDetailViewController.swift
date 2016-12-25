@@ -18,7 +18,6 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-
 class AppointmentDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 	
 	@IBOutlet weak var tableView: UITableView!
@@ -43,7 +42,6 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 	func setAppointments(_ app: inout AppointmentEvent) {
 		appointment = app
 	}
-	
 	
 	/*
 	// MARK: - Navigation
@@ -125,7 +123,6 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 				}
 			}
 			
-			
 			login.text = data.members![i].login
 			
 			scrollView.contentSize.width = nibView.frame.origin.x + nibView.frame.size.width
@@ -156,7 +153,6 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 		
 		let scrollView = cell.viewWithTag(41) as! UIScrollView
 		let data = appointments[(indexPath as NSIndexPath).section]
-		
 		
 		title.text = data.title!
 		
@@ -194,7 +190,6 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 				}
 			}
 			
-			
 			login.text = data.members![i].login
 			
 			scrollView.contentSize.width = nibView.frame.origin.x + nibView.frame.size.width
@@ -203,7 +198,6 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 		}
 		return cell
 	}
-	
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)

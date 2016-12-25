@@ -28,7 +28,6 @@ fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
 	@IBOutlet weak var alertTableView: UITableView!
@@ -124,7 +123,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 		}
 	}
 	
-	
 	/*
 	// MARK: - Navigation
 	
@@ -151,7 +149,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		
 		
 		var cell = UITableViewCell()
 		cell = tableView.dequeueReusableCell(withIdentifier: "alertCell")!

@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class CustomUITableViewCell: UITableViewCell {
 	
 /*	var imageView : UIImageView!
@@ -35,6 +34,5 @@ class CustomUITableViewCell: UITableViewCell {
 		imageView.hnk_cancelSetImage()
 		imageView.image = nil
 	}*/
-	
 	
 }

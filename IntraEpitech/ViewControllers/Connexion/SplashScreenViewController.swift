@@ -37,7 +37,6 @@ class SplashScreenViewController: UIViewController {
 	
 	override func viewDidAppear(_ animated: Bool) {
 		
-		
 		MJProgressView.instance.showProgress(self.view, white: true)
 		
 		fetchAllData()
@@ -54,8 +53,6 @@ class SplashScreenViewController: UIViewController {
 		let dispatchGroup = DispatchGroup()
 		
 		DispatchQueue.global(qos: .utility).async {
-			
-		
 		
 			DispatchQueue.global(qos: .utility).async(group: dispatchGroup, execute: {
 				//self.statusLabel.text = NSLocalizedString("GettingData", comment: "")

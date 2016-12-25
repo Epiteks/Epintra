@@ -29,7 +29,6 @@ class ApplicationManager: NSObject {
 	internal var marks: [Mark]?
 	internal var allUsers: [User]?
 
-
 	var lastUserApiCall: Double?
 
 	var planningSemesters = [Bool]()

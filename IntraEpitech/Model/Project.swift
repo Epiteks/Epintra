@@ -48,7 +48,6 @@ class Project: NSObject {
 	var registered :Bool?
 	var mark :String?
 	
-	
 	init(dict :JSON) {
 		
 		typeActiCode = dict["type_acti_code"].stringValue

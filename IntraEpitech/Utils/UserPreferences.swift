@@ -43,7 +43,6 @@ class UserPreferences: NSObject {
 		return def.bool(forKey: "wantsDownloading")
 	}
 	
-	
 	class func getData() -> (login :String, password :String) {
 		
 		let def = UserDefaults.standard
@@ -115,7 +114,6 @@ class UserPreferences: NSObject {
 		
 		def.set(data, forKey: "semesters")
 	}
-	
 	
 	class func checkSemestersExist() -> Bool {
 		

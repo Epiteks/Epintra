@@ -77,12 +77,9 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		}
 	}
 	
-	
 	override func awakeFromNib() {
 		self.title = NSLocalizedString("Planning", comment: "")
 	}
-	
-	
 	
 	override func viewWillAppear(_ animated: Bool) {
 		
@@ -94,7 +91,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 			tableView.isUserInteractionEnabled = false
 			tableView.isScrollEnabled = false
 			calendar.isUserInteractionEnabled = false
-			PlanningApiCalls.getPlanning((cal.startOfWeek()?.toAPIString())!, last: (cal.endOfWeek()?.toAPIString())!) { (isOk: Bool, planningArray: Dictionary<String, [Planning]>?, mess: String?) in
+			PlanningApiCalls.getPlanning((cal.startOfWeek()?.toAPIString())!, last: (cal.endOfWeek()?.toAPIString())!) { (isOk: Bool, planningArray: Dictionary<String, [Planning]>?, _) in
 				
 				MJProgressView.instance.hideProgress()
 				if (isOk) {
@@ -127,11 +124,11 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		}
 	}
 	
-	func loadData(_ first: String, end: String, onCompletion :@escaping () -> ()) {
+	func loadData(_ first: String, end: String, onCompletion :@escaping () -> Void) {
 		tableView.isUserInteractionEnabled = false
 		tableView.isScrollEnabled = false
 		calendar.isUserInteractionEnabled = false
-		PlanningApiCalls.getPlanning(first, last: end) { (isOk: Bool, planningArray: Dictionary<String, [Planning]>?, mess: String?) in
+		PlanningApiCalls.getPlanning(first, last: end) { (isOk: Bool, planningArray: Dictionary<String, [Planning]>?, _) in
 			
 			MJProgressView.instance.hideProgress()
 			if (isOk) {
@@ -160,7 +157,6 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 	func calendar(_ calendar: FSCalendar!, didSelectDate date: Date!) {
 		self.tableView.scrollToRow(at: IndexPath(row: 0, section: self.getDateInArray(date)), at: UITableViewScrollPosition.top, animated: true)
 	}
-	
 	
 	func getCurrentDateInData() -> Int {
 		var res = 0
@@ -213,13 +209,10 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		let df = DateFormatter()
 		df.dateFormat = "yyyy-MM-dd HH:mm:ss"
 		
-		
 		for i in 0 ..< tableViewData.count {
 			let val = tableViewData[i].1
 			tableViewData[i].1 = val.sorted { df.date(from: $0.startTime!)!.compare(df.date(from: $1.startTime!)!) == .orderedAscending }
 		}
-		
-		
 		
 	}
 	
@@ -289,7 +282,6 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		changeImageToDisplay(data, imageView: statusImageView)
 		statusImageView.imageAtIndexPath = indexPath
 		
-		
 		let singleTap = UITapGestureRecognizer(target: self, action:#selector(PlanningViewController.actionOnImageView(_:)))
 		singleTap.numberOfTapsRequired = 1
 		
@@ -312,10 +304,9 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		return 30
 	}
 	
-	
 	func setActionsOnCell(_ cell: MGSwipeTableCell, indexPath: IndexPath) {
 		
-		let createEvent = MGSwipeButton(title: NSLocalizedString("AddInCalendar", comment: ""), icon: nil, backgroundColor: UIUtils.planningBlueColor(), callback: { (sender: MGSwipeTableCell!) -> Bool in
+		let createEvent = MGSwipeButton(title: NSLocalizedString("AddInCalendar", comment: ""), icon: nil, backgroundColor: UIUtils.planningBlueColor(), callback: { (_) -> Bool in
 			
 			let calman = CalendarManager()
 			calman.createEvent(self.tableViewData[(indexPath as NSIndexPath).section].1[(indexPath as NSIndexPath).row]) { (isOk: Bool, mess: String) in
@@ -332,7 +323,6 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		cell.rightButtons = [createEvent]
 		
 	}
-	
 	
 	func changeImageToDisplay(_ data: Planning, imageView: UIImageView) {
 		
@@ -368,12 +358,10 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		}
 	}
 	
-	
 	func actionOnImageView(_ sender: UIGestureRecognizer) {
 		let tapLocation = sender.location(in: self.tableView)
 		let indexPath = self.tableView.indexPathForRow(at: tapLocation)
 		let data = tableViewData[(indexPath! as NSIndexPath).section].1[(indexPath! as NSIndexPath).row]
-		
 		
 		if (data.eventType == "rdv") {
 			return
@@ -488,7 +476,6 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 			self.tableView.endUpdates()
 			MJProgressView.instance.hideProgress()
 		}
-		
 		
 	}
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

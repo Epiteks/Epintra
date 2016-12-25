@@ -21,7 +21,6 @@ class AlertController: UIAlertController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation

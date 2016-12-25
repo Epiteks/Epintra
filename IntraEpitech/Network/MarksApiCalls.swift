@@ -12,7 +12,7 @@ import Alamofire
 
 class MarksApiCalls: APICalls {
 	
-	class func getMarks(_ onCompletion :@escaping (Bool, [Mark]?, String) ->()) {
+	class func getMarks(_ onCompletion :@escaping (Bool, [Mark]?, String) ->Void) {
 		
 		let url = super.getApiUrl() + "marks"
 		
@@ -42,7 +42,7 @@ class MarksApiCalls: APICalls {
 		}
 	}
 	
-	class func getProjectMarks(_ mark :Mark, onCompletion :@escaping (Bool, [Mark]?, String) ->()) {
+	class func getProjectMarks(_ mark :Mark, onCompletion :@escaping (Bool, [Mark]?, String) ->Void) {
 		
 		let url = super.getApiUrl() + "project/marks"
 		
@@ -75,7 +75,7 @@ class MarksApiCalls: APICalls {
 		}
 	}
 	
-	class func getProjectMarksForProject(_ proj :Project, onCompletion :@escaping (Bool, [Mark]?, String) ->()) {
+	class func getProjectMarksForProject(_ proj :Project, onCompletion :@escaping (Bool, [Mark]?, String) ->Void) {
 		
 		let url = super.getApiUrl() + "project/marks"
 		
@@ -108,7 +108,7 @@ class MarksApiCalls: APICalls {
 		}
 	}
 	
-	class func getMarksFor(user login :String, onCompletion :@escaping (Bool, [Mark]?, String) ->()) {
+	class func getMarksFor(user login :String, onCompletion :@escaping (Bool, [Mark]?, String) ->Void) {
 		
 		let url = super.getApiUrl() + "marks"
 		
@@ -137,6 +137,5 @@ class MarksApiCalls: APICalls {
 				}
 		}
 	}
-	
 	
 }

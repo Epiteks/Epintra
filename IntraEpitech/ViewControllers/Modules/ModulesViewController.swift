@@ -76,7 +76,6 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 	}
 	
-	
 	func numberOfSections(in tableView: UITableView) -> Int {
 		if (modules.count == 0) {
 			tableView.separatorStyle = .none
@@ -99,7 +98,6 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
 		let gradeLabel = cell?.viewWithTag(3) as! UILabel
 		
 		let module = modules[(indexPath as NSIndexPath).row]
-		
 		
 		creditsLabel.text = NSLocalizedString("AvailableCredits", comment: "") + module.credits!
 		if (module.grade != nil) {

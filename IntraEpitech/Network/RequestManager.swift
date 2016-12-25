@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class RequestManager: NSObject {
 	
-	func call(_ requestID: String, params: [String: Any]? = nil, urlParams: String? = nil, completion: @escaping (Result<JSON>) -> ()) {
+	func call(_ requestID: String, params: [String: Any]? = nil, urlParams: String? = nil, completion: @escaping (Result<JSON>) -> Void) {
 		
 		let req = Requests.routes[requestID]
 		var headers = [String: String]()

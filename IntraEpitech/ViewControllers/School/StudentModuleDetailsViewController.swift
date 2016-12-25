@@ -51,7 +51,6 @@ class StudentModuleDetailsViewController: SchoolDataViewController, UITableViewD
         // Dispose of any resources that can be recreated.
     }
     
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "gradesSegue" {
@@ -60,7 +59,6 @@ class StudentModuleDetailsViewController: SchoolDataViewController, UITableViewD
             }
         }
     }
-    
     
     func setModuleEndLabel() {
         if let registerLimit = self.module?.endRegister?.shortToDate(), registerLimit > Date() {
@@ -148,7 +146,6 @@ class StudentModuleDetailsViewController: SchoolDataViewController, UITableViewD
                 switch (result) {
                 case .success(let data):
                     
-                    
                     //self.performSegue(withIdentifier: "gradesSegue", sender: self)
                     break
                 case .failure(let err):
@@ -187,4 +184,3 @@ class StudentModuleDetailsViewController: SchoolDataViewController, UITableViewD
     }
     
 }
-

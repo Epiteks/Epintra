@@ -11,7 +11,7 @@ import SwiftyJSON
 
 class ProjectRequests: RequestManager {
     
-    func details(forProject project: Project, completion: @escaping (Result<Any?>) -> ()) {
+    func details(forProject project: Project, completion: @escaping (Result<Any?>) -> Void) {
         
         let params = String(format: "?year=%@&module=%@&instance=%@", project.scolaryear!, project.codeModule!, project.codeInstance!)
         

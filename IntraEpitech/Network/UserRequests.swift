@@ -18,7 +18,7 @@ class UserRequests: RequestManager {
 	- parameter password:		user password
 	- parameter completion:	Request completion action
 	*/
-	func auth(_ login: String, password: String, completion: @escaping (Result<Any?>) -> ()) {
+	func auth(_ login: String, password: String, completion: @escaping (Result<Any?>) -> Void) {
 		
 		super.call("authentication", params: ["login": login, "password": password]) { (response) in
 			switch response {
@@ -45,7 +45,7 @@ class UserRequests: RequestManager {
 	Set the user planning semester to allow him to see his current calendar.
 	- parameter completion: Request completion action
 	*/
-	func getCurrentUserData(_ completion: @escaping (Result<Any?>) -> ()) {
+	func getCurrentUserData(_ completion: @escaping (Result<Any?>) -> Void) {
 		
 		let app = ApplicationManager.sharedInstance
 		
@@ -76,7 +76,7 @@ class UserRequests: RequestManager {
 	- parameter login:			wanted user
 	- parameter completion:	Request completion action
 	*/
-	func getUserData(_ login: String, completion: @escaping (Result<User>) -> ()) {
+	func getUserData(_ login: String, completion: @escaping (Result<User>) -> Void) {
 		
 		let param = "?login=" + login
 		
@@ -102,7 +102,7 @@ class UserRequests: RequestManager {
 	Fills the history in manager, the completion takes nil in param.
 	- parameter completion:	Request completion action
 	*/
-	func getHistory(_ completion: @escaping (Result<Any?>) -> ()) {
+	func getHistory(_ completion: @escaping (Result<Any?>) -> Void) {
 		
 		let app = ApplicationManager.sharedInstance
 		
@@ -120,7 +120,7 @@ class UserRequests: RequestManager {
 		}
 	}
 	
-	func getUserFlags(_ login: String, completion: @escaping (Result<[Flags]>) -> ()) {
+	func getUserFlags(_ login: String, completion: @escaping (Result<[Flags]>) -> Void) {
 		
 		let params = "?login=" + login
 		
@@ -146,7 +146,7 @@ class UserRequests: RequestManager {
 		}
 	}
 	
-	func getUserDocuments(_ completion: @escaping (Result<[File]>) -> ()) {
+	func getUserDocuments(_ completion: @escaping (Result<[File]>) -> Void) {
 		
 		let params = "?login=" +  (ApplicationManager.sharedInstance.user?.login)!
 		

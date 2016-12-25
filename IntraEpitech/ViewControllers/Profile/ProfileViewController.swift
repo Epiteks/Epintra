@@ -28,7 +28,6 @@ fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
 	@IBOutlet weak var tableView: UITableView!
@@ -280,7 +279,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		return cell!
 	}
-	
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		if (indexPath as NSIndexPath).section == 0 {

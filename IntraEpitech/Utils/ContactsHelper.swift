@@ -13,7 +13,7 @@ class ContactsHelper: NSObject {
 	
 	let addressBookRef: ABAddressBook = ABAddressBookCreateWithOptions(nil, nil).takeRetainedValue()
 	
-	func authorize(_ onCompletion :@escaping (Bool) -> ()) {
+	func authorize(_ onCompletion :@escaping (Bool) -> Void) {
 		
 		let authorizationStatus = ABAddressBookGetAuthorizationStatus()
 		
@@ -33,10 +33,10 @@ class ContactsHelper: NSObject {
 		}
 	}
 	
-	func promptForAddressBookRequestAccess(_ onCompletion :@escaping (Bool) -> ()) {
+	func promptForAddressBookRequestAccess(_ onCompletion :@escaping (Bool) -> Void) {
 		//let err: Unmanaged<CFError>? = nil
 		ABAddressBookRequestAccessWithCompletion(addressBookRef) {
-			(granted: Bool, error: CFError?) in
+			(granted: Bool, _) in
 			DispatchQueue.main.async {
 				if !granted {
 					print("Just denied")

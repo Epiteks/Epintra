@@ -42,16 +42,13 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 	override func viewDidAppear(_ animated: Bool) {
 		let calman = CalendarManager()
 		
-		
-		
-		calman.hasRights() { (granted :Bool, mess :String?) in
+		calman.hasRights() { (granted :Bool, _) in
 			if (!granted) {
 				self.isLoading = false
 				self.hasRight = false
 				self.generateBackgroundView()
 				
 				self.accessNotGrantedError()
-				
 				
 			} else {
 				self.isLoading = true
@@ -123,7 +120,6 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 		return cell
 	}
 	
-	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
 		
@@ -138,7 +134,6 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 		}
 		newCell = tableView.cellForRow(at: indexPath)
 		newCell?.accessoryType = .checkmark
-		
 		
 		ApplicationManager.sharedInstance.defaultCalendar = calendars[(indexPath as NSIndexPath).row].title
 		currentCalendar = calendars[(indexPath as NSIndexPath).row].title
@@ -167,7 +162,6 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 				self.tableView.tableFooterView = self.tableFooterSave
 				self.tableView.backgroundView = nil
 			}
-			
 			
 		}
 	}

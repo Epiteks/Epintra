@@ -52,7 +52,6 @@ class SystemUtils: NSObject {
 		return nsObject as! String
 	}
 	
-	
 	class func getAllMailData() -> String {
 		let currentDevice = UIDevice.current
 		var str = "Version : " + SystemUtils.getVersion()

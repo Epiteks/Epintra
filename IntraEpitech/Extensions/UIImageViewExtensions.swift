@@ -31,9 +31,9 @@ extension UIImageView {
 		contentMode = mode
 		URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) -> Void in
 			guard
-				let httpURLResponse = response as? HTTPURLResponse , httpURLResponse.statusCode == 200,
-				let mimeType = response?.mimeType , mimeType.hasPrefix("image"),
-				let data = data , error == nil,
+				let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+				let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+				let data = data, error == nil,
 				let image = UIImage(data: data)
 				else { return }
 			DispatchQueue.main.async { () -> Void in
@@ -44,16 +44,16 @@ extension UIImageView {
 		}).resume()
 	}
 	
-	func downloadFrom(link:String, contentMode mode: UIViewContentMode, onCompletion :@escaping (UIImage) -> ()) {
+	func downloadFrom(link:String, contentMode mode: UIViewContentMode, onCompletion :@escaping (UIImage) -> Void) {
 		guard
 			let url = URL(string: link)
 			else {return}
 		contentMode = mode
 		URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) -> Void in
 			guard
-				let httpURLResponse = response as? HTTPURLResponse , httpURLResponse.statusCode == 200,
-				let mimeType = response?.mimeType , mimeType.hasPrefix("image"),
-				let data = data , error == nil,
+				let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+				let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+				let data = data, error == nil,
 				let image = UIImage(data: data)
 				else { return }
 			DispatchQueue.main.async { () -> Void in
@@ -64,7 +64,6 @@ extension UIImageView {
 			}
 		}).resume()
 	}
-	
 	
 	func cropToSquare() {
 		// Create a copy of the image without the imageOrientation property so it is in its native orientation (landscape)

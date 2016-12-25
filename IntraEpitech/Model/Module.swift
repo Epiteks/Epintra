@@ -1,4 +1,4 @@
- //
+//
 //  Module.swift
 //  IntraEpitech
 //
@@ -72,7 +72,7 @@ class Module: NSObject {
 
     }
     
-    func getDetails(completion: @escaping (Result<Any?>) -> ()) {
+    func getDetails(completion: @escaping (Result<Any?>) -> Void) {
         
         modulesRequests.details(forModule: self) { (result) in
             switch (result) {

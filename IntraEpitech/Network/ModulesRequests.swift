@@ -11,7 +11,7 @@ import SwiftyJSON
 
 class ModulesRequests: RequestManager {
    
-    func usersModules(completion: @escaping (Result<[Module]>) -> ()) {
+    func usersModules(completion: @escaping (Result<[Module]>) -> Void) {
         super.call("userModules") { (response) in
             switch response {
             case .success(let responseJSON):
@@ -29,7 +29,7 @@ class ModulesRequests: RequestManager {
         }
     }
     
-    func details(forModule module: Module, completion: @escaping (Result<Any?>) -> ()) {
+    func details(forModule module: Module, completion: @escaping (Result<Any?>) -> Void) {
         
         let params = String(format: "?year=%@&module=%@&instance=%@", module.scolaryear!, module.codemodule!, module.codeinstance!)
         
@@ -46,7 +46,7 @@ class ModulesRequests: RequestManager {
         }
     }
     
-    func registeredStudents(for module :Module, completion: @escaping (Result<[RegisteredStudent]>) -> ()) {
+    func registeredStudents(for module :Module, completion: @escaping (Result<[RegisteredStudent]>) -> Void) {
         
         let params = String(format: "?year=%@&module=%@&instance=%@", module.scolaryear!, module.codemodule!, module.codeinstance!)
         

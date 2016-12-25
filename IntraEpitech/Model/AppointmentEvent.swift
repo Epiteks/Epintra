@@ -34,8 +34,6 @@ class AppointmentEvent: NSObject {
 		
 		registeredByBlock = dict["registered_by_block"].boolValue
 		
-		
-		
 		//		if (slots.count > 0) {
 		//			let eventSlots = slots[0]["slots"]
 		//			

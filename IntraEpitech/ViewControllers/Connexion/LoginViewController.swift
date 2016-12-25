@@ -30,7 +30,6 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 		waitingView.backgroundColor = UIUtils.backgroundColor()
 		waitingView.isHidden = true
 		
-		
 		if (UserPreferences.checkIfDataExists()) {
 			waitingView.isHidden = false
 			let data = UserPreferences.getData()
@@ -45,7 +44,6 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 		self.loginTableView.isScrollEnabled = false
 		self.loginTableView.layer.cornerRadius = 3
 		self.loginTableView.separatorInset = UIEdgeInsets.zero
-		
 		
 		// Set different texts
 		self.loginButton.setTitle(NSLocalizedString("login", comment: ""), for: UIControlState())
@@ -84,7 +82,6 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 		let gesture = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.tapOnView(_:)))
 		self.view.addGestureRecognizer(gesture)
 	}
-	
 	
 	func tapOnView(_ sender: UITapGestureRecognizer) {
 		self.view.endEditing(true)
@@ -204,7 +201,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 			UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 2.0, initialSpringVelocity: 0.0, options: .curveLinear, animations: {
 				self.view.frame.origin.y = self.connexionButtonConstraintSave!
 				self.view.layoutIfNeeded()
-				}, completion: { (complete: Bool) in
+				}, completion: { (_) in
 					self.connexionButtonConstraintSave = nil
 			})
 		}

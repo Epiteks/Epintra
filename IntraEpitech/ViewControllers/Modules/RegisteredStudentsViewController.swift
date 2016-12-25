@@ -19,7 +19,6 @@ class RegisteredStudentsViewController: UIViewController, UITableViewDelegate, U
 		// Do any additional setup after loading the view.
 		self.title = NSLocalizedString("Grades", comment: "")
 	}
-
 	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
@@ -51,7 +50,6 @@ class RegisteredStudentsViewController: UIViewController, UITableViewDelegate, U
 	}
 	*/
 	
-	
 	func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
 	}
@@ -77,7 +75,6 @@ class RegisteredStudentsViewController: UIViewController, UITableViewDelegate, U
 			studentNameLabel.textColor = UIColor.black
 			gradeLabel.textColor = UIColor.black
 		}
-
 		
 		return cell!
 	}

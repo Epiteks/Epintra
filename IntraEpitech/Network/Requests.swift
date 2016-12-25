@@ -15,7 +15,6 @@ struct Request {
 	var secured: Bool! // Know if we need token or not
 }
 
-
 class Requests {
 	
 	static let routes = [
@@ -42,7 +41,6 @@ class Requests {
 		"eventDetails": Request(endpoint: "/event/rdv", method: .get, secured: true), // Get event details like slots
 		"subscribeSlot": Request(endpoint: "/event/rdv", method: .post, secured: true), // Subscribe to a slot
 		"unsubscribeSlot": Request(endpoint: "/event/rdv", method: .delete, secured: true), // Unsubscribe from a slot
-		
 		
 		// Modules
 		"userModules": Request(endpoint: "/modules", method: .get, secured: true), // Get modules registered

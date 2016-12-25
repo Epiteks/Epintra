@@ -10,7 +10,7 @@ import UIKit
 
 class ErrorViewer: NSObject {
 	
-	class func errorShow(_ viewController :UIViewController, mess :String, onCompletion :@escaping () -> ()) {
+	class func errorShow(_ viewController :UIViewController, mess :String, onCompletion :@escaping () -> Void) {
 		
 		DispatchQueue.main.async {
 			let _alert = UIAlertController(title: "", message: "", preferredStyle: .alert)
@@ -27,9 +27,7 @@ class ErrorViewer: NSObject {
 		}
 	}
 	
-	class func errorPresent(_ viewController :UIViewController, mess :String, onCompletion :@escaping () -> ()) {
-		
-		
+	class func errorPresent(_ viewController :UIViewController, mess :String, onCompletion :@escaping () -> Void) {
 		
 		DispatchQueue.main.async {
 			

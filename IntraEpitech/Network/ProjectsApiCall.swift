@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class ProjectsApiCall: APICalls {
 	
-	class func getCurrentProjects(_ onCompletion :@escaping (Bool, [Project]?, String) ->()) {
+	class func getCurrentProjects(_ onCompletion :@escaping (Bool, [Project]?, String) ->Void) {
 		
 		let url = super.getApiUrl() + "projects"
 		
@@ -42,8 +42,7 @@ class ProjectsApiCall: APICalls {
 		}
 	}
 	
-	
-	class func getProjectDetails(_ proj :Project, onCompletion :@escaping (Bool, ProjectDetail?, String) ->()) {
+	class func getProjectDetails(_ proj :Project, onCompletion :@escaping (Bool, ProjectDetail?, String) ->Void) {
 		
 		let url = super.getApiUrl() + "project"
 		
@@ -70,8 +69,7 @@ class ProjectsApiCall: APICalls {
 		}
 	}
 	
-	
-	class func getProjectFiles(_ proj :Project, onCompletion :@escaping (Bool, [File]?, String) ->()) {
+	class func getProjectFiles(_ proj :Project, onCompletion :@escaping (Bool, [File]?, String) ->Void) {
 		
 		let url = super.getApiUrl() + "project/files"
 		

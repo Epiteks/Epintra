@@ -31,7 +31,6 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-
 class OtherUserViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate, CNContactViewControllerDelegate {
 	
 	@IBOutlet weak var profileViewContainer: UIView!
@@ -160,7 +159,6 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 		profileImageView.toCircle()
 	}
 	
-	
 	/*
 	// MARK: - Navigation
 	
@@ -273,14 +271,14 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 	@IBAction func actionButtonClicked(_ sender: AnyObject) {
 		let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 		
-		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
 			
 		}
 		alertController.addAction(cancelAction)
 		
 		if (currentUser?.phone != nil && currentUser?.phone?.characters.count > 0) {
 			
-			let callAction = UIAlertAction(title: NSLocalizedString("Call", comment: "") + " " + (currentUser?.phone!)!, style: .default) { (action) in
+			let callAction = UIAlertAction(title: NSLocalizedString("Call", comment: "") + " " + (currentUser?.phone!)!, style: .default) { (_) in
 				
 				let nbr = self.currentUser?.phone!.replacingOccurrences(of: " ", with: "")
 				
@@ -290,7 +288,7 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 			alertController.addAction(callAction)
 		}
 		
-		let emailAction = UIAlertAction(title: NSLocalizedString("Email", comment: ""), style: .default) { (action) in
+		let emailAction = UIAlertAction(title: NSLocalizedString("Email", comment: ""), style: .default) { (_) in
 			
 			if (MFMailComposeViewController.canSendMail()) {
 				let mailComposerVC = MFMailComposeViewController()

@@ -102,7 +102,6 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 		}
 	}
 	
-	
 	/*
 	// MARK: - Navigation
 	

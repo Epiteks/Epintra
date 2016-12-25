@@ -27,7 +27,6 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-
 class RankingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchControllerDelegate, UISearchResultsUpdating {
 	
 	@IBOutlet weak var promoSelection: UISegmentedControl!
@@ -45,7 +44,6 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 	var refreshControl = UIRefreshControl()
 	
 	var selectedUser :User?
-	
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -65,7 +63,6 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 		downloadingLabel.text = NSLocalizedString("DownloadingAllUsers", comment :"")
 		
 		students = db.getStudentDataFor(Promo: teks[promoSelection.selectedSegmentIndex]) as AnyObject as! [StudentInfo]
-		
 		
 		resultSearchController = UISearchController(searchResultsController: nil)
 		resultSearchController.searchResultsUpdater = self
@@ -102,12 +99,11 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 		// Dispose of any resources that can be recreated.
 	}
 	
-	
 	func showConfirmationAlert() {
 		
 		let alertController = UIAlertController(title: NSLocalizedString("DataDownload", comment: ""), message: NSLocalizedString("SureWantsDownloadData", comment: ""), preferredStyle: .alert)
 		
-		let cancelAction = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .cancel) { (action:UIAlertAction!) in
+		let cancelAction = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .cancel) { (_) in
 			self.refreshControl.endRefreshing()
 			self.downloadingView.isHidden = true
 			self.tableView.isScrollEnabled = true
@@ -119,12 +115,12 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 		}
 		alertController.addAction(cancelAction)
 		
-		let OKAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { (action:UIAlertAction!) in
+		let OKAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { (_) in
 			self.refreshControl.endRefreshing()
 			let db = DBManager.getInstance()
 			self.downloadingView.isHidden = false
 			MJProgressView.instance.showProgress(self.view, white: true)
-			UserApiCalls.getAllUsers() { (isOk :Bool, res :[StudentInfo]?, mess :String) in
+			UserApiCalls.getAllUsers() { (_, _, _) in
 				self.students = db.getStudentDataFor(Promo: self.teks[self.promoSelection.selectedSegmentIndex]) as AnyObject as! [StudentInfo]
 				MJProgressView.instance.hideProgress()
 				self.navigationItem.titleView = self.resultSearchController.searchBar
@@ -164,7 +160,6 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 		//        }
 		
 	}
-	
 	
 	@IBAction func segmentedChanged(_ sender: UISegmentedControl) {
 		

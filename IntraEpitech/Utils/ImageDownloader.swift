@@ -10,7 +10,7 @@ import UIKit
 
 class ImageDownloader: NSObject {
 	
-	class func downloadFrom(link:String, onCompletion :@escaping (Result<Any?>) -> () ) {
+	class func downloadFrom(link:String, onCompletion :@escaping (Result<Any?>) -> Void ) {
 		
 		if (ApplicationManager.sharedInstance.canDownload == false) {
 			onCompletion(Result.failure(type: AppError.unauthorizedByUser, message: ""))
@@ -22,9 +22,9 @@ class ImageDownloader: NSObject {
 			else {return}
 		URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) -> Void in
 			guard
-				let httpURLResponse = response as? HTTPURLResponse , httpURLResponse.statusCode == 200,
-				let mimeType = response?.mimeType , mimeType.hasPrefix("image"),
-				let data = data , error == nil,
+				let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+				let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+				let data = data, error == nil,
 				let image = UIImage(data: data)
 				else {
 					onCompletion(Result.failure(type: AppError.apiError, message: ""))
@@ -37,7 +37,7 @@ class ImageDownloader: NSObject {
 		}).resume()
 	}
 	
-	class func downloadFromCallback(link:String, onCompletion :@escaping (String) -> () ) {
+	class func downloadFromCallback(link:String, onCompletion :@escaping (String) -> Void ) {
 		
 		if (ApplicationManager.sharedInstance.canDownload == false) {
 			onCompletion("")
@@ -49,9 +49,9 @@ class ImageDownloader: NSObject {
 			else {return}
 		URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) -> Void in
 			guard
-				let httpURLResponse = response as? HTTPURLResponse , httpURLResponse.statusCode == 200,
-				let mimeType = response?.mimeType , mimeType.hasPrefix("image"),
-				let data = data , error == nil,
+				let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+				let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+				let data = data, error == nil,
 				let image = UIImage(data: data)
 				else { return }
 			DispatchQueue.main.async { () -> Void in
@@ -60,7 +60,5 @@ class ImageDownloader: NSObject {
 			}
 		}).resume()
 	}
-	
-	
 	
 }

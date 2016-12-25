@@ -9,7 +9,6 @@
 import UIKit
 
 class SchoolDataViewController: UIViewController {
-
     
     /// Know if the view is currently fetching data
     var isFetching: Bool = false {
@@ -28,7 +27,6 @@ class SchoolDataViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation
@@ -39,7 +37,6 @@ class SchoolDataViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    
     
     /// Add LoadingView screen
     func addLoadingScreen() {
@@ -68,7 +65,6 @@ class SchoolDataViewController: UIViewController {
             }
         }
     }
-    
     
     /// Add ActivityIndicator on center of the view
     func addActivityIndicator() {

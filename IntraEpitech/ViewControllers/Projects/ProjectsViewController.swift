@@ -149,7 +149,6 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
 					self.canPress = true
 				}
 				
-				
 			}
 			self.canPress = true
 			MJProgressView.instance.hideProgress()

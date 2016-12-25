@@ -29,7 +29,6 @@ class StudentModulesViewController: SchoolDataViewController, UITableViewDataSou
         }
     }
     
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "moduleDetailsSegue" {
             if let vc = segue.destination as? StudentModuleDetailsViewController {
@@ -52,7 +51,6 @@ class StudentModulesViewController: SchoolDataViewController, UITableViewDataSou
                 self.modules = data
                 ApplicationManager.sharedInstance.user?.modules = data
                 self.modulesTableView.reloadData()
-                
                 
                 break
             case .failure(let error):
@@ -94,13 +92,10 @@ class StudentModulesViewController: SchoolDataViewController, UITableViewDataSou
             cell?.accessoryType = .disclosureIndicator
         }
         
-        
         return cell ?? UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
         
         if let selectedIndex = self.modulesTableView.indexPathForSelectedRow?.row, let module = self.modules?[selectedIndex] {
             module.getDetails() { _ in
@@ -109,6 +104,5 @@ class StudentModulesViewController: SchoolDataViewController, UITableViewDataSou
             }
         }
     }
-    
     
 }

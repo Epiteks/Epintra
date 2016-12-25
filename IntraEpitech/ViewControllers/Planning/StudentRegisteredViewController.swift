@@ -24,7 +24,6 @@ class StudentRegisteredViewController: UIViewController, UITableViewDelegate, UI
 		// Dispose of any resources that can be recreated.
 	}
 	
-	
 	/*
 	// MARK: - Navigation
 	

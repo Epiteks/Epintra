@@ -109,8 +109,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 			//productTest()
 		}
 		
-		
-		
 	}
 	
 	func disconnectAction() {
@@ -118,7 +116,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 		let confirmationMenu = UIAlertController(title: nil, message: NSLocalizedString("WantToDisconnect", comment: ""), preferredStyle: .actionSheet)
 		
 		let disconnect = UIAlertAction(title: NSLocalizedString("Disconnect", comment: ""), style: .destructive, handler: {
-			(alert: UIAlertAction!) -> Void in
+			(_) -> Void in
 			
 			UserPreferences.deleteData()
 			
@@ -128,7 +126,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 		})
 		
 		let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: {
-			(alert: UIAlertAction!) -> Void in
+			(_) -> Void in
 			print("Cancelled")
 		})
 		

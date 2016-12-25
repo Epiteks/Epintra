@@ -50,7 +50,6 @@ class ProjectMarksViewController: UIViewController, UITableViewDelegate, UITable
 		}
 	}
 	
-	
 	func numberOfSections(in tableView: UITableView) -> Int {
 		if (marks == nil || marks!.count == 0) {
 			tableView.separatorStyle = .none

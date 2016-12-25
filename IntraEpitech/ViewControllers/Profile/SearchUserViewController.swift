@@ -27,7 +27,6 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-
 class SearchUserViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchControllerDelegate, UISearchResultsUpdating {
 	
 	var users = [StudentInfo]()
@@ -47,7 +46,6 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		
 		// Do any additional setup after loading the view.
 		
 		resultSearchController = UISearchController(searchResultsController: nil)
@@ -57,7 +55,6 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 		resultSearchController.searchBar.searchBarStyle = UISearchBarStyle.prominent
 		resultSearchController.searchBar.sizeToFit()
 		//self.tableView.tableHeaderView = resultSearchController.searchBar
-		
 		
 		resultSearchController.searchBar.barTintColor = UIUtils.backgroundColor()
 		resultSearchController.searchBar.tintColor = UIColor.white
@@ -103,7 +100,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 		
 		let alertController = UIAlertController(title: NSLocalizedString("DataDownload", comment: ""), message: NSLocalizedString("SureWantsDownloadData", comment: ""), preferredStyle: .alert)
 		
-		let cancelAction = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .cancel) { (action:UIAlertAction!) in
+		let cancelAction = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .cancel) { (_) in
 			self.refreshControl.endRefreshing()
 			self.downloadingView.isHidden = true
 			self.tableView.isScrollEnabled = true
@@ -114,7 +111,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 		}
 		alertController.addAction(cancelAction)
 		
-		let OKAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { (action:UIAlertAction!) in
+		let OKAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { (_) in
 			self.refreshControl.endRefreshing()
 			let db = DBManager.getInstance()
 			self.downloadingView.isHidden = false
@@ -135,7 +132,6 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 		
 		self.present(alertController, animated: true, completion:nil)
 	}
-	
 	
 	func refreshData(_ sender:AnyObject) {
 		self.tableView.isUserInteractionEnabled = false

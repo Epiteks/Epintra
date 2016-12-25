@@ -12,7 +12,7 @@ import Alamofire
 
 class ModulesApiCalls: APICalls {
 	
-	class func getRegisteredModules(_ onCompletion :@escaping (Bool, [Module]?, String) ->()) {
+	class func getRegisteredModules(_ onCompletion :@escaping (Bool, [Module]?, String) ->Void) {
 		
 		let url = super.getApiUrl() + "modules"
 		
@@ -40,7 +40,7 @@ class ModulesApiCalls: APICalls {
 		}
 	}
 	
-	class func getRegisteredModulesFor(user login :String, onCompletion :@escaping (Bool, [Module]?, String) ->()) {
+	class func getRegisteredModulesFor(user login :String, onCompletion :@escaping (Bool, [Module]?, String) ->Void) {
 		
 		let url = super.getApiUrl() + "modules"
 		
@@ -68,8 +68,7 @@ class ModulesApiCalls: APICalls {
 		}
 	}
 	
-	
-	class func getModule(_ mod :Module, onCompletion :@escaping (Bool, Module?, String) ->()) {
+	class func getModule(_ mod :Module, onCompletion :@escaping (Bool, Module?, String) ->Void) {
 		
 		let url = super.getApiUrl() + "module"
 		
@@ -96,7 +95,7 @@ class ModulesApiCalls: APICalls {
 		}
 	}
 	
-	class func getRegistered(_ mod :Module, onCompletion :@escaping (Bool, [RegisteredStudent]?, String) ->()) {
+	class func getRegistered(_ mod :Module, onCompletion :@escaping (Bool, [RegisteredStudent]?, String) ->Void) {
 		
 		let url = super.getApiUrl() + "module/registered"
 		

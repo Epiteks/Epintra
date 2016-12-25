@@ -25,13 +25,11 @@ class ModuleActivityTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         
         activityType.backgroundColor = self.activityColor
     
         // Configure the view for the selected state
     }
-    
     
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         activityType.backgroundColor = self.activityColor
