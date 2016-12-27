@@ -10,32 +10,60 @@ import UIKit
 
 class WebViewViewController: UIViewController, UIWebViewDelegate {
 	
-	@IBOutlet weak var webView: UIWebView!
-	var file :File?
-	var fileName :String?
-	var pageTitle :String?
-	var isUrl :Bool?
+    var webView: UIWebView!
+	
+    var file: File?
+	var fileName: String?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		// Do any additional setup after loading the view.
-		
-		if (isUrl == true) {
-			loadURL()
-		} else {
-			loadLocal()
-		}
+		self.automaticallyAdjustsScrollViewInsets = false
+        self.edgesForExtendedLayout = .bottom
+    
+        self.view.backgroundColor = .white
+        
+        var webViewFrame = self.view.frame
+        
+        if let tabBarFrame = self.tabBarController?.tabBar.frame, let navBarFrame = self.navigationController?.navigationBar.frame {
+            let height = self.view.frame.height - (navBarFrame.height + navBarFrame.origin.y + tabBarFrame.height)
+            
+            webViewFrame = CGRect(x: self.view.frame.origin.x,
+                                  y: self.view.frame.origin.y,
+                                  width: self.view.frame.width,
+                                  height: height)
+        }
+        
+        self.webView = UIWebView(frame: webViewFrame)
+        
+        self.view.addSubview(webView)
+        
+        if self.file != nil {
+            loadURL()
+        } else {
+            loadLocal()
+        }
 	}
-	
+
 	func loadURL() {
-		self.pageTitle = file?.title!
-		let url : URL! = URL(string: (file?.url!)!)
-		webView.loadRequest(URLRequest(url: url))
+		self.title = file?.title!
+
+        if let urlString = file?.url {
+            
+            let url = URL(string: urlString)
+            var request = URLRequest(url: url!)
+            
+            let header = String(format: "PHPSESSID=%@", ApplicationManager.sharedInstance.token!)
+            
+            request.addValue(header, forHTTPHeaderField: "Cookie")
+            request.httpMethod = "GET"
+            
+            webView.loadRequest(request)
+        }
 	}
 	
 	func loadLocal() {
-		self.pageTitle = title!
 		let htmlFile = Bundle.main.path(forResource: fileName, ofType: "html")
 		do {
 			let htmlString = try NSString.init(contentsOfFile: htmlFile!, encoding: String.Encoding.utf8.rawValue)
@@ -43,20 +71,5 @@ class WebViewViewController: UIViewController, UIWebViewDelegate {
 		} catch {}
 		
 	}
-	
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
-	}
-	
-	/*
-	// MARK: - Navigation
-	
-	// In a storyboard-based application, you will often want to do a little preparation before navigation
-	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-	// Get the new view controller using segue.destinationViewController.
-	// Pass the selected object to the new view controller.
-	}
-	*/
 	
 }

@@ -17,7 +17,7 @@ class SelectSemestersViewController: UIViewController, UITableViewDelegate, UITa
 		
 		// Do any additional setup after loading the view.
 		
-		self.title = NSLocalizedString("Semesters", comment :"")
+		self.title = NSLocalizedString("Semesters", comment: "")
 		
 	}
 	
@@ -53,7 +53,7 @@ class SelectSemestersViewController: UIViewController, UITableViewDelegate, UITa
 			cell.accessoryType = .none
 		}
 		
-		cell.textLabel!.text = NSLocalizedString("Semester", comment :"") + " " + String((indexPath as NSIndexPath).row)
+		cell.textLabel!.text = NSLocalizedString("Semester", comment: "") + " " + String((indexPath as NSIndexPath).row)
 		
 		return cell
 	}
@@ -65,7 +65,7 @@ class SelectSemestersViewController: UIViewController, UITableViewDelegate, UITa
 		let cell = tableView.cellForRow(at: indexPath)
 		_semesters[(indexPath as NSIndexPath).row] = !_semesters[(indexPath as NSIndexPath).row]
 		ApplicationManager.sharedInstance.planningSemesters = _semesters
-		cell?.accessoryType = (cell?.accessoryType == .checkmark ? .none : .checkmark)
+		cell?.accessoryType = (cell?.accessoryType == .checkmark ? .none:  .checkmark)
 		UserPreferences.saveSemesters(_semesters)
 		tableView.endUpdates()
 	}

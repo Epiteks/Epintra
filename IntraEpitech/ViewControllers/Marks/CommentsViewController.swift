@@ -10,7 +10,7 @@ import UIKit
 
 class CommentsViewController: UIViewController {
 	
-	var mark :Mark?
+	var mark: Mark?
 	@IBOutlet weak var textView: UITextView!
 	
 	override func viewDidLoad() {

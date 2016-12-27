@@ -7,7 +7,7 @@
 ////
 //
 //import UIKit
-//fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+//fileprivate func < <T:  Comparable>(lhs: T?, rhs: T?) -> Bool {
 //  switch (lhs, rhs) {
 //  case let (l?, r?):
 //    return l < r
@@ -18,7 +18,7 @@
 //  }
 //}
 //
-//fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+//fileprivate func > <T:  Comparable>(lhs: T?, rhs: T?) -> Bool {
 //  switch (lhs, rhs) {
 //  case let (l?, r?):
 //    return l > r
@@ -30,24 +30,24 @@
 //
 //class ModuleDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 //	
-//	var module :Module?
+//	var module: Module?
 //	
 //	@IBOutlet weak var remainingTime: UILabel!
 //	@IBOutlet weak var progressBar: UIProgressView!
 //	@IBOutlet weak var tableView: UITableView!
 //	@IBOutlet weak var studentsBarButton: UIBarButtonItem!
 //	
-//	var selectedProj :ProjectDetail?
-//	var marksData : [Mark]?
-//	var studentsData :[RegisteredStudent]?
+//	var selectedProj: ProjectDetail?
+//	var marksData:  [Mark]?
+//	var studentsData: [RegisteredStudent]?
 //	
 //	let typeColors = [
-//		"proj" : UIUtils.planningBlueColor(),
-//		"rdv" : UIUtils.planningOrangeColor(),
-//		"tp" : UIUtils.planningPurpleColor(),
-//		"other" : UIUtils.planningBlueColor(),
-//		"exam" : UIUtils.planningRedColor(),
-//		"class" : UIUtils.planningGreenColor()
+//		"proj":  UIUtils.planningBlueColor(),
+//		"rdv":  UIUtils.planningOrangeColor(),
+//		"tp":  UIUtils.planningPurpleColor(),
+//		"other":  UIUtils.planningBlueColor(),
+//		"exam":  UIUtils.planningRedColor(),
+//		"class":  UIUtils.planningGreenColor()
 //	]
 //	
 //	override func viewDidLoad() {
@@ -197,13 +197,13 @@
 //	}
 //	
 //	
-//	func projectStart(_ proj :Project?) {
-//		ProjectsApiCall.getProjectDetails(proj!) { (isOk :Bool, proj :ProjectDetail?, mess :String) in
+//	func projectStart(_ proj: Project?) {
+//		ProjectsApiCall.getProjectDetails(proj!) { (isOk: Bool, proj: ProjectDetail?, mess: String) in
 //			
 //			if (!isOk) {
 //				ErrorViewer.errorPresent(self, mess: mess) {}
 //			} else {
-//				ProjectsApiCall.getProjectFiles(proj!) { (isOk :Bool, files :[File]?, mess :String) in
+//				ProjectsApiCall.getProjectFiles(proj!) { (isOk: Bool, files: [File]?, mess: String) in
 //					
 //					if (!isOk) {
 //						ErrorViewer.errorPresent(self, mess: mess) {}
@@ -220,8 +220,8 @@
 //		}
 //	}
 //	
-//	func appointmentStart(_ proj :Project?) {
-//		MarksApiCalls.getProjectMarksForProject(proj!) { (isOk :Bool, resp :[Mark]?, mess :String) in
+//	func appointmentStart(_ proj: Project?) {
+//		MarksApiCalls.getProjectMarksForProject(proj!) { (isOk: Bool, resp: [Mark]?, mess: String) in
 //			
 //			if (!isOk) {
 //				ErrorViewer.errorPresent(self, mess: mess) {}
@@ -234,11 +234,11 @@
 //		}
 //	}
 //	
-//	@IBAction func registeredButtonClicked(_ sender :AnyObject) {
+//	@IBAction func registeredButtonClicked(_ sender: AnyObject) {
 //		
 //		MJProgressView.instance.showProgress(self.view, white: false)
 //		studentsBarButton.isEnabled = false
-//		ModulesApiCalls.getRegistered(self.module!) { (isOk :Bool, resp :[RegisteredStudent]?, mess :String) in
+//		ModulesApiCalls.getRegistered(self.module!) { (isOk: Bool, resp: [RegisteredStudent]?, mess: String) in
 //			self.studentsBarButton.isEnabled = true
 //			if (!isOk) {
 //				ErrorViewer.errorPresent(self, mess: mess) {}

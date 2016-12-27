@@ -133,10 +133,10 @@
  ** Modules
  */
 
-"AvailableCredits" = "Credits : ";
-"InscriptionEnd" = "End of registration : ";
-"ModuleEnd" = "End of module : ";
-"ModuleEndedSince" = "Module ended since : ";
+"AvailableCredits" = "Credits:  ";
+"InscriptionEnd" = "End of registration:  ";
+"ModuleEnd" = "End of module:  ";
+"ModuleEndedSince" = "Module ended since:  ";
 "Grades" = "Grades";
 
 /**

@@ -8,11 +8,11 @@
 
 import UIKit
 
-private var _imageAtIndexPath :IndexPath?
+private var _imageAtIndexPath: IndexPath?
 
 extension UIImageView {
 	
-	public var imageAtIndexPath : IndexPath {
+	public var imageAtIndexPath:  IndexPath {
 		
 		get {
 			return _imageAtIndexPath!
@@ -44,7 +44,7 @@ extension UIImageView {
 		}).resume()
 	}
 	
-	func downloadFrom(link:String, contentMode mode: UIViewContentMode, onCompletion :@escaping (UIImage) -> Void) {
+	func downloadFrom(link:String, contentMode mode: UIViewContentMode, onCompletion: @escaping (UIImage) -> Void) {
 		guard
 			let url = URL(string: link)
 			else {return}

@@ -11,14 +11,14 @@ import SwiftyJSON
 
 class StudentInfo: NSObject {
 	
-	var login :String?
-	var city :String?
-	var gpa :Float?
-	var promo :String?
+	var login: String?
+	var city: String?
+	var gpa: Float?
+	var promo: String?
 	
-	var position :Int?
+	var position: Int?
 	
-	init(dict :JSON, promo :String) {
+	init(dict: JSON, promo: String) {
 		
 		login = dict["login"].stringValue
 		city = dict["ville"].stringValue

@@ -37,7 +37,7 @@ class CalendarManager: NSObject {
 	//		}
 	//	}
 	
-	func hasRights(_ onCompletion :@escaping (Bool, String?)->Void) {
+	func hasRights(_ onCompletion: @escaping (Bool, String?)->Void) {
 		
 		let eventStore = EKEventStore()
 		var res = false
@@ -54,7 +54,7 @@ class CalendarManager: NSObject {
 			onCompletion(res, mess)
 			break
 		case .notDetermined:
-			eventStore.requestAccess(to: EKEntityType.event) { (granted :Bool, _) in
+			eventStore.requestAccess(to: EKEntityType.event) { (granted: Bool, _) in
 				if (granted) {
 					res = true
 				} else {
@@ -70,7 +70,7 @@ class CalendarManager: NSObject {
 		
 	}
 	
-	func createEvent(_ planning :Planning, onCompletion : @escaping (Bool, String) -> Void) {
+	func createEvent(_ planning: Planning, onCompletion:  @escaping (Bool, String) -> Void) {
 		// 1
 		let eventStore = EKEventStore()
 		
@@ -85,7 +85,7 @@ class CalendarManager: NSObject {
 		// 2
 		switch (EKEventStore.authorizationStatus(for: EKEntityType.event)) {
 		case .authorized:
-			insertEvent(eventStore, planning: planning) { (isOk :Bool) in
+			insertEvent(eventStore, planning: planning) { (isOk: Bool) in
 				onCompletion(isOk, "SomethingDidntWorkedCorrectly")
 			}
 			break
@@ -94,9 +94,9 @@ class CalendarManager: NSObject {
 			onCompletion(false, "CalendarAccessDenied")
 			break
 		case .notDetermined:
-			eventStore.requestAccess(to: EKEntityType.event) { (granted :Bool, _) in
+			eventStore.requestAccess(to: EKEntityType.event) { (granted: Bool, _) in
 				if (granted) {
-					self.insertEvent(eventStore, planning: planning) { (isOk :Bool) in
+					self.insertEvent(eventStore, planning: planning) { (isOk: Bool) in
 						onCompletion(isOk, "SomethingDidntWorkedCorrectly")
 					}
 				} else {
@@ -110,7 +110,7 @@ class CalendarManager: NSObject {
 		}
 	}
 	
-	func insertEvent(_ store: EKEventStore, planning :Planning, onCompletion :(Bool) -> Void) {
+	func insertEvent(_ store: EKEventStore, planning: Planning, onCompletion: (Bool) -> Void) {
 		// 1
 		let calendars = store.calendars(for: EKEntityType.event)
 		

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+fileprivate func < <T:  Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l < r
@@ -18,7 +18,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+fileprivate func > <T:  Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l > r
@@ -32,14 +32,14 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 	var users = [StudentInfo]()
 	var filteredData = [StudentInfo]()
 	
-	var selectedUser :User?
+	var selectedUser: User?
 	
 	var resultSearchController:UISearchController!
 	
 	@IBOutlet weak var tableView: UITableView!
 	
-	@IBOutlet weak var downloadingView :UIView!
-	@IBOutlet weak var downloadingLabel :UILabel!
+	@IBOutlet weak var downloadingView: UIView!
+	@IBOutlet weak var downloadingLabel: UILabel!
 	
 	var refreshControl = UIRefreshControl()
 	
@@ -65,14 +65,14 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 		// self.clearsSelectionOnViewWillAppear = false
 		
 		let dbManager = DBManager.getInstance()
-		downloadingLabel.text = NSLocalizedString("DownloadingAllUsers", comment :"")
+		downloadingLabel.text = NSLocalizedString("DownloadingAllUsers", comment: "")
 		users = dbManager.getAllStudentData() as AnyObject as! [StudentInfo]
 		
 		if (users.count == 0) {
 			showConfirmationAlert()
 			//			self.downloadingView.hidden = false
 			//			MJProgressView.instance.showProgress(self.view, white: true)
-			//			UserApiCalls.getAllUsers() { (isOk :Bool, res :[StudentInfo]?, mess :String) in
+			//			UserApiCalls.getAllUsers() { (isOk: Bool, res: [StudentInfo]?, mess: String) in
 			//				
 			//				self.users = dbManager.getAllStudentData() as AnyObject as! [StudentInfo]
 			//				MJProgressView.instance.hideProgress()
@@ -117,7 +117,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 			self.downloadingView.isHidden = false
 			MJProgressView.instance.showProgress(self.view, white: true)
 			/*
-			UserApiCalls.getAllUsers() { (isOk :Bool, res :[StudentInfo]?, mess :String) in
+			UserApiCalls.getAllUsers() { (isOk: Bool, res: [StudentInfo]?, mess: String) in
 				self.users = db.getAllStudentData() as AnyObject as! [StudentInfo]
 				self.refreshControl.endRefreshing()
 				MJProgressView.instance.hideProgress()
@@ -138,7 +138,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 		self.tableView.isScrollEnabled = false
 		showConfirmationAlert()
 		//		let db = DBManager.getInstance()
-		//		UserApiCalls.getAllUsers() { (isOk :Bool, res :[StudentInfo]?, mess :String) in
+		//		UserApiCalls.getAllUsers() { (isOk: Bool, res: [StudentInfo]?, mess: String) in
 		//			self.users = db.getAllStudentData() as AnyObject as! [StudentInfo]
 		//			self.refreshControl.endRefreshing()
 		//			self.navigationItem.titleView = self.resultSearchController.searchBar
@@ -222,12 +222,12 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
 		self.view.endEditing(true)
-		let usr = (self.resultSearchController.isActive == true ? filteredData[(indexPath as NSIndexPath).row] : users[(indexPath as NSIndexPath).row])
+		let usr = (self.resultSearchController.isActive == true ? filteredData[(indexPath as NSIndexPath).row]:  users[(indexPath as NSIndexPath).row])
 		
 		tableView.isUserInteractionEnabled = false
 		tableView.isScrollEnabled = false
 		MJProgressView.instance.showProgress(self.view, white: false)
-		/*UserApiCalls.getSelectedUserData(usr.login!) { (isOk :Bool, resp :User?, mess :String) in
+		/*UserApiCalls.getSelectedUserData(usr.login!) { (isOk: Bool, resp: User?, mess: String) in
 			
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
@@ -240,7 +240,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 				MJProgressView.instance.hideProgress()
 				self.performSegue(withIdentifier: "otherUserProfileSegue", sender: self)
 				
-				//				MarksApiCalls.getMarksFor(user: self.selectedUser!.login!) { (isOk :Bool, resp :[Mark]?, mess :String) in
+				//				MarksApiCalls.getMarksFor(user: self.selectedUser!.login!) { (isOk: Bool, resp: [Mark]?, mess: String) in
 				//					
 				//					if (!isOk) {
 				//						ErrorViewer.errorPresent(self, mess: mess) {}
@@ -251,7 +251,7 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 				//					else {
 				//						self.selectedUser?.marks = resp
 				//						
-				//						ModulesApiCalls.getRegisteredModulesFor(user: self.selectedUser!.login!) { (isOk :Bool, resp :[Module]?, mess :String) in
+				//						ModulesApiCalls.getRegisteredModulesFor(user: self.selectedUser!.login!) { (isOk: Bool, resp: [Module]?, mess: String) in
 				//							if (!isOk) {
 				//								ErrorViewer.errorPresent(self, mess: mess) {}
 				//								MJProgressView.instance.hideProgress()

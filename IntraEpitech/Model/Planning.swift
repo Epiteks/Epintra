@@ -11,30 +11,30 @@ import SwiftyJSON
 
 class Planning: NSObject {
 	
-	var titleModule :String?
-	var startTime :String?
-	var endTime :String?
-	var totalStudentsRegistered :Int?
-	var allowRegister :Bool?
-	var allowToken :Bool?
-	var eventRegisteredStatus :String?
-	var eventType :String?
-	var typeTitle :String?
-	var actiTitle :String?
-	var scolaryear :Int?
-	var codeModule :String?
-	var codeActi :String?
-	var codeEvent :String?
-	var codeInstance :String?
-	var room :Room?
-	var moduleRegistered :Bool?
-	var isRdv :Int?
-	var rdvGroupRegistered :String?
-	var rdvIndividuelRegistered :String?
-	var past :Bool?
-	var semester :Int?
+	var titleModule: String?
+	var startTime: String?
+	var endTime: String?
+	var totalStudentsRegistered: Int?
+	var allowRegister: Bool?
+	var allowToken: Bool?
+	var eventRegisteredStatus: String?
+	var eventType: String?
+	var typeTitle: String?
+	var actiTitle: String?
+	var scolaryear: Int?
+	var codeModule: String?
+	var codeActi: String?
+	var codeEvent: String?
+	var codeInstance: String?
+	var room: Room?
+	var moduleRegistered: Bool?
+	var isRdv: Int?
+	var rdvGroupRegistered: String?
+	var rdvIndividuelRegistered: String?
+	var past: Bool?
+	var semester: Int?
 	
-	init(dict :JSON) {
+	init(dict: JSON) {
 		titleModule = dict["titlemodule"].stringValue
 		startTime = dict["start"].stringValue
 		endTime = dict["end"].stringValue
@@ -119,7 +119,7 @@ class Planning: NSObject {
 		return false
 	}
 	
-	func getEventTime() -> (start :String, end :String) {
+	func getEventTime() -> (start: String, end: String) {
 		
 		startTime?.toDate().toEventHour()
 		
@@ -134,7 +134,7 @@ class Planning: NSObject {
 		}
 	}
 	
-	init(appointment :AppointmentEvent) {
+	init(appointment: AppointmentEvent) {
 		scolaryear = Int(appointment.scolaryear!)
 		codeModule = appointment.codeModule!
 		codeActi = appointment.codeActi!

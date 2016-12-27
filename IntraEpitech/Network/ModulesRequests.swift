@@ -24,14 +24,14 @@ class ModulesRequests: RequestManager {
                 completion(Result.success(modules))
             case .failure(let err):
                 completion(Result.failure(type: err.type, message: err.message))
-                log.error("Fetching modules : \(err)")
+                log.error("Fetching modules:  \(err)")
             }
         }
     }
     
     func details(forModule module: Module, completion: @escaping (Result<Any?>) -> Void) {
         
-        let params = String(format: "?year=%@&module=%@&instance=%@", module.scolaryear!, module.codemodule!, module.codeinstance!)
+        let params = String(format: "?year=%@&module=%@&instance=%@", module.scolaryear!, module.codeModule!, module.codeInstance!)
         
         super.call("moduleDetails", urlParams: params) { (response) in
             switch response {
@@ -41,14 +41,14 @@ class ModulesRequests: RequestManager {
                 break
             case .failure(let err):
                 completion(Result.failure(type: err.type, message: err.message))
-                log.error("Fetching modules : \(err)")
+                log.error("Fetching modules:  \(err)")
             }
         }
     }
     
-    func registeredStudents(for module :Module, completion: @escaping (Result<[RegisteredStudent]>) -> Void) {
+    func registeredStudents(for module: Module, completion: @escaping (Result<[RegisteredStudent]>) -> Void) {
         
-        let params = String(format: "?year=%@&module=%@&instance=%@", module.scolaryear!, module.codemodule!, module.codeinstance!)
+        let params = String(format: "?year=%@&module=%@&instance=%@", module.scolaryear!, module.codeModule!, module.codeInstance!)
         
         super.call("moduleUsersRegistered", urlParams: params) { (response) in
             switch response {
@@ -56,14 +56,14 @@ class ModulesRequests: RequestManager {
                 if let studentsJSONArray = responseJSON.array {
                     var students = [RegisteredStudent]()
                     for tmp in studentsJSONArray {
-                        students.append(RegisteredStudent(dict :tmp))
+                        students.append(RegisteredStudent(dict: tmp))
                     }
                     completion(Result.success(students))
                 }
                 break
             case .failure(let err):
                 completion(Result.failure(type: err.type, message: err.message))
-                log.error("Fetching modules : \(err)")
+                log.error("Fetching modules:  \(err)")
             }
         }
     }

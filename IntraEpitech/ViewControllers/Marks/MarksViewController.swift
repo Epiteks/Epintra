@@ -8,15 +8,15 @@
 
 import UIKit
 
-class MarksViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MarkssViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 	
 	@IBOutlet weak var menuButton: UIBarButtonItem!
 	
 	@IBOutlet weak var tableView: UITableView!
 	var marks = [Mark]()
 	
-	var marksData : [Mark]?
-	var selectedMark :Mark?
+	var marksData:  [Mark]?
+	var selectedMark: Mark?
 	
 	var refreshControl = UIRefreshControl()
 	
@@ -29,7 +29,7 @@ class MarksViewController: UIViewController, UITableViewDataSource, UITableViewD
 			marks = ApplicationManager.sharedInstance.marks!
 		} else {
 			MJProgressView.instance.showProgress(self.view, white: false)
-			MarksApiCalls.getMarks() { (isOk :Bool, resp :[Mark]?, mess :String) in
+			MarksApiCalls.getMarks() { (isOk: Bool, resp: [Mark]?, mess: String) in
 				
 				if (!isOk) {
 					ErrorViewer.errorPresent(self, mess: mess) {}
@@ -43,7 +43,7 @@ class MarksViewController: UIViewController, UITableViewDataSource, UITableViewD
 		}
 		
 		self.refreshControl.tintColor = UIUtils.backgroundColor()
-		self.refreshControl.addTarget(self, action: #selector(MarksViewController.refreshData(_:)), for: .valueChanged)
+		self.refreshControl.addTarget(self, action: #selector(MarkssViewController.refreshData(_:)), for: .valueChanged)
 		self.tableView.addSubview(self.refreshControl)
 		// Do any additional setup after loading the view.
 	}
@@ -53,8 +53,8 @@ class MarksViewController: UIViewController, UITableViewDataSource, UITableViewD
 		// Dispose of any resources that can be recreated.
 	}
 	
-	func refreshData(_ sender :AnyObject) {
-		MarksApiCalls.getMarks() { (isOk :Bool, resp :[Mark]?, mess :String) in
+	func refreshData(_ sender: AnyObject) {
+		MarksApiCalls.getMarks() { (isOk: Bool, resp: [Mark]?, mess: String) in
 			
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
@@ -118,7 +118,7 @@ class MarksViewController: UIViewController, UITableViewDataSource, UITableViewD
 		tableView.isScrollEnabled = false
 		
 		MJProgressView.instance.showProgress(self.view, white: false)
-		MarksApiCalls.getProjectMarks(marks[(indexPath as NSIndexPath).row]) { (isOk :Bool, resp :[Mark]?, mess :String) in
+		MarksApiCalls.getProjectMarks(marks[(indexPath as NSIndexPath).row]) { (isOk: Bool, resp: [Mark]?, mess: String) in
 			tableView.isUserInteractionEnabled = true
 			tableView.isScrollEnabled = true
 			MJProgressView.instance.hideProgress()

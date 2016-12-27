@@ -11,7 +11,7 @@ import MessageUI
 import AddressBookUI
 import Contacts
 import ContactsUI
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+fileprivate func < <T:  Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l < r
@@ -22,7 +22,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+fileprivate func > <T:  Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l > r
@@ -35,21 +35,21 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 	
 	@IBOutlet weak var profileViewContainer: UIView!
 	
-	var profileImageView :UIImageView!
-	var creditsTitleLabel :UILabel!
-	var creditsLabel :UILabel!
-	var spicesLabel :UILabel!
-	var logLabel :UILabel!
-	var gpaTitleLabel :UILabel!
-	var gpaLabel :UILabel!
-	var	gpaTypeLabel :UILabel!
-	var currentUser :User?
+	var profileImageView: UIImageView!
+	var creditsTitleLabel: UILabel!
+	var creditsLabel: UILabel!
+	var spicesLabel: UILabel!
+	var logLabel: UILabel!
+	var gpaTitleLabel: UILabel!
+	var gpaLabel: UILabel!
+	var	gpaTypeLabel: UILabel!
+	var currentUser: User?
 	
-	var isModuleDownloading :Bool?
-	var isMarksDownloading :Bool?
-	var isFlagsDownloading :Bool?
+	var isModuleDownloading: Bool?
+	var isMarksDownloading: Bool?
+	var isFlagsDownloading: Bool?
 	
-	var flags :[Flags]?
+	var flags: [Flags]?
 	
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var segmentedControl: UISegmentedControl!
@@ -71,7 +71,7 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 	
 	override func viewWillAppear(_ animated: Bool) {
 		isMarksDownloading = true
-		MarksApiCalls.getMarksFor(user: self.currentUser!.login!) { (isOk :Bool, resp :[Mark]?, mess :String) in
+		MarksApiCalls.getMarksFor(user: self.currentUser!.login!) { (isOk: Bool, resp: [Mark]?, mess: String) in
 			self.isMarksDownloading = false
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
@@ -85,7 +85,7 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 			}
 		}
 		self.isModuleDownloading = true
-		ModulesApiCalls.getRegisteredModulesFor(user: self.currentUser!.login!) { (isOk :Bool, resp :[Module]?, mess :String) in
+		ModulesApiCalls.getRegisteredModulesFor(user: self.currentUser!.login!) { (isOk: Bool, resp: [Module]?, mess: String) in
 			self.isModuleDownloading = false
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
@@ -99,7 +99,7 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 			}
 		}
 		self.isFlagsDownloading = true
-		/*UserApiCalls.getUserFlags(self.currentUser!.login!) { (isOk :Bool, resp :[Flags]?, mess :String) in
+		/*UserApiCalls.getUserFlags(self.currentUser!.login!) { (isOk: Bool, resp: [Flags]?, mess: String) in
 			self.isFlagsDownloading = false
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
@@ -148,7 +148,7 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 		creditsTitleLabel.text = NSLocalizedString("credits", comment: "")
 		creditsLabel.text = String(currentUser!.credits!)
 		spicesLabel.text =  currentUser!.spices!.currentSpices + " " + NSLocalizedString("spices", comment: "")
-		logLabel.text = "Log : " + String(currentUser!.log!.timeActive)
+		logLabel.text = "Log:  " + String(currentUser!.log!.timeActive)
 		logLabel.textColor = currentUser?.log?.getColor()
 		
 		let gpa = currentUser?.getLatestGPA()
@@ -207,12 +207,12 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 			return (currentUser?.marks?.count)!
 		case 2:
 			let cnt = flags![section].modules.count
-			return (cnt == 0 ? 1 : cnt)
+			return (cnt == 0 ? 1:  cnt)
 		default:
 			return 0
 		}
 		
-		//		return (segmentedControl.selectedSegmentIndex == 0 ? currentUser?.modules!.count : currentUser?.marks!.count)!
+		//		return (segmentedControl.selectedSegmentIndex == 0 ? currentUser?.modules!.count:  currentUser?.marks!.count)!
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -318,13 +318,13 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 		var str = ""
 		
 		switch section {
-		case 0 : str = "Medals"
+		case 0:  str = "Medals"
 			break
-		case 1 : str = "Remarkables"
+		case 1:  str = "Remarkables"
 			break
-		case 2 : str = "Difficulty"
+		case 2:  str = "Difficulty"
 			break
-		case 3 : str = "Ghost"
+		case 3:  str = "Ghost"
 			break
 		default: str = ""
 			break

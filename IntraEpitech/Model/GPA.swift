@@ -10,10 +10,10 @@ import UIKit
 import SwiftyJSON
 
 class GPA: NSObject {
-	internal var value :String
-	internal var cycle :String
+	internal var value: String
+	internal var cycle: String
 	
-	init(dict :JSON) {
+	init(dict: JSON) {
 		value = dict["gpa"].stringValue
 		cycle = dict["cycle"].stringValue
 	}

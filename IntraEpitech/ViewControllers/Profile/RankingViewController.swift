@@ -7,7 +7,7 @@
 //
 
 import UIKit
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+fileprivate func < <T:  Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l < r
@@ -18,7 +18,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+fileprivate func > <T:  Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l > r
@@ -30,9 +30,9 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 class RankingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchControllerDelegate, UISearchResultsUpdating {
 	
 	@IBOutlet weak var promoSelection: UISegmentedControl!
-	@IBOutlet weak var tableView :UITableView!
-	@IBOutlet weak var downloadingView :UIView!
-	@IBOutlet weak var downloadingLabel :UILabel!
+	@IBOutlet weak var tableView: UITableView!
+	@IBOutlet weak var downloadingView: UIView!
+	@IBOutlet weak var downloadingLabel: UILabel!
 	
 	var students = [StudentInfo]()
 	var filteredData = [StudentInfo]()
@@ -43,7 +43,7 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 	
 	var refreshControl = UIRefreshControl()
 	
-	var selectedUser :User?
+	var selectedUser: User?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -60,7 +60,7 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 		promoSelection.setTitle(NSLocalizedString(teks[4], comment: ""), forSegmentAt: 4)
 		promoSelection.tintColor = UIUtils.backgroundColor()
 		
-		downloadingLabel.text = NSLocalizedString("DownloadingAllUsers", comment :"")
+		downloadingLabel.text = NSLocalizedString("DownloadingAllUsers", comment: "")
 		
 		students = db.getStudentDataFor(Promo: teks[promoSelection.selectedSegmentIndex]) as AnyObject as! [StudentInfo]
 		
@@ -78,7 +78,7 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 			showConfirmationAlert()
 			//            self.downloadingView.hidden = false
 			//            MJProgressView.instance.showProgress(self.view, white: true)
-			//            UserApiCalls.getAllUsers() { (isOk :Bool, res :[StudentInfo]?, mess :String) in
+			//            UserApiCalls.getAllUsers() { (isOk: Bool, res: [StudentInfo]?, mess: String) in
 			//                self.students = db.getStudentDataFor(Promo: self.teks[self.promoSelection.selectedSegmentIndex]) as AnyObject as! [StudentInfo]
 			//                MJProgressView.instance.hideProgress()
 			//                self.navigationItem.titleView = self.resultSearchController.searchBar
@@ -149,7 +149,7 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		showConfirmationAlert()
 		
-		//        UserApiCalls.getAllUsers() { (isOk :Bool, res :[StudentInfo]?, mess :String) in
+		//        UserApiCalls.getAllUsers() { (isOk: Bool, res: [StudentInfo]?, mess: String) in
 		//            self.students = db.getStudentDataFor(Promo: self.teks[self.promoSelection.selectedSegmentIndex]) as AnyObject as! [StudentInfo]
 		//            self.refreshControl.endRefreshing()
 		//            self.navigationItem.titleView = self.resultSearchController.searchBar
@@ -239,13 +239,13 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		tableView.deselectRow(at: indexPath, animated: true)
 		self.view.endEditing(true)
-		let usr = (self.resultSearchController.isActive == true ? filteredData[(indexPath as NSIndexPath).row] : students[(indexPath as NSIndexPath).row])
+		let usr = (self.resultSearchController.isActive == true ? filteredData[(indexPath as NSIndexPath).row]:  students[(indexPath as NSIndexPath).row])
 		
 		tableView.isUserInteractionEnabled = false
 		tableView.isScrollEnabled = false
 		self.promoSelection.isUserInteractionEnabled = false
 		MJProgressView.instance.showProgress(self.view, white: false)
-		UserApiCalls.getSelectedUserData(usr.login!) { (isOk :Bool, resp :User?, mess :String) in
+		UserApiCalls.getSelectedUserData(usr.login!) { (isOk: Bool, resp: User?, mess: String) in
 			
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}

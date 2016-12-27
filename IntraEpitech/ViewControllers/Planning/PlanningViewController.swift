@@ -24,12 +24,12 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 	var tableViewData = [(String, [Planning])]()
 	
 	let typeColors = [
-		"proj" : UIUtils.planningBlueColor(),
-		"rdv" : UIUtils.planningOrangeColor(),
-		"tp" : UIUtils.planningPurpleColor(),
-		"other" : UIUtils.planningBlueColor(),
-		"exam" : UIUtils.planningRedColor(),
-		"class" : UIUtils.planningBlueColor()
+		"proj":  UIUtils.planningBlueColor(),
+		"rdv":  UIUtils.planningOrangeColor(),
+		"tp":  UIUtils.planningPurpleColor(),
+		"other":  UIUtils.planningBlueColor(),
+		"exam":  UIUtils.planningRedColor(),
+		"class":  UIUtils.planningBlueColor()
 	]
 	
 	var refreshControl = UIRefreshControl()
@@ -62,7 +62,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		self.tableView.addSubview(refreshControl)
 		self.tableView.allowsMultipleSelectionDuringEditing = true
 		
-		selectSemestersButton.title = NSLocalizedString("Semesters", comment :"")
+		selectSemestersButton.title = NSLocalizedString("Semesters", comment: "")
 		
 		//let calendar = NSCalendar(calendarIdentifier: .gregorian)
 		
@@ -124,7 +124,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		}
 	}
 	
-	func loadData(_ first: String, end: String, onCompletion :@escaping () -> Void) {
+	func loadData(_ first: String, end: String, onCompletion: @escaping () -> Void) {
 		tableView.isUserInteractionEnabled = false
 		tableView.isScrollEnabled = false
 		calendar.isUserInteractionEnabled = false
@@ -288,7 +288,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		statusImageView.isUserInteractionEnabled = true
 		statusImageView.addGestureRecognizer(singleTap)
 		
-		setActionsOnCell(cell, indexPath :indexPath)
+		setActionsOnCell(cell, indexPath: indexPath)
 		cell.selectionStyle = .none
 		
 		return cell

@@ -11,12 +11,12 @@ import UIKit
 
 class SystemUtils: NSObject {
 	
-	func getDateUnderstandable(_ day :Int, month :Int) -> (s_day :String?, s_month :String?) {
+	func getDateUnderstandable(_ day: Int, month: Int) -> (s_day: String?, s_month: String?) {
 		
 		var s_day = String()
 		var s_month = String()
 		
-		let days : [String] = [
+		let days:  [String] = [
 			NSLocalizedString("Sunday", comment: ""),
 			NSLocalizedString("Monday", comment: ""),
 			NSLocalizedString("Tuesday", comment: ""),
@@ -26,7 +26,7 @@ class SystemUtils: NSObject {
 			NSLocalizedString("Saturday", comment: "")
 		]
 		
-		let monthes : [String] = [
+		let monthes:  [String] = [
 			NSLocalizedString("January", comment: ""),
 			NSLocalizedString("February", comment: ""),
 			NSLocalizedString("March", comment: ""),
@@ -54,9 +54,9 @@ class SystemUtils: NSObject {
 	
 	class func getAllMailData() -> String {
 		let currentDevice = UIDevice.current
-		var str = "Version : " + SystemUtils.getVersion()
-		str += "\n" + "Model : " + currentDevice.modelName
-		str += "\n" + "iOS : " + currentDevice.systemVersion
+		var str = "Version:  " + SystemUtils.getVersion()
+		str += "\n" + "Model:  " + currentDevice.modelName
+		str += "\n" + "iOS:  " + currentDevice.systemVersion
 		return str
 	}
 }

@@ -17,6 +17,8 @@ class SchoolDataViewController: UIViewController {
         }
     }
     
+    var willLoadNextView: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

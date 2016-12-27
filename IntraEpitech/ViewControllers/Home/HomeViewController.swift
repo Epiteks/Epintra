@@ -8,7 +8,7 @@
 
 import UIKit
 
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+fileprivate func < <T:  Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l < r
@@ -19,7 +19,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+fileprivate func <= <T:  Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l <= r
@@ -32,7 +32,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 	
 	@IBOutlet weak var alertTableView: UITableView!
 	
-	var currentUser :User?
+	var currentUser: User?
 	var tableFooterSave: UIView!
 	
 	override func viewDidLoad() {

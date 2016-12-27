@@ -10,7 +10,7 @@ import AVFoundation
 
 class UserPreferences: NSObject {
 	
-	class func saveData(_ login : String, password : String) {
+	class func saveData(_ login:  String, password:  String) {
 		
 		let def = UserDefaults.standard
 		
@@ -18,7 +18,7 @@ class UserPreferences: NSObject {
 		def.set(password, forKey: "password")
 	}
 	
-	class func saveWantToDownloadImage(_ wants : Bool) {
+	class func saveWantToDownloadImage(_ wants:  Bool) {
 		
 		let def = UserDefaults.standard
 		
@@ -43,7 +43,7 @@ class UserPreferences: NSObject {
 		return def.bool(forKey: "wantsDownloading")
 	}
 	
-	class func getData() -> (login :String, password :String) {
+	class func getData() -> (login: String, password: String) {
 		
 		let def = UserDefaults.standard
 		
@@ -74,7 +74,7 @@ class UserPreferences: NSObject {
 		def.removeObject(forKey: "password")
 	}
 	
-	class func savDefaultCalendar(_ name : String) {
+	class func savDefaultCalendar(_ name:  String) {
 		
 		let def = UserDefaults.standard
 		
@@ -108,7 +108,7 @@ class UserPreferences: NSObject {
 		return dict
 	}
 	
-	class func saveSemesters(_ data : [Bool]) {
+	class func saveSemesters(_ data:  [Bool]) {
 		
 		let def = UserDefaults.standard
 		

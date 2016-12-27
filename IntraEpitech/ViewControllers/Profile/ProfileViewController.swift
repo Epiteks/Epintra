@@ -8,7 +8,7 @@
 
 import UIKit
 
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+fileprivate func < <T:  Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l < r
@@ -19,7 +19,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+fileprivate func <= <T:  Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l <= r
@@ -32,11 +32,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 	
 	@IBOutlet weak var tableView: UITableView!
 	
-	var currentUser :User?
+	var currentUser: User?
 	
-	var files :[File]?
-	var flags :[Flags]?
-	var webViewData :File?
+	var files: [File]?
+	var flags: [Flags]?
+	var webViewData: File?
 	
 	var downloadingFiles: Bool = false
 	var downloadingFlags: Bool = false
@@ -303,9 +303,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if (segue.identifier == "webViewSegue") {
-			let vc :WebViewViewController = segue.destination as! WebViewViewController
+			let vc: WebViewViewController = segue.destination as! WebViewViewController
 			vc.file = webViewData!
-			vc.isUrl = true
+			//vc.isUrl = true
 		}
 	}
 }

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+fileprivate func < <T:  Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l < r
@@ -18,7 +18,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+fileprivate func <= <T:  Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l <= r
@@ -75,7 +75,7 @@ class ProfileView: UIView {
 	func setUserData(_ user: User) {
 		
 		self.spicesLabel.text =  user.spices!.currentSpices + " " + NSLocalizedString("spices", comment: "")
-		self.logLabel.text = "Log : " + String(user.log!.timeActive)
+		self.logLabel.text = "Log:  " + String(user.log!.timeActive)
 		self.logLabel.textColor = user.log?.getColor()
 		
 		if user.gpa?.count <= 1 {

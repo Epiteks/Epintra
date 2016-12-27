@@ -10,7 +10,7 @@ import UIKit
 
 class RegisteredStudentsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
-	var students :[RegisteredStudent]?
+	var students: [RegisteredStudent]?
 	
 	@IBOutlet weak var tableView: UITableView!
 	override func viewDidLoad() {
@@ -26,7 +26,7 @@ class RegisteredStudentsViewController: UIViewController, UITableViewDelegate, U
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
-		var index :IndexPath = IndexPath(row: 0, section: 0)
+		var index: IndexPath = IndexPath(row: 0, section: 0)
 		
 		var i = 0
 		

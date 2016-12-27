@@ -96,11 +96,16 @@ class StudentModulesViewController: SchoolDataViewController, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if let selectedIndex = self.modulesTableView.indexPathForSelectedRow?.row, let module = self.modules?[selectedIndex] {
-            module.getDetails() { _ in
-                self.performSegue(withIdentifier: "moduleDetailsSegue", sender: self)
-                tableView.deselectRow(at: indexPath, animated: true)
+        if self.willLoadNextView == false {
+            self.willLoadNextView = true
+            self.addActivityIndicator()
+            if let selectedIndex = self.modulesTableView.indexPathForSelectedRow?.row, let module = self.modules?[selectedIndex] {
+                module.getDetails { _ in
+                    self.performSegue(withIdentifier: "moduleDetailsSegue", sender: self)
+                    tableView.deselectRow(at: indexPath, animated: true)
+                    self.removeActivityIndicator()
+                    self.willLoadNextView = false
+                }
             }
         }
     }

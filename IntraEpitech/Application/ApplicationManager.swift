@@ -19,7 +19,7 @@ class ApplicationManager: NSObject {
 	internal var token: String?
 	internal var user: User?
 	internal var currentLogin: String?
-	internal var downloadedImages: [String : UIImage]?
+	internal var downloadedImages: [String:  UIImage]?
 	internal var canDownload: Bool?
 	internal var defaultCalendar: String?
 
@@ -35,7 +35,7 @@ class ApplicationManager: NSObject {
 
 	override init() {
 		super.init()
-		downloadedImages = [String : UIImage]()
+		downloadedImages = [String:  UIImage]()
 		canDownload = true
 		lastUserApiCall = 0
 		fillPlanningSemesters()
@@ -50,7 +50,7 @@ class ApplicationManager: NSObject {
 
 	func addImageToCache(_ url: String, image: UIImage) {
 		if downloadedImages == nil {
-			downloadedImages = [String : UIImage]()
+			downloadedImages = [String:  UIImage]()
 		}
 		downloadedImages![url] = image
 	}

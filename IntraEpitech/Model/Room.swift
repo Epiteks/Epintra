@@ -11,11 +11,11 @@ import SwiftyJSON
 
 class Room: NSObject {
 	
-	var type :String?
-	var code :String?
-	var seats :Int?
+	var type: String?
+	var code: String?
+	var seats: Int?
 	
-	init(dict :JSON) {
+	init(dict: JSON) {
 		type = dict["type"].stringValue
 		code = dict["code"].stringValue
 		seats = dict["seats"].intValue
@@ -29,7 +29,7 @@ class Room: NSObject {
 			return ""
 		}
 		
-		let res :String = arr![arr!.count - 1]
+		let res: String = arr![arr!.count - 1]
 		
 		return res.replacingOccurrences(of: "-", with: " ")	}
 }

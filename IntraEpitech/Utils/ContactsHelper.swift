@@ -13,7 +13,7 @@ class ContactsHelper: NSObject {
 	
 	let addressBookRef: ABAddressBook = ABAddressBookCreateWithOptions(nil, nil).takeRetainedValue()
 	
-	func authorize(_ onCompletion :@escaping (Bool) -> Void) {
+	func authorize(_ onCompletion: @escaping (Bool) -> Void) {
 		
 		let authorizationStatus = ABAddressBookGetAuthorizationStatus()
 		
@@ -26,14 +26,14 @@ class ContactsHelper: NSObject {
 			onCompletion(true)
 		case .notDetermined:
 			//3
-			promptForAddressBookRequestAccess() { (res :Bool) in
+			promptForAddressBookRequestAccess() { (res: Bool) in
 				onCompletion(res)
 			}
 			
 		}
 	}
 	
-	func promptForAddressBookRequestAccess(_ onCompletion :@escaping (Bool) -> Void) {
+	func promptForAddressBookRequestAccess(_ onCompletion: @escaping (Bool) -> Void) {
 		//let err: Unmanaged<CFError>? = nil
 		ABAddressBookRequestAccessWithCompletion(addressBookRef) {
 			(granted: Bool, _) in

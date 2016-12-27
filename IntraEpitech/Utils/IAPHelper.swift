@@ -20,7 +20,7 @@ import StoreKit
 //
 ///// A Helper class for In-App-Purchases, it can fetch products, tell you if a product has been purchased,
 ///// purchase products, and restore purchases.  Uses NSUserDefaults to cache if a product has been purchased.
-//public class IAPHelper : NSObject  {
+//public class IAPHelper:  NSObject  {
 //	
 //	/// MARK: - Private Properties
 //	

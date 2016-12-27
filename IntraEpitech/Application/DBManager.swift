@@ -13,7 +13,7 @@ class DBManager: NSObject {
 	
 	static let sharedInstance = DBManager()
 	
-	var database :FMDatabase? = nil
+	var database: FMDatabase? = nil
 	
 	class func getInstance() -> DBManager {
 		if sharedInstance.database == nil {
@@ -53,10 +53,10 @@ class DBManager: NSObject {
 	func getAllStudentData() -> NSMutableArray {
 		database!.open()
 		let resultSet: FMResultSet! = database!.executeQuery("SELECT * FROM student_info ORDER BY login", withArgumentsIn: nil)
-		let marrStudentInfo : NSMutableArray = NSMutableArray()
+		let marrStudentInfo:  NSMutableArray = NSMutableArray()
 		if (resultSet != nil) {
 			while resultSet.next() {
-				let studentInfo : StudentInfo = StudentInfo()
+				let studentInfo:  StudentInfo = StudentInfo()
 				studentInfo.login = resultSet.string(forColumn: "login")
 				studentInfo.city = resultSet.string(forColumn: "ville")
 				studentInfo.gpa = Float(resultSet.string(forColumn: "gpa"))
@@ -71,11 +71,11 @@ class DBManager: NSObject {
 	func getStudentDataFor(Promo promo:String) -> NSMutableArray {
 		database!.open()
 		let resultSet: FMResultSet! = database!.executeQuery("SELECT * FROM student_info WHERE promo=?", withArgumentsIn: [promo])
-		let marrStudentInfo : NSMutableArray = NSMutableArray()
+		let marrStudentInfo:  NSMutableArray = NSMutableArray()
 		var i = 1
 		if (resultSet != nil) {
 			while resultSet.next() {
-				let studentInfo : StudentInfo = StudentInfo()
+				let studentInfo:  StudentInfo = StudentInfo()
 				studentInfo.login = resultSet.string(forColumn: "login")
 				studentInfo.city = resultSet.string(forColumn: "ville")
 				studentInfo.gpa = Float(resultSet.string(forColumn: "gpa"))

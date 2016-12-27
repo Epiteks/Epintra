@@ -11,8 +11,8 @@ import UIKit
 class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
 	var calendars = [(title: String, color: CGColor)]()
-	var currentCalendar :String?
-	var currentCalendarIndex :Int?
+	var currentCalendar: String?
+	var currentCalendarIndex: Int?
 	
 	var isLoading: Bool?
 	
@@ -42,7 +42,7 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 	override func viewDidAppear(_ animated: Bool) {
 		let calman = CalendarManager()
 		
-		calman.hasRights() { (granted :Bool, _) in
+		calman.hasRights() { (granted: Bool, _) in
 			if (!granted) {
 				self.isLoading = false
 				self.hasRight = false
@@ -125,8 +125,8 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 		
 		tableView.beginUpdates()
 		
-		var prevCell :UITableViewCell?
-		var newCell :UITableViewCell?
+		var prevCell: UITableViewCell?
+		var newCell: UITableViewCell?
 		
 		if (currentCalendarIndex != nil) {
 			prevCell = tableView.cellForRow(at: IndexPath(row: currentCalendarIndex!, section: 0))

@@ -10,10 +10,10 @@ import SwiftyJSON
 
 class Netsoul: NSObject {
 	
-	var	timeActive :Int
-	var timeNormal :Int
+	var	timeActive: Int
+	var timeNormal: Int
 	
-	init(dict :JSON) {
+	init(dict: JSON) {
 		timeActive = dict["active"].intValue
 		timeNormal = dict["nslog_norm"].intValue
 	}

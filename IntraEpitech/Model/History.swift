@@ -10,13 +10,13 @@ import SwiftyJSON
 
 class History: NSObject {
 	
-	var title :String?
-	var userName :String?
-	var userPicture :String?
-	var content :String?
-	var date :Date?
+	var title: String?
+	var userName: String?
+	var userPicture: String?
+	var content: String?
+	var date: Date?
 	
-	init(dict :JSON) {
+	init(dict: JSON) {
 		
 		super.init()
 		

@@ -8,10 +8,10 @@
 
 import UIKit
 
-class ProjectMarksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ProjectMarkssViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
-	var marks :[Mark]?
-	var selectedMark :Mark?
+	var marks: [Mark]?
+	var selectedMark: Mark?
 	
 	@IBOutlet weak var tableView: UITableView!
 	
@@ -28,7 +28,7 @@ class ProjectMarksViewController: UIViewController, UITableViewDelegate, UITable
 	
 	override func viewDidAppear(_ animated: Bool) {
 		
-		var index :IndexPath = IndexPath(row: 0, section: 0)
+		var index: IndexPath = IndexPath(row: 0, section: 0)
 		
 		var i = 0
 		

@@ -25,7 +25,7 @@ class UserRequests: RequestManager {
 			case .success(let responseJSON):
 				
 				if let token = responseJSON["token"].string {
-					log.info("Token : \(token)")
+					log.info("Token:  \(token)")
 					ApplicationManager.sharedInstance.token = token
 					completion(Result.success(nil))
 				}
@@ -33,7 +33,7 @@ class UserRequests: RequestManager {
 				break
 			case .failure(let err):
 				completion(Result.failure(type: err.type, message: err.message))
-				log.error("Authentication : \(err)")
+				log.error("Authentication:  \(err)")
 				break
 			}
 		}
@@ -64,7 +64,7 @@ class UserRequests: RequestManager {
 				break
 			case .failure(let err):
 				completion(Result.failure(type: err.type, message: err.message))
-				log.error("GetCurrentUserData : \(err)")
+				log.error("GetCurrentUserData:  \(err)")
 				break
 			}
 		}
@@ -91,7 +91,7 @@ class UserRequests: RequestManager {
 				break
 			case .failure(let err):
 				completion(Result.failure(type: err.type, message: err.message))
-				log.error("GetUserData : \(err)")
+				log.error("GetUserData:  \(err)")
 				break
 			}
 		}
@@ -114,7 +114,7 @@ class UserRequests: RequestManager {
 				break
 			case .failure(let err):
 				completion(Result.failure(type: err.type, message: err.message))
-				log.error("GetHistory : \(err)")
+				log.error("GetHistory:  \(err)")
 				break
 			}
 		}
@@ -140,7 +140,7 @@ class UserRequests: RequestManager {
 				break
 			case .failure(let err):
 				completion(Result.failure(type: err.type, message: err.message))
-				log.error("GetUserFlags : \(err)")
+				log.error("GetUserFlags:  \(err)")
 				break
 			}
 		}
@@ -163,7 +163,7 @@ class UserRequests: RequestManager {
 				break
 			case .failure(let err):
 				completion(Result.failure(type: err.type, message: err.message))
-				log.error("GetUserDocuments : \(err)")
+				log.error("GetUserDocuments:  \(err)")
 				break
 			}
 		}

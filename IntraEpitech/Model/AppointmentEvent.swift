@@ -11,21 +11,21 @@ import SwiftyJSON
 
 class AppointmentEvent: NSObject {
 	
-	var scolaryear :String?
-	var codeModule :String?
-	var codeActi :String?
-	var codeInstance :String?
-	var registeredByBlock :Bool?
-	var slots :[Appointment]?
-	var groupId :String?
-	var registered :Bool?
-	var studentRegistered :String?
+	var scolaryear: String?
+	var codeModule: String?
+	var codeActi: String?
+	var codeInstance: String?
+	var registeredByBlock: Bool?
+	var slots: [Appointment]?
+	var groupId: String?
+	var registered: Bool?
+	var studentRegistered: String?
 	
-	var eventName :String?
-	var eventStart :Date?
-	var eventEnd :Date?
+	var eventName: String?
+	var eventStart: Date?
+	var eventEnd: Date?
 	
-	init(dict :JSON) {
+	init(dict: JSON) {
 		super.init()
 		scolaryear = dict["scolaryear"].string
 		codeModule = dict["codemodule"].stringValue
@@ -49,7 +49,7 @@ class AppointmentEvent: NSObject {
 		studentRegistered = dict["student_registered"].stringValue
 	}
 	
-	func addAppointments(_ dict :JSON) {
+	func addAppointments(_ dict: JSON) {
 		self.slots = [Appointment]()
 		
 		var slots = dict["slots"].arrayValue

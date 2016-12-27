@@ -164,7 +164,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 			let vc: WebViewViewController = segue.destination as! WebViewViewController
 			vc.fileName = "thirdParty"
 			vc.title = NSLocalizedString("ThirdParty", comment: "")
-			vc.isUrl = false
+			//vc.isUrl = false
 		}
 	}
 	

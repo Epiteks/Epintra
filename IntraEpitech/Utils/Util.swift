@@ -25,7 +25,7 @@ class Util: NSObject {
 			let documentsURL = Bundle.main.resourceURL
 			let fromPath = documentsURL!.appendingPathComponent(fileName as String)
 			
-			var error : NSError?
+			var error:  NSError?
 			do {
 				try fileManager.copyItem(atPath: fromPath.path, toPath: dbPath)
 			} catch let error1 as NSError {

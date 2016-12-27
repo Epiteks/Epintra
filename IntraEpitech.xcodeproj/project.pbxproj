@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		464BADE36BFD7C003EEA1234 /* Pods_IntraEpitech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D7B38E3CE760CCA1D7F0ABE /* Pods_IntraEpitech.framework */; };
 		7906842A1C6FC1E10067B26F /* AppointmentEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790684291C6FC1E10067B26F /* AppointmentEvent.swift */; };
-		791172E51C5FAD4800581DF3 /* ProjectMarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791172E41C5FAD4800581DF3 /* ProjectMarksViewController.swift */; };
+		791172E51C5FAD4800581DF3 /* ProjectMarkssViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791172E41C5FAD4800581DF3 /* ProjectMarkssViewController.swift */; };
 		791172E71C5FB7B800581DF3 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791172E61C5FB7B800581DF3 /* CommentsViewController.swift */; };
 		791172E91C5FC85000581DF3 /* ModuleDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791172E81C5FC85000581DF3 /* ModuleDetailsViewController.swift */; };
 		79152D851C666A0B00513E0F /* SelectSemestersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79152D841C666A0B00513E0F /* SelectSemestersViewController.swift */; };
@@ -91,6 +91,8 @@
 		79892EF61C5024E000F83669 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79892EF51C5024E000F83669 /* UserPreferences.swift */; };
 		798AF18D1DDC61B9002B8A8C /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798AF18C1DDC61B9002B8A8C /* StringExtension.swift */; };
 		798CF1B81E0FCE8D00BAB754 /* ProjectRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798CF1B71E0FCE8D00BAB754 /* ProjectRequests.swift */; };
+		798CF1BA1E0FDAF200BAB754 /* ProjectDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798CF1B91E0FDAF200BAB754 /* ProjectDetailsViewController.swift */; };
+		798CF1BC1E1032CC00BAB754 /* ProjectMarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798CF1BB1E1032CC00BAB754 /* ProjectMarksViewController.swift */; };
 		79A5AE7D1C56B432004B3FB9 /* PlanningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5AE7C1C56B432004B3FB9 /* PlanningViewController.swift */; };
 		79B05FD91C68BC1C0032DB0C /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B05FD81C68BC1C0032DB0C /* IAPHelper.swift */; };
 		79B05FDD1C68BEB90032DB0C /* IntraProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B05FDC1C68BEB90032DB0C /* IntraProduct.swift */; };
@@ -163,8 +165,8 @@
 		313769C12E242E85E0C3E0E4 /* Pods-IntraEpitech.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntraEpitech.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IntraEpitech/Pods-IntraEpitech.debug.xcconfig"; sourceTree = "<group>"; };
 		4D6CF33004246A48EC67D48F /* Pods-IntraEpitech.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntraEpitech.release.xcconfig"; path = "Pods/Target Support Files/Pods-IntraEpitech/Pods-IntraEpitech.release.xcconfig"; sourceTree = "<group>"; };
 		74F850461F157F431C9CB699 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		790684291C6FC1E10067B26F /* AppointmentEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppointmentEvent.swift; path = Model/AppointmentEvent.swift; sourceTree = "<group>"; };
-		791172E41C5FAD4800581DF3 /* ProjectMarksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectMarksViewController.swift; path = Marks/ProjectMarksViewController.swift; sourceTree = "<group>"; };
+		790684291C6FC1E10067B26F /* AppointmentEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = AppointmentEvent.swift; path = Model/AppointmentEvent.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		791172E41C5FAD4800581DF3 /* ProjectMarkssViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectMarkssViewController.swift; path = Marks/ProjectMarkssViewController.swift; sourceTree = "<group>"; };
 		791172E61C5FB7B800581DF3 /* CommentsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommentsViewController.swift; path = Marks/CommentsViewController.swift; sourceTree = "<group>"; };
 		791172E81C5FC85000581DF3 /* ModuleDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModuleDetailsViewController.swift; path = Modules/ModuleDetailsViewController.swift; sourceTree = "<group>"; };
 		79152D841C666A0B00513E0F /* SelectSemestersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectSemestersViewController.swift; path = Planning/SelectSemestersViewController.swift; sourceTree = "<group>"; };
@@ -191,7 +193,7 @@
 		793C52C51C5E311300C33328 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		79486F9A1E0C58ED00950F36 /* SchoolViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SchoolViewController.swift; path = School/SchoolViewController.swift; sourceTree = "<group>"; };
 		795954A61C58166A00734F91 /* CustomSegues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomSegues.swift; path = Segues/CustomSegues.swift; sourceTree = "<group>"; };
-		7959943F1C52C8F2007BE7C5 /* ApplicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApplicationManager.swift; path = Application/ApplicationManager.swift; sourceTree = "<group>"; };
+		7959943F1C52C8F2007BE7C5 /* ApplicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = ApplicationManager.swift; path = Application/ApplicationManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		795994411C52CED9007BE7C5 /* ErrorViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorViewer.swift; sourceTree = "<group>"; };
 		795994431C52DA35007BE7C5 /* SplashScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenViewController.swift; sourceTree = "<group>"; };
 		795994461C52E0C4007BE7C5 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = Settings/SettingsViewController.swift; sourceTree = "<group>"; };
@@ -253,6 +255,8 @@
 		79892EF51C5024E000F83669 /* UserPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 		798AF18C1DDC61B9002B8A8C /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		798CF1B71E0FCE8D00BAB754 /* ProjectRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectRequests.swift; path = Network/ProjectRequests.swift; sourceTree = "<group>"; };
+		798CF1B91E0FDAF200BAB754 /* ProjectDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectDetailsViewController.swift; path = School/ProjectDetailsViewController.swift; sourceTree = "<group>"; };
+		798CF1BB1E1032CC00BAB754 /* ProjectMarksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectMarksViewController.swift; path = School/ProjectMarksViewController.swift; sourceTree = "<group>"; };
 		79A5AE7C1C56B432004B3FB9 /* PlanningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanningViewController.swift; path = Planning/PlanningViewController.swift; sourceTree = "<group>"; };
 		79B05FD81C68BC1C0032DB0C /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		79B05FDC1C68BEB90032DB0C /* IntraProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntraProduct.swift; sourceTree = "<group>"; };
@@ -260,7 +264,7 @@
 		79CC43FC1E0DBA5000FBFC90 /* ModuleActivityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ModuleActivityTableViewCell.xib; path = Views/ModuleActivityTableViewCell/ModuleActivityTableViewCell.xib; sourceTree = "<group>"; };
 		79D958331E0D327A00C003E8 /* SchoolDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SchoolDataViewController.swift; path = School/SchoolDataViewController.swift; sourceTree = "<group>"; };
 		79DE549B1C5BABFF00E2ADDE /* EmptyPlanningTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EmptyPlanningTableView.xib; path = Views/EmptyPlanningTableView.xib; sourceTree = "<group>"; };
-		79DE549D1C5BAF3300E2ADDE /* CalendarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
+		79DE549D1C5BAF3300E2ADDE /* CalendarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CalendarManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		79DE549F1C5BAF5300E2ADDE /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "Pods/../build/Debug-iphoneos/Alamofire.framework"; sourceTree = "<group>"; };
 		79DE54A01C5BAF5300E2ADDE /* FSCalendar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FSCalendar.framework; path = "Pods/../build/Debug-iphoneos/FSCalendar.framework"; sourceTree = "<group>"; };
 		79DE54A11C5BAF5300E2ADDE /* Haneke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Haneke.framework; path = "Pods/../build/Debug-iphoneos/Haneke.framework"; sourceTree = "<group>"; };
@@ -270,8 +274,8 @@
 		79DF37071C4D7B3B00EF69A3 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		79DF37141C4D831200EF69A3 /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		79E4C5C41C6E1C140003DA56 /* StudentRegisteredViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudentRegisteredViewController.swift; path = Planning/StudentRegisteredViewController.swift; sourceTree = "<group>"; };
-		79E4C5C61C6E35440003DA56 /* AppointmentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppointmentDetailViewController.swift; path = Planning/AppointmentDetailViewController.swift; sourceTree = "<group>"; };
-		79E4C5C81C6E35AC0003DA56 /* Appointment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Appointment.swift; path = Model/Appointment.swift; sourceTree = "<group>"; };
+		79E4C5C61C6E35440003DA56 /* AppointmentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = AppointmentDetailViewController.swift; path = Planning/AppointmentDetailViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		79E4C5C81C6E35AC0003DA56 /* Appointment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Appointment.swift; path = Model/Appointment.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		79E9D4971E0D51B7006A3910 /* StudentModuleDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudentModuleDetailsViewController.swift; path = School/StudentModuleDetailsViewController.swift; sourceTree = "<group>"; };
 		79EA5CB51D5E49E800DA7C30 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Requests.swift; path = Network/Requests.swift; sourceTree = "<group>"; };
 		79EA5CBB1D5E64C700DA7C30 /* MainViewStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainViewStoryboard.storyboard; path = Storyboards/MainViewStoryboard.storyboard; sourceTree = "<group>"; };
@@ -397,6 +401,8 @@
 				79D958331E0D327A00C003E8 /* SchoolDataViewController.swift */,
 				79E9D4971E0D51B7006A3910 /* StudentModuleDetailsViewController.swift */,
 				79FF0B0B1E0EB7DF0044CB26 /* ModuleRegisteredStudentsViewController.swift */,
+				798CF1B91E0FDAF200BAB754 /* ProjectDetailsViewController.swift */,
+				798CF1BB1E1032CC00BAB754 /* ProjectMarksViewController.swift */,
 			);
 			name = School;
 			sourceTree = "<group>";
@@ -443,7 +449,7 @@
 			isa = PBXGroup;
 			children = (
 				79622E9C1C5D582200FBA456 /* MarksViewController.swift */,
-				791172E41C5FAD4800581DF3 /* ProjectMarksViewController.swift */,
+				791172E41C5FAD4800581DF3 /* ProjectMarkssViewController.swift */,
 				791172E61C5FB7B800581DF3 /* CommentsViewController.swift */,
 			);
 			name = Marks;
@@ -1018,6 +1024,7 @@
 				795F1EA21C56019E00B8C347 /* History.swift in Sources */,
 				793B77991E0C79FE006FFD16 /* ModuleTableViewCell.swift in Sources */,
 				795954A71C58166A00734F91 /* CustomSegues.swift in Sources */,
+				798CF1BC1E1032CC00BAB754 /* ProjectMarksViewController.swift in Sources */,
 				791172E71C5FB7B800581DF3 /* CommentsViewController.swift in Sources */,
 				795CC3251C5CB2A7007AFE87 /* Project.swift in Sources */,
 				79779AA61C592355008803C5 /* String+NSDate.swift in Sources */,
@@ -1085,12 +1092,13 @@
 				795994421C52CED9007BE7C5 /* ErrorViewer.swift in Sources */,
 				79F826621C554BED0002DCC8 /* Netsoul.swift in Sources */,
 				795CC32C1C5CC3A6007AFE87 /* ProjectGroup.swift in Sources */,
+				798CF1BA1E0FDAF200BAB754 /* ProjectDetailsViewController.swift in Sources */,
 				79622E931C5D4C4B00FBA456 /* ModulesApiCalls.swift in Sources */,
 				79836ADF1D7F74CE009134EF /* NoDataView.swift in Sources */,
 				79DF37151C4D831200EF69A3 /* TestViewController.swift in Sources */,
 				79EA5CB61D5E49E800DA7C30 /* Requests.swift in Sources */,
 				79A5AE7D1C56B432004B3FB9 /* PlanningViewController.swift in Sources */,
-				791172E51C5FAD4800581DF3 /* ProjectMarksViewController.swift in Sources */,
+				791172E51C5FAD4800581DF3 /* ProjectMarkssViewController.swift in Sources */,
 				795D81C51C623A1000187E43 /* RegisteredStudent.swift in Sources */,
 				796B2EFE1C4AE70E00327E22 /* ActionButton.swift in Sources */,
 				792B7A611C57EC6200F988BB /* ProjectsApiCall.swift in Sources */,

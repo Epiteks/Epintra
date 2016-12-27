@@ -9,31 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-/*
-"num_event": null,
-"type_acti_code": "proj",
-"project": "Projet : EpiAndroid",
-"codeinstance": "STG-5-1",
-"scolaryear": "2015",
-"acti_title": "EpiAndroid",
-"title_module": "B5 - Java I Programming",
-"end_event": null,
-"code_location": "STG",
-"begin_acti": "2015-12-28 00:00:00",
-"codemodule": "B-PAV-560",
-"type_acti": "Mini-Projets",
-"codeacti": "acti-192058",
-"end_acti": "2016-01-31 23:42:00",
-"seats": null,
-"registered": 1,
-"num": "3",
-"info_creneau": null,
-"rights": [
-"student"
-],
-"begin_event": null*/
-
-class Project: NSObject {
+class Project {
 	
 	var typeActiCode :String?
 	var projectName :String?
@@ -41,35 +17,93 @@ class Project: NSObject {
 	var scolaryear :String?
 	var actiTitle :String?
 	var titleModule :String?
-	var beginActi :String?
+	var begin :String?
 	var codeModule :String?
 	var codeActi :String?
-	var endActi :String?
+	var end :String?
 	var registered :Bool?
 	var mark :String?
+    var marks: [Mark]?
+    
+    var explanations: String?
+    var userProjectStatus: String?
+    var note: String?
+    var userProjectCode: String?
+    var userProjectTitle: String?
+    var registeredGroups: [ProjectGroup]?
+    var projectStatus: String?
+    var files: [File]?
 	
 	init(dict :JSON) {
-		
-		typeActiCode = dict["type_acti_code"].stringValue
-		projectName = dict["project"].stringValue
-		codeInstance = dict["codeinstance"].stringValue
-		scolaryear = dict["scolaryear"].stringValue
-		actiTitle = dict["acti_title"].stringValue
-		titleModule = dict["title_module"].stringValue
-		beginActi = dict["begin_acti"].stringValue
-		codeModule = dict["codemodule"].stringValue
-		codeActi = dict["codeacti"].stringValue
-		endActi = dict["end_acti"].stringValue
-		registered = dict["registered"].boolValue
+		self.typeActiCode = dict["type_acti_code"].stringValue
+		self.projectName = dict["project_title"].stringValue
+		self.codeInstance = dict["codeinstance"].stringValue
+		self.scolaryear = dict["scolaryear"].stringValue
+		self.actiTitle = dict["acti_title"].stringValue
+		self.titleModule = dict["title_module"].stringValue
+		self.begin = dict["begin_acti"].stringValue
+		self.codeModule = dict["codemodule"].stringValue
+		self.codeActi = dict["codeacti"].stringValue
+		self.end = dict["end_acti"].stringValue
+		self.registered = dict["registered"].boolValue
 	}
 	
 	init(detail :JSON) {
-		codeActi = detail["codeacti"].stringValue
-		typeActiCode = detail["type_code"].stringValue
-		actiTitle = detail["title"].stringValue
-		titleModule = detail["module_title"].stringValue
-		beginActi = detail["begin"].stringValue
-		endActi = detail["end"].stringValue
-		mark = detail["note"].stringValue
+		self.codeActi = detail["codeacti"].stringValue
+		self.typeActiCode = detail["type_code"].stringValue
+		self.actiTitle = detail["title"].stringValue
+		self.titleModule = detail["module_title"].stringValue
+		self.begin = detail["begin"].stringValue
+		self.end = detail["end"].stringValue
+		self.mark = detail["note"].stringValue
+        self.projectName = detail["project_title"].stringValue
 	}
+    
+    func addModuleData(module: Module) {
+        self.codeInstance = module.codeInstance
+        self.scolaryear = module.scolaryear
+        self.codeModule = module.codeModule
+    }
+    
+    func fillProjectGroups(_ dict: JSON) {
+        registeredGroups = [ProjectGroup]()
+        let arr = dict.arrayValue
+        print(arr.count)
+        for tmp in arr {
+            registeredGroups?.append(ProjectGroup(dict: tmp))
+        }
+    }
+    
+    func findGroup(_ code: String) -> ProjectGroup? {
+        var res:  ProjectGroup?
+        for tmp in registeredGroups! {
+            if (tmp.code == code) {
+                res = tmp
+                break
+            }
+        }
+        
+        return res
+    }
+    
+    func isRegistered() -> Bool {
+        if (projectStatus == "project_confirmed") {
+            return true
+        }
+        return false
+    }
+
+    func setDetails(dict: JSON) {
+        explanations = dict["description"].stringValue
+        userProjectStatus = dict["user_project_status"].stringValue
+        note = dict["note"].stringValue
+        userProjectCode = dict["user_project_code"].stringValue
+        userProjectTitle = dict["user_project_title"].stringValue
+        begin = dict["begin"].stringValue
+        end = dict["end"].stringValue
+        actiTitle = dict["title"].stringValue
+        registered =  dict["instance_registered"].boolValue
+        projectStatus = dict["user_project_status"].stringValue
+        fillProjectGroups(dict["registered"])
+    }
 }

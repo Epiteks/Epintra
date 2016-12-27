@@ -11,13 +11,13 @@ import SwiftyJSON
 
 class Appointment: NSObject {
 	
-	var date :Date?
-	var master :RegisteredStudent?
-	var members :[RegisteredStudent]?
-	var title :String?
-	var id :String?
+	var date: Date?
+	var master: RegisteredStudent?
+	var members: [RegisteredStudent]?
+	var title: String?
+	var id: String?
 	
-	init(dict :JSON) {
+	init(dict: JSON) {
 		
 		date = dict["date"].stringValue.toDate()
 		

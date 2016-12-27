@@ -11,10 +11,10 @@ import SwiftyJSON
 
 class File: NSObject {
 	
-	var title :String?
-	var url :String?
+	var title: String?
+	var url: String?
 	
-	init(dict :JSON) {
+	init(dict: JSON) {
 		
 		title = dict["title"].stringValue
 		url = APICalls.getEpitechURL() + dict["fullpath"].stringValue

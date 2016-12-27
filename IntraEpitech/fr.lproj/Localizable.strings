@@ -129,10 +129,10 @@
  ** Modules
  */
 
-"AvailableCredits" = "Crédits : ";
-"InscriptionEnd" = "Fin des inscriptions : ";
-"ModuleEnd" = "Fin du module : ";
-"ModuleEndedSince" = "Module terminé le : ";
+"AvailableCredits" = "Crédits:  ";
+"InscriptionEnd" = "Fin des inscriptions:  ";
+"ModuleEnd" = "Fin du module:  ";
+"ModuleEndedSince" = "Module terminé le:  ";
 "Grades" = "Grades";
 
 /**

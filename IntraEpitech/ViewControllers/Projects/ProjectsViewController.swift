@@ -14,7 +14,7 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
 	
 	@IBOutlet weak var tableView: UITableView!
 	var projects = [Project]()
-	var selectedProject :ProjectDetail?
+	var selectedProject: ProjectDetail?
 	
 	var canPress = true
 	
@@ -32,7 +32,7 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
 			MJProgressView.instance.hideProgress()
 			self.tableView.reloadData()
 		} else {
-			ProjectsApiCall.getCurrentProjects() { (isOk :Bool, proj :[Project]?, mess :String) in
+			ProjectsApiCall.getCurrentProjects() { (isOk: Bool, proj: [Project]?, mess: String) in
 				if (!isOk) {
 					ErrorViewer.errorPresent(self, mess: mess) {}
 				} else {
@@ -54,9 +54,9 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
 		// Dispose of any resources that can be recreated.
 	}
 	
-	func refreshData(_ sender :AnyObject) {
+	func refreshData(_ sender: AnyObject) {
 		
-		ProjectsApiCall.getCurrentProjects() { (isOk :Bool, proj :[Project]?, mess :String) in
+		ProjectsApiCall.getCurrentProjects() { (isOk: Bool, proj: [Project]?, mess: String) in
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
 			} else {
@@ -125,7 +125,7 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
 		MJProgressView.instance.showProgress(self.view, white: false)
 		tableView.isUserInteractionEnabled = false
 		tableView.isScrollEnabled = false
-		ProjectsApiCall.getProjectDetails(projects[(indexPath as NSIndexPath).row]) { (isOk :Bool, proj :ProjectDetail?, mess :String) in
+		ProjectsApiCall.getProjectDetails(projects[(indexPath as NSIndexPath).row]) { (isOk: Bool, proj: ProjectDetail?, mess: String) in
 			
 			tableView.isUserInteractionEnabled = true
 			tableView.isScrollEnabled = true
@@ -137,7 +137,7 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
 				self.selectedProject = proj!
 				tableView.isUserInteractionEnabled = false
 				tableView.isScrollEnabled = false
-				ProjectsApiCall.getProjectFiles(self.projects[(indexPath as NSIndexPath).row]) { (isOk :Bool, files :[File]?, mess :String) in
+				ProjectsApiCall.getProjectFiles(self.projects[(indexPath as NSIndexPath).row]) { (isOk: Bool, files: [File]?, mess: String) in
 					tableView.isUserInteractionEnabled = true
 					tableView.isScrollEnabled = true
 					if (!isOk) {
@@ -158,7 +158,7 @@ class ProjectsViewController: UIViewController, UITableViewDelegate, UITableView
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if (segue.identifier == "detailsProjectSegue") {
-			let vc :ProjectsDetailsViewController = segue.destination as! ProjectsDetailsViewController
+			let vc: ProjectsDetailsViewController = segue.destination as! ProjectsDetailsViewController
 			vc.project = selectedProject
 		}
 	}

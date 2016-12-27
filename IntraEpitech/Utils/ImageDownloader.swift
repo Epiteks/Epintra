@@ -10,7 +10,7 @@ import UIKit
 
 class ImageDownloader: NSObject {
 	
-	class func downloadFrom(link:String, onCompletion :@escaping (Result<Any?>) -> Void ) {
+	class func downloadFrom(link:String, onCompletion: @escaping (Result<Any?>) -> Void ) {
 		
 		if (ApplicationManager.sharedInstance.canDownload == false) {
 			onCompletion(Result.failure(type: AppError.unauthorizedByUser, message: ""))
@@ -37,7 +37,7 @@ class ImageDownloader: NSObject {
 		}).resume()
 	}
 	
-	class func downloadFromCallback(link:String, onCompletion :@escaping (String) -> Void ) {
+	class func downloadFromCallback(link:String, onCompletion: @escaping (String) -> Void ) {
 		
 		if (ApplicationManager.sharedInstance.canDownload == false) {
 			onCompletion("")

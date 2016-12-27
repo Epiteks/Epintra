@@ -15,7 +15,7 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
 	@IBOutlet weak var tableView: UITableView!
 	
 	var modules = [Module]()
-	var selectedModule :Module?
+	var selectedModule: Module?
 	
 	var refreshControl = UIRefreshControl()
 	
@@ -28,7 +28,7 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
 			modules = ApplicationManager.sharedInstance.modules!
 		} else {
 			MJProgressView.instance.showProgress(self.view, white: false)
-			ModulesApiCalls.getRegisteredModules() { (isOk :Bool, resp :[Module]?, mess :String) in
+			ModulesApiCalls.getRegisteredModules() { (isOk: Bool, resp: [Module]?, mess: String) in
 				
 				if (!isOk) {
 					ErrorViewer.errorPresent(self, mess: mess) {}
@@ -48,8 +48,8 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
 		// Do any additional setup after loading the view.
 	}
 	
-	func refreshData(_ sender :AnyObject) {
-		ModulesApiCalls.getRegisteredModules() { (isOk :Bool, resp :[Module]?, mess :String) in
+	func refreshData(_ sender: AnyObject) {
+		ModulesApiCalls.getRegisteredModules() { (isOk: Bool, resp: [Module]?, mess: String) in
 			
 			if (!isOk) {
 				ErrorViewer.errorPresent(self, mess: mess) {}
@@ -116,7 +116,7 @@ class ModulesViewController: UIViewController, UITableViewDelegate, UITableViewD
 		tableView.isScrollEnabled = false
 		
 		MJProgressView.instance.showProgress(self.view, white: false)
-		ModulesApiCalls.getModule(modules[(indexPath as NSIndexPath).row]) { (isOk :Bool, resp :Module?, mess :String) in
+		ModulesApiCalls.getModule(modules[(indexPath as NSIndexPath).row]) { (isOk: Bool, resp: Module?, mess: String) in
 			MJProgressView.instance.hideProgress()
 			tableView.isUserInteractionEnabled = true
 			tableView.isScrollEnabled = true

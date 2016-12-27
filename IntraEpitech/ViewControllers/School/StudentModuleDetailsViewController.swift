@@ -20,13 +20,16 @@ class StudentModuleDetailsViewController: SchoolDataViewController, UITableViewD
     var module: Module? = nil
     
     let typeColors = [
-        "proj" : UIUtils.planningBlueColor(),
-        "rdv" : UIUtils.planningOrangeColor(),
-        "tp" : UIUtils.planningPurpleColor(),
-        "other" : UIUtils.planningBlueColor(),
-        "exam" : UIUtils.planningRedColor(),
-        "class" : UIUtils.planningGreenColor()
+        "proj":  UIUtils.planningBlueColor(),
+        "rdv":  UIUtils.planningOrangeColor(),
+        "tp":  UIUtils.planningPurpleColor(),
+        "other":  UIUtils.planningBlueColor(),
+        "exam":  UIUtils.planningRedColor(),
+        "class":  UIUtils.planningGreenColor()
     ]
+    
+    //    /// Data to pass to project details view
+    //    var projectDetailsToSend: ProjectDetail? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +58,15 @@ class StudentModuleDetailsViewController: SchoolDataViewController, UITableViewD
         
         if segue.identifier == "gradesSegue" {
             if let vc = segue.destination as? ModuleRegisteredStudentsViewController {
-                vc.students = module?.registeredStudents
+                vc.students = self.module?.registeredStudents
+            }
+        } else if segue.identifier == "projectDetailsSegue" {
+            if let vc = segue.destination as? ProjectDetailsViewController, let index = self.activitiesTableView.indexPathForSelectedRow?.row, let activity = self.module?.activities[index] {
+                vc.project = activity
+            }
+        } else if segue.identifier == "projectMarksSegue" {
+            if let vc = segue.destination as? ProjectMarksViewController, let index = self.activitiesTableView.indexPathForSelectedRow?.row, let activity = self.module?.activities[index] {
+                vc.marks = activity.marks
             }
         }
     }
@@ -65,12 +76,14 @@ class StudentModuleDetailsViewController: SchoolDataViewController, UITableViewD
             self.moduleEndLabel.text = NSLocalizedString("InscriptionEnd", comment: "") + registerLimit.toTitleString()
         } else if let end = self.module?.end?.shortToDate() {
             self.moduleEndLabel.text = String(format: "%@%@", end > Date() ? NSLocalizedString("ModuleEnd", comment: "") : NSLocalizedString("ModuleEndedSince", comment: ""), end.toTitleString())
+        } else {
+            self.moduleEndLabel.text = ""
         }
     }
     
     func setProgressView() {
         
-        if let begin = self.module?.begin!.shortToDate(), let end = self.module?.end!.shortToDate() {
+        if let begin = self.module?.begin?.shortToDate(), let end = self.module?.end?.shortToDate() {
             
             let today = Date()
             
@@ -120,15 +133,17 @@ class StudentModuleDetailsViewController: SchoolDataViewController, UITableViewD
         if let activity = self.module?.activities[indexPath.row] {
             
             cell?.activityTitleLabel.text = activity.actiTitle
-            
             cell?.markLabel.text = activity.mark
-            cell?.startDateLabel.text = activity.beginActi?.toDate().toActiDate()
-            cell?.endDateLabel.text = activity.endActi?.toDate().toActiDate()
-            
+            cell?.startDateLabel.text = activity.begin?.toDate().toActiDate()
+            cell?.endDateLabel.text = activity.end?.toDate().toActiDate()
             cell?.activityColor = self.typeColors[activity.typeActiCode!]
             
             if let characters = activity.mark?.characters, characters.count > 0 {
                 cell?.accessoryType = .disclosureIndicator
+            } else if activity.typeActiCode == "proj" {
+                cell?.accessoryType = .disclosureIndicator
+            } else {
+                cell?.accessoryType = .none
             }
             
         }
@@ -138,27 +153,76 @@ class StudentModuleDetailsViewController: SchoolDataViewController, UITableViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        tableView.deselectRow(at: indexPath, animated: true)
+        if self.willLoadNextView == true { return }
         
-        if let activity = self.module?.activities[indexPath.row], let characters = activity.mark?.characters, characters.count > 0 {
-            self.addActivityIndicator()
-            projectRequests.details(forProject: activity, completion: { result in
-                switch (result) {
-                case .success(let data):
+        if let activity = self.module?.activities[indexPath.row] {
+            if activity.typeActiCode == "proj" {
+                    self.willLoadNextView = true
+                    self.addActivityIndicator()
                     
-                    //self.performSegue(withIdentifier: "gradesSegue", sender: self)
-                    break
-                case .failure(let err):
-                    if err.message != nil {
-                        ErrorViewer.errorPresent(self, mess: err.message!) {}
+                    let dispatchGroup = DispatchGroup()
+                    
+                    DispatchQueue.global(qos: .utility).async {
+                        DispatchQueue.global(qos: .utility).async(group: dispatchGroup, execute: {
+                            self.getProjectFiles(forProject: activity, group: dispatchGroup)
+                            self.getProjectDetails(forProject: activity, group: dispatchGroup)
+                        })
+                        dispatchGroup.notify(queue: DispatchQueue.global(qos: .utility), execute: {
+                            DispatchQueue.main.async(execute: {
+                                self.removeActivityIndicator()
+                                self.performSegue(withIdentifier: "projectDetailsSegue", sender: self)
+                                self.activitiesTableView.deselectRow(at: indexPath, animated: true)
+                                self.willLoadNextView = false
+                            })
+                        })
                     }
-                    log.error("Fetching project details error : \(err)")
+                
+            } else if let characters = activity.mark?.characters, characters.count > 0 {
+                self.willLoadNextView = true
+                self.addActivityIndicator()
+                projectRequests.marks(forProject: activity) { result in
+                    self.performSegue(withIdentifier: "projectMarksSegue", sender: self)
+                    self.willLoadNextView = false
+                    self.removeActivityIndicator()
+                    self.activitiesTableView.deselectRow(at: indexPath, animated: true)
                 }
-                self.removeActivityIndicator()
-                self.barButtonItem.isEnabled = true
-            })
-            
+            } else {
+                self.activitiesTableView.deselectRow(at: indexPath, animated: true)
+            }
         }
+    }
+    
+    func getProjectFiles(forProject activity: Project, group: DispatchGroup) {
+        group.enter()
+        projectRequests.files(forProject: activity, completion: { (result) in
+            switch (result) {
+            case .success(let files):
+                activity.files = files
+            case .failure(let err):
+                if err.message != nil {
+                    ErrorViewer.errorPresent(self, mess: err.message!) {}
+                }
+                log.error("Fetching project files error:  \(err)")
+            }
+            group.leave()
+        })
+    }
+    
+    func getProjectDetails(forProject activity: Project, group: DispatchGroup) {
+        group.enter()
+        projectRequests.details(forProject: activity, completion: { result in
+            switch (result) {
+            case .success(_):
+                log.info("Project details set")
+                break
+            case .failure(let err):
+                if err.message != nil {
+                    ErrorViewer.errorPresent(self, mess: err.message!) {}
+                }
+                log.error("Fetching project details error:  \(err)")
+            }
+            group.leave()
+        })
         
     }
     
@@ -175,12 +239,13 @@ class StudentModuleDetailsViewController: SchoolDataViewController, UITableViewD
                 if err.message != nil {
                     ErrorViewer.errorPresent(self, mess: err.message!) {}
                 }
-                log.error("Fetching modules error : \(err)")
+                log.error("Fetching modules error:  \(err)")
             }
             self.removeActivityIndicator()
             self.barButtonItem.isEnabled = true
-            
         }
     }
+    
+    
     
 }

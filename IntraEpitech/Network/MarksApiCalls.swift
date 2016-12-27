@@ -12,7 +12,7 @@ import Alamofire
 
 class MarksApiCalls: APICalls {
 	
-	class func getMarks(_ onCompletion :@escaping (Bool, [Mark]?, String) ->Void) {
+	class func getMarks(_ onCompletion: @escaping (Bool, [Mark]?, String) ->Void) {
 		
 		let url = super.getApiUrl() + "marks"
 		
@@ -21,7 +21,7 @@ class MarksApiCalls: APICalls {
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)
 					let errorDict = responseCall["error"].dictionaryValue
-					let errorMessage :String?
+					let errorMessage: String?
 					if (errorDict.count > 0) {
 						errorMessage = (errorDict["message"]?.stringValue)
 						onCompletion(false, nil, errorMessage!)
@@ -42,7 +42,7 @@ class MarksApiCalls: APICalls {
 		}
 	}
 	
-	class func getProjectMarks(_ mark :Mark, onCompletion :@escaping (Bool, [Mark]?, String) ->Void) {
+	class func getProjectMarks(_ mark: Mark, onCompletion: @escaping (Bool, [Mark]?, String) ->Void) {
 		
 		let url = super.getApiUrl() + "project/marks"
 		
@@ -55,7 +55,7 @@ class MarksApiCalls: APICalls {
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)
 					let errorDict = responseCall["error"].dictionaryValue
-					let errorMessage :String?
+					let errorMessage: String?
 					if (errorDict.count > 0) {
 						errorMessage = (errorDict["message"]?.stringValue)
 						onCompletion(false, nil, errorMessage!)
@@ -75,7 +75,7 @@ class MarksApiCalls: APICalls {
 		}
 	}
 	
-	class func getProjectMarksForProject(_ proj :Project, onCompletion :@escaping (Bool, [Mark]?, String) ->Void) {
+	class func getProjectMarksForProject(_ proj: Project, onCompletion: @escaping (Bool, [Mark]?, String) ->Void) {
 		
 		let url = super.getApiUrl() + "project/marks"
 		
@@ -88,7 +88,7 @@ class MarksApiCalls: APICalls {
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)
 					let errorDict = responseCall["error"].dictionaryValue
-					let errorMessage :String?
+					let errorMessage: String?
 					if (errorDict.count > 0) {
 						errorMessage = (errorDict["message"]?.stringValue)
 						onCompletion(false, nil, errorMessage!)
@@ -108,7 +108,7 @@ class MarksApiCalls: APICalls {
 		}
 	}
 	
-	class func getMarksFor(user login :String, onCompletion :@escaping (Bool, [Mark]?, String) ->Void) {
+	class func getMarksFor(user login: String, onCompletion: @escaping (Bool, [Mark]?, String) ->Void) {
 		
 		let url = super.getApiUrl() + "marks"
 		
@@ -117,7 +117,7 @@ class MarksApiCalls: APICalls {
 				if (response.result.isSuccess) {
 					let responseCall = JSON(response.result.value!)
 					let errorDict = responseCall["error"].dictionaryValue
-					let errorMessage :String?
+					let errorMessage: String?
 					if (errorDict.count > 0) {
 						errorMessage = (errorDict["message"]?.stringValue)
 						onCompletion(false, nil, errorMessage!)

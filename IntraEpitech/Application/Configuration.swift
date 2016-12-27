@@ -26,7 +26,7 @@ open class Configuration {
 	
 	var profilePictureURL: String {
 		get {
-			return "https://cdn.local.epitech.eu/userprofil/profilview/"
+			return "https://cdn.local.epitech.eu/userprofil/"
 		}
 	}
 }

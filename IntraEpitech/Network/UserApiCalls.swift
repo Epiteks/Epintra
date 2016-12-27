@@ -40,7 +40,7 @@ class UserApiCalls: APICalls {
 		
 		let url = super.getApiUrl() + "user"
 		
-		Alamofire.request(url, method: .get, parameters: ["token": ApplicationManager.sharedInstance.token!, "user" : login])
+		Alamofire.request(url, method: .get, parameters: ["token": ApplicationManager.sharedInstance.token!, "user":  login])
 			.responseJSON { response in
 				if response.result.isSuccess {
 					let responseCall = JSON(response.result.value!)
@@ -65,7 +65,7 @@ class UserApiCalls: APICalls {
 		
 		let url = super.getApiUrl() + "user"
 		
-		Alamofire.request(url, method: .get, parameters: ["token": ApplicationManager.sharedInstance.token!, "user" : login])
+		Alamofire.request(url, method: .get, parameters: ["token": ApplicationManager.sharedInstance.token!, "user":  login])
 			.responseJSON { response in
 				if response.result.isSuccess {
 					let responseCall = JSON(response.result.value!)
@@ -112,7 +112,7 @@ class UserApiCalls: APICalls {
 		let url = super.getApiUrl() + "user/files"
 		
 		Alamofire.request(url, method: .get, parameters: ["token": ApplicationManager.sharedInstance.token!,
-			"login" :(ApplicationManager.sharedInstance.user?.login)!])
+			"login": (ApplicationManager.sharedInstance.user?.login)!])
 			.responseJSON { response in
 				if response.result.isSuccess {
 					let responseCall = JSON(response.result.value!)
@@ -141,7 +141,7 @@ class UserApiCalls: APICalls {
 		let url = super.getApiUrl() + "user/flags"
 		
 		Alamofire.request(url, method: .get, parameters: ["token": ApplicationManager.sharedInstance.token!,
-			"login" :login!])
+			"login": login!])
 			.responseJSON { response in
 				if response.result.isSuccess {
 					let responseCall = JSON(response.result.value!)
@@ -173,7 +173,7 @@ class UserApiCalls: APICalls {
 		let url = super.getRankingUrl()
 		
 		Alamofire.request(url, method: .get, parameters: ["token": ApplicationManager.sharedInstance.token!,
-			"login" :(ApplicationManager.sharedInstance.user?.login)!])
+			"login": (ApplicationManager.sharedInstance.user?.login)!])
 			.responseJSON { response in
 				if response.result.isSuccess {
 					let responseCall = JSON(response.result.value!)

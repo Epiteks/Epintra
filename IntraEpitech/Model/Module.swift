@@ -12,8 +12,8 @@ import SwiftyJSON
 class Module: NSObject {
 	
 	var scolaryear: String?
-	var codemodule: String?
-	var codeinstance: String?
+	var codeModule: String?
+	var codeInstance: String?
 	var title: String?
 	var semester: String?
 	var grade: String?
@@ -28,8 +28,8 @@ class Module: NSObject {
 	
 	init(dict: JSON) {
 		scolaryear = dict["scolaryear"].stringValue
-		codemodule = dict["codemodule"].stringValue
-		codeinstance = dict["codeinstance"].stringValue
+		codeModule = dict["codemodule"].stringValue
+		codeInstance = dict["codeinstance"].stringValue
 		title = dict["title"].stringValue
 		semester = dict["semester"].stringValue
 		grade = dict["grade"].stringValue
@@ -59,15 +59,19 @@ class Module: NSObject {
 //	}
     
     func setAllData(detail: JSON) {
-        begin = detail["begin"].stringValue
-        end = detail["end"].stringValue
-        endRegister = detail["end_register"].stringValue
-        registered = detail["student_registered"].boolValue
+        self.begin = detail["begin"].stringValue
+        self.end = detail["end"].stringValue
+        self.endRegister = detail["end_register"].stringValue
+        self.registered = detail["student_registered"].boolValue
+        
+        self.activities = [Project]()
         
         let arr = detail["activites"].arrayValue
         
         for tmp in arr {
-            activities.append(Project(detail: tmp))
+            let proj = Project(detail: tmp)
+            proj.addModuleData(module: self)
+            self.activities.append(proj)
         }
 
     }

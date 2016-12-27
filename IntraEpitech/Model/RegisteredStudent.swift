@@ -11,12 +11,12 @@ import SwiftyJSON
 
 class RegisteredStudent: NSObject {
 	
-	var login :String!
-	var grade :String!
-	var status :String!
-	var imageURL :String!
+	var login: String!
+	var grade: String!
+	var status: String!
+	var imageURL: String!
 	
-	init(dict :JSON) {
+	init(dict: JSON) {
 		
 		login = dict["login"].stringValue
 		grade = dict["grade"].stringValue

@@ -26,7 +26,7 @@ class RequestManager: NSObject {
 			newURL += urlParams!
 		}
 		
-		log.info("Request \(requestID) with parameters :\n\t\(params)\n\tWith URL \(newURL)")
+		log.info("Request \(requestID) with parameters: \n\t\(params)\n\tWith URL \(newURL)")
 		
 		Alamofire.request(newURL, method: (req?.method!)!, parameters: params, encoding: JSONEncoding.default, headers: headers)
 			.responseJSON { res in

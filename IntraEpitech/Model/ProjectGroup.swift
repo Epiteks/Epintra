@@ -11,11 +11,11 @@ import SwiftyJSON
 
 class ProjectGroup: NSObject {
 	
-	var title :String?
-	var code :String?
-	var finalNote :String?
-	var master :User?
-	var members :[User]?
+	var title: String?
+	var code: String?
+	var finalNote: String?
+	var master: User?
+	var members: [User]?
 	
 	init(dict: JSON) {
 		super.init()
@@ -26,7 +26,7 @@ class ProjectGroup: NSObject {
 		fillMembers(dict)
 	}
 	
-	func fillMembers(_ dict :JSON) {
+	func fillMembers(_ dict: JSON) {
 		members = [User]()
 		
 		let arr = dict["members"].arrayValue

@@ -15,14 +15,14 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 	@IBOutlet weak var projectEnd: UILabel!
 	@IBOutlet weak var projectProgressView: UIProgressView!
 	
-	var project : ProjectDetail?
+	var project:  ProjectDetail?
 	
 	var members = [User]()
 	var files = [File]()
 	
-	var webViewData : File?
+	var webViewData:  File?
 	
-	var marksData : [Mark]?
+	var marksData:  [Mark]?
 	
 	var marksAllowed = false
 	
@@ -31,7 +31,7 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 		
 		// Do any additional setup after loading the view.
 		
-		projectEnd.text = project?.endActi?.toDate().toProjectEnding()
+		projectEnd.text = project?.end?.toDate().toProjectEnding()
 		
 		self.title = project?.actiTitle
 		
@@ -55,7 +55,7 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 		fillProgressView()
 	}
 	
-	func setUIIfRegistered(_ grp :ProjectGroup?) {
+	func setUIIfRegistered(_ grp: ProjectGroup?) {
 		
 		if let img = ApplicationManager.sharedInstance.downloadedImages![(grp?.master?.imageUrl)!] {
 			self.masterImage.image = img
@@ -78,8 +78,8 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 	
 	func fillProgressView() {
 		
-		let begin = self.project?.beginActi?.toDate()
-		let end = self.project?.endActi?.toDate()
+		let begin = self.project?.begin?.toDate()
+		let end = self.project?.end?.toDate()
 		let today = Date()
 		
 		let totalTime = end?.timeIntervalSince(begin! as Date)
@@ -198,9 +198,9 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 		}
 	}
 	
-	//	@IBAction func allMarksButtonPressed(sender :AnyObject) {
+	//	@IBAction func allMarksButtonPressed(sender: AnyObject) {
 	//		
-	//		MarksApiCalls.getProjectMarksForProject(self.project!) { (isOk :Bool, resp :[Mark]?, mess :String) in
+	//		MarksApiCalls.getProjectMarksForProject(self.project!) { (isOk: Bool, resp: [Mark]?, mess: String) in
 	//			
 	//			if (!isOk) {
 	//				ErrorViewer.errorPresent(self, mess: mess) {}
@@ -215,12 +215,12 @@ class ProjectsDetailsViewController: UIViewController, UITableViewDelegate, UITa
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if (segue.identifier == "webViewSegue") {
-			let vc :WebViewViewController = segue.destination as! WebViewViewController
+			let vc: WebViewViewController = segue.destination as! WebViewViewController
 			vc.file = webViewData!
-			vc.isUrl = true
+			//vc.isUrl = true
 		} else if (segue.identifier == "allMarksSegue") {
-			let vc = segue.destination as! ProjectMarksViewController
-			vc.marks = marksData
+//			let vc = segue.destination as! ProjectMarksViewController
+//			vc.marks = marksData
 		}
 		
 	}
