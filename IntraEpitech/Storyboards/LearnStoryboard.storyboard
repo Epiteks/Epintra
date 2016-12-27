@@ -52,12 +52,22 @@
                                     <segue destination="IHZ-VN-RMd" kind="embed" id="twD-uu-nCA"/>
                                 </connections>
                             </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PNG-mX-X8G">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <connections>
+                                    <segue destination="jXB-6p-0Ln" kind="embed" id="Sa9-gS-ibC"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="PNG-mX-X8G" firstAttribute="leading" secondItem="st5-Cj-CHU" secondAttribute="leadingMargin" constant="-16" id="0vq-Mh-gJs"/>
                             <constraint firstAttribute="trailingMargin" secondItem="LUk-kv-ZDi" secondAttribute="trailing" constant="-16" id="2cS-VM-qIQ"/>
                             <constraint firstItem="LUk-kv-ZDi" firstAttribute="leading" secondItem="st5-Cj-CHU" secondAttribute="leadingMargin" constant="-16" id="8x4-Mb-m8R"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="PNG-mX-X8G" secondAttribute="trailing" constant="-16" id="Fte-pS-2Lt"/>
+                            <constraint firstItem="PNG-mX-X8G" firstAttribute="top" secondItem="C3x-fF-fen" secondAttribute="bottom" id="bfr-AX-HYg"/>
                             <constraint firstItem="LUk-kv-ZDi" firstAttribute="top" secondItem="C3x-fF-fen" secondAttribute="bottom" id="e8f-a5-tWx"/>
+                            <constraint firstItem="ka8-r4-Fkh" firstAttribute="top" secondItem="PNG-mX-X8G" secondAttribute="bottom" id="o1z-D9-Gjh"/>
                             <constraint firstItem="ka8-r4-Fkh" firstAttribute="top" secondItem="LUk-kv-ZDi" secondAttribute="bottom" id="r64-5c-sPl"/>
                         </constraints>
                     </view>
@@ -77,6 +87,7 @@
                         </segmentedControl>
                     </navigationItem>
                     <connections>
+                        <outlet property="marksContainer" destination="PNG-mX-X8G" id="nZh-7C-jcd"/>
                         <outlet property="menuControl" destination="MMB-pM-gqa" id="Bgn-MI-qx6"/>
                         <outlet property="modulesContainer" destination="4MO-ya-YmO" id="Ada-tG-k1k"/>
                         <outlet property="projectsContainer" destination="LUk-kv-ZDi" id="P93-yv-b18"/>
@@ -329,7 +340,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DGg-2V-BA1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4081" y="-8"/>
+            <point key="canvasLocation" x="3148" y="1124"/>
         </scene>
         <!--Module Registered Students View Controller-->
         <scene sceneID="po6-hV-ioo">
@@ -367,7 +378,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xFI-7c-72Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4081" y="-661"/>
+            <point key="canvasLocation" x="3961" y="-122"/>
         </scene>
         <!--Project Marks View Controller-->
         <scene sceneID="sj8-Kb-ph5">
@@ -404,12 +415,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="idD-lr-pF6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4080.8000000000002" y="642.27886056971522"/>
+            <point key="canvasLocation" x="3962" y="452"/>
         </scene>
-        <!--View Controller-->
+        <!--Current Projects View Controller-->
         <scene sceneID="6gk-0e-f3l">
             <objects>
-                <viewController id="IHZ-VN-RMd" sceneMemberID="viewController">
+                <viewController id="IHZ-VN-RMd" customClass="CurrentProjectsViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fVW-Ty-MdZ"/>
                         <viewControllerLayoutGuide type="bottom" id="5F4-OU-QgT"/>
@@ -417,12 +428,65 @@
                     <view key="view" contentMode="scaleToFill" id="wnE-lH-9Hx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ycY-jG-EiF">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="IHZ-VN-RMd" id="sPb-AL-VXS"/>
+                                    <outlet property="delegate" destination="IHZ-VN-RMd" id="O8i-to-205"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" red="0.26936580290000001" green="1" blue="0.2654763208" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="5F4-OU-QgT" firstAttribute="top" secondItem="ycY-jG-EiF" secondAttribute="bottom" id="8fH-lw-oMS"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ycY-jG-EiF" secondAttribute="trailing" constant="-16" id="Fp3-sP-xLK"/>
+                            <constraint firstItem="ycY-jG-EiF" firstAttribute="leading" secondItem="wnE-lH-9Hx" secondAttribute="leadingMargin" constant="-16" id="Nkd-7d-Aze"/>
+                            <constraint firstItem="ycY-jG-EiF" firstAttribute="top" secondItem="fVW-Ty-MdZ" secondAttribute="bottom" id="yaa-Yj-wNG"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="projectsTableView" destination="ycY-jG-EiF" id="unk-2N-cwA"/>
+                        <segue destination="CIw-c7-Nza" kind="show" identifier="projectDetailsSegue" id="LRe-an-dO5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tNB-tb-8yt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2161" y="1048"/>
+            <point key="canvasLocation" x="2161" y="1124"/>
+        </scene>
+        <!--Marks View Controller-->
+        <scene sceneID="uPB-zw-8GX">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="jXB-6p-0Ln" customClass="MarksViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ieh-8s-peb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lKB-rP-tSS">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="jXB-6p-0Ln" id="RvA-Tg-qLG"/>
+                                    <outlet property="delegate" destination="jXB-6p-0Ln" id="Spo-vp-iRg"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="topMargin" secondItem="lKB-rP-tSS" secondAttribute="top" id="HSl-d6-JXL"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="lKB-rP-tSS" secondAttribute="bottom" id="TCO-cu-HkE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="lKB-rP-tSS" secondAttribute="trailing" constant="-16" id="UiS-aX-awU"/>
+                            <constraint firstItem="lKB-rP-tSS" firstAttribute="leading" secondItem="ieh-8s-peb" secondAttribute="leadingMargin" constant="-16" id="vCc-K3-8Mj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="marksTableView" destination="lKB-rP-tSS" id="ACT-pD-a2W"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GLX-4e-drG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1749.5999999999999" y="1738.8305847076463"/>
         </scene>
     </scenes>
     <resources>
@@ -430,4 +494,7 @@
         <image name="mindmap_filled" width="25" height="25"/>
         <image name="userProfile" width="75" height="75"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="LRe-an-dO5"/>
+    </inferredMetricsTieBreakers>
 </document>

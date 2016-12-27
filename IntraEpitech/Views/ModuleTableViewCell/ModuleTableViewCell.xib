@@ -11,15 +11,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="51" id="KGk-i7-Jjw" customClass="ModuleTableViewCell" customModule="Epintra" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="365" height="51"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="133" id="KGk-i7-Jjw" customClass="ModuleTableViewCell" customModule="Epintra" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="365" height="133"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="365" height="50"/>
+                <rect key="frame" x="0.0" y="0.0" width="365" height="132.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="vx8-fe-S7T">
-                        <rect key="frame" x="15" y="10" width="282" height="32"/>
+                        <rect key="frame" x="15" y="8" width="282" height="117"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7zM-8B-czg">
                                 <rect key="frame" x="0.0" y="0.0" width="35.5" height="17"/>
@@ -28,15 +28,18 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qf7-zY-Y8A">
-                                <rect key="frame" x="0.0" y="17" width="31" height="15"/>
+                                <rect key="frame" x="0.0" y="17" width="31" height="100"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="uVP-ZJ-9dW"/>
+                        </constraints>
                     </stackView>
                     <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ECHEC" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zjB-Oq-0dX">
-                        <rect key="frame" x="299" y="14" width="65.5" height="23"/>
+                        <rect key="frame" x="299" y="55" width="66" height="23"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="65.5" id="EWI-TV-eCH"/>
                         </constraints>
@@ -47,7 +50,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottomMargin" secondItem="vx8-fe-S7T" secondAttribute="bottom" id="9kg-G2-AUv"/>
-                    <constraint firstItem="vx8-fe-S7T" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="B59-ZE-ta5"/>
+                    <constraint firstItem="vx8-fe-S7T" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="B59-ZE-ta5"/>
                     <constraint firstItem="zjB-Oq-0dX" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="bPo-7B-IfN"/>
                     <constraint firstAttribute="leadingMargin" secondItem="vx8-fe-S7T" secondAttribute="leading" constant="-7" id="cWs-a2-5P7"/>
                     <constraint firstItem="zjB-Oq-0dX" firstAttribute="leading" secondItem="vx8-fe-S7T" secondAttribute="trailing" constant="2" id="hyS-I1-bcE"/>
@@ -59,7 +62,7 @@
                 <outlet property="gradeLabel" destination="zjB-Oq-0dX" id="94t-eG-4vy"/>
                 <outlet property="titleLabel" destination="7zM-8B-czg" id="naH-qc-75Z"/>
             </connections>
-            <point key="canvasLocation" x="56.5" y="50.5"/>
+            <point key="canvasLocation" x="56.5" y="91.5"/>
         </tableViewCell>
     </objects>
 </document>

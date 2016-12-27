@@ -82,7 +82,7 @@ class SplashScreenViewController: UIViewController {
 	
 	func userDataCall(_ group: DispatchGroup) {
 		group.enter()
-		userRequests.getCurrentUserData { result in
+		usersRequests.getCurrentUserData { result in
 			self.setStatusLabel(message: "FetchedUserData")
 			switch (result) {
 			case .success(_):
@@ -111,7 +111,7 @@ class SplashScreenViewController: UIViewController {
 	func userHistoryCall(_ group: DispatchGroup) {
 		group.enter()
 		setStatusLabel(message: "GettingUserHistory")
-		userRequests.getHistory() { result in
+		usersRequests.getHistory() { result in
 			self.setStatusLabel(message: "FetchedHistory")
 			switch (result) {
 			case .success(_):

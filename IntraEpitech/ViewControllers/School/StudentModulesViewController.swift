@@ -18,7 +18,7 @@ class StudentModulesViewController: SchoolDataViewController, UITableViewDataSou
     
     override func viewDidLoad() {
         self.modulesTableView.rowHeight = UITableViewAutomaticDimension
-        self.modulesTableView.estimatedRowHeight = 140
+        self.modulesTableView.estimatedRowHeight = 60
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,7 +43,7 @@ class StudentModulesViewController: SchoolDataViewController, UITableViewDataSou
         
         self.isFetching = true
         
-        modulesRequests.usersModules() { (result) in
+        modulesRequests.usersModules { (result) in
             switch result {
             case .success(let data):
                 

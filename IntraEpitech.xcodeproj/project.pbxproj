@@ -34,6 +34,10 @@
 		793C52C41C5E2D9600C33328 /* thirdParty.html in Resources */ = {isa = PBXBuildFile; fileRef = 793C52C31C5E2D9600C33328 /* thirdParty.html */; };
 		793C52C61C5E311300C33328 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 793C52C51C5E311300C33328 /* SystemConfiguration.framework */; };
 		79486F9B1E0C58ED00950F36 /* SchoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79486F9A1E0C58ED00950F36 /* SchoolViewController.swift */; };
+		794909951E12BCB40090D0C2 /* CurrentProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794909941E12BCB40090D0C2 /* CurrentProjectsViewController.swift */; };
+		7949099B1E12BDCF0090D0C2 /* ProjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794909991E12BDCF0090D0C2 /* ProjectTableViewCell.swift */; };
+		7949099C1E12BDCF0090D0C2 /* ProjectTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7949099A1E12BDCF0090D0C2 /* ProjectTableViewCell.xib */; };
+		7949099E1E1311C40090D0C2 /* MarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7949099D1E1311C40090D0C2 /* MarksViewController.swift */; };
 		795954A71C58166A00734F91 /* CustomSegues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795954A61C58166A00734F91 /* CustomSegues.swift */; };
 		795994401C52C8F2007BE7C5 /* ApplicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7959943F1C52C8F2007BE7C5 /* ApplicationManager.swift */; };
 		795994421C52CED9007BE7C5 /* ErrorViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795994411C52CED9007BE7C5 /* ErrorViewer.swift */; };
@@ -57,7 +61,7 @@
 		79622E961C5D4D4B00FBA456 /* ModulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79622E951C5D4D4B00FBA456 /* ModulesViewController.swift */; };
 		79622E981C5D567A00FBA456 /* MarksApiCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79622E971C5D567A00FBA456 /* MarksApiCalls.swift */; };
 		79622E9A1C5D56C000FBA456 /* Mark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79622E991C5D56C000FBA456 /* Mark.swift */; };
-		79622E9D1C5D582200FBA456 /* MarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79622E9C1C5D582200FBA456 /* MarksViewController.swift */; };
+		79622E9D1C5D582200FBA456 /* MarkssViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79622E9C1C5D582200FBA456 /* MarkssViewController.swift */; };
 		79622EA01C5D612100FBA456 /* RankingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79622E9F1C5D612100FBA456 /* RankingViewController.swift */; };
 		79622EA21C5D66BB00FBA456 /* SearchUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79622EA11C5D66BB00FBA456 /* SearchUserViewController.swift */; };
 		796B2EF61C4ADE5400327E22 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796B2EF51C4ADE5400327E22 /* LoginViewController.swift */; };
@@ -90,7 +94,7 @@
 		7988506D1C4ACD4500BAA888 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988506C1C4ACD4500BAA888 /* UIColorExtensions.swift */; };
 		79892EF61C5024E000F83669 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79892EF51C5024E000F83669 /* UserPreferences.swift */; };
 		798AF18D1DDC61B9002B8A8C /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798AF18C1DDC61B9002B8A8C /* StringExtension.swift */; };
-		798CF1B81E0FCE8D00BAB754 /* ProjectRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798CF1B71E0FCE8D00BAB754 /* ProjectRequests.swift */; };
+		798CF1B81E0FCE8D00BAB754 /* ProjectsRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798CF1B71E0FCE8D00BAB754 /* ProjectsRequests.swift */; };
 		798CF1BA1E0FDAF200BAB754 /* ProjectDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798CF1B91E0FDAF200BAB754 /* ProjectDetailsViewController.swift */; };
 		798CF1BC1E1032CC00BAB754 /* ProjectMarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798CF1BB1E1032CC00BAB754 /* ProjectMarksViewController.swift */; };
 		79A5AE7D1C56B432004B3FB9 /* PlanningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A5AE7C1C56B432004B3FB9 /* PlanningViewController.swift */; };
@@ -128,7 +132,7 @@
 		79F42BE71D68BE32008DF047 /* DownloadingAllUsersView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79F42BE61D68BE32008DF047 /* DownloadingAllUsersView.xib */; };
 		79F42BE91D68C5D7008DF047 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F42BE81D68C5D7008DF047 /* RequestManager.swift */; };
 		79F42BEB1D68C65A008DF047 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F42BEA1D68C65A008DF047 /* Configuration.swift */; };
-		79F42BED1D68C7CA008DF047 /* UserRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F42BEC1D68C7C9008DF047 /* UserRequests.swift */; };
+		79F42BED1D68C7CA008DF047 /* UsersRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F42BEC1D68C7C9008DF047 /* UsersRequests.swift */; };
 		79F42BEF1D68CCC6008DF047 /* CompletionHandlerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F42BEE1D68CCC6008DF047 /* CompletionHandlerType.swift */; };
 		79F826531C5521AE0002DCC8 /* GPA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F826521C5521AE0002DCC8 /* GPA.swift */; };
 		79F826561C55278D0002DCC8 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F826551C55278D0002DCC8 /* HomeViewController.swift */; };
@@ -192,6 +196,10 @@
 		793C52C31C5E2D9600C33328 /* thirdParty.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = thirdParty.html; sourceTree = "<group>"; };
 		793C52C51C5E311300C33328 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		79486F9A1E0C58ED00950F36 /* SchoolViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SchoolViewController.swift; path = School/SchoolViewController.swift; sourceTree = "<group>"; };
+		794909941E12BCB40090D0C2 /* CurrentProjectsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CurrentProjectsViewController.swift; path = School/CurrentProjectsViewController.swift; sourceTree = "<group>"; };
+		794909991E12BDCF0090D0C2 /* ProjectTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectTableViewCell.swift; path = Views/ProjectTableViewCell/ProjectTableViewCell.swift; sourceTree = "<group>"; };
+		7949099A1E12BDCF0090D0C2 /* ProjectTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProjectTableViewCell.xib; path = Views/ProjectTableViewCell/ProjectTableViewCell.xib; sourceTree = "<group>"; };
+		7949099D1E1311C40090D0C2 /* MarksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MarksViewController.swift; path = School/MarksViewController.swift; sourceTree = "<group>"; };
 		795954A61C58166A00734F91 /* CustomSegues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomSegues.swift; path = Segues/CustomSegues.swift; sourceTree = "<group>"; };
 		7959943F1C52C8F2007BE7C5 /* ApplicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = ApplicationManager.swift; path = Application/ApplicationManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		795994411C52CED9007BE7C5 /* ErrorViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorViewer.swift; sourceTree = "<group>"; };
@@ -215,7 +223,7 @@
 		79622E951C5D4D4B00FBA456 /* ModulesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModulesViewController.swift; path = Modules/ModulesViewController.swift; sourceTree = "<group>"; };
 		79622E971C5D567A00FBA456 /* MarksApiCalls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MarksApiCalls.swift; path = Network/MarksApiCalls.swift; sourceTree = "<group>"; };
 		79622E991C5D56C000FBA456 /* Mark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Mark.swift; path = Model/Mark.swift; sourceTree = "<group>"; };
-		79622E9C1C5D582200FBA456 /* MarksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MarksViewController.swift; path = Marks/MarksViewController.swift; sourceTree = "<group>"; };
+		79622E9C1C5D582200FBA456 /* MarkssViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MarkssViewController.swift; path = Marks/MarkssViewController.swift; sourceTree = "<group>"; };
 		79622E9F1C5D612100FBA456 /* RankingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RankingViewController.swift; path = Profile/RankingViewController.swift; sourceTree = "<group>"; };
 		79622EA11C5D66BB00FBA456 /* SearchUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchUserViewController.swift; path = Profile/SearchUserViewController.swift; sourceTree = "<group>"; };
 		796B2EF51C4ADE5400327E22 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -254,7 +262,7 @@
 		7988506C1C4ACD4500BAA888 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		79892EF51C5024E000F83669 /* UserPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 		798AF18C1DDC61B9002B8A8C /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
-		798CF1B71E0FCE8D00BAB754 /* ProjectRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectRequests.swift; path = Network/ProjectRequests.swift; sourceTree = "<group>"; };
+		798CF1B71E0FCE8D00BAB754 /* ProjectsRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectsRequests.swift; path = Network/ProjectsRequests.swift; sourceTree = "<group>"; };
 		798CF1B91E0FDAF200BAB754 /* ProjectDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectDetailsViewController.swift; path = School/ProjectDetailsViewController.swift; sourceTree = "<group>"; };
 		798CF1BB1E1032CC00BAB754 /* ProjectMarksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectMarksViewController.swift; path = School/ProjectMarksViewController.swift; sourceTree = "<group>"; };
 		79A5AE7C1C56B432004B3FB9 /* PlanningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanningViewController.swift; path = Planning/PlanningViewController.swift; sourceTree = "<group>"; };
@@ -293,7 +301,7 @@
 		79F42BE61D68BE32008DF047 /* DownloadingAllUsersView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DownloadingAllUsersView.xib; path = Views/DownloadingAllUsersView.xib; sourceTree = "<group>"; };
 		79F42BE81D68C5D7008DF047 /* RequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RequestManager.swift; path = Network/RequestManager.swift; sourceTree = "<group>"; };
 		79F42BEA1D68C65A008DF047 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Configuration.swift; path = Application/Configuration.swift; sourceTree = "<group>"; };
-		79F42BEC1D68C7C9008DF047 /* UserRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserRequests.swift; path = Network/UserRequests.swift; sourceTree = "<group>"; };
+		79F42BEC1D68C7C9008DF047 /* UsersRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UsersRequests.swift; path = Network/UsersRequests.swift; sourceTree = "<group>"; };
 		79F42BEE1D68CCC6008DF047 /* CompletionHandlerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompletionHandlerType.swift; sourceTree = "<group>"; };
 		79F826521C5521AE0002DCC8 /* GPA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GPA.swift; path = Model/GPA.swift; sourceTree = "<group>"; };
 		79F826551C55278D0002DCC8 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeViewController.swift; path = Home/HomeViewController.swift; sourceTree = "<group>"; };
@@ -397,14 +405,25 @@
 			isa = PBXGroup;
 			children = (
 				79486F9A1E0C58ED00950F36 /* SchoolViewController.swift */,
+				794909941E12BCB40090D0C2 /* CurrentProjectsViewController.swift */,
 				793B77921E0C6DD2006FFD16 /* StudentModulesViewController.swift */,
 				79D958331E0D327A00C003E8 /* SchoolDataViewController.swift */,
 				79E9D4971E0D51B7006A3910 /* StudentModuleDetailsViewController.swift */,
 				79FF0B0B1E0EB7DF0044CB26 /* ModuleRegisteredStudentsViewController.swift */,
 				798CF1B91E0FDAF200BAB754 /* ProjectDetailsViewController.swift */,
 				798CF1BB1E1032CC00BAB754 /* ProjectMarksViewController.swift */,
+				7949099D1E1311C40090D0C2 /* MarksViewController.swift */,
 			);
 			name = School;
+			sourceTree = "<group>";
+		};
+		794909961E12BD8D0090D0C2 /* ProjectTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				794909991E12BDCF0090D0C2 /* ProjectTableViewCell.swift */,
+				7949099A1E12BDCF0090D0C2 /* ProjectTableViewCell.xib */,
+			);
+			name = ProjectTableViewCell;
 			sourceTree = "<group>";
 		};
 		7959943E1C52C8D1007BE7C5 /* Application */ = {
@@ -448,7 +467,7 @@
 		79622E9B1C5D580E00FBA456 /* Marks */ = {
 			isa = PBXGroup;
 			children = (
-				79622E9C1C5D582200FBA456 /* MarksViewController.swift */,
+				79622E9C1C5D582200FBA456 /* MarkssViewController.swift */,
 				791172E41C5FAD4800581DF3 /* ProjectMarkssViewController.swift */,
 				791172E61C5FB7B800581DF3 /* CommentsViewController.swift */,
 			);
@@ -686,9 +705,9 @@
 			children = (
 				79EA5CB51D5E49E800DA7C30 /* Requests.swift */,
 				79F42BE81D68C5D7008DF047 /* RequestManager.swift */,
-				79F42BEC1D68C7C9008DF047 /* UserRequests.swift */,
+				79F42BEC1D68C7C9008DF047 /* UsersRequests.swift */,
 				793B77941E0C71AE006FFD16 /* ModulesRequests.swift */,
-				798CF1B71E0FCE8D00BAB754 /* ProjectRequests.swift */,
+				798CF1B71E0FCE8D00BAB754 /* ProjectsRequests.swift */,
 			);
 			name = New;
 			sourceTree = "<group>";
@@ -704,6 +723,7 @@
 		79F8265C1C5529F20002DCC8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				794909961E12BD8D0090D0C2 /* ProjectTableViewCell */,
 				79FF0B0D1E0EC3380044CB26 /* StudentGradeTableViewCell */,
 				79CC43F81E0DB9B400FBFC90 /* ModuleActivityTableViewCell */,
 				793B77961E0C79D3006FFD16 /* ModuleTableViewCell */,
@@ -917,6 +937,7 @@
 				79FF0B111E0EC36D0044CB26 /* StudentGradeTableViewCell.xib in Resources */,
 				79EA5CC41D5E789A00DA7C30 /* NotificationsStoryboard.storyboard in Resources */,
 				79EA5CC61D5E78BF00DA7C30 /* PlanningStoryboard.storyboard in Resources */,
+				7949099C1E12BDCF0090D0C2 /* ProjectTableViewCell.xib in Resources */,
 				79F42BE21D68BDF6008DF047 /* ConnexionStoryboard.storyboard in Resources */,
 				79EA5CBC1D5E64C700DA7C30 /* MainViewStoryboard.storyboard in Resources */,
 				79F2B1021C60FAE600244AC6 /* EmptyTableView.xib in Resources */,
@@ -1018,10 +1039,11 @@
 				79F42BEF1D68CCC6008DF047 /* CompletionHandlerType.swift in Sources */,
 				798AF18D1DDC61B9002B8A8C /* StringExtension.swift in Sources */,
 				7976955B1C562730001772A2 /* ImageDownloader.swift in Sources */,
-				798CF1B81E0FCE8D00BAB754 /* ProjectRequests.swift in Sources */,
+				798CF1B81E0FCE8D00BAB754 /* ProjectsRequests.swift in Sources */,
 				79E9D4981E0D51B7006A3910 /* StudentModuleDetailsViewController.swift in Sources */,
 				79152D871C67726800513E0F /* OtherUserViewController.swift in Sources */,
 				795F1EA21C56019E00B8C347 /* History.swift in Sources */,
+				7949099B1E12BDCF0090D0C2 /* ProjectTableViewCell.swift in Sources */,
 				793B77991E0C79FE006FFD16 /* ModuleTableViewCell.swift in Sources */,
 				795954A71C58166A00734F91 /* CustomSegues.swift in Sources */,
 				798CF1BC1E1032CC00BAB754 /* ProjectMarksViewController.swift in Sources */,
@@ -1042,12 +1064,14 @@
 				79F8ADEE1C52AC9100F4FDD4 /* User.swift in Sources */,
 				79622E9A1C5D56C000FBA456 /* Mark.swift in Sources */,
 				79EAFE731C5619ED005EE542 /* CustomUITableViewCell.swift in Sources */,
+				794909951E12BCB40090D0C2 /* CurrentProjectsViewController.swift in Sources */,
 				795F1EA61C560F4A00B8C347 /* DateExtensions.swift in Sources */,
-				79F42BED1D68C7CA008DF047 /* UserRequests.swift in Sources */,
+				79F42BED1D68C7CA008DF047 /* UsersRequests.swift in Sources */,
 				79152D851C666A0B00513E0F /* SelectSemestersViewController.swift in Sources */,
+				7949099E1E1311C40090D0C2 /* MarksViewController.swift in Sources */,
 				795CC32E1C5CCAED007AFE87 /* ProjectsDetailsViewController.swift in Sources */,
 				795D81C31C6226D200187E43 /* RegisteredStudentsViewController.swift in Sources */,
-				79622E9D1C5D582200FBA456 /* MarksViewController.swift in Sources */,
+				79622E9D1C5D582200FBA456 /* MarkssViewController.swift in Sources */,
 				79152D891C67A43D00513E0F /* ContactsHelper.swift in Sources */,
 				79779AA41C591A0D008803C5 /* PlanningApiCalls.swift in Sources */,
 				79622E981C5D567A00FBA456 /* MarksApiCalls.swift in Sources */,

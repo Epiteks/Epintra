@@ -15,6 +15,7 @@ class ModuleActivityTableViewCell: UITableViewCell {
     @IBOutlet weak var startDateLabel: UILabel!
     @IBOutlet weak var endDateLabel: UILabel!
     @IBOutlet weak var activityType: UIView!
+    @IBOutlet weak var moduleLabel: UILabel!
     
     var activityColor: UIColor! = nil
     

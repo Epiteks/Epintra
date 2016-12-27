@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class UserRequests: RequestManager {
+class UsersRequests: RequestManager {
 	
 	/*!
 	API call to authenticate the user and get his token if credentials are good.
@@ -167,8 +167,28 @@ class UserRequests: RequestManager {
 				break
 			}
 		}
-	}
+    }
+    
+    func allMarks(_ completion: @escaping (Result<[Mark]>) -> Void) {
+        
+        super.call("allMarks") { (response) in
+            switch response {
+            case .success(let responseJSON):
+                var resp = [Mark]()
+                for tmp in responseJSON.arrayValue {
+                    resp.insert(Mark(dict: tmp), at: 0)
+                }
+                completion(Result.success(resp))
+                
+                break
+            case .failure(let err):
+                completion(Result.failure(type: err.type, message: err.message))
+                log.error("Get all marks :  \(err)")
+                break
+            }
+        }
+    }
 	
 }
 
-let userRequests = UserRequests()
+let usersRequests = UsersRequests()

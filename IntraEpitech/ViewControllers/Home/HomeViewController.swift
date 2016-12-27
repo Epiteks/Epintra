@@ -90,7 +90,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 	
 	func userDataCall(_ group: DispatchGroup) {
 		group.enter()
-		userRequests.getCurrentUserData { result in
+		usersRequests.getCurrentUserData { result in
 			
 			switch (result) {
 			case .success(_):
@@ -107,7 +107,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 	
 	func userHistoryCall(_ group: DispatchGroup) {
 		group.enter()
-		userRequests.getHistory() { result in
+		usersRequests.getHistory() { result in
 			switch (result) {
 			case .success(_):
 				log.info("Get user history")

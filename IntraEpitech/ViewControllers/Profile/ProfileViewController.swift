@@ -51,9 +51,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 	]
 	
 	override func viewDidLoad() {
-		
 		currentUser = ApplicationManager.sharedInstance.user
-		
 		calls()
 	}
 	
@@ -77,12 +75,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		self.downloadingFlags = true
 		
 		// TODO REMOVE THIS SHIT
-		userRequests.getUserFlags(ApplicationManager.sharedInstance.currentLogin!) { (result) in
+		usersRequests.getUserFlags(ApplicationManager.sharedInstance.currentLogin!) { (result) in
 			switch (result) {
 			case .success(let data):
-				if let flgs = data as? [Flags] {
-					self.flags = flgs
-				}
+					self.flags = data
 				log.info("User flags fetched")
 				break
 			case .failure(let error):
@@ -104,19 +100,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 		
 		self.downloadingFiles = true
 		
-		userRequests.getUserDocuments() { (result) in
+		usersRequests.getUserDocuments { (result) in
 			switch (result) {
-			case .success(let data):
-				if let documents = data as? [File] {
-					self.files = documents
-				}
-				log.info("User documents fetched")
-				break
+            case .success(let data):
+                self.files = data
 			case .failure(let error):
 				if error.message != nil {
 					ErrorViewer.errorPresent(self, mess: error.message!) { }
 				}
-				break
 			}
 			self.downloadingFiles = false
 			self.tableView.reloadData()
@@ -281,7 +272,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 	}
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		if (indexPath as NSIndexPath).section == 0 {
+		if indexPath.section == 0 {
 			return 110
 		} else {
 			return 44
@@ -293,19 +284,21 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		tableView.deselectRow(at: indexPath, animated: true)
 		
-		if ((indexPath as NSIndexPath).section == 1) {
-			webViewData = files![(indexPath as NSIndexPath).row]
-			self.performSegue(withIdentifier: "webViewSegue", sender: self)
+        tableView.deselectRow(at: indexPath, animated: true)
+		
+		if indexPath.section == 1, let file = files?[(indexPath as NSIndexPath).row] {
+			open(file: file)
 		}
 	}
-	
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-		if (segue.identifier == "webViewSegue") {
-			let vc: WebViewViewController = segue.destination as! WebViewViewController
-			vc.file = webViewData!
-			//vc.isUrl = true
-		}
-	}
+    
+    func open(file: File) {
+        
+        let vc = WebViewViewController()
+        
+        vc.file = file
+        
+        self.show(vc, sender: self)
+        
+    }
 }

@@ -28,9 +28,6 @@ class StudentModuleDetailsViewController: SchoolDataViewController, UITableViewD
         "class":  UIUtils.planningGreenColor()
     ]
     
-    //    /// Data to pass to project details view
-    //    var projectDetailsToSend: ProjectDetail? = nil
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -137,6 +134,7 @@ class StudentModuleDetailsViewController: SchoolDataViewController, UITableViewD
             cell?.startDateLabel.text = activity.begin?.toDate().toActiDate()
             cell?.endDateLabel.text = activity.end?.toDate().toActiDate()
             cell?.activityColor = self.typeColors[activity.typeActiCode!]
+            cell?.moduleLabel.text = ""
             
             if let characters = activity.mark?.characters, characters.count > 0 {
                 cell?.accessoryType = .disclosureIndicator
@@ -159,9 +157,7 @@ class StudentModuleDetailsViewController: SchoolDataViewController, UITableViewD
             if activity.typeActiCode == "proj" {
                     self.willLoadNextView = true
                     self.addActivityIndicator()
-                    
                     let dispatchGroup = DispatchGroup()
-                    
                     DispatchQueue.global(qos: .utility).async {
                         DispatchQueue.global(qos: .utility).async(group: dispatchGroup, execute: {
                             self.getProjectFiles(forProject: activity, group: dispatchGroup)
@@ -180,7 +176,7 @@ class StudentModuleDetailsViewController: SchoolDataViewController, UITableViewD
             } else if let characters = activity.mark?.characters, characters.count > 0 {
                 self.willLoadNextView = true
                 self.addActivityIndicator()
-                projectRequests.marks(forProject: activity) { result in
+                projectsRequests.marks(forProject: activity) { _ in
                     self.performSegue(withIdentifier: "projectMarksSegue", sender: self)
                     self.willLoadNextView = false
                     self.removeActivityIndicator()
@@ -194,7 +190,7 @@ class StudentModuleDetailsViewController: SchoolDataViewController, UITableViewD
     
     func getProjectFiles(forProject activity: Project, group: DispatchGroup) {
         group.enter()
-        projectRequests.files(forProject: activity, completion: { (result) in
+        projectsRequests.files(forProject: activity, completion: { (result) in
             switch (result) {
             case .success(let files):
                 activity.files = files
@@ -210,7 +206,7 @@ class StudentModuleDetailsViewController: SchoolDataViewController, UITableViewD
     
     func getProjectDetails(forProject activity: Project, group: DispatchGroup) {
         group.enter()
-        projectRequests.details(forProject: activity, completion: { result in
+        projectsRequests.details(forProject: activity, completion: { result in
             switch (result) {
             case .success(_):
                 log.info("Project details set")
@@ -223,7 +219,6 @@ class StudentModuleDetailsViewController: SchoolDataViewController, UITableViewD
             }
             group.leave()
         })
-        
     }
     
     func registeredStudentsButtonTouched() {
@@ -245,7 +240,4 @@ class StudentModuleDetailsViewController: SchoolDataViewController, UITableViewD
             self.barButtonItem.isEnabled = true
         }
     }
-    
-    
-    
 }

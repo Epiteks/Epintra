@@ -9,7 +9,26 @@
 import Foundation
 import SwiftyJSON
 
-class ProjectRequests: RequestManager {
+class ProjectsRequests: RequestManager {
+    
+    func current(completion: @escaping (Result<[Project]>) -> Void) {
+        super.call("currentProjects") { (response) in
+            switch response {
+            case .success(let responseJSON):
+                var resp = [Project]()
+                for tmp in responseJSON.arrayValue {
+                    if (tmp["type_acti_code"].stringValue == "proj") {
+                        resp.append(Project(dict: tmp))
+                    }
+                }
+                completion(Result.success(resp))
+                break
+            case .failure(let err):
+                completion(Result.failure(type: err.type, message: err.message))
+                log.error("Fetching current projects:  \(err)")
+            }
+        }
+    }
     
     func details(forProject project: Project, completion: @escaping (Result<Any?>) -> Void) {
         
@@ -23,7 +42,7 @@ class ProjectRequests: RequestManager {
                 break
             case .failure(let err):
                 completion(Result.failure(type: err.type, message: err.message))
-                log.error("Fetching modules:  \(err)")
+                log.error("Fetching project details:  \(err)")
             }
         }
     }
@@ -44,7 +63,7 @@ class ProjectRequests: RequestManager {
                 break
             case .failure(let err):
                 completion(Result.failure(type: err.type, message: err.message))
-                log.error("Fetching modules:  \(err)")
+                log.error("Fetching project files:  \(err)")
             }
         }
     }
@@ -65,10 +84,10 @@ class ProjectRequests: RequestManager {
                 break
             case .failure(let err):
                 completion(Result.failure(type: err.type, message: err.message))
-                log.error("Fetching modules:  \(err)")
+                log.error("Fetching project marks:  \(err)")
             }
         }
     }
 }
 
-let projectRequests = ProjectRequests()
+let projectsRequests = ProjectsRequests()

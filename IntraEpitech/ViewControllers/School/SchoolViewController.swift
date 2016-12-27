@@ -14,6 +14,7 @@ class SchoolViewController: UIViewController {
     @IBOutlet weak var menuControl: UISegmentedControl!
     @IBOutlet weak var modulesContainer: UIView!
     @IBOutlet weak var projectsContainer: UIView!
+    @IBOutlet weak var marksContainer: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,13 +56,15 @@ class SchoolViewController: UIViewController {
      
         self.modulesContainer.isHidden = true
         self.projectsContainer.isHidden = true
+        self.marksContainer.isHidden = true
         
         switch index {
         case 0:
             self.modulesContainer.isHidden = false
-        default:
+        case 1:
             self.projectsContainer.isHidden = false
+        default:
+            self.marksContainer.isHidden = false
         }
-        
     }
 }

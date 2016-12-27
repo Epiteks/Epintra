@@ -30,6 +30,7 @@ class User: NSObject {
 	var marks: [Mark]?
 	var modules: [Module]?
 	var phone: String?
+    var projects: [Project]?
 	
 	init(dict: JSON) {
 		id = dict["id"].stringValue

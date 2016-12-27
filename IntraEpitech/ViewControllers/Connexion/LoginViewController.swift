@@ -146,7 +146,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 			password = "monsupermdp"
 		}
 		
-		userRequests.auth(login, password: password) { (result) in
+		usersRequests.auth(login, password: password) { (result) in
 			
 			MJProgressView.instance.hideProgress()
 			

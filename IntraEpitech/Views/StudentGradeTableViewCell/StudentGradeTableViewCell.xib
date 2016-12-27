@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KuB-6C-dFx">
-                        <rect key="frame" x="8" y="11" width="260" height="21"/>
+                        <rect key="frame" x="15" y="11" width="247" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -32,10 +32,10 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="ngi-lZ-Cgo" firstAttribute="leading" secondItem="KuB-6C-dFx" secondAttribute="trailing" constant="2" id="7Uq-Fb-MpG"/>
+                    <constraint firstItem="ngi-lZ-Cgo" firstAttribute="leading" secondItem="KuB-6C-dFx" secondAttribute="trailing" constant="8" id="7Uq-Fb-MpG"/>
                     <constraint firstItem="ngi-lZ-Cgo" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Mcx-gQ-y9J"/>
                     <constraint firstAttribute="trailingMargin" secondItem="ngi-lZ-Cgo" secondAttribute="trailing" id="UPh-2Q-tZo"/>
-                    <constraint firstAttribute="leadingMargin" secondItem="KuB-6C-dFx" secondAttribute="leading" id="VFR-40-HVY"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="KuB-6C-dFx" secondAttribute="leading" constant="-7" id="VFR-40-HVY"/>
                     <constraint firstItem="KuB-6C-dFx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="dbt-IV-Hzd"/>
                     <constraint firstAttribute="bottomMargin" secondItem="KuB-6C-dFx" secondAttribute="bottom" constant="3" id="r4d-OT-kTI"/>
                 </constraints>
