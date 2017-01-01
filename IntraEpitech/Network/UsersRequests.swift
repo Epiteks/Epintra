@@ -30,11 +30,11 @@ class UsersRequests: RequestManager {
 					completion(Result.success(nil))
 				}
 				
-				break
+				
 			case .failure(let err):
 				completion(Result.failure(type: err.type, message: err.message))
 				log.error("Authentication:  \(err)")
-				break
+				
 			}
 		}
 	}
@@ -61,11 +61,11 @@ class UsersRequests: RequestManager {
 				
 				completion(Result.success(nil))
 				
-				break
+				
 			case .failure(let err):
 				completion(Result.failure(type: err.type, message: err.message))
 				log.error("GetCurrentUserData:  \(err)")
-				break
+				
 			}
 		}
 	}
@@ -88,11 +88,11 @@ class UsersRequests: RequestManager {
 				
 				completion(Result.success(usr))
 				
-				break
+				
 			case .failure(let err):
 				completion(Result.failure(type: err.type, message: err.message))
 				log.error("GetUserData:  \(err)")
-				break
+				
 			}
 		}
 	}
@@ -111,11 +111,11 @@ class UsersRequests: RequestManager {
 			case .success(let responseJSON):
 				app.user?.fillHistory(responseJSON)
 				completion(Result.success(nil))
-				break
+				
 			case .failure(let err):
 				completion(Result.failure(type: err.type, message: err.message))
 				log.error("GetHistory:  \(err)")
-				break
+				
 			}
 		}
 	}
@@ -134,14 +134,10 @@ class UsersRequests: RequestManager {
 				resp.append(Flags(name: "remarkable", dict: flags["remarkable"]))
 				resp.append(Flags(name: "difficulty", dict: flags["difficulty"]))
 				resp.append(Flags(name: "ghost", dict: flags["ghost"]))
-				
 				completion(Result.success(resp))
-				
-				break
 			case .failure(let err):
 				completion(Result.failure(type: err.type, message: err.message))
 				log.error("GetUserFlags:  \(err)")
-				break
 			}
 		}
 	}
@@ -160,11 +156,10 @@ class UsersRequests: RequestManager {
 				}
 				completion(Result.success(resp))
 				
-				break
 			case .failure(let err):
 				completion(Result.failure(type: err.type, message: err.message))
 				log.error("GetUserDocuments:  \(err)")
-				break
+				
 			}
 		}
     }
@@ -179,16 +174,55 @@ class UsersRequests: RequestManager {
                     resp.insert(Mark(dict: tmp), at: 0)
                 }
                 completion(Result.success(resp))
-                
-                break
             case .failure(let err):
                 completion(Result.failure(type: err.type, message: err.message))
                 log.error("Get all marks :  \(err)")
-                break
+                
             }
         }
     }
-	
+    
+    func download(students promo: String, completion: @escaping (Result<[StudentInfo]>) -> Void) {
+        
+        let params = String(format: "?promotion=%@&format=json", promo)
+        
+        super.call("epirank", urlParams: params) { (response) in
+            switch response {
+            case .success(let responseJSON):
+                
+                let updatedAtString = responseJSON["updatedAt"].stringValue
+                
+                var students = [StudentInfo]()
+                for tmp in responseJSON["students"].arrayValue {
+                    students.append(StudentInfo(dict: tmp, promo: promo))
+                }
+                
+                //if let epirankInformations = ApplicationManager.sharedInstance.epirankInformations {
+                
+                    //epirankInformations.updated(promotion: promo, at: Date(fromEpirank: updatedAtString))
+                    DispatchQueue.main.async {
+                        do {
+                            
+                            var epirankInformation = ApplicationManager.sharedInstance.realmManager.epirankInformation(forPromo: promo)
+                            
+                            if epirankInformation == nil {
+                                epirankInformation = EpirankInformation(promo: promo, date: Date(fromEpirank: updatedAtString))
+                            }
+                            
+                            try ApplicationManager.sharedInstance.realmManager.save(students: students, updatedAt: epirankInformation!)
+                        } catch {
+                            log.error("Realm save failed")
+                        }
+                    //}
+                }
+                completion(Result.success(students))
+            case .failure(let err):
+                completion(Result.failure(type: err.type, message: err.message))
+                log.error("Get all marks :  \(err)")
+                
+            }
+        }
+    }
 }
 
 let usersRequests = UsersRequests()

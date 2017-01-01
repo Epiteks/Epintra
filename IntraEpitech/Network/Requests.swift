@@ -54,7 +54,7 @@ class Requests {
 		
 		// Marks
 		"allMarks": Request(endpoint: "/marks", method: .get, secured: true), // Get all marks of user
-		"projectMarks": Request(endpoint: "/project/marks", method: .get, secured: true), // Get all marks of a project
+		"projectMarks": Request(endpoint: "/project/marks", method: .get, secured: true) // Get all marks of a project
 		]
 	
 }

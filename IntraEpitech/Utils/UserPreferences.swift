@@ -10,6 +10,8 @@ import AVFoundation
 
 class UserPreferences: NSObject {
 	
+    // TODO CLEAN THIS SHIT
+    
 	class func saveData(_ login:  String, password:  String) {
 		
 		let def = UserDefaults.standard
@@ -133,4 +135,21 @@ class UserPreferences: NSObject {
 		
 		def.removeObject(forKey: "semesters")
 	}
+    
+    class func setLastEpirankUpdate(date: Date) {
+        
+        let def = UserDefaults.standard
+        
+        def.set(date, forKey: "epirankUpdatedAt")
+    }
+    
+    class func getLastEpirankUpdate() -> Date? {
+        
+        let def = UserDefaults.standard
+        
+        if let date = def.object(forKey: "epirankUpdatedAt") as? Date {
+            return date
+        }
+        return nil
+    }
 }

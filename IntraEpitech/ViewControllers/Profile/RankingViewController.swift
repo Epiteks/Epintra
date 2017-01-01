@@ -206,69 +206,69 @@ class RankingViewController: UIViewController, UITableViewDelegate, UITableViewD
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "studentCell")!
 		
-		let login = cell.viewWithTag(1) as! UILabel
-		let city = cell.viewWithTag(2) as! UILabel
-		let gpa = cell.viewWithTag(3) as! UILabel
-		
-		if(resultSearchController.isActive) {
-			login.text = filteredData[(indexPath as NSIndexPath).row].login!
-			city.text = String(filteredData[(indexPath as NSIndexPath).row].position!) + " - " + filteredData[(indexPath as NSIndexPath).row].city!
-			gpa.text = String(filteredData[(indexPath as NSIndexPath).row].gpa!)
-		} else {
-			login.text = students[(indexPath as NSIndexPath).row].login!
-			city.text = String(students[(indexPath as NSIndexPath).row].position!) + " - " + students[(indexPath as NSIndexPath).row].city!
-			gpa.text = String(students[(indexPath as NSIndexPath).row].gpa!)
-			
-			if (login.text == ApplicationManager.sharedInstance.user?.login!) {
-				login.textColor = UIUtils.planningRedColor()
-				city.textColor = UIUtils.planningRedColor()
-				gpa.textColor = UIUtils.planningRedColor()
-			} else {
-				login.textColor = UIColor.black
-				city.textColor = UIColor.lightGray
-				gpa.textColor = UIColor.black
-			}
-			
-		}
+//		let login = cell.viewWithTag(1) as! UILabel
+//		let city = cell.viewWithTag(2) as! UILabel
+//		let gpa = cell.viewWithTag(3) as! UILabel
+//		
+//		if(resultSearchController.isActive) {
+//			login.text = filteredData[(indexPath as NSIndexPath).row].login!
+//			city.text = String(filteredData[(indexPath as NSIndexPath).row].position!) + " - " + filteredData[(indexPath as NSIndexPath).row].city!
+////			gpa.text = String(filteredData[(indexPath as NSIndexPath).row].gpa!)
+//		} else {
+//			login.text = students[(indexPath as NSIndexPath).row].login!
+//			city.text = String(students[(indexPath as NSIndexPath).row].position!) + " - " + students[(indexPath as NSIndexPath).row].city!
+////			gpa.text = String(students[(indexPath as NSIndexPath).row].gpa!)
+//			
+//			if (login.text == ApplicationManager.sharedInstance.user?.login!) {
+//				login.textColor = UIUtils.planningRedColor()
+//				city.textColor = UIUtils.planningRedColor()
+//				gpa.textColor = UIUtils.planningRedColor()
+//			} else {
+//				login.textColor = UIColor.black
+//				city.textColor = UIColor.lightGray
+//				gpa.textColor = UIColor.black
+//			}
+//			
+//		}
 		
 		return cell
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		tableView.deselectRow(at: indexPath, animated: true)
-		
-		tableView.deselectRow(at: indexPath, animated: true)
-		self.view.endEditing(true)
-		let usr = (self.resultSearchController.isActive == true ? filteredData[(indexPath as NSIndexPath).row]:  students[(indexPath as NSIndexPath).row])
-		
-		tableView.isUserInteractionEnabled = false
-		tableView.isScrollEnabled = false
-		self.promoSelection.isUserInteractionEnabled = false
-		MJProgressView.instance.showProgress(self.view, white: false)
-		UserApiCalls.getSelectedUserData(usr.login!) { (isOk: Bool, resp: User?, mess: String) in
-			
-			if (!isOk) {
-				ErrorViewer.errorPresent(self, mess: mess) {}
-				MJProgressView.instance.hideProgress()
-			} else {
-				self.selectedUser = resp
-				print(self.selectedUser?.login)
-				MJProgressView.instance.hideProgress()
-				self.performSegue(withIdentifier: "otherUserProfileSegue", sender: self)
-			}
-			tableView.isUserInteractionEnabled = true
-			tableView.isScrollEnabled = true
-			self.promoSelection.isUserInteractionEnabled = true
-		}
+//		tableView.deselectRow(at: indexPath, animated: true)
+//		
+//		tableView.deselectRow(at: indexPath, animated: true)
+//		self.view.endEditing(true)
+//		let usr = (self.resultSearchController.isActive == true ? filteredData[(indexPath as NSIndexPath).row]:  students[(indexPath as NSIndexPath).row])
+//		
+//		tableView.isUserInteractionEnabled = false
+//		tableView.isScrollEnabled = false
+//		self.promoSelection.isUserInteractionEnabled = false
+//		MJProgressView.instance.showProgress(self.view, white: false)
+//		UserApiCalls.getSelectedUserData(usr.login!) { (isOk: Bool, resp: User?, mess: String) in
+//			
+//			if (!isOk) {
+//				ErrorViewer.errorPresent(self, mess: mess) {}
+//				MJProgressView.instance.hideProgress()
+//			} else {
+//				self.selectedUser = resp
+//				print(self.selectedUser?.login)
+//				MJProgressView.instance.hideProgress()
+//				self.performSegue(withIdentifier: "otherUserProfileSegue", sender: self)
+//			}
+//			tableView.isUserInteractionEnabled = true
+//			tableView.isScrollEnabled = true
+//			self.promoSelection.isUserInteractionEnabled = true
+//		}
 		
 	}
 	
 	func updateSearchResults(for searchController: UISearchController) {
 		if searchController.searchBar.text?.characters.count > 0 {
-			filteredData.removeAll(keepingCapacity: false)
-			let array = students.filter() { ($0.login?.contains(searchController.searchBar.text!.lowercased()))! }
-			filteredData = array
-			tableView.reloadData()
+//			filteredData.removeAll(keepingCapacity: false)
+//			let array = students.filter() { ($0.login?.contains(searchController.searchBar.text!.lowercased()))! }
+//			filteredData = array
+//			tableView.reloadData()
 			
 		} else {
 			

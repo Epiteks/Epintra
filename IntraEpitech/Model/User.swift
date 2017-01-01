@@ -31,6 +31,7 @@ class User: NSObject {
 	var modules: [Module]?
 	var phone: String?
     var projects: [Project]?
+    var studentyear: Int?
 	
 	init(dict: JSON) {
 		id = dict["id"].stringValue
@@ -44,6 +45,7 @@ class User: NSObject {
 		promotion = dict["promo"].intValue
 		credits = dict["credits"].intValue
 		city = dict["location"].stringValue
+        studentyear = dict["studentyear"].intValue
 		
 		let gpas = dict["gpa"].arrayValue
 		for gpa in gpas {

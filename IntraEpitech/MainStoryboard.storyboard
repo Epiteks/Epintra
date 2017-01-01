@@ -1248,49 +1248,19 @@
                                     <action selector="segmentedChanged:" destination="8a6-Zb-ukB" eventType="valueChanged" id="aIt-YT-Ixa"/>
                                 </connections>
                             </segmentedControl>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hRL-G2-wnE">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qLr-Xd-wGF">
-                                        <rect key="frame" x="279" y="116" width="42" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.16862745100000001" green="0.20784313730000001" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstItem="qLr-Xd-wGF" firstAttribute="centerX" secondItem="hRL-G2-wnE" secondAttribute="centerX" id="5uf-Kz-eyP"/>
-                                    <constraint firstItem="qLr-Xd-wGF" firstAttribute="centerY" secondItem="hRL-G2-wnE" secondAttribute="centerY" constant="-141.75" id="abI-Au-Yan"/>
-                                    <constraint firstAttribute="trailing" secondItem="qLr-Xd-wGF" secondAttribute="trailing" constant="275" id="dDu-rb-jTe"/>
-                                    <constraint firstItem="qLr-Xd-wGF" firstAttribute="leading" secondItem="hRL-G2-wnE" secondAttribute="leading" constant="275" id="zRc-13-312"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="dDu-rb-jTe"/>
-                                        <exclude reference="zRc-13-312"/>
-                                    </mask>
-                                </variation>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="khP-zx-wv7" firstAttribute="top" secondItem="hCO-LD-COG" secondAttribute="bottom" id="GAT-jk-BxH"/>
-                            <constraint firstItem="hRL-G2-wnE" firstAttribute="top" secondItem="8qb-2w-Gs0" secondAttribute="bottom" id="Nn9-3i-CfS"/>
                             <constraint firstAttribute="trailingMargin" secondItem="hCO-LD-COG" secondAttribute="trailing" constant="-20" id="Nxw-V1-1jS"/>
                             <constraint firstAttribute="leadingMargin" secondItem="ywU-r6-Xy8" secondAttribute="leading" id="Rod-94-FC3"/>
-                            <constraint firstItem="khP-zx-wv7" firstAttribute="top" secondItem="hRL-G2-wnE" secondAttribute="bottom" id="VgY-Ho-JWH"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="hRL-G2-wnE" secondAttribute="trailing" constant="-20" id="awZ-10-FcJ"/>
                             <constraint firstItem="hCO-LD-COG" firstAttribute="leading" secondItem="CVm-hJ-bSE" secondAttribute="leadingMargin" constant="-20" id="cvw-Zf-iPa"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ywU-r6-Xy8" secondAttribute="trailing" id="fUd-Z7-oG1"/>
                             <constraint firstItem="hCO-LD-COG" firstAttribute="top" secondItem="ywU-r6-Xy8" secondAttribute="bottom" constant="8" id="htV-aO-gjC"/>
                             <constraint firstItem="ywU-r6-Xy8" firstAttribute="top" secondItem="8qb-2w-Gs0" secondAttribute="bottom" constant="8" id="lem-y3-HvZ"/>
-                            <constraint firstItem="hRL-G2-wnE" firstAttribute="leading" secondItem="CVm-hJ-bSE" secondAttribute="leadingMargin" constant="-20" id="yjj-rr-eMC"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="_downloadingLabel" destination="qLr-Xd-wGF" id="FFm-m9-t95"/>
-                        <outlet property="_downloadingView" destination="hRL-G2-wnE" id="JRo-n0-hy3"/>
                         <outlet property="_promoSelection" destination="ywU-r6-Xy8" id="z6q-FJ-Ygq"/>
                         <outlet property="_tableView" destination="hCO-LD-COG" id="KHI-UB-PDt"/>
                         <segue destination="UIN-VI-pRb" kind="show" identifier="otherUserProfileSegue" id="7C7-Yy-o9Q"/>
@@ -2227,7 +2197,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="WEN-N9-tGx"/>
-        <segue reference="g89-O9-UIS"/>
+        <segue reference="7C7-Yy-o9Q"/>
         <segue reference="Cdu-OT-W1z"/>
         <segue reference="enT-Z0-pMd"/>
         <segue reference="jcX-Uh-dOi"/>

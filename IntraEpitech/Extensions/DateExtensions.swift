@@ -99,4 +99,12 @@ public extension Date {
 		
 		return str
 	}
+
+    init(fromEpirank epirankDateString: String) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        dateFormatter.timeZone = TimeZone(identifier: "GMT")
+        self = dateFormatter.date(from: epirankDateString)!
+    }
+    
 }

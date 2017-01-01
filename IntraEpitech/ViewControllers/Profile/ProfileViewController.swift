@@ -53,6 +53,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 	override func viewDidLoad() {
 		currentUser = ApplicationManager.sharedInstance.user
 		calls()
+       
 	}
 	
 	override func awakeFromNib() {

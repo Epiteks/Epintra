@@ -23,10 +23,10 @@ class DBManager: NSObject {
 	}
 	
 	func addStudentData(_ studentInfo: StudentInfo) -> Bool {
-		database!.open()
-		let isInserted = database!.executeUpdate("INSERT INTO student_info (login, ville, gpa, promo) VALUES (?, ?, ?, ?)", withArgumentsIn: [studentInfo.login!, studentInfo.city!, studentInfo.gpa!, studentInfo.promo!])
-		database!.close()
-		return isInserted
+//		database!.open()
+//		let isInserted = database!.executeUpdate("INSERT INTO student_info (login, ville, gpa, promo) VALUES (?, ?, ?, ?)", withArgumentsIn: [studentInfo.login!, studentInfo.city!, studentInfo.gpa!, studentInfo.promo!])
+//		database!.close()
+		return false 
 	}
 	
 	//	func updateStudentData(studentInfo: StudentInfo) -> Bool {
@@ -38,7 +38,7 @@ class DBManager: NSObject {
 	
 	func deleteStudentData(_ studentInfo: StudentInfo) -> Bool {
 		database!.open()
-		let isDeleted = database!.executeUpdate("DELETE FROM student_info WHERE login=?", withArgumentsIn: [studentInfo.login!])
+		let isDeleted = database!.executeUpdate("DELETE FROM student_info WHERE login=?", withArgumentsIn: [studentInfo.login])
 		database!.close()
 		return isDeleted
 	}
@@ -59,7 +59,7 @@ class DBManager: NSObject {
 				let studentInfo:  StudentInfo = StudentInfo()
 				studentInfo.login = resultSet.string(forColumn: "login")
 				studentInfo.city = resultSet.string(forColumn: "ville")
-				studentInfo.gpa = Float(resultSet.string(forColumn: "gpa"))
+			//	studentInfo.gpa = Float(resultSet.string(forColumn: "gpa"))
 				studentInfo.promo = resultSet.string(forColumn: "promo")
 				marrStudentInfo.add(studentInfo)
 			}
@@ -78,9 +78,9 @@ class DBManager: NSObject {
 				let studentInfo:  StudentInfo = StudentInfo()
 				studentInfo.login = resultSet.string(forColumn: "login")
 				studentInfo.city = resultSet.string(forColumn: "ville")
-				studentInfo.gpa = Float(resultSet.string(forColumn: "gpa"))
+		//		studentInfo.gpa = Float(resultSet.string(forColumn: "gpa"))
 				studentInfo.promo = resultSet.string(forColumn: "promo")
-				studentInfo.position = i
+				//studentInfo.position = i
 				i += 1
 				marrStudentInfo.add(studentInfo)
 			}

@@ -21,6 +21,11 @@ class RequestManager: NSObject {
 		if req!.secured == true {
 			headers["token"] = ApplicationManager.sharedInstance.token!
 		}
+        
+        // Change URL Epirank
+        if requestID == "epirank" {
+            newURL = "https://epirank.junger.io/"
+        }
 		
 		if (urlParams != nil) {
 			newURL += urlParams!

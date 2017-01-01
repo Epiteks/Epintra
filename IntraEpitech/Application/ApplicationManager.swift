@@ -23,6 +23,8 @@ class ApplicationManager: NSObject {
 	internal var canDownload: Bool?
 	internal var defaultCalendar: String?
 
+    var realmManager: RealmManager = RealmManager()
+    
 	// DATA
 	internal var projects: [Project]?
 	internal var modules: [Module]?

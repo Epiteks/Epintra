@@ -175,39 +175,39 @@ class SearchUserViewController: UIViewController, UITableViewDelegate, UITableVi
 		
 		let cell = tableView.dequeueReusableCell(withIdentifier: "userCell")
 		
-		let loginTitle = cell?.viewWithTag(1) as! UILabel
-		let promo = cell?.viewWithTag(2) as! UILabel
-		let city = cell?.viewWithTag(3) as! UILabel
-		
-		if(resultSearchController.isActive) {
-			loginTitle.text = filteredData[(indexPath as NSIndexPath).row].login
-			promo.text = NSLocalizedString(String(filteredData[(indexPath as NSIndexPath).row].promo!), comment: "")
-			city.text = filteredData[(indexPath as NSIndexPath).row].city
-		} else {
-			loginTitle.text = users[(indexPath as NSIndexPath).row].login
-			promo.text = NSLocalizedString(String(users[(indexPath as NSIndexPath).row].promo!), comment: "")
-			city.text = users[(indexPath as NSIndexPath).row].city
-		}
+//		let loginTitle = cell?.viewWithTag(1) as! UILabel
+//		let promo = cell?.viewWithTag(2) as! UILabel
+//		let city = cell?.viewWithTag(3) as! UILabel
+//		
+//		if(resultSearchController.isActive) {
+//			loginTitle.text = filteredData[(indexPath as NSIndexPath).row].login
+//			promo.text = NSLocalizedString(String(filteredData[(indexPath as NSIndexPath).row].promo!), comment: "")
+//			city.text = filteredData[(indexPath as NSIndexPath).row].city
+//		} else {
+//			loginTitle.text = users[(indexPath as NSIndexPath).row].login
+//			promo.text = NSLocalizedString(String(users[(indexPath as NSIndexPath).row].promo!), comment: "")
+//			city.text = users[(indexPath as NSIndexPath).row].city
+//		}
 		
 		return cell!
 	}
 	
 	func updateSearchResults(for searchController: UISearchController) {
-		if searchController.searchBar.text?.characters.count > 0 {
-			filteredData.removeAll(keepingCapacity: false)
-			let array = users.filter() { ($0.login?.contains(searchController.searchBar.text!.lowercased()))! }
-			filteredData = array
-			tableView.reloadData()
-			
-		} else {
-			
-			filteredData.removeAll(keepingCapacity: false)
-			
-			filteredData = users
-			
-			tableView.reloadData()
-			
-		}
+//		if searchController.searchBar.text?.characters.count > 0 {
+//			filteredData.removeAll(keepingCapacity: false)
+//			let array = users.filter() { ($0.login?.contains(searchController.searchBar.text!.lowercased()))! }
+//			filteredData = array
+//			tableView.reloadData()
+//			
+//		} else {
+//			
+//			filteredData.removeAll(keepingCapacity: false)
+//			
+//			filteredData = users
+//			
+//			tableView.reloadData()
+//			
+//		}
 		
 	}
 	

@@ -8,31 +8,43 @@
 
 import UIKit
 import SwiftyJSON
+import RealmSwift
+import Realm
 
-class StudentInfo: NSObject {
+class StudentInfo: Object {
 	
-	var login: String?
-	var city: String?
-	var gpa: Float?
-	var promo: String?
-	
-	var position: Int?
+    dynamic var title: String? = nil
+	dynamic var login: String? = nil
+	dynamic var city: String? = nil
+    var bachelor = RealmOptional<Double>()
+	dynamic var promo: String? = nil
 	
 	init(dict: JSON, promo: String) {
-		
-		login = dict["login"].stringValue
-		city = dict["ville"].stringValue
-		
-		let cit = dict["ville"].stringValue
-		if (cit.contains("/")) {
-			city = cit.components(separatedBy: "/")[1]
-		}
-		
-		gpa = dict["gpa"].floatValue
+        super.init()
+        self.title = dict["title"].stringValue
+		self.login = dict["login"].stringValue
+		self.city = dict["city"].stringValue
+        self.bachelor.value = dict["bachelor"].doubleValue
 		self.promo = promo
 	}
-	
-	override init() {
-		super.init()
-	}
+    
+    override static func primaryKey() -> String {
+        return "login"
+    }
+    
+    override static func indexedProperties() -> [String] {
+        return ["city", "promo"]
+    }
+    
+    required init(value: Any, schema: RLMSchema) {
+        super.init(value: value, schema: schema)
+    }
+    
+    required init() {
+        super.init()
+    }
+    
+    required init(realm: RLMRealm, schema: RLMObjectSchema) {
+        super.init(realm: realm, schema: schema)
+    }
 }

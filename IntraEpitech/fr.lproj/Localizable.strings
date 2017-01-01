@@ -105,7 +105,7 @@
  ** Profile
  */
 "NoNotification" = "Aucune notification";
-"Ranking" = "Classement";
+"{" = "Classement";
 "Files" = "Documents";
 "Medals" = "Médailles 🏅";
 "Remarkables" = "Encouragements 👍";
@@ -146,3 +146,27 @@
  */
 "NoCurrentProject" = "Vous n'avez aucun\nprojet en cours";
 "NoMarks" = "Il n'y a aucune note";
+
+/**
+ ** Ranking
+ */
+
+"filter" = "Filtre";
+
+"tek1" = "Tek 1";
+"tek2" = "Tek 2";
+"tek3" = "Tek 3";
+
+"All" = "Toutes";
+"BDX" = "Bordeaux";
+"LIL" = "Lille";
+"LYN" = "Lyon";
+"MAR" = "Marseille";
+"MPL" = "Montpellier";
+"NAN" = "Nantes";
+"NCE" = "Nice";
+"NCY" = "Nancy";
+"PAR" = "Paris";
+"REN" = "Rennes";
+"STG" = "Strasbourg";
+"TLS" = "Toulouse";
