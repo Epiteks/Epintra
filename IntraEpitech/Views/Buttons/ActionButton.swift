@@ -15,7 +15,7 @@ class ActionButton: UIButton {
 		
 		self.setTitleColor(UIColor.white, for: UIControlState())
 		
-		self.setBackgroundImage(UIUtils.lightBackgroundColor().toImage(), for: UIControlState())
+		self.setBackgroundImage(UIUtils.lightBackgroundColor.toImage(), for: UIControlState())
 		
 		self.layer.masksToBounds = true
 	}

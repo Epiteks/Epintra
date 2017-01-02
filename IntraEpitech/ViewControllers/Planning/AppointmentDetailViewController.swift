@@ -140,7 +140,7 @@ class AppointmentDetailViewController: UIViewController, UITableViewDataSource, 
 		let title = cell.viewWithTag(1) as! UILabel
 		
 		title.text = NSLocalizedString("Register", comment: "")
-		title.textColor = UIUtils.backgroundColor()
+		title.textColor = UIUtils.backgroundColor
 		
 		return cell
 	}

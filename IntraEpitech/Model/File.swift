@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class File: NSObject {
+class File {
 	
 	var title: String?
 	var url: String?

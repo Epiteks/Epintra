@@ -1,5 +1,5 @@
 //
-//  SchoolDataViewController.swift
+//  LoadingDataViewController.swift
 //  IntraEpitech
 //
 //  Created by Maxime Junger on 23/12/2016.
@@ -8,7 +8,9 @@
 
 import UIKit
 
-class SchoolDataViewController: UIViewController {
+
+/// Used for viewcontrollers that need to fetch data to show
+class LoadingDataViewController: UIViewController {
     
     /// Know if the view is currently fetching data
     var isFetching: Bool = false {
@@ -18,27 +20,6 @@ class SchoolDataViewController: UIViewController {
     }
     
     var willLoadNextView: Bool = false
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     /// Add LoadingView screen
     func addLoadingScreen() {
@@ -86,6 +67,21 @@ class SchoolDataViewController: UIViewController {
     func removeActivityIndicator() {
         for sub in self.view.subviews {
             if sub is UIActivityIndicatorView {
+                sub.removeFromSuperview()
+                break
+            }
+        }
+    }
+    
+    func addNoDataView() {
+        let noData = NoDataView(info: NSLocalizedString("NoNotification", comment: ""))
+        noData.frame = self.view.frame
+        self.view.addSubview(noData)
+    }
+    
+    func removeNoDataView() {
+        for sub in self.view.subviews {
+            if sub is NoDataView {
                 sub.removeFromSuperview()
                 break
             }

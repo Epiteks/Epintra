@@ -46,8 +46,6 @@ class RealmManager {
             return Array(newStudents)
         }
         
-        print(students)
-        
         return Array(students)
     }
     

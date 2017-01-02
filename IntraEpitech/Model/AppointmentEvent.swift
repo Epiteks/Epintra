@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class AppointmentEvent: NSObject {
+class AppointmentEvent {
 	
 	var scolaryear: String?
 	var codeModule: String?
@@ -26,7 +26,6 @@ class AppointmentEvent: NSObject {
 	var eventEnd: Date?
 	
 	init(dict: JSON) {
-		super.init()
 		scolaryear = dict["scolaryear"].string
 		codeModule = dict["codemodule"].stringValue
 		codeActi = dict["codeacti"].stringValue

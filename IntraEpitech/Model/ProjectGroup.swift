@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class ProjectGroup: NSObject {
+class ProjectGroup {
 	
 	var title: String?
 	var code: String?
@@ -18,7 +18,6 @@ class ProjectGroup: NSObject {
 	var members: [User]?
 	
 	init(dict: JSON) {
-		super.init()
 		title = dict["title"].stringValue
 		code = dict["code"].stringValue
 		finalNote = dict["final_note"].stringValue

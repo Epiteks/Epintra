@@ -9,7 +9,8 @@
 import UIKit
 import SwiftyJSON
 
-class GPA: NSObject {
+class GPA {
+    
 	internal var value: String
 	internal var cycle: String
 	
@@ -18,7 +19,7 @@ class GPA: NSObject {
 		cycle = dict["cycle"].stringValue
 	}
 	
-	override init() {
+    init() {
 		value = "0"
 		cycle = NSLocalizedString("unknown", comment: "")
 	}

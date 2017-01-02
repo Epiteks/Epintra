@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Override point for customization after application launch.
 		// Configure tracker from GoogleService-Info.plist.
 		let navigationBarAppearace = UINavigationBar.appearance()
-		navigationBarAppearace.tintColor = UIUtils.backgroundColor()
+		navigationBarAppearace.tintColor = UIUtils.backgroundColor
 		
 		Util.copyFile("Students1.0.1.sqlite")
 		
@@ -34,8 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		console.levelColor.error = "👺 "
 		
 		log.addDestination(console)
-		
-		//UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
 		
 		NetworkActivityIndicatorManager.shared.isEnabled = true
 		

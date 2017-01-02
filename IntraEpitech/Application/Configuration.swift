@@ -8,25 +8,20 @@
 
 import Foundation
 
-open class Configuration {
+class Configuration {
 	
 	enum ConfigType {
 		case dev, prod
 	}
-	
+
 	/// Sets the application mode to use differents things if we are in DEV or PROD
-	let applicationMode: ConfigType = .dev
+	static let applicationMode: ConfigType = .dev
 	
 	// URL of the API
-	var apiURL: String {
-			return "https://epitech.hug33k.fr/intra"
-	}
-	
-    
+	static let apiURL = "https://epitech.hug33k.fr/intra"
+
 	/// URL of users images
-	var profilePictureURL: String {
-			return "https://cdn.local.epitech.eu/userprofil/"
-	}
+	static let profilePictureURL = "https://cdn.local.epitech.eu/userprofil/"
 }
 
 let configurationInstance = Configuration()

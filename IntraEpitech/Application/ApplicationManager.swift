@@ -8,11 +8,7 @@
 
 import UIKit
 
-/*let logger = Logger(formatter: Log.Formatter("%@: %@", .level, .message),
-                 theme:     .TomorrowNightEighties,
-                 minLevel:  .info)
-*/
-class ApplicationManager: NSObject {
+class ApplicationManager {
 
 	internal static let sharedInstance = ApplicationManager()
 
@@ -35,8 +31,7 @@ class ApplicationManager: NSObject {
 
 	var planningSemesters = [Bool]()
 
-	override init() {
-		super.init()
+	init() {
 		downloadedImages = [String:  UIImage]()
 		canDownload = true
 		lastUserApiCall = 0

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RankViewController: SchoolDataViewController {
+class RankViewController: LoadingDataViewController {
     
     @IBOutlet weak var studentsTableView: UITableView!
     @IBOutlet weak var rightBarButtonItem: UIBarButtonItem!
@@ -18,7 +18,6 @@ class RankViewController: SchoolDataViewController {
             self.tableViewContentWasUpdated = true
         }
     }
-    
     
     var tableViewContentWasUpdated: Bool = false
     
@@ -42,7 +41,7 @@ class RankViewController: SchoolDataViewController {
         
         self.configureSearchController()
         
-        self.rightBarButtonItem.tintColor = UIUtils.backgroundColor()
+        self.rightBarButtonItem.tintColor = UIUtils.backgroundColor
         
         self.rankFilter = FilterRankViewController.RankFilter()
     }
@@ -110,7 +109,7 @@ extension RankViewController: UISearchResultsUpdating {
         self.searchController = UISearchController(searchResultsController: nil)
         self.searchController.searchResultsUpdater = self
         self.searchController.dimsBackgroundDuringPresentation = false
-        self.searchController.searchBar.tintColor = UIUtils.backgroundColor()
+        self.searchController.searchBar.tintColor = UIUtils.backgroundColor
         self.searchController.searchBar.sizeToFit()
         self.studentsTableView.tableHeaderView = searchController.searchBar
     }
@@ -159,7 +158,7 @@ extension RankViewController: UITableViewDataSource {
             cell?.titleLabel.text = student.title
             cell?.gpaLabel.text = String(describing: student.bachelor.value!)
             cell?.informationsLabel.text = String(format: "%@ - %@", student.city!, student.login!)
-            cell?.accessoryType = .disclosureIndicator
+            //cell?.accessoryType = .disclosureIndicator
             
             if let position = self.students?.index(of: student) {
                 cell?.positionLabel?.text = String(position + 1)

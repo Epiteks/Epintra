@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Util: NSObject {
+class Util {
 	class func getPath(_ fileName: String) -> String {
 		
 		let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]

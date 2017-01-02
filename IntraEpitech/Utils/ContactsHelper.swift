@@ -9,7 +9,7 @@
 import UIKit
 import AddressBook
 
-class ContactsHelper: NSObject {
+class ContactsHelper {
 	
 	let addressBookRef: ABAddressBook = ABAddressBookCreateWithOptions(nil, nil).takeRetainedValue()
 	

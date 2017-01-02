@@ -8,7 +8,7 @@
 
 import SwiftyJSON
 
-class History: NSObject {
+class History {
 	
 	var title: String?
 	var userName: String?
@@ -17,17 +17,10 @@ class History: NSObject {
 	var date: Date?
 	
 	init(dict: JSON) {
-		
-		super.init()
-		
 		title = dict["title"].stringValue
 		userName = dict["user"]["title"].stringValue
 		userPicture = dict["user"]["picture"].stringValue
 		content = dict["content"].stringValue
 		date = dict["date"].stringValue.toDate()
-		
-		if (userPicture != nil && (userPicture?.characters.count)! > 0 && ApplicationManager.sharedInstance.downloadedImages![userPicture!] == nil) {
-			ImageDownloader.downloadFrom(link: userPicture!) {_ in }
-		}
 	}
 }

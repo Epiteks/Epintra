@@ -7,64 +7,10 @@
 //
 
 import UIKit
-
-private var _imageAtIndexPath: IndexPath?
+import AlamofireImage
 
 extension UIImageView {
-	
-	public var imageAtIndexPath:  IndexPath {
-		
-		get {
-			return _imageAtIndexPath!
-		}
-		
-		set(newValue) {
-			_imageAtIndexPath = newValue
-			// What do you want to do here?
-		}
-	}
-	
-	func downloadedFrom(link:String, contentMode mode: UIViewContentMode) {
-		guard
-			let url = URL(string: link)
-			else {return}
-		contentMode = mode
-		URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) -> Void in
-			guard
-				let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
-				let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
-				let data = data, error == nil,
-				let image = UIImage(data: data)
-				else { return }
-			DispatchQueue.main.async { () -> Void in
-				self.image = image
-				self.cropToSquare()
-				self.clipsToBounds = true
-			}
-		}).resume()
-	}
-	
-	func downloadFrom(link:String, contentMode mode: UIViewContentMode, onCompletion: @escaping (UIImage) -> Void) {
-		guard
-			let url = URL(string: link)
-			else {return}
-		contentMode = mode
-		URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) -> Void in
-			guard
-				let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
-				let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
-				let data = data, error == nil,
-				let image = UIImage(data: data)
-				else { return }
-			DispatchQueue.main.async { () -> Void in
-				//				self.image = image
-				onCompletion(image)
-				//self.cropToSquare()
-				//self.clipsToBounds = true
-			}
-		}).resume()
-	}
-	
+
 	func cropToSquare() {
 		// Create a copy of the image without the imageOrientation property so it is in its native orientation (landscape)
 		let contextImage: UIImage = UIImage(cgImage: self.image!.cgImage!)
@@ -104,8 +50,18 @@ extension UIImageView {
 	
 	func toCircle() {
 		self.layer.borderWidth = 1.0
-		self.layer.borderColor = UIUtils.lightBackgroundColor().cgColor
+		self.layer.borderColor = UIUtils.lightBackgroundColor.cgColor
 		self.layer.cornerRadius = self.frame.size.height / 2
-		
 	}
+    
+    func downloadProfileImage(fromURL url: URL) {
+        self.af_setImage(withURL: url, placeholderImage: #imageLiteral(resourceName: "userProfile")) { _ in
+            DispatchQueue.main.async {
+                self.cropToSquare()
+                self.toCircle()
+            }
+        }
+        self.toCircle()
+        self.cropToSquare()
+    }
 }

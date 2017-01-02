@@ -8,7 +8,7 @@
 
 import UIKit
 
-class APICalls: NSObject {
+class APICalls {
 
 	class func getApiUrl() -> String {
 		return "https://epitech.hug33k.fr/intra/"

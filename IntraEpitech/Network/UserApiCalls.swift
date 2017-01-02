@@ -170,47 +170,47 @@ class UserApiCalls: APICalls {
 	
 	class func getAllUsers(_ onCompletion: @escaping (Bool, [StudentInfo]?, String) ->Void) {
 		
-		let url = super.getRankingUrl()
-		
-		Alamofire.request(url, method: .get, parameters: ["token": ApplicationManager.sharedInstance.token!,
-			"login": (ApplicationManager.sharedInstance.user?.login)!])
-			.responseJSON { response in
-				if response.result.isSuccess {
-					let responseCall = JSON(response.result.value!)
-					let errorDict = responseCall["error"].dictionaryValue
-					let errorMessage: String?
-					if errorDict.count > 0 {
-						errorMessage = (errorDict["message"]?.stringValue)
-						onCompletion(false, nil, errorMessage!)
-					} else {
-						
-						var resp = [StudentInfo]()
-						let db = DBManager.getInstance()
-						db.cleanStudentData()
-						resp = UserApiCalls.addPromo("tech1", responseCall: responseCall, arr: resp)
-						resp = UserApiCalls.addPromo("tech2", responseCall: responseCall, arr: resp)
-						resp = UserApiCalls.addPromo("tech3", responseCall: responseCall, arr: resp)
-						resp = UserApiCalls.addPromo("tech4", responseCall: responseCall, arr: resp)
-						resp = UserApiCalls.addPromo("tech5", responseCall: responseCall, arr: resp)
-						onCompletion(true, resp, "Ok")
-					}
-				} else {
-					
-					onCompletion(false, nil, (response.result.error?.localizedDescription)!)
-				}
-		}
+//		let url = super.getRankingUrl()
+//		
+//		Alamofire.request(url, method: .get, parameters: ["token": ApplicationManager.sharedInstance.token!,
+//			"login": (ApplicationManager.sharedInstance.user?.login)!])
+//			.responseJSON { response in
+//				if response.result.isSuccess {
+//					let responseCall = JSON(response.result.value!)
+//					let errorDict = responseCall["error"].dictionaryValue
+//					let errorMessage: String?
+//					if errorDict.count > 0 {
+//						errorMessage = (errorDict["message"]?.stringValue)
+//						onCompletion(false, nil, errorMessage!)
+//					} else {
+//						
+//						var resp = [StudentInfo]()
+//						let db = DBManager.getInstance()
+//						db.cleanStudentData()
+//						resp = UserApiCalls.addPromo("tech1", responseCall: responseCall, arr: resp)
+//						resp = UserApiCalls.addPromo("tech2", responseCall: responseCall, arr: resp)
+//						resp = UserApiCalls.addPromo("tech3", responseCall: responseCall, arr: resp)
+//						resp = UserApiCalls.addPromo("tech4", responseCall: responseCall, arr: resp)
+//						resp = UserApiCalls.addPromo("tech5", responseCall: responseCall, arr: resp)
+//						onCompletion(true, resp, "Ok")
+//					}
+//				} else {
+//					
+//					onCompletion(false, nil, (response.result.error?.localizedDescription)!)
+//				}
+//		}
 	}
 	
-	class func addPromo(_ name: String, responseCall: JSON, arr: [StudentInfo]) -> [StudentInfo] {
-		var arr = arr
-		let db = DBManager.getInstance()
-		let tek = responseCall[name].arrayValue
-		
-		for tmp in tek {
-			let stud = StudentInfo(dict: tmp, promo: name)
-			arr.append(stud)
-			db.addStudentData(stud)
-		}
-		return arr
-	}
+//	class func addPromo(_ name: String, responseCall: JSON, arr: [StudentInfo]) -> [StudentInfo] {
+//		var arr = arr
+//		let db = DBManager.getInstance()
+//		let tek = responseCall[name].arrayValue
+//		
+//		for tmp in tek {
+//			let stud = StudentInfo(dict: tmp, promo: name)
+//			arr.append(stud)
+//			db.addStudentData(stud)
+//		}
+//		return arr
+//	}
 }

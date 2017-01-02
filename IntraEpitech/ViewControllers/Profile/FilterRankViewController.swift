@@ -70,7 +70,7 @@ extension FilterRankViewController: UITableViewDataSource {
         
         let data = self.tableViewData[indexPath.section].data[indexPath.row]
         
-        cell.tintColor = UIUtils.backgroundColor()
+        cell.tintColor = UIUtils.backgroundColor
         cell.textLabel?.text = NSLocalizedString(data, comment: "")
         
         if (indexPath.section == 0 && self.rankFilter.promotion == (indexPath.row + 1))

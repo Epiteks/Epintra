@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class RegisteredStudent: NSObject {
+class RegisteredStudent {
 	
 	var login: String!
 	var grade: String!

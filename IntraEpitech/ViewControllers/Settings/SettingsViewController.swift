@@ -54,7 +54,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 			cell = tableView.dequeueReusableCell(withIdentifier: "switchCell")!
 			let uiswitch = cell.viewWithTag(1) as! UISwitch
 			let label = cell.viewWithTag(2) as! UILabel
-			uiswitch.onTintColor = UIUtils.backgroundColor()
+			uiswitch.onTintColor = UIUtils.backgroundColor
 			uiswitch.isOn = ApplicationManager.sharedInstance.canDownload!
 			uiswitch.addTarget(self, action: #selector(SettingsViewController.switchClicked(_:)), for: .valueChanged)
 			label.text = NSLocalizedString(_settingsItems[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row], comment: "")
@@ -137,7 +137,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 	}
 	
 	func switchClicked(_ sender: UISwitch?) {
-		print(sender?.isOn)
 		ApplicationManager.sharedInstance.canDownload = sender!.isOn
 		UserPreferences.saveWantToDownloadImage(sender!.isOn)
 	}
@@ -156,14 +155,15 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 	}
 	
 	func showThirdParty() {
-		self.performSegue(withIdentifier: "webViewSegue", sender: self)
+        let vc = WebViewController()
+        vc.fileName = "thirdParty"
+        vc.title = NSLocalizedString("ThirdParty", comment: "")
+        self.navigationController?.show(vc, sender: self)
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if (segue.identifier == "webViewSegue") {
-			let vc: WebViewViewController = segue.destination as! WebViewViewController
-			vc.fileName = "thirdParty"
-			vc.title = NSLocalizedString("ThirdParty", comment: "")
+			
 			//vc.isUrl = false
 		}
 	}

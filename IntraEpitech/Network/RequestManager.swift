@@ -10,13 +10,13 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class RequestManager: NSObject {
+class RequestManager {
 	
 	func call(_ requestID: String, params: [String: Any]? = nil, urlParams: String? = nil, completion: @escaping (Result<JSON>) -> Void) {
 		
 		let req = Requests.routes[requestID]
 		var headers = [String: String]()
-		var newURL = configurationInstance.apiURL + (req?.endpoint)!
+		var newURL = Configuration.apiURL + (req?.endpoint)!
 		
 		if req!.secured == true {
 			headers["token"] = ApplicationManager.sharedInstance.token!
@@ -36,8 +36,8 @@ class RequestManager: NSObject {
 		Alamofire.request(newURL, method: (req?.method!)!, parameters: params, encoding: JSONEncoding.default, headers: headers)
 			.responseJSON { res in
 				
-				if res.response == nil || res.response?.statusCode == nil {
-					completion(Result.failure(type: AppError.apiError, message: nil))
+                if res.response == nil || res.response?.statusCode == nil || res.result.isFailure {
+					completion(Result.failure(type: AppError.apiError, message: res.result.error?.localizedDescription))
 					return
 				}
 				
@@ -52,9 +52,8 @@ class RequestManager: NSObject {
                         if let errorDictionary = responseJSON["error"].dictionary, let errorMessage = errorDictionary["message"]?.string {
                             completion(Result.failure(type: AppError.apiError, message: errorMessage))
                         } else {
-                            completion(Result.failure(type: AppError.apiError, message: nil))
+                            completion(Result.failure(type: AppError.apiError, message: res.result.error?.localizedDescription))
 						}
-						
 					} else {
 						completion(Result.failure(type: AppError.apiError, message: nil))
 					}

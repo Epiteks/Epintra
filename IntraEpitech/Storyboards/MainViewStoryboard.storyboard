@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Z0r-jy-Ua2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Z0r-jy-Ua2">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -72,10 +75,10 @@
             </objects>
             <point key="canvasLocation" x="361" y="54"/>
         </scene>
-        <!--LearnStoryboard-->
+        <!--SchoolStoryboard-->
         <scene sceneID="Vef-2G-Say">
             <objects>
-                <viewControllerPlaceholder storyboardName="LearnStoryboard" id="HOv-46-gdk" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="SchoolStoryboard" id="HOv-46-gdk" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="Ubp-sl-eAP"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hwx-Cm-yAp" userLabel="First Responder" sceneMemberID="firstResponder"/>

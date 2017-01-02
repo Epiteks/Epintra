@@ -57,7 +57,7 @@ class MJProgressView {
 		
 		indicator.frame = CGRect(x: view.frame.width - 35, y: view.frame.height / 2 - 10, width: 20, height: 20)
 		indicator.activityIndicatorViewStyle = .white
-		indicator.color = UIUtils.backgroundColor()
+		indicator.color = UIUtils.backgroundColor
 		//indicator.center = CGPointMake(progressView.bounds.width / 2, progressView.bounds.height / 2)
 		
 		//progressView.addSubview(indicator)

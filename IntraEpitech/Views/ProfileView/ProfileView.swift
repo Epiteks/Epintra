@@ -7,25 +7,6 @@
 //
 
 import UIKit
-fileprivate func < <T:  Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-fileprivate func <= <T:  Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l <= r
-  default:
-    return !(rhs < lhs)
-  }
-}
 
 class ProfileView: UIView {
 	
@@ -46,13 +27,11 @@ class ProfileView: UIView {
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
-		
 		self.commonInit()
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
-		
 		self.commonInit()
 	}
 	
@@ -77,14 +56,13 @@ class ProfileView: UIView {
 		self.spicesLabel.text =  user.spices!.currentSpices + " " + NSLocalizedString("spices", comment: "")
 		self.logLabel.text = "Log:  " + String(user.log!.timeActive)
 		self.logLabel.textColor = user.log?.getColor()
-		
-		if user.gpa?.count <= 1 {
+
+		if let gpaCount = user.gpa?.count, gpaCount <= 1 {
 			gpaNumberLabel.isHidden = true
 			gpaTypeLabel.isHidden = true
 			gpaTitleLabel.isHidden = true
 		} else {
 			let gpa = user.gpa![0]
-			
 			gpaTypeLabel.text = gpa.cycle
 			gpaNumberLabel.text = gpa.value
 		}

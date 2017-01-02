@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ErrorViewer: NSObject {
+class ErrorViewer {
 	
 	class func errorShow(_ viewController: UIViewController, mess: String, onCompletion: @escaping () -> Void) {
 		

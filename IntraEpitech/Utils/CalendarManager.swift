@@ -9,35 +9,9 @@
 import UIKit
 import EventKit
 
-class CalendarManager: NSObject {
-	
-	//	func checkRights() {
-	//		
-	//		// 1
-	//		let eventStore = EKEventStore()
-	//		
-	//		// 2
-	//		switch (EKEventStore.authorizationStatusForEntityType(EKEntityType.Event)) {
-	//		case .Authorized:
-	//			insertEvent(eventStore)
-	//		case .Denied:
-	//			println("Access denied")
-	//		case .NotDetermined:
-	//			// 3
-	//			eventStore.requestAccessToEntityType(EKEntityType.Event, completion:
-	//				{[weak self] (granted: Bool, error: NSError!) -> Void in
-	//					if granted {
-	//						self!.insertEvent(eventStore)
-	//					} else {
-	//						println("Access denied")
-	//					}
-	//				})
-	//		default:
-	//			println("Case Default")
-	//		}
-	//	}
-	
-	func hasRights(_ onCompletion: @escaping (Bool, String?)->Void) {
+class CalendarManager {
+    
+	func hasRights(_ onCompletion: @escaping (Bool, String?) -> Void) {
 		
 		let eventStore = EKEventStore()
 		var res = false

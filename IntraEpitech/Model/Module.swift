@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class Module: NSObject {
+class Module {
 	
 	var scolaryear: String?
 	var codeModule: String?

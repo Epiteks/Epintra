@@ -8,7 +8,7 @@
 
 import AVFoundation
 
-class UserPreferences: NSObject {
+class UserPreferences {
 	
     // TODO CLEAN THIS SHIT
     

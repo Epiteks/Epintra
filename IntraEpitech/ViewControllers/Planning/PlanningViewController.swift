@@ -24,12 +24,12 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 	var tableViewData = [(String, [Planning])]()
 	
 	let typeColors = [
-		"proj":  UIUtils.planningBlueColor(),
-		"rdv":  UIUtils.planningOrangeColor(),
-		"tp":  UIUtils.planningPurpleColor(),
-		"other":  UIUtils.planningBlueColor(),
-		"exam":  UIUtils.planningRedColor(),
-		"class":  UIUtils.planningBlueColor()
+		"proj":  UIUtils.planningBlueColor,
+		"rdv":  UIUtils.planningOrangeColor,
+		"tp":  UIUtils.planningPurpleColor,
+		"other":  UIUtils.planningBlueColor,
+		"exam":  UIUtils.planningRedColor,
+		"class":  UIUtils.planningBlueColor
 	]
 	
 	var refreshControl = UIRefreshControl()
@@ -49,15 +49,15 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		calendar.scope = FSCalendarScope.week
 		calendar.firstWeekday = 2
 		
-		calendar.calendarWeekdayView.tintColor = UIUtils.backgroundColor()
+		calendar.calendarWeekdayView.tintColor = UIUtils.backgroundColor
 		/* TODO
-		calendar.weekdayTextColor = UIUtils.backgroundColor()
-		calendar.headerTitleColor = UIUtils.backgroundColor()
-		calendar.todayColor = UIUtils.backgroundColor()
-		calendar.selectionColor = UIUtils.lightBackgroundColor()*/
+		calendar.weekdayTextColor = UIUtils.backgroundColor
+		calendar.headerTitleColor = UIUtils.backgroundColor
+		calendar.todayColor = UIUtils.backgroundColor
+		calendar.selectionColor = UIUtils.lightBackgroundColor*/
 		//calendar.allowsSelection = false
 		
-		self.refreshControl.tintColor = UIUtils.backgroundColor()
+		self.refreshControl.tintColor = UIUtils.backgroundColor
 		self.refreshControl.addTarget(self, action: #selector(PlanningViewController.refreshData(_:)), for: .valueChanged)
 		self.tableView.addSubview(refreshControl)
 		self.tableView.allowsMultipleSelectionDuringEditing = true
@@ -259,7 +259,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 			cell.isUserInteractionEnabled = false
 			let emptyLabel = cell2!.viewWithTag(1) as! UILabel
 			emptyLabel.text = NSLocalizedString("EmptyEventCell", comment: "")
-			emptyLabel.textColor = UIUtils.backgroundColor()
+			emptyLabel.textColor = UIUtils.backgroundColor
 			return cell2!
 		}
 		cell.isUserInteractionEnabled = true
@@ -276,11 +276,11 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		moduleTitle.text = data.titleModule!
 		
 		if (data.eventType == "rdv" && eventTimes.start != data.startTime?.toDate().toEventHour() || eventTimes.end != data.endTime?.toDate().toEventHour()) {
-			typeView?.backgroundColor = UIUtils.planningDarkOrangeColor()
+			typeView?.backgroundColor = UIUtils.planningDarkOrangeColor
 		}
 		
 		changeImageToDisplay(data, imageView: statusImageView)
-		statusImageView.imageAtIndexPath = indexPath
+		//statusImageView.imageAtIndexPath = indexPath
 		
 		let singleTap = UITapGestureRecognizer(target: self, action:#selector(PlanningViewController.actionOnImageView(_:)))
 		singleTap.numberOfTapsRequired = 1
@@ -306,7 +306,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 	
 	func setActionsOnCell(_ cell: MGSwipeTableCell, indexPath: IndexPath) {
 		
-		let createEvent = MGSwipeButton(title: NSLocalizedString("AddInCalendar", comment: ""), icon: nil, backgroundColor: UIUtils.planningBlueColor(), callback: { (_) -> Bool in
+		let createEvent = MGSwipeButton(title: NSLocalizedString("AddInCalendar", comment: ""), icon: nil, backgroundColor: UIUtils.planningBlueColor, callback: { (_) -> Bool in
 			
 			let calman = CalendarManager()
 			calman.createEvent(self.tableViewData[(indexPath as NSIndexPath).section].1[(indexPath as NSIndexPath).row]) { (isOk: Bool, mess: String) in
@@ -328,31 +328,31 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		
 		if (data.eventType == "rdv") {
 			imageView.image = UIImage(named: "rightArrow")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-			imageView.tintColor = UIUtils.planningGrayColor()
+			imageView.tintColor = UIUtils.planningGrayColor
 			return
 		}
 		
 		if (data.canEnterToken()) {
 			imageView.image = UIImage(named: "Token")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-			imageView.tintColor = UIUtils.planningBlueColor()
+			imageView.tintColor = UIUtils.planningBlueColor
 		} else if (data.canRegister()) {
 			imageView.image = UIImage(named: "Register")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-			imageView.tintColor = UIUtils.planningGreenColor()
+			imageView.tintColor = UIUtils.planningGreenColor
 		} else if (data.canUnregister()) {
 			imageView.image = UIImage(named: "Unregister")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-			imageView.tintColor = UIUtils.planningRedColor()
+			imageView.tintColor = UIUtils.planningRedColor
 		} else if (data.isRegistered() && !data.canUnregister()) {
 			imageView.image = UIImage(named: "Unregister")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-			imageView.tintColor = UIUtils.planningGrayColor()
+			imageView.tintColor = UIUtils.planningGrayColor
 		} else if (data.isUnregistered() && !data.canRegister()) {
 			imageView.image = UIImage(named: "Register")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-			imageView.tintColor = UIUtils.planningGrayColor()
+			imageView.tintColor = UIUtils.planningGrayColor
 		} else if (data.wasPresent()) {
 			imageView.image = UIImage(named: "Done")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-			imageView.tintColor = UIUtils.planningGreenColor()
+			imageView.tintColor = UIUtils.planningGreenColor
 		} else if (data.wasAbsent()) {
 			imageView.image = UIImage(named: "Delete")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-			imageView.tintColor = UIUtils.planningRedColor()
+			imageView.tintColor = UIUtils.planningRedColor
 		} else {
 			imageView.image = nil
 		}
@@ -523,7 +523,7 @@ class PlanningViewController: UIViewController, UITableViewDelegate, UITableView
 		}
 	}
 	
-	func swipeTableCell(_ cell: MGSwipeTableCell!, canSwipe direction: MGSwipeDirection) -> Bool {
+	func swipeTableCell(_ cell: MGSwipeTableCell, canSwipe direction: MGSwipeDirection) -> Bool {
 		
 		if (direction == .rightToLeft) {
 			return swipeAllowed!

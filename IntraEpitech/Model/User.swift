@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class User: NSObject {
+class User {
 	
 	var id: String?
 	var login: String?
@@ -41,7 +41,7 @@ class User: NSObject {
 		firstname = dict["firstname"].stringValue
 		lastname = dict["lastname"].stringValue
 		semester = dict["semester"].intValue
-		imageUrl = configurationInstance.profilePictureURL + login!.removeDomainEmailPart() + ".bmp"
+		imageUrl = Configuration.profilePictureURL + login!.removeDomainEmailPart() + ".bmp"
 		promotion = dict["promo"].intValue
 		credits = dict["credits"].intValue
 		city = dict["location"].stringValue

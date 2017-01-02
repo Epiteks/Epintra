@@ -83,13 +83,13 @@ class ProjectDetailsViewController: UIViewController, UITableViewDelegate, UITab
             
             if end < today {
                 self.projectEndProgressView.setProgress(1.0, animated: true)
-                self.projectEndProgressView.progressTintColor = UIUtils.planningRedColor()
+                self.projectEndProgressView.progressTintColor = UIUtils.planningRedColor
             } else {
                 self.projectEndProgressView.setProgress(Float(percent), animated: true)
                 if (percent > 0.8) {
-                    self.projectEndProgressView.progressTintColor = UIUtils.planningOrangeColor()
+                    self.projectEndProgressView.progressTintColor = UIUtils.planningOrangeColor
                 } else {
-                    self.projectEndProgressView.progressTintColor = UIUtils.planningGreenColor()
+                    self.projectEndProgressView.progressTintColor = UIUtils.planningGreenColor
                 }
             }
         }
@@ -149,25 +149,16 @@ class ProjectDetailsViewController: UIViewController, UITableViewDelegate, UITab
         
         if (member.status == "confirmed") {
             statusImgView.image = UIImage(named: "Done")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-            statusImgView.tintColor = UIUtils.planningGreenColor()
+            statusImgView.tintColor = UIUtils.planningGreenColor
         } else {
             statusImgView.image = UIImage(named: "Delete")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-            statusImgView.tintColor = UIUtils.planningRedColor()
+            statusImgView.tintColor = UIUtils.planningRedColor
         }
         
-        if let img = ApplicationManager.sharedInstance.downloadedImages![member.imageUrl!] {
-                imgView.image = img
-        } else {
-            ImageDownloader.downloadFrom(link: member.imageUrl!) { _ in
-                if let img = ApplicationManager.sharedInstance.downloadedImages![member.imageUrl!] {
-                        imgView.image = img
-                        imgView.cropToSquare()
-                        imgView.toCircle()
-                }
-            }
+        if let profileImageURL = member.imageUrl, let url = URL(string: profileImageURL) {
+            imgView.downloadProfileImage(fromURL: url)
         }
-        imgView.cropToSquare()
-        imgView.toCircle()
+     
         return cell
     }
     
@@ -181,7 +172,7 @@ class ProjectDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     func open(file: File) {
         
-        let vc = WebViewViewController()
+        let vc = WebViewController()
         
         vc.file = file
         

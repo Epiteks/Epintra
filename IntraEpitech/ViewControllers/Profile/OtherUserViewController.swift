@@ -66,7 +66,7 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 		setUIElements()
 		self.title = currentUser?.login
 		
-		self.segmentedControl.tintColor = UIUtils.backgroundColor()
+		self.segmentedControl.tintColor = UIUtils.backgroundColor
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {

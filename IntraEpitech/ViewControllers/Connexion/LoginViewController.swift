@@ -8,37 +8,35 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 	
 	@IBOutlet weak var loginTableView: UITableView!
 	@IBOutlet weak var loginButton: ActionButton!
 	@IBOutlet weak var infoLabel: UILabel!
-	@IBOutlet weak var waitingView: UIView!
 	@IBOutlet weak var connexionBlockView: UIView!
 	
 	var login = String()
 	var password = String()
 	
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
 	// Used for moving the view
 	var connexionButtonConstraintSave: CGFloat?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		//self.setNeedsStatusBarAppearanceUpdate()
-		
-		waitingView.backgroundColor = UIUtils.backgroundColor()
-		waitingView.isHidden = true
-		
 		if (UserPreferences.checkIfDataExists()) {
-			waitingView.isHidden = false
+			self.addWaitingView()
 			let data = UserPreferences.getData()
 			login = data.login
 			password = data.password
 			loginCall()
 		}
 		
-		self.view.backgroundColor = UIUtils.backgroundColor()
+		self.view.backgroundColor = UIUtils.backgroundColor
 		
 		// Set UITableView properties
 		self.loginTableView.isScrollEnabled = false
@@ -55,22 +53,18 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 	
 	override func viewDidAppear(_ animated: Bool) {
 		
-		waitingView.isHidden = true
+		self.removeWaitingView()
 		if (UserPreferences.checkIfDataExists()) {
-			waitingView.isHidden = false
+			self.addWaitingView()
 		}
 		
-		if (waitingView.isHidden == false) {
-			MJProgressView.instance.showProgress(self.waitingView, white: true)
+		if let waitingview = self.getWaitingView() {
+			MJProgressView.instance.showProgress(waitingview, white: true)
 		} else {
 			MJProgressView.instance.hideProgress()
 		}
 		
 	}
-	
-	//	override func preferredStatusBarStyle() -> UIStatusBarStyle {
-	//		return UIStatusBarStyle.LightContent
-	//	}
 	
 	/**
 	Register Notification to get when keyboard is shown and hidden.
@@ -85,32 +79,6 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 	
 	func tapOnView(_ sender: UITapGestureRecognizer) {
 		self.view.endEditing(true)
-	}
-	
-	func numberOfSections(in tableView: UITableView) -> Int {
-		return 1
-	}
-	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 2
-	}
-	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		
-		let cell = tableView.dequeueReusableCell(withIdentifier: "normalCell")
-		
-		let textField = cell?.viewWithTag(1) as! UITextField
-		
-		textField.tintColor = UIUtils.backgroundColor()
-		
-		if ((indexPath as NSIndexPath).row == 0) { textField.placeholder = NSLocalizedString("loginUser", comment: "") } else {
-			textField.placeholder = NSLocalizedString("password", comment: "")
-			textField.isSecureTextEntry = true
-		}
-		
-		cell?.layoutMargins.left = 0
-		
-		return cell!
 	}
 	
 	@IBAction func loginPressed(_ sender: AnyObject) {
@@ -136,20 +104,10 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 	}
 	
 	func loginCall() {
+        
 		MJProgressView.instance.showLoginProgress(self.loginButton, white: true)
-		
-		let date = Date()
-		let tstamp = Date(timeIntervalSince1970: 1457784037)
-		
-		if ((date as NSDate).earlierDate(tstamp) == date && login == "iTunesConnect1203" && password == "iTunes1203") {
-			login = "junger_m"
-			password = "monsupermdp"
-		}
-		
 		usersRequests.auth(login, password: password) { (result) in
-			
 			MJProgressView.instance.hideProgress()
-			
 			switch (result) {
 			case .success(_):
 				UserPreferences.saveData(self.login, password: self.password)
@@ -159,9 +117,13 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 				if (error.type == AppError.authenticationFailure) {
 					ErrorViewer.errorShow(self, mess: NSLocalizedString("invalidCombinaison", comment: "")) { _ in }
 				} else if (error.type == AppError.apiError) {
-					ErrorViewer.errorShow(self, mess: NSLocalizedString("unknownApiError", comment: "")) { _ in }
+                    if let mess = error.message {
+                        ErrorViewer.errorShow(self, mess: mess) { _ in }
+                    } else {
+                        ErrorViewer.errorShow(self, mess: NSLocalizedString("unknownApiError", comment: "")) { _ in }
+                    }
 				}
-				self.waitingView.isHidden = true
+                self.removeWaitingView()
 				break
 			}
 		}		
@@ -215,4 +177,55 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
 		performSegue(withIdentifier: "splashSegue", sender: self)
 	}
 	
+    func addWaitingView() {
+        let wview = UIView(frame: self.view.frame)
+        wview.backgroundColor = UIUtils.backgroundColor
+        wview.restorationIdentifier = "waitingview"
+        self.view.addSubview(wview)
+    }
+    
+    func getWaitingView() -> UIView? {
+        for sub in self.view.subviews {
+            if sub.restorationIdentifier == "waitingview" {
+                return sub
+            }
+        }
+        return nil
+    }
+    
+    func removeWaitingView() {
+        if let waitview = self.getWaitingView() {
+            waitview.removeFromSuperview()
+        }
+    }
+}
+
+extension LoginViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "normalCell")
+        
+        let textField = cell?.viewWithTag(1) as! UITextField
+        
+        textField.tintColor = UIUtils.backgroundColor
+        
+        if ((indexPath as NSIndexPath).row == 0) { textField.placeholder = NSLocalizedString("email", comment: "") } else {
+            textField.placeholder = NSLocalizedString("password", comment: "")
+            textField.isSecureTextEntry = true
+        }
+        
+        cell?.layoutMargins.left = 0
+        
+        return cell!
+    }
+
 }

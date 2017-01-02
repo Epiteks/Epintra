@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class Planning: NSObject {
+class Planning {
 	
 	var titleModule: String?
 	var startTime: String?

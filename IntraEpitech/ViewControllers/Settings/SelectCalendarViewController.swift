@@ -42,7 +42,7 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 	override func viewDidAppear(_ animated: Bool) {
 		let calman = CalendarManager()
 		
-		calman.hasRights() { (granted: Bool, _) in
+		calman.hasRights { (granted: Bool, _) in
 			if (!granted) {
 				self.isLoading = false
 				self.hasRight = false
@@ -73,12 +73,12 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 				if let url = settingsUrl {
 					UIApplication.shared.openURL(url)
 				}
-				self.navigationController?.popViewController(animated: true)
+				_ = self.navigationController?.popViewController(animated: true)
 			})
 		}
 		
 		let cancelAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { (_) -> Void in
-			self.navigationController?.popViewController(animated: true)
+            _ = self.navigationController?.popViewController(animated: true)
 		}
 		alertController.addAction(settingsAction)
 		alertController.addAction(cancelAction)

@@ -15,14 +15,16 @@ class SplashScreenViewController: UIViewController {
 	
 	var errorDuringFetching = false
 	
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		//self.setNeedsStatusBarAppearanceUpdate()
-		
 		statusLabel.textColor = UIColor.white
 		statusLabel.text = ""
-		self.view.backgroundColor = UIUtils.backgroundColor()
+		self.view.backgroundColor = UIUtils.backgroundColor
 		
 		if (UserPreferences.checkIfWantsDownloadingExists()) {
 			app.canDownload = UserPreferences.getWantsDownloading()
@@ -44,10 +46,6 @@ class SplashScreenViewController: UIViewController {
 		return
 	}
 	
-	//	override func preferredStatusBarStyle() -> UIStatusBarStyle {
-	//		return UIStatusBarStyle.LightContent
-	//	}
-	
 	func fetchAllData() {
 		
 		let dispatchGroup = DispatchGroup()
@@ -55,10 +53,8 @@ class SplashScreenViewController: UIViewController {
 		DispatchQueue.global(qos: .utility).async {
 		
 			DispatchQueue.global(qos: .utility).async(group: dispatchGroup, execute: {
-				//self.statusLabel.text = NSLocalizedString("GettingData", comment: "")
 				self.userDataCall(dispatchGroup)
 				self.userHistoryCall(dispatchGroup)
-				self.getUserImage(dispatchGroup)
 			})
 			dispatchGroup.notify(queue: DispatchQueue.global(qos: .utility), execute: {
 				DispatchQueue.main.async(execute: {
@@ -111,7 +107,7 @@ class SplashScreenViewController: UIViewController {
 	func userHistoryCall(_ group: DispatchGroup) {
 		group.enter()
 		setStatusLabel(message: "GettingUserHistory")
-		usersRequests.getHistory() { result in
+		usersRequests.getHistory { result in
 			self.setStatusLabel(message: "FetchedHistory")
 			switch (result) {
 			case .success(_):
@@ -138,33 +134,9 @@ class SplashScreenViewController: UIViewController {
 		}
 	}
 	
-	func getUserImage(_ group: DispatchGroup) {
-		group.enter()
-		
-		let userProfileUrl = app.currentLogin!.removeDomainEmailPart()
-		
-		let url = configurationInstance.profilePictureURL + userProfileUrl + ".jpg"
-		
-		ImageDownloader.downloadFrom(link: url) { result in
-			switch(result) {
-			case .success(_):
-				log.info("Image downloaded")
-				break
-			case .failure(let error):
-				if (error.type == AppError.apiError) {
-					//ErrorViewer.errorPresent(self, mess: NSLocalizedString("unknownApiError", comment: "")) { }
-				}
-				break
-			}
-			group.leave()
-		}
-	}
-	
-	func setStatusLabel(message: String) {
+    func setStatusLabel(message: String) {
 		DispatchQueue.main.async {
-			
 			self.statusLabel.text = NSLocalizedString(message, comment: "")
-			
 		}
 	}
 }

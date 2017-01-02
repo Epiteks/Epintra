@@ -97,10 +97,10 @@
             </objects>
             <point key="canvasLocation" x="1101.5999999999999" y="855.9220389805098"/>
         </scene>
-        <!--Student Modules View Controller-->
+        <!--Modules View Controller-->
         <scene sceneID="hmb-u9-pmF">
             <objects>
-                <viewController id="bat-pb-3Wl" customClass="StudentModulesViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="bat-pb-3Wl" customClass="ModulesViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Rel-v6-Ujc"/>
                         <viewControllerLayoutGuide type="bottom" id="ZIF-O2-bMc"/>
@@ -135,10 +135,10 @@
             </objects>
             <point key="canvasLocation" x="2160.8000000000002" y="451.57421289355324"/>
         </scene>
-        <!--Student Module Details View Controller-->
+        <!--Module Details View Controller-->
         <scene sceneID="1jQ-Kj-VIy">
             <objects>
-                <viewController id="tGQ-Lb-8hy" customClass="StudentModuleDetailsViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="tGQ-Lb-8hy" customClass="ModuleDetailsViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4ap-7H-x6P"/>
                         <viewControllerLayoutGuide type="bottom" id="cPf-cv-hLy"/>
@@ -459,6 +459,10 @@
         <scene sceneID="uPB-zw-8GX">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="jXB-6p-0Ln" customClass="MarksViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TD6-RN-a6a"/>
+                        <viewControllerLayoutGuide type="bottom" id="5Rs-7W-mgb"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ieh-8s-peb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -495,6 +499,6 @@
         <image name="userProfile" width="75" height="75"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LRe-an-dO5"/>
+        <segue reference="6QV-9R-J7V"/>
     </inferredMetricsTieBreakers>
 </document>

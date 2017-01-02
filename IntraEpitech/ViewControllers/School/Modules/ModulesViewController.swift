@@ -8,9 +8,7 @@
 
 import UIKit
 
-import DZNEmptyDataSet
-
-class StudentModulesViewController: SchoolDataViewController, UITableViewDataSource, UITableViewDelegate {
+class ModulesViewController: LoadingDataViewController {
     
     @IBOutlet weak var modulesTableView: UITableView!
     
@@ -31,7 +29,7 @@ class StudentModulesViewController: SchoolDataViewController, UITableViewDataSou
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "moduleDetailsSegue" {
-            if let vc = segue.destination as? StudentModuleDetailsViewController {
+            if let vc = segue.destination as? ModuleDetailsViewController {
                 if let selectedIndex = self.modulesTableView.indexPathForSelectedRow?.row, let module = self.modules?[selectedIndex] {
                     vc.module = module
                 }
@@ -62,6 +60,9 @@ class StudentModulesViewController: SchoolDataViewController, UITableViewDataSou
             self.isFetching = false
         }
     }
+}
+
+extension ModulesViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -91,9 +92,12 @@ class StudentModulesViewController: SchoolDataViewController, UITableViewDataSou
             }
             cell?.accessoryType = .disclosureIndicator
         }
-        
         return cell ?? UITableViewCell()
     }
+    
+}
+
+extension ModulesViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.willLoadNextView == false {

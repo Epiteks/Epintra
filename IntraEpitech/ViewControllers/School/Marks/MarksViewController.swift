@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MarksViewController: SchoolDataViewController, UITableViewDataSource, UITableViewDelegate {
+class MarksViewController: LoadingDataViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var marksTableView: UITableView!
     var marks: [Mark]? = nil

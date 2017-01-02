@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class Room: NSObject {
+class Room {
 	
 	var type: String?
 	var code: String?

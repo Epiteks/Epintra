@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class SystemUtils: NSObject {
+class SystemUtils {
 	
 	func getDateUnderstandable(_ day: Int, month: Int) -> (s_day: String?, s_month: String?) {
 		

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ImageDownloader: NSObject {
+class ImageDownloader {
 	
 	class func downloadFrom(link:String, onCompletion: @escaping (Result<Any?>) -> Void ) {
 		

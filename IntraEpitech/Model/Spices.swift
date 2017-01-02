@@ -8,7 +8,7 @@
 
 import SwiftyJSON
 
-class Spices: NSObject {
+class Spices {
 	var currentSpices: String
 	
 	init(dict: JSON) {

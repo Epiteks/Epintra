@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class Flags: NSObject {
+class Flags {
 	
 	var name: String?
 	var label: String?

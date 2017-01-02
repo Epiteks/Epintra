@@ -8,7 +8,7 @@
 
 import SwiftyJSON
 
-class Netsoul: NSObject {
+class Netsoul {
 	
 	var	timeActive: Int
 	var timeNormal: Int
@@ -24,8 +24,8 @@ class Netsoul: NSObject {
 		let normal = Int(timeNormal)
 		
 		if (current >= normal) {
-			return UIUtils.netsoulGreenColor()
+			return UIUtils.netsoulGreenColor
 		}
-		return UIUtils.netsoulRedColor()
+		return UIUtils.netsoulRedColor
 	}
 }

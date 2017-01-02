@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class Mark: NSObject {
+class Mark {
 	
 	var titleModule: String?
 	var title: String?

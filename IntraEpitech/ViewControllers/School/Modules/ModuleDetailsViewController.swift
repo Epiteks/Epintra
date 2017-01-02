@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StudentModuleDetailsViewController: SchoolDataViewController, UITableViewDelegate, UITableViewDataSource {
+class ModuleDetailsViewController: LoadingDataViewController {
     
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var moduleProgressView: UIProgressView!
@@ -19,14 +19,7 @@ class StudentModuleDetailsViewController: SchoolDataViewController, UITableViewD
     
     var module: Module? = nil
     
-    let typeColors = [
-        "proj":  UIUtils.planningBlueColor(),
-        "rdv":  UIUtils.planningOrangeColor(),
-        "tp":  UIUtils.planningPurpleColor(),
-        "other":  UIUtils.planningBlueColor(),
-        "exam":  UIUtils.planningRedColor(),
-        "class":  UIUtils.planningGreenColor()
-    ]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,99 +84,14 @@ class StudentModuleDetailsViewController: SchoolDataViewController, UITableViewD
             
             if end < today {
                 self.moduleProgressView.setProgress(1.0, animated: true)
-                self.moduleProgressView.progressTintColor = UIUtils.planningRedColor()
+                self.moduleProgressView.progressTintColor = UIUtils.planningRedColor
             } else {
                 self.moduleProgressView.setProgress(Float(percent), animated: true)
                 if (percent > 0.8) {
-                    self.moduleProgressView.progressTintColor = UIUtils.planningOrangeColor()
+                    self.moduleProgressView.progressTintColor = UIUtils.planningOrangeColor
                 } else {
-                    self.moduleProgressView.progressTintColor = UIUtils.planningGreenColor()
+                    self.moduleProgressView.progressTintColor = UIUtils.planningGreenColor
                 }
-            }
-        }
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if let activities = self.module?.activities {
-            return activities.count
-        }
-        
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellIdentifier = "activityCell"
-        
-        var cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? ModuleActivityTableViewCell
-        
-        if cell == nil {
-            let nib = UINib(nibName: "ModuleActivityTableViewCell", bundle:nil)
-            tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
-            cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? ModuleActivityTableViewCell
-        }
-        
-        if let activity = self.module?.activities[indexPath.row] {
-            
-            cell?.activityTitleLabel.text = activity.actiTitle
-            cell?.markLabel.text = activity.mark
-            cell?.startDateLabel.text = activity.begin?.toDate().toActiDate()
-            cell?.endDateLabel.text = activity.end?.toDate().toActiDate()
-            cell?.activityColor = self.typeColors[activity.typeActiCode!]
-            cell?.moduleLabel.text = ""
-            
-            if let characters = activity.mark?.characters, characters.count > 0 {
-                cell?.accessoryType = .disclosureIndicator
-            } else if activity.typeActiCode == "proj" {
-                cell?.accessoryType = .disclosureIndicator
-            } else {
-                cell?.accessoryType = .none
-            }
-            
-        }
-        
-        return cell!
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if self.willLoadNextView == true { return }
-        
-        if let activity = self.module?.activities[indexPath.row] {
-            if activity.typeActiCode == "proj" {
-                    self.willLoadNextView = true
-                    self.addActivityIndicator()
-                    let dispatchGroup = DispatchGroup()
-                    DispatchQueue.global(qos: .utility).async {
-                        DispatchQueue.global(qos: .utility).async(group: dispatchGroup, execute: {
-                            self.getProjectFiles(forProject: activity, group: dispatchGroup)
-                            self.getProjectDetails(forProject: activity, group: dispatchGroup)
-                        })
-                        dispatchGroup.notify(queue: DispatchQueue.global(qos: .utility), execute: {
-                            DispatchQueue.main.async(execute: {
-                                self.removeActivityIndicator()
-                                self.performSegue(withIdentifier: "projectDetailsSegue", sender: self)
-                                self.activitiesTableView.deselectRow(at: indexPath, animated: true)
-                                self.willLoadNextView = false
-                            })
-                        })
-                    }
-                
-            } else if let characters = activity.mark?.characters, characters.count > 0 {
-                self.willLoadNextView = true
-                self.addActivityIndicator()
-                projectsRequests.marks(forProject: activity) { _ in
-                    self.performSegue(withIdentifier: "projectMarksSegue", sender: self)
-                    self.willLoadNextView = false
-                    self.removeActivityIndicator()
-                    self.activitiesTableView.deselectRow(at: indexPath, animated: true)
-                }
-            } else {
-                self.activitiesTableView.deselectRow(at: indexPath, animated: true)
             }
         }
     }
@@ -240,4 +148,90 @@ class StudentModuleDetailsViewController: SchoolDataViewController, UITableViewD
             self.barButtonItem.isEnabled = true
         }
     }
+}
+
+extension ModuleDetailsViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.module?.activities.count ?? 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellIdentifier = "activityCell"
+        
+        var cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? ModuleActivityTableViewCell
+        
+        if cell == nil {
+            let nib = UINib(nibName: "ModuleActivityTableViewCell", bundle:nil)
+            tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
+            cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? ModuleActivityTableViewCell
+        }
+        
+        if let activity = self.module?.activities[indexPath.row] {
+            
+            cell?.activityTitleLabel.text = activity.actiTitle
+            cell?.markLabel.text = activity.mark
+            cell?.startDateLabel.text = activity.begin?.toDate().toActiDate()
+            cell?.endDateLabel.text = activity.end?.toDate().toActiDate()
+            cell?.activityColor = UIUtils.activitiesColors[activity.typeActiCode!]
+            cell?.moduleLabel.text = ""
+            
+            if let characters = activity.mark?.characters, characters.count > 0 {
+                cell?.accessoryType = .disclosureIndicator
+            } else if activity.typeActiCode == "proj" {
+                cell?.accessoryType = .disclosureIndicator
+            } else {
+                cell?.accessoryType = .none
+            }
+            
+        }
+        return cell!
+    }
+    
+}
+
+extension ModuleDetailsViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if self.willLoadNextView == true { return }
+        
+        if let activity = self.module?.activities[indexPath.row] {
+            if activity.typeActiCode == "proj" {
+                self.willLoadNextView = true
+                self.addActivityIndicator()
+                let dispatchGroup = DispatchGroup()
+                DispatchQueue.global(qos: .utility).async {
+                    DispatchQueue.global(qos: .utility).async(group: dispatchGroup, execute: {
+                        self.getProjectFiles(forProject: activity, group: dispatchGroup)
+                        self.getProjectDetails(forProject: activity, group: dispatchGroup)
+                    })
+                    dispatchGroup.notify(queue: DispatchQueue.global(qos: .utility), execute: {
+                        DispatchQueue.main.async(execute: {
+                            self.removeActivityIndicator()
+                            self.performSegue(withIdentifier: "projectDetailsSegue", sender: self)
+                            self.activitiesTableView.deselectRow(at: indexPath, animated: true)
+                            self.willLoadNextView = false
+                        })
+                    })
+                }
+            } else if let characters = activity.mark?.characters, characters.count > 0 {
+                self.willLoadNextView = true
+                self.addActivityIndicator()
+                projectsRequests.marks(forProject: activity) { _ in
+                    self.performSegue(withIdentifier: "projectMarksSegue", sender: self)
+                    self.willLoadNextView = false
+                    self.removeActivityIndicator()
+                    self.activitiesTableView.deselectRow(at: indexPath, animated: true)
+                }
+            } else {
+                self.activitiesTableView.deselectRow(at: indexPath, animated: true)
+            }
+        }
+    }
+    
 }
