@@ -23,14 +23,16 @@ class FilterRankViewController: UIViewController {
         }
     }
     
-    struct Data {
-        var title: String!
-        var data: [String]!
-    }
+    
     
     @IBOutlet weak var dataTableView: UITableView!
     
     var rankFilter: RankFilter!
+    
+    struct Data {
+        var title: String!
+        var data: [String]!
+    }
     
     var tableViewData = [
         Data(title: "promotion", data: ["tek1", "tek2", "tek3"]),
@@ -66,6 +68,7 @@ extension FilterRankViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = UITableViewCell()
         
         let data = self.tableViewData[indexPath.section].data[indexPath.row]

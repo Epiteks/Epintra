@@ -40,12 +40,14 @@ class MarksViewController: LoadingDataViewController, UITableViewDataSource, UIT
                 self.marks = data
                 ApplicationManager.sharedInstance.user?.marks = data
                 self.marksTableView.reloadData()
-                break
+                self.removeNoDataView()
             case .failure(let error):
                 if error.message != nil {
                     ErrorViewer.errorPresent(self, mess: error.message!) { }
                 }
-                break
+                if self.marks == nil || self.marks?.count == 0 {
+                    self.addNoDataView()
+                }
             }
             self.isFetching = false
         }

@@ -44,16 +44,18 @@ class ModulesViewController: LoadingDataViewController {
         modulesRequests.usersModules { (result) in
             switch result {
             case .success(let data):
-                
                 log.info("User modules fetched")
                 self.modules = data
                 ApplicationManager.sharedInstance.user?.modules = data
                 self.modulesTableView.reloadData()
-                
+                self.removeNoDataView()
                 break
             case .failure(let error):
                 if error.message != nil {
                     ErrorViewer.errorPresent(self, mess: error.message!) { }
+                }
+                if self.modules == nil || self.modules?.count == 0 {
+                    self.addNoDataView()
                 }
                 break
             }

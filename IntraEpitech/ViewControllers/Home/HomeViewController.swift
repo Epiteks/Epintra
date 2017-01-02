@@ -51,31 +51,6 @@ class HomeViewController: LoadingDataViewController {
             })
         }
     }
-    
-	func refreshData(_ sender:AnyObject) {
-		
-//		let dispatchGroup = DispatchGroup()
-//		
-//		let historySave = currentUser?.history
-//		
-//        
-//        
-//        DispatchQueue.main.async {
-//            DispatchQueue.main.async(group: dispatchGroup, execute: {
-//				self.userDataCall(dispatchGroup)
-//				self.userHistoryCall(dispatchGroup)
-//			})
-//			dispatchGroup.notify(queue: DispatchQueue.global(qos: .default), execute: {
-//				DispatchQueue.main.async(execute: {
-//					// Update tableview if changes
-//					if (historySave! != self.currentUser!.history!) {
-//						self.generateBackgroundView()
-//						self.alertTableView.reloadData()
-//					}
-//				})
-//			})
-//		}
-	}
 	
 	func userDataCall(_ group: DispatchGroup) {
 		group.enter()

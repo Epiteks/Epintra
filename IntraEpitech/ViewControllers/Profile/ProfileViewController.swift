@@ -8,31 +8,9 @@
 
 import UIKit
 
-//fileprivate func < <T:  Comparable>(lhs: T?, rhs: T?) -> Bool {
-//  switch (lhs, rhs) {
-//  case let (l?, r?):
-//    return l < r
-//  case (nil, _?):
-//    return true
-//  default:
-//    return false
-//  }
-//}
-//
-//fileprivate func <= <T:  Comparable>(lhs: T?, rhs: T?) -> Bool {
-//  switch (lhs, rhs) {
-//  case let (l?, r?):
-//    return l <= r
-//  default:
-//    return !(rhs < lhs)
-//  }
-//}
-
 class ProfileViewController: UIViewController {
 	
 	@IBOutlet weak var tableView: UITableView!
-	
-	var currentUser: User?
 	
 	var files: [File]?
 	var flags: [Flags]?
@@ -51,9 +29,13 @@ class ProfileViewController: UIViewController {
 	]
 	
 	override func viewDidLoad() {
-		currentUser = ApplicationManager.sharedInstance.user
+        
+        super.viewDidLoad()
+        
 		calls()
-       
+        
+        self.tableView.register(UINib(nibName: "FlagTableViewCell", bundle: nil), forCellReuseIdentifier: "flagCell")
+        self.tableView.register(UINib(nibName: "EmptyDataTableViewCell", bundle: nil), forCellReuseIdentifier: "emptyCell")
 	}
 	
 	override func awakeFromNib() {
@@ -81,13 +63,10 @@ class ProfileViewController: UIViewController {
 			case .success(let data):
 					self.flags = data
 				log.info("User flags fetched")
-				break
 			case .failure(let error):
 				if error.message != nil {
 					ErrorViewer.errorPresent(self, mess: error.message!) { }
 				}
-				break
-					
 			}
 			self.downloadingFlags = false
 			self.tableView.reloadData()
@@ -160,7 +139,7 @@ extension ProfileViewController: UITableViewDataSource {
         if (indexPath as NSIndexPath).section == 0 { // Profile Cell, the first one
             cell = tableView.dequeueReusableCell(withIdentifier: "profileCell")!
             let profileView = cell.viewWithTag(1) as! ProfileView
-            profileView.setUserData(currentUser!)
+            profileView.setUserData(ApplicationManager.sharedInstance.user!)
             
             if let profileImageURL = ApplicationManager.sharedInstance.user?.imageUrl {
                 profileView.userProfileImage.downloadProfileImage(fromURL: URL(string: profileImageURL)!)
@@ -223,14 +202,7 @@ extension ProfileViewController: UITableViewDataSource {
             return cellEmpty(data: "NoFlag")
         }
         
-        var cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? FlagTableViewCell
-        
-        if cell == nil {
-            let nib = UINib(nibName: "FlagTableViewCell", bundle:nil)
-            tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
-            cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? FlagTableViewCell
-        }
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? FlagTableViewCell
         let module = flags![(indexPath as NSIndexPath).section - 2].modules[(indexPath as NSIndexPath).row]
         
         cell?.moduleLabel.text = module.title
@@ -250,13 +222,7 @@ extension ProfileViewController: UITableViewDataSource {
         
         let cellIdentifier = "emptyCell"
         
-        var cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? EmptyDataTableViewCell
-        
-        if cell == nil {
-            let nib = UINib(nibName: "EmptyDataTableViewCell", bundle:nil)
-            tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
-            cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? EmptyDataTableViewCell
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? EmptyDataTableViewCell
         
         cell?.infoLabel.text = NSLocalizedString(str, comment: "")
         

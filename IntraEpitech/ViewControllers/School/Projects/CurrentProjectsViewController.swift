@@ -36,12 +36,14 @@ class CurrentProjectsViewController: LoadingDataViewController {
                 self.projects = data
                 ApplicationManager.sharedInstance.user?.projects = data
                 self.projectsTableView.reloadData()
-                break
+                self.removeNoDataView()
             case .failure(let error):
                 if error.message != nil {
                     ErrorViewer.errorPresent(self, mess: error.message!) { }
                 }
-                break
+                if self.projects == nil || self.projects?.count == 0 {
+                    self.addNoDataView()
+                }
             }
             self.isFetching = false
         }

@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="365" height="133"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="365" height="132.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="365" height="132"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="vx8-fe-S7T">
@@ -39,11 +39,11 @@
                         </constraints>
                     </stackView>
                     <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ECHEC" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zjB-Oq-0dX">
-                        <rect key="frame" x="299" y="55" width="66" height="23"/>
+                        <rect key="frame" x="299" y="57" width="66" height="19.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="65.5" id="EWI-TV-eCH"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="19"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
