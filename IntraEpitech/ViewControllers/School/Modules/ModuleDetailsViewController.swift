@@ -18,9 +18,7 @@ class ModuleDetailsViewController: LoadingDataViewController {
     var barButtonItem: UIBarButtonItem!
     
     var module: Module? = nil
-    
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -34,6 +32,7 @@ class ModuleDetailsViewController: LoadingDataViewController {
         setModuleEndLabel()
         setProgressView()
         
+        self.activitiesTableView.register(UINib(nibName: "ModuleActivityTableViewCell", bundle: nil), forCellReuseIdentifier: "activityCell")
         self.activitiesTableView.rowHeight = UITableViewAutomaticDimension
         self.activitiesTableView.estimatedRowHeight = 50
         self.activitiesTableView.tableFooterView = UIView()
@@ -163,13 +162,7 @@ extension ModuleDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "activityCell"
         
-        var cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? ModuleActivityTableViewCell
-        
-        if cell == nil {
-            let nib = UINib(nibName: "ModuleActivityTableViewCell", bundle:nil)
-            tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
-            cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? ModuleActivityTableViewCell
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? ModuleActivityTableViewCell
         
         if let activity = self.module?.activities[indexPath.row] {
             

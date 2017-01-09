@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 /// Used for viewcontrollers that need to fetch data to show
 class LoadingDataViewController: UIViewController {
     
@@ -73,14 +72,12 @@ class LoadingDataViewController: UIViewController {
         }
     }
     
-    
     /// Add NoData View
     func addNoDataView() {
         let noData = NoDataView(info: NSLocalizedString("NoNotification", comment: ""))
         noData.frame = self.view.frame
         self.view.addSubview(noData)
     }
-    
     
     /// Remove NoData View
     func removeNoDataView() {
@@ -91,5 +88,4 @@ class LoadingDataViewController: UIViewController {
             }
         }
     }
-
 }

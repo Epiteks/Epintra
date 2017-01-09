@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, UITextFieldDelegate {
+class LoginViewController: UIViewController {
 	
 	@IBOutlet weak var loginTableView: UITableView!
 	@IBOutlet weak var loginButton: ActionButton!
@@ -17,7 +17,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 	
 	var login = String()
 	var password = String()
-	
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -39,6 +39,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 		self.view.backgroundColor = UIUtils.backgroundColor
 		
 		// Set UITableView properties
+        self.loginTableView.register(UINib(nibName: "LoginTableViewCell", bundle: nil), forCellReuseIdentifier: "loginCell")
 		self.loginTableView.isScrollEnabled = false
 		self.loginTableView.layer.cornerRadius = 3
 		self.loginTableView.separatorInset = UIEdgeInsets.zero
@@ -212,20 +213,19 @@ extension LoginViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "normalCell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "loginCell") as? LoginTableViewCell
         
-        let textField = cell?.viewWithTag(1) as! UITextField
+        cell?.dataTextField.tintColor = UIUtils.backgroundColor
         
-        textField.tintColor = UIUtils.backgroundColor
-        
-        if ((indexPath as NSIndexPath).row == 0) { textField.placeholder = NSLocalizedString("email", comment: "") } else {
-            textField.placeholder = NSLocalizedString("password", comment: "")
-            textField.isSecureTextEntry = true
+        if ((indexPath as NSIndexPath).row == 0) {
+            cell?.dataTextField.placeholder = NSLocalizedString("email", comment: "")
+        } else {
+            cell?.dataTextField.placeholder = NSLocalizedString("password", comment: "")
+            cell?.dataTextField.isSecureTextEntry = true
         }
         
         cell?.layoutMargins.left = 0
         
         return cell!
     }
-
 }

@@ -57,7 +57,6 @@ class ProfileViewController: UIViewController {
 		
 		self.downloadingFlags = true
 		
-		// TODO REMOVE THIS SHIT
 		usersRequests.getUserFlags(ApplicationManager.sharedInstance.currentLogin!) { (result) in
 			switch (result) {
 			case .success(let data):

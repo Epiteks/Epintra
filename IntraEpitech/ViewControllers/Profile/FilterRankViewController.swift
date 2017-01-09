@@ -23,8 +23,6 @@ class FilterRankViewController: UIViewController {
         }
     }
     
-    
-    
     @IBOutlet weak var dataTableView: UITableView!
     
     var rankFilter: RankFilter!

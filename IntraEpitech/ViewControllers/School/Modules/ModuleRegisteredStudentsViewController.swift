@@ -22,6 +22,7 @@ class ModuleRegisteredStudentsViewController: UIViewController, UITableViewDeleg
         // Do any additional setup after loading the view.
         self.title = NSLocalizedString("Grades", comment: "")
         
+        self.studentsTableView.register(UINib(nibName: "StudentGradeTableViewCell", bundle: nil), forCellReuseIdentifier: "studentRegisteredCell")
         self.studentsTableView.estimatedRowHeight = 60
         self.studentsTableView.rowHeight = UITableViewAutomaticDimension
         self.automaticallyAdjustsScrollViewInsets = false
@@ -56,13 +57,7 @@ class ModuleRegisteredStudentsViewController: UIViewController, UITableViewDeleg
         
         let cellIdentifier = "studentRegisteredCell"
         
-        var cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? StudentGradeTableViewCell
-        
-        if cell == nil {
-            let nib = UINib(nibName: "StudentGradeTableViewCell", bundle:nil)
-            tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
-            cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? StudentGradeTableViewCell
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? StudentGradeTableViewCell
         
         if let student = students?[indexPath.row] {
             cell?.nameLabel.text = student.login

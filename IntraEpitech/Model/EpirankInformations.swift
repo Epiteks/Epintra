@@ -40,48 +40,6 @@ class EpirankInformation: Object {
        super.init(realm: realm, schema: schema)
     }
     
-    /// Set new value for promotion update information
-    ///
-    /// - Parameters:
-    ///   - promotion: promotion to update
-    ///   - date: date of the update
-    //func updated(promotion: String, at date: Date) {
-
-        
-        
-//        if let data = self.informations.filter(NSPredicate(format: "promotion = %@", promotion)).first {
-//            data.updatedAt = date
-//        } else {
-//            let data = EpirankInformationsData()
-//            data.promotion = promotion
-//            data.updatedAt = date
-//            
-//            // swiftlint:disable force_try
-//            let realm = try! Realm()
-//            try! realm.write {
-//                informations.append(data)
-//            }
-//        }
-    //}
-
-    /// Get promotion date up
-    ///
-    /// - Parameter promotion: promotion to retrieve the value
-    /// - Returns: date updated, returns nil if there is no value
-//    func dateUpdated(for promotion: String) -> Date? {
-//        
-//        let all = self.informations
-//        
-//        for tmp in all {
-//            print(tmp)
-//        }
-//        
-//        if let data = self.informations.filter(NSPredicate(format: "promotion = %@", promotion)).first {
-//            return data.updatedAt
-//        }
-//        return nil
-//    }
-    
     func needsNewerData() -> Bool {
         
         /// Guess when the data was updated on server-side
@@ -90,17 +48,4 @@ class EpirankInformation: Object {
         // Check if current date can have new data
         return guessedUpdatedDate < Date() ? true : false
     }
-    
-   
-
-}
-
-class EpirankInformationManager {
-    
-    class func updated(promotion: String, at date: Date) {
-        
-        //ApplicationManager.sharedInstance.realmManager
-        
-    }
-    
 }

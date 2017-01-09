@@ -9,9 +9,8 @@
 import UIKit
 
 class SplashScreenViewController: UIViewController {
+
 	@IBOutlet weak var statusLabel: UILabel!
-	
-	let app = ApplicationManager.sharedInstance
 	
 	var errorDuringFetching = false
 	
@@ -27,10 +26,10 @@ class SplashScreenViewController: UIViewController {
 		self.view.backgroundColor = UIUtils.backgroundColor
 		
 		if (UserPreferences.checkIfWantsDownloadingExists()) {
-			app.canDownload = UserPreferences.getWantsDownloading()
+			ApplicationManager.sharedInstance.canDownload = UserPreferences.getWantsDownloading()
 		}
 		if (UserPreferences.checkIfDefaultCalendarExists()) {
-			app.defaultCalendar = UserPreferences.getDefaultCalendar()
+			ApplicationManager.sharedInstance.defaultCalendar = UserPreferences.getDefaultCalendar()
 		}
 		if (UserPreferences.checkSemestersExist() == true) {
 			ApplicationManager.sharedInstance.planningSemesters = UserPreferences.getSemesters()

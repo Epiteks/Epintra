@@ -16,7 +16,7 @@ class MarksViewController: LoadingDataViewController, UITableViewDataSource, UIT
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.marksTableView.register(UINib(nibName: "StudentGradeTableViewCell", bundle: nil), forCellReuseIdentifier: "studentRegisteredCell")
         self.marksTableView.rowHeight = UITableViewAutomaticDimension
         self.marksTableView.estimatedRowHeight = 60
     }
@@ -74,13 +74,7 @@ class MarksViewController: LoadingDataViewController, UITableViewDataSource, UIT
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "studentRegisteredCell"
         
-        var cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? StudentGradeTableViewCell
-        
-        if cell == nil {
-            let nib = UINib(nibName: "StudentGradeTableViewCell", bundle:nil)
-            tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
-            cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? StudentGradeTableViewCell
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? StudentGradeTableViewCell
         
         if let data = self.marks?[indexPath.row] {
             cell?.nameLabel.text = data.title

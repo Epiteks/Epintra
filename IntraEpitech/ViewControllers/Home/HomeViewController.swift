@@ -25,7 +25,7 @@ class HomeViewController: LoadingDataViewController {
 		self.title = NSLocalizedString("Notifications", comment: "")
 	}
 	
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         // No data
         if let history = ApplicationManager.sharedInstance.user?.history, history.count == 0 {
             self.addNoDataView()

@@ -23,14 +23,11 @@ class UsersRequests: RequestManager {
 		super.call("authentication", params: ["login": login, "password": password]) { (response) in
 			switch response {
 			case .success(let responseJSON):
-				
 				if let token = responseJSON["token"].string {
 					log.info("Token:  \(token)")
 					ApplicationManager.sharedInstance.token = token
 					completion(Result.success(nil))
 				}
-				
-				
 			case .failure(let err):
 				completion(Result.failure(type: err.type, message: err.message))
 				log.error("Authentication:  \(err)")
@@ -58,10 +55,7 @@ class UsersRequests: RequestManager {
 				app.user = User(dict: responseJSON)
 				app.lastUserApiCall = Date().timeIntervalSince1970
 				app.planningSemesters[(app.user?.semester!)!] = true
-				
 				completion(Result.success(nil))
-				
-				
 			case .failure(let err):
 				completion(Result.failure(type: err.type, message: err.message))
 				log.error("GetCurrentUserData:  \(err)")
@@ -83,12 +77,8 @@ class UsersRequests: RequestManager {
 		super.call("userData", params: nil, urlParams: param) { (response) in
 			switch response {
 			case .success(let responseJSON):
-				
 				let usr = User(dict: responseJSON)
-				
 				completion(Result.success(usr))
-				
-				
 			case .failure(let err):
 				completion(Result.failure(type: err.type, message: err.message))
 				log.error("GetUserData:  \(err)")

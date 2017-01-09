@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProjectMarksViewController: UIViewController, UITableViewDataSource {
+class ProjectMarksViewController: UIViewController {
 
     @IBOutlet weak var marksTableView: UITableView!
     
@@ -19,10 +19,14 @@ class ProjectMarksViewController: UIViewController, UITableViewDataSource {
         
         self.title = NSLocalizedString("Marks", comment: "")
         
+        self.marksTableView.register(UINib(nibName: "StudentGradeTableViewCell", bundle: nil), forCellReuseIdentifier: "markCell")
         self.marksTableView.estimatedRowHeight = 60
         self.marksTableView.rowHeight = UITableViewAutomaticDimension
     }
+}
 
+extension ProjectMarksViewController: UITableViewDataSource {
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -35,13 +39,7 @@ class ProjectMarksViewController: UIViewController, UITableViewDataSource {
         
         let cellIdentifier = "markCell"
         
-        var cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? StudentGradeTableViewCell
-        
-        if cell == nil {
-            let nib = UINib(nibName: "StudentGradeTableViewCell", bundle:nil)
-            tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
-            cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? StudentGradeTableViewCell
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? StudentGradeTableViewCell
         
         let data = self.marks[indexPath.row]
         

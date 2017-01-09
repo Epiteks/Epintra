@@ -17,6 +17,7 @@ class CurrentProjectsViewController: LoadingDataViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.projectsTableView.register(UINib(nibName: "ModuleActivityTableViewCell", bundle: nil), forCellReuseIdentifier: "activityCell")
         self.projectsTableView.rowHeight = UITableViewAutomaticDimension
         self.projectsTableView.estimatedRowHeight = 60
         self.projectsTableView.separatorInset = .zero
@@ -105,13 +106,7 @@ extension CurrentProjectsViewController: UITableViewDataSource {
         
         let cellIdentifier = "activityCell"
         
-        var cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? ModuleActivityTableViewCell
-        
-        if cell == nil {
-            let nib = UINib(nibName: "ModuleActivityTableViewCell", bundle:nil)
-            tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
-            cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? ModuleActivityTableViewCell
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? ModuleActivityTableViewCell
         
         if let data = self.projects?[indexPath.row] {
             cell?.activityTitleLabel.text = data.actiTitle

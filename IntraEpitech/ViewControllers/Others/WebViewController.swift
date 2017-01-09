@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WebViewController: UIViewController, UIWebViewDelegate {
+class WebViewController: UIViewController {
 	
     var webView: UIWebView!
 	

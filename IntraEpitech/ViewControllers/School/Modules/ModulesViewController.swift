@@ -25,6 +25,8 @@ class ModulesViewController: LoadingDataViewController {
         if ApplicationManager.sharedInstance.user?.modules == nil {
             getModules()
         }
+        
+        self.modulesTableView.register(UINib(nibName: "ModuleTableViewCell", bundle: nil), forCellReuseIdentifier: "moduleCell")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -79,12 +81,6 @@ extension ModulesViewController: UITableViewDataSource {
         let cellIdentifier = "moduleCell"
         
         var cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? ModuleTableViewCell
-        
-        if cell == nil {
-            let nib = UINib(nibName: "ModuleTableViewCell", bundle:nil)
-            tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
-            cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? ModuleTableViewCell
-        }
         
         if let data = modules?[indexPath.row] {
             cell?.titleLabel.text = data.title
