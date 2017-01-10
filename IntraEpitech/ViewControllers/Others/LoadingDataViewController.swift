@@ -21,26 +21,30 @@ class LoadingDataViewController: UIViewController {
     var willLoadNextView: Bool = false
     
     /// Add LoadingView screen
-    func addLoadingScreen() {
+    func addLoadingScreen(for otherView: UIView? = nil) {
         
-        for sub in self.view.subviews {
+        let viewToSearchOn: UIView = otherView ?? self.view
+        
+        for sub in viewToSearchOn.subviews {
             if sub.restorationIdentifier == "loadingView" {
                 log.warning("Loading view already present. Not adding it.")
                 return
             }
         }
         
-        let loadingView = LoadingView(frame: self.view.frame)
+        let loadingView = LoadingView(frame: viewToSearchOn.frame)
         
         loadingView.restorationIdentifier = "loadingView"
         
-        self.view.addSubview(loadingView)
+        viewToSearchOn.addSubview(loadingView)
     }
     
     /// Remove LoadingView screen
-    func removeLoadingScreen() {
+    func removeLoadingScreen(for otherView: UIView? = nil) {
         
-        for sub in self.view.subviews {
+        let viewToSearchOn: UIView = otherView ?? self.view
+        
+        for sub in viewToSearchOn.subviews {
             if sub.restorationIdentifier == "loadingView" {
                 sub.removeFromSuperview()
                 break

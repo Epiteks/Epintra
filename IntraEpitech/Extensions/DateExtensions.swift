@@ -29,29 +29,19 @@ public extension Date {
 	func toAPIString() -> String {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd"
-		let str = dateFormatter.string(from: self)
-		return str
+		return dateFormatter.string(from: self)
 	}
-	
-	func startOfWeek() -> Date? {
-		
-		guard
-			var cal: Calendar = Calendar.current,
-			var comp: DateComponents = (cal as NSCalendar).components([.yearForWeekOfYear, .weekOfYear], from: self) else { return nil }
-		cal.firstWeekday = 2// ?? 1
-		return cal.date(from: comp)!
-	}
-	
-	func endOfWeek() -> Date? {
-		guard
-			var cal: Calendar = Calendar.current,
-			var comp: DateComponents = (cal as NSCalendar).components([.weekOfYear], from: self) else { return nil }
-		cal.firstWeekday = 2
-		comp.weekOfYear = 1
-		comp.day = -1
-		return (cal as NSCalendar).date(byAdding: comp, to: self.startOfWeek()!, options: [])!
-	}
-	
+    
+    func endOfWeekDate() -> Date { // Adds 6 days
+        
+        let calendar = Calendar(identifier: .gregorian)
+        var dateComponent = DateComponents()
+        dateComponent.day = 6
+        
+        let lastDayShown = calendar.date(byAdding: dateComponent, to: self)
+        return lastDayShown!
+    }
+
 	func toEventHour() -> String {
 		
 		var str = String()

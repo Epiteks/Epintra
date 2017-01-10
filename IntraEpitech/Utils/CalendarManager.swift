@@ -108,9 +108,12 @@ class CalendarManager {
 					endDate = arr![1].toDate() as Date
 					
 				} else {
-					startDate = (planning.startTime?.toDate())! as Date
-					// 2 hours
-					endDate = (planning.endTime?.toDate())! as Date
+                    
+                    // TODO NOT WORK
+                    
+//					startDate = (planning.startTime?.toDate())! as Date
+//					// 2 hours
+//					endDate = (planning.endTime?.toDate())! as Date
 				}
 				// 4
 				

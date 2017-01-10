@@ -12,8 +12,8 @@ import SwiftyJSON
 class Planning {
 	
 	var titleModule: String?
-	var startTime: String?
-	var endTime: String?
+	var startTime: Date?
+	var endTime: Date?
 	var totalStudentsRegistered: Int?
 	var allowRegister: Bool?
 	var allowToken: Bool?
@@ -35,9 +35,14 @@ class Planning {
 	var semester: Int?
 	
 	init(dict: JSON) {
+        
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        
 		titleModule = dict["titlemodule"].stringValue
-		startTime = dict["start"].stringValue
-		endTime = dict["end"].stringValue
+		startTime = dateFormat.date(from: dict["start"].stringValue)
+		endTime = dateFormat.date(from: dict["end"].stringValue)
 		totalStudentsRegistered = dict["total_students_registered"].intValue
 		allowRegister = dict["allow_register"].boolValue
 		allowToken = dict["allow_token"].boolValue
@@ -59,11 +64,11 @@ class Planning {
 		semester = dict["semester"].intValue
 	}
 	
-	func getOnlyDay() -> String {
-		let array = startTime?.components(separatedBy: " ")
-		return array![0]
-	}
-	
+//	func getOnlyDay() -> String {
+//		let array = startTime?.components(separatedBy: " ")
+//		return array![0]
+//	}
+//	
 	func canEnterToken() -> Bool {
 		if (self.allowToken == true && self.eventRegisteredStatus == "registered") {
 			return true
@@ -119,20 +124,20 @@ class Planning {
 		return false
 	}
 	
-	func getEventTime() -> (start: String, end: String) {
-		
-		startTime?.toDate().toEventHour()
-		
-		if (rdvGroupRegistered!.characters.count > 0) {
-			let arr = rdvGroupRegistered?.components(separatedBy: "|")
-			return (arr![0].toDate().toEventHour(), arr![1].toDate().toEventHour())
-		} else if (rdvIndividuelRegistered!.characters.count > 0) {
-			let arr = rdvIndividuelRegistered?.components(separatedBy: "|")
-			return (arr![0].toDate().toEventHour(), arr![1].toDate().toEventHour())
-		} else {
-			return ((startTime?.toDate().toEventHour())!, (endTime?.toDate().toEventHour())!)
-		}
-	}
+//	func getEventTime() -> (start: String, end: String) {
+//		
+//		startTime?.toDate().toEventHour()
+//		
+//		if (rdvGroupRegistered!.characters.count > 0) {
+//			let arr = rdvGroupRegistered?.components(separatedBy: "|")
+//			return (arr![0].toDate().toEventHour(), arr![1].toDate().toEventHour())
+//		} else if (rdvIndividuelRegistered!.characters.count > 0) {
+//			let arr = rdvIndividuelRegistered?.components(separatedBy: "|")
+//			return (arr![0].toDate().toEventHour(), arr![1].toDate().toEventHour())
+//		} else {
+//			return ((startTime?.toDate().toEventHour())!, (endTime?.toDate().toEventHour())!)
+//		}
+//	}
 	
 	init(appointment: AppointmentEvent) {
 		scolaryear = Int(appointment.scolaryear!)
