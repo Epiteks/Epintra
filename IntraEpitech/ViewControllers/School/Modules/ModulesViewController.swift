@@ -80,7 +80,7 @@ extension ModulesViewController: UITableViewDataSource {
         
         let cellIdentifier = "moduleCell"
         
-        var cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? ModuleTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? ModuleTableViewCell
         
         if let data = modules?[indexPath.row] {
             cell?.titleLabel.text = data.title

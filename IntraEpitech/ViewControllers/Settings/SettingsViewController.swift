@@ -15,7 +15,7 @@ class SettingsViewController: UIViewController, MFMailComposeViewControllerDeleg
     struct SettingsCellData {
         var id: String!
         var view: ((IndexPath, SettingsCellData) -> (UITableViewCell))? = nil
-        var handler: (() -> ())? = nil
+        var handler: (() -> Void)? = nil
     }
     
     struct SettingsSectionData {

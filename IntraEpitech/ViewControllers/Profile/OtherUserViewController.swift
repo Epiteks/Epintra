@@ -116,12 +116,13 @@ class OtherUserViewController: UIViewController, UITableViewDelegate, UITableVie
 	override func viewDidAppear(_ animated: Bool) {
 		MJProgressView.instance.showProgress(self.tableView, white: false)
 		self.profileImageView.image = UIImage(named: "userProfile")
-		ImageDownloader.downloadFrom(link: (currentUser?.imageUrl)!) {_ in 
-			if let img = ApplicationManager.sharedInstance.downloadedImages![self.currentUser!.imageUrl!] {
-				self.profileImageView.image = img
-				self.profileImageView.cropToSquare()
-			}
-		}
+        
+//		ImageDownloader.downloadFrom(link: (currentUser?.imageUrl)!) {_ in 
+//			if let img = ApplicationManager.sharedInstance.downloadedImages![self.currentUser!.imageUrl!] {
+//				self.profileImageView.image = img
+//				self.profileImageView.cropToSquare()
+//			}
+//		}
 		
 	}
 	

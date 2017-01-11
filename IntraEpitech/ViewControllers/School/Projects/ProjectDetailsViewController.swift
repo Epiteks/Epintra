@@ -97,18 +97,23 @@ class ProjectDetailsViewController: UIViewController, UITableViewDelegate, UITab
 
     func setUIIfRegistered(_ grp: ProjectGroup?) {
         
-        if let img = ApplicationManager.sharedInstance.downloadedImages![(grp?.master?.imageUrl)!] {
-            self.masterProfileImage.image = img
-            self.masterProfileImage.cropToSquare()
-        } else {
-            ImageDownloader.downloadFrom(link: (grp?.master?.imageUrl)!) {_ in
-                if let img = ApplicationManager.sharedInstance.downloadedImages![(grp?.master?.imageUrl)!] {
-                    self.masterProfileImage.image = img
-                    self.masterProfileImage.cropToSquare()
-                    self.masterProfileImage.toCircle()
-                }
-            }
+        if let profileImageURL = grp?.master?.imageUrl {
+            self.masterProfileImage.downloadProfileImage(fromURL: URL(string: profileImageURL)!)
         }
+//        
+//        
+//        if let img = ApplicationManager.sharedInstance.downloadedImages![(grp?.master?.imageUrl)!] {
+//            self.masterProfileImage.image = img
+//            self.masterProfileImage.cropToSquare()
+//        } else {
+//            ImageDownloader.downloadFrom(link: (grp?.master?.imageUrl)!) {_ in
+//                if let img = ApplicationManager.sharedInstance.downloadedImages![(grp?.master?.imageUrl)!] {
+//                    self.masterProfileImage.image = img
+//                    self.masterProfileImage.cropToSquare()
+//                    self.masterProfileImage.toCircle()
+//                }
+//            }
+//        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

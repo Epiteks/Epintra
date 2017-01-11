@@ -88,7 +88,6 @@
 		79779AA21C59140E008803C5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79779AA11C59140E008803C5 /* QuartzCore.framework */; };
 		79779AA41C591A0D008803C5 /* PlanningApiCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79779AA31C591A0D008803C5 /* PlanningApiCalls.swift */; };
 		79779AA61C592355008803C5 /* String+NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79779AA51C592355008803C5 /* String+NSDate.swift */; };
-		797DC7EF1C7A09DF00ED095E /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797DC7EE1C7A09DF00ED095E /* Util.swift */; };
 		797DC7F11C7A0AE700ED095E /* StudentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797DC7F01C7A0AE700ED095E /* StudentInfo.swift */; };
 		798850381C4AC51C00BAA888 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798850371C4AC51C00BAA888 /* AppDelegate.swift */; };
 		7988503F1C4AC51C00BAA888 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7988503E1C4AC51C00BAA888 /* Assets.xcassets */; };
@@ -106,8 +105,6 @@
 		79AFFA501E25B1FF00FDEDF3 /* PlanningFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AFFA4F1E25B1FF00FDEDF3 /* PlanningFilterViewController.swift */; };
 		79AFFA521E264AF500FDEDF3 /* PlanningFilterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AFFA511E264AF500FDEDF3 /* PlanningFilterDelegate.swift */; };
 		79AFFA541E26657100FDEDF3 /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AFFA531E26657100FDEDF3 /* SwiftyBeaver.framework */; };
-		79B05FD91C68BC1C0032DB0C /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B05FD81C68BC1C0032DB0C /* IAPHelper.swift */; };
-		79B05FDD1C68BEB90032DB0C /* IntraProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B05FDC1C68BEB90032DB0C /* IntraProduct.swift */; };
 		79C8A7481E1FBA2A00F8F9C3 /* LoginTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C8A7461E1FBA2A00F8F9C3 /* LoginTableViewCell.swift */; };
 		79C8A7491E1FBA2A00F8F9C3 /* LoginTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79C8A7471E1FBA2A00F8F9C3 /* LoginTableViewCell.xib */; };
 		79DE549E1C5BAF3300E2ADDE /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DE549D1C5BAF3300E2ADDE /* CalendarManager.swift */; };
@@ -244,7 +241,6 @@
 		79779AA11C59140E008803C5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		79779AA31C591A0D008803C5 /* PlanningApiCalls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanningApiCalls.swift; path = Network/PlanningApiCalls.swift; sourceTree = "<group>"; };
 		79779AA51C592355008803C5 /* String+NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+NSDate.swift"; sourceTree = "<group>"; };
-		797DC7EE1C7A09DF00ED095E /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		797DC7F01C7A0AE700ED095E /* StudentInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudentInfo.swift; path = Model/StudentInfo.swift; sourceTree = "<group>"; };
 		798850341C4AC51C00BAA888 /* Epintra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Epintra.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		798850371C4AC51C00BAA888 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -268,8 +264,6 @@
 		79AFFA4F1E25B1FF00FDEDF3 /* PlanningFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanningFilterViewController.swift; sourceTree = "<group>"; };
 		79AFFA511E264AF500FDEDF3 /* PlanningFilterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanningFilterDelegate.swift; path = Protocols/PlanningFilterDelegate.swift; sourceTree = "<group>"; };
 		79AFFA531E26657100FDEDF3 /* SwiftyBeaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBeaver.framework; path = "Pods/../build/Debug-iphoneos/SwiftyBeaver/SwiftyBeaver.framework"; sourceTree = "<group>"; };
-		79B05FD81C68BC1C0032DB0C /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
-		79B05FDC1C68BEB90032DB0C /* IntraProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntraProduct.swift; sourceTree = "<group>"; };
 		79C8A7461E1FBA2A00F8F9C3 /* LoginTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginTableViewCell.swift; path = LoginTableViewCell/LoginTableViewCell.swift; sourceTree = "<group>"; };
 		79C8A7471E1FBA2A00F8F9C3 /* LoginTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginTableViewCell.xib; path = LoginTableViewCell/LoginTableViewCell.xib; sourceTree = "<group>"; };
 		79DE549D1C5BAF3300E2ADDE /* CalendarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CalendarManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -645,9 +639,6 @@
 				79779A9D1C5912DA008803C5 /* SystemUtils.swift */,
 				79DE549D1C5BAF3300E2ADDE /* CalendarManager.swift */,
 				79152D881C67A43D00513E0F /* ContactsHelper.swift */,
-				79B05FD81C68BC1C0032DB0C /* IAPHelper.swift */,
-				79B05FDC1C68BEB90032DB0C /* IntraProduct.swift */,
-				797DC7EE1C7A09DF00ED095E /* Util.swift */,
 				79F42BEE1D68CCC6008DF047 /* CompletionHandlerType.swift */,
 			);
 			path = Utils;
@@ -1065,7 +1056,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				797DC7EF1C7A09DF00ED095E /* Util.swift in Sources */,
 				797DC7F11C7A0AE700ED095E /* StudentInfo.swift in Sources */,
 				7948FEC81E19CAC1001C5F3A /* SplashScreenViewController.swift in Sources */,
 				79F826601C554B420002DCC8 /* Spices.swift in Sources */,
@@ -1091,7 +1081,6 @@
 				7948FEC71E19CAC1001C5F3A /* LoginViewController.swift in Sources */,
 				795CC32A1C5CBE72007AFE87 /* ProjectDetail.swift in Sources */,
 				79F8ADEB1C52AA9C00F4FDD4 /* UserApiCalls.swift in Sources */,
-				79B05FDD1C68BEB90032DB0C /* IntraProduct.swift in Sources */,
 				796B2EF91C4ADEB800327E22 /* UIUtils.swift in Sources */,
 				79E4C5C91C6E35AC0003DA56 /* Appointment.swift in Sources */,
 				7948FF351E19CC02001C5F3A /* ProjectTableViewCell.swift in Sources */,
@@ -1140,7 +1129,6 @@
 				7948FF2F1E19CC02001C5F3A /* LoadingDataTableViewCell.swift in Sources */,
 				79284F5D1C5F3FC500349628 /* Flags.swift in Sources */,
 				7906842A1C6FC1E10067B26F /* AppointmentEvent.swift in Sources */,
-				79B05FD91C68BC1C0032DB0C /* IAPHelper.swift in Sources */,
 				795994421C52CED9007BE7C5 /* ErrorViewer.swift in Sources */,
 				7948FF371E19CC02001C5F3A /* StudentGradeTableViewCell.swift in Sources */,
 				79F826621C554BED0002DCC8 /* Netsoul.swift in Sources */,

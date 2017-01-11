@@ -11,42 +11,6 @@ import UIKit
 
 class SystemUtils {
 	
-	func getDateUnderstandable(_ day: Int, month: Int) -> (s_day: String?, s_month: String?) {
-		
-		var s_day = String()
-		var s_month = String()
-		
-		let days:  [String] = [
-			NSLocalizedString("Sunday", comment: ""),
-			NSLocalizedString("Monday", comment: ""),
-			NSLocalizedString("Tuesday", comment: ""),
-			NSLocalizedString("Wednesday", comment: ""),
-			NSLocalizedString("Thursday", comment: ""),
-			NSLocalizedString("Friday", comment: ""),
-			NSLocalizedString("Saturday", comment: "")
-		]
-		
-		let monthes:  [String] = [
-			NSLocalizedString("January", comment: ""),
-			NSLocalizedString("February", comment: ""),
-			NSLocalizedString("March", comment: ""),
-			NSLocalizedString("April", comment: ""),
-			NSLocalizedString("May", comment: ""),
-			NSLocalizedString("June", comment: ""),
-			NSLocalizedString("July", comment: ""),
-			NSLocalizedString("August", comment: ""),
-			NSLocalizedString("September", comment: ""),
-			NSLocalizedString("October", comment: ""),
-			NSLocalizedString("November", comment: ""),
-			NSLocalizedString("December", comment: "")
-		]
-		
-		s_day = days[day - 1]
-		s_month = monthes[month - 1]
-		
-		return (s_day, s_month)
-	}
-	
 	class func getVersion() -> String {
 		let nsObject: AnyObject? = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as AnyObject?
 		return nsObject as! String

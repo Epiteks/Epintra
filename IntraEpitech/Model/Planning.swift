@@ -39,7 +39,6 @@ class Planning {
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
-        
 		titleModule = dict["titlemodule"].stringValue
 		startTime = dateFormat.date(from: dict["start"].stringValue)
 		endTime = dateFormat.date(from: dict["end"].stringValue)

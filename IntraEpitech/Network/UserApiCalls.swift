@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class UserApiCalls: APICalls {
 	
-	class func loginCall(_ login: String, password: String, onCompletion: @escaping (Bool, String) ->Void) {
+	class func loginCall(_ login: String, password: String, onCompletion: @escaping (Bool, String) -> Void) {
 		
 		let url = super.getApiUrl() + "login"
 		
@@ -36,7 +36,7 @@ class UserApiCalls: APICalls {
 		}
 	}
 	
-	class func getUserData(_ login: String, onCompletion: @escaping (Bool, String) ->Void) {
+	class func getUserData(_ login: String, onCompletion: @escaping (Bool, String) -> Void) {
 		
 		let url = super.getApiUrl() + "user"
 		
@@ -61,7 +61,7 @@ class UserApiCalls: APICalls {
 				}
 		}
 	}
-	class func getSelectedUserData(_ login: String, onCompletion: @escaping (Bool, User?, String) ->Void) {
+	class func getSelectedUserData(_ login: String, onCompletion: @escaping (Bool, User?, String) -> Void) {
 		
 		let url = super.getApiUrl() + "user"
 		
@@ -84,7 +84,7 @@ class UserApiCalls: APICalls {
 		}
 	}
 	
-	class func getUserHistory(_ onCompletion: @escaping (Bool, String) ->Void) {
+	class func getUserHistory(_ onCompletion: @escaping (Bool, String) -> Void) {
 		
 		let url = super.getApiUrl() + "infos"
 		
@@ -107,7 +107,7 @@ class UserApiCalls: APICalls {
 		}
 	}
 	
-	class func getUserDocuments(_ onCompletion: @escaping (Bool, [File]?, String) ->Void) {
+	class func getUserDocuments(_ onCompletion: @escaping (Bool, [File]?, String) -> Void) {
 		
 		let url = super.getApiUrl() + "user/files"
 		
@@ -136,7 +136,7 @@ class UserApiCalls: APICalls {
 		}
 	}
 	
-	class func getUserFlags(_ login: String?, onCompletion: @escaping (Bool, [Flags]?, String) ->Void) {
+	class func getUserFlags(_ login: String?, onCompletion: @escaping (Bool, [Flags]?, String) -> Void) {
 		
 		let url = super.getApiUrl() + "user/flags"
 		
@@ -168,7 +168,7 @@ class UserApiCalls: APICalls {
 		}
 	}
 	
-	class func getAllUsers(_ onCompletion: @escaping (Bool, [StudentInfo]?, String) ->Void) {
+	class func getAllUsers(_ onCompletion: @escaping (Bool, [StudentInfo]?, String) -> Void) {
 		
 //		let url = super.getRankingUrl()
 //		

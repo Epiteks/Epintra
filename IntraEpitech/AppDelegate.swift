@@ -32,8 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		console.levelColor.error = "👺 "
         
 		log.addDestination(console)
-		
-       
         
 		NetworkActivityIndicatorManager.shared.isEnabled = true
 		
