@@ -104,6 +104,8 @@
 		79AFFA471E23EA5800FDEDF3 /* PlanningRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AFFA461E23EA5800FDEDF3 /* PlanningRequests.swift */; };
 		79AFFA4D1E24FD2A00FDEDF3 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AFFA4B1E24FD2A00FDEDF3 /* EventTableViewCell.swift */; };
 		79AFFA4E1E24FD2A00FDEDF3 /* EventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79AFFA4C1E24FD2A00FDEDF3 /* EventTableViewCell.xib */; };
+		79AFFA501E25B1FF00FDEDF3 /* PlanningFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AFFA4F1E25B1FF00FDEDF3 /* PlanningFilterViewController.swift */; };
+		79AFFA521E264AF500FDEDF3 /* PlanningFilterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AFFA511E264AF500FDEDF3 /* PlanningFilterDelegate.swift */; };
 		79B05FD91C68BC1C0032DB0C /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B05FD81C68BC1C0032DB0C /* IAPHelper.swift */; };
 		79B05FDD1C68BEB90032DB0C /* IntraProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B05FDC1C68BEB90032DB0C /* IntraProduct.swift */; };
 		79C8A7481E1FBA2A00F8F9C3 /* LoginTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C8A7461E1FBA2A00F8F9C3 /* LoginTableViewCell.swift */; };
@@ -264,6 +266,8 @@
 		79AFFA461E23EA5800FDEDF3 /* PlanningRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanningRequests.swift; path = Network/PlanningRequests.swift; sourceTree = "<group>"; };
 		79AFFA4B1E24FD2A00FDEDF3 /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventTableViewCell.swift; path = EventTableViewCell/EventTableViewCell.swift; sourceTree = "<group>"; };
 		79AFFA4C1E24FD2A00FDEDF3 /* EventTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventTableViewCell.xib; path = EventTableViewCell/EventTableViewCell.xib; sourceTree = "<group>"; };
+		79AFFA4F1E25B1FF00FDEDF3 /* PlanningFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanningFilterViewController.swift; sourceTree = "<group>"; };
+		79AFFA511E264AF500FDEDF3 /* PlanningFilterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanningFilterDelegate.swift; path = Protocols/PlanningFilterDelegate.swift; sourceTree = "<group>"; };
 		79B05FD81C68BC1C0032DB0C /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		79B05FDC1C68BEB90032DB0C /* IntraProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntraProduct.swift; sourceTree = "<group>"; };
 		79C8A7461E1FBA2A00F8F9C3 /* LoginTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginTableViewCell.swift; path = LoginTableViewCell/LoginTableViewCell.swift; sourceTree = "<group>"; };
@@ -369,6 +373,7 @@
 			isa = PBXGroup;
 			children = (
 				790750781E17ABB700B07F7E /* UpdateRankFilterProtocol.swift */,
+				79AFFA511E264AF500FDEDF3 /* PlanningFilterDelegate.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -409,6 +414,7 @@
 				7948FED11E19CAE2001C5F3A /* SelectSemestersViewController.swift */,
 				7948FED21E19CAE2001C5F3A /* StudentRegisteredViewController.swift */,
 				79AFFA441E23E4A800FDEDF3 /* PlanningViewController.swift */,
+				79AFFA4F1E25B1FF00FDEDF3 /* PlanningFilterViewController.swift */,
 			);
 			path = Planning;
 			sourceTree = "<group>";
@@ -1127,6 +1133,7 @@
 				79779A9E1C5912DA008803C5 /* SystemUtils.swift in Sources */,
 				795CC3301C5CF840007AFE87 /* File.swift in Sources */,
 				79892EF61C5024E000F83669 /* UserPreferences.swift in Sources */,
+				79AFFA501E25B1FF00FDEDF3 /* PlanningFilterViewController.swift in Sources */,
 				79306D611C4AF46600708BED /* MJProgressView.swift in Sources */,
 				7948FF331E19CC02001C5F3A /* ModuleTableViewCell.swift in Sources */,
 				793B77951E0C71AE006FFD16 /* ModulesRequests.swift in Sources */,
@@ -1151,6 +1158,7 @@
 				7948FED61E19CAE2001C5F3A /* StudentRegisteredViewController.swift in Sources */,
 				792B7A611C57EC6200F988BB /* ProjectsApiCall.swift in Sources */,
 				795994401C52C8F2007BE7C5 /* ApplicationManager.swift in Sources */,
+				79AFFA521E264AF500FDEDF3 /* PlanningFilterDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

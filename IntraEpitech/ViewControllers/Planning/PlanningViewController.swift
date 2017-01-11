@@ -21,15 +21,14 @@ class PlanningViewController: LoadingDataViewController {
     var currentWeekEvents: [Planning]? = nil
     var currentDayEvents: [Planning]? = nil
     
+    var planningFilter = PlanningFilterViewController.PlanningFilter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.eventsTableView.register(UINib(nibName: "EventTableViewCell", bundle: nil), forCellReuseIdentifier: "eventCell")
         self.eventsTableView.estimatedRowHeight = 50
         self.eventsTableView.rowHeight = UITableViewAutomaticDimension
-        
-        self.todayButtonItem.title = NSLocalizedString("Today", comment: "")
-        self.filterButtonItem.title = NSLocalizedString("filter", comment: "")
         
         self.setCalendar()
     }
@@ -38,13 +37,27 @@ class PlanningViewController: LoadingDataViewController {
          self.reloadEventsData()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "planningFilterSegue" {
+            if let nav = segue.destination as? UINavigationController, let vc = nav.viewControllers.first as? PlanningFilterViewController {
+                vc.delegate = self
+                vc.planningFilter = self.planningFilter
+            }
+        }
+    }
+    
     override func awakeFromNib() {
         self.title = NSLocalizedString("Planning", comment: "")
+        
+        self.todayButtonItem.title = NSLocalizedString("Today", comment: "")
+        self.todayButtonItem.image = nil
+        self.filterButtonItem.title = NSLocalizedString("filter", comment: "")
+        self.filterButtonItem.image = nil
     }
     
     func reloadEventsData() {
         
-        self.addLoadingScreen(for: self.eventsTableView)
+        self.addActivityIndicator()
         
         let firstDayShown = self.calendarView.currentPage
         let lastDayShown = firstDayShown.endOfWeekDate()
@@ -58,7 +71,7 @@ class PlanningViewController: LoadingDataViewController {
                 // TODO Handle error
                 break
             }
-            self.removeLoadingScreen(for: self.eventsTableView)
+            self.removeActivityIndicator()
         }
     }
     
@@ -69,31 +82,35 @@ class PlanningViewController: LoadingDataViewController {
         
         // Filter events to get only those this day
         self.currentDayEvents = self.currentWeekEvents?.filter {
-            
             if let startTime = $0.startTime {
-                
-                let comp1 = calendar.component(.day, from: startTime)
-                let comp2 = calendar.component(.day, from: selectedDate)
-            
-                return comp1 == comp2
+
+                if let semester = $0.semester, let index = self.planningFilter.semesters.index(of: semester), index >= 0 {
+                    return calendar.component(.day, from: startTime) == calendar.component(.day, from: selectedDate)
+                } else {
+                    return false
+                }
             }
             return false
         }
         self.eventsTableView.reloadData()
     }
-
+    
     @IBAction func todayButtonItemSelected(_ sender: Any) {
         self.calendarView.select(Date(), scrollToDate: true)
         self.calendarView.select(Date())
     }
     
-    @IBAction func filterButtonItemSelected(_ sender: Any) {
+    @IBAction func filterButtonSelected(_ sender: Any) {
+        self.performSegue(withIdentifier: "planningFilterSegue", sender: self)
     }
 }
 
 extension PlanningViewController: FSCalendarDataSource, FSCalendarDelegate {
  
     func setCalendar() {
+        
+        self.calendarView.delegate = self
+        self.calendarView.dataSource = self
         
         self.calendarView.scope = .week
         self.calendarView.firstWeekday = 2
@@ -148,11 +165,20 @@ extension PlanningViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell") as! EventTableViewCell
         
         cell.setView(with: self.currentDayEvents![indexPath.row])
         
         return cell
+    }
+
+}
+
+extension PlanningViewController: PlanningFilterDelegate {
+    
+    func updateFilter(filter: PlanningFilterViewController.PlanningFilter) {
+        self.planningFilter = filter
     }
     
 }
