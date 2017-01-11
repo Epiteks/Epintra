@@ -23,8 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		let navigationBarAppearace = UINavigationBar.appearance()
 		navigationBarAppearace.tintColor = UIUtils.backgroundColor
 		
-		Util.copyFile("Students1.0.1.sqlite")
-		
 		let console = ConsoleDestination()
 		
 		console.levelColor.verbose = "🗣 "
@@ -32,9 +30,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		console.levelColor.info = "🤖 "
 		console.levelColor.warning = "🙀 "
 		console.levelColor.error = "👺 "
-		
+        
 		log.addDestination(console)
 		
+       
+        
 		NetworkActivityIndicatorManager.shared.isEnabled = true
 		
 		return true

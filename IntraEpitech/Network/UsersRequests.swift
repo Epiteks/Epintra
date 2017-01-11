@@ -54,7 +54,6 @@ class UsersRequests: RequestManager {
 				
 				app.user = User(dict: responseJSON)
 				app.lastUserApiCall = Date().timeIntervalSince1970
-				app.planningSemesters[(app.user?.semester!)!] = true
 				completion(Result.success(nil))
 			case .failure(let err):
 				completion(Result.failure(type: err.type, message: err.message))

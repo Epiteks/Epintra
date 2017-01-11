@@ -26,15 +26,14 @@ class PlanningViewController: LoadingDataViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.eventsTableView.tableFooterView = UIView()
+        self.eventsTableView.separatorInset = .zero
         self.eventsTableView.register(UINib(nibName: "EventTableViewCell", bundle: nil), forCellReuseIdentifier: "eventCell")
         self.eventsTableView.estimatedRowHeight = 50
         self.eventsTableView.rowHeight = UITableViewAutomaticDimension
         
         self.setCalendar()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-         self.reloadEventsData()
+        self.reloadEventsData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -170,9 +169,74 @@ extension PlanningViewController: UITableViewDataSource {
         
         cell.setView(with: self.currentDayEvents![indexPath.row])
         
+        //TODO Remove for next update
+        cell.statusImageView.image = nil
+        cell.isUserInteractionEnabled = false
+        cell.accessoryType = .none
+        
+//        if cell.accessoryType != .disclosureIndicator {
+//            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(PlanningViewController.statusImageSelected(_:)))
+//            tapGesture.numberOfTapsRequired = 1
+//            cell.statusImageView.isUserInteractionEnabled = true
+//            cell.statusImageView.addGestureRecognizer(tapGesture)
+//        }
+        
         return cell
     }
+    
+    func statusImageSelected(_ sender: UIGestureRecognizer) {
+        
+        let tapLocation = sender.location(in: self.eventsTableView)
+        
+        if let indexPath = self.eventsTableView.indexPathForRow(at: tapLocation), let data = self.currentDayEvents?[indexPath.row] {
+    
+            if data.canEnterToken() {
+                // Enter Token Alert View
+            } else if data.canRegister() {
+                
+            } else if data.canUnregister() {
+                
+            }
+            
+        }
+//
+//        		if (data.canEnterToken()) {
+//        			enterTokenAlertView(data, indexPath: indexPath!)
+//        		} else if (data.canRegister()) {
+//        			PlanningApiCalls.registerToEvent(data) { (isOk: Bool, mess: String) in
+//        
+//        				if (!isOk) {
+//        					self.showMessage(mess)
+//        				} else {
+//        					// Reload cell
+//        					self.updateEventCell(indexPath!, event: data)
+//        				}
+//        
+//        			}
+//        		} else if (data.canUnregister()) {
+//        			PlanningApiCalls.unregisterToEvent(data) { (isOk: Bool, mess: String) in
+//        
+//        				if (!isOk) {
+//        					self.showMessage(mess)
+//        				} else {
+//        					// Reload cell
+//        					self.updateEventCell(indexPath!, event: data)
+//        				}
+//        			}
+//        		}
+//        		
+//        		print(indexPath)
+//        		
+       	}
+//
+}
 
+extension PlanningViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
 }
 
 extension PlanningViewController: PlanningFilterDelegate {

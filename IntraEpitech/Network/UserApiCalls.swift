@@ -53,7 +53,7 @@ class UserApiCalls: APICalls {
 						let app = ApplicationManager.sharedInstance
 						app.user = User(dict: responseCall)
 						app.lastUserApiCall = Date().timeIntervalSince1970
-						app.planningSemesters[(app.user?.semester!)!] = true
+						//app.planningSemesters[(app.user?.semester!)!] = true
 						onCompletion(true, "Ok")
 					}
 				} else {

@@ -31,9 +31,7 @@ class SplashScreenViewController: UIViewController {
 		if (UserPreferences.checkIfDefaultCalendarExists()) {
 			ApplicationManager.sharedInstance.defaultCalendar = UserPreferences.getDefaultCalendar()
 		}
-		if (UserPreferences.checkSemestersExist() == true) {
-			ApplicationManager.sharedInstance.planningSemesters = UserPreferences.getSemesters()
-		}
+
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {

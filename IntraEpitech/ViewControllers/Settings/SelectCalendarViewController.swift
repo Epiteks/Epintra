@@ -67,7 +67,6 @@ class SelectCalendarViewController: UIViewController, UITableViewDelegate, UITab
 		let alertController = UIAlertController (title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("CalendarAccessDenied", comment: ""), preferredStyle: .alert)
 		
 		let settingsAction = UIAlertAction(title: NSLocalizedString("Settings", comment: ""), style: .default) { (_) -> Void in
-			
 			DispatchQueue.main.async(execute: {
 				let settingsUrl = URL(string: UIApplicationOpenSettingsURLString)
 				if let url = settingsUrl {

@@ -30,7 +30,6 @@
 		7948FECE1E19CAD7001C5F3A /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948FECC1E19CAD7001C5F3A /* WebViewController.swift */; };
 		7948FED31E19CAE2001C5F3A /* AppointmentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948FECF1E19CAE2001C5F3A /* AppointmentDetailViewController.swift */; };
 		7948FED41E19CAE2001C5F3A /* PlanningViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948FED01E19CAE2001C5F3A /* PlanningViewControllers.swift */; };
-		7948FED51E19CAE2001C5F3A /* SelectSemestersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948FED11E19CAE2001C5F3A /* SelectSemestersViewController.swift */; };
 		7948FED61E19CAE2001C5F3A /* StudentRegisteredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948FED21E19CAE2001C5F3A /* StudentRegisteredViewController.swift */; };
 		7948FEDB1E19CAF1001C5F3A /* FilterRankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948FED71E19CAF1001C5F3A /* FilterRankViewController.swift */; };
 		7948FEDC1E19CAF1001C5F3A /* OtherUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948FED81E19CAF1001C5F3A /* OtherUserViewController.swift */; };
@@ -106,6 +105,7 @@
 		79AFFA4E1E24FD2A00FDEDF3 /* EventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79AFFA4C1E24FD2A00FDEDF3 /* EventTableViewCell.xib */; };
 		79AFFA501E25B1FF00FDEDF3 /* PlanningFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AFFA4F1E25B1FF00FDEDF3 /* PlanningFilterViewController.swift */; };
 		79AFFA521E264AF500FDEDF3 /* PlanningFilterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AFFA511E264AF500FDEDF3 /* PlanningFilterDelegate.swift */; };
+		79AFFA541E26657100FDEDF3 /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AFFA531E26657100FDEDF3 /* SwiftyBeaver.framework */; };
 		79B05FD91C68BC1C0032DB0C /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B05FD81C68BC1C0032DB0C /* IAPHelper.swift */; };
 		79B05FDD1C68BEB90032DB0C /* IntraProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B05FDC1C68BEB90032DB0C /* IntraProduct.swift */; };
 		79C8A7481E1FBA2A00F8F9C3 /* LoginTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C8A7461E1FBA2A00F8F9C3 /* LoginTableViewCell.swift */; };
@@ -186,7 +186,6 @@
 		7948FECC1E19CAD7001C5F3A /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		7948FECF1E19CAE2001C5F3A /* AppointmentDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppointmentDetailViewController.swift; sourceTree = "<group>"; };
 		7948FED01E19CAE2001C5F3A /* PlanningViewControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanningViewControllers.swift; sourceTree = "<group>"; };
-		7948FED11E19CAE2001C5F3A /* SelectSemestersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectSemestersViewController.swift; sourceTree = "<group>"; };
 		7948FED21E19CAE2001C5F3A /* StudentRegisteredViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentRegisteredViewController.swift; sourceTree = "<group>"; };
 		7948FED71E19CAF1001C5F3A /* FilterRankViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterRankViewController.swift; sourceTree = "<group>"; };
 		7948FED81E19CAF1001C5F3A /* OtherUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserViewController.swift; sourceTree = "<group>"; };
@@ -268,6 +267,7 @@
 		79AFFA4C1E24FD2A00FDEDF3 /* EventTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EventTableViewCell.xib; path = EventTableViewCell/EventTableViewCell.xib; sourceTree = "<group>"; };
 		79AFFA4F1E25B1FF00FDEDF3 /* PlanningFilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanningFilterViewController.swift; sourceTree = "<group>"; };
 		79AFFA511E264AF500FDEDF3 /* PlanningFilterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanningFilterDelegate.swift; path = Protocols/PlanningFilterDelegate.swift; sourceTree = "<group>"; };
+		79AFFA531E26657100FDEDF3 /* SwiftyBeaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBeaver.framework; path = "Pods/../build/Debug-iphoneos/SwiftyBeaver/SwiftyBeaver.framework"; sourceTree = "<group>"; };
 		79B05FD81C68BC1C0032DB0C /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		79B05FDC1C68BEB90032DB0C /* IntraProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntraProduct.swift; sourceTree = "<group>"; };
 		79C8A7461E1FBA2A00F8F9C3 /* LoginTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginTableViewCell.swift; path = LoginTableViewCell/LoginTableViewCell.swift; sourceTree = "<group>"; };
@@ -310,6 +310,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79AFFA541E26657100FDEDF3 /* SwiftyBeaver.framework in Frameworks */,
 				79152D8C1C67A47100513E0F /* AddressBook.framework in Frameworks */,
 				79152D8D1C67A47100513E0F /* AddressBookUI.framework in Frameworks */,
 				793C52C61C5E311300C33328 /* SystemConfiguration.framework in Frameworks */,
@@ -343,6 +344,7 @@
 		331ED8344BD2BA7948788795 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				79AFFA531E26657100FDEDF3 /* SwiftyBeaver.framework */,
 				793B779B1E0C83E2006FFD16 /* DZNEmptyDataSet.framework */,
 				79152D8A1C67A47100513E0F /* AddressBook.framework */,
 				79152D8B1C67A47100513E0F /* AddressBookUI.framework */,
@@ -411,7 +413,6 @@
 			children = (
 				7948FECF1E19CAE2001C5F3A /* AppointmentDetailViewController.swift */,
 				7948FED01E19CAE2001C5F3A /* PlanningViewControllers.swift */,
-				7948FED11E19CAE2001C5F3A /* SelectSemestersViewController.swift */,
 				7948FED21E19CAE2001C5F3A /* StudentRegisteredViewController.swift */,
 				79AFFA441E23E4A800FDEDF3 /* PlanningViewController.swift */,
 				79AFFA4F1E25B1FF00FDEDF3 /* PlanningFilterViewController.swift */,
@@ -894,7 +895,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Maxime Junger";
 				TargetAttributes = {
 					798850331C4AC51C00BAA888 = {
@@ -1116,7 +1117,6 @@
 				795F1EA41C5602DC00B8C347 /* StringExtensions.swift in Sources */,
 				7948FEE11E19CB08001C5F3A /* SelectCalendarViewController.swift in Sources */,
 				7988506D1C4ACD4500BAA888 /* UIColorExtensions.swift in Sources */,
-				7948FED51E19CAE2001C5F3A /* SelectSemestersViewController.swift in Sources */,
 				79F8ADE91C52A8E400F4FDD4 /* APICalls.swift in Sources */,
 				7948FED31E19CAE2001C5F3A /* AppointmentDetailViewController.swift in Sources */,
 				7948FF3D1E19CDCA001C5F3A /* ActionButton.swift in Sources */,
@@ -1253,7 +1253,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1294,7 +1294,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -1311,10 +1311,12 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = JWHA9MBD3S;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/DZNEmptyDataSet",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/SwiftyBeaver",
 				);
 				INFOPLIST_FILE = IntraEpitech/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1337,10 +1339,12 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = JWHA9MBD3S;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/DZNEmptyDataSet",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/SwiftyBeaver",
 				);
 				INFOPLIST_FILE = IntraEpitech/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

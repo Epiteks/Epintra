@@ -17,9 +17,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
 	var products: [SKProduct]!
 	
 	let _settingsItems = [
-		["DefaultCalendar"],
-		["DownloadOnData"],
-		["ThirdParty", "BugQuestion"],
+		/*["DefaultCalendar"],
+		["DownloadOnData"],*/
+		["ThirdParty"/*, "BugQuestion"*/],
 		["Disconnect"]
 	]
 	@IBOutlet weak var _tableView: UITableView!
