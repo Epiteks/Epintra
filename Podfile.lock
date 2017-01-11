@@ -4,34 +4,20 @@ PODS:
     - Alamofire (~> 4.1)
   - AlamofireNetworkActivityIndicator (2.1.0):
     - Alamofire (~> 4.1)
-  - FMDB (2.6.2):
-    - FMDB/standard (= 2.6.2)
-  - FMDB/SQLCipher (2.6.2):
-    - SQLCipher
-  - FMDB/standard (2.6.2)
   - FSCalendar (2.6.0)
-  - MGSwipeTableCell (1.5.6)
   - Realm (2.1.2):
     - Realm/Headers (= 2.1.2)
   - Realm/Headers (2.1.2)
   - RealmSwift (2.1.2):
     - Realm (= 2.1.2)
-  - SQLCipher (3.4.0):
-    - SQLCipher/standard (= 3.4.0)
-  - SQLCipher/common (3.4.0)
-  - SQLCipher/standard (3.4.0):
-    - SQLCipher/common
   - SwiftyBeaver (1.1.1)
-  - SwiftyJSON (3.1.3)
+  - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
   - AlamofireImage (~> 3.1)
   - AlamofireNetworkActivityIndicator (~> 2.0)
-  - FMDB
-  - FMDB/SQLCipher
   - FSCalendar
-  - MGSwipeTableCell
   - RealmSwift
   - SwiftyBeaver
   - SwiftyJSON
@@ -40,15 +26,12 @@ SPEC CHECKSUMS:
   Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   AlamofireNetworkActivityIndicator: 4716f6554bdfb9c7cf13b1e0e3af21163129690a
-  FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   FSCalendar: c00fa5f4c3ec343ee6f7b804ae19322e9898bb84
-  MGSwipeTableCell: 616700eb0ffd1c611ba909066cb7fd739790a0a7
   Realm: efe855f4d977c8ce5a82d3116d9f1ff155a6550c
   RealmSwift: 17d6ee30b6f9df86364408c2197492e33bfea567
-  SQLCipher: 4c768761421736a247ed6cf412d9045615d53dff
   SwiftyBeaver: 2b68694df862381235e32bcfc4ec991e26bf131d
-  SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 4fc2d55a80967744ceff5730ab01363d02e45953
+PODFILE CHECKSUM: ba2d44a5ec92fe37e5c7f4258d1ab708dba19fe7
 
 COCOAPODS: 1.1.1

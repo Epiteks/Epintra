@@ -7,11 +7,7 @@ target 'IntraEpitech' do
 	pod 'AlamofireImage', '~> 3.1'
 	pod 'AlamofireNetworkActivityIndicator', '~> 2.0'
 	pod 'SwiftyJSON'
-#	pod 'HanekeSwift'
 	pod 'SwiftyBeaver'
 	pod 'FSCalendar'
-	pod 'MGSwipeTableCell'
-	pod 'FMDB'
-	pod 'FMDB/SQLCipher'
 	pod 'RealmSwift'
 end
