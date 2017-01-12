@@ -32,7 +32,7 @@ class SettingsViewController: UIViewController {
         self.tableData = [
             // Calendar section
             SettingsSectionData(name: nil, cells: [
-                SettingsCellData(id: "DefaultCalendar", view: nil, handler: nil)
+                SettingsCellData(id: "DefaultCalendar", view: self.calendarCellGenerate, handler: self.selectCalendarViewController)
                 ]),
             
             // Informations section
@@ -100,6 +100,22 @@ extension SettingsViewController: UITableViewDataSource {
         
         return cell
     }
+    
+    func calendarCellGenerate(indexPath: IndexPath, data: SettingsCellData) -> UITableViewCell {
+        
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: "calendarCell")
+
+        cell.textLabel?.text = NSLocalizedString(data.id, comment: "")
+        
+        if let defaultCalendar = ApplicationManager.sharedInstance.defaultCalendar {
+            cell.detailTextLabel?.text = defaultCalendar
+            cell.accessoryType = .none
+        } else {
+            cell.accessoryType = .disclosureIndicator
+        }
+        
+        return cell
+    }
 }
 
 extension SettingsViewController: UITableViewDelegate {
@@ -109,9 +125,7 @@ extension SettingsViewController: UITableViewDelegate {
         if let data = self.tableData[indexPath.section].cells?[indexPath.row] {
             data.handler?()
         }
-        
         tableView.deselectRow(at: indexPath, animated: true)
-
     }
     
     func disconnect() {
@@ -142,6 +156,9 @@ extension SettingsViewController: UITableViewDelegate {
         self.navigationController?.show(vc, sender: self)
     }
     
+    func selectCalendarViewController() {
+        self.performSegue(withIdentifier: "SelectCalendarSegue", sender: self)
+    }
 }
 
 extension SettingsViewController: MFMailComposeViewControllerDelegate {

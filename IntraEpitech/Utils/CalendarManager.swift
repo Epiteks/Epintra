@@ -144,17 +144,17 @@ class CalendarManager {
 		}
 	}
 	
-	func getAllCalendars() -> [(title: String, color: CGColor)] {
+	func getAllCalendars() -> [EKCalendar] {
 		
 		let calendars = EKEventStore().calendars(for: EKEntityType.event)
 		//EKCalendar
 		
-		var arr = [(title: String, color: CGColor)]()
+		var arr = [EKCalendar]()
 		
 		for calendar in calendars {
 			// 2
 			if (calendar.allowsContentModifications == true) {
-				arr.append((calendar.title, calendar.cgColor))
+				arr.append(calendar)
 			}
 			
 		}

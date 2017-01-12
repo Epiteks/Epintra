@@ -46,7 +46,7 @@ class MarksViewController: LoadingDataViewController, UITableViewDataSource, UIT
                     ErrorViewer.errorPresent(self, mess: error.message!) { }
                 }
                 if self.marks == nil || self.marks?.count == 0 {
-                    self.addNoDataView()
+                    self.addNoDataView(info: "Empty")
                 }
             }
             self.isFetching = false

@@ -57,7 +57,7 @@ class ModulesViewController: LoadingDataViewController {
                     ErrorViewer.errorPresent(self, mess: error.message!) { }
                 }
                 if self.modules == nil || self.modules?.count == 0 {
-                    self.addNoDataView()
+                    self.addNoDataView(info: "Empty")
                 }
                 break
             }

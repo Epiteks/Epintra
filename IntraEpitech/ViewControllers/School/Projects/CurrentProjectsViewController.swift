@@ -43,7 +43,7 @@ class CurrentProjectsViewController: LoadingDataViewController {
                     ErrorViewer.errorPresent(self, mess: error.message!) { }
                 }
                 if self.projects == nil || self.projects?.count == 0 {
-                    self.addNoDataView()
+                    self.addNoDataView(info: "Empty")
                 }
             }
             self.isFetching = false

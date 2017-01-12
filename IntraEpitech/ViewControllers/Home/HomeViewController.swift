@@ -28,7 +28,7 @@ class HomeViewController: LoadingDataViewController {
     override func viewWillAppear(_ animated: Bool) {
         // No data
         if let history = ApplicationManager.sharedInstance.user?.history, history.count == 0 {
-            self.addNoDataView()
+            self.addNoDataView(info: "NoNotification")
         } else {
            self.alertTableView.reloadData()
         }

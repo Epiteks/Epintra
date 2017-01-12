@@ -77,8 +77,8 @@ class LoadingDataViewController: UIViewController {
     }
     
     /// Add NoData View
-    func addNoDataView() {
-        let noData = NoDataView(info: NSLocalizedString("NoNotification", comment: ""))
+    func addNoDataView(info: String) {
+        let noData = NoDataView(info: NSLocalizedString(info, comment: ""))
         noData.frame = self.view.frame
         self.view.addSubview(noData)
     }
