@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="80" id="d6I-yd-tqQ" customClass="NotificationTableViewCell" customModule="Epintra" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="383" height="80"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="d6I-yd-tqQ" id="CWa-Nw-JXw">
+                <rect key="frame" x="0.0" y="0.0" width="383" height="79"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="rK3-N1-CEK">
+                        <rect key="frame" x="70" y="16" width="305" height="48"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iyy-3B-kLf">
+                                <rect key="frame" x="0.0" y="0.0" width="31" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0GF-Ps-h5z">
+                                <rect key="frame" x="0.0" y="36" width="26.5" height="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="v19-ee-Ucg"/>
+                        </constraints>
+                    </stackView>
+                    <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userProfile" translatesAutoresizingMaskIntoConstraints="NO" id="Qqm-Mr-rzW">
+                        <rect key="frame" x="16" y="17" width="45" height="45"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="45" id="Thc-bS-p57"/>
+                            <constraint firstAttribute="width" constant="45" id="uiG-tz-lPW"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="rK3-N1-CEK" firstAttribute="leading" secondItem="Qqm-Mr-rzW" secondAttribute="trailing" constant="9" id="4Qo-cz-alW"/>
+                    <constraint firstItem="rK3-N1-CEK" firstAttribute="top" secondItem="CWa-Nw-JXw" secondAttribute="topMargin" constant="8" id="A3E-qT-CRJ"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="rK3-N1-CEK" secondAttribute="trailing" id="EMP-8e-LoR"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="rK3-N1-CEK" secondAttribute="bottom" constant="7" id="TWe-FJ-WYE"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="Qqm-Mr-rzW" secondAttribute="leading" constant="-8" id="UNL-z5-xSF"/>
+                    <constraint firstItem="Qqm-Mr-rzW" firstAttribute="centerY" secondItem="CWa-Nw-JXw" secondAttribute="centerY" id="xgM-go-EWU"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="dateLabel" destination="0GF-Ps-h5z" id="dYB-nN-HFl"/>
+                <outlet property="notificationMessageLabel" destination="iyy-3B-kLf" id="xeB-vX-bH3"/>
+                <outlet property="userProfileImageView" destination="Qqm-Mr-rzW" id="eaB-of-Az2"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="userProfile" width="75" height="75"/>
+    </resources>
+</document>

@@ -99,6 +99,8 @@
 		798AF18D1DDC61B9002B8A8C /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798AF18C1DDC61B9002B8A8C /* StringExtension.swift */; };
 		798C9F311E2E27F000675296 /* ProjectDetailsUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798C9F2F1E2E27F000675296 /* ProjectDetailsUserTableViewCell.swift */; };
 		798C9F321E2E27F000675296 /* ProjectDetailsUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 798C9F301E2E27F000675296 /* ProjectDetailsUserTableViewCell.xib */; };
+		798C9F371E2E2E5D00675296 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798C9F351E2E2E5D00675296 /* NotificationTableViewCell.swift */; };
+		798C9F381E2E2E5D00675296 /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 798C9F361E2E2E5D00675296 /* NotificationTableViewCell.xib */; };
 		798CF1B81E0FCE8D00BAB754 /* ProjectsRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798CF1B71E0FCE8D00BAB754 /* ProjectsRequests.swift */; };
 		79AFFA451E23E4A800FDEDF3 /* PlanningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AFFA441E23E4A800FDEDF3 /* PlanningViewController.swift */; };
 		79AFFA471E23EA5800FDEDF3 /* PlanningRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AFFA461E23EA5800FDEDF3 /* PlanningRequests.swift */; };
@@ -260,6 +262,8 @@
 		798AF18C1DDC61B9002B8A8C /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		798C9F2F1E2E27F000675296 /* ProjectDetailsUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectDetailsUserTableViewCell.swift; path = ProjectDetailsUserTableViewCell/ProjectDetailsUserTableViewCell.swift; sourceTree = "<group>"; };
 		798C9F301E2E27F000675296 /* ProjectDetailsUserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProjectDetailsUserTableViewCell.xib; path = ProjectDetailsUserTableViewCell/ProjectDetailsUserTableViewCell.xib; sourceTree = "<group>"; };
+		798C9F351E2E2E5D00675296 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationTableViewCell.swift; path = NotificationTableViewCell/NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		798C9F361E2E2E5D00675296 /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NotificationTableViewCell.xib; path = NotificationTableViewCell/NotificationTableViewCell.xib; sourceTree = "<group>"; };
 		798CF1B71E0FCE8D00BAB754 /* ProjectsRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectsRequests.swift; path = Network/ProjectsRequests.swift; sourceTree = "<group>"; };
 		79AFFA441E23E4A800FDEDF3 /* PlanningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanningViewController.swift; sourceTree = "<group>"; };
 		79AFFA461E23EA5800FDEDF3 /* PlanningRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanningRequests.swift; path = Network/PlanningRequests.swift; sourceTree = "<group>"; };
@@ -519,7 +523,7 @@
 		7948FF071E19CC02001C5F3A /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				798C9F331E2E2AA900675296 /* ProjectDetailsFileTableViewCell */,
+				798C9F341E2E2E4500675296 /* NotificationTableViewCell */,
 				798C9F2E1E2E27C400675296 /* ProjectDetailsUserTableViewCell */,
 				79AFFA481E24FCEE00FDEDF3 /* EventTableViewCell */,
 				79C8A7451E1FB9EE00F8F9C3 /* LoginTableViewCell */,
@@ -763,11 +767,13 @@
 			name = ProjectDetailsUserTableViewCell;
 			sourceTree = "<group>";
 		};
-		798C9F331E2E2AA900675296 /* ProjectDetailsFileTableViewCell */ = {
+		798C9F341E2E2E4500675296 /* NotificationTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				798C9F351E2E2E5D00675296 /* NotificationTableViewCell.swift */,
+				798C9F361E2E2E5D00675296 /* NotificationTableViewCell.xib */,
 			);
-			name = ProjectDetailsFileTableViewCell;
+			name = NotificationTableViewCell;
 			sourceTree = "<group>";
 		};
 		79AFFA481E24FCEE00FDEDF3 /* EventTableViewCell */ = {
@@ -984,6 +990,7 @@
 				79EA5CC41D5E789A00DA7C30 /* NotificationsStoryboard.storyboard in Resources */,
 				79AFFA4E1E24FD2A00FDEDF3 /* EventTableViewCell.xib in Resources */,
 				7948FF2E1E19CC02001C5F3A /* FlagTableViewCell.xib in Resources */,
+				798C9F381E2E2E5D00675296 /* NotificationTableViewCell.xib in Resources */,
 				7948FF2A1E19CC02001C5F3A /* ProfileView.xib in Resources */,
 				7948FF341E19CC02001C5F3A /* ModuleTableViewCell.xib in Resources */,
 				798C9F321E2E27F000675296 /* ProjectDetailsUserTableViewCell.xib in Resources */,
@@ -1109,6 +1116,7 @@
 				7948FF351E19CC02001C5F3A /* ProjectTableViewCell.swift in Sources */,
 				7948FEEF1E19CB47001C5F3A /* ModulesViewController.swift in Sources */,
 				79F8ADEE1C52AC9100F4FDD4 /* User.swift in Sources */,
+				798C9F371E2E2E5D00675296 /* NotificationTableViewCell.swift in Sources */,
 				7948FF391E19CC02001C5F3A /* StudentTableViewCell.swift in Sources */,
 				7948FF2B1E19CC02001C5F3A /* EmptyDataTableViewCell.swift in Sources */,
 				79622E9A1C5D56C000FBA456 /* Mark.swift in Sources */,

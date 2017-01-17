@@ -16,6 +16,10 @@ class History {
 	var content: String?
 	var date: Date?
 	
+    init() {
+        
+    }
+    
 	init(dict: JSON) {
 		title = dict["title"].stringValue
 		userName = dict["user"]["title"].stringValue

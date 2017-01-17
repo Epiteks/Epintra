@@ -19,6 +19,8 @@ class HomeViewController: LoadingDataViewController {
         
         self.alertTableView.rowHeight = UITableViewAutomaticDimension
         self.alertTableView.estimatedRowHeight = 60
+        
+        self.alertTableView.register(UINib(nibName: "NotificationTableViewCell", bundle: nil), forCellReuseIdentifier: "notificationCell")
 	}
 	
 	override func awakeFromNib() {
@@ -26,6 +28,7 @@ class HomeViewController: LoadingDataViewController {
 	}
 	
     override func viewWillAppear(_ animated: Bool) {
+
         // No data
         if let history = ApplicationManager.sharedInstance.user?.history, history.count == 0 {
             self.addNoDataView(info: "NoNotification")
@@ -116,37 +119,33 @@ extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell = UITableViewCell()
-        cell = tableView.dequeueReusableCell(withIdentifier: "alertCell")!
-        
-        cell.tag = (indexPath as NSIndexPath).row + 100
-        
-        let profileImage = cell.viewWithTag(1) as! UIImageView
-        let content = cell.viewWithTag(2) as! UILabel
-        let date = cell.viewWithTag(3) as! UILabel
+        let cell = tableView.dequeueReusableCell(withIdentifier: "notificationCell") as! NotificationTableViewCell
         
         guard let history = ApplicationManager.sharedInstance.user?.history?[indexPath.row] else {
             log.error("Error history Home")
             return cell
         }
 
-        profileImage.image = UIImage(named: "userProfile")
+        cell.userProfileImageView.image = UIImage(named: "userProfile")
+        cell.userProfileImageView.cropToSquare()
+        cell.userProfileImageView.toCircle()
         
         if let profileImageURL = history.userPicture, let url = URL(string: profileImageURL) {
-            profileImage.downloadProfileImage(fromURL: url)
+            cell.userProfileImageView.downloadProfileImage(fromURL: url)
         }
         
-        profileImage.cropToSquare()
-        profileImage.toCircle()
+        if let title = history.title?.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil) {
+            cell.notificationMessageLabel.text = title
+        }
         
-        content.text = history.title!.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
+        if let content = history.content?.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil) {
+            cell.notificationMessageLabel.text = "\(cell.notificationMessageLabel.text) - \(content)"
+        }
         
-        date.text = String(format: "%@ - %@", history.userName!, history.date!.toAlertString())
+        if let userName = history.userName, let date = history.date?.toAlertString() {
+            cell.dateLabel.text = String(format: "%@ - %@", userName, date)
+        }
         
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80.0
     }
 }
