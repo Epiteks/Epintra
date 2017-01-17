@@ -97,6 +97,8 @@
 		7988506D1C4ACD4500BAA888 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988506C1C4ACD4500BAA888 /* UIColorExtensions.swift */; };
 		79892EF61C5024E000F83669 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79892EF51C5024E000F83669 /* UserPreferences.swift */; };
 		798AF18D1DDC61B9002B8A8C /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798AF18C1DDC61B9002B8A8C /* StringExtension.swift */; };
+		798C9F311E2E27F000675296 /* ProjectDetailsUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798C9F2F1E2E27F000675296 /* ProjectDetailsUserTableViewCell.swift */; };
+		798C9F321E2E27F000675296 /* ProjectDetailsUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 798C9F301E2E27F000675296 /* ProjectDetailsUserTableViewCell.xib */; };
 		798CF1B81E0FCE8D00BAB754 /* ProjectsRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798CF1B71E0FCE8D00BAB754 /* ProjectsRequests.swift */; };
 		79AFFA451E23E4A800FDEDF3 /* PlanningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AFFA441E23E4A800FDEDF3 /* PlanningViewController.swift */; };
 		79AFFA471E23EA5800FDEDF3 /* PlanningRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AFFA461E23EA5800FDEDF3 /* PlanningRequests.swift */; };
@@ -256,6 +258,8 @@
 		7988506C1C4ACD4500BAA888 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		79892EF51C5024E000F83669 /* UserPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 		798AF18C1DDC61B9002B8A8C /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		798C9F2F1E2E27F000675296 /* ProjectDetailsUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectDetailsUserTableViewCell.swift; path = ProjectDetailsUserTableViewCell/ProjectDetailsUserTableViewCell.swift; sourceTree = "<group>"; };
+		798C9F301E2E27F000675296 /* ProjectDetailsUserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProjectDetailsUserTableViewCell.xib; path = ProjectDetailsUserTableViewCell/ProjectDetailsUserTableViewCell.xib; sourceTree = "<group>"; };
 		798CF1B71E0FCE8D00BAB754 /* ProjectsRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectsRequests.swift; path = Network/ProjectsRequests.swift; sourceTree = "<group>"; };
 		79AFFA441E23E4A800FDEDF3 /* PlanningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanningViewController.swift; sourceTree = "<group>"; };
 		79AFFA461E23EA5800FDEDF3 /* PlanningRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanningRequests.swift; path = Network/PlanningRequests.swift; sourceTree = "<group>"; };
@@ -515,6 +519,8 @@
 		7948FF071E19CC02001C5F3A /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				798C9F331E2E2AA900675296 /* ProjectDetailsFileTableViewCell */,
+				798C9F2E1E2E27C400675296 /* ProjectDetailsUserTableViewCell */,
 				79AFFA481E24FCEE00FDEDF3 /* EventTableViewCell */,
 				79C8A7451E1FB9EE00F8F9C3 /* LoginTableViewCell */,
 				7948FF081E19CC02001C5F3A /* EmptyDataTableViewCell */,
@@ -748,6 +754,22 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
+		798C9F2E1E2E27C400675296 /* ProjectDetailsUserTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				798C9F2F1E2E27F000675296 /* ProjectDetailsUserTableViewCell.swift */,
+				798C9F301E2E27F000675296 /* ProjectDetailsUserTableViewCell.xib */,
+			);
+			name = ProjectDetailsUserTableViewCell;
+			sourceTree = "<group>";
+		};
+		798C9F331E2E2AA900675296 /* ProjectDetailsFileTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ProjectDetailsFileTableViewCell;
+			sourceTree = "<group>";
+		};
 		79AFFA481E24FCEE00FDEDF3 /* EventTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -964,6 +986,7 @@
 				7948FF2E1E19CC02001C5F3A /* FlagTableViewCell.xib in Resources */,
 				7948FF2A1E19CC02001C5F3A /* ProfileView.xib in Resources */,
 				7948FF341E19CC02001C5F3A /* ModuleTableViewCell.xib in Resources */,
+				798C9F321E2E27F000675296 /* ProjectDetailsUserTableViewCell.xib in Resources */,
 				7948FF381E19CC02001C5F3A /* StudentGradeTableViewCell.xib in Resources */,
 				7948FF3A1E19CC02001C5F3A /* StudentTableViewCell.xib in Resources */,
 				7948FF261E19CC02001C5F3A /* LoadingView.xib in Resources */,
@@ -1135,6 +1158,7 @@
 				795CC32C1C5CC3A6007AFE87 /* ProjectGroup.swift in Sources */,
 				7948FEF41E19CB50001C5F3A /* ProjectDetailsViewController.swift in Sources */,
 				7948FF271E19CC02001C5F3A /* NoDataView.swift in Sources */,
+				798C9F311E2E27F000675296 /* ProjectDetailsUserTableViewCell.swift in Sources */,
 				79622E931C5D4C4B00FBA456 /* ModulesApiCalls.swift in Sources */,
 				7948FF311E19CC02001C5F3A /* ModuleActivityTableViewCell.swift in Sources */,
 				79EA5CB61D5E49E800DA7C30 /* Requests.swift in Sources */,

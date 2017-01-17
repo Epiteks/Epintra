@@ -8,8 +8,8 @@
 
 import UIKit
 
-class ProjectDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+class ProjectDetailsViewController: UIViewController {
+    
     @IBOutlet weak var masterProfileImage: UIImageView!
     @IBOutlet weak var masterNameLabel: UILabel!
     @IBOutlet weak var projectEndLabel: UILabel!
@@ -27,9 +27,9 @@ class ProjectDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
-
+        
         self.title = self.project.actiTitle
         
         if let end = self.project.end {
@@ -45,8 +45,10 @@ class ProjectDetailsViewController: UIViewController, UITableViewDelegate, UITab
         
         self.projectTableView.estimatedRowHeight = 60
         self.projectTableView.rowHeight = UITableViewAutomaticDimension
+        
+        self.projectTableView.register(UINib(nibName: "ProjectDetailsUserTableViewCell", bundle: nil), forCellReuseIdentifier: "userCell")
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -94,28 +96,17 @@ class ProjectDetailsViewController: UIViewController, UITableViewDelegate, UITab
             }
         }
     }
-
+    
     func setUIIfRegistered(_ grp: ProjectGroup?) {
         
         if let profileImageURL = grp?.master?.imageUrl {
             self.masterProfileImage.downloadProfileImage(fromURL: URL(string: profileImageURL)!)
         }
-//        
-//        
-//        if let img = ApplicationManager.sharedInstance.downloadedImages![(grp?.master?.imageUrl)!] {
-//            self.masterProfileImage.image = img
-//            self.masterProfileImage.cropToSquare()
-//        } else {
-//            ImageDownloader.downloadFrom(link: (grp?.master?.imageUrl)!) {_ in
-//                if let img = ApplicationManager.sharedInstance.downloadedImages![(grp?.master?.imageUrl)!] {
-//                    self.masterProfileImage.image = img
-//                    self.masterProfileImage.cropToSquare()
-//                    self.masterProfileImage.toCircle()
-//                }
-//            }
-//        }
     }
     
+}
+
+extension ProjectDetailsViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -131,11 +122,12 @@ class ProjectDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     func getFileCell(for file: File) -> UITableViewCell {
         
-        let cell = self.projectTableView.dequeueReusableCell(withIdentifier: "fileCell")!
-        let titleLabel = cell.viewWithTag(1) as! UILabel
+        let cell = UITableViewCell()//.. self.projectTableView.dequeueReusableCell(withIdentifier: "fileCell")!
         
-        titleLabel.text = file.title!
-        
+        if let title = file.title {
+            cell.textLabel?.text = title
+        }
+
         cell.accessoryType = .disclosureIndicator
         
         return cell
@@ -143,29 +135,29 @@ class ProjectDetailsViewController: UIViewController, UITableViewDelegate, UITab
     
     func getStudentCell(for member: User) -> UITableViewCell {
         
-        let cell = self.projectTableView.dequeueReusableCell(withIdentifier: "userCell")!
-        let imgView = cell.viewWithTag(1) as! UIImageView
-        let userLabel = cell.viewWithTag(2) as! UILabel
-        let statusImgView = cell.viewWithTag(3) as!UIImageView
-        
-        imgView.image = UIImage(named: "userProfile")
-        
-        userLabel.text = member.title
+        let cell = self.projectTableView.dequeueReusableCell(withIdentifier: "userCell") as! ProjectDetailsUserTableViewCell
+
+        cell.userProfileImageView.image = UIImage(named: "userProfile")
+        cell.userNameLabel.text = member.title
         
         if (member.status == "confirmed") {
-            statusImgView.image = UIImage(named: "Done")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-            statusImgView.tintColor = UIUtils.planningGreenColor
+            cell.accessoryType = .checkmark
+            cell.tintColor = UIUtils.planningGreenColor
         } else {
-            statusImgView.image = UIImage(named: "Delete")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
-            statusImgView.tintColor = UIUtils.planningRedColor
+            cell.accessoryType = .none
+            cell.statusImageView.image = UIImage(named: "Delete")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+            cell.statusImageView.tintColor = UIUtils.planningRedColor
         }
         
         if let profileImageURL = member.imageUrl, let url = URL(string: profileImageURL) {
-            imgView.downloadProfileImage(fromURL: url)
+            cell.userProfileImageView.downloadProfileImage(fromURL: url)
         }
-     
+        
         return cell
     }
+}
+
+extension ProjectDetailsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -176,12 +168,9 @@ class ProjectDetailsViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func open(file: File) {
-        
         let vc = WebViewController()
-        
         vc.file = file
-        
         self.show(vc, sender: self)
-
     }
+    
 }

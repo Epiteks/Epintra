@@ -85,7 +85,7 @@ class LoginViewController: UIViewController {
 	@IBAction func loginPressed(_ sender: AnyObject) {
 		
 		self.view.endEditing(true)
-		
+        
 		// Getting login cell data
 		var cell = loginTableView.cellForRow(at: IndexPath(row: 0, section: 0))
 		var textField = cell?.viewWithTag(1) as! UITextField
