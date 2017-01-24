@@ -14,6 +14,7 @@
 		79152D891C67A43D00513E0F /* ContactsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79152D881C67A43D00513E0F /* ContactsHelper.swift */; };
 		79152D8C1C67A47100513E0F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79152D8A1C67A47100513E0F /* AddressBook.framework */; };
 		79152D8D1C67A47100513E0F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79152D8B1C67A47100513E0F /* AddressBookUI.framework */; };
+		7926D0FA1E37FF08004BA0A3 /* RealmStudentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7926D0F91E37FF08004BA0A3 /* RealmStudentInfo.swift */; };
 		79284F5D1C5F3FC500349628 /* Flags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79284F5C1C5F3FC500349628 /* Flags.swift */; };
 		792B7A611C57EC6200F988BB /* ProjectsApiCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B7A601C57EC6200F988BB /* ProjectsApiCall.swift */; };
 		79306D531C4AEBF300708BED /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79306D551C4AEBF300708BED /* Localizable.strings */; };
@@ -176,6 +177,7 @@
 		79152D881C67A43D00513E0F /* ContactsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ContactsHelper.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		79152D8A1C67A47100513E0F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		79152D8B1C67A47100513E0F /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		7926D0F91E37FF08004BA0A3 /* RealmStudentInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmStudentInfo.swift; path = Application/RealmStudentInfo.swift; sourceTree = "<group>"; };
 		79284F5C1C5F3FC500349628 /* Flags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Flags.swift; path = Model/Flags.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		792B7A601C57EC6200F988BB /* ProjectsApiCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectsApiCall.swift; path = Network/ProjectsApiCall.swift; sourceTree = "<group>"; };
 		79306D541C4AEBF300708BED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -657,6 +659,7 @@
 				7959943F1C52C8F2007BE7C5 /* ApplicationManager.swift */,
 				79F42BEA1D68C65A008DF047 /* Configuration.swift */,
 				79F9C7101E14083100431D49 /* RealmManager.swift */,
+				7926D0F91E37FF08004BA0A3 /* RealmStudentInfo.swift */,
 			);
 			name = Application;
 			sourceTree = "<group>";
@@ -1197,6 +1200,7 @@
 				798C9F311E2E27F000675296 /* ProjectDetailsUserTableViewCell.swift in Sources */,
 				79622E931C5D4C4B00FBA456 /* ModulesApiCalls.swift in Sources */,
 				7948FF311E19CC02001C5F3A /* ModuleActivityTableViewCell.swift in Sources */,
+				7926D0FA1E37FF08004BA0A3 /* RealmStudentInfo.swift in Sources */,
 				79EA5CB61D5E49E800DA7C30 /* Requests.swift in Sources */,
 				795D81C51C623A1000187E43 /* RegisteredStudent.swift in Sources */,
 				7948FF291E19CC02001C5F3A /* ProfileView.swift in Sources */,

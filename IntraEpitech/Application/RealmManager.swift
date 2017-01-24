@@ -10,51 +10,62 @@ import Foundation
 import Realm
 import RealmSwift
 
-class RealmManager {
+class RealmManager<T: Object> {
     
-    // swiftlint:disable force_try
-    var realm = try! Realm()
+    var realm: Realm? = nil
     
-    func save(students: [StudentInfo], updatedAt: EpirankInformation) throws {
-        
-        // Add update information value
-        try! realm.write {
-            realm.add(updatedAt, update: true)
+    /// Initializer
+    ///
+    /// - Throws: throws if realm could not init
+    init() throws {
+        do {
+            try self.realm = Realm()
+        } catch {
+            log.error("Realm launch failed")
         }
-        
-        // Add all students to realm
-        for tmp in students {
-            try! realm.write {
-                realm.add(tmp, update: true)
+    }
+    
+    /// Save an element is specific realm file
+    ///
+    /// - Parameter element: element T to save
+    func save(element: T) {
+        do {
+            // Try writing
+            try realm?.write {
+                // Add object to Realm, update if needed
+                realm?.add(element, update: true)
+            }
+        } catch {
+            log.error("Cannot write on Realm")
+        }
+    }
+    
+    /// Save multiple elements in realm files
+    ///
+    /// - Parameter elements: array of elements T
+    func save(elements: [T]) {
+        // Add all elements to realm
+        for tmp in elements {
+            do {
+                // Try writing
+                try realm?.write {
+                    // Add object to Realm, update if needed
+                    realm?.add(tmp, update: true)
+                }
+            } catch {
+                log.error("Cannot write on Realm")
             }
         }
     }
     
-    func students(byPromotion promotion: String, andCities cities: [String]? = nil) -> [StudentInfo] {
-        
-        let query = NSPredicate(format: "promo = %@", promotion)
-    
-        let students = realm.objects(StudentInfo.self).filter(query).sorted(byProperty: "bachelor", ascending: false)
-
-        if let allCities = cities, allCities.first != "All" {
-            var citiesPredicates = [NSPredicate]()
-            for city in allCities {
-                citiesPredicates.append(NSPredicate(format: "city = %@", city))
-            }
-            let allCitiesPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: citiesPredicates)
-            let newStudents = students.filter(allCitiesPredicate)
-            return Array(newStudents)
+    /// Retrieve elements stored in Realm using an optinal predicate
+    ///
+    /// - Parameter query: NSPredicate used for filtering data
+    /// - Returns: All results
+    func retrieveElements(withPredicate query: NSPredicate? = nil) -> Results<T>? {
+        if let elements = realm?.objects(T.self) {
+            return query != nil ? elements.filter(query!) : elements
         }
-        
-        return Array(students)
-    }
-    
-    func epirankInformation(forPromo promo: String) -> EpirankInformation? {
-        
-        let query = NSPredicate(format: "promotion = %@", promo)
-        
-        let infos = realm.objects(EpirankInformation.self).filter(query)
-        
-        return infos.first
+        return nil
     }
 }

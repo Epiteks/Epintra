@@ -26,10 +26,7 @@ class ApplicationManager {
             UserPreferences.saveDefaultCalendar(newValue)
         }
     }
-    
-    // Realm manager instance
-    let realmManager: RealmManager = RealmManager()
-    
+
     func resetInstance() {
         token = nil
         user = nil

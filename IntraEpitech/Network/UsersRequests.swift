@@ -179,28 +179,31 @@ class UsersRequests: RequestManager {
                 let updatedAtString = responseJSON["updatedAt"].stringValue
                 
                 var students = [StudentInfo]()
+                
                 for tmp in responseJSON["students"].arrayValue {
                     students.append(StudentInfo(dict: tmp, promo: promo))
                 }
-                
-                //if let epirankInformations = ApplicationManager.sharedInstance.epirankInformations {
-                
-                    //epirankInformations.updated(promotion: promo, at: Date(fromEpirank: updatedAtString))
-                    DispatchQueue.global().async {
-                        do {
-                            let realmManager = RealmManager()
-                            var epirankInformation = realmManager.epirankInformation(forPromo: promo)
-                            
-                            if epirankInformation == nil {
-                                epirankInformation = EpirankInformation(promo: promo, date: Date(fromEpirank: updatedAtString))
-                            }
-                            try realmManager.save(students: students, updatedAt: epirankInformation!)
-                        } catch {
-                            log.error("Realm save failed")
+                DispatchQueue(label: "background").async {
+                    do {
+                        var realmStudentInfo = RealmStudentInfo()
+                        
+                        var epirankInformation = realmStudentInfo.epirankInformation(forPromo: promo)
+                        
+                        if epirankInformation == nil || epirankInformation?.promotion == nil || epirankInformation?.updatedAt == nil{
+                            epirankInformation = EpirankInformation(promo: promo, date: Date(fromEpirank: updatedAtString))
                         }
-                    //}
+                        try realmStudentInfo.save(students: students, updatedAt: epirankInformation!)
+                        
+                        DispatchQueue.main.async {
+                            // Need new thread
+                            realmStudentInfo = RealmStudentInfo()
+                            completion(Result.success(realmStudentInfo.students(byPromotion: promo)))
+                        }
+                        
+                    } catch {
+                        log.error("Realm save failed")
+                    }
                 }
-                completion(Result.success(students))
             case .failure(let err):
                 completion(Result.failure(type: err.type, message: err.message))
                 log.error("Get all marks :  \(err)")

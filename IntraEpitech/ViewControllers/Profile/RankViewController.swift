@@ -54,7 +54,9 @@ class RankViewController: LoadingDataViewController {
         
         let promotion = String(format: "tek%i", self.rankFilter.promotion)
         
-        guard let epirankInformation = ApplicationManager.sharedInstance.realmManager.epirankInformation(forPromo: promotion) else {
+        let realmStudentInfo = RealmStudentInfo()
+        
+        guard let epirankInformation = realmStudentInfo.epirankInformation(forPromo: promotion) else {
             fetchNewData()
             return
         }
@@ -62,7 +64,7 @@ class RankViewController: LoadingDataViewController {
         if epirankInformation.needsNewerData() {
             fetchNewData()
         } else {
-            self.students = ApplicationManager.sharedInstance.realmManager.students(byPromotion: promotion, andCities: self.rankFilter.cities)
+            self.students = realmStudentInfo.students(byPromotion: promotion, andCities: self.rankFilter.cities)
         }
         
         self.studentsTableView.reloadData()
@@ -78,10 +80,11 @@ class RankViewController: LoadingDataViewController {
                     self.students = students
                     self.studentsTableView.reloadData()
                 case .failure(let err):
-                    // TODO Manage Error
-                    break
+                    self.showAlert(withTitle: "error", andMessage: err.message)
                 }
                 self.isFetching = false
+            } else {
+                log.warning("Rank view controller is not on top")
             }
         }
     }
