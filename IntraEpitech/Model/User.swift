@@ -64,6 +64,10 @@ class User {
 		let infos = dict["userinfo"]
 		phone = infos["telephone"]["value"].stringValue
 	}
+    
+    init(login: String) {
+        self.login = login
+    }
 	
 	init(little: JSON) {
 		login = little["login"].stringValue

@@ -10,4 +10,5 @@ target 'IntraEpitech' do
 	pod 'SwiftyBeaver'
 	pod 'FSCalendar'
 	pod 'RealmSwift'
+	pod 'SwiftKeychainWrapper'
 end

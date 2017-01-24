@@ -9,33 +9,31 @@
 import Foundation
 import SwiftyJSON
 
-class Mark {
+class Mark: BasicInformation {
 	
 	var titleModule: String?
 	var title: String?
 	var correcteur: String?
 	var finalNote: String?
 	var comment: String?
-	var scolaryear: String?
-	var codemodule: String?
-	var codeinstance: String?
-	var codeacti: String?
+    var codeacti: String?
 	var login: String?
 	
-	init(dict: JSON) {
+	override init(dict: JSON) {
+        
+        super.init(dict: dict)
+        
 		titleModule = dict["titlemodule"].stringValue
 		title = dict["title"].stringValue
 		correcteur = dict["correcteur"].stringValue
 		finalNote = dict["final_note"].stringValue
 		comment = dict["comment"].stringValue
-		scolaryear = dict["scolaryear"].stringValue
-		codemodule = dict["codemodule"].stringValue
-		codeinstance = dict["codeinstance"].stringValue
 		codeacti = dict["codeacti"].stringValue
 		login = dict["login"].stringValue
 	}
 	
 	init(little: JSON) {
+        super.init(dict: little)
 		correcteur = little["grader"].stringValue
 		finalNote = little["note"].stringValue
 		login = little["login"].stringValue

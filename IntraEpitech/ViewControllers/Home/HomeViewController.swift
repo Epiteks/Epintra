@@ -19,7 +19,7 @@ class HomeViewController: LoadingDataViewController {
         
         self.alertTableView.rowHeight = UITableViewAutomaticDimension
         self.alertTableView.estimatedRowHeight = 60
-        
+        self.alertTableView.tableFooterView = UIView()
         self.alertTableView.register(UINib(nibName: "NotificationTableViewCell", bundle: nil), forCellReuseIdentifier: "notificationCell")
 	}
 	
@@ -28,67 +28,67 @@ class HomeViewController: LoadingDataViewController {
 	}
 	
     override func viewWillAppear(_ animated: Bool) {
-
+        let app = ApplicationManager.sharedInstance
         // No data
-        if let history = ApplicationManager.sharedInstance.user?.history, history.count == 0 {
+        if ApplicationManager.sharedInstance.user?.history == nil || ApplicationManager.sharedInstance.user?.history?.count == 0 {
             self.addNoDataView(info: "NoNotification")
         } else {
            self.alertTableView.reloadData()
         }
 	}
 	
-    func getNotifications() {
-        
-        let dispatchGroup = DispatchGroup()
-        self.isFetching = true
-        DispatchQueue.main.async {
-            DispatchQueue.main.async(group: dispatchGroup, execute: {
-                self.userDataCall(dispatchGroup)
-                self.userHistoryCall(dispatchGroup)
-            })
-            dispatchGroup.notify(queue: DispatchQueue.global(qos: .default), execute: {
-                DispatchQueue.main.async(execute: {
-                    self.isFetching = false
-                    self.alertTableView.reloadData()
-                })
-            })
-        }
-    }
-	
-	func userDataCall(_ group: DispatchGroup) {
-		group.enter()
-		usersRequests.getCurrentUserData { result in
-			
-			switch (result) {
-			case .success(_):
-				log.info("Get user data ok")
-				break
-			case .failure(let error):
-				MJProgressView.instance.hideProgress()
-				ErrorViewer.errorPresent(self, mess: error.message!) { }
-				break
-			}
-			group.leave()
-		}
-	}
-	
-	func userHistoryCall(_ group: DispatchGroup) {
-		group.enter()
-		usersRequests.getHistory { result in
-			switch (result) {
-			case .success(_):
-				log.info("Get user history")
-				break
-			case .failure(let error):
-				MJProgressView.instance.hideProgress()
-				if error.message != nil {
-					ErrorViewer.errorPresent(self, mess: error.message!) {}
-				}
-				break
-			}
-			group.leave()
-		}
-	}
+//    func getNotifications() {
+//        
+//        let dispatchGroup = DispatchGroup()
+//        self.isFetching = true
+//        DispatchQueue.main.async {
+//            DispatchQueue.main.async(group: dispatchGroup, execute: {
+//                self.userDataCall(dispatchGroup)
+//                self.userHistoryCall(dispatchGroup)
+//            })
+//            dispatchGroup.notify(queue: DispatchQueue.global(qos: .default), execute: {
+//                DispatchQueue.main.async(execute: {
+//                    self.isFetching = false
+//                    self.alertTableView.reloadData()
+//                })
+//            })
+//        }
+//    }
+//	
+//	func userDataCall(_ group: DispatchGroup) {
+//		group.enter()
+//		usersRequests.getCurrentUserData { result in
+//			
+//			switch (result) {
+//			case .success(_):
+//				log.info("Get user data ok")
+//				break
+//			case .failure(let error):
+//				MJProgressView.instance.hideProgress()
+//				ErrorViewer.errorPresent(self, mess: error.message!) { }
+//				break
+//			}
+//			group.leave()
+//		}
+//	}
+//	
+//	func userHistoryCall(_ group: DispatchGroup) {
+//		group.enter()
+//		usersRequests.getHistory { result in
+//			switch (result) {
+//			case .success(_):
+//				log.info("Get user history")
+//				break
+//			case .failure(let error):
+//				MJProgressView.instance.hideProgress()
+//				if error.message != nil {
+//					ErrorViewer.errorPresent(self, mess: error.message!) {}
+//				}
+//				break
+//			}
+//			group.leave()
+//		}
+//	}
 	
 	func generateBackgroundView() {
 		
@@ -134,12 +134,12 @@ extension HomeViewController: UITableViewDataSource {
             cell.userProfileImageView.downloadProfileImage(fromURL: url)
         }
         
-        if let title = history.title?.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil) {
-            cell.notificationMessageLabel.text = title
+        if let notificationTitle = history.title?.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil) {
+            cell.notificationMessageLabel.text = notificationTitle
         }
         
         if let content = history.content?.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil) {
-            cell.notificationMessageLabel.text = "\(cell.notificationMessageLabel.text) - \(content)"
+            cell.notificationMessageLabel.text = "\(cell.notificationMessageLabel.text!) - \(content)"
         }
         
         if let userName = history.userName, let date = history.date?.toAlertString() {

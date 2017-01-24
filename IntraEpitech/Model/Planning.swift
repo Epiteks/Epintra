@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class Planning {
+class Planning: BasicInformation {
 	
 	var titleModule: String?
 	var startTime: Date?
@@ -21,11 +21,10 @@ class Planning {
 	var eventType: String?
 	var typeTitle: String?
 	var actiTitle: String?
-	var scolaryear: Int?
-	var codeModule: String?
 	var codeActi: String?
+    var title: String?
+
 	var codeEvent: String?
-	var codeInstance: String?
 	var room: Room?
 	var moduleRegistered: Bool?
 	var isRdv: Int?
@@ -34,11 +33,14 @@ class Planning {
 	var past: Bool?
 	var semester: Int?
 	
-	init(dict: JSON) {
+	override init(dict: JSON) {
+        
+        super.init(dict: dict)
         
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
+        title = dict["title"].stringValue
 		titleModule = dict["titlemodule"].stringValue
 		startTime = dateFormat.date(from: dict["start"].stringValue)
 		endTime = dateFormat.date(from: dict["end"].stringValue)
@@ -49,7 +51,6 @@ class Planning {
 		eventType = dict["type_code"].stringValue
 		typeTitle = dict["type_title"].stringValue
 		actiTitle = dict["acti_title"].stringValue
-		scolaryear = dict["scolaryear"].intValue
 		codeModule = dict["codemodule"].stringValue
 		codeActi = dict["codeacti"].stringValue
 		codeEvent = dict["codeevent"].stringValue
@@ -139,11 +140,31 @@ class Planning {
 //	}
 	
 	init(appointment: AppointmentEvent) {
-		scolaryear = Int(appointment.scolaryear!)
+        super.init()
+		scolaryear = appointment.scolaryear!
 		codeModule = appointment.codeModule!
 		codeActi = appointment.codeActi!
 		codeInstance = appointment.codeInstance!
-		
 	}
+    
+    func requestData() -> [String: String] {
+        
+        let parameters: [String: String] = [
+            "year": self.scolaryear!,
+            "module": self.codeModule!,
+            "instance": self.codeInstance!,
+            "activity": self.codeActi!,
+            "event": self.codeEvent!
+        ]
+        
+        return parameters
+    }
+    
+    func requestURLData() -> String {
+        
+        let url = String(format: "?year=%@&module=%@&instance=%@&activity=%@&event=%@", self.scolaryear!, self.codeModule!, self.codeInstance!, self.codeActi!, self.codeEvent!)
+        
+        return url
+    }
 	
 }

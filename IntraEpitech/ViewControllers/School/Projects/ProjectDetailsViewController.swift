@@ -63,10 +63,6 @@ class ProjectDetailsViewController: UIViewController {
             setUIIfRegistered(grp)
         } else {
             self.masterNameLabel.text = NSLocalizedString("NotRegisteredProject", comment: "")
-            if let img = ApplicationManager.sharedInstance.downloadedImages![(ApplicationManager.sharedInstance.user?.imageUrl)!] {
-                self.masterProfileImage.image = img
-                self.masterProfileImage.cropToSquare()
-            }
         }
         self.masterProfileImage.cropToSquare()
         self.masterProfileImage.toCircle()

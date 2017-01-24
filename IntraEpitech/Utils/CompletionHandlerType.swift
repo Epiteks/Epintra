@@ -17,4 +17,7 @@ enum AppError: Error {
 	case apiError
 	case unauthorizedByUser
 	case authenticationFailure
+    
+    // Calendar Errors
+    case unauthorizedCalendar
 }

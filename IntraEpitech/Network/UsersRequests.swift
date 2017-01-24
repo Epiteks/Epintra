@@ -26,6 +26,7 @@ class UsersRequests: RequestManager {
 				if let token = responseJSON["token"].string {
 					log.info("Token:  \(token)")
 					ApplicationManager.sharedInstance.token = token
+                    ApplicationManager.sharedInstance.user = User(login: login)
 					completion(Result.success(nil))
 				}
 			case .failure(let err):
@@ -43,17 +44,13 @@ class UsersRequests: RequestManager {
 	- parameter completion: Request completion action
 	*/
 	func getCurrentUserData(_ completion: @escaping (Result<Any?>) -> Void) {
-		
-		let app = ApplicationManager.sharedInstance
-		
-		let param = "?login=" + app.currentLogin!
+        
+        let param = "?login=" + (ApplicationManager.sharedInstance.user?.login)!
 		
 		super.call("userData", params: nil, urlParams: param) { (response) in
 			switch response {
 			case .success(let responseJSON):
-				
-				app.user = User(dict: responseJSON)
-				app.lastUserApiCall = Date().timeIntervalSince1970
+				ApplicationManager.sharedInstance.user = User(dict: responseJSON)
 				completion(Result.success(nil))
 			case .failure(let err):
 				completion(Result.failure(type: err.type, message: err.message))
@@ -189,16 +186,15 @@ class UsersRequests: RequestManager {
                 //if let epirankInformations = ApplicationManager.sharedInstance.epirankInformations {
                 
                     //epirankInformations.updated(promotion: promo, at: Date(fromEpirank: updatedAtString))
-                    DispatchQueue.main.async {
+                    DispatchQueue.global().async {
                         do {
-                            
-                            var epirankInformation = ApplicationManager.sharedInstance.realmManager.epirankInformation(forPromo: promo)
+                            let realmManager = RealmManager()
+                            var epirankInformation = realmManager.epirankInformation(forPromo: promo)
                             
                             if epirankInformation == nil {
                                 epirankInformation = EpirankInformation(promo: promo, date: Date(fromEpirank: updatedAtString))
                             }
-                            
-                            try ApplicationManager.sharedInstance.realmManager.save(students: students, updatedAt: epirankInformation!)
+                            try realmManager.save(students: students, updatedAt: epirankInformation!)
                         } catch {
                             log.error("Realm save failed")
                         }

@@ -9,16 +9,14 @@
 import Foundation
 import SwiftyJSON
 
-class Project {
+class Project: BasicInformation {
 	
 	var typeActiCode :String?
 	var projectName :String?
-	var codeInstance :String?
-	var scolaryear :String?
 	var actiTitle :String?
 	var titleModule :String?
 	var begin :String?
-	var codeModule :String?
+	
 	var codeActi :String?
 	var end :String?
 	var registered :Bool?
@@ -34,21 +32,23 @@ class Project {
     var projectStatus: String?
     var files: [File]?
 	
-	init(dict :JSON) {
+	override init(dict :JSON) {
+        
+        super.init(dict: dict)
+        
 		self.typeActiCode = dict["type_acti_code"].stringValue
 		self.projectName = dict["project_title"].stringValue
-		self.codeInstance = dict["codeinstance"].stringValue
-		self.scolaryear = dict["scolaryear"].stringValue
+		
 		self.actiTitle = dict["acti_title"].stringValue
 		self.titleModule = dict["title_module"].stringValue
 		self.begin = dict["begin_acti"].stringValue
-		self.codeModule = dict["codemodule"].stringValue
 		self.codeActi = dict["codeacti"].stringValue
 		self.end = dict["end_acti"].stringValue
 		self.registered = dict["registered"].boolValue
 	}
 	
 	init(detail :JSON) {
+        super.init(dict: detail)
 		self.codeActi = detail["codeacti"].stringValue
 		self.typeActiCode = detail["type_code"].stringValue
 		self.actiTitle = detail["title"].stringValue

@@ -11,48 +11,36 @@ import EventKit
 
 class SelectCalendarViewController: LoadingDataViewController {
 	
-    var calendars: [EKCalendar]? = nil
-	
-    var currentCalendar: String?
-	var currentCalendarIndex: Int?
-	
-	var hasRight: Bool!
-	
 	@IBOutlet weak var tableView: UITableView!
 	
+    var calendars: [EKCalendar]? = nil
+    
     override func viewDidLoad() {
 		super.viewDidLoad()
-		
 		
 		self.title = NSLocalizedString("Calendars", comment: "")
 		
         self.tableView.tableFooterView = UIView()
         
         self.isFetching = true
-		
-		self.hasRight = true
 	}
 
 	override func viewDidAppear(_ animated: Bool) {
 		
         let calman = CalendarManager()
 		
-		calman.hasRights { (granted: Bool, _) in
-			if (!granted) {
+		CalendarManager.hasRights { result in
+            switch result {
+            case .success(_):
+                DispatchQueue.main.async {
+                    self.isFetching = true
+                    self.calendars = calman.getAllCalendars()
+                    self.isFetching = false
+                    self.tableView.reloadData()
+                }
+            case .failure(_):
 				self.isFetching = false
-				self.hasRight = false
-				self.generateBackgroundView()
-				
 				self.accessNotGrantedError()
-				
-			} else {
-				self.isFetching = true
-				self.generateBackgroundView()
-				self.calendars = calman.getAllCalendars()
-				self.currentCalendar = ApplicationManager.sharedInstance.defaultCalendar
-				self.isFetching = false
-				self.generateBackgroundView()
-				self.tableView.reloadData()
 			}
 		}
 	}
@@ -110,37 +98,35 @@ extension SelectCalendarViewController: UITableViewDataSource {
         if let calendarInformations = self.calendars?[indexPath.row] {
             cell.textLabel?.text = calendarInformations.title
             cell.textLabel?.textColor = UIColor(cgColor: calendarInformations.cgColor)
-            if calendarInformations.calendarIdentifier == ApplicationManager.sharedInstance.defaultCalendar {
+            if calendarInformations.calendarIdentifier == ApplicationManager.sharedInstance.defaultCalendarIdentifier {
                 cell.accessoryType = .checkmark
             } else {
                 cell.accessoryType = .none
             }
         }
+        
+        cell.tintColor = UIUtils.backgroundColor
     
 		return cell
 	}
 	
+}
+
+extension SelectCalendarViewController: UITableViewDelegate {
+    
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		tableView.deselectRow(at: indexPath, animated: true)
-//		
-//		tableView.beginUpdates()
-//		
-//		var prevCell: UITableViewCell?
-//		var newCell: UITableViewCell?
-//		
-//		if (currentCalendarIndex != nil) {
-//			prevCell = tableView.cellForRow(at: IndexPath(row: currentCalendarIndex!, section: 0))
-//			prevCell?.accessoryType = .none
-//		}
-//		newCell = tableView.cellForRow(at: indexPath)
-//		newCell?.accessoryType = .checkmark
-		
-//		ApplicationManager.sharedInstance.defaultCalendar = calendars[(indexPath as NSIndexPath).row].title
-//		currentCalendar = calendars[(indexPath as NSIndexPath).row].title
-//		currentCalendarIndex = (indexPath as NSIndexPath).row
-//		UserPreferences.savDefaultCalendar(calendars[(indexPath as NSIndexPath).row].title)
-		
-		tableView.endUpdates()
+        
+        if let calendar = self.calendars?[indexPath.row] {
+            
+            if calendar.calendarIdentifier == ApplicationManager.sharedInstance.defaultCalendarIdentifier {
+                ApplicationManager.sharedInstance.defaultCalendarIdentifier = nil
+            } else {
+                ApplicationManager.sharedInstance.defaultCalendarIdentifier = calendar.calendarIdentifier
+            }
+        }
+        
+        self.tableView.reloadData()
 	}
 	
 	func generateBackgroundView() {

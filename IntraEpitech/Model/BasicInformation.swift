@@ -7,3 +7,20 @@
 //
 
 import Foundation
+import SwiftyJSON
+
+class BasicInformation {
+ 
+    var scolaryear: String? = nil
+    var codeModule: String? = nil
+    var codeInstance: String? = nil
+    
+    init() { }
+    
+    init(dict: JSON) {
+        scolaryear = dict["scolaryear"].stringValue
+        codeModule = dict["codemodule"].stringValue
+        codeInstance = dict["codeinstance"].stringValue
+    }
+    
+}

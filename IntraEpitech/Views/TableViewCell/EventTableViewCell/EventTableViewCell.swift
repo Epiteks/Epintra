@@ -41,11 +41,13 @@ class EventTableViewCell: UITableViewCell {
     
     func setView(with data: Planning) {
         
-        if let eventType = data.eventType {
+        if let eventType = data.eventType, eventType.characters.count > 0 {
             self.activityColor = UIUtils.activitiesColors[eventType]
+        } else {
+            self.activityColor = .red
         }
         
-        self.activityTitleLabel.text = data.actiTitle
+        self.activityTitleLabel.text = (data.actiTitle?.characters.count)! > 0 ? data.actiTitle : data.title
         self.moduleTitleLabel.text = String(format: "%@ - %@", data.titleModule!, data.codeInstance!)
         
         self.startTimeLabel.text = data.startTime?.toEventHour()

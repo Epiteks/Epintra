@@ -9,6 +9,7 @@
 import UIKit
 import MessageUI
 import StoreKit
+import EventKit
 
 class SettingsViewController: UIViewController {
 
@@ -107,8 +108,8 @@ extension SettingsViewController: UITableViewDataSource {
 
         cell.textLabel?.text = NSLocalizedString(data.id, comment: "")
         
-        if let defaultCalendar = ApplicationManager.sharedInstance.defaultCalendar {
-            cell.detailTextLabel?.text = defaultCalendar
+        if let defaultCalendarIdentifier = ApplicationManager.sharedInstance.defaultCalendarIdentifier, let calendar = EKEventStore().calendar(withIdentifier: defaultCalendarIdentifier) {
+            cell.detailTextLabel?.text = calendar.title
             cell.accessoryType = .none
         } else {
             cell.accessoryType = .disclosureIndicator
@@ -134,7 +135,7 @@ extension SettingsViewController: UITableViewDelegate {
         
         let disconnect = UIAlertAction(title: NSLocalizedString("Disconnect", comment: ""), style: .destructive, handler: { _ in
             
-            UserPreferences.deleteData()
+            KeychainUtil.deleteCredentials()
             
             let storyboard = UIStoryboard(name: "ConnexionStoryboard", bundle: nil)
             let vc = storyboard.instantiateInitialViewController()

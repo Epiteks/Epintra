@@ -28,11 +28,10 @@ class LoginViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		if (UserPreferences.checkIfDataExists()) {
+		if let credentials = KeychainUtil.getCredentials() {
 			self.addWaitingView()
-			let data = UserPreferences.getData()
-			login = data.login
-			password = data.password
+			login = credentials.email
+			password = credentials.password
 			loginCall()
 		}
 		
@@ -55,7 +54,7 @@ class LoginViewController: UIViewController {
 	override func viewDidAppear(_ animated: Bool) {
 		
 		self.removeWaitingView()
-		if (UserPreferences.checkIfDataExists()) {
+        if KeychainUtil.getCredentials() != nil {
 			self.addWaitingView()
 		}
 		
@@ -111,7 +110,13 @@ class LoginViewController: UIViewController {
 			MJProgressView.instance.hideProgress()
 			switch (result) {
 			case .success(_):
-				UserPreferences.saveData(self.login, password: self.password)
+                
+                do {
+                    try KeychainUtil.saveCredentials(email: self.login, password: self.password)
+                } catch {
+                    log.error("Thrown error when saving credentials")
+                }
+                
 				self.goToNextView()
 				break
 			case .failure(let error):
@@ -174,7 +179,7 @@ class LoginViewController: UIViewController {
 	Perform the segue to go to the splash view
 	*/
 	func goToNextView() {
-		ApplicationManager.sharedInstance.currentLogin = login
+		//ApplicationManager.sharedInstance.currentLogin = login
 		performSegue(withIdentifier: "splashSegue", sender: self)
 	}
 	

@@ -24,12 +24,9 @@ class SplashScreenViewController: UIViewController {
 		statusLabel.textColor = UIColor.white
 		statusLabel.text = ""
 		self.view.backgroundColor = UIUtils.backgroundColor
-		
-		if (UserPreferences.checkIfWantsDownloadingExists()) {
-			ApplicationManager.sharedInstance.canDownload = UserPreferences.getWantsDownloading()
-		}
+
 		if (UserPreferences.checkIfDefaultCalendarExists()) {
-			ApplicationManager.sharedInstance.defaultCalendar = UserPreferences.getDefaultCalendar()
+			ApplicationManager.sharedInstance.defaultCalendarIdentifier = UserPreferences.getDefaultCalendar()
 		}
 
 	}
@@ -68,7 +65,7 @@ class SplashScreenViewController: UIViewController {
 	}
 	
 	func goBackToLogin() {
-		UserPreferences.deleteData()
+        KeychainUtil.deleteCredentials()
 		ApplicationManager.sharedInstance.resetInstance()
 		self.dismiss(animated: true, completion: nil)
 	}

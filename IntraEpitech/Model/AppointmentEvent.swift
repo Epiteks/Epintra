@@ -9,12 +9,9 @@
 import UIKit
 import SwiftyJSON
 
-class AppointmentEvent {
+class AppointmentEvent: BasicInformation {
 	
-	var scolaryear: String?
-	var codeModule: String?
 	var codeActi: String?
-	var codeInstance: String?
 	var registeredByBlock: Bool?
 	var slots: [Appointment]?
 	var groupId: String?
@@ -25,24 +22,10 @@ class AppointmentEvent {
 	var eventStart: Date?
 	var eventEnd: Date?
 	
-	init(dict: JSON) {
-		scolaryear = dict["scolaryear"].string
-		codeModule = dict["codemodule"].stringValue
+	override init(dict: JSON) {
+        super.init(dict: dict)
 		codeActi = dict["codeacti"].stringValue
-		codeInstance = dict["codeinstance"].stringValue
-		
 		registeredByBlock = dict["registered_by_block"].boolValue
-		
-		//		if (slots.count > 0) {
-		//			let eventSlots = slots[0]["slots"]
-		//			
-		//			for tmp in eventSlots.arrayValue
-		//			{
-		//				let tmp = Appointment(dict: tmp)
-		//				_slots!.append(tmp)
-		//			}
-		//		}
-		
 		groupId = dict["group"]["id"].stringValue
 		registered = dict["group"]["inscrit"].boolValue
 		studentRegistered = dict["student_registered"].stringValue

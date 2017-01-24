@@ -36,7 +36,9 @@ class LoadingDataViewController: UIViewController {
         
         loadingView.restorationIdentifier = "loadingView"
         
-        viewToSearchOn.addSubview(loadingView)
+        DispatchQueue.main.async {
+            viewToSearchOn.addSubview(loadingView)
+        }
     }
     
     /// Remove LoadingView screen
@@ -46,7 +48,9 @@ class LoadingDataViewController: UIViewController {
         
         for sub in viewToSearchOn.subviews {
             if sub.restorationIdentifier == "loadingView" {
-                sub.removeFromSuperview()
+                DispatchQueue.main.async {
+                    sub.removeFromSuperview()
+                }
                 break
             }
         }
@@ -62,15 +66,18 @@ class LoadingDataViewController: UIViewController {
         
         indicator.color = .black
         indicator.startAnimating()
-        
-        self.view.addSubview(indicator)
+        DispatchQueue.main.async {
+            self.view.addSubview(indicator)
+        }
     }
 
     /// Remove ActivityIndicator
     func removeActivityIndicator() {
         for sub in self.view.subviews {
             if sub is UIActivityIndicatorView {
-                sub.removeFromSuperview()
+                DispatchQueue.main.async {
+                    sub.removeFromSuperview()
+                }
                 break
             }
         }
@@ -80,14 +87,18 @@ class LoadingDataViewController: UIViewController {
     func addNoDataView(info: String) {
         let noData = NoDataView(info: NSLocalizedString(info, comment: ""))
         noData.frame = self.view.frame
-        self.view.addSubview(noData)
+        DispatchQueue.main.async {
+            self.view.addSubview(noData)
+        }
     }
     
     /// Remove NoData View
     func removeNoDataView() {
         for sub in self.view.subviews {
             if sub is NoDataView {
-                sub.removeFromSuperview()
+                DispatchQueue.main.async {
+                    sub.removeFromSuperview()
+                }
                 break
             }
         }

@@ -38,50 +38,59 @@ class PlanningRequests: RequestManager {
             }
         }
     }
-//
-////        Alamofire.request(url, method: .get, parameters: ["token": ApplicationManager.sharedInstance.token!, "start": first, "end": last])
-////            .responseJSON { response in
-////                if (response.result.isSuccess) {
-////                    let responseCall = JSON(response.result.value!)
-////                    let errorDict = responseCall["error"].dictionaryValue
-////                    var errorMessage: String?
-////                    if (errorDict.count > 0) {
-////                        errorMessage = (errorDict["message"]?.stringValue)
-////                        errorMessage = errorMessage!.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
-////                        onCompletion(false, nil, errorMessage!)
-////                    } else {
-//                        var planningMan = Dictionary<String, [Planning]>()
-//                        
-//                        var date = first.shortToDate()
-//                        let lol = NSDate()
-//                        
-//                        // TODO
-//                        /*
-//                         while (date < last.shortToDate()) {
-//                         planningMan[date.toAPIString()] = [Planning]()
-//                         date = date.fs_date(byAddingDays: 1)
-//                         }
-//                         */
-//                        
-//                        for tmpPlanning in responseCall.arrayValue {
-//                            let tmp = Planning(dict: tmpPlanning)
-//                            
-//                            if (planningMan[tmp.getOnlyDay()] == nil) {
-//                                planningMan[tmp.getOnlyDay()] = [Planning]()
-//                            }
-//                            
-//                            let allowedCalendars = ApplicationManager.sharedInstance.planningSemesters
-//                            if (allowedCalendars[tmp.semester!] == true) {
-//                                planningMan[tmp.getOnlyDay()]?.append(tmp)	
-//                            }
-//                        }
-//                        onCompletion(true, planningMan, "")
-//                    }
-//                } else {
-//                    onCompletion(false, nil, (response.result.error?.localizedDescription)!)
-//                }
-//        }
-//    }
+
+    func enter(token: String, for planning: Planning, completion: @escaping (Result<Any?>) -> Void) {
+        
+        let urlParameters = planning.requestURLData()
+        
+        let parameters = ["token": token]
+    
+        super.call("tokenValidation", params: parameters, urlParams: urlParameters) { response in
+            switch response {
+            case .success(let responseJSON):
+                log.info("Token registration response \(responseJSON)")
+                completion(Result.success(nil))
+                break
+            case .failure(let err):
+                completion(Result.failure(type: err.type, message: err.message))
+                log.error("Enter token error : \(err)")
+            }
+        }
+    }
+    
+    func register(toEvent event: Planning, completion: @escaping (Result<Any?>) -> Void) {
+        
+        let urlParameters = event.requestURLData()
+        
+        super.call("subscribeEvent", urlParams: urlParameters) { response in
+            switch response {
+            case .success(let responseJSON):
+                log.info("Subscribe event \(responseJSON)")
+                completion(Result.success(nil))
+                break
+            case .failure(let err):
+                completion(Result.failure(type: err.type, message: err.message))
+                log.error("Register event error : \(err)")
+            }
+        }
+    }
+    
+    func unregister(toEvent event: Planning, completion: @escaping (Result<Any?>) -> Void) {
+        
+        let urlParameters = event.requestURLData()
+        
+        super.call("unsubscribeEvent", urlParams: urlParameters) { response in
+            switch response {
+            case .success(let responseJSON):
+                log.info("Unsubscribe event \(responseJSON)")
+                completion(Result.success(nil))
+                break
+            case .failure(let err):
+                completion(Result.failure(type: err.type, message: err.message))
+                log.error("Unregister event error : \(err)")
+            }
+        }
+    }
     
 }
 

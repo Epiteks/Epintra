@@ -10,43 +10,28 @@ import UIKit
 
 class ApplicationManager {
     
+    // Singleton
     internal static let sharedInstance = ApplicationManager()
     
+    // Current token used for the calls
     internal var token: String?
+    
+    // Logged user
     internal var user: User?
-    internal var currentLogin: String?
-    internal var downloadedImages: [String:  UIImage]?
-    internal var canDownload: Bool?
-    internal var defaultCalendar: String?
-    
-    var realmManager: RealmManager = RealmManager()
-    
-    // DATA
-    internal var projects: [Project]?
-    internal var modules: [Module]?
-    internal var marks: [Mark]?
-    internal var allUsers: [User]?
-    
-    var lastUserApiCall: Double?
-    
-    init() {
-        downloadedImages = [String:  UIImage]()
-        canDownload = true
-        lastUserApiCall = 0
+
+    // Calendar identifier
+    internal var defaultCalendarIdentifier: String? {
+        willSet {
+            // Save new selected calendar in preferences
+            UserPreferences.saveDefaultCalendar(newValue)
+        }
     }
+    
+    // Realm manager instance
+    let realmManager: RealmManager = RealmManager()
     
     func resetInstance() {
         token = nil
         user = nil
-        currentLogin = nil
-        lastUserApiCall = 0
     }
-    
-    func addImageToCache(_ url: String, image: UIImage) {
-        if downloadedImages == nil {
-            downloadedImages = [String:  UIImage]()
-        }
-        downloadedImages![url] = image
-    }
-    
 }

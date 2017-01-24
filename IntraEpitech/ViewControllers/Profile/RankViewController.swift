@@ -34,7 +34,7 @@ class RankViewController: LoadingDataViewController {
         super.viewDidLoad()
         
         self.title = NSLocalizedString("Ranking", comment: "")
-
+        
         self.studentsTableView.register(UINib(nibName: "StudentTableViewCell", bundle: nil), forCellReuseIdentifier: "studentInfoCell")
         self.studentsTableView.estimatedRowHeight = 60
         self.studentsTableView.rowHeight = UITableViewAutomaticDimension
@@ -53,7 +53,7 @@ class RankViewController: LoadingDataViewController {
     func getDataIfNeeded() {
         
         let promotion = String(format: "tek%i", self.rankFilter.promotion)
-
+        
         guard let epirankInformation = ApplicationManager.sharedInstance.realmManager.epirankInformation(forPromo: promotion) else {
             fetchNewData()
             return
@@ -64,7 +64,7 @@ class RankViewController: LoadingDataViewController {
         } else {
             self.students = ApplicationManager.sharedInstance.realmManager.students(byPromotion: promotion, andCities: self.rankFilter.cities)
         }
-    
+        
         self.studentsTableView.reloadData()
     }
     
@@ -72,29 +72,31 @@ class RankViewController: LoadingDataViewController {
         self.isFetching = true
         let promotion = String(format: "tek%i", self.rankFilter.promotion)
         usersRequests.download(students: promotion) { result in
-            switch result {
-            case .success(let students):
-                self.students = students
-                self.studentsTableView.reloadData()
-            case .failure(let err):
-                // TODO Manage Error
-                break
+            if self.isViewLoaded && self.view.window != nil {
+                switch result {
+                case .success(let students):
+                    self.students = students
+                    self.studentsTableView.reloadData()
+                case .failure(let err):
+                    // TODO Manage Error
+                    break
+                }
+                self.isFetching = false
             }
-            self.isFetching = false
         }
     }
     
     @IBAction func filterSearchSegue(_ sender: Any) {
         self.performSegue(withIdentifier: "filterSearchSegue", sender: self)
     }
-   
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "filterSearchSegue", let navController = segue.destination as? UINavigationController, let vc = navController.viewControllers.first as? FilterRankViewController {
             vc.rankFilter = self.rankFilter
             vc.delegate = self
         }
-     }
- 
+    }
+    
 }
 
 extension RankViewController: UpdateRankFilterDelegate {
@@ -104,7 +106,7 @@ extension RankViewController: UpdateRankFilterDelegate {
 }
 
 extension RankViewController: UISearchResultsUpdating {
-
+    
     func configureSearchController() {
         self.searchController = UISearchController(searchResultsController: nil)
         self.searchController.searchResultsUpdater = self
@@ -125,7 +127,7 @@ extension RankViewController: UISearchResultsUpdating {
             self.filteredStudents = self.students?.filter { query.evaluate(with: $0) }
         }
     }
-
+    
     func updateSearchResults(for searchController: UISearchController) {
         if let data = searchController.searchBar.text {
             filterStudentsContent(for: data)
@@ -134,7 +136,7 @@ extension RankViewController: UISearchResultsUpdating {
         }
         self.studentsTableView.reloadData()
     }
-
+    
 }
 
 extension RankViewController: UITableViewDataSource {
@@ -166,7 +168,7 @@ extension RankViewController: UITableViewDataSource {
         }
         return cell ?? UITableViewCell()
     }
-
+    
 }
 
 extension RankViewController: UITableViewDelegate {

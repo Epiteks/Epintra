@@ -10,6 +10,7 @@ PODS:
   - Realm/Headers (2.1.2)
   - RealmSwift (2.1.2):
     - Realm (= 2.1.2)
+  - SwiftKeychainWrapper (3.0.1)
   - SwiftyBeaver (1.1.1)
   - SwiftyJSON (3.1.4)
 
@@ -19,6 +20,7 @@ DEPENDENCIES:
   - AlamofireNetworkActivityIndicator (~> 2.0)
   - FSCalendar
   - RealmSwift
+  - SwiftKeychainWrapper
   - SwiftyBeaver
   - SwiftyJSON
 
@@ -29,9 +31,10 @@ SPEC CHECKSUMS:
   FSCalendar: c00fa5f4c3ec343ee6f7b804ae19322e9898bb84
   Realm: efe855f4d977c8ce5a82d3116d9f1ff155a6550c
   RealmSwift: 17d6ee30b6f9df86364408c2197492e33bfea567
+  SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
   SwiftyBeaver: 2b68694df862381235e32bcfc4ec991e26bf131d
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: ba2d44a5ec92fe37e5c7f4258d1ab708dba19fe7
+PODFILE CHECKSUM: 095e1ac451d3fc2deb1218361ac3ad35003fd0cc
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.0.rc.1

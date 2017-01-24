@@ -169,39 +169,84 @@ extension PlanningViewController: UITableViewDataSource {
         
         cell.setView(with: self.currentDayEvents![indexPath.row])
         
-        //TODO Remove for next update
-        cell.statusImageView.image = nil
-        cell.isUserInteractionEnabled = false
-        cell.accessoryType = .none
-        
-//        if cell.accessoryType != .disclosureIndicator {
-//            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(PlanningViewController.statusImageSelected(_:)))
-//            tapGesture.numberOfTapsRequired = 1
-//            cell.statusImageView.isUserInteractionEnabled = true
-//            cell.statusImageView.addGestureRecognizer(tapGesture)
-//        }
+        if cell.accessoryType != .disclosureIndicator {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.statusImageSelected(_:)))
+            tapGesture.numberOfTapsRequired = 1
+            cell.statusImageView.isUserInteractionEnabled = true
+            cell.statusImageView.addGestureRecognizer(tapGesture)
+            cell.statusImageView.tag = indexPath.row
+        }
         
         return cell
     }
     
     func statusImageSelected(_ sender: UIGestureRecognizer) {
-        
-        let tapLocation = sender.location(in: self.eventsTableView)
-        
-        if let indexPath = self.eventsTableView.indexPathForRow(at: tapLocation), let data = self.currentDayEvents?[indexPath.row] {
     
-            if data.canEnterToken() {
-                // Enter Token Alert View
-            } else if data.canRegister() {
-                
-            } else if data.canUnregister() {
-                
+            if let statusImageView = sender.view as? UIImageView, let data = self.currentDayEvents?[statusImageView.tag] {
+                if data.canEnterToken() {
+                    // Enter Token Alert View
+                    self.enterTokenAlertView(planningEvent: data)
+                } else if data.canRegister() || true {
+                    // Register student
+                    self.addActivityIndicator()
+                    planningRequests.register(toEvent: data, completion: { result in
+                        self.removeActivityIndicator()
+                        switch result {
+                        case .success(_):
+                            // TODO update UI
+                            
+                            break
+                        case .failure(_):
+                            // TODO show error
+                            break
+                        }
+                    })
+                    
+                } else if data.canUnregister() {
+                    // Unregister Student
+                }
             }
             
         }
-//
-//        		if (data.canEnterToken()) {
-//        			enterTokenAlertView(data, indexPath: indexPath!)
+    
+    func enterTokenAlertView(planningEvent: Planning) {
+        
+        let alert = UIAlertController(title: NSLocalizedString("EnterToken", comment: ""), message: "", preferredStyle: .alert)
+        var tokenTextField: UITextField!
+        
+        alert.addTextField { textField in
+            textField.placeholder = NSLocalizedString("Token", comment: "")
+            tokenTextField = textField
+        }
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel) { _ in
+            
+        })
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Done", comment: ""), style: .default, handler: { _ in
+            self.addActivityIndicator()
+            if let token = tokenTextField.text, token.characters.count > 0 {
+                planningRequests.enter(token: token, for: planningEvent, completion: { result in
+                    self.removeActivityIndicator()
+                    switch result {
+                    case .success(_):
+                        // TODO update UI
+                        break
+                    case .failure(_):
+                        // TODO show error
+                        
+                        break
+                    }
+                })
+            }
+        }))
+        self.present(alert, animated: true)
+    }
+}
+
+    //
+    //        		if (data.canEnterToken()) {
+    //        			enterTokenAlertView(data, indexPath: indexPath!)
 //        		} else if (data.canRegister()) {
 //        			PlanningApiCalls.registerToEvent(data) { (isOk: Bool, mess: String) in
 //        
@@ -227,9 +272,8 @@ extension PlanningViewController: UITableViewDataSource {
 //        		
 //        		print(indexPath)
 //        		
-       	}
+
 //
-}
 
 extension PlanningViewController: UITableViewDelegate {
     

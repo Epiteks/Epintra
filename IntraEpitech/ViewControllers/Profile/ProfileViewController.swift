@@ -57,7 +57,7 @@ class ProfileViewController: UIViewController {
 		
 		self.downloadingFlags = true
 		
-		usersRequests.getUserFlags(ApplicationManager.sharedInstance.currentLogin!) { (result) in
+		usersRequests.getUserFlags((ApplicationManager.sharedInstance.user?.login)!) { (result) in
 			switch (result) {
 			case .success(let data):
 					self.flags = data

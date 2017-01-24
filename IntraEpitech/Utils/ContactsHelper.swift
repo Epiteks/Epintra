@@ -49,16 +49,17 @@ class ContactsHelper {
 		}
 	}
 	
-	func createUserRecord(_ usr: User) -> ABRecord {
-		let usrRecord: ABRecord = ABPersonCreate().takeRetainedValue()
-		ABRecordSetValue(usrRecord, kABPersonFirstNameProperty, usr.firstname as CFTypeRef!, nil)
-		ABRecordSetValue(usrRecord, kABPersonLastNameProperty, usr.lastname as CFTypeRef!, nil)
-		
-		if (ApplicationManager.sharedInstance.canDownload == true) {
-			let img = ApplicationManager.sharedInstance.downloadedImages![usr.imageUrl!]
-			ABPersonSetImageData(usrRecord, UIImagePNGRepresentation(img!) as CFData!, nil)
-		}
-		return usrRecord
+	func createUserRecord(_ usr: User) -> ABRecord? {
+//		let usrRecord: ABRecord = ABPersonCreate().takeRetainedValue()
+//		ABRecordSetValue(usrRecord, kABPersonFirstNameProperty, usr.firstname as CFTypeRef!, nil)
+//		ABRecordSetValue(usrRecord, kABPersonLastNameProperty, usr.lastname as CFTypeRef!, nil)
+//		
+//		if (ApplicationManager.sharedInstance.canDownload == true) {
+//			let img = ApplicationManager.sharedInstance.downloadedImages![usr.imageUrl!]
+//			ABPersonSetImageData(usrRecord, UIImagePNGRepresentation(img!) as CFData!, nil)
+//		}
+//		return usrRecord
+        return nil
 	}
 	
 }
