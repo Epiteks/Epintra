@@ -186,30 +186,52 @@ extension PlanningViewController: UITableViewDataSource {
                 if data.canEnterToken() {
                     // Enter Token Alert View
                     self.enterTokenAlertView(planningEvent: data)
-                } else if data.canRegister() || true {
+                } else if data.canRegister() {
                     // Register student
                     self.addActivityIndicator()
                     planningRequests.register(toEvent: data, completion: { result in
+                        
                         self.removeActivityIndicator()
                         switch result {
                         case .success(_):
                             // TODO update UI
-                            
+                            if let eventIndex = self.currentDayEvents?.index(where: { $0 == data }) {
+                                    self.eventsTableView.reloadRows(at: [IndexPath(row: eventIndex, section: 0)], with: .automatic)
+                                }
                             break
-                        case .failure(_):
-                            // TODO show error
+                        case .failure(let err):
+                            if let message = err.message {
+                                self.showAlert(withTitle: "error", andMessage: message)
+                            }
                             break
                         }
                     })
                     
                 } else if data.canUnregister() {
                     // Unregister Student
+                    self.addActivityIndicator()
+                    planningRequests.unregister(fromEvent: data, completion: { result in
+                        self.removeActivityIndicator()
+                        switch result {
+                        case .success(_):
+                            // TODO update UI
+                            if let eventIndex = self.currentDayEvents?.index(where: { $0 == data }) {
+                                self.eventsTableView.reloadRows(at: [IndexPath(row: eventIndex, section: 0)], with: .automatic)
+                            }
+                            break
+                        case .failure(let err):
+                            if let message = err.message {
+                                self.showAlert(withTitle: "error", andMessage: message)
+                            }
+                            break
+                        }
+                    })
                 }
             }
             
         }
     
-    func enterTokenAlertView(planningEvent: Planning) {
+    func enterTokenAlertView(planningEvent data: Planning) {
         
         let alert = UIAlertController(title: NSLocalizedString("EnterToken", comment: ""), message: "", preferredStyle: .alert)
         var tokenTextField: UITextField!
@@ -226,15 +248,19 @@ extension PlanningViewController: UITableViewDataSource {
         alert.addAction(UIAlertAction(title: NSLocalizedString("Done", comment: ""), style: .default, handler: { _ in
             self.addActivityIndicator()
             if let token = tokenTextField.text, token.characters.count > 0 {
-                planningRequests.enter(token: token, for: planningEvent, completion: { result in
+                planningRequests.enter(token: token, for: data, completion: { result in
                     self.removeActivityIndicator()
                     switch result {
                     case .success(_):
                         // TODO update UI
+                        if let eventIndex = self.currentDayEvents?.index(where: { $0 == data }) {
+                            self.eventsTableView.reloadRows(at: [IndexPath(row: eventIndex, section: 0)], with: .automatic)
+                        }
                         break
-                    case .failure(_):
-                        // TODO show error
-                        
+                    case .failure(let err):
+                        if let message = err.message {
+                            self.showAlert(withTitle: "error", andMessage: message)
+                        }
                         break
                     }
                 })
@@ -243,37 +269,6 @@ extension PlanningViewController: UITableViewDataSource {
         self.present(alert, animated: true)
     }
 }
-
-    //
-    //        		if (data.canEnterToken()) {
-    //        			enterTokenAlertView(data, indexPath: indexPath!)
-//        		} else if (data.canRegister()) {
-//        			PlanningApiCalls.registerToEvent(data) { (isOk: Bool, mess: String) in
-//        
-//        				if (!isOk) {
-//        					self.showMessage(mess)
-//        				} else {
-//        					// Reload cell
-//        					self.updateEventCell(indexPath!, event: data)
-//        				}
-//        
-//        			}
-//        		} else if (data.canUnregister()) {
-//        			PlanningApiCalls.unregisterToEvent(data) { (isOk: Bool, mess: String) in
-//        
-//        				if (!isOk) {
-//        					self.showMessage(mess)
-//        				} else {
-//        					// Reload cell
-//        					self.updateEventCell(indexPath!, event: data)
-//        				}
-//        			}
-//        		}
-//        		
-//        		print(indexPath)
-//        		
-
-//
 
 extension PlanningViewController: UITableViewDelegate {
     

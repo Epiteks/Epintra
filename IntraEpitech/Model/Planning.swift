@@ -11,6 +11,12 @@ import SwiftyJSON
 
 class Planning: BasicInformation {
 	
+    enum EventType {
+        case all, personal
+    }
+    
+    let type: EventType!
+    
 	var titleModule: String?
 	var startTime: Date?
 	var endTime: Date?
@@ -32,8 +38,20 @@ class Planning: BasicInformation {
 	var rdvIndividuelRegistered: String?
 	var past: Bool?
 	var semester: Int?
-	
+    
+    // For personal calendars
+    var calendarID: Int?
+    var eventID: Int?
+    
 	override init(dict: JSON) {
+        
+        if let calendarType = dict["calendar_type"].string, calendarType == "perso" {
+            self.type = .personal
+            self.calendarID = dict["id_calendar"].intValue
+            self.eventID = dict["id"].intValue
+        } else {
+            self.type = .all
+        }
         
         super.init(dict: dict)
         
@@ -78,7 +96,11 @@ class Planning: BasicInformation {
 	
 	func canRegister() -> Bool {
 		
-		if (self.moduleRegistered == true && self.eventRegisteredStatus == "false" && self.allowRegister! == true && room != nil && room?.seats != nil) {
+        if self.type == .personal, let startAt = self.startTime, startAt > Date(), self.eventRegisteredStatus != "registered" {
+            return true
+        }
+        
+		if self.moduleRegistered == true && self.eventRegisteredStatus == "false" && self.allowRegister! == true && room != nil && room?.seats != nil {
 			return true
 		}
 		return false
@@ -86,7 +108,11 @@ class Planning: BasicInformation {
 	
 	func canUnregister() -> Bool {
 		
-		if (self.moduleRegistered == true && self.eventRegisteredStatus == "registered" && self.allowRegister! == true) {
+        if self.type == .personal, let startAt = self.startTime, startAt > Date(), self.eventRegisteredStatus == "registered" {
+            return true
+        }
+        
+		if self.moduleRegistered == true && self.eventRegisteredStatus == "registered" && self.allowRegister! == true {
 			return true
 		}
 		return false
@@ -94,7 +120,7 @@ class Planning: BasicInformation {
 	
 	func isRegistered() -> Bool {
 		
-		if (self.eventRegisteredStatus == "registered") {
+		if self.eventRegisteredStatus == "registered" {
 			return true
 		}
 		return false
@@ -102,7 +128,7 @@ class Planning: BasicInformation {
 	
 	func isUnregistered() -> Bool {
 		
-		if (self.eventRegisteredStatus == "false") {
+		if self.eventRegisteredStatus == "false" {
 			return true
 		}
 		return false
@@ -110,7 +136,7 @@ class Planning: BasicInformation {
 	
 	func wasPresent() -> Bool {
 		
-		if (self.eventRegisteredStatus == "present") {
+		if self.eventRegisteredStatus == "present" {
 			return true
 		}
 		return false
@@ -118,7 +144,7 @@ class Planning: BasicInformation {
 	
 	func wasAbsent() -> Bool {
 		
-		if (self.eventRegisteredStatus == "failed" || self.eventRegisteredStatus == "absent") {
+		if self.eventRegisteredStatus == "failed" || self.eventRegisteredStatus == "absent" {
 			return true
 		}
 		return false
@@ -139,32 +165,40 @@ class Planning: BasicInformation {
 //		}
 //	}
 	
-	init(appointment: AppointmentEvent) {
-        super.init()
-		scolaryear = appointment.scolaryear!
-		codeModule = appointment.codeModule!
-		codeActi = appointment.codeActi!
-		codeInstance = appointment.codeInstance!
-	}
+//	init(appointment: AppointmentEvent) {
+//        super.init()
+//		scolaryear = appointment.scolaryear!
+//		codeModule = appointment.codeModule!
+//		codeActi = appointment.codeActi!
+//		codeInstance = appointment.codeInstance!
+//	}
     
-    func requestData() -> [String: String] {
-        
-        let parameters: [String: String] = [
-            "year": self.scolaryear!,
-            "module": self.codeModule!,
-            "instance": self.codeInstance!,
-            "activity": self.codeActi!,
-            "event": self.codeEvent!
-        ]
-        
-        return parameters
-    }
-    
+//    func requestData() -> [String: String] {
+//        
+//        let parameters: [String: String] = [
+//            "year": self.scolaryear!,
+//            "module": self.codeModule!,
+//            "instance": self.codeInstance!,
+//            "activity": self.codeActi!,
+//            "event": self.codeEvent!
+//        ]
+//        
+//        return parameters
+//    }
+//    
     func requestURLData() -> String {
-        
-        let url = String(format: "?year=%@&module=%@&instance=%@&activity=%@&event=%@", self.scolaryear!, self.codeModule!, self.codeInstance!, self.codeActi!, self.codeEvent!)
-        
-        return url
+        if self.type == .all {
+            return String(format: "?year=%@&module=%@&instance=%@&activity=%@&event=%@", self.scolaryear!, self.codeModule!, self.codeInstance!, self.codeActi!, self.codeEvent!)
+        } else {
+            return String(format: "?calendar=%i&event=%i", self.calendarID!, self.eventID!)
+        }
     }
-	
+}
+
+func == (left: Planning, right: Planning) -> Bool {
+    
+    if left.type == right.type && left.calendarID == right.calendarID && left.eventID == right.eventID && left.codeEvent == right.codeEvent && left.codeActi == right.codeActi && left.codeInstance == right.codeInstance {
+        return true
+    }
+    return false
 }

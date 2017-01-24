@@ -61,11 +61,19 @@ class PlanningRequests: RequestManager {
     func register(toEvent event: Planning, completion: @escaping (Result<Any?>) -> Void) {
         
         let urlParameters = event.requestURLData()
+        var endpointID = ""
         
-        super.call("subscribeEvent", urlParams: urlParameters) { response in
+        if event.type == .all {
+            endpointID = "subscribeEvent"
+        } else {
+            endpointID = "subscribePersonalEvent"
+        }
+        
+        super.call(endpointID, urlParams: urlParameters) { response in
             switch response {
-            case .success(let responseJSON):
-                log.info("Subscribe event \(responseJSON)")
+            case .success(_):
+                event.eventRegisteredStatus = "registered"
+                log.info("Subscribed event \(event)")
                 completion(Result.success(nil))
                 break
             case .failure(let err):
@@ -75,13 +83,21 @@ class PlanningRequests: RequestManager {
         }
     }
     
-    func unregister(toEvent event: Planning, completion: @escaping (Result<Any?>) -> Void) {
+    func unregister(fromEvent event: Planning, completion: @escaping (Result<Any?>) -> Void) {
         
         let urlParameters = event.requestURLData()
+        var endpointID = ""
         
-        super.call("unsubscribeEvent", urlParams: urlParameters) { response in
+        if event.type == .all {
+            endpointID = "unsubscribeEvent"
+        } else {
+            endpointID = "unsubscribePersonalEvent"
+        }
+        
+        super.call(endpointID, urlParams: urlParameters) { response in
             switch response {
             case .success(let responseJSON):
+                event.eventRegisteredStatus = "false"
                 log.info("Unsubscribe event \(responseJSON)")
                 completion(Result.success(nil))
                 break

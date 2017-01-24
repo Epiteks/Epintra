@@ -103,4 +103,16 @@ class LoadingDataViewController: UIViewController {
             }
         }
     }
+    
+    func showAlert(withTitle title: String, andMessage message: String? = nil) {
+        
+        let alert = UIAlertController(title: NSLocalizedString(title, comment: ""), message: message ?? "", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { _ in
+            
+        })
+        self.present(alert, animated: true)
+        alert.view.tintColor = UIUtils.backgroundColor
+        
+    }
 }
