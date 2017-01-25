@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import RealmSwift
 
 class UsersRequests: RequestManager {
 	
@@ -168,7 +169,7 @@ class UsersRequests: RequestManager {
         }
     }
     
-    func download(students promo: String, completion: @escaping (Result<[StudentInfo]>) -> Void) {
+    func download(students promo: String, completion: @escaping (Result<Results<StudentInfo>?>) -> Void) {
         
         let params = String(format: "?promotion=%@&format=json", promo)
         

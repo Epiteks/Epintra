@@ -29,7 +29,7 @@ class RealmStudentInfo {
         self.realmStudents?.save(elements: students)
     }
     
-    func students(byPromotion promotion: String, andCities cities: [String]? = nil) -> [StudentInfo] {
+    func students(byPromotion promotion: String, andCities cities: [String]? = nil) -> Results<StudentInfo>? {
         
         let query = NSPredicate(format: "promo = %@", promotion)
         
@@ -41,12 +41,12 @@ class RealmStudentInfo {
                 }
                 let allCitiesPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: citiesPredicates)
                 let newStudents = students.filter(allCitiesPredicate)
-                return Array(newStudents)
+                return newStudents
             } else {
-                return Array(students)
+                return students
             }
         }
-        return [StudentInfo]()
+        return nil
     }
     
     func epirankInformation(forPromo promo: String) -> EpirankInformation? {

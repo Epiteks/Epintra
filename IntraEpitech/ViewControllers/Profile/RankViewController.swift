@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class RankViewController: LoadingDataViewController {
     
@@ -23,12 +24,12 @@ class RankViewController: LoadingDataViewController {
     
     var searchController: UISearchController!
     
-    var students: [StudentInfo]? {
+    var students: Results<StudentInfo>? {
         willSet {
             self.filteredStudents = newValue
         }
     }
-    var filteredStudents: [StudentInfo]? = nil
+    var filteredStudents: Results<StudentInfo>? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -127,7 +128,7 @@ extension RankViewController: UISearchResultsUpdating {
             self.filteredStudents = self.students
         } else {
             let query = NSPredicate(format: "login CONTAINS[c] %@ or title CONTAINS[c] %@", data, data)
-            self.filteredStudents = self.students?.filter { query.evaluate(with: $0) }
+            self.filteredStudents = self.students?.filter(query)
         }
     }
     
