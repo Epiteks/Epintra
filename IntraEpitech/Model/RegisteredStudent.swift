@@ -11,21 +11,23 @@ import SwiftyJSON
 
 class RegisteredStudent {
 	
+	/// User login aka email
 	var login: String!
-	var grade: String!
-	var status: String!
-	var imageURL: String!
+    
+    /// User title (Firstname Lastname)
+    var title: String!
+    
+    /// User profile image url
+    var imageURL: String!
 	
-	init(dict: JSON) {
-		
-		login = dict["login"].stringValue
-		grade = dict["grade"].stringValue
-		status = dict["present"].stringValue
-		imageURL = dict["picture"].stringValue
-
-		if (dict["picture"].stringValue.characters.count > 0 && dict["picture"].stringValue.characters.count <= 12) {
-			imageURL = APICalls.getProfilePictureURL() + login + ".bmp"
-		}
+    /// Student grade (user for modules registered view controller)
+    var grade: String?
+    
+    init(dict: JSON) {
+		self.login = dict["login"].stringValue
+        self.title = dict["title"].stringValue
+		self.imageURL = dict["picture"].stringValue
+        self.grade = dict["grade"].stringValue
 	}
 	
 }

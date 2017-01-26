@@ -39,7 +39,10 @@ class CalendarManager {
 		}
 	}
 	
+    
 	func createEvent(_ planning: Planning, onCompletion:  @escaping (Bool, String) -> Void) {
+        
+        
 		// 1
 //		let eventStore = EKEventStore()
 //		
@@ -79,80 +82,62 @@ class CalendarManager {
 //		}
 	}
 	
-	func insertEvent(_ store: EKEventStore, planning: Planning, onCompletion: (Bool) -> Void) {
-		// 1
-//		let calendars = store.calendars(for: EKEntityType.event)
-//		
-//		for calendar in calendars {
-//			// 2
-//			if calendar.title == ApplicationManager.sharedInstance.defaultCalendar {
-//				// 3
-//				
-//				var startDate = Date()
-//				var endDate = Date()
-//				
-//				if (planning.rdvGroupRegistered!.characters.count > 0) {
-//					let arr = planning.rdvGroupRegistered?.components(separatedBy: "|")
-//					//					let resp = (arr![0].toDate().toEventHour(), arr![1].toDate().toEventHour())
-//					startDate = arr![0].toDate() as Date
-//					endDate = arr![1].toDate() as Date
-//					
-//				} else if (planning.rdvIndividuelRegistered!.characters.count > 0) {
-//					let arr = planning.rdvIndividuelRegistered?.components(separatedBy: "|")
-//					startDate = arr![0].toDate() as Date
-//					endDate = arr![1].toDate() as Date
-//					
-//				} else {
-//                    
-//                    // TODO NOT WORK
-//                    
-////					startDate = (planning.startTime?.toDate())! as Date
-////					// 2 hours
-////					endDate = (planning.endTime?.toDate())! as Date
-//				}
-//				// 4
-//				
-//				// Create Event
-//				let event = EKEvent(eventStore: store)
-//				event.calendar = calendar
-//				
-//				event.title = planning.actiTitle!
-//				event.startDate = startDate
-//				event.endDate = endDate
-//				
-//				if (planning.room != nil) {
-//					event.location = planning.room!.getRoomCleaned()
-//				}
-//				
-//				// 5
-//				// Save Event in Calendar
-//				
-//				do {
-//					try store.save(event, span: EKSpan.thisEvent)
-//					
-//				} catch {
-//					onCompletion(false)
-//				}
-//				onCompletion(true)
-//				
-//			}
-//		}
+    
+	func inser(planning: Planning, onCompletion: (Bool) -> Void) {
+        
+        guard let calendarIdentifier = ApplicationManager.sharedInstance.defaultCalendarIdentifier else {
+            // TODO No selected calendar
+            log.warning("There was no selected calendar")
+            return
+        }
+        
+        let eventStore = EKEventStore()
+        
+        guard let defaultCalendar = eventStore.calendar(withIdentifier: calendarIdentifier) else {
+            // TODO wrong calender
+            log.warning("Wrong calendar selected")
+            return
+        }
+        
+        let event = EKEvent(eventStore: eventStore)
+        event.calendar = defaultCalendar
+        
+        event.title = planning.actiTitle!
+        event.startDate = planning.startTime!
+        event.endDate = planning.endTime!
+        
+        if (planning.room != nil) {
+            event.location = planning.room!.getRoomCleaned()
+        }
+        
+        do {
+            try eventStore.save(event, span: EKSpan.thisEvent)
+            
+        } catch {
+            
+            // TODO complete error
+           
+        }
+        
+        // TODO complete OK
+        
 	}
 	
+    
+	/// Retrieve all calendars available for creating events
+	///
+	/// - Returns: calendars
 	func getAllCalendars() -> [EKCalendar] {
 		
 		let calendars = EKEventStore().calendars(for: EKEntityType.event)
-		//EKCalendar
-		
 		var arr = [EKCalendar]()
 		
 		for calendar in calendars {
-			// 2
 			if (calendar.allowsContentModifications == true) {
 				arr.append(calendar)
 			}
-			
 		}
+        
 		return arr
 	}
 	

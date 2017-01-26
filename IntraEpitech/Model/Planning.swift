@@ -11,28 +11,71 @@ import SwiftyJSON
 
 class Planning: BasicInformation {
 	
-    enum EventType {
+    /// Know the type of the associated calendar because they have different behaviours
+    ///
+    /// - all: Calendar accessed from everyone
+    /// - personal: Restricted calendar
+    enum CalendarType {
         case all, personal
     }
     
-    let type: EventType!
+    /// Know the type of the event. If it is an event where we should register or not
+    ///
+    /// - normal: Normal event with no particular registration
+    /// - slots: Slots registration
+    enum EventType {
+        case normal, slots
+    }
     
-	var titleModule: String?
-	var startTime: Date?
+    /// Type of the associated calendar
+    let calendarType: CalendarType!
+    
+    
+    /// Type of the event
+    let eventType: EventType!
+    
+	/// Title of the module event, nil if event is personal
+    var titleModule: String? = nil
+    
+	/// When the event starts
+	var startTime: Date!
+    
+	/// When the event ends
 	var endTime: Date?
-	var totalStudentsRegistered: Int?
-	var allowRegister: Bool?
-	var allowToken: Bool?
-	var eventRegisteredStatus: String?
-	var eventType: String?
-	var typeTitle: String?
-	var actiTitle: String?
-	var codeActi: String?
-    var title: String?
+	
+    /// Number of registered students 🚧
+    var totalStudentsRegistered: Int?
+	
+    /// Student can register to event
+    var allowRegister: Bool?
+    
+    /// Student can enter its token
+    var allowToken: Bool?
+    
+    /// Student status, if he is registered or not
+    var eventRegisteredStatus: String? = nil
+	
+    /// Type code of the event (used for the colorizaration)
+    var eventTypeCode: String?
+    
+    /// Title of the type (Workshop, etc...)
+    var typeTitle: String?
+	
+    /// 🚧
+    var actiTitle: String?
+	
+    /// 🚧
+    var codeActi: String?
+
+    /// Only there for personal events...
+    var title: String? = nil
 
 	var codeEvent: String?
 	var room: Room?
 	var moduleRegistered: Bool?
+    
+    
+    
 	var isRdv: Int?
 	var rdvGroupRegistered: String?
 	var rdvIndividuelRegistered: String?
@@ -43,14 +86,69 @@ class Planning: BasicInformation {
     var calendarID: Int?
     var eventID: Int?
     
-	override init(dict: JSON) {
+    /*
+    ** Get-only properties
+    */
+    
+    var isRegistered: Bool {
+        return self.eventRegisteredStatus == "registered"
+    }
+    
+    var isNotRegistered: Bool {
+        return self.eventRegisteredStatus == "false"
+    }
+    
+    var wasPresent: Bool {
+        return self.eventRegisteredStatus == "present"
+    }
+    
+    var wasAbsent: Bool {
+        return self.eventRegisteredStatus == "failed" || self.eventRegisteredStatus == "absent"
+    }
+    
+    var canEnterToken: Bool {
+        return self.allowToken == true && self.eventRegisteredStatus == "registered"
+    }
+    
+    var canRegister: Bool {
         
+        if self.calendarType == .personal, let startAt = self.startTime, startAt > Date(), self.isNotRegistered == true {
+            return true
+        }
+        
+        if self.moduleRegistered == true && self.eventRegisteredStatus == "false" && self.allowRegister! == true && room != nil && room?.seats != nil {
+            return true
+        }
+        return false
+    }
+    
+    var canUnregister: Bool {
+        
+        if self.calendarType == .personal, let startAt = self.startTime, startAt > Date(), self.eventRegisteredStatus == "registered" {
+            return true
+        }
+        
+        if self.moduleRegistered == true && self.eventRegisteredStatus == "registered" && self.allowRegister! == true {
+            return true
+        }
+        return false
+    }
+    
+	override init(dict: JSON) {
+
+        // Event from a personal calendar
         if let calendarType = dict["calendar_type"].string, calendarType == "perso" {
-            self.type = .personal
+            self.calendarType = .personal
             self.calendarID = dict["id_calendar"].intValue
             self.eventID = dict["id"].intValue
         } else {
-            self.type = .all
+            self.calendarType = .all
+        }
+        
+        if dict["type_code"].string == "rdv" {
+            self.eventType = .slots
+        } else {
+            self.eventType = .normal
         }
         
         super.init(dict: dict)
@@ -58,22 +156,27 @@ class Planning: BasicInformation {
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
-        title = dict["title"].stringValue
+        self.title = dict["title"].stringValue
+        
+        
 		titleModule = dict["titlemodule"].stringValue
 		startTime = dateFormat.date(from: dict["start"].stringValue)
 		endTime = dateFormat.date(from: dict["end"].stringValue)
-		totalStudentsRegistered = dict["total_students_registered"].intValue
-		allowRegister = dict["allow_register"].boolValue
-		allowToken = dict["allow_token"].boolValue
-		eventRegisteredStatus = dict["event_registered"].stringValue
-		eventType = dict["type_code"].stringValue
+		
+        self.totalStudentsRegistered = dict["total_students_registered"].intValue
+		
+        self.allowRegister = dict["allow_register"].boolValue
+		self.allowToken = dict["allow_token"].boolValue
+
+		self.eventRegisteredStatus = dict["event_registered"].stringValue
+		self.eventTypeCode = dict["type_code"].string
 		typeTitle = dict["type_title"].stringValue
 		actiTitle = dict["acti_title"].stringValue
 		codeModule = dict["codemodule"].stringValue
 		codeActi = dict["codeacti"].stringValue
 		codeEvent = dict["codeevent"].stringValue
 		codeInstance = dict["codeinstance"].stringValue
-		room = Room(dict: dict["room"])
+		self.room = Room(dict: dict["room"])
 		moduleRegistered = dict["module_registered"].boolValue
 		isRdv = dict["is_rdv"].intValue
 		rdvGroupRegistered = dict["rdv_group_registered"].stringValue
@@ -82,73 +185,9 @@ class Planning: BasicInformation {
 		semester = dict["semester"].intValue
 	}
 	
-//	func getOnlyDay() -> String {
-//		let array = startTime?.components(separatedBy: " ")
-//		return array![0]
-//	}
-//	
-	func canEnterToken() -> Bool {
-		if (self.allowToken == true && self.eventRegisteredStatus == "registered") {
-			return true
-		}
-		return false
-	}
 	
-	func canRegister() -> Bool {
-		
-        if self.type == .personal, let startAt = self.startTime, startAt > Date(), self.eventRegisteredStatus != "registered" {
-            return true
-        }
-        
-		if self.moduleRegistered == true && self.eventRegisteredStatus == "false" && self.allowRegister! == true && room != nil && room?.seats != nil {
-			return true
-		}
-		return false
-	}
 	
-	func canUnregister() -> Bool {
-		
-        if self.type == .personal, let startAt = self.startTime, startAt > Date(), self.eventRegisteredStatus == "registered" {
-            return true
-        }
-        
-		if self.moduleRegistered == true && self.eventRegisteredStatus == "registered" && self.allowRegister! == true {
-			return true
-		}
-		return false
-	}
-	
-	func isRegistered() -> Bool {
-		
-		if self.eventRegisteredStatus == "registered" {
-			return true
-		}
-		return false
-	}
-	
-	func isUnregistered() -> Bool {
-		
-		if self.eventRegisteredStatus == "false" {
-			return true
-		}
-		return false
-	}
-	
-	func wasPresent() -> Bool {
-		
-		if self.eventRegisteredStatus == "present" {
-			return true
-		}
-		return false
-	}
-	
-	func wasAbsent() -> Bool {
-		
-		if self.eventRegisteredStatus == "failed" || self.eventRegisteredStatus == "absent" {
-			return true
-		}
-		return false
-	}
+
 	
 //	func getEventTime() -> (start: String, end: String) {
 //		
@@ -186,8 +225,13 @@ class Planning: BasicInformation {
 //        return parameters
 //    }
 //    
+    
+    
+    /// Get URL data, needed for all planning API calls
+    ///
+    /// - Returns: data
     func requestURLData() -> String {
-        if self.type == .all {
+        if self.calendarType == .all {
             return String(format: "?year=%@&module=%@&instance=%@&activity=%@&event=%@", self.scolaryear!, self.codeModule!, self.codeInstance!, self.codeActi!, self.codeEvent!)
         } else {
             return String(format: "?calendar=%i&event=%i", self.calendarID!, self.eventID!)
@@ -197,7 +241,7 @@ class Planning: BasicInformation {
 
 func == (left: Planning, right: Planning) -> Bool {
     
-    if left.type == right.type && left.calendarID == right.calendarID && left.eventID == right.eventID && left.codeEvent == right.codeEvent && left.codeActi == right.codeActi && left.codeInstance == right.codeInstance {
+    if left.calendarType == right.calendarType && left.calendarID == right.calendarID && left.eventID == right.eventID && left.codeEvent == right.codeEvent && left.codeActi == right.codeActi && left.codeInstance == right.codeInstance {
         return true
     }
     return false

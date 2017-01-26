@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class Appointment {
+class Slot {
 	
 	var date: Date?
 	var master: RegisteredStudent?

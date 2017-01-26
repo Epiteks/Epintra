@@ -10,63 +10,106 @@ import UIKit
 import SwiftyJSON
 
 class AppointmentEvent: BasicInformation {
-	
-	var codeActi: String?
-	var registeredByBlock: Bool?
-	var slots: [Appointment]?
-	var groupId: String?
-	var registered: Bool?
-	var studentRegistered: String?
-	
-	var eventName: String?
-	var eventStart: Date?
-	var eventEnd: Date?
-	
-	override init(dict: JSON) {
+    
+    /// Code of the activity
+    var codeActi: String!
+    
+    /// Structure to organize slots easily
+    struct SlotsGroup {
+        var date: Date!
+        var slots: [Slot]!
+    }
+    
+    /// Available slots.
+    /// Array of tuple to keep date track
+    var slots: [SlotsGroup]? = nil
+    
+    /// Current group id if slots are for groups projects
+    var groupId: Int?
+    
+    /// Don't remember... 🚧
+    // var registeredByBlock: Bool?
+    
+    /// Is group currently registered
+    var registered: Bool!
+    
+    /// Don't remember... 🚧
+    // var studentRegistered: String?
+    
+    /// Name of the event
+    var eventName: String?
+    
+    /// When the event starts
+    var eventStart: Date!
+    
+    /// When the event ends
+    var eventEnd: Date!
+    
+    init(dict: JSON, eventStart: Date, eventEnd: Date) {
+        
+        self.eventStart = eventStart
+        self.eventEnd = eventEnd
+        
         super.init(dict: dict)
-		codeActi = dict["codeacti"].stringValue
-		registeredByBlock = dict["registered_by_block"].boolValue
-		groupId = dict["group"]["id"].stringValue
-		registered = dict["group"]["inscrit"].boolValue
-		studentRegistered = dict["student_registered"].stringValue
-	}
-	
-	func addAppointments(_ dict: JSON) {
-		self.slots = [Appointment]()
-		
-		var slots = dict["slots"].arrayValue
-		
-		if (slots.count == 1) {
-			slots = dict["slots"]["slots"].arrayValue
-		}
-		
-		for eventSlots in slots {
-			
-			let slots = eventSlots["slots"]
-			
-			for tmpA in slots.arrayValue {
-				let tmp = Appointment(dict: tmpA)
-				tmp.date?.addingTimeInterval(TimeInterval(-1))
-				if ((tmp.date as NSDate?)?.earlierDate(eventStart!) == eventStart && (tmp.date as NSDate?)?.laterDate(eventEnd!) == eventEnd) {
-					self.slots!.append(tmp)
-				}
-			}
-		}
-	}
-	
-	func canRegister() -> Bool {
-		if (studentRegistered! == "") {
-			return false
-		}
-		return true
-	}
+        
+        self.codeActi = dict["codeacti"].stringValue
+        //self.registeredByBlock = dict["registered_by_block"].boolValue
+        self.groupId = dict["group"]["id"].int
+        self.registered = dict["group"]["inscrit"].boolValue
+        //self.studentRegistered = dict["student_registered"].string
+        self.eventName = dict["title"].string
+        self.addAppointments(dict)
+    }
+    
+    private func addAppointments(_ dict: JSON) {
+        
+        self.slots = [SlotsGroup]()
+        
+        // Get all slots for an activity, does not matter of the day
+        let slots = dict["slots"].arrayValue
+        
+        // Iterate through all activities blocks
+        for activityBlock in slots {
+            
+            let slots = activityBlock["slots"]
+            
+            // Iterate through all slots for a given bvlock
+            for jsonSlot in slots.arrayValue {
+                
+                let tmp = Slot(dict: jsonSlot)
+                
+                if let tmpDate = tmp.date {
+                    // Check if slot is in our event
+                    if self.eventStart <= tmpDate && tmpDate < self.eventEnd {
+                        self.addToSlots(slot: tmp)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func addToSlots(slot: Slot) {
+        
+        if let slotDate = slot.date {
+        
+            let index = self.slots?.index(where: { $0.date == slotDate})
+            
+            if index == nil {
+                self.slots?.append(SlotsGroup(date: slotDate, slots: [slot]))
+            } else {
+                self.slots?[index!].slots.append(slot)
+            }
+        }
+        
+    }
+    
 }
 
-	func == (left: AppointmentEvent, right: AppointmentEvent) -> Bool {
-	
-	if (left.registered == right.registered) {
-		return true
-	}
-	
-	return false
+func == (left: AppointmentEvent, right: AppointmentEvent) -> Bool {
+    
+    if (left.registered == right.registered) {
+        return true
+    }
+    
+    return false
 }

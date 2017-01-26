@@ -119,13 +119,18 @@
 		79AFFA541E26657100FDEDF3 /* SwiftyBeaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AFFA531E26657100FDEDF3 /* SwiftyBeaver.framework */; };
 		79C8A7481E1FBA2A00F8F9C3 /* LoginTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C8A7461E1FBA2A00F8F9C3 /* LoginTableViewCell.swift */; };
 		79C8A7491E1FBA2A00F8F9C3 /* LoginTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79C8A7471E1FBA2A00F8F9C3 /* LoginTableViewCell.xib */; };
+		79CC0C761E3A750C00CBFF66 /* SlotRegisterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CC0C741E3A750C00CBFF66 /* SlotRegisterTableViewCell.swift */; };
+		79CC0C771E3A750C00CBFF66 /* SlotRegisterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79CC0C751E3A750C00CBFF66 /* SlotRegisterTableViewCell.xib */; };
+		79CCF7D51E3A35BD00D71A20 /* AppointmentDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CCF7D41E3A35BD00D71A20 /* AppointmentDetailsViewController.swift */; };
+		79CCF7D91E3A4D3C00D71A20 /* SlotTakenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CCF7D71E3A4D3C00D71A20 /* SlotTakenTableViewCell.swift */; };
+		79CCF7DA1E3A4D3C00D71A20 /* SlotTakenTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79CCF7D81E3A4D3C00D71A20 /* SlotTakenTableViewCell.xib */; };
 		79DE549E1C5BAF3300E2ADDE /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DE549D1C5BAF3300E2ADDE /* CalendarManager.swift */; };
 		79DE54A31C5BAF5300E2ADDE /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79DE549F1C5BAF5300E2ADDE /* Alamofire.framework */; };
 		79DE54A41C5BAF5300E2ADDE /* FSCalendar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79DE54A01C5BAF5300E2ADDE /* FSCalendar.framework */; };
 		79DE54A61C5BAF5300E2ADDE /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79DE54A21C5BAF5300E2ADDE /* SwiftyJSON.framework */; };
 		79DE54A81C5BAF6600E2ADDE /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79DE54A71C5BAF6600E2ADDE /* EventKit.framework */; };
 		79DF37081C4D7B3B00EF69A3 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79DF37071C4D7B3B00EF69A3 /* MainStoryboard.storyboard */; };
-		79E4C5C91C6E35AC0003DA56 /* Appointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E4C5C81C6E35AC0003DA56 /* Appointment.swift */; };
+		79E4C5C91C6E35AC0003DA56 /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E4C5C81C6E35AC0003DA56 /* Slot.swift */; };
 		79EA5CB61D5E49E800DA7C30 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EA5CB51D5E49E800DA7C30 /* Requests.swift */; };
 		79EA5CBC1D5E64C700DA7C30 /* MainViewStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79EA5CBB1D5E64C700DA7C30 /* MainViewStoryboard.storyboard */; };
 		79EA5CC01D5E696000DA7C30 /* SettingsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79EA5CBF1D5E696000DA7C30 /* SettingsStoryboard.storyboard */; };
@@ -290,6 +295,11 @@
 		79AFFA531E26657100FDEDF3 /* SwiftyBeaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyBeaver.framework; path = "Pods/../build/Debug-iphoneos/SwiftyBeaver/SwiftyBeaver.framework"; sourceTree = "<group>"; };
 		79C8A7461E1FBA2A00F8F9C3 /* LoginTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginTableViewCell.swift; path = LoginTableViewCell/LoginTableViewCell.swift; sourceTree = "<group>"; };
 		79C8A7471E1FBA2A00F8F9C3 /* LoginTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginTableViewCell.xib; path = LoginTableViewCell/LoginTableViewCell.xib; sourceTree = "<group>"; };
+		79CC0C741E3A750C00CBFF66 /* SlotRegisterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SlotRegisterTableViewCell.swift; path = SlotRegisterTableViewCell/SlotRegisterTableViewCell.swift; sourceTree = "<group>"; };
+		79CC0C751E3A750C00CBFF66 /* SlotRegisterTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SlotRegisterTableViewCell.xib; path = SlotRegisterTableViewCell/SlotRegisterTableViewCell.xib; sourceTree = "<group>"; };
+		79CCF7D41E3A35BD00D71A20 /* AppointmentDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppointmentDetailsViewController.swift; sourceTree = "<group>"; };
+		79CCF7D71E3A4D3C00D71A20 /* SlotTakenTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SlotTakenTableViewCell.swift; path = SlotTakenTableViewCell/SlotTakenTableViewCell.swift; sourceTree = "<group>"; };
+		79CCF7D81E3A4D3C00D71A20 /* SlotTakenTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SlotTakenTableViewCell.xib; path = SlotTakenTableViewCell/SlotTakenTableViewCell.xib; sourceTree = "<group>"; };
 		79DE549D1C5BAF3300E2ADDE /* CalendarManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CalendarManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		79DE549F1C5BAF5300E2ADDE /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "Pods/../build/Debug-iphoneos/Alamofire.framework"; sourceTree = "<group>"; };
 		79DE54A01C5BAF5300E2ADDE /* FSCalendar.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FSCalendar.framework; path = "Pods/../build/Debug-iphoneos/FSCalendar.framework"; sourceTree = "<group>"; };
@@ -297,7 +307,7 @@
 		79DE54A21C5BAF5300E2ADDE /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "Pods/../build/Debug-iphoneos/SwiftyJSON.framework"; sourceTree = "<group>"; };
 		79DE54A71C5BAF6600E2ADDE /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		79DF37071C4D7B3B00EF69A3 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
-		79E4C5C81C6E35AC0003DA56 /* Appointment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Appointment.swift; path = Model/Appointment.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		79E4C5C81C6E35AC0003DA56 /* Slot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Slot.swift; path = Model/Slot.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		79EA5CB51D5E49E800DA7C30 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Requests.swift; path = Network/Requests.swift; sourceTree = "<group>"; };
 		79EA5CBB1D5E64C700DA7C30 /* MainViewStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = MainViewStoryboard.storyboard; path = Storyboards/MainViewStoryboard.storyboard; sourceTree = "<group>"; };
 		79EA5CBF1D5E696000DA7C30 /* SettingsStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SettingsStoryboard.storyboard; path = Storyboards/SettingsStoryboard.storyboard; sourceTree = "<group>"; };
@@ -444,6 +454,7 @@
 				7948FED21E19CAE2001C5F3A /* StudentRegisteredViewController.swift */,
 				79AFFA441E23E4A800FDEDF3 /* PlanningViewController.swift */,
 				79AFFA4F1E25B1FF00FDEDF3 /* PlanningFilterViewController.swift */,
+				79CCF7D41E3A35BD00D71A20 /* AppointmentDetailsViewController.swift */,
 			);
 			path = Planning;
 			sourceTree = "<group>";
@@ -549,6 +560,8 @@
 		7948FF071E19CC02001C5F3A /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				79CC0C731E3A74EE00CBFF66 /* SlotRegisterTableViewCell */,
+				79CCF7D61E3A4D0100D71A20 /* SlotTakenTableViewCell */,
 				798C9F341E2E2E4500675296 /* NotificationTableViewCell */,
 				798C9F2E1E2E27C400675296 /* ProjectDetailsUserTableViewCell */,
 				79AFFA481E24FCEE00FDEDF3 /* EventTableViewCell */,
@@ -822,6 +835,24 @@
 			name = LoginTableViewCell;
 			sourceTree = "<group>";
 		};
+		79CC0C731E3A74EE00CBFF66 /* SlotRegisterTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				79CC0C741E3A750C00CBFF66 /* SlotRegisterTableViewCell.swift */,
+				79CC0C751E3A750C00CBFF66 /* SlotRegisterTableViewCell.xib */,
+			);
+			name = SlotRegisterTableViewCell;
+			sourceTree = "<group>";
+		};
+		79CCF7D61E3A4D0100D71A20 /* SlotTakenTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				79CCF7D71E3A4D3C00D71A20 /* SlotTakenTableViewCell.swift */,
+				79CCF7D81E3A4D3C00D71A20 /* SlotTakenTableViewCell.xib */,
+			);
+			name = SlotTakenTableViewCell;
+			sourceTree = "<group>";
+		};
 		79EA5CB41D5E49AE00DA7C30 /* New */ = {
 			isa = PBXGroup;
 			children = (
@@ -868,7 +899,7 @@
 				79622E991C5D56C000FBA456 /* Mark.swift */,
 				79284F5C1C5F3FC500349628 /* Flags.swift */,
 				795D81C41C623A1000187E43 /* RegisteredStudent.swift */,
-				79E4C5C81C6E35AC0003DA56 /* Appointment.swift */,
+				79E4C5C81C6E35AC0003DA56 /* Slot.swift */,
 				790684291C6FC1E10067B26F /* AppointmentEvent.swift */,
 				797DC7F01C7A0AE700ED095E /* StudentInfo.swift */,
 				7907507A1E17B93A00B07F7E /* EpirankInformations.swift */,
@@ -1021,9 +1052,11 @@
 				7948FF2E1E19CC02001C5F3A /* FlagTableViewCell.xib in Resources */,
 				798C9F381E2E2E5D00675296 /* NotificationTableViewCell.xib in Resources */,
 				7948FF2A1E19CC02001C5F3A /* ProfileView.xib in Resources */,
+				79CCF7DA1E3A4D3C00D71A20 /* SlotTakenTableViewCell.xib in Resources */,
 				7948FF341E19CC02001C5F3A /* ModuleTableViewCell.xib in Resources */,
 				798C9F321E2E27F000675296 /* ProjectDetailsUserTableViewCell.xib in Resources */,
 				7948FF381E19CC02001C5F3A /* StudentGradeTableViewCell.xib in Resources */,
+				79CC0C771E3A750C00CBFF66 /* SlotRegisterTableViewCell.xib in Resources */,
 				7948FF3A1E19CC02001C5F3A /* StudentTableViewCell.xib in Resources */,
 				7948FF261E19CC02001C5F3A /* LoadingView.xib in Resources */,
 				79EA5CC61D5E78BF00DA7C30 /* PlanningStoryboard.storyboard in Resources */,
@@ -1132,7 +1165,9 @@
 				795F1EA21C56019E00B8C347 /* History.swift in Sources */,
 				7907507B1E17B93A00B07F7E /* EpirankInformations.swift in Sources */,
 				795CC3251C5CB2A7007AFE87 /* Project.swift in Sources */,
+				79CCF7D51E3A35BD00D71A20 /* AppointmentDetailsViewController.swift in Sources */,
 				79779AA61C592355008803C5 /* String+NSDate.swift in Sources */,
+				79CC0C761E3A750C00CBFF66 /* SlotRegisterTableViewCell.swift in Sources */,
 				7948FEDE1E19CAF1001C5F3A /* RankViewController.swift in Sources */,
 				79306D631C4AF79400708BED /* ModelName.swift in Sources */,
 				79AFFA4D1E24FD2A00FDEDF3 /* EventTableViewCell.swift in Sources */,
@@ -1142,7 +1177,7 @@
 				79F8ADEB1C52AA9C00F4FDD4 /* UserApiCalls.swift in Sources */,
 				797DB28C1E365D3900F1BFBD /* BasicInformation.swift in Sources */,
 				796B2EF91C4ADEB800327E22 /* UIUtils.swift in Sources */,
-				79E4C5C91C6E35AC0003DA56 /* Appointment.swift in Sources */,
+				79E4C5C91C6E35AC0003DA56 /* Slot.swift in Sources */,
 				7948FF351E19CC02001C5F3A /* ProjectTableViewCell.swift in Sources */,
 				7948FEEF1E19CB47001C5F3A /* ModulesViewController.swift in Sources */,
 				79F8ADEE1C52AC9100F4FDD4 /* User.swift in Sources */,
@@ -1157,6 +1192,7 @@
 				7948FF2D1E19CC02001C5F3A /* FlagTableViewCell.swift in Sources */,
 				7948FEDD1E19CAF1001C5F3A /* ProfileViewController.swift in Sources */,
 				7948FEEE1E19CB47001C5F3A /* ModuleRegisteredStudentsViewController.swift in Sources */,
+				79CCF7D91E3A4D3C00D71A20 /* SlotTakenTableViewCell.swift in Sources */,
 				79152D891C67A43D00513E0F /* ContactsHelper.swift in Sources */,
 				79779AA41C591A0D008803C5 /* PlanningApiCalls.swift in Sources */,
 				7948FEE91E19CB3B001C5F3A /* MarksViewController.swift in Sources */,

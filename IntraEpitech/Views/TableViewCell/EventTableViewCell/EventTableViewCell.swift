@@ -41,7 +41,7 @@ class EventTableViewCell: UITableViewCell {
     
     func setView(with data: Planning) {
         
-        if let eventType = data.eventType, eventType.characters.count > 0 {
+        if let eventType = data.eventTypeCode, eventType.characters.count > 0 {
             self.activityColor = UIUtils.activitiesColors[eventType]
         } else {
             self.activityColor = .red
@@ -60,32 +60,32 @@ class EventTableViewCell: UITableViewCell {
         
         self.accessoryType = .none
         
-        if (data.eventType == "rdv") {
+        if (data.eventTypeCode == "rdv") {
             statusImageView.image = nil
             statusImageView.tintColor = UIUtils.planningGrayColor
             self.accessoryType = .disclosureIndicator
             return
         }
         
-        if (data.canEnterToken()) {
+        if (data.canEnterToken) {
             statusImageView.image = #imageLiteral(resourceName: "Token").withRenderingMode(UIImageRenderingMode.alwaysTemplate)
             statusImageView.tintColor = UIUtils.planningBlueColor
-        } else if (data.canRegister()) {
+        } else if (data.canRegister) {
             statusImageView.image = #imageLiteral(resourceName: "Register").withRenderingMode(UIImageRenderingMode.alwaysTemplate)
             statusImageView.tintColor = UIUtils.planningGreenColor
-        } else if (data.canUnregister()) {
+        } else if (data.canUnregister) {
             statusImageView.image = #imageLiteral(resourceName: "Unregister").withRenderingMode(UIImageRenderingMode.alwaysTemplate)
             statusImageView.tintColor = UIUtils.planningRedColor
-        } else if (data.isRegistered() && !data.canUnregister()) {
+        } else if (data.isRegistered && !data.canUnregister) {
             statusImageView.image = #imageLiteral(resourceName: "Unregister").withRenderingMode(UIImageRenderingMode.alwaysTemplate)
             statusImageView.tintColor = UIUtils.planningGrayColor
-        } else if (data.isUnregistered() && !data.canRegister()) {
+        } else if (data.isNotRegistered && !data.canRegister) {
             statusImageView.image = #imageLiteral(resourceName: "Register").withRenderingMode(UIImageRenderingMode.alwaysTemplate)
             statusImageView.tintColor = UIUtils.planningGrayColor
-        } else if (data.wasPresent()) {
+        } else if (data.wasPresent) {
             statusImageView.image = #imageLiteral(resourceName: "Done").withRenderingMode(UIImageRenderingMode.alwaysTemplate)
             statusImageView.tintColor = UIUtils.planningGreenColor
-        } else if (data.wasAbsent()) {
+        } else if (data.wasAbsent) {
             statusImageView.image = #imageLiteral(resourceName: "Delete").withRenderingMode(UIImageRenderingMode.alwaysTemplate)
             statusImageView.tintColor = UIUtils.planningRedColor
         } else {

@@ -63,7 +63,7 @@ class PlanningRequests: RequestManager {
         let urlParameters = event.requestURLData()
         var endpointID = ""
         
-        if event.type == .all {
+        if event.calendarType == .all {
             endpointID = "subscribeEvent"
         } else {
             endpointID = "subscribePersonalEvent"
@@ -88,7 +88,7 @@ class PlanningRequests: RequestManager {
         let urlParameters = event.requestURLData()
         var endpointID = ""
         
-        if event.type == .all {
+        if event.calendarType == .all {
             endpointID = "unsubscribeEvent"
         } else {
             endpointID = "unsubscribePersonalEvent"
@@ -106,6 +106,25 @@ class PlanningRequests: RequestManager {
                 log.error("Unregister event error : \(err)")
             }
         }
+    }
+    
+    func getSlots(forEvent event: Planning, completion: @escaping (Result<AppointmentEvent>) -> Void) {
+    
+        let urlParameters = event.requestURLData()
+    
+        super.call("eventDetails", urlParams: urlParameters) { response in
+            switch response {
+            case .success(let responseJSON):
+                log.info("Event slots : \(responseJSON)")
+                let res = AppointmentEvent(dict: responseJSON, eventStart: event.startTime!, eventEnd: event.endTime!)
+                completion(Result.success(res))
+                break
+            case .failure(let err):
+                completion(Result.failure(type: err.type, message: err.message))
+                log.error("Getting event slots error : \(err)")
+            }
+        }
+
     }
     
 }

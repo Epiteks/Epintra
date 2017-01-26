@@ -32,6 +32,12 @@ public extension Date {
 		return dateFormatter.string(from: self)
 	}
     
+    func toSlotTitleString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm"
+        return dateFormatter.string(from: self)
+    }
+    
     func endOfWeekDate() -> Date { // Adds 6 days
         
         let calendar = Calendar(identifier: .gregorian)

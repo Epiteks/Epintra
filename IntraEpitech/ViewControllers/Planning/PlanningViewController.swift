@@ -23,6 +23,9 @@ class PlanningViewController: LoadingDataViewController {
     
     var planningFilter = PlanningFilterViewController.PlanningFilter()
     
+    
+    var appointmentDetailsData: AppointmentEvent? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,6 +44,12 @@ class PlanningViewController: LoadingDataViewController {
             if let nav = segue.destination as? UINavigationController, let vc = nav.viewControllers.first as? PlanningFilterViewController {
                 vc.delegate = self
                 vc.planningFilter = self.planningFilter
+            }
+        } else if segue.identifier == "appointmentDetailsSegue" {
+            if let vc = segue.destination as? AppointmentDetailsViewController {
+                if let data = self.appointmentDetailsData {
+                    vc.appointment = data
+                }
             }
         }
     }
@@ -183,10 +192,10 @@ extension PlanningViewController: UITableViewDataSource {
     func statusImageSelected(_ sender: UIGestureRecognizer) {
     
             if let statusImageView = sender.view as? UIImageView, let data = self.currentDayEvents?[statusImageView.tag] {
-                if data.canEnterToken() {
+                if data.canEnterToken {
                     // Enter Token Alert View
                     self.enterTokenAlertView(planningEvent: data)
-                } else if data.canRegister() {
+                } else if data.canRegister {
                     // Register student
                     self.addActivityIndicator()
                     planningRequests.register(toEvent: data, completion: { result in
@@ -194,7 +203,6 @@ extension PlanningViewController: UITableViewDataSource {
                         self.removeActivityIndicator()
                         switch result {
                         case .success(_):
-                            // TODO update UI
                             if let eventIndex = self.currentDayEvents?.index(where: { $0 == data }) {
                                     self.eventsTableView.reloadRows(at: [IndexPath(row: eventIndex, section: 0)], with: .automatic)
                                 }
@@ -207,14 +215,13 @@ extension PlanningViewController: UITableViewDataSource {
                         }
                     })
                     
-                } else if data.canUnregister() {
+                } else if data.canUnregister {
                     // Unregister Student
                     self.addActivityIndicator()
                     planningRequests.unregister(fromEvent: data, completion: { result in
                         self.removeActivityIndicator()
                         switch result {
                         case .success(_):
-                            // TODO update UI
                             if let eventIndex = self.currentDayEvents?.index(where: { $0 == data }) {
                                 self.eventsTableView.reloadRows(at: [IndexPath(row: eventIndex, section: 0)], with: .automatic)
                             }
@@ -252,7 +259,6 @@ extension PlanningViewController: UITableViewDataSource {
                     self.removeActivityIndicator()
                     switch result {
                     case .success(_):
-                        // TODO update UI
                         if let eventIndex = self.currentDayEvents?.index(where: { $0 == data }) {
                             self.eventsTableView.reloadRows(at: [IndexPath(row: eventIndex, section: 0)], with: .automatic)
                         }
@@ -273,8 +279,21 @@ extension PlanningViewController: UITableViewDataSource {
 extension PlanningViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if let data = self.currentDayEvents?[indexPath.row] {
+            planningRequests.getSlots(forEvent: data) { result in
+                switch result {
+                case .success(let appointment):
+                    self.appointmentDetailsData = appointment
+                    self.performSegue(withIdentifier: "appointmentDetailsSegue", sender: self)
+                case .failure(let err):
+                    print(err)
+                }
+            }
+        }
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
     
 }
 
