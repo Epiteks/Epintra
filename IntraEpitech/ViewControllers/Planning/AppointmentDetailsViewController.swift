@@ -65,10 +65,6 @@ extension AppointmentDetailsViewController: UITableViewDataSource {
                 return cell
             }
             
-            
-            
-            
-            
         }
         
         return UITableViewCell()

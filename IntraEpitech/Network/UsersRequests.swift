@@ -190,7 +190,7 @@ class UsersRequests: RequestManager {
                         
                         var epirankInformation = realmStudentInfo.epirankInformation(forPromo: promo)
                         
-                        if epirankInformation == nil || epirankInformation?.promotion == nil || epirankInformation?.updatedAt == nil{
+                        if epirankInformation == nil || epirankInformation?.promotion == nil || epirankInformation?.updatedAt == nil {
                             epirankInformation = EpirankInformation(promo: promo, date: Date(fromEpirank: updatedAtString))
                         }
                         try realmStudentInfo.save(students: students, updatedAt: epirankInformation!)

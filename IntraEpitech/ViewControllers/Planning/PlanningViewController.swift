@@ -23,7 +23,6 @@ class PlanningViewController: LoadingDataViewController {
     
     var planningFilter = PlanningFilterViewController.PlanningFilter()
     
-    
     var appointmentDetailsData: AppointmentEvent? = nil
     
     override func viewDidLoad() {
@@ -293,7 +292,6 @@ extension PlanningViewController: UITableViewDelegate {
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
     
 }
 

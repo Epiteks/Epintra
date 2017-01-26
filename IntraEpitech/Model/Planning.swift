@@ -30,7 +30,6 @@ class Planning: BasicInformation {
     /// Type of the associated calendar
     let calendarType: CalendarType!
     
-    
     /// Type of the event
     let eventType: EventType!
     
@@ -73,8 +72,6 @@ class Planning: BasicInformation {
 	var codeEvent: String?
 	var room: Room?
 	var moduleRegistered: Bool?
-    
-    
     
 	var isRdv: Int?
 	var rdvGroupRegistered: String?
@@ -158,7 +155,6 @@ class Planning: BasicInformation {
         
         self.title = dict["title"].stringValue
         
-        
 		titleModule = dict["titlemodule"].stringValue
 		startTime = dateFormat.date(from: dict["start"].stringValue)
 		endTime = dateFormat.date(from: dict["end"].stringValue)
@@ -184,10 +180,6 @@ class Planning: BasicInformation {
 		past = dict["past"].boolValue
 		semester = dict["semester"].intValue
 	}
-	
-	
-	
-
 	
 //	func getEventTime() -> (start: String, end: String) {
 //		
@@ -225,7 +217,6 @@ class Planning: BasicInformation {
 //        return parameters
 //    }
 //    
-    
     
     /// Get URL data, needed for all planning API calls
     ///

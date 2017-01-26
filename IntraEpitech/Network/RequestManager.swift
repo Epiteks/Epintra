@@ -49,8 +49,7 @@ class RequestManager {
                 } else {
                     if let val = res.result.value {
                         let responseJSON = JSON(val)
-                        if let errorDictionary = responseJSON["error"].dictionary, let errorMessage = errorDictionary["message"]?.string
-                        {
+                        if let errorDictionary = responseJSON["error"].dictionary, let errorMessage = errorDictionary["message"]?.string {
                             completion(Result.failure(type: AppError.apiError, message: errorMessage))
                             
                         } else if let errorMessage = responseJSON["error"].string {

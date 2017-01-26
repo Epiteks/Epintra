@@ -14,7 +14,6 @@ class SlotTakenTableViewCell: UITableViewCell {
     @IBOutlet weak var userEmail: UILabel!
     @IBOutlet weak var actionImageView: UIImageView!
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

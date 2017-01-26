@@ -11,7 +11,6 @@ import EventKit
 
 class CalendarManager {
     
-    
 	/// Check if the application has the rights to access the calendar.
     /// If the user did not gave them, prompts the request alert.
 	///
@@ -38,10 +37,8 @@ class CalendarManager {
             onCompletion(Result.failure(type: AppError.unauthorizedCalendar, message: "CalendarAccessRestricted"))
 		}
 	}
-	
     
 	func createEvent(_ planning: Planning, onCompletion:  @escaping (Bool, String) -> Void) {
-        
         
 		// 1
 //		let eventStore = EKEventStore()
@@ -81,7 +78,6 @@ class CalendarManager {
 //			print("Case Default")
 //		}
 	}
-	
     
 	func inser(planning: Planning, onCompletion: (Bool) -> Void) {
         
@@ -122,7 +118,6 @@ class CalendarManager {
         // TODO complete OK
         
 	}
-	
     
 	/// Retrieve all calendars available for creating events
 	///
