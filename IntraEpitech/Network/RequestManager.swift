@@ -31,7 +31,9 @@ class RequestManager {
             newURL += urlParams!
         }
         
-        log.info("------\nRequest \(requestID) with parameters: \n\t\(params)\n\tWith URL \(newURL)\n------")
+        if requestID != "authentication" {
+            log.info("------\nRequest \(requestID) with parameters: \n\t\(params)\n\tWith URL \(newURL)\n------")
+        }
         
         Alamofire.request(newURL, method: (req?.method!)!, parameters: params, encoding: JSONEncoding.default, headers: headers)
             .responseJSON { res in

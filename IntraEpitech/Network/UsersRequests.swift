@@ -169,7 +169,7 @@ class UsersRequests: RequestManager {
         }
     }
     
-    func download(students promo: String, completion: @escaping (Result<Results<StudentInfo>?>) -> Void) {
+    func download(students promo: String, withFilter filter: FilterRankViewController.RankFilter? = nil, completion: @escaping (Result<Results<StudentInfo>?>) -> Void) {
         
         let params = String(format: "?promotion=%@&format=json", promo)
         
@@ -198,7 +198,7 @@ class UsersRequests: RequestManager {
                         DispatchQueue.main.async {
                             // Need new thread
                             realmStudentInfo = RealmStudentInfo()
-                            completion(Result.success(realmStudentInfo.students(byPromotion: promo)))
+                            completion(Result.success(realmStudentInfo.students(byPromotion: promo, andCities: filter?.cities)))
                         }
                         
                     } catch {

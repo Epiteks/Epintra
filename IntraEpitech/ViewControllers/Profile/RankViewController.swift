@@ -74,7 +74,7 @@ class RankViewController: LoadingDataViewController {
     func fetchNewData() {
         self.isFetching = true
         let promotion = String(format: "tek%i", self.rankFilter.promotion)
-        usersRequests.download(students: promotion) { result in
+        usersRequests.download(students: promotion, withFilter: self.rankFilter) { result in
             if self.isViewLoaded && self.view.window != nil {
                 switch result {
                 case .success(let students):

@@ -66,6 +66,6 @@ class Slot {
         if let groupID = event.groupID {
             return String(format: "?year=%@&module=%@&instance=%@&activity=%@&creneau=%i&team=%i", event.scolaryear!, event.codeModule!, event.codeInstance!, event.codeActi!, self.id, groupID)
         }
-        return String(format: "?year=%@&module=%@&instance=%@&activity=%@&creneau=%@&login=%@", event.scolaryear!, event.codeModule!, event.codeInstance!, event.codeActi!, ApplicationManager.sharedInstance.user?.login ?? "")
+        return String(format: "?year=%@&module=%@&instance=%@&activity=%@&creneau=%i&login=%@", event.scolaryear!, event.codeModule!, event.codeInstance!, event.codeActi!, self.id, ApplicationManager.sharedInstance.user?.login ?? "")
     }
 }

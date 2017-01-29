@@ -51,7 +51,7 @@ class AppointmentEvent: BasicInformation {
     var currentMembersEmail: [String]? = nil
     
     var canRegister: Bool {
-        return self.studentRegistered == false && self.canRegisterToInstance == true
+        return /*self.studentRegistered == false &&*/self.canRegisterToInstance == true
     }
     
     init(dict: JSON, eventStart: Date, eventEnd: Date, eventCodeAsked: String) {
