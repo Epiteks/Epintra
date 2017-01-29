@@ -12,16 +12,21 @@ import SwiftyJSON
 class RegisteredStudent {
 	
 	/// User login aka email
-	var login: String!
+	var login: String = ""
     
     /// User title (Firstname Lastname)
-    var title: String!
+    var title: String = ""
     
     /// User profile image url
-    var imageURL: String!
+    var imageURL: String = ""
 	
     /// Student grade (user for modules registered view controller)
-    var grade: String?
+    var grade: String? = nil
+    
+    init(withName name: String, andEmail email: String) {
+        self.login = email
+        self.title = name
+    }
     
     init(dict: JSON) {
 		self.login = dict["login"].stringValue

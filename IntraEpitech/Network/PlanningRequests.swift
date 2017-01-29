@@ -116,7 +116,8 @@ class PlanningRequests: RequestManager {
             switch response {
             case .success(let responseJSON):
                 log.info("Event slots : \(responseJSON)")
-                let res = AppointmentEvent(dict: responseJSON, eventStart: event.startTime!, eventEnd: event.endTime!)
+                
+                let res = AppointmentEvent(dict: responseJSON, eventStart: event.startTime!, eventEnd: event.endTime!, eventCodeAsked: event.codeEvent!)
                 completion(Result.success(res))
                 break
             case .failure(let err):
@@ -127,6 +128,42 @@ class PlanningRequests: RequestManager {
 
     }
     
+    func register(toSlot slot: Slot, forEvent event: AppointmentEvent, completion: @escaping (Result<Any?>) -> Void) {
+        
+        let urlParameters = slot.requestURLData(forEvent: event)
+        
+        super.call("subscribeSlot", urlParams: urlParameters) { response in
+            switch response {
+            case .success(let responseJSON):
+                log.info("Subscribed to slot  : \(responseJSON)")
+                slot.master = RegisteredStudent(withName: ApplicationManager.sharedInstance.user?.login ?? "", andEmail: event.currentMasterEmail ?? "")
+                completion(Result.success(nil))
+                break
+            case .failure(let err):
+                completion(Result.failure(type: err.type, message: err.message))
+                log.error("Subscribe slot error : \(err)")
+            }
+        }
+    }
+    
+    func unregister(fromSlot slot: Slot, forEvent event: AppointmentEvent, completion: @escaping (Result<Any?>) -> Void) {
+        
+        let urlParameters = slot.requestURLData(forEvent: event)
+        
+        super.call("unsubscribeSlot", urlParams: urlParameters) { response in
+            switch response {
+            case .success(let responseJSON):
+                log.info("Unsubscribed from slot  : \(responseJSON)")
+                slot.master = nil
+                slot.members = nil
+                completion(Result.success(nil))
+                break
+            case .failure(let err):
+                completion(Result.failure(type: err.type, message: err.message))
+                log.error("Unsubscribe from slot error : \(err)")
+            }
+        }
+    }
 }
 
 let planningRequests = PlanningRequests()

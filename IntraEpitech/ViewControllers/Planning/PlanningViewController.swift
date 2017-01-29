@@ -279,6 +279,8 @@ extension PlanningViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        tableView.isUserInteractionEnabled = false
+        self.addActivityIndicator()
         if let data = self.currentDayEvents?[indexPath.row] {
             planningRequests.getSlots(forEvent: data) { result in
                 switch result {
@@ -288,6 +290,8 @@ extension PlanningViewController: UITableViewDelegate {
                 case .failure(let err):
                     print(err)
                 }
+                self.removeActivityIndicator()
+                tableView.isUserInteractionEnabled = true
             }
         }
         tableView.deselectRow(at: indexPath, animated: true)

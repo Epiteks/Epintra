@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AppointmentDetailsViewController: UIViewController {
+class AppointmentDetailsViewController: LoadingDataViewController {
 
     @IBOutlet weak var dataTableView: UITableView!
 
@@ -24,7 +24,7 @@ class AppointmentDetailsViewController: UIViewController {
         
         self.dataTableView.register(UINib(nibName: "SlotTakenTableViewCell", bundle: nil), forCellReuseIdentifier: "slotTakenTableViewCell")
         self.dataTableView.register(UINib(nibName: "SlotRegisterTableViewCell", bundle: nil), forCellReuseIdentifier: "slotRegisterTableViewCell")
-        
+        self.dataTableView.register(UINib(nibName: "SlotRegisteredGroupTableViewCell", bundle: nil), forCellReuseIdentifier: "slotRegisteredGroupTableViewCell")
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,11 +56,16 @@ extension AppointmentDetailsViewController: UITableViewDataSource {
         
         if let data = self.appointment.slots?[indexPath.section].slots[indexPath.row] {
             
-            if data.master == nil {
+            if data.master == nil { // Slot free
                 let cell = tableView.dequeueReusableCell(withIdentifier: "slotRegisterTableViewCell") as! SlotRegisterTableViewCell
+                cell.setView(slot: data, appointment: self.appointment)
                 return cell
-            } else if data.master != nil {
+            } else if data.master != nil && data.members == nil { // Slot taken by one person only
                 let cell = tableView.dequeueReusableCell(withIdentifier: "slotTakenTableViewCell") as! SlotTakenTableViewCell
+                cell.setView(slot: data)
+                return cell
+            } else if data.master != nil && data.members != nil { // Slot taken by a group
+                let cell = tableView.dequeueReusableCell(withIdentifier: "slotRegisteredGroupTableViewCell") as! SlotRegisteredGroupTableViewCell
                 cell.setView(slot: data)
                 return cell
             }
@@ -75,7 +80,45 @@ extension AppointmentDetailsViewController: UITableViewDataSource {
 extension AppointmentDetailsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        if let data = self.appointment.slots?[indexPath.section].slots[indexPath.row] {
+            
+            if data.canRegister && self.appointment.canRegister {
+               self.subscribe(toSlot: data, forIndexPath: indexPath)
+            } else if data.canUnregister {
+              self.unsubscribe(fromSlot: data, forIndexPath: indexPath)
+            }
+        }
+    }
+    
+   private func subscribe(toSlot data: Slot, forIndexPath indexPath: IndexPath) {
+     
+        planningRequests.register(toSlot: data, forEvent: self.appointment, completion: { response in
+            switch response {
+            case .success(_):
+                self.dataTableView.reloadRows(at: [indexPath], with: .automatic)
+            case .failure(let err):
+                self.showAlert(withTitle: "error", andMessage: err.message)
+            }
+            
+        })
+        
+    }
+    
+    private func unsubscribe(fromSlot data: Slot, forIndexPath indexPath: IndexPath) {
+        
+        planningRequests.unregister(fromSlot: data, forEvent: self.appointment, completion: { response in
+            switch response {
+            case .success(_):
+                self.dataTableView.reloadRows(at: [indexPath], with: .automatic)
+            case .failure(let err):
+                self.showAlert(withTitle: "error", andMessage: err.message)
+            }
+            
+        })
+        
     }
     
 }

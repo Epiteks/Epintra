@@ -70,7 +70,7 @@ class LoadingDataViewController: UIViewController {
             self.view.addSubview(indicator)
         }
     }
-
+    
     /// Remove ActivityIndicator
     func removeActivityIndicator() {
         for sub in self.view.subviews {

@@ -69,6 +69,10 @@ class Planning: BasicInformation {
     /// Only there for personal events...
     var title: String? = nil
 
+    
+    /// Group id to register to slots with a group
+    var groupID: Int? = nil
+    
 	var codeEvent: String?
 	var room: Room?
 	var moduleRegistered: Bool?
@@ -179,6 +183,8 @@ class Planning: BasicInformation {
 		rdvIndividuelRegistered = dict["rdv_indiv_registered"].stringValue
 		past = dict["past"].boolValue
 		semester = dict["semester"].intValue
+        
+        
 	}
 	
 //	func getEventTime() -> (start: String, end: String) {

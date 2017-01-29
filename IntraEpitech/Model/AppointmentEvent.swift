@@ -25,7 +25,7 @@ class AppointmentEvent: BasicInformation {
     var slots: [SlotsGroup]? = nil
     
     /// Current group id if slots are for groups projects
-    var groupId: Int?
+    var groupID: Int?
     
     /// Don't remember... 🚧
     // var registeredByBlock: Bool?
@@ -33,8 +33,8 @@ class AppointmentEvent: BasicInformation {
     /// Is group currently registered
     var registered: Bool!
     
-    /// Don't remember... 🚧
-    // var studentRegistered: String?
+    /// Is student registered to another slot
+    var studentRegistered: Bool!
     
     /// Name of the event
     var eventName: String?
@@ -44,8 +44,17 @@ class AppointmentEvent: BasicInformation {
     
     /// When the event ends
     var eventEnd: Date!
+
+    var canRegisterToInstance: Bool!
     
-    init(dict: JSON, eventStart: Date, eventEnd: Date) {
+    var currentMasterEmail: String? = nil
+    var currentMembersEmail: [String]? = nil
+    
+    var canRegister: Bool {
+        return self.studentRegistered == false && self.canRegisterToInstance == true
+    }
+    
+    init(dict: JSON, eventStart: Date, eventEnd: Date, eventCodeAsked: String) {
         
         self.eventStart = eventStart
         self.eventEnd = eventEnd
@@ -54,14 +63,31 @@ class AppointmentEvent: BasicInformation {
         
         self.codeActi = dict["codeacti"].stringValue
         //self.registeredByBlock = dict["registered_by_block"].boolValue
-        self.groupId = dict["group"]["id"].int
-        self.registered = dict["group"]["inscrit"].boolValue
-        //self.studentRegistered = dict["student_registered"].string
+        
+        self.studentRegistered = dict["student_registered"].boolValue
+        
+        self.canRegisterToInstance = dict["student_registered"].boolValue
+        
         self.eventName = dict["title"].string
-        self.addAppointments(dict)
+        
+        let groupJSON = dict["group"]
+        self.groupID = groupJSON["id"].int
+        self.registered = groupJSON["inscrit"].boolValue
+        self.currentMasterEmail = groupJSON["master"].string
+        
+        if let members = groupJSON["members"].array {
+            
+            self.currentMembersEmail = [String]()
+            
+            for memberJSON in members {
+                self.currentMembersEmail?.append(memberJSON.stringValue)
+            }
+        }
+        
+        self.addAppointments(dict, eventCodeAsked: eventCodeAsked)
     }
     
-    private func addAppointments(_ dict: JSON) {
+    private func addAppointments(_ dict: JSON, eventCodeAsked: String) {
         
         self.slots = [SlotsGroup]()
         
@@ -72,6 +98,12 @@ class AppointmentEvent: BasicInformation {
         for activityBlock in slots {
             
             let slots = activityBlock["slots"]
+
+            let codeEvent = activityBlock["codeevent"].stringValue
+            
+            if codeEvent != eventCodeAsked {
+                continue
+            }
             
             // Iterate through all slots for a given bvlock
             for jsonSlot in slots.arrayValue {
@@ -80,6 +112,7 @@ class AppointmentEvent: BasicInformation {
                 
                 if let tmpDate = tmp.date {
                     // Check if slot is in our event
+
                     if self.eventStart <= tmpDate && tmpDate < self.eventEnd {
                         self.addToSlots(slot: tmp)
                     }
