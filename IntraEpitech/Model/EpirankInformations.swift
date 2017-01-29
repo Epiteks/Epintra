@@ -46,6 +46,6 @@ class EpirankInformation: Object {
         let guessedUpdatedDate = self.updatedAt.addingTimeInterval(60 * 60 * 24) // Add 24 hour to be sure new data was generated
         
         // Check if current date can have new data
-        return guessedUpdatedDate < Date() ? true : false
+        return guessedUpdatedDate < Date()
     }
 }
