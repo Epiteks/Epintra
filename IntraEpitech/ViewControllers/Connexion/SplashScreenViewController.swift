@@ -24,11 +24,6 @@ class SplashScreenViewController: UIViewController {
 		statusLabel.textColor = UIColor.white
 		statusLabel.text = ""
 		self.view.backgroundColor = UIUtils.backgroundColor
-
-		if (UserPreferences.checkIfDefaultCalendarExists()) {
-			ApplicationManager.sharedInstance.defaultCalendarIdentifier = UserPreferences.getDefaultCalendar()
-		}
-
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {

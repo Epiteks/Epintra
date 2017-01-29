@@ -15,8 +15,13 @@ class PlanningFilterViewController: UIViewController {
         var semesters: [Int] = [0]
         
         init() {
+            
             if let currentSemester = ApplicationManager.sharedInstance.user?.semester {
                 self.semesters.append(currentSemester)
+            }
+            
+            if let savedSemesters = UserPreferences.getSemesters() {
+                self.semesters = savedSemesters
             }
         }
     }
@@ -54,6 +59,7 @@ class PlanningFilterViewController: UIViewController {
 
     @IBAction func doneButtonTouched(_ sender: Any) {
         delegate?.updateFilter(filter: self.planningFilter)
+        UserPreferences.saveSemesters(self.planningFilter.semesters)        
         self.dismiss(animated: true, completion: nil)
     }
     

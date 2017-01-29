@@ -75,7 +75,7 @@ class PlanningViewController: LoadingDataViewController {
                 self.currentWeekEvents = events
                 self.setDataToDisplay()
             case .failure(let error):
-                // TODO Handle error
+                self.showAlert(withTitle: "error", andMessage: error.message)
                 break
             }
             self.removeActivityIndicator()
@@ -303,6 +303,8 @@ extension PlanningViewController: PlanningFilterDelegate {
     
     func updateFilter(filter: PlanningFilterViewController.PlanningFilter) {
         self.planningFilter = filter
+        self.setDataToDisplay()
+        self.eventsTableView.reloadData()
     }
     
 }

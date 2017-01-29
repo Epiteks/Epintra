@@ -21,7 +21,10 @@ class ApplicationManager {
 
     // Calendar identifier
     internal var defaultCalendarIdentifier: String? {
-        willSet {
+        get {
+           return UserPreferences.getDefaultCalendar()
+        }
+        set {
             // Save new selected calendar in preferences
             UserPreferences.saveDefaultCalendar(newValue)
         }
