@@ -279,19 +279,24 @@ extension PlanningViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        tableView.isUserInteractionEnabled = false
-        self.addActivityIndicator()
-        if let data = self.currentDayEvents?[indexPath.row] {
-            planningRequests.getSlots(forEvent: data) { result in
-                switch result {
-                case .success(let appointment):
-                    self.appointmentDetailsData = appointment
-                    self.performSegue(withIdentifier: "appointmentDetailsSegue", sender: self)
-                case .failure(let err):
-                    print(err)
+        let cell = tableView.cellForRow(at: indexPath)
+        
+        if cell?.accessoryType == .disclosureIndicator {
+            
+            tableView.isUserInteractionEnabled = false
+            self.addActivityIndicator()
+            if let data = self.currentDayEvents?[indexPath.row] {
+                planningRequests.getSlots(forEvent: data) { result in
+                    switch result {
+                    case .success(let appointment):
+                        self.appointmentDetailsData = appointment
+                        self.performSegue(withIdentifier: "appointmentDetailsSegue", sender: self)
+                    case .failure(let err):
+                        print(err)
+                    }
+                    self.removeActivityIndicator()
+                    tableView.isUserInteractionEnabled = true
                 }
-                self.removeActivityIndicator()
-                tableView.isUserInteractionEnabled = true
             }
         }
         tableView.deselectRow(at: indexPath, animated: true)

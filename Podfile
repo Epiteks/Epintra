@@ -11,4 +11,5 @@ target 'IntraEpitech' do
 	pod 'FSCalendar'
 	pod 'RealmSwift'
 	pod 'SwiftKeychainWrapper'
+	pod 'ADALiOS', '= 1.2.4'
 end
