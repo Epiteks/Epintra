@@ -96,6 +96,10 @@
 "Register" = "S'inscrire";
 "Registered" = "Inscrits";
 "Today" = "Aujourd'hui";
+"room" = "Salle";
+"appointment" = "Rendez-vous";
+"info" = "Infos";
+
 /**
  ** Project
  */

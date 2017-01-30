@@ -48,7 +48,12 @@ class EventTableViewCell: UITableViewCell {
         }
         
         self.activityTitleLabel.text = (data.actiTitle?.characters.count)! > 0 ? data.actiTitle : data.title
+    
         self.moduleTitleLabel.text = String(format: "%@ - %@", data.titleModule!, data.codeInstance!)
+    
+        if let room = data.room, let code = room.code {
+            self.moduleTitleLabel.text = "\(code) - \(self.moduleTitleLabel.text ?? "")"
+        }
         
         self.startTimeLabel.text = data.startTime?.toEventHour()
         self.endTimeLabel.text = data.endTime?.toEventHour()

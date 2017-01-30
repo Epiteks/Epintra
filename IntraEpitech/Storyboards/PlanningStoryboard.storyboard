@@ -224,7 +224,7 @@
             </objects>
             <point key="canvasLocation" x="2087" y="-316"/>
         </scene>
-        <!--Appointment Details View Controller-->
+        <!--Title-->
         <scene sceneID="dsg-D8-EQP">
             <objects>
                 <viewController id="Odf-j0-qH7" customClass="AppointmentDetailsViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
@@ -253,8 +253,16 @@
                             <constraint firstItem="6CC-kE-vSm" firstAttribute="leading" secondItem="gTM-FU-1zL" secondAttribute="leadingMargin" constant="-16" id="fdp-0W-PX5"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" id="ed4-o9-ZQc">
+                        <barButtonItem key="rightBarButtonItem" title="Item" style="plain" id="WFh-JN-ARe">
+                            <connections>
+                                <action selector="infoBarButtonItemTouched:" destination="Odf-j0-qH7" id="SY6-k9-JpV"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="dataTableView" destination="6CC-kE-vSm" id="yxG-9E-Oqb"/>
+                        <outlet property="showInformationBarButton" destination="WFh-JN-ARe" id="HB7-mD-VZI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UpK-6s-UFt" userLabel="First Responder" sceneMemberID="firstResponder"/>

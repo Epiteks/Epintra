@@ -45,6 +45,9 @@ class AppointmentEvent: BasicInformation {
     /// When the event ends
     var eventEnd: Date!
 
+    /// Title for block, used for some descriptions
+    var blockTitle: String?
+
     var canRegisterToInstance: Bool!
     
     var currentMasterEmail: String? = nil
@@ -104,6 +107,8 @@ class AppointmentEvent: BasicInformation {
             if codeEvent != eventCodeAsked {
                 continue
             }
+            
+            self.blockTitle = activityBlock["title"].stringValue
             
             // Iterate through all slots for a given bvlock
             for jsonSlot in slots.arrayValue {

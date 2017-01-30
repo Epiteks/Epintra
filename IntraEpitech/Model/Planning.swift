@@ -69,7 +69,6 @@ class Planning: BasicInformation {
     /// Only there for personal events...
     var title: String? = nil
 
-    
     /// Group id to register to slots with a group
     var groupID: Int? = nil
     

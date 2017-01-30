@@ -11,13 +11,15 @@ import UIKit
 class AppointmentDetailsViewController: LoadingDataViewController {
 
     @IBOutlet weak var dataTableView: UITableView!
+    @IBOutlet weak var showInformationBarButton: UIBarButtonItem!
 
     var appointment: AppointmentEvent!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = self.appointment.eventName
+        self.title = NSLocalizedString("appointment", comment: "")// self.appointment.eventName
+        self.showInformationBarButton.title = NSLocalizedString("info", comment: "")
         
         self.dataTableView.rowHeight = UITableViewAutomaticDimension
         self.dataTableView.estimatedRowHeight = 50
@@ -25,13 +27,22 @@ class AppointmentDetailsViewController: LoadingDataViewController {
         self.dataTableView.register(UINib(nibName: "SlotTakenTableViewCell", bundle: nil), forCellReuseIdentifier: "slotTakenTableViewCell")
         self.dataTableView.register(UINib(nibName: "SlotRegisterTableViewCell", bundle: nil), forCellReuseIdentifier: "slotRegisterTableViewCell")
         self.dataTableView.register(UINib(nibName: "SlotRegisteredGroupTableViewCell", bundle: nil), forCellReuseIdentifier: "slotRegisteredGroupTableViewCell")
+        
+        if self.appointment.eventName == nil && self.appointment.blockTitle == nil {
+            self.showInformationBarButton.title = ""
+        }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func infoBarButtonItemTouched(_ sender: Any) {
+        if self.appointment.eventName != nil || self.appointment.blockTitle != nil {
+            self.showAlert(withTitle: self.appointment.eventName ?? "", andMessage: self.appointment.blockTitle ?? "")
+        }
+    }
 }
 
 extension AppointmentDetailsViewController: UITableViewDataSource {

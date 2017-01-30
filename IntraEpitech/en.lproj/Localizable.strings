@@ -99,6 +99,9 @@
 "Register" = "Register";
 "Registered" = "Registered";
 "Today" = "Today";
+"room" = "Room";
+"appointment" = "Appointment";
+"info" = "Infos";
 
 /**
  ** Project
