@@ -5,6 +5,7 @@ PODS:
   - AlamofireNetworkActivityIndicator (2.1.0):
     - Alamofire (~> 4.1)
   - FSCalendar (2.7.0)
+  - MGSwipeTableCell (1.5.6)
   - Realm (2.4.1):
     - Realm/Headers (= 2.4.1)
   - Realm/Headers (2.4.1)
@@ -19,6 +20,7 @@ DEPENDENCIES:
   - AlamofireImage (~> 3.1)
   - AlamofireNetworkActivityIndicator (~> 2.0)
   - FSCalendar
+  - MGSwipeTableCell
   - RealmSwift
   - SwiftKeychainWrapper
   - SwiftyBeaver
@@ -29,12 +31,13 @@ SPEC CHECKSUMS:
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   AlamofireNetworkActivityIndicator: 4716f6554bdfb9c7cf13b1e0e3af21163129690a
   FSCalendar: 4957703ebd99b4fd0bfd46bf3e3c6465c0a25482
+  MGSwipeTableCell: 616700eb0ffd1c611ba909066cb7fd739790a0a7
   Realm: 37a5198a197598d9ec0e4d1ae2f64924c86eeb9a
   RealmSwift: d69e431b79a41acdf14c404b868ae1c2458916e1
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
   SwiftyBeaver: 2b68694df862381235e32bcfc4ec991e26bf131d
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 095e1ac451d3fc2deb1218361ac3ad35003fd0cc
+PODFILE CHECKSUM: fa046040851fbd7ad16055b895027c23cfcdefca
 
 COCOAPODS: 1.2.0.rc.1

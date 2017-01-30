@@ -11,11 +11,14 @@ import SwiftyJSON
 
 class Slot {
     
+    weak var appointment: AppointmentEvent?
+    
     var date: Date?
     var master: RegisteredStudent?
     var members: [RegisteredStudent]?
     var title: String = ""
     var id: Int!
+    var duration: Int!
     
     var open: Bool!
     
@@ -31,7 +34,9 @@ class Slot {
         return !self.isOneshot && self.master?.login == ApplicationManager.sharedInstance.user?.login
     }
     
-    init(dict: JSON) {
+    init(dict: JSON, appointment: AppointmentEvent) {
+        
+        self.appointment = appointment
         
         self.date = dict["date"].stringValue.toDate()
         
@@ -56,6 +61,8 @@ class Slot {
         self.isPast = dict["past"].boolValue
         
         self.isOneshot = dict["bloc_status"].string == "oneshot" ? true : false
+        
+        self.duration = dict["duration"].intValue
     }
 
     /// Get URL data, needed for all planning API calls

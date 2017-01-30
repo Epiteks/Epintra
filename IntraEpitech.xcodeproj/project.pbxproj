@@ -77,6 +77,8 @@
 		795F1EA61C560F4A00B8C347 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795F1EA51C560F4A00B8C347 /* DateExtensions.swift */; };
 		79622E911C5D4AF100FBA456 /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79622E901C5D4AF100FBA456 /* Module.swift */; };
 		79622E9A1C5D56C000FBA456 /* Mark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79622E991C5D56C000FBA456 /* Mark.swift */; };
+		7964F69B1E3F5ABB00432D57 /* MGSwipeTableCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7964F69A1E3F5ABB00432D57 /* MGSwipeTableCell.framework */; };
+		7964F69D1E3F673100432D57 /* PlanningCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7964F69C1E3F673100432D57 /* PlanningCellProtocol.swift */; };
 		796B2EF91C4ADEB800327E22 /* UIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796B2EF81C4ADEB800327E22 /* UIUtils.swift */; };
 		7976955B1C562730001772A2 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7976955A1C562730001772A2 /* ImageDownloader.swift */; };
 		7976A1C11E37717000C06F36 /* KeychainUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7976A1C01E37717000C06F36 /* KeychainUtil.swift */; };
@@ -238,6 +240,8 @@
 		795F1EA51C560F4A00B8C347 /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		79622E901C5D4AF100FBA456 /* Module.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Module.swift; path = Model/Module.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		79622E991C5D56C000FBA456 /* Mark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Mark.swift; path = Model/Mark.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		7964F69A1E3F5ABB00432D57 /* MGSwipeTableCell.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MGSwipeTableCell.framework; path = "../../../Library/Developer/Xcode/DerivedData/IntraEpitech-eynjybsoivxkenftnpjdjhxgoseh/Build/Products/Debug-iphonesimulator/MGSwipeTableCell/MGSwipeTableCell.framework"; sourceTree = "<group>"; };
+		7964F69C1E3F673100432D57 /* PlanningCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanningCellProtocol.swift; path = Protocols/PlanningCellProtocol.swift; sourceTree = "<group>"; };
 		796B2EF81C4ADEB800327E22 /* UIUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtils.swift; sourceTree = "<group>"; };
 		7976955A1C562730001772A2 /* ImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ImageDownloader.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		7976A1C01E37717000C06F36 /* KeychainUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainUtil.swift; sourceTree = "<group>"; };
@@ -320,6 +324,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7964F69B1E3F5ABB00432D57 /* MGSwipeTableCell.framework in Frameworks */,
 				799F27F71E3771E100FC2DA5 /* AlamofireImage.framework in Frameworks */,
 				799F27F81E3771E100FC2DA5 /* AlamofireNetworkActivityIndicator.framework in Frameworks */,
 				799F27F91E3771E100FC2DA5 /* Realm.framework in Frameworks */,
@@ -359,6 +364,7 @@
 		331ED8344BD2BA7948788795 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7964F69A1E3F5ABB00432D57 /* MGSwipeTableCell.framework */,
 				799F27F21E3771E100FC2DA5 /* AlamofireImage.framework */,
 				799F27F31E3771E100FC2DA5 /* AlamofireNetworkActivityIndicator.framework */,
 				799F27F41E3771E100FC2DA5 /* Realm.framework */,
@@ -396,6 +402,7 @@
 			children = (
 				790750781E17ABB700B07F7E /* UpdateRankFilterProtocol.swift */,
 				79AFFA511E264AF500FDEDF3 /* PlanningFilterDelegate.swift */,
+				7964F69C1E3F673100432D57 /* PlanningCellProtocol.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -1186,6 +1193,7 @@
 				795CC3301C5CF840007AFE87 /* File.swift in Sources */,
 				79892EF61C5024E000F83669 /* UserPreferences.swift in Sources */,
 				7976A1C11E37717000C06F36 /* KeychainUtil.swift in Sources */,
+				7964F69D1E3F673100432D57 /* PlanningCellProtocol.swift in Sources */,
 				79AFFA501E25B1FF00FDEDF3 /* PlanningFilterViewController.swift in Sources */,
 				79306D611C4AF46600708BED /* MJProgressView.swift in Sources */,
 				7948FF331E19CC02001C5F3A /* ModuleTableViewCell.swift in Sources */,

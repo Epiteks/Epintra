@@ -7,12 +7,17 @@
 //
 
 import UIKit
+import MGSwipeTableCell
 
-class SlotTakenTableViewCell: UITableViewCell {
+class SlotTakenTableViewCell: MGSwipeTableCell {
     
     @IBOutlet weak var userTitle: UILabel!
     @IBOutlet weak var userEmail: UILabel!
     @IBOutlet weak var actionImageView: UIImageView!
+    
+    weak var tapDelegate: PlanningCellProtocol? = nil
+    
+    weak var slotData: Slot? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,6 +31,9 @@ class SlotTakenTableViewCell: UITableViewCell {
     }
     
     func setView(slot: Slot) {
+        
+        self.slotData = slot
+        
         self.userTitle.text = slot.master?.title
         self.userEmail.text = slot.master?.login
         
@@ -36,4 +44,15 @@ class SlotTakenTableViewCell: UITableViewCell {
         
     }
     
+    func setSwipeActions() {
+        let button = MGSwipeButton(title: NSLocalizedString("Add to calendar", comment: ""), backgroundColor: UIUtils.planningBlueColor, callback: { [weak self] callback -> Bool in
+            if let slot = self?.slotData {
+                self?.tapDelegate?.tappedCell(withSlot: slot)
+            }
+            return true
+        })
+        
+        self.rightButtons = [button]
+        self.rightSwipeSettings.transition = MGSwipeTransition.static
+    }
 }

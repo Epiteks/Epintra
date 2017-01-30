@@ -11,4 +11,5 @@ target 'IntraEpitech' do
 	pod 'FSCalendar'
 	pod 'RealmSwift'
 	pod 'SwiftKeychainWrapper'
+	pod 'MGSwipeTableCell'
 end

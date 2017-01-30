@@ -14,6 +14,7 @@ class AppointmentDetailsViewController: LoadingDataViewController {
     @IBOutlet weak var showInformationBarButton: UIBarButtonItem!
 
     var appointment: AppointmentEvent!
+    var planning: Planning!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,15 +70,18 @@ extension AppointmentDetailsViewController: UITableViewDataSource {
             
             if data.master == nil { // Slot free
                 let cell = tableView.dequeueReusableCell(withIdentifier: "slotRegisterTableViewCell") as! SlotRegisterTableViewCell
-                cell.setView(slot: data, appointment: self.appointment)
+                cell.tapDelegate = self
+                cell.setView(slot: data)
                 return cell
             } else if data.master != nil && data.members == nil { // Slot taken by one person only
                 let cell = tableView.dequeueReusableCell(withIdentifier: "slotTakenTableViewCell") as! SlotTakenTableViewCell
+                cell.tapDelegate = self
                 cell.setView(slot: data)
                 return cell
             } else if data.master != nil && data.members != nil { // Slot taken by a group
                 let cell = tableView.dequeueReusableCell(withIdentifier: "slotRegisteredGroupTableViewCell") as! SlotRegisteredGroupTableViewCell
                 cell.setView(slot: data)
+                cell.tapDelegate = self
                 return cell
             }
             
@@ -130,6 +134,29 @@ extension AppointmentDetailsViewController: UITableViewDelegate {
             
         })
         
+    }
+    
+}
+
+extension AppointmentDetailsViewController: PlanningCellProtocol {
+    
+    func tappedCell(withEvent event: Planning) {
+        // Nothing there, no event. Only slots
+    }
+
+    func tappedCell(withSlot slot: Slot) {
+        let calendarManager = CalendarManager()
+        
+        calendarManager.insert(slot: slot) { [weak self] result in
+            switch result {
+            case .success(_):
+                self?.showAlert(withTitle: "eventSaved")
+                break
+            case .failure(let err):
+                self?.showAlert(withTitle: "error", andMessage: err.message ?? "")
+            }
+        }
+
     }
     
 }

@@ -20,4 +20,6 @@ enum AppError: Error {
     
     // Calendar Errors
     case unauthorizedCalendar
+    case noCalendarSelected
+    case calendarNotExists
 }

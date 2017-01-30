@@ -11,6 +11,8 @@ import SwiftyJSON
 
 class AppointmentEvent: BasicInformation {
     
+    weak var planningEvent: Planning?
+    
     /// Code of the activity
     var codeActi: String!
     
@@ -57,7 +59,9 @@ class AppointmentEvent: BasicInformation {
         return /*self.studentRegistered == false &&*/self.canRegisterToInstance == true
     }
     
-    init(dict: JSON, eventStart: Date, eventEnd: Date, eventCodeAsked: String) {
+    init(dict: JSON, eventStart: Date, eventEnd: Date, eventCodeAsked: String, planning: Planning) {
+        
+        self.planningEvent = planning
         
         self.eventStart = eventStart
         self.eventEnd = eventEnd
@@ -113,7 +117,7 @@ class AppointmentEvent: BasicInformation {
             // Iterate through all slots for a given bvlock
             for jsonSlot in slots.arrayValue {
                 
-                let tmp = Slot(dict: jsonSlot)
+                let tmp = Slot(dict: jsonSlot, appointment: self)
                 
                 if let tmpDate = tmp.date {
                     // Check if slot is in our event

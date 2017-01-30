@@ -24,6 +24,7 @@ class PlanningViewController: LoadingDataViewController {
     var planningFilter = PlanningFilterViewController.PlanningFilter()
     
     var appointmentDetailsData: AppointmentEvent? = nil
+    var selectedActivity: Planning? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,8 +47,9 @@ class PlanningViewController: LoadingDataViewController {
             }
         } else if segue.identifier == "appointmentDetailsSegue" {
             if let vc = segue.destination as? AppointmentDetailsViewController {
-                if let data = self.appointmentDetailsData {
+                if let data = self.appointmentDetailsData, let activity = self.selectedActivity {
                     vc.appointment = data
+                    vc.planning = activity
                 }
             }
         }
@@ -177,6 +179,8 @@ extension PlanningViewController: UITableViewDataSource {
         
         cell.setView(with: self.currentDayEvents![indexPath.row])
         
+        cell.tapDelegate = self
+        
         if cell.accessoryType != .disclosureIndicator {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.statusImageSelected(_:)))
             tapGesture.numberOfTapsRequired = 1
@@ -286,15 +290,16 @@ extension PlanningViewController: UITableViewDelegate {
             tableView.isUserInteractionEnabled = false
             self.addActivityIndicator()
             if let data = self.currentDayEvents?[indexPath.row] {
-                planningRequests.getSlots(forEvent: data) { result in
+                planningRequests.getSlots(forEvent: data) { [weak self] result in
                     switch result {
                     case .success(let appointment):
-                        self.appointmentDetailsData = appointment
-                        self.performSegue(withIdentifier: "appointmentDetailsSegue", sender: self)
+                        self?.appointmentDetailsData = appointment
+                        self?.selectedActivity = data
+                        self?.performSegue(withIdentifier: "appointmentDetailsSegue", sender: self)
                     case .failure(let err):
                         print(err)
                     }
-                    self.removeActivityIndicator()
+                    self?.removeActivityIndicator()
                     tableView.isUserInteractionEnabled = true
                 }
             }
@@ -311,5 +316,27 @@ extension PlanningViewController: PlanningFilterDelegate {
         self.setDataToDisplay()
         self.eventsTableView.reloadData()
     }
+
+}
+
+extension PlanningViewController: PlanningCellProtocol {
     
+    func tappedCell(withEvent event: Planning) {
+       let calendarManager = CalendarManager()
+        
+        calendarManager.insert(planning: event) { [weak self] result in
+            switch result {
+            case .success(_):
+                self?.showAlert(withTitle: "eventSaved")
+                break
+            case .failure(let err):
+                self?.showAlert(withTitle: "error", andMessage: err.message ?? "")
+            }
+        }
+    }
+    
+    func tappedCell(withSlot slot: Slot) {
+        // Nothing there because there is no slot
+    }
+
 }

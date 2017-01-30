@@ -7,27 +7,35 @@
 //
 
 import UIKit
+import MGSwipeTableCell
 
-class SlotRegisteredGroupTableViewCell: UITableViewCell {
-
+class SlotRegisteredGroupTableViewCell: MGSwipeTableCell {
+    
     @IBOutlet weak var userTitle: UILabel!
     @IBOutlet weak var userEmail: UILabel!
     @IBOutlet weak var members: UILabel!
     
     @IBOutlet weak var actionImageView: UIImageView!
     
+    weak var tapDelegate: PlanningCellProtocol? = nil
+    
+    weak var slotData: Slot? = nil
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
-
+    
     func setView(slot: Slot) {
+        
+        self.slotData = slot
+        
         self.userTitle.text = slot.master?.title
         self.userEmail.text = slot.master?.login
         
@@ -54,6 +62,18 @@ class SlotRegisteredGroupTableViewCell: UITableViewCell {
             self.actionImageView.tintColor = UIUtils.planningRedColor
         }
         
+        setSwipeActions()
     }
     
+    func setSwipeActions() {
+        let button = MGSwipeButton(title: NSLocalizedString("Add to calendar", comment: ""), backgroundColor: UIUtils.planningBlueColor, callback: { [weak self] callback -> Bool in
+            if let slot = self?.slotData {
+                self?.tapDelegate?.tappedCell(withSlot: slot)
+            }
+            return true
+        })
+        
+        self.rightButtons = [button]
+        self.rightSwipeSettings.transition = MGSwipeTransition.static
+    }
 }

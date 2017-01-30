@@ -38,60 +38,17 @@ class CalendarManager {
 		}
 	}
     
-	func createEvent(_ planning: Planning, onCompletion:  @escaping (Bool, String) -> Void) {
-        
-		// 1
-//		let eventStore = EKEventStore()
-//		
-//		if (ApplicationManager.sharedInstance.defaultCalendar == nil) {
-//			onCompletion(false, "NoDefaultCalendar")
-//			return
-//		} else if ((eventStore.calendar(withIdentifier: ApplicationManager.sharedInstance.defaultCalendar!)) != nil) {
-//			onCompletion(false, "DefaultCalendarWrong")
-//			return
-//		}
-//		
-//		// 2
-//		switch (EKEventStore.authorizationStatus(for: EKEntityType.event)) {
-//		case .authorized:
-//			insertEvent(eventStore, planning: planning) { (isOk: Bool) in
-//				onCompletion(isOk, "SomethingDidntWorkedCorrectly")
-//			}
-//			break
-//		case .denied:
-//			print("Access denied")
-//			onCompletion(false, "CalendarAccessDenied")
-//			break
-//		case .notDetermined:
-//			eventStore.requestAccess(to: EKEntityType.event) { (granted: Bool, _) in
-//				if (granted) {
-//					self.insertEvent(eventStore, planning: planning) { (isOk: Bool) in
-//						onCompletion(isOk, "SomethingDidntWorkedCorrectly")
-//					}
-//				} else {
-//					print("Access denied")
-//					onCompletion(false, "CalendarAccessDenied")
-//				}
-//			}
-//			break
-//		default:
-//			print("Case Default")
-//		}
-	}
-    
-	func inser(planning: Planning, onCompletion: (Bool) -> Void) {
+	func insert(planning: Planning, completion: @escaping (Result<Any?>) -> Void) {
         
         guard let calendarIdentifier = ApplicationManager.sharedInstance.defaultCalendarIdentifier else {
-            // TODO No selected calendar
-            log.warning("There was no selected calendar")
+            completion(Result.failure(type: .noCalendarSelected, message: NSLocalizedString("NoCalendarSelected", comment: "")))
             return
         }
         
         let eventStore = EKEventStore()
         
         guard let defaultCalendar = eventStore.calendar(withIdentifier: calendarIdentifier) else {
-            // TODO wrong calender
-            log.warning("Wrong calendar selected")
+            completion(Result.failure(type: .calendarNotExists, message: NSLocalizedString("NoCalendar", comment: "")))
             return
         }
         
@@ -101,23 +58,55 @@ class CalendarManager {
         event.title = planning.actiTitle!
         event.startDate = planning.startTime!
         event.endDate = planning.endTime!
-        
+    
         if (planning.room != nil) {
             event.location = planning.room!.getRoomCleaned()
         }
         
         do {
             try eventStore.save(event, span: EKSpan.thisEvent)
-            
         } catch {
-            
-            // TODO complete error
-           
+            completion(Result.failure(type: .unauthorizedByUser, message: NSLocalizedString("NoCalendar", comment: "")))
+            return
+        }
+        completion(Result.success(nil))
+	}
+    
+    func insert(slot: Slot, completion: @escaping (Result<Any?>) -> Void) {
+        
+        guard let calendarIdentifier = ApplicationManager.sharedInstance.defaultCalendarIdentifier else {
+            completion(Result.failure(type: .noCalendarSelected, message: NSLocalizedString("NoCalendarSelected", comment: "")))
+            return
         }
         
-        // TODO complete OK
+        let eventStore = EKEventStore()
         
-	}
+        guard let defaultCalendar = eventStore.calendar(withIdentifier: calendarIdentifier) else {
+            completion(Result.failure(type: .calendarNotExists, message: NSLocalizedString("NoCalendar", comment: "")))
+            return
+        }
+        
+        let event = EKEvent(eventStore: eventStore)
+        event.calendar = defaultCalendar
+        
+        event.title = slot.appointment?.planningEvent?.actiTitle ?? ""
+        event.startDate = slot.date!
+        event.endDate = slot.date!.addingTimeInterval(Double(slot.duration) * 60.0)
+        
+        event.notes = slot.appointment?.blockTitle
+        
+        if let room = slot.appointment?.planningEvent?.room?.getRoomCleaned() {
+            event.location = room
+        }
+        
+        do {
+            try eventStore.save(event, span: EKSpan.thisEvent)
+        } catch {
+            completion(Result.failure(type: .unauthorizedByUser, message: NSLocalizedString("NoCalendar", comment: "")))
+            return
+        }
+        completion(Result.success(nil))
+    }
     
 	/// Retrieve all calendars available for creating events
 	///

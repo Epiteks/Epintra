@@ -61,6 +61,7 @@
 "BugQuestion" = "Any bug or a feature idea ?";
 "NoCalendar" = "No calendar found.";
 "NoAccessCalendar" = "You haven't granted the access to the calendar.\nIf you want to, go to Settings -> Epintra.";
+"NoCalendarSelected" = "You haven't choose any calendar. Go to Settings section to select one.";
 
 /**
  ** Profile View
@@ -102,6 +103,7 @@
 "room" = "Room";
 "appointment" = "Appointment";
 "info" = "Infos";
+"eventSaved" = "Saved in calendar";
 
 /**
  ** Project

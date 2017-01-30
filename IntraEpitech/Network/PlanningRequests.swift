@@ -117,7 +117,7 @@ class PlanningRequests: RequestManager {
             case .success(let responseJSON):
                 log.info("Event slots : \(responseJSON)")
                 
-                let res = AppointmentEvent(dict: responseJSON, eventStart: event.startTime!, eventEnd: event.endTime!, eventCodeAsked: event.codeEvent!)
+                let res = AppointmentEvent(dict: responseJSON, eventStart: event.startTime!, eventEnd: event.endTime!, eventCodeAsked: event.codeEvent!, planning: event)
                 completion(Result.success(res))
                 break
             case .failure(let err):

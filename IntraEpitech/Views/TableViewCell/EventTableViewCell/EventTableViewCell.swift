@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import MGSwipeTableCell
 
-class EventTableViewCell: UITableViewCell {
-
+class EventTableViewCell: MGSwipeTableCell {
+    
     @IBOutlet weak var activityTypeView: UIView!
     
     @IBOutlet weak var startTimeLabel: UILabel!
@@ -20,13 +21,17 @@ class EventTableViewCell: UITableViewCell {
     
     @IBOutlet weak var statusImageView: UIImageView!
     
+    var activityData: Planning? = nil
+    
     var activityColor: UIColor! = .black
+    
+    weak var tapDelegate: PlanningCellProtocol? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
@@ -41,6 +46,8 @@ class EventTableViewCell: UITableViewCell {
     
     func setView(with data: Planning) {
         
+        self.activityData = data
+        
         if let eventType = data.eventTypeCode, eventType.characters.count > 0 {
             self.activityColor = UIUtils.activitiesColors[eventType]
         } else {
@@ -48,9 +55,9 @@ class EventTableViewCell: UITableViewCell {
         }
         
         self.activityTitleLabel.text = (data.actiTitle?.characters.count)! > 0 ? data.actiTitle : data.title
-    
+        
         self.moduleTitleLabel.text = String(format: "%@ - %@", data.titleModule!, data.codeInstance!)
-    
+        
         if let room = data.room, let code = room.code {
             self.moduleTitleLabel.text = "\(code) - \(self.moduleTitleLabel.text ?? "")"
         }
@@ -59,6 +66,7 @@ class EventTableViewCell: UITableViewCell {
         self.endTimeLabel.text = data.endTime?.toEventHour()
         
         self.setStatusImage(data: data)
+        self.setSwipeActions()
     }
     
     func setStatusImage(data: Planning) {
@@ -95,6 +103,23 @@ class EventTableViewCell: UITableViewCell {
             statusImageView.tintColor = UIUtils.planningRedColor
         } else {
             statusImageView.image = nil
+        }
+    }
+    
+    func setSwipeActions() {
+        
+        if self.accessoryType != .disclosureIndicator {
+            
+            let button = MGSwipeButton(title: NSLocalizedString("Add to calendar", comment: ""), backgroundColor: UIUtils.planningBlueColor, callback: { [weak self] callback -> Bool in
+                if let data = self?.activityData {
+                    self?.tapDelegate?.tappedCell(withEvent: data)
+                }
+                return true
+            })
+            
+            self.rightButtons = [button]
+
+            self.rightSwipeSettings.transition = MGSwipeTransition.static
         }
     }
 }
