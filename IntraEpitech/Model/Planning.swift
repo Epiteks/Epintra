@@ -182,8 +182,6 @@ class Planning: BasicInformation {
 		rdvIndividuelRegistered = dict["rdv_indiv_registered"].stringValue
 		past = dict["past"].boolValue
 		semester = dict["semester"].intValue
-        
-        
 	}
 	
 //	func getEventTime() -> (start: String, end: String) {

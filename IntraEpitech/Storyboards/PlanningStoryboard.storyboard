@@ -254,7 +254,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="ed4-o9-ZQc">
-                        <barButtonItem key="rightBarButtonItem" title="Item" style="plain" id="WFh-JN-ARe">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="WFh-JN-ARe">
                             <connections>
                                 <action selector="infoBarButtonItemTouched:" destination="Odf-j0-qH7" id="SY6-k9-JpV"/>
                             </connections>

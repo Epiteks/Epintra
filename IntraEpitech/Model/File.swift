@@ -17,7 +17,8 @@ class File {
 	init(dict: JSON) {
 		
 		title = dict["title"].stringValue
-		url = APICalls.getEpitechURL() + dict["fullpath"].stringValue
+        
+		url = Configuration.epitechURL + dict["fullpath"].stringValue
 	}
 	
 }

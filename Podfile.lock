@@ -1,22 +1,20 @@
 PODS:
-  - ADALiOS (1.2.4)
-  - Alamofire (4.2.0)
+  - Alamofire (4.3.0)
   - AlamofireImage (3.2.0):
     - Alamofire (~> 4.1)
   - AlamofireNetworkActivityIndicator (2.1.0):
     - Alamofire (~> 4.1)
-  - FSCalendar (2.6.0)
-  - Realm (2.1.2):
-    - Realm/Headers (= 2.1.2)
-  - Realm/Headers (2.1.2)
-  - RealmSwift (2.1.2):
-    - Realm (= 2.1.2)
+  - FSCalendar (2.7.0)
+  - Realm (2.4.1):
+    - Realm/Headers (= 2.4.1)
+  - Realm/Headers (2.4.1)
+  - RealmSwift (2.4.1):
+    - Realm (= 2.4.1)
   - SwiftKeychainWrapper (3.0.1)
   - SwiftyBeaver (1.1.1)
   - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
-  - ADALiOS (= 1.2.4)
   - Alamofire (~> 4.0)
   - AlamofireImage (~> 3.1)
   - AlamofireNetworkActivityIndicator (~> 2.0)
@@ -27,17 +25,16 @@ DEPENDENCIES:
   - SwiftyJSON
 
 SPEC CHECKSUMS:
-  ADALiOS: 8179aed8e136bf79dca5a4138a0c1a0d52701cb2
-  Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
+  Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   AlamofireNetworkActivityIndicator: 4716f6554bdfb9c7cf13b1e0e3af21163129690a
-  FSCalendar: c00fa5f4c3ec343ee6f7b804ae19322e9898bb84
-  Realm: efe855f4d977c8ce5a82d3116d9f1ff155a6550c
-  RealmSwift: 17d6ee30b6f9df86364408c2197492e33bfea567
+  FSCalendar: 4957703ebd99b4fd0bfd46bf3e3c6465c0a25482
+  Realm: 37a5198a197598d9ec0e4d1ae2f64924c86eeb9a
+  RealmSwift: d69e431b79a41acdf14c404b868ae1c2458916e1
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
   SwiftyBeaver: 2b68694df862381235e32bcfc4ec991e26bf131d
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 55a92d01a21c3a8828584b313163109e32db6a9e
+PODFILE CHECKSUM: 095e1ac451d3fc2deb1218361ac3ad35003fd0cc
 
 COCOAPODS: 1.2.0.rc.1

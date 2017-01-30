@@ -11,14 +11,12 @@
 		7906842A1C6FC1E10067B26F /* AppointmentEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790684291C6FC1E10067B26F /* AppointmentEvent.swift */; };
 		790750791E17ABB700B07F7E /* UpdateRankFilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790750781E17ABB700B07F7E /* UpdateRankFilterProtocol.swift */; };
 		7907507B1E17B93A00B07F7E /* EpirankInformations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7907507A1E17B93A00B07F7E /* EpirankInformations.swift */; };
-		79152D891C67A43D00513E0F /* ContactsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79152D881C67A43D00513E0F /* ContactsHelper.swift */; };
 		79152D8C1C67A47100513E0F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79152D8A1C67A47100513E0F /* AddressBook.framework */; };
 		79152D8D1C67A47100513E0F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79152D8B1C67A47100513E0F /* AddressBookUI.framework */; };
 		7926D0FA1E37FF08004BA0A3 /* RealmStudentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7926D0F91E37FF08004BA0A3 /* RealmStudentInfo.swift */; };
 		79284F5D1C5F3FC500349628 /* Flags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79284F5C1C5F3FC500349628 /* Flags.swift */; };
 		792B25931E3D1E3800FDCCB6 /* SlotRegisteredGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B25911E3D1E3800FDCCB6 /* SlotRegisteredGroupTableViewCell.swift */; };
 		792B25941E3D1E3800FDCCB6 /* SlotRegisteredGroupTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 792B25921E3D1E3800FDCCB6 /* SlotRegisteredGroupTableViewCell.xib */; };
-		792B7A611C57EC6200F988BB /* ProjectsApiCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B7A601C57EC6200F988BB /* ProjectsApiCall.swift */; };
 		79306D531C4AEBF300708BED /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79306D551C4AEBF300708BED /* Localizable.strings */; };
 		79306D611C4AF46600708BED /* MJProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79306D601C4AF46600708BED /* MJProgressView.swift */; };
 		79306D631C4AF79400708BED /* ModelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79306D621C4AF79400708BED /* ModelName.swift */; };
@@ -31,10 +29,7 @@
 		7948FECA1E19CACC001C5F3A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948FEC91E19CACC001C5F3A /* HomeViewController.swift */; };
 		7948FECD1E19CAD7001C5F3A /* LoadingDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948FECB1E19CAD7001C5F3A /* LoadingDataViewController.swift */; };
 		7948FECE1E19CAD7001C5F3A /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948FECC1E19CAD7001C5F3A /* WebViewController.swift */; };
-		7948FED41E19CAE2001C5F3A /* PlanningViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948FED01E19CAE2001C5F3A /* PlanningViewControllers.swift */; };
-		7948FED61E19CAE2001C5F3A /* StudentRegisteredViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948FED21E19CAE2001C5F3A /* StudentRegisteredViewController.swift */; };
 		7948FEDB1E19CAF1001C5F3A /* FilterRankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948FED71E19CAF1001C5F3A /* FilterRankViewController.swift */; };
-		7948FEDC1E19CAF1001C5F3A /* OtherUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948FED81E19CAF1001C5F3A /* OtherUserViewController.swift */; };
 		7948FEDD1E19CAF1001C5F3A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948FED91E19CAF1001C5F3A /* ProfileViewController.swift */; };
 		7948FEDE1E19CAF1001C5F3A /* RankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948FEDA1E19CAF1001C5F3A /* RankViewController.swift */; };
 		7948FEE11E19CB08001C5F3A /* SelectCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7948FEDF1E19CB08001C5F3A /* SelectCalendarViewController.swift */; };
@@ -81,15 +76,12 @@
 		795F1EA41C5602DC00B8C347 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795F1EA31C5602DC00B8C347 /* StringExtensions.swift */; };
 		795F1EA61C560F4A00B8C347 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795F1EA51C560F4A00B8C347 /* DateExtensions.swift */; };
 		79622E911C5D4AF100FBA456 /* Module.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79622E901C5D4AF100FBA456 /* Module.swift */; };
-		79622E931C5D4C4B00FBA456 /* ModulesApiCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79622E921C5D4C4B00FBA456 /* ModulesApiCalls.swift */; };
-		79622E981C5D567A00FBA456 /* MarksApiCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79622E971C5D567A00FBA456 /* MarksApiCalls.swift */; };
 		79622E9A1C5D56C000FBA456 /* Mark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79622E991C5D56C000FBA456 /* Mark.swift */; };
 		796B2EF91C4ADEB800327E22 /* UIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796B2EF81C4ADEB800327E22 /* UIUtils.swift */; };
 		7976955B1C562730001772A2 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7976955A1C562730001772A2 /* ImageDownloader.swift */; };
 		7976A1C11E37717000C06F36 /* KeychainUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7976A1C01E37717000C06F36 /* KeychainUtil.swift */; };
 		79779A9E1C5912DA008803C5 /* SystemUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79779A9D1C5912DA008803C5 /* SystemUtils.swift */; };
 		79779AA21C59140E008803C5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79779AA11C59140E008803C5 /* QuartzCore.framework */; };
-		79779AA41C591A0D008803C5 /* PlanningApiCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79779AA31C591A0D008803C5 /* PlanningApiCalls.swift */; };
 		79779AA61C592355008803C5 /* String+NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79779AA51C592355008803C5 /* String+NSDate.swift */; };
 		797DB28C1E365D3900F1BFBD /* BasicInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797DB28B1E365D3900F1BFBD /* BasicInformation.swift */; };
 		797DC7F11C7A0AE700ED095E /* StudentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797DC7F01C7A0AE700ED095E /* StudentInfo.swift */; };
@@ -150,8 +142,6 @@
 		79F8265E1C552C5F0002DCC8 /* UIImageViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F8265D1C552C5F0002DCC8 /* UIImageViewExtensions.swift */; };
 		79F826601C554B420002DCC8 /* Spices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F8265F1C554B420002DCC8 /* Spices.swift */; };
 		79F826621C554BED0002DCC8 /* Netsoul.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F826611C554BED0002DCC8 /* Netsoul.swift */; };
-		79F8ADE91C52A8E400F4FDD4 /* APICalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F8ADE81C52A8E400F4FDD4 /* APICalls.swift */; };
-		79F8ADEB1C52AA9C00F4FDD4 /* UserApiCalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F8ADEA1C52AA9C00F4FDD4 /* UserApiCalls.swift */; };
 		79F8ADEE1C52AC9100F4FDD4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F8ADED1C52AC9100F4FDD4 /* User.swift */; };
 		79F9C7111E14083100431D49 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F9C7101E14083100431D49 /* RealmManager.swift */; };
 /* End PBXBuildFile section */
@@ -180,14 +170,12 @@
 		790684291C6FC1E10067B26F /* AppointmentEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = AppointmentEvent.swift; path = Model/AppointmentEvent.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		790750781E17ABB700B07F7E /* UpdateRankFilterProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpdateRankFilterProtocol.swift; path = Protocols/UpdateRankFilterProtocol.swift; sourceTree = "<group>"; };
 		7907507A1E17B93A00B07F7E /* EpirankInformations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EpirankInformations.swift; path = Model/EpirankInformations.swift; sourceTree = "<group>"; };
-		79152D881C67A43D00513E0F /* ContactsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ContactsHelper.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		79152D8A1C67A47100513E0F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		79152D8B1C67A47100513E0F /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		7926D0F91E37FF08004BA0A3 /* RealmStudentInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmStudentInfo.swift; path = Application/RealmStudentInfo.swift; sourceTree = "<group>"; };
 		79284F5C1C5F3FC500349628 /* Flags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Flags.swift; path = Model/Flags.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		792B25911E3D1E3800FDCCB6 /* SlotRegisteredGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SlotRegisteredGroupTableViewCell.swift; path = SlotRegisteredGroupTableViewCell/SlotRegisteredGroupTableViewCell.swift; sourceTree = "<group>"; };
 		792B25921E3D1E3800FDCCB6 /* SlotRegisteredGroupTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SlotRegisteredGroupTableViewCell.xib; path = SlotRegisteredGroupTableViewCell/SlotRegisteredGroupTableViewCell.xib; sourceTree = "<group>"; };
-		792B7A601C57EC6200F988BB /* ProjectsApiCall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectsApiCall.swift; path = Network/ProjectsApiCall.swift; sourceTree = "<group>"; };
 		79306D541C4AEBF300708BED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		79306D5A1C4AEC4A00708BED /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		79306D601C4AF46600708BED /* MJProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MJProgressView.swift; sourceTree = "<group>"; };
@@ -202,10 +190,7 @@
 		7948FEC91E19CACC001C5F3A /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		7948FECB1E19CAD7001C5F3A /* LoadingDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingDataViewController.swift; sourceTree = "<group>"; };
 		7948FECC1E19CAD7001C5F3A /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
-		7948FED01E19CAE2001C5F3A /* PlanningViewControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanningViewControllers.swift; sourceTree = "<group>"; };
-		7948FED21E19CAE2001C5F3A /* StudentRegisteredViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentRegisteredViewController.swift; sourceTree = "<group>"; };
 		7948FED71E19CAF1001C5F3A /* FilterRankViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterRankViewController.swift; sourceTree = "<group>"; };
-		7948FED81E19CAF1001C5F3A /* OtherUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserViewController.swift; sourceTree = "<group>"; };
 		7948FED91E19CAF1001C5F3A /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		7948FEDA1E19CAF1001C5F3A /* RankViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankViewController.swift; sourceTree = "<group>"; };
 		7948FEDF1E19CB08001C5F3A /* SelectCalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCalendarViewController.swift; sourceTree = "<group>"; };
@@ -252,15 +237,12 @@
 		795F1EA31C5602DC00B8C347 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		795F1EA51C560F4A00B8C347 /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		79622E901C5D4AF100FBA456 /* Module.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Module.swift; path = Model/Module.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		79622E921C5D4C4B00FBA456 /* ModulesApiCalls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModulesApiCalls.swift; path = Network/ModulesApiCalls.swift; sourceTree = "<group>"; };
-		79622E971C5D567A00FBA456 /* MarksApiCalls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MarksApiCalls.swift; path = Network/MarksApiCalls.swift; sourceTree = "<group>"; };
 		79622E991C5D56C000FBA456 /* Mark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Mark.swift; path = Model/Mark.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		796B2EF81C4ADEB800327E22 /* UIUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtils.swift; sourceTree = "<group>"; };
 		7976955A1C562730001772A2 /* ImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ImageDownloader.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		7976A1C01E37717000C06F36 /* KeychainUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainUtil.swift; sourceTree = "<group>"; };
 		79779A9D1C5912DA008803C5 /* SystemUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemUtils.swift; sourceTree = "<group>"; };
 		79779AA11C59140E008803C5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		79779AA31C591A0D008803C5 /* PlanningApiCalls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanningApiCalls.swift; path = Network/PlanningApiCalls.swift; sourceTree = "<group>"; };
 		79779AA51C592355008803C5 /* String+NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+NSDate.swift"; sourceTree = "<group>"; };
 		797DB28B1E365D3900F1BFBD /* BasicInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BasicInformation.swift; path = Model/BasicInformation.swift; sourceTree = "<group>"; };
 		797DC7F01C7A0AE700ED095E /* StudentInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudentInfo.swift; path = Model/StudentInfo.swift; sourceTree = "<group>"; };
@@ -328,8 +310,6 @@
 		79F8265D1C552C5F0002DCC8 /* UIImageViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtensions.swift; sourceTree = "<group>"; };
 		79F8265F1C554B420002DCC8 /* Spices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Spices.swift; path = Model/Spices.swift; sourceTree = "<group>"; };
 		79F826611C554BED0002DCC8 /* Netsoul.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Netsoul.swift; path = Model/Netsoul.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		79F8ADE81C52A8E400F4FDD4 /* APICalls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = APICalls.swift; path = Network/APICalls.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		79F8ADEA1C52AA9C00F4FDD4 /* UserApiCalls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserApiCalls.swift; path = Network/UserApiCalls.swift; sourceTree = "<group>"; };
 		79F8ADED1C52AC9100F4FDD4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Model/User.swift; sourceTree = "<group>"; };
 		79F9C7101E14083100431D49 /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmManager.swift; path = Application/RealmManager.swift; sourceTree = "<group>"; };
 		8D7B38E3CE760CCA1D7F0ABE /* Pods_IntraEpitech.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IntraEpitech.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -460,8 +440,6 @@
 		7948FEBF1E19CA5C001C5F3A /* Planning */ = {
 			isa = PBXGroup;
 			children = (
-				7948FED01E19CAE2001C5F3A /* PlanningViewControllers.swift */,
-				7948FED21E19CAE2001C5F3A /* StudentRegisteredViewController.swift */,
 				79AFFA441E23E4A800FDEDF3 /* PlanningViewController.swift */,
 				79AFFA4F1E25B1FF00FDEDF3 /* PlanningFilterViewController.swift */,
 				79CCF7D41E3A35BD00D71A20 /* AppointmentDetailsViewController.swift */,
@@ -473,7 +451,6 @@
 			isa = PBXGroup;
 			children = (
 				7948FED71E19CAF1001C5F3A /* FilterRankViewController.swift */,
-				7948FED81E19CAF1001C5F3A /* OtherUserViewController.swift */,
 				7948FED91E19CAF1001C5F3A /* ProfileViewController.swift */,
 				7948FEDA1E19CAF1001C5F3A /* RankViewController.swift */,
 			);
@@ -699,7 +676,6 @@
 				7976955A1C562730001772A2 /* ImageDownloader.swift */,
 				79779A9D1C5912DA008803C5 /* SystemUtils.swift */,
 				79DE549D1C5BAF3300E2ADDE /* CalendarManager.swift */,
-				79152D881C67A43D00513E0F /* ContactsHelper.swift */,
 				79F42BEE1D68CCC6008DF047 /* CompletionHandlerType.swift */,
 				7976A1C01E37717000C06F36 /* KeychainUtil.swift */,
 			);
@@ -864,7 +840,7 @@
 			name = SlotTakenTableViewCell;
 			sourceTree = "<group>";
 		};
-		79EA5CB41D5E49AE00DA7C30 /* New */ = {
+		79F8ADE51C52A7DC00F4FDD4 /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				79EA5CB51D5E49E800DA7C30 /* Requests.swift */,
@@ -873,20 +849,6 @@
 				793B77941E0C71AE006FFD16 /* ModulesRequests.swift */,
 				798CF1B71E0FCE8D00BAB754 /* ProjectsRequests.swift */,
 				79AFFA461E23EA5800FDEDF3 /* PlanningRequests.swift */,
-			);
-			name = New;
-			sourceTree = "<group>";
-		};
-		79F8ADE51C52A7DC00F4FDD4 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				79EA5CB41D5E49AE00DA7C30 /* New */,
-				79F8ADE81C52A8E400F4FDD4 /* APICalls.swift */,
-				79F8ADEA1C52AA9C00F4FDD4 /* UserApiCalls.swift */,
-				792B7A601C57EC6200F988BB /* ProjectsApiCall.swift */,
-				79779AA31C591A0D008803C5 /* PlanningApiCalls.swift */,
-				79622E921C5D4C4B00FBA456 /* ModulesApiCalls.swift */,
-				79622E971C5D567A00FBA456 /* MarksApiCalls.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -1183,10 +1145,8 @@
 				7948FEDE1E19CAF1001C5F3A /* RankViewController.swift in Sources */,
 				79306D631C4AF79400708BED /* ModelName.swift in Sources */,
 				79AFFA4D1E24FD2A00FDEDF3 /* EventTableViewCell.swift in Sources */,
-				7948FEDC1E19CAF1001C5F3A /* OtherUserViewController.swift in Sources */,
 				7948FEC71E19CAC1001C5F3A /* LoginViewController.swift in Sources */,
 				795CC32A1C5CBE72007AFE87 /* ProjectDetail.swift in Sources */,
-				79F8ADEB1C52AA9C00F4FDD4 /* UserApiCalls.swift in Sources */,
 				797DB28C1E365D3900F1BFBD /* BasicInformation.swift in Sources */,
 				796B2EF91C4ADEB800327E22 /* UIUtils.swift in Sources */,
 				79E4C5C91C6E35AC0003DA56 /* Slot.swift in Sources */,
@@ -1205,19 +1165,14 @@
 				7948FEDD1E19CAF1001C5F3A /* ProfileViewController.swift in Sources */,
 				7948FEEE1E19CB47001C5F3A /* ModuleRegisteredStudentsViewController.swift in Sources */,
 				79CCF7D91E3A4D3C00D71A20 /* SlotTakenTableViewCell.swift in Sources */,
-				79152D891C67A43D00513E0F /* ContactsHelper.swift in Sources */,
-				79779AA41C591A0D008803C5 /* PlanningApiCalls.swift in Sources */,
 				7948FEE91E19CB3B001C5F3A /* MarksViewController.swift in Sources */,
-				79622E981C5D567A00FBA456 /* MarksApiCalls.swift in Sources */,
 				79F42BEB1D68C65A008DF047 /* Configuration.swift in Sources */,
 				79F42BE91D68C5D7008DF047 /* RequestManager.swift in Sources */,
 				798850381C4AC51C00BAA888 /* AppDelegate.swift in Sources */,
 				795F1EA41C5602DC00B8C347 /* StringExtensions.swift in Sources */,
 				7948FEE11E19CB08001C5F3A /* SelectCalendarViewController.swift in Sources */,
 				7988506D1C4ACD4500BAA888 /* UIColorExtensions.swift in Sources */,
-				79F8ADE91C52A8E400F4FDD4 /* APICalls.swift in Sources */,
 				7948FF3D1E19CDCA001C5F3A /* ActionButton.swift in Sources */,
-				7948FED41E19CAE2001C5F3A /* PlanningViewControllers.swift in Sources */,
 				7948FEF51E19CB50001C5F3A /* ProjectMarksViewController.swift in Sources */,
 				7948FECA1E19CACC001C5F3A /* HomeViewController.swift in Sources */,
 				79F826531C5521AE0002DCC8 /* GPA.swift in Sources */,
@@ -1246,7 +1201,6 @@
 				7948FF271E19CC02001C5F3A /* NoDataView.swift in Sources */,
 				792B25931E3D1E3800FDCCB6 /* SlotRegisteredGroupTableViewCell.swift in Sources */,
 				798C9F311E2E27F000675296 /* ProjectDetailsUserTableViewCell.swift in Sources */,
-				79622E931C5D4C4B00FBA456 /* ModulesApiCalls.swift in Sources */,
 				7948FF311E19CC02001C5F3A /* ModuleActivityTableViewCell.swift in Sources */,
 				7926D0FA1E37FF08004BA0A3 /* RealmStudentInfo.swift in Sources */,
 				79EA5CB61D5E49E800DA7C30 /* Requests.swift in Sources */,
@@ -1255,8 +1209,6 @@
 				7948FEF31E19CB50001C5F3A /* CurrentProjectsViewController.swift in Sources */,
 				7948FF251E19CC02001C5F3A /* LoadingView.swift in Sources */,
 				79F9C7111E14083100431D49 /* RealmManager.swift in Sources */,
-				7948FED61E19CAE2001C5F3A /* StudentRegisteredViewController.swift in Sources */,
-				792B7A611C57EC6200F988BB /* ProjectsApiCall.swift in Sources */,
 				795994401C52C8F2007BE7C5 /* ApplicationManager.swift in Sources */,
 				79AFFA521E264AF500FDEDF3 /* PlanningFilterDelegate.swift in Sources */,
 			);
@@ -1413,12 +1365,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = JWHA9MBD3S;
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/DZNEmptyDataSet",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/SwiftyBeaver",
-					"$(PROJECT_DIR)/build/Debug-iphoneos/SwiftKeychainWrapper",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = IntraEpitech/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -17,13 +17,13 @@ class Flags {
 	
 	init(name: String, dict: JSON) {
 		self.name = name
-		label = dict["label"].stringValue
+		self.label = dict["label"].stringValue
 		
 		let arr = dict["modules"].arrayValue
-		modules = [Module]()
+		self.modules = [Module]()
 		for tmp in arr {
 			let tmp2 = Module(dict: tmp)
-			modules.append(tmp2)
+			self.modules.append(tmp2)
 		}
 	}
 }

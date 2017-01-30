@@ -22,6 +22,9 @@ class Configuration {
 
 	/// URL of users images
 	static let profilePictureURL = "https://cdn.local.epitech.eu/userprofil/"
+    
+    /// Epitech basic URL
+    static let epitechURL = "https://intra.epitech.eu"
 }
 
 let configurationInstance = Configuration()

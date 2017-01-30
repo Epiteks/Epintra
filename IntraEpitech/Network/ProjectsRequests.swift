@@ -51,7 +51,7 @@ class ProjectsRequests: RequestManager {
         
         let params = String(format: "?year=%@&module=%@&instance=%@&activity=%@", project.scolaryear!, project.codeModule!, project.codeInstance!, project.codeActi!)
         
-        super.call("projectFiles", urlParams: params) { (response) in
+        super.call("projectFiles", urlParams: params) { response in
             switch response {
             case .success(let responseJSON):
                 var files = [File]()

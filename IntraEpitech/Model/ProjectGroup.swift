@@ -26,12 +26,13 @@ class ProjectGroup {
 	}
 	
 	func fillMembers(_ dict: JSON) {
-		members = [User]()
+		
+        self.members = [User]()
 		
 		let arr = dict["members"].arrayValue
 		
 		for tmp in arr {
-			members?.append(User(little: tmp))
+			self.members?.append(User(little: tmp))
 		}
 	}
 }
