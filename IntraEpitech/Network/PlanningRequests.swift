@@ -49,6 +49,8 @@ class PlanningRequests: RequestManager {
             switch response {
             case .success(let responseJSON):
                 log.info("Token registration response \(responseJSON)")
+                planning.allowToken = false
+                planning.eventRegisteredStatus = "present"
                 completion(Result.success(nil))
                 break
             case .failure(let err):
