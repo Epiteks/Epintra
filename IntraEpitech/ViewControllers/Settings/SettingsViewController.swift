@@ -108,8 +108,8 @@ extension SettingsViewController: UITableViewDataSource {
 
         cell.textLabel?.text = NSLocalizedString(data.id, comment: "")
         
-        if let defaultCalendarIdentifier = ApplicationManager.sharedInstance.defaultCalendarIdentifier, let calendar = EKEventStore().calendar(withIdentifier: defaultCalendarIdentifier) {
-            cell.detailTextLabel?.text = calendar.title
+        if let defaultCalendarIdentifier = ApplicationManager.sharedInstance.defaultCalendarIdentifier, let calendar = CalendarManager.getCalendar(forIdentifier: defaultCalendarIdentifier) {
+            cell.detailTextLabel?.text = calendar.title;
             cell.accessoryType = .none
         } else {
             cell.accessoryType = .disclosureIndicator

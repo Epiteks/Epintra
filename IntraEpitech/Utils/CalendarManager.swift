@@ -124,5 +124,23 @@ class CalendarManager {
         
 		return arr
 	}
+    
+    
+    /// Get specific calendar based on its idenrtifier
+    ///
+    /// - Parameter identifier: calendar identifier
+    /// - Returns: matching calendar if found
+    class func getCalendar(forIdentifier identifier: String) -> EKCalendar? {
+        
+        let calendars = EKEventStore().calendars(for: EKEntityType.event)
+        
+        for calendar in calendars {
+            if calendar.calendarIdentifier == identifier {
+                return calendar
+            }
+        }
+        
+        return nil
+    }
 	
 }
