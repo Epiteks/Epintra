@@ -13,11 +13,11 @@ import Realm
 
 class StudentInfo: Object {
 	
-    dynamic var title: String? = nil
-	dynamic var login: String? = nil
-	dynamic var city: String? = nil
+    dynamic var title: String?
+	dynamic var login: String?
+	dynamic var city: String?
     var bachelor = RealmOptional<Double>()
-	dynamic var promo: String? = nil
+	dynamic var promo: String?
 	
 	init(dict: JSON, promo: String) {
         super.init()

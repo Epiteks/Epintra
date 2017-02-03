@@ -169,7 +169,7 @@ class UsersRequests: RequestManager {
         }
     }
     
-    func download(students promo: String, withFilter filter: FilterRankViewController.RankFilter? = nil, completion: @escaping (Result<Results<StudentInfo>?>) -> Void) {
+    func download(students promo: String, withFilter filter: FilterRankViewController.RankFilter?, completion: @escaping (Result<Results<StudentInfo>?>) -> Void) {
         
         let params = String(format: "?promotion=%@&format=json", promo)
         

@@ -21,11 +21,11 @@ class EventTableViewCell: MGSwipeTableCell {
     
     @IBOutlet weak var statusImageView: UIImageView!
     
-    var activityData: Planning? = nil
+    var activityData: Planning?
     
     var activityColor: UIColor! = .black
     
-    weak var tapDelegate: PlanningCellProtocol? = nil
+    weak var tapDelegate: PlanningCellProtocol?
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -13,7 +13,7 @@ class SelectCalendarViewController: LoadingDataViewController {
 	
 	@IBOutlet weak var tableView: UITableView!
 	
-    var calendars: [EKCalendar]? = nil
+    var calendars: [EKCalendar]?
     
     override func viewDidLoad() {
 		super.viewDidLoad()

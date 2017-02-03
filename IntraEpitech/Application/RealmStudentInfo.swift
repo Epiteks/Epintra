@@ -12,8 +12,8 @@ import RealmSwift
 
 class RealmStudentInfo {
     
-    private var realmStudents: RealmManager<StudentInfo>? = nil
-    private var realmInformation: RealmManager<EpirankInformation>? = nil
+    private var realmStudents: RealmManager<StudentInfo>?
+    private var realmInformation: RealmManager<EpirankInformation>?
     
     init() {
         do {
@@ -29,11 +29,11 @@ class RealmStudentInfo {
         self.realmStudents?.save(elements: students)
     }
     
-    func students(byPromotion promotion: String, andCities cities: [String]? = nil) -> Results<StudentInfo>? {
+    func students(byPromotion promotion: String, andCities cities: [String]?) -> Results<StudentInfo>? {
         
         let query = NSPredicate(format: "promo = %@", promotion)
         
-        if let students = self.realmStudents?.retrieveElements(withPredicate: query)?.sorted(byProperty: "bachelor", ascending: false) {
+        if let students = self.realmStudents?.retrieveElements(withPredicate: query)?.sorted(byKeyPath: "bachelor", ascending: false) {
             if let allCities = cities, allCities.first != "All" {
                 var citiesPredicates = [NSPredicate]()
                 for city in allCities {

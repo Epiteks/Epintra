@@ -13,9 +13,9 @@ class SlotRegisterTableViewCell: MGSwipeTableCell {
     
     @IBOutlet weak var registerText: UILabel!
     
-    weak var tapDelegate: PlanningCellProtocol? = nil
+    weak var tapDelegate: PlanningCellProtocol?
     
-    weak var slotData: Slot? = nil
+    weak var slotData: Slot?
     
     override func awakeFromNib() {
         super.awakeFromNib()

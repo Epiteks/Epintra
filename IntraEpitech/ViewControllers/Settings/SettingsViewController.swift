@@ -15,8 +15,8 @@ class SettingsViewController: UIViewController {
 
     struct SettingsCellData {
         var id: String!
-        var view: ((IndexPath, SettingsCellData) -> (UITableViewCell))? = nil
-        var handler: (() -> Void)? = nil
+        var view: ((IndexPath, SettingsCellData) -> (UITableViewCell))?
+        var handler: (() -> Void)?
     }
     
     struct SettingsSectionData {
@@ -109,7 +109,7 @@ extension SettingsViewController: UITableViewDataSource {
         cell.textLabel?.text = NSLocalizedString(data.id, comment: "")
         
         if let defaultCalendarIdentifier = ApplicationManager.sharedInstance.defaultCalendarIdentifier, let calendar = CalendarManager.getCalendar(forIdentifier: defaultCalendarIdentifier) {
-            cell.detailTextLabel?.text = calendar.title;
+            cell.detailTextLabel?.text = calendar.title
             cell.accessoryType = .none
         } else {
             cell.accessoryType = .disclosureIndicator

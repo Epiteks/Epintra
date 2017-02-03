@@ -11,9 +11,9 @@ import SwiftyJSON
 
 class BasicInformation {
  
-    var scolaryear: String? = nil
-    var codeModule: String? = nil
-    var codeInstance: String? = nil
+    var scolaryear: String?
+    var codeModule: String?
+    var codeInstance: String?
     
     init() { }
     

@@ -12,7 +12,7 @@ class CurrentProjectsViewController: LoadingDataViewController {
 
     @IBOutlet weak var projectsTableView: UITableView!
 
-    var projects: [Project]? = nil
+    var projects: [Project]?
     
     override func viewDidLoad() {
         super.viewDidLoad()

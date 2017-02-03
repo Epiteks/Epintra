@@ -21,7 +21,7 @@ class RegisteredStudent {
     var imageURL: String = ""
 	
     /// Student grade (user for modules registered view controller)
-    var grade: String? = nil
+    var grade: String?
     
     init(withName name: String, andEmail email: String) {
         self.login = email

@@ -17,9 +17,9 @@ class SlotRegisteredGroupTableViewCell: MGSwipeTableCell {
     
     @IBOutlet weak var actionImageView: UIImageView!
     
-    weak var tapDelegate: PlanningCellProtocol? = nil
-    
-    weak var slotData: Slot? = nil
+    weak var tapDelegate: PlanningCellProtocol?
+
+    weak var slotData: Slot?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,7 +39,7 @@ class SlotRegisteredGroupTableViewCell: MGSwipeTableCell {
         self.userTitle.text = slot.master?.title
         self.userEmail.text = slot.master?.login
         
-        var membersString: String? = nil
+        var membersString: String?
         
         if slot.members != nil {
             

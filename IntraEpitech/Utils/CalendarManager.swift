@@ -125,7 +125,6 @@ class CalendarManager {
 		return arr
 	}
     
-    
     /// Get specific calendar based on its idenrtifier
     ///
     /// - Parameter identifier: calendar identifier

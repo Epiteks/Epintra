@@ -37,7 +37,7 @@ class PlanningFilterViewController: UIViewController {
 
     var tableViewData: [Data]!
     
-    weak var delegate: PlanningFilterDelegate? = nil
+    weak var delegate: PlanningFilterDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()

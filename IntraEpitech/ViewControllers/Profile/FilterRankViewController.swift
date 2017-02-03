@@ -37,7 +37,7 @@ class FilterRankViewController: UIViewController {
         Data(title: "city", data: ["All", "BDX", "LIL", "LYN", "MAR", "MPL", "NAN", "NCE", "NCY", "PAR", "REN", "STG", "TLS"])
     ]
     
-    weak var delegate: UpdateRankFilterDelegate? = nil
+    weak var delegate: UpdateRankFilterDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()

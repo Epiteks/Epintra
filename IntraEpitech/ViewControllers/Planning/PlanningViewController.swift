@@ -18,13 +18,13 @@ class PlanningViewController: LoadingDataViewController {
     @IBOutlet weak var todayButtonItem: UIBarButtonItem!
     @IBOutlet weak var filterButtonItem: UIBarButtonItem!
 
-    var currentWeekEvents: [Planning]? = nil
-    var currentDayEvents: [Planning]? = nil
+    var currentWeekEvents: [Planning]?
+    var currentDayEvents: [Planning]?
     
     var planningFilter = PlanningFilterViewController.PlanningFilter()
     
-    var appointmentDetailsData: AppointmentEvent? = nil
-    var selectedActivity: Planning? = nil
+    var appointmentDetailsData: AppointmentEvent?
+    var selectedActivity: Planning?
     
     override func viewDidLoad() {
         super.viewDidLoad()

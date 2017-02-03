@@ -12,7 +12,7 @@ class ModulesViewController: LoadingDataViewController {
     
     @IBOutlet weak var modulesTableView: UITableView!
     
-    var modules: [Module]? = nil
+    var modules: [Module]?
     
     override func viewDidLoad() {
         self.modulesTableView.rowHeight = UITableViewAutomaticDimension

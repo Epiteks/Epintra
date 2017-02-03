@@ -15,9 +15,9 @@ class SlotTakenTableViewCell: MGSwipeTableCell {
     @IBOutlet weak var userEmail: UILabel!
     @IBOutlet weak var actionImageView: UIImageView!
     
-    weak var tapDelegate: PlanningCellProtocol? = nil
+    weak var tapDelegate: PlanningCellProtocol?
     
-    weak var slotData: Slot? = nil
+    weak var slotData: Slot?
     
     override func awakeFromNib() {
         super.awakeFromNib()

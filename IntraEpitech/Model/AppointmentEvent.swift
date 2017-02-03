@@ -24,7 +24,7 @@ class AppointmentEvent: BasicInformation {
     
     /// Available slots.
     /// Array of tuple to keep date track
-    var slots: [SlotsGroup]? = nil
+    var slots: [SlotsGroup]?
     
     /// Current group id if slots are for groups projects
     var groupID: Int?
@@ -52,8 +52,8 @@ class AppointmentEvent: BasicInformation {
 
     var canRegisterToInstance: Bool!
     
-    var currentMasterEmail: String? = nil
-    var currentMembersEmail: [String]? = nil
+    var currentMasterEmail: String?
+    var currentMembersEmail: [String]?
     
     var canRegister: Bool {
         return /*self.studentRegistered == false &&*/self.canRegisterToInstance == true

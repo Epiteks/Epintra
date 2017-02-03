@@ -34,7 +34,7 @@ class Planning: BasicInformation {
     let eventType: EventType!
     
 	/// Title of the module event, nil if event is personal
-    var titleModule: String? = nil
+    var titleModule: String?
     
 	/// When the event starts
 	var startTime: Date!
@@ -52,7 +52,7 @@ class Planning: BasicInformation {
     var allowToken: Bool?
     
     /// Student status, if he is registered or not
-    var eventRegisteredStatus: String? = nil
+    var eventRegisteredStatus: String?
 	
     /// Type code of the event (used for the colorizaration)
     var eventTypeCode: String?
@@ -67,10 +67,10 @@ class Planning: BasicInformation {
     var codeActi: String?
 
     /// Only there for personal events...
-    var title: String? = nil
+    var title: String?
 
     /// Group id to register to slots with a group
-    var groupID: Int? = nil
+    var groupID: Int?
     
 	var codeEvent: String?
 	var room: Room?

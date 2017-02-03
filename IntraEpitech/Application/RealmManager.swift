@@ -12,7 +12,7 @@ import RealmSwift
 
 class RealmManager<T: Object> {
     
-    var realm: Realm? = nil
+    var realm: Realm?
     
     /// Initializer
     ///
@@ -62,7 +62,7 @@ class RealmManager<T: Object> {
     ///
     /// - Parameter query: NSPredicate used for filtering data
     /// - Returns: All results
-    func retrieveElements(withPredicate query: NSPredicate? = nil) -> Results<T>? {
+    func retrieveElements(withPredicate query: NSPredicate?) -> Results<T>? {
         if let elements = realm?.objects(T.self) {
             return query != nil ? elements.filter(query!) : elements
         }

@@ -29,7 +29,7 @@ class RankViewController: LoadingDataViewController {
             self.filteredStudents = newValue
         }
     }
-    var filteredStudents: Results<StudentInfo>? = nil
+    var filteredStudents: Results<StudentInfo>?
     
     override func viewDidLoad() {
         super.viewDidLoad()

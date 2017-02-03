@@ -12,9 +12,9 @@ class ModuleRegisteredStudentsViewController: UIViewController, UITableViewDeleg
 
     @IBOutlet weak var studentsTableView: UITableView!
     
-    var students: [RegisteredStudent]? = nil
+    var students: [RegisteredStudent]?
     
-    var currentStudentIndex: IndexPath? = nil
+    var currentStudentIndex: IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -17,7 +17,7 @@ class ModuleDetailsViewController: LoadingDataViewController {
     
     var barButtonItem: UIBarButtonItem!
     
-    var module: Module? = nil
+    var module: Module?
 
     override func viewDidLoad() {
         super.viewDidLoad()
