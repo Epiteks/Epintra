@@ -5,7 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,13 +14,13 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="72"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="71.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="71"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rho-ds-Jky">
-                        <rect key="frame" x="59" y="8" width="201" height="55.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="71.5"/>
                         <constraints>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="28" id="zqT-w0-dof"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="zqT-w0-dof"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -29,10 +28,10 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottomMargin" secondItem="Rho-ds-Jky" secondAttribute="bottom" id="1iJ-2d-aKa"/>
-                    <constraint firstAttribute="topMargin" secondItem="Rho-ds-Jky" secondAttribute="top" id="4YA-42-tLU"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="Rho-ds-Jky" secondAttribute="trailing" constant="52" id="EuF-04-ktC"/>
-                    <constraint firstItem="Rho-ds-Jky" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="51" id="xbH-oG-0ER"/>
+                    <constraint firstAttribute="trailing" secondItem="Rho-ds-Jky" secondAttribute="trailing" id="7kz-pO-8cz"/>
+                    <constraint firstAttribute="bottom" secondItem="Rho-ds-Jky" secondAttribute="bottom" id="H59-wu-8sp"/>
+                    <constraint firstItem="Rho-ds-Jky" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="OuX-D6-ruS"/>
+                    <constraint firstItem="Rho-ds-Jky" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="dlR-Ao-6uJ"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

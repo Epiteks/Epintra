@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="vx8-fe-S7T">
-                        <rect key="frame" x="15" y="8" width="282" height="117"/>
+                        <rect key="frame" x="16" y="8" width="280" height="116"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7zM-8B-czg">
                                 <rect key="frame" x="0.0" y="0.0" width="35.5" height="17"/>
@@ -28,18 +28,18 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qf7-zY-Y8A">
-                                <rect key="frame" x="0.0" y="17" width="31" height="100"/>
+                                <rect key="frame" x="0.0" y="17" width="31" height="99"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="uVP-ZJ-9dW"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" constant="36" id="62y-ns-Aw4"/>
                         </constraints>
                     </stackView>
                     <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ECHEC" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zjB-Oq-0dX">
-                        <rect key="frame" x="299" y="57" width="66" height="19.5"/>
+                        <rect key="frame" x="298" y="56.5" width="66" height="19.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="65.5" id="EWI-TV-eCH"/>
                         </constraints>
@@ -51,10 +51,10 @@
                 <constraints>
                     <constraint firstAttribute="bottomMargin" secondItem="vx8-fe-S7T" secondAttribute="bottom" id="9kg-G2-AUv"/>
                     <constraint firstItem="vx8-fe-S7T" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="B59-ZE-ta5"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="zjB-Oq-0dX" secondAttribute="trailing" constant="-7" id="Md3-I4-mES"/>
                     <constraint firstItem="zjB-Oq-0dX" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="bPo-7B-IfN"/>
-                    <constraint firstAttribute="leadingMargin" secondItem="vx8-fe-S7T" secondAttribute="leading" constant="-7" id="cWs-a2-5P7"/>
+                    <constraint firstItem="vx8-fe-S7T" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="bbA-sc-ujh"/>
                     <constraint firstItem="zjB-Oq-0dX" firstAttribute="leading" secondItem="vx8-fe-S7T" secondAttribute="trailing" constant="2" id="hyS-I1-bcE"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="zjB-Oq-0dX" secondAttribute="trailing" constant="-7.5" id="u5q-Us-7og"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

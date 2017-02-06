@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="145"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U4L-gG-kxW" id="3o6-4J-vZq">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="144.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="144"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="b1T-vX-XGE">
@@ -56,9 +56,10 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottomMargin" secondItem="b1T-vX-XGE" secondAttribute="bottom" id="6tI-0T-9va"/>
-                    <constraint firstItem="bpi-i1-Ve6" firstAttribute="leading" secondItem="b1T-vX-XGE" secondAttribute="trailing" constant="20" id="HJd-tP-gS4"/>
+                    <constraint firstItem="bpi-i1-Ve6" firstAttribute="leading" secondItem="b1T-vX-XGE" secondAttribute="trailing" priority="750" constant="20" id="HJd-tP-gS4"/>
                     <constraint firstAttribute="trailingMargin" secondItem="bpi-i1-Ve6" secondAttribute="trailing" id="O0I-Gy-nMJ"/>
                     <constraint firstItem="b1T-vX-XGE" firstAttribute="leading" secondItem="3o6-4J-vZq" secondAttribute="leadingMargin" constant="15" id="Utv-fL-IVw"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="b1T-vX-XGE" secondAttribute="trailing" constant="40" id="a8m-1s-2bb"/>
                     <constraint firstItem="b1T-vX-XGE" firstAttribute="top" secondItem="3o6-4J-vZq" secondAttribute="topMargin" id="d0S-Xu-kXE"/>
                     <constraint firstItem="bpi-i1-Ve6" firstAttribute="centerY" secondItem="3o6-4J-vZq" secondAttribute="centerY" id="fvp-uM-0Jp"/>
                 </constraints>
@@ -66,6 +67,8 @@
             <connections>
                 <outlet property="actionImageView" destination="bpi-i1-Ve6" id="m5D-lG-brS"/>
                 <outlet property="members" destination="Igt-o2-QqS" id="0gV-GI-P8c"/>
+                <outlet property="stackViewToStatusImageConstraint" destination="HJd-tP-gS4" id="W5T-GP-fuU"/>
+                <outlet property="stackViewToSuperViewConstraint" destination="a8m-1s-2bb" id="iFQ-C1-c8d"/>
                 <outlet property="userEmail" destination="Izz-xw-R5T" id="Zsr-Ob-8HJ"/>
                 <outlet property="userTitle" destination="pak-WJ-kjg" id="uir-SK-3UZ"/>
             </connections>

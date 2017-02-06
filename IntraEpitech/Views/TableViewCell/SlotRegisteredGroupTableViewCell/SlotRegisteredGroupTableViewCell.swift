@@ -17,6 +17,9 @@ class SlotRegisteredGroupTableViewCell: MGSwipeTableCell {
     
     @IBOutlet weak var actionImageView: UIImageView!
     
+    @IBOutlet weak var stackViewToStatusImageConstraint: NSLayoutConstraint!
+    @IBOutlet weak var stackViewToSuperViewConstraint: NSLayoutConstraint!
+    
     weak var tapDelegate: PlanningCellProtocol?
 
     weak var slotData: Slot?
@@ -60,6 +63,14 @@ class SlotRegisteredGroupTableViewCell: MGSwipeTableCell {
         if slot.canUnregister {
             self.actionImageView.image = UIImage(named: "Unregister")?.withRenderingMode(.alwaysTemplate)
             self.actionImageView.tintColor = UIUtils.planningRedColor
+            
+            self.stackViewToStatusImageConstraint.constant = 15
+            self.stackViewToSuperViewConstraint.priority = 250
+            self.stackViewToStatusImageConstraint.priority = 1000
+        } else {
+            self.stackViewToSuperViewConstraint.constant = 15
+            self.stackViewToSuperViewConstraint.priority = 1000
+            self.stackViewToStatusImageConstraint.priority = 250
         }
         
         setSwipeActions()

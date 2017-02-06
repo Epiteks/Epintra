@@ -177,7 +177,7 @@
                                         <rect key="frame" x="0.0" y="28" width="383" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="t5Z-NV-Jnl" id="FOb-c9-O8i">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xX-QA-ZVr">
@@ -247,10 +247,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="1w5-No-D9i" firstAttribute="top" secondItem="6CC-kE-vSm" secondAttribute="bottom" constant="-49" id="72b-EB-qCe"/>
-                            <constraint firstItem="6CC-kE-vSm" firstAttribute="top" secondItem="gIf-tT-kA7" secondAttribute="bottom" constant="-64" id="CJo-Ex-P5w"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="6CC-kE-vSm" secondAttribute="trailing" constant="-16" id="Fnj-Uc-tmJ"/>
-                            <constraint firstItem="6CC-kE-vSm" firstAttribute="leading" secondItem="gTM-FU-1zL" secondAttribute="leadingMargin" constant="-16" id="fdp-0W-PX5"/>
+                            <constraint firstAttribute="trailing" secondItem="6CC-kE-vSm" secondAttribute="trailing" id="IQu-kl-wS2"/>
+                            <constraint firstAttribute="bottom" secondItem="6CC-kE-vSm" secondAttribute="bottom" id="cuZ-px-EPP"/>
+                            <constraint firstItem="6CC-kE-vSm" firstAttribute="leading" secondItem="gTM-FU-1zL" secondAttribute="leading" id="dsW-ru-PcT"/>
+                            <constraint firstItem="6CC-kE-vSm" firstAttribute="top" secondItem="gTM-FU-1zL" secondAttribute="top" id="lvf-yY-e2o"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="ed4-o9-ZQc">
