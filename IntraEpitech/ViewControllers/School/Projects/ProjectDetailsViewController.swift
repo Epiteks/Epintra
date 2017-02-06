@@ -70,7 +70,7 @@ class ProjectDetailsViewController: UIViewController {
     
     func setProgressView() {
         
-        if let begin = self.project?.begin?.shortToDate(), let end = self.project?.end?.shortToDate() {
+        if let begin = self.project?.begin?.toDate(), let end = self.project?.end?.toDate() {
             
             let today = Date()
             
