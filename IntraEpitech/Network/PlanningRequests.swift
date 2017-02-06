@@ -48,7 +48,7 @@ class PlanningRequests: RequestManager {
         super.call("tokenValidation", params: parameters, urlParams: urlParameters) { response in
             switch response {
             case .success(let responseJSON):
-                log.info("Token registration response \(responseJSON)")
+                log.verbose("Token registration response \(responseJSON)")
                 planning.allowToken = false
                 planning.eventRegisteredStatus = "present"
                 completion(Result.success(nil))
@@ -75,7 +75,7 @@ class PlanningRequests: RequestManager {
             switch response {
             case .success(_):
                 event.eventRegisteredStatus = "registered"
-                log.info("Subscribed event \(event)")
+                log.verbose("Subscribed event \(event)")
                 completion(Result.success(nil))
                 break
             case .failure(let err):
@@ -100,7 +100,7 @@ class PlanningRequests: RequestManager {
             switch response {
             case .success(let responseJSON):
                 event.eventRegisteredStatus = "false"
-                log.info("Unsubscribe event \(responseJSON)")
+                log.verbose("Unsubscribe event \(responseJSON)")
                 completion(Result.success(nil))
                 break
             case .failure(let err):
@@ -117,7 +117,7 @@ class PlanningRequests: RequestManager {
         super.call("eventDetails", urlParams: urlParameters) { response in
             switch response {
             case .success(let responseJSON):
-                log.info("Event slots : \(responseJSON)")
+                log.verbose("Event slots : \(responseJSON)")
                 
                 let res = AppointmentEvent(dict: responseJSON, eventStart: event.startTime!, eventEnd: event.endTime!, eventCodeAsked: event.codeEvent!, planning: event)
                 completion(Result.success(res))
@@ -137,7 +137,7 @@ class PlanningRequests: RequestManager {
         super.call("subscribeSlot", urlParams: urlParameters) { response in
             switch response {
             case .success(let responseJSON):
-                log.info("Subscribed to slot  : \(responseJSON)")
+                log.verbose("Subscribed to slot  : \(responseJSON)")
                 slot.master = RegisteredStudent(withName: ApplicationManager.sharedInstance.user?.login ?? "", andEmail: event.currentMasterEmail ?? "")
                 completion(Result.success(nil))
                 break
@@ -155,7 +155,7 @@ class PlanningRequests: RequestManager {
         super.call("unsubscribeSlot", urlParams: urlParameters) { response in
             switch response {
             case .success(let responseJSON):
-                log.info("Unsubscribed from slot  : \(responseJSON)")
+                log.verbose("Unsubscribed from slot  : \(responseJSON)")
                 slot.master = nil
                 slot.members = nil
                 completion(Result.success(nil))
