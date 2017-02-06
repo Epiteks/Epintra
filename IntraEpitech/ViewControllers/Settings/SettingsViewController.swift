@@ -88,6 +88,9 @@ extension SettingsViewController: UITableViewDataSource {
             log.error("No cell data for section \(indexPath.section) at row \(indexPath.row)")
         }
         
+//        cell.textLabel?.font = cell.textLabel?.font.withSize(14)
+//        cell.detailTextLabel?.font = cell.textLabel?.font.withSize(14)
+        
         return cell
     }
     

@@ -13,8 +13,8 @@ import RealmSwift
 /// Used to retrieve informations about epirank data contained in database
 class EpirankInformation: Object {
     
-    dynamic var promotion: String!
-    dynamic var updatedAt: Date!
+    dynamic var promotion: String?
+    dynamic var updatedAt: Date?
     
     override static func primaryKey() -> String {
         return "promotion"
@@ -43,8 +43,9 @@ class EpirankInformation: Object {
     func needsNewerData() -> Bool {
         
         /// Guess when the data was updated on server-side
-        let guessedUpdatedDate = self.updatedAt.addingTimeInterval(60 * 60 * 24) // Add 24 hour to be sure new data was generated
-        
+        guard let guessedUpdatedDate = self.updatedAt?.addingTimeInterval(60 * 60 * 24) else { // Add 24 hour to be sure new data was generated
+            return true
+        }
         // Check if current date can have new data
         return guessedUpdatedDate < Date()
     }

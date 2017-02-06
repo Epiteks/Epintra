@@ -188,12 +188,12 @@ class UsersRequests: RequestManager {
                     do {
                         var realmStudentInfo = RealmStudentInfo()
                         
-                        var epirankInformation = realmStudentInfo.epirankInformation(forPromo: promo)
+                        //var epirankInformation = realmStudentInfo.epirankInformation(forPromo: promo)
                         
-                        if epirankInformation == nil || epirankInformation?.promotion == nil || epirankInformation?.updatedAt == nil {
-                            epirankInformation = EpirankInformation(promo: promo, date: Date(fromEpirank: updatedAtString))
-                        }
-                        try realmStudentInfo.save(students: students, updatedAt: epirankInformation!)
+                        //if epirankInformation == nil || epirankInformation?.promotion == nil || epirankInformation?.updatedAt == nil {
+                        let epirankInformation = EpirankInformation(promo: promo, date: Date(fromEpirank: updatedAtString))
+                        //}
+                        try realmStudentInfo.save(students: students, updatedAt: epirankInformation)
                         
                         DispatchQueue.main.async {
                             // Need new thread
