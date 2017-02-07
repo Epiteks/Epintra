@@ -26,7 +26,8 @@ class MarksViewController: LoadingDataViewController, UITableViewDataSource, UIT
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         if ApplicationManager.sharedInstance.user?.marks == nil {
             getMarks()
         }

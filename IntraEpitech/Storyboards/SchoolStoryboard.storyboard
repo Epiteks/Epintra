@@ -77,7 +77,7 @@
                     <navigationItem key="navigationItem" id="J5x-9R-335">
                         <nil key="title"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="bar" selectedSegmentIndex="0" id="MMB-pM-gqa">
-                            <rect key="frame" x="28" y="7" width="359" height="30"/>
+                            <rect key="frame" x="27.5" y="7" width="359" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="First"/>

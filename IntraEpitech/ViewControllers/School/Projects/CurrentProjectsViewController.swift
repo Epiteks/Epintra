@@ -23,7 +23,8 @@ class CurrentProjectsViewController: LoadingDataViewController {
         self.projectsTableView.separatorInset = .zero
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         if ApplicationManager.sharedInstance.user?.projects == nil {
             getProjects()
         }

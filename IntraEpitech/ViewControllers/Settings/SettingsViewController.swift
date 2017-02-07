@@ -169,12 +169,16 @@ extension SettingsViewController: MFMailComposeViewControllerDelegate {
             let mailComposerVC = MFMailComposeViewController()
             mailComposerVC.mailComposeDelegate = self
             mailComposerVC.setToRecipients(["maxime.junger@epitech.eu"])
-            mailComposerVC.setSubject("IntraEpitech")
+            mailComposerVC.setSubject("Epintra")
             mailComposerVC.setMessageBody(SystemUtils.getAllMailData(), isHTML: false)
             self.present(mailComposerVC, animated: true, completion: nil)
         } else {
             log.error("Cannot send email")
             self.showAlert(withTitle: NSLocalizedString("cannotSendEmail", comment: ""))
         }
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }

@@ -17,15 +17,6 @@ class ModulesViewController: LoadingDataViewController {
     override func viewDidLoad() {
         self.modulesTableView.rowHeight = UITableViewAutomaticDimension
         self.modulesTableView.estimatedRowHeight = 60
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if ApplicationManager.sharedInstance.user?.modules == nil {
-            getModules()
-        }
-        
         self.modulesTableView.register(UINib(nibName: "ModuleTableViewCell", bundle: nil), forCellReuseIdentifier: "moduleCell")
     }
     
@@ -36,6 +27,14 @@ class ModulesViewController: LoadingDataViewController {
                     vc.module = module
                 }
             }
+        }
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        if ApplicationManager.sharedInstance.user?.modules == nil {
+            getModules()
         }
     }
     
