@@ -62,6 +62,7 @@
 "NoCalendar" = "No calendar found.";
 "NoAccessCalendar" = "You haven't granted the access to the calendar.\nIf you want to, go to Settings -> Epintra.";
 "NoCalendarSelected" = "You haven't choose any calendar. Go to Settings section to select one.";
+"cannotSendEmail" = "Cannot send email.";
 
 /**
  ** Profile View

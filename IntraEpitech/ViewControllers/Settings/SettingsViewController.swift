@@ -11,7 +11,7 @@ import MessageUI
 import StoreKit
 import EventKit
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: LoadingDataViewController {
 
     struct SettingsCellData {
         var id: String!
@@ -87,9 +87,6 @@ extension SettingsViewController: UITableViewDataSource {
         } else {
             log.error("No cell data for section \(indexPath.section) at row \(indexPath.row)")
         }
-        
-//        cell.textLabel?.font = cell.textLabel?.font.withSize(14)
-//        cell.detailTextLabel?.font = cell.textLabel?.font.withSize(14)
         
         return cell
     }
@@ -177,6 +174,7 @@ extension SettingsViewController: MFMailComposeViewControllerDelegate {
             self.present(mailComposerVC, animated: true, completion: nil)
         } else {
             log.error("Cannot send email")
+            self.showAlert(withTitle: NSLocalizedString("cannotSendEmail", comment: ""))
         }
     }
 }

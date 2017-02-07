@@ -62,6 +62,8 @@
 "NoCalendar" = "Aucun calendrier trouvé.";
 "NoAccessCalendar" = "Vous n'avez pas donné l'accès aux calendriers.\nSi vous souhaitez le donner, aller dans Réglages -> Epintra.";
 "NoCalendarSelected" = "Vous n'avez pas choisi de calendrier. Sélectionnez en un dans les réglages.";
+"cannotSendEmail" = "Impossible d'envoyer un email.";
+
 /**
  ** Home
  */
