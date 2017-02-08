@@ -155,7 +155,8 @@ class Planning: BasicInformation {
         
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        
+        dateFormat.locale = Locale(identifier: "en_US_POSIX")
+
         self.title = dict["title"].stringValue
         
 		titleModule = dict["titlemodule"].stringValue
