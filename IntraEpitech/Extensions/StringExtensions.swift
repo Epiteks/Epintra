@@ -14,6 +14,7 @@ extension String {
 		let dateFormatter = DateFormatter()
 		dateFormatter.locale = Locale(identifier: "en_US_POSIX")
 		dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
 		let date = dateFormatter.date(from: strTime!)
 		return date!
 		
@@ -34,7 +35,7 @@ extension String {
 		let strTime: String? = self
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
-		dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+    dateFormatter.locale = Locale(identifier: "en_US_POSIX")
 		let date = dateFormatter.date(from: strTime!)
 		return date!
 	}

@@ -35,6 +35,7 @@ public extension Date {
     func toSlotTitleString() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         return dateFormatter.string(from: self)
     }
     
@@ -51,10 +52,9 @@ public extension Date {
 	func toEventHour() -> String {
 		
 		var str = String()
-		
 		let formatter = DateFormatter()
 		formatter.dateFormat = "HH:mm"
-		
+		formatter.locale = Locale(identifier: "en_US_POSIX")
 		str = formatter.string(from: self)
 		
 		return str
@@ -66,7 +66,7 @@ public extension Date {
 		
 		let formatter = DateFormatter()
 		formatter.dateFormat = "dd/MM/yyyy HH:mm"
-		
+		formatter.locale = Locale(identifier: "en_US_POSIX")
 		str = formatter.string(from: self)
 		
 		return str
