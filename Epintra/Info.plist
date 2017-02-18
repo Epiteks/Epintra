@@ -44,16 +44,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-	<key>UIApplicationShortcutItems</key>
-	<array>
-		<dict>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>Profil</string>
-			<key>UIApplicationShortcutItemType</key>
-			<string>ShowUserProfile</string>
-			<key>UIApplicationShortcutItemIconType</key>
-			<string>UIApplicationShortcutIconTypeHome</string>
-		</dict>
-	</array>
 </dict>
 </plist>
