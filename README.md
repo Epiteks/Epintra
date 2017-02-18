@@ -11,4 +11,4 @@ To install all dependencies, run :
 ```bash
 pod install
 ```
-After this, open the `IntraEpitech.xcworkspace` and enjoy.
+After this, open the `Epintra.xcworkspace` and enjoy.
