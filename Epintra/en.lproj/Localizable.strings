@@ -20,6 +20,7 @@
 "pleaseFillEverything" = "Please fill every field";
 "noOfficialApp" = "Non official application.";
 "invalidCombinaison" = "Invalid login/password combinaison";
+"serverNotAvailable" = "Server is currently not available";
 
 /**
  ** Splash screen

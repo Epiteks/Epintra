@@ -48,7 +48,8 @@ class LoginViewController: UIViewController {
 		self.infoLabel.text = NSLocalizedString("noOfficialApp", comment: "")
 		
 		self.registerForKeyboardNotifications()
-		
+
+		checkStatus()
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -204,6 +205,51 @@ class LoginViewController: UIViewController {
             waitview.removeFromSuperview()
         }
     }
+
+	func checkStatus() {
+
+		func checkAPI() {
+			miscRequests.getAPIStatus { (responseAPI) in
+				switch responseAPI {
+				case .success(let status):
+					if status {
+						checkIntra()
+					} else {
+						ErrorViewer.errorShow(self, mess: NSLocalizedString("serverNotAvailable", comment: "")) { _ in }
+					}
+					break
+				case .failure(let error):
+					if let mess = error.message {
+						ErrorViewer.errorShow(self, mess: mess) { _ in }
+					} else {
+						ErrorViewer.errorShow(self, mess: NSLocalizedString("unknownApiError", comment: "")) { _ in }
+					}
+					break
+				}
+			}
+		}
+
+		func checkIntra() {
+			miscRequests.getIntraStatus(completion: { (responseIntra) in
+				switch responseIntra {
+				case .success(let status):
+					if !status {
+						ErrorViewer.errorShow(self, mess: NSLocalizedString("serverNotAvailable", comment: "")) { _ in }
+					}
+					break
+				case .failure(let error):
+					if let mess = error.message {
+						ErrorViewer.errorShow(self, mess: mess) { _ in }
+					} else {
+						ErrorViewer.errorShow(self, mess: NSLocalizedString("unknownApiError", comment: "")) { _ in }
+					}
+					break
+				}
+			})
+		}
+
+		checkAPI()
+	}
 }
 
 extension LoginViewController: UITableViewDataSource {

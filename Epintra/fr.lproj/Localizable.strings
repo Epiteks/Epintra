@@ -20,6 +20,7 @@
 "pleaseFillEverything" = "Merci de remplir tous les champs";
 "noOfficialApp" = "Application non officielle.";
 "invalidCombinaison" = "Mauvaise combinaison login / mot de passe";
+"serverNotAvailable" = "Le serveur est temporairement indisponible";
 
 /**
  ** Splash screen
