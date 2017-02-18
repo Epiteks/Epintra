@@ -270,6 +270,7 @@ extension LoginViewController: UITableViewDataSource {
         
         if ((indexPath as NSIndexPath).row == 0) {
             cell?.dataTextField.placeholder = NSLocalizedString("email", comment: "")
+			cell?.dataTextField.keyboardType = .emailAddress
         } else {
             cell?.dataTextField.placeholder = NSLocalizedString("password", comment: "")
             cell?.dataTextField.isSecureTextEntry = true
