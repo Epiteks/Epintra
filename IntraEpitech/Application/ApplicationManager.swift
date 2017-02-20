@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class ApplicationManager {
     
@@ -16,8 +17,18 @@ class ApplicationManager {
     // Current token used for the calls
     internal var token: String?
     
+//    private var userObservers = [Observer]()
+    
     // Logged user
+    internal var ouser: Variable<User>?
     internal var user: User?
+    
+    
+//        didSet {
+//            for observer in self.userObservers {
+//                observer.function()
+//            }
+//        }
 
     // Calendar identifier
     internal var defaultCalendarIdentifier: String? {
@@ -31,7 +42,12 @@ class ApplicationManager {
     }
 
     func resetInstance() {
-        token = nil
-        user = nil
+        self.token = nil
+        self.user = nil
+//        self.userObservers.removeAll()
+    }
+    
+    func addObserver() {
+        
     }
 }

@@ -53,18 +53,24 @@ class ProfileView: UIView {
 	
 	func setUserData(_ user: User) {
 		
-		self.spicesLabel.text =  user.spices!.currentSpices + " " + NSLocalizedString("spices", comment: "")
-		self.logLabel.text = "Log:  " + String(user.log!.timeActive)
-		self.logLabel.textColor = user.log?.getColor()
-
+        if let spices = user.spices {
+            self.spicesLabel.text =  spices.currentSpices + " " + NSLocalizedString("spices", comment: "")
+        }
+		
+        if let log = user.log {
+            self.logLabel.text = "Log:  " + String(log.timeActive)
+            self.logLabel.textColor = user.log?.getColor()
+        }
+        
 		if let gpaCount = user.gpa?.count, gpaCount <= 1 {
 			gpaNumberLabel.isHidden = true
 			gpaTypeLabel.isHidden = true
 			gpaTitleLabel.isHidden = true
 		} else {
-			let gpa = user.gpa![0]
-			gpaTypeLabel.text = gpa.cycle
-			gpaNumberLabel.text = gpa.value
+            if let gpa = user.gpa?[0] {
+                gpaTypeLabel.text = gpa.cycle
+                gpaNumberLabel.text = gpa.value
+            }
 		}
 		
 		let gpa = user.getLatestGPA()
@@ -72,7 +78,7 @@ class ProfileView: UIView {
 		self.gpaCurrentNumberLabel.text = gpa.value
 		self.gpaCurrentTypeLabel.text = gpa.cycle
 		
-		self.creditsNumberLabel.text = String(user.credits!)
+		self.creditsNumberLabel.text = String(user.credits ?? 0)
 	}
 	
 	func setUserImage(_ image: UIImage) {

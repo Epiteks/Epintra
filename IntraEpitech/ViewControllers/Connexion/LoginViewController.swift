@@ -217,7 +217,7 @@ extension LoginViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "loginCell") as? LoginTableViewCell
         
         cell?.dataTextField.tintColor = UIUtils.backgroundColor
@@ -233,4 +233,32 @@ extension LoginViewController: UITableViewDataSource {
         
         return cell!
     }
+}
+
+extension LoginViewController {
+    
+//    func getUserDataAndGoNext() {
+//
+//        usersRequests.getCurrentUserData { result in
+//            switch (result) {
+//            case .success(_):
+//                log.info("Get user data ok")
+//            case .failure(let error):
+//                DispatchQueue.main.async {
+//                    self.errorDuringFetching = true
+//                    MJProgressView.instance.hideProgress()
+//                    if error.message != nil {
+//                        ErrorViewer.errorPresent(self, mess: error.message!) {
+//                            group.leave()
+//                        }
+//                    } else {
+//                        ErrorViewer.errorPresent(self, mess: NSLocalizedString("unknownApiError", comment: "")) {
+//                            group.leave()
+//                        }
+//                    }
+//                }
+//                break
+//            }
+//        }
+//    }
 }

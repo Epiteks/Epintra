@@ -11,6 +11,9 @@ PODS:
   - Realm/Headers (2.4.2)
   - RealmSwift (2.4.2):
     - Realm (= 2.4.2)
+  - RxCocoa (3.2.0):
+    - RxSwift (~> 3.1)
+  - RxSwift (3.2.0)
   - SwiftKeychainWrapper (3.0.1)
   - SwiftyBeaver (1.1.1)
   - SwiftyJSON (3.1.4)
@@ -22,6 +25,8 @@ DEPENDENCIES:
   - FSCalendar
   - MGSwipeTableCell
   - RealmSwift
+  - RxCocoa
+  - RxSwift
   - SwiftKeychainWrapper
   - SwiftyBeaver
   - SwiftyJSON
@@ -34,10 +39,12 @@ SPEC CHECKSUMS:
   MGSwipeTableCell: 616700eb0ffd1c611ba909066cb7fd739790a0a7
   Realm: d27b758e12d62a3371879a065d4c40aa212c5a54
   RealmSwift: 9556c0fe0f0cfecacfb755ae9e68ff379fc6bead
+  RxCocoa: ccdf43101a70407097a29082f648ba1676075b30
+  RxSwift: 46574f70d416b7923c237195939cc488a7fbf3a0
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
   SwiftyBeaver: 2b68694df862381235e32bcfc4ec991e26bf131d
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: fa046040851fbd7ad16055b895027c23cfcdefca
+PODFILE CHECKSUM: c489f423371d4ed67c913ab2943ea0246df5c249
 
-COCOAPODS: 1.2.0.rc.1
+COCOAPODS: 1.2.0

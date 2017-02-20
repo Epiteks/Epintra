@@ -30,7 +30,10 @@ class SplashScreenViewController: UIViewController {
 		
 		MJProgressView.instance.showProgress(self.view, white: true)
 		
-		fetchAllData()
+        let storyboard = UIStoryboard(name: "MainViewStoryboard", bundle: nil)
+        let vc = storyboard.instantiateInitialViewController()
+        self.present(vc!, animated: true, completion: nil)
+//        fetchAllData()
 		
 		return
 	}

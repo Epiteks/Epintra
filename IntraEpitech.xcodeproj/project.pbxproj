@@ -13,6 +13,8 @@
 		7907507B1E17B93A00B07F7E /* EpirankInformations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7907507A1E17B93A00B07F7E /* EpirankInformations.swift */; };
 		79152D8C1C67A47100513E0F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79152D8A1C67A47100513E0F /* AddressBook.framework */; };
 		79152D8D1C67A47100513E0F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79152D8B1C67A47100513E0F /* AddressBookUI.framework */; };
+		791855981E5B5F8D001F1F62 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 791855961E5B5F8D001F1F62 /* RxCocoa.framework */; };
+		791855991E5B5F8D001F1F62 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 791855971E5B5F8D001F1F62 /* RxSwift.framework */; };
 		7926D0FA1E37FF08004BA0A3 /* RealmStudentInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7926D0F91E37FF08004BA0A3 /* RealmStudentInfo.swift */; };
 		79284F5D1C5F3FC500349628 /* Flags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79284F5C1C5F3FC500349628 /* Flags.swift */; };
 		792B25931E3D1E3800FDCCB6 /* SlotRegisteredGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792B25911E3D1E3800FDCCB6 /* SlotRegisteredGroupTableViewCell.swift */; };
@@ -174,6 +176,8 @@
 		7907507A1E17B93A00B07F7E /* EpirankInformations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EpirankInformations.swift; path = Model/EpirankInformations.swift; sourceTree = "<group>"; };
 		79152D8A1C67A47100513E0F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		79152D8B1C67A47100513E0F /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		791855961E5B5F8D001F1F62 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = "../../../Library/Developer/Xcode/DerivedData/IntraEpitech-eynjybsoivxkenftnpjdjhxgoseh/Build/Products/Debug-iphonesimulator/RxCocoa/RxCocoa.framework"; sourceTree = "<group>"; };
+		791855971E5B5F8D001F1F62 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = "../../../Library/Developer/Xcode/DerivedData/IntraEpitech-eynjybsoivxkenftnpjdjhxgoseh/Build/Products/Debug-iphonesimulator/RxSwift/RxSwift.framework"; sourceTree = "<group>"; };
 		7926D0F91E37FF08004BA0A3 /* RealmStudentInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmStudentInfo.swift; path = Application/RealmStudentInfo.swift; sourceTree = "<group>"; };
 		79284F5C1C5F3FC500349628 /* Flags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Flags.swift; path = Model/Flags.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		792B25911E3D1E3800FDCCB6 /* SlotRegisteredGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SlotRegisteredGroupTableViewCell.swift; path = SlotRegisteredGroupTableViewCell/SlotRegisteredGroupTableViewCell.swift; sourceTree = "<group>"; };
@@ -324,6 +328,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				791855981E5B5F8D001F1F62 /* RxCocoa.framework in Frameworks */,
+				791855991E5B5F8D001F1F62 /* RxSwift.framework in Frameworks */,
 				7964F69B1E3F5ABB00432D57 /* MGSwipeTableCell.framework in Frameworks */,
 				799F27F71E3771E100FC2DA5 /* AlamofireImage.framework in Frameworks */,
 				799F27F81E3771E100FC2DA5 /* AlamofireNetworkActivityIndicator.framework in Frameworks */,
@@ -364,6 +370,8 @@
 		331ED8344BD2BA7948788795 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				791855961E5B5F8D001F1F62 /* RxCocoa.framework */,
+				791855971E5B5F8D001F1F62 /* RxSwift.framework */,
 				7964F69A1E3F5ABB00432D57 /* MGSwipeTableCell.framework */,
 				799F27F21E3771E100FC2DA5 /* AlamofireImage.framework */,
 				799F27F31E3771E100FC2DA5 /* AlamofireNetworkActivityIndicator.framework */,
