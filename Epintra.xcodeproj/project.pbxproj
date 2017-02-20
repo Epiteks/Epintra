@@ -1381,7 +1381,7 @@
 				INFOPLIST_FILE = Epintra/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "junger-m.Epintra.dev";
+				PRODUCT_BUNDLE_IDENTIFIER = "junger-m.IntraEpitech";
 				PRODUCT_NAME = Epintra;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -1410,7 +1410,7 @@
 				INFOPLIST_FILE = Epintra/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "junger-m.Epintra.dev";
+				PRODUCT_BUNDLE_IDENTIFIER = "junger-m.IntraEpitech";
 				PRODUCT_NAME = Epintra;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -1424,7 +1424,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = EpintraTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "junger-m.EpintraTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "junger-m.IntraEpitechTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Epintra.app/Epintra";
@@ -1437,7 +1437,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = EpintraTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "junger-m.EpintraTests";
+				PRODUCT_BUNDLE_IDENTIFIER = "junger-m.IntraEpitechTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Epintra.app/Epintra";
@@ -1449,7 +1449,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = EpintraUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "junger-m.EpintraUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "junger-m.IntraEpitechUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Epintra;
@@ -1462,7 +1462,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = EpintraUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "junger-m.EpintraUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = "junger-m.IntraEpitechUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Epintra;
