@@ -1381,7 +1381,7 @@
 				INFOPLIST_FILE = Epintra/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "junger-m.Epintra.dev";
+				PRODUCT_BUNDLE_IDENTIFIER = "junger-m.Epintra";
 				PRODUCT_NAME = Epintra;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -1410,7 +1410,7 @@
 				INFOPLIST_FILE = Epintra/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "junger-m.Epintra.dev";
+				PRODUCT_BUNDLE_IDENTIFIER = "junger-m.Epintra";
 				PRODUCT_NAME = Epintra;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
