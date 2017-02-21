@@ -8,7 +8,6 @@
 
 import SwiftyJSON
 
-
 /// History represents a notification on the Intranet
 struct History {
 	

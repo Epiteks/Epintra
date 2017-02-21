@@ -57,9 +57,7 @@ class ProfileViewController: UIViewController {
         // Check if the current user data contains all needed fields.
         // Otherwise, download it.
         if !(ApplicationManager.sharedInstance.user?.enoughDataForProfile() ?? false) {
-            usersRequests.getCurrentUserData { _ in
-                // TODO Check this
-            }
+            usersRequests.getCurrentUserData { _ in }
         }
         // Add subscription to user
         self.userSubscription = ApplicationManager.sharedInstance.ouser?.asObservable().subscribe(onNext: { _ in

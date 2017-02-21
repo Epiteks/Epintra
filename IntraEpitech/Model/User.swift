@@ -42,7 +42,7 @@ class User {
     /// Notifications history
     var history = Variable<[History]>([])
 
-	/// 🚧 Member status : Only used in Little user
+	/// 🚧 Member status : Only used in Little user. Should remove it in future releases.
 	var status: String?
     
 	/// Current city
@@ -122,8 +122,7 @@ class User {
         
 		return GPA()
 	}
-	
-    
+
 	/// Fill notifications history data
 	///
 	/// - Parameter dict: JSON data

@@ -17,19 +17,10 @@ class ApplicationManager {
     // Current token used for the calls
     internal var token: String?
     
-//    private var userObservers = [Observer]()
-    
     // Logged user
-    internal var ouser: Variable<User>?
+    internal var ouser: Variable<User>? // Observable user. Used to prepare Rx transition
     internal var user: User?
     
-    
-//        didSet {
-//            for observer in self.userObservers {
-//                observer.function()
-//            }
-//        }
-
     // Calendar identifier
     internal var defaultCalendarIdentifier: String? {
         get {
@@ -44,10 +35,5 @@ class ApplicationManager {
     func resetInstance() {
         self.token = nil
         self.user = nil
-//        self.userObservers.removeAll()
-    }
-    
-    func addObserver() {
-        
     }
 }

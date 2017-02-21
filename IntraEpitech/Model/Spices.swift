@@ -10,9 +10,9 @@ import SwiftyJSON
 
 struct Spices {
 
-	var currentSpices: String
+	var currentSpices: Int
 	
 	init(dict: JSON) {
-		currentSpices = dict["available_spice"].stringValue
+		currentSpices = dict["available_spice"].intValue
 	}
 }
