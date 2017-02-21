@@ -1,1 +1,11 @@
-IntraEpitech/.swiftlint.yml
+disabled_rules: # rule identifiers to exclude from running
+  - line_length
+  - trailing_whitespace
+  - force_cast
+  - variable_name
+  - colon
+  - control_statement
+  - legacy_constructor  
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Pods
+reporter: "xcode" # reporter type (xcode, json, csv, checkstyle)
