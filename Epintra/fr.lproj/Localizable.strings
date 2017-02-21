@@ -1,0 +1,182 @@
+/* 
+ Localizable.strings
+ Epintra
+ 
+ Created by Maxime Junger on 16/01/16.
+ Copyright © 2016 Maxime Junger. All rights reserved.
+ */
+
+"unknownApiError" = "Erreur de l'API. Verifiez si l'intranet est en ligne.";
+
+/**
+ ** Login View
+ */
+"login" = "Connexion";
+"loginUser" = "Login";
+"email" = "Email";
+"password" = "Mot de passe";
+"error" = "Erreur";
+"Error" = "Erreur";
+"pleaseFillEverything" = "Merci de remplir tous les champs";
+"noOfficialApp" = "Application non officielle.";
+"invalidCombinaison" = "Mauvaise combinaison login / mot de passe";
+"serverNotAvailable" = "Le serveur est temporairement indisponible";
+
+/**
+ ** Splash screen
+ */
+"GettingUserData" = "Récupération utilisateur";
+"FinishedGettingUserData" = "Fin de la récupération utilisateur";
+"DownloadingPicture" = "Téléchargement de la photo";
+"GettingUserHistory" = "Récupération de l'historique";
+"FinishedGettingUserHistory" = "Fin de la récupération de l'historique";
+"GettingData" = "Récupération des données";
+"FetchedHistory" = "Historique récupér";
+"FetchedUserData" = "Données récupérées";
+"Loading" = "Chargement";
+
+/**
+ ** Menu
+ */
+"Home" = "Home";
+"Planning" = "Planning";
+"Profile" = "Profil";
+"Modules" = "Modules";
+"Projects" = "Projets";
+"Marks" = "Notes";
+"Settings" = "Paramètres";
+"Notifications" = "Notifications";
+"School" = "Ecole";
+
+/**
+ ** Settings Tab
+ */
+
+"Disconnect" = "Déconnexion";
+"WantToDisconnect" = "Voulez-vous vous déconnecter ?";
+"Cancel" = "Annuler";
+"Ok" = "Ok";
+"DownloadOnData" = "Télécharger les photos";
+"Calendars" = "Calendriers";
+"ThirdParty" = "Licences";
+"BugQuestion" = "Un bug ou une idée d'amélioration ?";
+"NoCalendar" = "Aucun calendrier trouvé.";
+"NoAccessCalendar" = "Vous n'avez pas donné l'accès aux calendriers.\nSi vous souhaitez le donner, aller dans Réglages -> Epintra.";
+"NoCalendarSelected" = "Vous n'avez pas choisi de calendrier. Sélectionnez en un dans les réglages.";
+"cannotSendEmail" = "Impossible d'envoyer un email.";
+
+/**
+ ** Home
+ */
+
+"unknown" = "Inconnu";
+"spices" = "Epices";
+"credits" = "Crédits";
+"gpa" = "GPA";
+"NoAlerts" = "Vous n'avez aucune alerte";
+
+/**
+ ** Planning View
+ */
+
+"EnterToken" = "Entrez votre token";
+"Token" = "Token";
+"Enter" = "Entrer";
+"SuccessfullyRegistered" = "Vous vous êtes bien enregistré à l'événement";
+"SuccessfullyValidated" = "Vous avez bien validé votre présence";
+"SuccessfullyUnregistered" = "Vous vous êtes bien désinscrit";
+"EmptyEventCell" = "Aucun événement";
+"EmptyPlanningTableView" = "Aucun événement à afficher";
+"DefaultCalendar" = "Calendrier par défaut";
+"NoDefaultCalendar" = "Aucun calendrier sélectionné, merci d'en ajouter un dans les réglages.";
+"DefaultCalendarWrong" = "Le calendrier sélectionné est introuvable.";
+"CalendarAccessDenied" = "Accès refusé. Pour activer la gestion des calendriers, allez dans les réglages de l'appareil.";
+"SomethingDidntWorkedCorrectly" = "Quelque chose n'a pas fonctionné correctement. Si cela arrive souvent, merci de m'envoyer un mail.";
+"SuccessfullyAdded" = "Événement créé.";
+"AddInCalendar" = "Ajouter au\ncalendrier";
+"Semesters" = "Semestres";
+"Semester" = "Semestre";
+"Register" = "S'inscrire";
+"Registered" = "Inscrits";
+"Today" = "Aujourd'hui";
+"room" = "Salle";
+"appointment" = "Rendez-vous";
+"info" = "Infos";
+"eventSaved" = "Sauvegardé dans le calendrier.";
+
+/**
+ ** Project
+ */
+"NotRegisteredProject" = "Vous n'êtes pas inscrit à ce projet";
+"Files" = "Fichiers";
+"Members" = "Membres du groupe";
+
+/**
+ ** Profile
+ */
+"NoNotification" = "Aucune notification";
+"{" = "Classement";
+"Files" = "Documents";
+"Medals" = "Médailles 🏅";
+"Remarkables" = "Encouragements 👍";
+"Difficulty" = "Difficultés 🏊";
+"Ghost" = "Fantômes 👻";
+"NoFile" = "Aucun Document";
+"NoFlag" = "Aucun Flag";
+"AddContact" = "Ajouter aux contacts";
+"Call" = "Appeler";
+"Search" = "Rechercher";
+"tech1" = "Tek 1";
+"tech2" = "Tek 2";
+"tech3" = "Tek 3";
+"tech4" = "Tek 4";
+"tech5" = "Tek 5";
+"DownloadingAllUsers" = "Téléchargement de la liste\nde tous les étudiants...";
+"DataDownload" = "Téléchargement";
+"SureWantsDownloadData" = "Voulez-vous vraiment télécharger toute la liste des étudiants?";
+"No" = "Non";
+/**
+ ** Modules
+ */
+
+"AvailableCredits" = "Crédits:  ";
+"InscriptionEnd" = "Fin des inscriptions:  ";
+"ModuleEnd" = "Fin du module:  ";
+"ModuleEndedSince" = "Module terminé le:  ";
+"Grades" = "Grades";
+
+/**
+ ** Marks
+ */
+
+"Comments" = "Commentaires";
+
+/**
+ ** Empty Tables
+ */
+"NoCurrentProject" = "Vous n'avez aucun\nprojet en cours";
+"NoMarks" = "Il n'y a aucune note";
+
+/**
+ ** Ranking
+ */
+
+"filter" = "Filtre";
+
+"tek1" = "Tek 1";
+"tek2" = "Tek 2";
+"tek3" = "Tek 3";
+
+"All" = "Toutes";
+"BDX" = "Bordeaux";
+"LIL" = "Lille";
+"LYN" = "Lyon";
+"MAR" = "Marseille";
+"MPL" = "Montpellier";
+"NAN" = "Nantes";
+"NCE" = "Nice";
+"NCY" = "Nancy";
+"PAR" = "Paris";
+"REN" = "Rennes";
+"STG" = "Strasbourg";
+"TLS" = "Toulouse";
