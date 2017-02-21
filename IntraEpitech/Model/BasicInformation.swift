@@ -11,7 +11,7 @@ import SwiftyJSON
 
 
 /// Events basic data
-struct BasicInformation {
+class BasicInformation {
  
     var scolaryear: String?
     var codeModule: String?

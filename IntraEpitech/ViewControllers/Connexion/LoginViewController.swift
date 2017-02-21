@@ -179,8 +179,9 @@ class LoginViewController: UIViewController {
 	Perform the segue to go to the splash view
 	*/
 	func goToNextView() {
-		//ApplicationManager.sharedInstance.currentLogin = login
-		performSegue(withIdentifier: "splashSegue", sender: self)
+        let storyboard = UIStoryboard(name: "MainViewStoryboard", bundle: nil)
+        let vc = storyboard.instantiateInitialViewController()
+        self.present(vc!, animated: true, completion: nil)
 	}
 	
     func addWaitingView() {

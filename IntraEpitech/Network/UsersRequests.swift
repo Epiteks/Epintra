@@ -111,6 +111,7 @@ class UsersRequests: RequestManager {
 			switch response {
 			case .success(let responseJSON):
 				app.user?.fillHistory(responseJSON)
+                ApplicationManager.sharedInstance.ouser?.value.fillHistory(responseJSON)
 				completion(Result.success(nil))
 				
 			case .failure(let err):

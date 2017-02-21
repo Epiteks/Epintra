@@ -8,7 +8,9 @@
 
 import SwiftyJSON
 
-class History {
+
+/// History represents a notification on the Intranet
+struct History {
 	
 	var title: String?
 	var userName: String?
@@ -16,15 +18,11 @@ class History {
 	var content: String?
 	var date: Date?
 	
-    init() {
-        
-    }
-    
 	init(dict: JSON) {
-		title = dict["title"].stringValue
-		userName = dict["user"]["title"].stringValue
-		userPicture = dict["user"]["picture"].stringValue
-		content = dict["content"].stringValue
-		date = dict["date"].stringValue.toDate()
+		self.title = dict["title"].stringValue
+		self.userName = dict["user"]["title"].stringValue
+		self.userPicture = dict["user"]["picture"].stringValue
+		self.content = dict["content"].stringValue
+		self.date = dict["date"].stringValue.toDate()
 	}
 }

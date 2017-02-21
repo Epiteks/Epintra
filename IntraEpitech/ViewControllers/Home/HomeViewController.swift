@@ -7,103 +7,66 @@
 //
 
 import UIKit
+import RxSwift
 
 class HomeViewController: LoadingDataViewController {
-	
-	@IBOutlet weak var alertTableView: UITableView!
-
-	var tableFooterSave: UIView!
-	
-	override func viewDidLoad() {
-		super.viewDidLoad()
+    
+    @IBOutlet weak var alertTableView: UITableView!
+    
+    var tableFooterSave: UIView!
+    
+    /// Bag
+    let bag = DisposeBag()
+    
+    /// Subscription to the user instance
+    var notificationsSubscription: Disposable?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         self.alertTableView.rowHeight = UITableViewAutomaticDimension
         self.alertTableView.estimatedRowHeight = 60
         self.alertTableView.tableFooterView = UIView()
         self.alertTableView.register(UINib(nibName: "NotificationTableViewCell", bundle: nil), forCellReuseIdentifier: "notificationCell")
-	}
-	
-	override func awakeFromNib() {
-		self.title = NSLocalizedString("Notifications", comment: "")
-	}
-	
+    }
+    
+    override func awakeFromNib() {
+        self.title = NSLocalizedString("Notifications", comment: "")
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
-        // No data
-        if ApplicationManager.sharedInstance.user?.history == nil || ApplicationManager.sharedInstance.user?.history?.count == 0 {
-            self.addNoDataView(info: "NoNotification")
-        } else {
-           self.alertTableView.reloadData()
-        }
-	}
-	
-//    func getNotifications() {
-//        
-//        let dispatchGroup = DispatchGroup()
-//        self.isFetching = true
-//        DispatchQueue.main.async {
-//            DispatchQueue.main.async(group: dispatchGroup, execute: {
-//                self.userDataCall(dispatchGroup)
-//                self.userHistoryCall(dispatchGroup)
-//            })
-//            dispatchGroup.notify(queue: DispatchQueue.global(qos: .default), execute: {
-//                DispatchQueue.main.async(execute: {
-//                    self.isFetching = false
-//                    self.alertTableView.reloadData()
-//                })
-//            })
-//        }
-//    }
-//	
-//	func userDataCall(_ group: DispatchGroup) {
-//		group.enter()
-//		usersRequests.getCurrentUserData { result in
-//			
-//			switch (result) {
-//			case .success(_):
-//				log.info("Get user data ok")
-//				break
-//			case .failure(let error):
-//				MJProgressView.instance.hideProgress()
-//				ErrorViewer.errorPresent(self, mess: error.message!) { }
-//				break
-//			}
-//			group.leave()
-//		}
-//	}
-//	
-//	func userHistoryCall(_ group: DispatchGroup) {
-//		group.enter()
-//		usersRequests.getHistory { result in
-//			switch (result) {
-//			case .success(_):
-//				log.info("Get user history")
-//				break
-//			case .failure(let error):
-//				MJProgressView.instance.hideProgress()
-//				if error.message != nil {
-//					ErrorViewer.errorPresent(self, mess: error.message!) {}
-//				}
-//				break
-//			}
-//			group.leave()
-//		}
-//	}
-	
-	func generateBackgroundView() {
-		
-		let usr = ApplicationManager.sharedInstance.user!
-		
-        let historyCount = usr.history?.count ?? 0
+        // Check data each time the view appears
+        getNotificationsIfNeeded()
+    }
+    
+    /// Get notifications if it is not available
+    func getNotificationsIfNeeded() {
         
-		if usr.history != nil && historyCount <= 0 {
-			self.alertTableView.tableFooterView = UIView()
-			let noData = NoDataView(info:  NSLocalizedString("NoNotification", comment: ""))
-			self.alertTableView.backgroundView = noData
-		} else {
-			self.alertTableView.tableFooterView = self.tableFooterSave
-			self.alertTableView.backgroundView = nil
-		}
-	}
+        // Check if the current user data contains all needed fields.
+        // Otherwise, download it.
+        if ApplicationManager.sharedInstance.ouser?.value.history.value.count ?? 0 == 0 {
+            
+            // Add subscription to notifications
+            self.notificationsSubscription = ApplicationManager.sharedInstance.ouser?.value.history.asObservable().subscribe(onNext: { _ in
+                self.alertTableView.reloadData()
+                self.isFetching = false
+                
+                if let cnt = ApplicationManager.sharedInstance.ouser?.value.history.value.count, cnt == 0 {
+                    self.addNoDataView(info: "NoNotification")
+                } else {
+                    self.removeNoDataView()
+                }
+                
+                return
+            })
+            
+            self.removeNoDataView()
+            self.isFetching = true
+            usersRequests.getHistory { _ in }
+        }
+        self.notificationsSubscription?.addDisposableTo(self.bag)
+    }
+    
 }
 
 extension HomeViewController: UITableViewDataSource {
@@ -113,18 +76,18 @@ extension HomeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ApplicationManager.sharedInstance.user?.history?.count ?? 0
+        return ApplicationManager.sharedInstance.ouser?.value.history.value.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "notificationCell") as! NotificationTableViewCell
         
-        guard let history = ApplicationManager.sharedInstance.user?.history?[indexPath.row] else {
+        guard let history = ApplicationManager.sharedInstance.ouser?.value.history.value[indexPath.row] else {
             log.error("Error history Home")
             return cell
         }
-
+        
         cell.userProfileImageView.image = UIImage(named: "userProfile")
         cell.userProfileImageView.cropToSquare()
         cell.userProfileImageView.toCircle()

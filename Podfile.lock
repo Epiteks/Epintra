@@ -6,6 +6,8 @@ PODS:
     - Alamofire (~> 4.1)
   - FSCalendar (2.7.1)
   - MGSwipeTableCell (1.5.6)
+  - ObservableArray-RxSwift (0.1.1):
+    - RxSwift (~> 3.0)
   - Realm (2.4.2):
     - Realm/Headers (= 2.4.2)
   - Realm/Headers (2.4.2)
@@ -24,6 +26,7 @@ DEPENDENCIES:
   - AlamofireNetworkActivityIndicator (~> 2.0)
   - FSCalendar
   - MGSwipeTableCell
+  - ObservableArray-RxSwift
   - RealmSwift
   - RxCocoa
   - RxSwift
@@ -37,6 +40,7 @@ SPEC CHECKSUMS:
   AlamofireNetworkActivityIndicator: 4716f6554bdfb9c7cf13b1e0e3af21163129690a
   FSCalendar: cfc95384cb0d648ad7c1957649ea74d6c26bb0de
   MGSwipeTableCell: 616700eb0ffd1c611ba909066cb7fd739790a0a7
+  ObservableArray-RxSwift: 1ade2543c0eec6fc64a84080c7e3c9bafbc6c760
   Realm: d27b758e12d62a3371879a065d4c40aa212c5a54
   RealmSwift: 9556c0fe0f0cfecacfb755ae9e68ff379fc6bead
   RxCocoa: ccdf43101a70407097a29082f648ba1676075b30
@@ -45,6 +49,6 @@ SPEC CHECKSUMS:
   SwiftyBeaver: 2b68694df862381235e32bcfc4ec991e26bf131d
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: c489f423371d4ed67c913ab2943ea0246df5c249
+PODFILE CHECKSUM: 8618400e4c3b58feb64455cdb54a085af617ede1
 
 COCOAPODS: 1.2.0

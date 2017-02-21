@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import RxSwift
 
 class User {
 	
@@ -39,7 +40,7 @@ class User {
 	var log: Netsoul?
     
     /// Notifications history
-    var history: [History]?
+    var history = Variable<[History]>([])
 
 	/// 🚧 Member status : Only used in Little user
 	var status: String?
@@ -66,7 +67,6 @@ class User {
         self.setData(fromJSON: dict)
     }
     
-    
     /// Creates user with login
     ///
     /// - Parameter login: user email
@@ -89,7 +89,6 @@ class User {
 	}
 	
     func setData(fromJSON dict: JSON) {
-        self.id = dict["id"].stringValue
         self.login = dict["login"].stringValue
         self.title = dict["title"].stringValue
         
@@ -124,18 +123,19 @@ class User {
 		return GPA()
 	}
 	
+    
+	/// Fill notifications history data
+	///
+	/// - Parameter dict: JSON data
 	func fillHistory(_ dict: JSON) {
 		
-		let array = dict["history"].arrayValue
-		
-		history = [History]()
-		
-		for hist in array {
-			if history == nil {
-				history = [History]()
-			}
-			history?.append(History(dict: hist))
+        var tmpArray = [History]()
+        
+        for hist in dict["history"].arrayValue {
+			tmpArray.append(History(dict: hist))
 		}
+        
+        self.history.value.append(contentsOf: tmpArray)
 	}
     
     /// Check if the user profile contains enough information to be displayed on profile
