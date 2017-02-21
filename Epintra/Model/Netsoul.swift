@@ -8,7 +8,7 @@
 
 import SwiftyJSON
 
-class Netsoul {
+struct Netsoul {
 	
 	var	timeActive: Int
 	var timeNormal: Int

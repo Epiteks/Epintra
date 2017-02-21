@@ -12,4 +12,6 @@ target 'Epintra' do
 	pod 'RealmSwift'
 	pod 'SwiftKeychainWrapper'
 	pod 'MGSwipeTableCell'
+	pod 'RxSwift'
+    	pod 'RxCocoa'
 end

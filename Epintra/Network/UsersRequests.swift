@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 import RealmSwift
+import RxSwift
 
 class UsersRequests: RequestManager {
 	
@@ -26,8 +27,10 @@ class UsersRequests: RequestManager {
 			case .success(let responseJSON):
 				if let token = responseJSON["token"].string {
 					log.info("Token:  \(token)")
+
 					ApplicationManager.sharedInstance.token = token
                     ApplicationManager.sharedInstance.user = User(login: login)
+                    ApplicationManager.sharedInstance.ouser = Variable<User>(User(login: login))
 					completion(Result.success(nil))
 				}
 			case .failure(let err):
@@ -45,18 +48,29 @@ class UsersRequests: RequestManager {
 	- parameter completion: Request completion action
 	*/
 	func getCurrentUserData(_ completion: @escaping (Result<Any?>) -> Void) {
+
+        let dispo = DisposeBag()
+        var login: String?
         
-        let param = "?login=" + (ApplicationManager.sharedInstance.user?.login)!
+        ApplicationManager.sharedInstance.ouser?.asObservable()
+        .do(onNext: { usr in
+            login = usr.login
+        }).subscribe().addDisposableTo(dispo)
+        
+        let param = "?login=" + (login ?? "")
 		
 		super.call("userData", params: nil, urlParams: param) { (response) in
 			switch response {
 			case .success(let responseJSON):
 				ApplicationManager.sharedInstance.user = User(dict: responseJSON)
+                
+                ApplicationManager.sharedInstance.ouser?.value = User(dict: responseJSON)
+                
+//                ApplicationManager.sharedInstance.ouser?.value.setData(fromJSON: responseJSON)
 				completion(Result.success(nil))
 			case .failure(let err):
 				completion(Result.failure(type: err.type, message: err.message))
 				log.error("GetCurrentUserData:  \(err)")
-				
 			}
 		}
 	}
@@ -97,6 +111,7 @@ class UsersRequests: RequestManager {
 			switch response {
 			case .success(let responseJSON):
 				app.user?.fillHistory(responseJSON)
+                ApplicationManager.sharedInstance.ouser?.value.fillHistory(responseJSON)
 				completion(Result.success(nil))
 				
 			case .failure(let err):

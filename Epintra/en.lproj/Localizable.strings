@@ -93,7 +93,7 @@
 "DefaultCalendar" = "Default calendar";
 "NoDefaultCalendar" = "No default calendar selected. Please add one in settings";
 "DefaultCalendarWrong" = "The default calendar is inreachable.";
-"CalendarAccessDenied" = "Access denied. Go in your phone settings to allow calendar management.";
+"CalendarAccessDenied" = "Access denied. Go in your device settings to allow calendar management.";
 "SomethingDidntWorkedCorrectly" = "Something didn't work correctly. If it appears often, please me an email.";
 "SuccessfullyAdded" = "Event created";
 "AddInCalendar" = "Add in\ncalendar";

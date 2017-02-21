@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class ProfileViewController: UIViewController {
 	
@@ -28,9 +29,17 @@ class ProfileViewController: UIViewController {
 		"Ghost"
 	]
 	
+    /// Bag
+    let bag = DisposeBag()
+    
+    /// Subscription to the user instance
+    var userSubscription: Disposable?
+    
 	override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        getUserDataIfNeeded()
         
 		calls()
         
@@ -42,6 +51,23 @@ class ProfileViewController: UIViewController {
 		self.title = NSLocalizedString("Profile", comment: "")
 	}
 	
+    /// Get user data if it is not complete
+    func getUserDataIfNeeded() {
+        
+        // Check if the current user data contains all needed fields.
+        // Otherwise, download it.
+        if !(ApplicationManager.sharedInstance.user?.enoughDataForProfile() ?? false) {
+            usersRequests.getCurrentUserData { _ in }
+        }
+        // Add subscription to user
+        self.userSubscription = ApplicationManager.sharedInstance.ouser?.asObservable().subscribe(onNext: { _ in
+            self.tableView.reloadSections([0], with: .automatic)
+            return
+        })
+        
+        self.userSubscription?.addDisposableTo(self.bag)
+    }
+    
 	/*!
 	All needed calls
 	*/
@@ -57,7 +83,7 @@ class ProfileViewController: UIViewController {
 		
 		self.downloadingFlags = true
 		
-		usersRequests.getUserFlags((ApplicationManager.sharedInstance.user?.login)!) { (result) in
+		usersRequests.getUserFlags((ApplicationManager.sharedInstance.ouser?.value.login)!) { (result) in
 			switch (result) {
 			case .success(let data):
 					self.flags = data
@@ -138,7 +164,9 @@ extension ProfileViewController: UITableViewDataSource {
         if (indexPath as NSIndexPath).section == 0 { // Profile Cell, the first one
             cell = tableView.dequeueReusableCell(withIdentifier: "profileCell")!
             let profileView = cell.viewWithTag(1) as! ProfileView
-            profileView.setUserData(ApplicationManager.sharedInstance.user!)
+            if let usr = ApplicationManager.sharedInstance.ouser?.value {
+                profileView.setUserData(usr)
+            }
             
             if let profileImageURL = ApplicationManager.sharedInstance.user?.imageUrl {
                 profileView.userProfileImage.downloadProfileImage(fromURL: URL(string: profileImageURL)!)

@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 
+/// Events basic data
 class BasicInformation {
  
     var scolaryear: String?

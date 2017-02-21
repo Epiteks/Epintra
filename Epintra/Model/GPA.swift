@@ -11,16 +11,16 @@ import SwiftyJSON
 
 class GPA {
     
-	internal var value: String
+	internal var value: Float
 	internal var cycle: String
 	
 	init(dict: JSON) {
-		value = dict["gpa"].stringValue
+		value = dict["gpa"].floatValue
 		cycle = dict["cycle"].stringValue
 	}
 	
     init() {
-		value = "0"
+		value = 0
 		cycle = NSLocalizedString("unknown", comment: "")
 	}
 }

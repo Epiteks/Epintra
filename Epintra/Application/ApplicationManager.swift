@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class ApplicationManager {
     
@@ -17,8 +18,9 @@ class ApplicationManager {
     internal var token: String?
     
     // Logged user
+    internal var ouser: Variable<User>? // Observable user. Used to prepare Rx transition
     internal var user: User?
-
+    
     // Calendar identifier
     internal var defaultCalendarIdentifier: String? {
         get {
@@ -31,7 +33,7 @@ class ApplicationManager {
     }
 
     func resetInstance() {
-        token = nil
-        user = nil
+        self.token = nil
+        self.user = nil
     }
 }

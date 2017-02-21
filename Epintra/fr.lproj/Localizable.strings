@@ -90,7 +90,7 @@
 "DefaultCalendar" = "Calendrier par défaut";
 "NoDefaultCalendar" = "Aucun calendrier sélectionné, merci d'en ajouter un dans les réglages.";
 "DefaultCalendarWrong" = "Le calendrier sélectionné est introuvable.";
-"CalendarAccessDenied" = "Accès refusé. Pour activer la gestion des calendriers, allez dans les réglages du téléphone.";
+"CalendarAccessDenied" = "Accès refusé. Pour activer la gestion des calendriers, allez dans les réglages de l'appareil.";
 "SomethingDidntWorkedCorrectly" = "Quelque chose n'a pas fonctionné correctement. Si cela arrive souvent, merci de m'envoyer un mail.";
 "SuccessfullyAdded" = "Événement créé.";
 "AddInCalendar" = "Ajouter au\ncalendrier";
