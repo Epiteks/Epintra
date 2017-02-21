@@ -8,7 +8,8 @@
 
 import SwiftyJSON
 
-class Spices {
+struct Spices {
+
 	var currentSpices: String
 	
 	init(dict: JSON) {

@@ -11,32 +11,65 @@ import SwiftyJSON
 
 class User {
 	
-	var id: String?
+	/// User login
 	var login: String?
+    
+	/// User title (first name + last name)
 	var title: String?
-	var internalEmail: String?
-	var firstname: String?
-	var lastname: String?
+
+	/// Profile image URL
 	var imageUrl: String?
+    
+	/// Current semester
 	var semester: Int?
+    
+	/// Current promotion
 	var promotion: Int?
+    
+	/// Credits number
 	var credits: Int?
+    
+	/// Available GPA (bachelor/master)
 	var gpa: [GPA]?
+    
+	/// Available spices
 	var spices: Spices?
+    
+	/// Current log
 	var log: Netsoul?
-	var history: [History]?
+    
+    /// Notifications history
+    var history: [History]?
+
+	/// 🚧 Member status : Only used in Little user
 	var status: String?
+    
+	/// Current city
 	var city: String?
+    
+	/// All marks
 	var marks: [Mark]?
+    
+	/// All modules
 	var modules: [Module]?
-	var phone: String?
+    
+    /// All projects from student
     var projects: [Project]?
+    
+    /// Current year
     var studentyear: Int?
 	
+    /// Creates user with all available data from Intranet.
+    ///
+    /// - Parameter dict: JSON response
     init(dict: JSON) {
         self.setData(fromJSON: dict)
     }
     
+    
+    /// Creates user with login
+    ///
+    /// - Parameter login: user email
     init(login: String) {
         self.login = login
     }
@@ -59,9 +92,7 @@ class User {
         self.id = dict["id"].stringValue
         self.login = dict["login"].stringValue
         self.title = dict["title"].stringValue
-        self.internalEmail = dict["internal_email"].stringValue
-        self.firstname = dict["firstname"].stringValue
-        self.lastname = dict["lastname"].stringValue
+        
         self.semester = dict["semester"].intValue
         self.imageUrl = Configuration.profilePictureURL + login!.removeDomainEmailPart() + ".bmp"
         self.promotion = dict["promo"].intValue
@@ -82,9 +113,6 @@ class User {
         }
         self.spices = Spices(dict: dict["spice"])
         self.log = Netsoul(dict: dict["nsstat"])
-        
-        let infos = dict["userinfo"]
-        self.phone = infos["telephone"]["value"].stringValue
     }
     
 	func getLatestGPA() -> GPA {
@@ -109,7 +137,6 @@ class User {
 			history?.append(History(dict: hist))
 		}
 	}
-    
     
     /// Check if the user profile contains enough information to be displayed on profile
     func enoughDataForProfile() -> Bool {

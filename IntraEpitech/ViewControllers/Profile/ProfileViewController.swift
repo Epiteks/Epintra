@@ -54,22 +54,20 @@ class ProfileViewController: UIViewController {
     /// Get user data if it is not complete
     func getUserDataIfNeeded() {
         
-        if !(ApplicationManager.sharedInstance.user?.enoughDataForProfile() ?? true) {
-            
-            self.userSubscription = ApplicationManager.sharedInstance.ouser?.asObservable().subscribe(onNext: { usr in
-                self.tableView.reloadSections([0], with: .automatic)
-                return
-            })
-            
-            
+        // Check if the current user data contains all needed fields.
+        // Otherwise, download it.
+        if !(ApplicationManager.sharedInstance.user?.enoughDataForProfile() ?? false) {
+            usersRequests.getCurrentUserData { _ in
+                // TODO Check this
+            }
         }
-        self.userSubscription?.addDisposableTo(self.bag)
-        //        usersRequests.getCurrentUserData { _ in
-        //            // TODO Check this
-        //        }
+        // Add subscription to user
+        self.userSubscription = ApplicationManager.sharedInstance.ouser?.asObservable().subscribe(onNext: { _ in
+            self.tableView.reloadSections([0], with: .automatic)
+            return
+        })
         
-        //        self.userSubscription?.addDisposableTo(bag)
-
+        self.userSubscription?.addDisposableTo(self.bag)
     }
     
 	/*!

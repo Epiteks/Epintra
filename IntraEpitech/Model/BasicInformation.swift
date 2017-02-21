@@ -9,7 +9,9 @@
 import Foundation
 import SwiftyJSON
 
-class BasicInformation {
+
+/// Events basic data
+struct BasicInformation {
  
     var scolaryear: String?
     var codeModule: String?
