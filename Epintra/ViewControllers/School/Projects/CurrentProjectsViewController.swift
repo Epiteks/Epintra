@@ -53,7 +53,7 @@ class CurrentProjectsViewController: LoadingDataViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "projectDetailsSegue" {
-            if let vc = segue.destination as? ProjectDetailsViewController, let index = self.projectsTableView.indexPathForSelectedRow?.row, let project = self.projects?[index] {
+            if let vc = segue.destination as? ProjectDetailsViewController, let project = sender as? Project {
                 vc.project = project
             }
         }
@@ -65,13 +65,17 @@ class CurrentProjectsViewController: LoadingDataViewController {
             switch (result) {
             case .success(let files):
                 activity.files = files
+                group.leave()
             case .failure(let err):
-                if err.message != nil {
-                    ErrorViewer.errorPresent(self, mess: err.message!) {}
+                if let message = err.message {
+                       ErrorViewer.errorPresent(self, mess: message) {
+                        group.leave()
+                    }
+                } else {
+                    group.leave()
                 }
                 log.error("Fetching project files error:  \(err)")
             }
-            group.leave()
         })
     }
     
@@ -81,14 +85,17 @@ class CurrentProjectsViewController: LoadingDataViewController {
             switch (result) {
             case .success(_):
                 log.info("Project details set")
-                break
+                group.leave()
             case .failure(let err):
-                if err.message != nil {
-                    ErrorViewer.errorPresent(self, mess: err.message!) {}
+                if let message = err.message {
+                    ErrorViewer.errorPresent(self, mess: message) {
+                        group.leave()
+                    }
+                } else {
+                    group.leave()
                 }
                 log.error("Fetching project details error:  \(err)")
             }
-            group.leave()
         })
     }
 }
@@ -140,7 +147,7 @@ extension CurrentProjectsViewController: UITableViewDelegate {
                 dispatchGroup.notify(queue: DispatchQueue.global(qos: .utility), execute: {
                     DispatchQueue.main.async(execute: {
                         self.removeActivityIndicator()
-                        self.performSegue(withIdentifier: "projectDetailsSegue", sender: self)
+                        self.performSegue(withIdentifier: "projectDetailsSegue", sender: project)
                         tableView.deselectRow(at: indexPath, animated: true)
                         self.willLoadNextView = false
                     })
