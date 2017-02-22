@@ -25,7 +25,7 @@ class CurrentProjectsViewController: LoadingDataViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        if ApplicationManager.sharedInstance.user?.projects == nil {
+        if ApplicationManager.sharedInstance.user?.value.projects == nil {
             getProjects()
         }
     }
@@ -36,7 +36,7 @@ class CurrentProjectsViewController: LoadingDataViewController {
             switch result {
             case .success(let data):
                 self.projects = data
-                ApplicationManager.sharedInstance.user?.projects = data
+                ApplicationManager.sharedInstance.user?.value.projects = data
                 self.projectsTableView.reloadData()
                 self.removeNoDataView()
             case .failure(let error):

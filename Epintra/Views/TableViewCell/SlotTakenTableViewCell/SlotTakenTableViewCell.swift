@@ -37,7 +37,7 @@ class SlotTakenTableViewCell: MGSwipeTableCell {
         self.userTitle.text = slot.master?.title
         self.userEmail.text = slot.master?.login
         
-        if slot.master?.login == ApplicationManager.sharedInstance.user?.login {
+        if slot.master?.login == ApplicationManager.sharedInstance.user?.value.login {
             self.actionImageView.image = #imageLiteral(resourceName: "Unregister")
             self.actionImageView.tintColor = UIUtils.planningRedColor
         }

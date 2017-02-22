@@ -18,8 +18,8 @@ class ApplicationManager {
     internal var token: String?
     
     // Logged user
-    internal var ouser: Variable<User>? // Observable user. Used to prepare Rx transition
-    internal var user: User?
+    internal var user: Variable<User>? // Observable user. Used to prepare Rx transition
+    //internal var user: User?
     
     // Calendar identifier
     internal var defaultCalendarIdentifier: String? {

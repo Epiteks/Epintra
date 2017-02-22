@@ -33,7 +33,7 @@ class ModulesViewController: LoadingDataViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
-        if ApplicationManager.sharedInstance.user?.modules == nil {
+        if ApplicationManager.sharedInstance.user?.value.modules == nil {
             getModules()
         }
     }
@@ -47,7 +47,7 @@ class ModulesViewController: LoadingDataViewController {
             case .success(let data):
                 log.info("User modules fetched")
                 self.modules = data
-                ApplicationManager.sharedInstance.user?.modules = data
+                ApplicationManager.sharedInstance.user?.value.modules = data
                 self.modulesTableView.reloadData()
                 self.removeNoDataView()
                 break

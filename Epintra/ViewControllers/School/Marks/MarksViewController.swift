@@ -28,7 +28,7 @@ class MarksViewController: LoadingDataViewController, UITableViewDataSource, UIT
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        if ApplicationManager.sharedInstance.user?.marks == nil {
+        if ApplicationManager.sharedInstance.user?.value.marks == nil {
             getMarks()
         }
     }
@@ -39,7 +39,7 @@ class MarksViewController: LoadingDataViewController, UITableViewDataSource, UIT
             switch result {
             case .success(let data):
                 self.marks = data
-                ApplicationManager.sharedInstance.user?.marks = data
+                ApplicationManager.sharedInstance.user?.value.marks = data
                 self.marksTableView.reloadData()
                 self.removeNoDataView()
             case .failure(let error):

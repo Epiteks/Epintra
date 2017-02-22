@@ -31,7 +31,7 @@ class Slot {
     }
     
     var canUnregister: Bool {
-        return !self.isOneshot && self.master?.login == ApplicationManager.sharedInstance.user?.login
+        return !self.isOneshot && self.master?.login == ApplicationManager.sharedInstance.user?.value.login
     }
     
     init(dict: JSON, appointment: AppointmentEvent) {
@@ -73,6 +73,6 @@ class Slot {
         if let groupID = event.groupID {
             return String(format: "?year=%@&module=%@&instance=%@&activity=%@&creneau=%i&team=%i", event.scolaryear!, event.codeModule!, event.codeInstance!, event.codeActi!, self.id, groupID)
         }
-        return String(format: "?year=%@&module=%@&instance=%@&activity=%@&creneau=%i&login=%@", event.scolaryear!, event.codeModule!, event.codeInstance!, event.codeActi!, self.id, ApplicationManager.sharedInstance.user?.login ?? "")
+        return String(format: "?year=%@&module=%@&instance=%@&activity=%@&creneau=%i&login=%@", event.scolaryear!, event.codeModule!, event.codeInstance!, event.codeActi!, self.id, ApplicationManager.sharedInstance.user?.value.login ?? "")
     }
 }

@@ -44,14 +44,14 @@ class HomeViewController: LoadingDataViewController {
         
         // Check if the current user data contains all needed fields.
         // Otherwise, download it.
-        if ApplicationManager.sharedInstance.ouser?.value.history.value.count ?? 0 == 0 {
+        if ApplicationManager.sharedInstance.user?.value.history.value.count ?? 0 == 0 {
             
             // Add subscription to notifications
-            self.notificationsSubscription = ApplicationManager.sharedInstance.ouser?.value.history.asObservable().subscribe(onNext: { _ in
+            self.notificationsSubscription = ApplicationManager.sharedInstance.user?.value.history.asObservable().subscribe(onNext: { _ in
                 self.alertTableView.reloadData()
                 self.isFetching = false
                 
-                if let cnt = ApplicationManager.sharedInstance.ouser?.value.history.value.count, cnt == 0 {
+                if let cnt = ApplicationManager.sharedInstance.user?.value.history.value.count, cnt == 0 {
                     self.addNoDataView(info: "NoNotification")
                 } else {
                     self.removeNoDataView()
@@ -76,14 +76,14 @@ extension HomeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ApplicationManager.sharedInstance.ouser?.value.history.value.count ?? 0
+        return ApplicationManager.sharedInstance.user?.value.history.value.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "notificationCell") as! NotificationTableViewCell
         
-        guard let history = ApplicationManager.sharedInstance.ouser?.value.history.value[indexPath.row] else {
+        guard let history = ApplicationManager.sharedInstance.user?.value.history.value[indexPath.row] else {
             log.error("Error history Home")
             return cell
         }

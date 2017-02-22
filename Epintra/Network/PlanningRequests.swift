@@ -138,7 +138,7 @@ class PlanningRequests: RequestManager {
             switch response {
             case .success(let responseJSON):
                 log.verbose("Subscribed to slot  : \(responseJSON)")
-                slot.master = RegisteredStudent(withName: ApplicationManager.sharedInstance.user?.login ?? "", andEmail: event.currentMasterEmail ?? "")
+                slot.master = RegisteredStudent(withName: ApplicationManager.sharedInstance.user?.value.login ?? "", andEmail: event.currentMasterEmail ?? "")
                 completion(Result.success(nil))
                 break
             case .failure(let err):
