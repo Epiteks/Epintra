@@ -60,8 +60,8 @@ class ProfileViewController: UIViewController {
             usersRequests.getCurrentUserData { _ in }
         }
         // Add subscription to user
-        self.userSubscription = ApplicationManager.sharedInstance.user?.asObservable().subscribe(onNext: { _ in
-            self.tableView.reloadSections([0], with: .automatic)
+        self.userSubscription = ApplicationManager.sharedInstance.user?.asObservable().subscribe(onNext: { [weak self] _ in
+            self?.tableView.reloadSections([0], with: .automatic)
             return
         })
         

@@ -47,14 +47,14 @@ class HomeViewController: LoadingDataViewController {
         if ApplicationManager.sharedInstance.user?.value.history.value.count ?? 0 == 0 {
             
             // Add subscription to notifications
-            self.notificationsSubscription = ApplicationManager.sharedInstance.user?.value.history.asObservable().subscribe(onNext: { _ in
-                self.alertTableView.reloadData()
-                self.isFetching = false
+            self.notificationsSubscription = ApplicationManager.sharedInstance.user?.value.history.asObservable().subscribe(onNext: { [weak self] _ in
+                self?.alertTableView.reloadData()
+                self?.isFetching = false
                 
                 if let cnt = ApplicationManager.sharedInstance.user?.value.history.value.count, cnt == 0 {
-                    self.addNoDataView(info: "NoNotification")
+                    self?.addNoDataView(info: "NoNotification")
                 } else {
-                    self.removeNoDataView()
+                    self?.removeNoDataView()
                 }
                 
                 return
