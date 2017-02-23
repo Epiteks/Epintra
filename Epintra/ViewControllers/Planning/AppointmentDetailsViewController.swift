@@ -110,12 +110,12 @@ extension AppointmentDetailsViewController: UITableViewDelegate {
     
    private func subscribe(toSlot data: Slot, forIndexPath indexPath: IndexPath) {
      
-        planningRequests.register(toSlot: data, forEvent: self.appointment, completion: { response in
+        planningRequests.register(toSlot: data, forEvent: self.appointment, completion: { [weak self] response in
             switch response {
             case .success(_):
-                self.dataTableView.reloadRows(at: [indexPath], with: .automatic)
+                self?.dataTableView.reloadRows(at: [indexPath], with: .automatic)
             case .failure(let err):
-                self.showAlert(withTitle: "error", andMessage: err.message)
+                self?.showAlert(withTitle: "error", andMessage: err.message)
             }
             
         })
@@ -124,12 +124,12 @@ extension AppointmentDetailsViewController: UITableViewDelegate {
     
     private func unsubscribe(fromSlot data: Slot, forIndexPath indexPath: IndexPath) {
         
-        planningRequests.unregister(fromSlot: data, forEvent: self.appointment, completion: { response in
+        planningRequests.unregister(fromSlot: data, forEvent: self.appointment, completion: { [weak self] response in
             switch response {
             case .success(_):
-                self.dataTableView.reloadRows(at: [indexPath], with: .automatic)
+                self?.dataTableView.reloadRows(at: [indexPath], with: .automatic)
             case .failure(let err):
-                self.showAlert(withTitle: "error", andMessage: err.message)
+                self?.showAlert(withTitle: "error", andMessage: err.message)
             }
             
         })

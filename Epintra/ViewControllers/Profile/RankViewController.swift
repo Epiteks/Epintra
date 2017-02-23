@@ -74,16 +74,16 @@ class RankViewController: LoadingDataViewController {
     func fetchNewData() {
         self.isFetching = true
         let promotion = String(format: "tek%i", self.rankFilter.promotion)
-        usersRequests.download(students: promotion, withFilter: self.rankFilter) { result in
-            if self.isViewLoaded && self.view.window != nil {
+        usersRequests.download(students: promotion, withFilter: self.rankFilter) { [weak self] result in
+            if let tmpSelf = self, tmpSelf.isViewLoaded && tmpSelf.view.window != nil {
                 switch result {
                 case .success(let students):
-                    self.students = students
-                    self.studentsTableView.reloadData()
+                    self?.students = students
+                    self?.studentsTableView.reloadData()
                 case .failure(let err):
-                    self.showAlert(withTitle: "error", andMessage: err.message)
+                    self?.showAlert(withTitle: "error", andMessage: err.message)
                 }
-                self.isFetching = false
+                self?.isFetching = false
             } else {
                 log.warning("Rank view controller is not on top")
             }

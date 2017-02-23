@@ -40,25 +40,25 @@ class ModulesViewController: LoadingDataViewController {
 
         self.isFetching = true
 
-        modulesRequests.usersModules { (result) in
+        modulesRequests.usersModules { [weak self] result in
             switch result {
             case .success(let data):
                 log.info("User modules fetched")
-                self.modules = data
+                self?.modules = data
                 ApplicationManager.sharedInstance.user?.value.modules = data
-                self.modulesTableView.reloadData()
-                self.removeNoDataView()
+                self?.modulesTableView.reloadData()
+                self?.removeNoDataView()
                 break
             case .failure(let error):
-                if error.message != nil {
-                    ErrorViewer.errorPresent(self, mess: error.message!) { }
+                if let tmpSelf = self, let message = error.message {
+                    ErrorViewer.errorPresent(tmpSelf, mess: message) { }
                 }
-                if self.modules == nil || self.modules?.count == 0 {
-                    self.addNoDataView(info: "Empty")
+                if self?.modules == nil || self?.modules?.count == 0 {
+                    self?.addNoDataView(info: "Empty")
                 }
                 break
             }
-            self.isFetching = false
+            self?.isFetching = false
         }
     }
 }
@@ -100,10 +100,10 @@ extension ModulesViewController: UITableViewDelegate {
             self.willLoadNextView = true
             self.addActivityIndicator()
             if let module = self.modules?[indexPath.row] {
-                module.getDetails { _ in
-                    self.performSegue(withIdentifier: "moduleDetailsSegue", sender: module)
-                    self.removeActivityIndicator()
-                    self.willLoadNextView = false
+                module.getDetails { [weak self] _ in
+                    self?.performSegue(withIdentifier: "moduleDetailsSegue", sender: module)
+                    self?.removeActivityIndicator()
+                    self?.willLoadNextView = false
                 }
             }
         }

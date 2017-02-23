@@ -32,22 +32,22 @@ class CurrentProjectsViewController: LoadingDataViewController {
     
     func getProjects() {
         self.isFetching = true
-        projectsRequests.current { (result) in
+        projectsRequests.current { [weak self] result in
             switch result {
             case .success(let data):
-                self.projects = data
+                self?.projects = data
                 ApplicationManager.sharedInstance.user?.value.projects = data
-                self.projectsTableView.reloadData()
-                self.removeNoDataView()
+                self?.projectsTableView.reloadData()
+                self?.removeNoDataView()
             case .failure(let error):
-                if error.message != nil {
-                    ErrorViewer.errorPresent(self, mess: error.message!) { }
+                if let tmpSelf = self, let message = error.message {
+                    ErrorViewer.errorPresent(tmpSelf, mess: message) { }
                 }
-                if self.projects == nil || self.projects?.count == 0 {
-                    self.addNoDataView(info: "Empty")
+                if self?.projects == nil || self?.projects?.count == 0 {
+                    self?.addNoDataView(info: "Empty")
                 }
             }
-            self.isFetching = false
+            self?.isFetching = false
         }
     }
 
@@ -61,14 +61,14 @@ class CurrentProjectsViewController: LoadingDataViewController {
     
     func getProjectFiles(forProject activity: Project, group: DispatchGroup) {
         group.enter()
-        projectsRequests.files(forProject: activity, completion: { (result) in
+        projectsRequests.files(forProject: activity, completion: { [weak self] result in
             switch (result) {
             case .success(let files):
                 activity.files = files
                 group.leave()
             case .failure(let err):
-                if let message = err.message {
-                       ErrorViewer.errorPresent(self, mess: message) {
+                if let tmpSelf = self, let message = err.message {
+                       ErrorViewer.errorPresent(tmpSelf, mess: message) {
                         group.leave()
                     }
                 } else {
@@ -81,14 +81,14 @@ class CurrentProjectsViewController: LoadingDataViewController {
     
     func getProjectDetails(forProject activity: Project, group: DispatchGroup) {
         group.enter()
-        projectsRequests.details(forProject: activity, completion: { result in
+        projectsRequests.details(forProject: activity, completion: { [weak self] result in
             switch (result) {
             case .success(_):
                 log.info("Project details set")
                 group.leave()
             case .failure(let err):
-                if let message = err.message {
-                    ErrorViewer.errorPresent(self, mess: message) {
+                if let tmpSelf = self, let message = err.message {
+                    ErrorViewer.errorPresent(tmpSelf, mess: message) {
                         group.leave()
                     }
                 } else {

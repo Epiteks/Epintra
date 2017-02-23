@@ -133,13 +133,13 @@ extension SettingsViewController: UITableViewDelegate {
         
         let confirmationMenu = UIAlertController(title: nil, message: NSLocalizedString("WantToDisconnect", comment: ""), preferredStyle: .actionSheet)
         
-        let disconnect = UIAlertAction(title: NSLocalizedString("Disconnect", comment: ""), style: .destructive, handler: { _ in
+        let disconnect = UIAlertAction(title: NSLocalizedString("Disconnect", comment: ""), style: .destructive, handler: { [weak self] _ in
             
             KeychainUtil.deleteCredentials()
             
             let storyboard = UIStoryboard(name: "ConnexionStoryboard", bundle: nil)
             let vc = storyboard.instantiateInitialViewController()
-            self.present(vc!, animated: true, completion: nil)
+            self?.present(vc!, animated: true, completion: nil)
         })
         
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)

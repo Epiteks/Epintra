@@ -107,30 +107,35 @@ class LoginViewController: UIViewController {
 	func loginCall() {
         
 		MJProgressView.instance.showLoginProgress(self.loginButton, white: true)
-		usersRequests.auth(login, password: password) { (result) in
+		usersRequests.auth(login, password: password) { [weak self] result in
 			MJProgressView.instance.hideProgress()
+
+            guard let tmpSelf = self else {
+                return
+            }
+
 			switch (result) {
 			case .success(_):
                 
                 do {
-                    try KeychainUtil.saveCredentials(email: self.login, password: self.password)
+                    try KeychainUtil.saveCredentials(email: tmpSelf.login, password: tmpSelf.password)
                 } catch {
                     log.error("Thrown error when saving credentials")
                 }
                 
-				self.goToNextView()
+				tmpSelf.goToNextView()
 				break
 			case .failure(let error):
 				if (error.type == AppError.authenticationFailure) {
-					ErrorViewer.errorShow(self, mess: NSLocalizedString("invalidCombinaison", comment: "")) { _ in }
+					ErrorViewer.errorShow(tmpSelf, mess: NSLocalizedString("invalidCombinaison", comment: "")) { _ in }
 				} else if (error.type == AppError.apiError) {
                     if let mess = error.message {
-                        ErrorViewer.errorShow(self, mess: mess) { _ in }
+                        ErrorViewer.errorShow(tmpSelf, mess: mess) { _ in }
                     } else {
-                        ErrorViewer.errorShow(self, mess: NSLocalizedString("unknownApiError", comment: "")) { _ in }
+                        ErrorViewer.errorShow(tmpSelf, mess: NSLocalizedString("unknownApiError", comment: "")) { _ in }
                     }
 				}
-                self.removeWaitingView()
+                tmpSelf.removeWaitingView()
 				break
 			}
 		}		
@@ -170,8 +175,8 @@ class LoginViewController: UIViewController {
 			UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 2.0, initialSpringVelocity: 0.0, options: .curveLinear, animations: {
 				self.view.frame.origin.y = self.connexionButtonConstraintSave!
 				self.view.layoutIfNeeded()
-				}, completion: { (_) in
-					self.connexionButtonConstraintSave = nil
+				}, completion: { [weak self] _ in
+					self?.connexionButtonConstraintSave = nil
 			})
 		}
 	}
@@ -210,20 +215,25 @@ class LoginViewController: UIViewController {
 	func checkStatus() {
 
 		func checkAPI() {
-			miscRequests.getAPIStatus { (responseAPI) in
+			miscRequests.getAPIStatus { [weak self] responseAPI in
+
+                guard let tmpSelf = self else {
+                    return
+                }
+
 				switch responseAPI {
 				case .success(let status):
 					if status {
 						checkIntra()
 					} else {
-						ErrorViewer.errorShow(self, mess: NSLocalizedString("serverNotAvailable", comment: "")) { _ in }
+						ErrorViewer.errorShow(tmpSelf, mess: NSLocalizedString("serverNotAvailable", comment: "")) { _ in }
 					}
 					break
 				case .failure(let error):
 					if let mess = error.message {
-						ErrorViewer.errorShow(self, mess: mess) { _ in }
+						ErrorViewer.errorShow(tmpSelf, mess: mess) { _ in }
 					} else {
-						ErrorViewer.errorShow(self, mess: NSLocalizedString("unknownApiError", comment: "")) { _ in }
+						ErrorViewer.errorShow(tmpSelf, mess: NSLocalizedString("unknownApiError", comment: "")) { _ in }
 					}
 					break
 				}
@@ -231,18 +241,23 @@ class LoginViewController: UIViewController {
 		}
 
 		func checkIntra() {
-			miscRequests.getIntraStatus(completion: { (responseIntra) in
-				switch responseIntra {
+			miscRequests.getIntraStatus(completion: { [weak self] responseIntra in
+
+                guard let tmpSelf = self else {
+                    return
+                }
+
+                switch responseIntra {
 				case .success(let status):
 					if !status {
-						ErrorViewer.errorShow(self, mess: NSLocalizedString("serverNotAvailable", comment: "")) { _ in }
+						ErrorViewer.errorShow(tmpSelf, mess: NSLocalizedString("serverNotAvailable", comment: "")) { _ in }
 					}
 					break
 				case .failure(let error):
 					if let mess = error.message {
-						ErrorViewer.errorShow(self, mess: mess) { _ in }
+						ErrorViewer.errorShow(tmpSelf, mess: mess) { _ in }
 					} else {
-						ErrorViewer.errorShow(self, mess: NSLocalizedString("unknownApiError", comment: "")) { _ in }
+						ErrorViewer.errorShow(tmpSelf, mess: NSLocalizedString("unknownApiError", comment: "")) { _ in }
 					}
 					break
 				}

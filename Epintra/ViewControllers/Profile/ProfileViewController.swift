@@ -83,18 +83,18 @@ class ProfileViewController: UIViewController {
 		
 		self.downloadingFlags = true
 		
-		usersRequests.getUserFlags((ApplicationManager.sharedInstance.user?.value.login)!) { (result) in
+		usersRequests.getUserFlags((ApplicationManager.sharedInstance.user?.value.login)!) { [weak self] result in
 			switch (result) {
 			case .success(let data):
-					self.flags = data
+					self?.flags = data
 				log.info("User flags fetched")
 			case .failure(let error):
-				if error.message != nil {
-					ErrorViewer.errorPresent(self, mess: error.message!) { }
+				if let tmpSelf = self, let message = error.message {
+					ErrorViewer.errorPresent(tmpSelf, mess: message) { }
 				}
 			}
-			self.downloadingFlags = false
-			self.tableView.reloadData()
+			self?.downloadingFlags = false
+			self?.tableView.reloadData()
 		}
 	}
 	
@@ -105,17 +105,17 @@ class ProfileViewController: UIViewController {
 		
 		self.downloadingFiles = true
 		
-		usersRequests.getUserDocuments { (result) in
+		usersRequests.getUserDocuments { [weak self] result in
 			switch (result) {
             case .success(let data):
-                self.files = data
+                self?.files = data
 			case .failure(let error):
-				if error.message != nil {
-					ErrorViewer.errorPresent(self, mess: error.message!) { }
+				if let tmpSelf = self, let message = error.message {
+					ErrorViewer.errorPresent(tmpSelf, mess: message) { }
 				}
 			}
-			self.downloadingFiles = false
-			self.tableView.reloadData()
+			self?.downloadingFiles = false
+			self?.tableView.reloadData()
 		}
 	}
 

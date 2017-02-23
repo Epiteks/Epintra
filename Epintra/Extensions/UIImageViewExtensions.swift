@@ -53,12 +53,12 @@ extension UIImageView {
 		self.layer.borderColor = UIUtils.lightBackgroundColor.cgColor
 		self.layer.cornerRadius = self.frame.size.height / 2
 	}
-    
+
     func downloadProfileImage(fromURL url: URL) {
-        self.af_setImage(withURL: url, placeholderImage: #imageLiteral(resourceName: "userProfile")) { _ in
+        self.af_setImage(withURL: url, placeholderImage: #imageLiteral(resourceName: "userProfile")) { [weak self] _ in
             DispatchQueue.main.async {
-                self.cropToSquare()
-                self.toCircle()
+                self?.cropToSquare()
+                self?.toCircle()
             }
         }
         self.toCircle()
