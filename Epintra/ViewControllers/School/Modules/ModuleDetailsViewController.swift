@@ -50,12 +50,12 @@ class ModuleDetailsViewController: LoadingDataViewController {
                 vc.students = self.module?.registeredStudents
             }
         } else if segue.identifier == "projectDetailsSegue" {
-            if let vc = segue.destination as? ProjectDetailsViewController, let index = self.activitiesTableView.indexPathForSelectedRow?.row, let activity = self.module?.activities[index] {
+            if let vc = segue.destination as? ProjectDetailsViewController, let activity = sender as? Project {
                 vc.project = activity
             }
         } else if segue.identifier == "projectMarksSegue" {
-            if let vc = segue.destination as? ProjectMarksViewController, let index = self.activitiesTableView.indexPathForSelectedRow?.row, let activity = self.module?.activities[index] {
-                vc.marks = activity.marks
+            if let vc = segue.destination as? ProjectMarksViewController, let marks = (sender as? Project)?.marks {
+                vc.marks = marks
             }
         }
     }
@@ -134,9 +134,8 @@ class ModuleDetailsViewController: LoadingDataViewController {
         modulesRequests.registeredStudents(for: self.module!) { result in
             switch (result) {
             case .success(let registeredStudents):
-                
                 self.module?.registeredStudents = registeredStudents
-                self.performSegue(withIdentifier: "gradesSegue", sender: self)
+                self.performSegue(withIdentifier: "gradesSegue", sender: nil)
             case .failure(let err):
                 if err.message != nil {
                     ErrorViewer.errorPresent(self, mess: err.message!) {}
@@ -206,7 +205,7 @@ extension ModuleDetailsViewController: UITableViewDelegate {
                     dispatchGroup.notify(queue: DispatchQueue.global(qos: .utility), execute: {
                         DispatchQueue.main.async(execute: {
                             self.removeActivityIndicator()
-                            self.performSegue(withIdentifier: "projectDetailsSegue", sender: self)
+                            self.performSegue(withIdentifier: "projectDetailsSegue", sender: activity)
                             self.activitiesTableView.deselectRow(at: indexPath, animated: true)
                             self.willLoadNextView = false
                         })
@@ -216,7 +215,7 @@ extension ModuleDetailsViewController: UITableViewDelegate {
                 self.willLoadNextView = true
                 self.addActivityIndicator()
                 projectsRequests.marks(forProject: activity) { _ in
-                    self.performSegue(withIdentifier: "projectMarksSegue", sender: self)
+                    self.performSegue(withIdentifier: "projectMarksSegue", sender: activity)
                     self.willLoadNextView = false
                     self.removeActivityIndicator()
                     self.activitiesTableView.deselectRow(at: indexPath, animated: true)

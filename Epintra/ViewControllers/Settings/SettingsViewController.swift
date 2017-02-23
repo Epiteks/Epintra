@@ -158,7 +158,7 @@ extension SettingsViewController: UITableViewDelegate {
     }
     
     func selectCalendarViewController() {
-        self.performSegue(withIdentifier: "SelectCalendarSegue", sender: self)
+        self.performSegue(withIdentifier: "SelectCalendarSegue", sender: nil)
     }
 }
 

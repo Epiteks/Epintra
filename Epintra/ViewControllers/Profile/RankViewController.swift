@@ -91,7 +91,7 @@ class RankViewController: LoadingDataViewController {
     }
     
     @IBAction func filterSearchSegue(_ sender: Any) {
-        self.performSegue(withIdentifier: "filterSearchSegue", sender: self)
+        self.performSegue(withIdentifier: "filterSearchSegue", sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

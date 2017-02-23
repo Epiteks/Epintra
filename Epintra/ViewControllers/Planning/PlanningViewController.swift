@@ -22,10 +22,7 @@ class PlanningViewController: LoadingDataViewController {
     var currentDayEvents: [Planning]?
     
     var planningFilter = PlanningFilterViewController.PlanningFilter()
-    
-    var appointmentDetailsData: AppointmentEvent?
-    var selectedActivity: Planning?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,11 +43,9 @@ class PlanningViewController: LoadingDataViewController {
                 vc.planningFilter = self.planningFilter
             }
         } else if segue.identifier == "appointmentDetailsSegue" {
-            if let vc = segue.destination as? AppointmentDetailsViewController {
-                if let data = self.appointmentDetailsData, let activity = self.selectedActivity {
-                    vc.appointment = data
-                    vc.planning = activity
-                }
+            if let vc = segue.destination as? AppointmentDetailsViewController, let activity = sender as? AppointmentEvent, let event = activity.planningEvent {
+                    vc.appointment = activity
+                    vc.planning = event
             }
         }
     }
@@ -110,7 +105,7 @@ class PlanningViewController: LoadingDataViewController {
     }
     
     @IBAction func filterButtonSelected(_ sender: Any) {
-        self.performSegue(withIdentifier: "planningFilterSegue", sender: self)
+        self.performSegue(withIdentifier: "planningFilterSegue", sender: nil)
     }
 }
 
@@ -293,9 +288,7 @@ extension PlanningViewController: UITableViewDelegate {
                 planningRequests.getSlots(forEvent: data) { [weak self] result in
                     switch result {
                     case .success(let appointment):
-                        self?.appointmentDetailsData = appointment
-                        self?.selectedActivity = data
-                        self?.performSegue(withIdentifier: "appointmentDetailsSegue", sender: self)
+                        self?.performSegue(withIdentifier: "appointmentDetailsSegue", sender: appointment)
                     case .failure(let err):
                         print(err)
                     }
