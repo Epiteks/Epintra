@@ -56,12 +56,12 @@ class ProfileViewController: UIViewController {
         
         // Check if the current user data contains all needed fields.
         // Otherwise, download it.
-        if !(ApplicationManager.sharedInstance.user?.enoughDataForProfile() ?? false) {
+        if !(ApplicationManager.sharedInstance.user?.value.enoughDataForProfile() ?? false) {
             usersRequests.getCurrentUserData { _ in }
         }
         // Add subscription to user
-        self.userSubscription = ApplicationManager.sharedInstance.ouser?.asObservable().subscribe(onNext: { _ in
-            self.tableView.reloadSections([0], with: .automatic)
+        self.userSubscription = ApplicationManager.sharedInstance.user?.asObservable().subscribe(onNext: { [weak self] _ in
+            self?.tableView.reloadSections([0], with: .automatic)
             return
         })
         
@@ -83,18 +83,18 @@ class ProfileViewController: UIViewController {
 		
 		self.downloadingFlags = true
 		
-		usersRequests.getUserFlags((ApplicationManager.sharedInstance.ouser?.value.login)!) { (result) in
+		usersRequests.getUserFlags((ApplicationManager.sharedInstance.user?.value.login)!) { [weak self] result in
 			switch (result) {
 			case .success(let data):
-					self.flags = data
+					self?.flags = data
 				log.info("User flags fetched")
 			case .failure(let error):
-				if error.message != nil {
-					ErrorViewer.errorPresent(self, mess: error.message!) { }
+				if let tmpSelf = self, let message = error.message {
+					ErrorViewer.errorPresent(tmpSelf, mess: message) { }
 				}
 			}
-			self.downloadingFlags = false
-			self.tableView.reloadData()
+			self?.downloadingFlags = false
+			self?.tableView.reloadData()
 		}
 	}
 	
@@ -105,17 +105,17 @@ class ProfileViewController: UIViewController {
 		
 		self.downloadingFiles = true
 		
-		usersRequests.getUserDocuments { (result) in
+		usersRequests.getUserDocuments { [weak self] result in
 			switch (result) {
             case .success(let data):
-                self.files = data
+                self?.files = data
 			case .failure(let error):
-				if error.message != nil {
-					ErrorViewer.errorPresent(self, mess: error.message!) { }
+				if let tmpSelf = self, let message = error.message {
+					ErrorViewer.errorPresent(tmpSelf, mess: message) { }
 				}
 			}
-			self.downloadingFiles = false
-			self.tableView.reloadData()
+			self?.downloadingFiles = false
+			self?.tableView.reloadData()
 		}
 	}
 
@@ -164,11 +164,11 @@ extension ProfileViewController: UITableViewDataSource {
         if (indexPath as NSIndexPath).section == 0 { // Profile Cell, the first one
             cell = tableView.dequeueReusableCell(withIdentifier: "profileCell")!
             let profileView = cell.viewWithTag(1) as! ProfileView
-            if let usr = ApplicationManager.sharedInstance.ouser?.value {
+            if let usr = ApplicationManager.sharedInstance.user?.value {
                 profileView.setUserData(usr)
             }
             
-            if let profileImageURL = ApplicationManager.sharedInstance.user?.imageUrl {
+            if let profileImageURL = ApplicationManager.sharedInstance.user?.value.imageUrl {
                 profileView.userProfileImage.downloadProfileImage(fromURL: URL(string: profileImageURL)!)
             }
         } else if (indexPath as NSIndexPath).section == 1 { // Files

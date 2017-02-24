@@ -16,7 +16,7 @@ class PlanningFilterViewController: UIViewController {
         
         init() {
             
-            if let currentSemester = ApplicationManager.sharedInstance.user?.semester {
+            if let currentSemester = ApplicationManager.sharedInstance.user?.value.semester {
                 self.semesters.append(currentSemester)
             }
             

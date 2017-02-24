@@ -50,12 +50,12 @@ class ModuleDetailsViewController: LoadingDataViewController {
                 vc.students = self.module?.registeredStudents
             }
         } else if segue.identifier == "projectDetailsSegue" {
-            if let vc = segue.destination as? ProjectDetailsViewController, let index = self.activitiesTableView.indexPathForSelectedRow?.row, let activity = self.module?.activities[index] {
+            if let vc = segue.destination as? ProjectDetailsViewController, let activity = sender as? Project {
                 vc.project = activity
             }
         } else if segue.identifier == "projectMarksSegue" {
-            if let vc = segue.destination as? ProjectMarksViewController, let index = self.activitiesTableView.indexPathForSelectedRow?.row, let activity = self.module?.activities[index] {
-                vc.marks = activity.marks
+            if let vc = segue.destination as? ProjectMarksViewController, let marks = (sender as? Project)?.marks {
+                vc.marks = marks
             }
         }
     }
@@ -97,13 +97,13 @@ class ModuleDetailsViewController: LoadingDataViewController {
     
     func getProjectFiles(forProject activity: Project, group: DispatchGroup) {
         group.enter()
-        projectsRequests.files(forProject: activity, completion: { (result) in
+        projectsRequests.files(forProject: activity, completion: { [weak self] (result) in
             switch (result) {
             case .success(let files):
                 activity.files = files
             case .failure(let err):
-                if err.message != nil {
-                    ErrorViewer.errorPresent(self, mess: err.message!) {}
+                if let tmpSelf = self, let message = err.message {
+                    ErrorViewer.errorPresent(tmpSelf, mess: message) {}
                 }
                 log.error("Fetching project files error:  \(err)")
             }
@@ -113,14 +113,14 @@ class ModuleDetailsViewController: LoadingDataViewController {
     
     func getProjectDetails(forProject activity: Project, group: DispatchGroup) {
         group.enter()
-        projectsRequests.details(forProject: activity, completion: { result in
+        projectsRequests.details(forProject: activity, completion: { [weak self] result in
             switch (result) {
             case .success(_):
                 log.info("Project details set")
                 break
             case .failure(let err):
-                if err.message != nil {
-                    ErrorViewer.errorPresent(self, mess: err.message!) {}
+                if let tmpSelf = self, let message = err.message {
+                    ErrorViewer.errorPresent(tmpSelf, mess: message) {}
                 }
                 log.error("Fetching project details error:  \(err)")
             }
@@ -131,20 +131,20 @@ class ModuleDetailsViewController: LoadingDataViewController {
     func registeredStudentsButtonTouched() {
         self.barButtonItem.isEnabled = false
         self.addActivityIndicator()
-        modulesRequests.registeredStudents(for: self.module!) { result in
+        modulesRequests.registeredStudents(for: self.module!) { [weak self] result in
+
             switch (result) {
             case .success(let registeredStudents):
-                
-                self.module?.registeredStudents = registeredStudents
-                self.performSegue(withIdentifier: "gradesSegue", sender: self)
+                self?.module?.registeredStudents = registeredStudents
+                self?.performSegue(withIdentifier: "gradesSegue", sender: nil)
             case .failure(let err):
-                if err.message != nil {
-                    ErrorViewer.errorPresent(self, mess: err.message!) {}
+                if let tmpSelf = self, let message = err.message {
+                    ErrorViewer.errorPresent(tmpSelf, mess: message) {}
                 }
                 log.error("Fetching modules error:  \(err)")
             }
-            self.removeActivityIndicator()
-            self.barButtonItem.isEnabled = true
+            self?.removeActivityIndicator()
+            self?.barButtonItem.isEnabled = true
         }
     }
 }
@@ -206,7 +206,7 @@ extension ModuleDetailsViewController: UITableViewDelegate {
                     dispatchGroup.notify(queue: DispatchQueue.global(qos: .utility), execute: {
                         DispatchQueue.main.async(execute: {
                             self.removeActivityIndicator()
-                            self.performSegue(withIdentifier: "projectDetailsSegue", sender: self)
+                            self.performSegue(withIdentifier: "projectDetailsSegue", sender: activity)
                             self.activitiesTableView.deselectRow(at: indexPath, animated: true)
                             self.willLoadNextView = false
                         })
@@ -215,11 +215,11 @@ extension ModuleDetailsViewController: UITableViewDelegate {
             } else if let characters = activity.mark?.characters, characters.count > 0 {
                 self.willLoadNextView = true
                 self.addActivityIndicator()
-                projectsRequests.marks(forProject: activity) { _ in
-                    self.performSegue(withIdentifier: "projectMarksSegue", sender: self)
-                    self.willLoadNextView = false
-                    self.removeActivityIndicator()
-                    self.activitiesTableView.deselectRow(at: indexPath, animated: true)
+                projectsRequests.marks(forProject: activity) { [weak self] _ in
+                    self?.performSegue(withIdentifier: "projectMarksSegue", sender: activity)
+                    self?.willLoadNextView = false
+                    self?.removeActivityIndicator()
+                    self?.activitiesTableView.deselectRow(at: indexPath, animated: true)
                 }
             } else {
                 self.activitiesTableView.deselectRow(at: indexPath, animated: true)

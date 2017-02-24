@@ -15,7 +15,7 @@ class FilterRankViewController: UIViewController {
         var cities = ["All"]
         
         init() {
-            if let studentYear = ApplicationManager.sharedInstance.user?.studentyear {
+            if let studentYear = ApplicationManager.sharedInstance.user?.value.studentyear {
                 self.promotion = studentYear < 4 ? studentYear : 3 // Tek3 if user is tek[more]
             } else {
                 self.promotion = 3

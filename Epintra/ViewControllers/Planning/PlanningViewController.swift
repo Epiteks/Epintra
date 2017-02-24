@@ -22,10 +22,7 @@ class PlanningViewController: LoadingDataViewController {
     var currentDayEvents: [Planning]?
     
     var planningFilter = PlanningFilterViewController.PlanningFilter()
-    
-    var appointmentDetailsData: AppointmentEvent?
-    var selectedActivity: Planning?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,11 +43,9 @@ class PlanningViewController: LoadingDataViewController {
                 vc.planningFilter = self.planningFilter
             }
         } else if segue.identifier == "appointmentDetailsSegue" {
-            if let vc = segue.destination as? AppointmentDetailsViewController {
-                if let data = self.appointmentDetailsData, let activity = self.selectedActivity {
-                    vc.appointment = data
-                    vc.planning = activity
-                }
+            if let vc = segue.destination as? AppointmentDetailsViewController, let activity = sender as? AppointmentEvent, let event = activity.planningEvent {
+                    vc.appointment = activity
+                    vc.planning = event
             }
         }
     }
@@ -71,16 +66,16 @@ class PlanningViewController: LoadingDataViewController {
         let firstDayShown = self.calendarView.currentPage
         let lastDayShown = firstDayShown.endOfWeekDate()
         
-        planningRequests.getPlanning(for: firstDayShown, end: lastDayShown) { result in
+        planningRequests.getPlanning(for: firstDayShown, end: lastDayShown) { [weak self] result in
             switch result {
             case .success(let events):
-                self.currentWeekEvents = events
-                self.setDataToDisplay()
+                self?.currentWeekEvents = events
+                self?.setDataToDisplay()
             case .failure(let error):
-                self.showAlert(withTitle: "error", andMessage: error.message)
+                self?.showAlert(withTitle: "error", andMessage: error.message)
                 break
             }
-            self.removeActivityIndicator()
+            self?.removeActivityIndicator()
         }
     }
     
@@ -110,7 +105,7 @@ class PlanningViewController: LoadingDataViewController {
     }
     
     @IBAction func filterButtonSelected(_ sender: Any) {
-        self.performSegue(withIdentifier: "planningFilterSegue", sender: self)
+        self.performSegue(withIdentifier: "planningFilterSegue", sender: nil)
     }
 }
 
@@ -201,18 +196,18 @@ extension PlanningViewController: UITableViewDataSource {
                 } else if data.canRegister {
                     // Register student
                     self.addActivityIndicator()
-                    planningRequests.register(toEvent: data, completion: { result in
+                    planningRequests.register(toEvent: data, completion: { [weak self] result in
                         
-                        self.removeActivityIndicator()
+                        self?.removeActivityIndicator()
                         switch result {
                         case .success(_):
-                            if let eventIndex = self.currentDayEvents?.index(where: { $0 == data }) {
-                                    self.eventsTableView.reloadRows(at: [IndexPath(row: eventIndex, section: 0)], with: .automatic)
+                            if let eventIndex = self?.currentDayEvents?.index(where: { $0 == data }) {
+                                    self?.eventsTableView.reloadRows(at: [IndexPath(row: eventIndex, section: 0)], with: .automatic)
                                 }
                             break
                         case .failure(let err):
                             if let message = err.message {
-                                self.showAlert(withTitle: "error", andMessage: message)
+                                self?.showAlert(withTitle: "error", andMessage: message)
                             }
                             break
                         }
@@ -221,17 +216,17 @@ extension PlanningViewController: UITableViewDataSource {
                 } else if data.canUnregister {
                     // Unregister Student
                     self.addActivityIndicator()
-                    planningRequests.unregister(fromEvent: data, completion: { result in
-                        self.removeActivityIndicator()
+                    planningRequests.unregister(fromEvent: data, completion: { [weak self] result in
+                        self?.removeActivityIndicator()
                         switch result {
                         case .success(_):
-                            if let eventIndex = self.currentDayEvents?.index(where: { $0 == data }) {
-                                self.eventsTableView.reloadRows(at: [IndexPath(row: eventIndex, section: 0)], with: .automatic)
+                            if let eventIndex = self?.currentDayEvents?.index(where: { $0 == data }) {
+                                self?.eventsTableView.reloadRows(at: [IndexPath(row: eventIndex, section: 0)], with: .automatic)
                             }
                             break
                         case .failure(let err):
                             if let message = err.message {
-                                self.showAlert(withTitle: "error", andMessage: message)
+                                self?.showAlert(withTitle: "error", andMessage: message)
                             }
                             break
                         }
@@ -255,20 +250,20 @@ extension PlanningViewController: UITableViewDataSource {
             
         })
         
-        alert.addAction(UIAlertAction(title: NSLocalizedString("Done", comment: ""), style: .default, handler: { _ in
-            self.addActivityIndicator()
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Done", comment: ""), style: .default, handler: { [weak self] _ in
+            self?.addActivityIndicator()
             if let token = tokenTextField.text, token.characters.count > 0 {
                 planningRequests.enter(token: token, for: data, completion: { result in
-                    self.removeActivityIndicator()
+                    self?.removeActivityIndicator()
                     switch result {
                     case .success(_):
-                        if let eventIndex = self.currentDayEvents?.index(where: { $0 == data }) {
-                            self.eventsTableView.reloadRows(at: [IndexPath(row: eventIndex, section: 0)], with: .automatic)
+                        if let eventIndex = self?.currentDayEvents?.index(where: { $0 == data }) {
+                            self?.eventsTableView.reloadRows(at: [IndexPath(row: eventIndex, section: 0)], with: .automatic)
                         }
                         break
                     case .failure(let err):
                         if let message = err.message {
-                            self.showAlert(withTitle: "error", andMessage: message)
+                            self?.showAlert(withTitle: "error", andMessage: message)
                         }
                         break
                     }
@@ -293,9 +288,7 @@ extension PlanningViewController: UITableViewDelegate {
                 planningRequests.getSlots(forEvent: data) { [weak self] result in
                     switch result {
                     case .success(let appointment):
-                        self?.appointmentDetailsData = appointment
-                        self?.selectedActivity = data
-                        self?.performSegue(withIdentifier: "appointmentDetailsSegue", sender: self)
+                        self?.performSegue(withIdentifier: "appointmentDetailsSegue", sender: appointment)
                     case .failure(let err):
                         print(err)
                     }

@@ -28,29 +28,29 @@ class MarksViewController: LoadingDataViewController, UITableViewDataSource, UIT
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        if ApplicationManager.sharedInstance.user?.marks == nil {
+        if ApplicationManager.sharedInstance.user?.value.marks == nil {
             getMarks()
         }
     }
     
     func getMarks() {
         self.isFetching = true
-        usersRequests.allMarks { (result) in
+        usersRequests.allMarks { [weak self] result in
             switch result {
             case .success(let data):
-                self.marks = data
-                ApplicationManager.sharedInstance.user?.marks = data
-                self.marksTableView.reloadData()
-                self.removeNoDataView()
+                self?.marks = data
+                ApplicationManager.sharedInstance.user?.value.marks = data
+                self?.marksTableView.reloadData()
+                self?.removeNoDataView()
             case .failure(let error):
-                if error.message != nil {
-                    ErrorViewer.errorPresent(self, mess: error.message!) { }
+                if let tmpSelf = self, let message = error.message {
+                    ErrorViewer.errorPresent(tmpSelf, mess: message) { }
                 }
-                if self.marks == nil || self.marks?.count == 0 {
-                    self.addNoDataView(info: "Empty")
+                if self?.marks == nil || self?.marks?.count == 0 {
+                    self?.addNoDataView(info: "Empty")
                 }
             }
-            self.isFetching = false
+            self?.isFetching = false
         }
     }
     

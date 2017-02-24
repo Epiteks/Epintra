@@ -29,8 +29,8 @@ class UsersRequests: RequestManager {
 					log.info("Token:  \(token)")
 
 					ApplicationManager.sharedInstance.token = token
-                    ApplicationManager.sharedInstance.user = User(login: login)
-                    ApplicationManager.sharedInstance.ouser = Variable<User>(User(login: login))
+                    //ApplicationManager.sharedInstance.user = User(login: login)
+                    ApplicationManager.sharedInstance.user = Variable<User>(User(login: login))
 					completion(Result.success(nil))
 				}
 			case .failure(let err):
@@ -52,7 +52,7 @@ class UsersRequests: RequestManager {
         let dispo = DisposeBag()
         var login: String?
         
-        ApplicationManager.sharedInstance.ouser?.asObservable()
+        ApplicationManager.sharedInstance.user?.asObservable()
         .do(onNext: { usr in
             login = usr.login
         }).subscribe().addDisposableTo(dispo)
@@ -62,11 +62,7 @@ class UsersRequests: RequestManager {
 		super.call("userData", params: nil, urlParams: param) { (response) in
 			switch response {
 			case .success(let responseJSON):
-				ApplicationManager.sharedInstance.user = User(dict: responseJSON)
-                
-                ApplicationManager.sharedInstance.ouser?.value = User(dict: responseJSON)
-                
-//                ApplicationManager.sharedInstance.ouser?.value.setData(fromJSON: responseJSON)
+                ApplicationManager.sharedInstance.user?.value = User(dict: responseJSON)
 				completion(Result.success(nil))
 			case .failure(let err):
 				completion(Result.failure(type: err.type, message: err.message))
@@ -110,8 +106,8 @@ class UsersRequests: RequestManager {
 		super.call("userHistory", params: nil) { (response) in
 			switch response {
 			case .success(let responseJSON):
-				app.user?.fillHistory(responseJSON)
-                ApplicationManager.sharedInstance.ouser?.value.fillHistory(responseJSON)
+				app.user?.value.fillHistory(responseJSON)
+                ApplicationManager.sharedInstance.user?.value.fillHistory(responseJSON)
 				completion(Result.success(nil))
 				
 			case .failure(let err):
@@ -146,7 +142,7 @@ class UsersRequests: RequestManager {
 	
 	func getUserDocuments(_ completion: @escaping (Result<[File]>) -> Void) {
 		
-		let params = "?login=" +  (ApplicationManager.sharedInstance.user?.login)!
+		let params = "?login=" +  (ApplicationManager.sharedInstance.user?.value.login)!
 		
 		super.call("userFiles", urlParams: params) { (response) in
 			switch response {

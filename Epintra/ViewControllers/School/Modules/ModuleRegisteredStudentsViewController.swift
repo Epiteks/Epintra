@@ -37,7 +37,7 @@ class ModuleRegisteredStudentsViewController: UIViewController, UITableViewDeleg
         
         for (index, student) in self.students!.enumerated() {
            
-            if student.login == ApplicationManager.sharedInstance.user?.login {
+            if student.login == ApplicationManager.sharedInstance.user?.value.login {
                 self.studentsTableView.scrollToRow(at: IndexPath(row: index, section: 0), at: UITableViewScrollPosition.top, animated: true)
             }
             
@@ -63,7 +63,7 @@ class ModuleRegisteredStudentsViewController: UIViewController, UITableViewDeleg
             cell?.nameLabel.text = student.login
             cell?.gradeLabel.text = student.grade
           
-            if student.login == ApplicationManager.sharedInstance.user?.login {
+            if student.login == ApplicationManager.sharedInstance.user?.value.login {
                 cell?.nameLabel.textColor = .red
                 cell?.gradeLabel.textColor = .red
             } else {

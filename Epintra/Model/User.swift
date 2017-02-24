@@ -134,7 +134,7 @@ class User {
 			tmpArray.append(History(dict: hist))
 		}
         
-        self.history.value.append(contentsOf: tmpArray)
+        self.history.value = tmpArray
 	}
     
     /// Check if the user profile contains enough information to be displayed on profile

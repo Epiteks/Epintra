@@ -25,35 +25,35 @@ class CurrentProjectsViewController: LoadingDataViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        if ApplicationManager.sharedInstance.user?.projects == nil {
+        if ApplicationManager.sharedInstance.user?.value.projects == nil {
             getProjects()
         }
     }
     
     func getProjects() {
         self.isFetching = true
-        projectsRequests.current { (result) in
+        projectsRequests.current { [weak self] result in
             switch result {
             case .success(let data):
-                self.projects = data
-                ApplicationManager.sharedInstance.user?.projects = data
-                self.projectsTableView.reloadData()
-                self.removeNoDataView()
+                self?.projects = data
+                ApplicationManager.sharedInstance.user?.value.projects = data
+                self?.projectsTableView.reloadData()
+                self?.removeNoDataView()
             case .failure(let error):
-                if error.message != nil {
-                    ErrorViewer.errorPresent(self, mess: error.message!) { }
+                if let tmpSelf = self, let message = error.message {
+                    ErrorViewer.errorPresent(tmpSelf, mess: message) { }
                 }
-                if self.projects == nil || self.projects?.count == 0 {
-                    self.addNoDataView(info: "Empty")
+                if self?.projects == nil || self?.projects?.count == 0 {
+                    self?.addNoDataView(info: "Empty")
                 }
             }
-            self.isFetching = false
+            self?.isFetching = false
         }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "projectDetailsSegue" {
-            if let vc = segue.destination as? ProjectDetailsViewController, let index = self.projectsTableView.indexPathForSelectedRow?.row, let project = self.projects?[index] {
+            if let vc = segue.destination as? ProjectDetailsViewController, let project = sender as? Project {
                 vc.project = project
             }
         }
@@ -61,34 +61,41 @@ class CurrentProjectsViewController: LoadingDataViewController {
     
     func getProjectFiles(forProject activity: Project, group: DispatchGroup) {
         group.enter()
-        projectsRequests.files(forProject: activity, completion: { (result) in
+        projectsRequests.files(forProject: activity, completion: { [weak self] result in
             switch (result) {
             case .success(let files):
                 activity.files = files
+                group.leave()
             case .failure(let err):
-                if err.message != nil {
-                    ErrorViewer.errorPresent(self, mess: err.message!) {}
+                if let tmpSelf = self, let message = err.message {
+                       ErrorViewer.errorPresent(tmpSelf, mess: message) {
+                        group.leave()
+                    }
+                } else {
+                    group.leave()
                 }
                 log.error("Fetching project files error:  \(err)")
             }
-            group.leave()
         })
     }
     
     func getProjectDetails(forProject activity: Project, group: DispatchGroup) {
         group.enter()
-        projectsRequests.details(forProject: activity, completion: { result in
+        projectsRequests.details(forProject: activity, completion: { [weak self] result in
             switch (result) {
             case .success(_):
                 log.info("Project details set")
-                break
+                group.leave()
             case .failure(let err):
-                if err.message != nil {
-                    ErrorViewer.errorPresent(self, mess: err.message!) {}
+                if let tmpSelf = self, let message = err.message {
+                    ErrorViewer.errorPresent(tmpSelf, mess: message) {
+                        group.leave()
+                    }
+                } else {
+                    group.leave()
                 }
                 log.error("Fetching project details error:  \(err)")
             }
-            group.leave()
         })
     }
 }
@@ -140,7 +147,7 @@ extension CurrentProjectsViewController: UITableViewDelegate {
                 dispatchGroup.notify(queue: DispatchQueue.global(qos: .utility), execute: {
                     DispatchQueue.main.async(execute: {
                         self.removeActivityIndicator()
-                        self.performSegue(withIdentifier: "projectDetailsSegue", sender: self)
+                        self.performSegue(withIdentifier: "projectDetailsSegue", sender: project)
                         tableView.deselectRow(at: indexPath, animated: true)
                         self.willLoadNextView = false
                     })

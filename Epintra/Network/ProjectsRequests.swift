@@ -61,7 +61,10 @@ class ProjectsRequests: RequestManager {
                 }
                 completion(Result.success(files))
                 break
-            case .failure(let err):
+            case .failure(var err):
+                if err.message == "File «  » not found" {
+                    err.message = nil
+                }
                 completion(Result.failure(type: err.type, message: err.message))
                 log.error("Fetching project files:  \(err)")
             }

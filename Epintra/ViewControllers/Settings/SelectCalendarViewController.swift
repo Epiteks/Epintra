@@ -29,18 +29,18 @@ class SelectCalendarViewController: LoadingDataViewController {
 		
         let calman = CalendarManager()
 		
-		CalendarManager.hasRights { result in
+		CalendarManager.hasRights { [weak self] result in
             switch result {
             case .success(_):
                 DispatchQueue.main.async {
-                    self.isFetching = true
-                    self.calendars = calman.getAllCalendars()
-                    self.isFetching = false
-                    self.tableView.reloadData()
+                    self?.isFetching = true
+                    self?.calendars = calman.getAllCalendars()
+                    self?.isFetching = false
+                    self?.tableView.reloadData()
                 }
             case .failure(_):
-				self.isFetching = false
-				self.accessNotGrantedError()
+				self?.isFetching = false
+				self?.accessNotGrantedError()
 			}
 		}
 	}
@@ -49,18 +49,18 @@ class SelectCalendarViewController: LoadingDataViewController {
 		
 		let alertController = UIAlertController (title: NSLocalizedString("Error", comment: ""), message: NSLocalizedString("CalendarAccessDenied", comment: ""), preferredStyle: .alert)
 		
-		let settingsAction = UIAlertAction(title: NSLocalizedString("Settings", comment: ""), style: .default) { (_) -> Void in
+		let settingsAction = UIAlertAction(title: NSLocalizedString("Settings", comment: ""), style: .default) { [weak self] _ -> Void in
 			DispatchQueue.main.async(execute: {
 				let settingsUrl = URL(string: UIApplicationOpenSettingsURLString)
 				if let url = settingsUrl {
 					UIApplication.shared.openURL(url)
 				}
-				_ = self.navigationController?.popViewController(animated: true)
+				_ = self?.navigationController?.popViewController(animated: true)
 			})
 		}
 		
-		let cancelAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { (_) -> Void in
-            _ = self.navigationController?.popViewController(animated: true)
+		let cancelAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default) { [weak self] _ -> Void in
+            _ = self?.navigationController?.popViewController(animated: true)
 		}
 		alertController.addAction(settingsAction)
 		alertController.addAction(cancelAction)
