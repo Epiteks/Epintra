@@ -223,6 +223,26 @@ class UsersRequests: RequestManager {
             }
         }
     }
+
+    func getPhotoURL(_ login: String, completion: @escaping (Result<String>) -> Void) {
+
+        super.call("userPhoto", urlParams: "?login=\(login)") { (response) in
+            switch response {
+            case .success(let responseJSON):
+                print(responseJSON)
+                if let photoURL = responseJSON["url"].string {
+                    log.info("Photo URL : \(photoURL)")
+                    completion(Result.success(photoURL))
+                } else {
+                    completion(Result.success(""))
+                }
+            case .failure(let err):
+                completion(Result.failure(type: err.type, message: err.message))
+                log.error("Authentication:  \(err)")
+                
+            }
+        }
+    }
 }
 
 let usersRequests = UsersRequests()

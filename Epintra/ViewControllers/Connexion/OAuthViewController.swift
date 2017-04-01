@@ -40,6 +40,8 @@ class OAuthViewController: UIViewController, WKUIDelegate, WKNavigationDelegate 
         webView.uiDelegate = self
         webView.navigationDelegate = self
         self.view = self.webView
+
+        self.title = NSLocalizedString("officeAuth", comment: "")
     }
 
     override func viewDidLoad() {

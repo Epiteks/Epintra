@@ -66,13 +66,10 @@ class LoginViewController: UIViewController {
         if let credentials = KeychainUtil.getCredentials() {
             self.addWaitingView()
             if let token = credentials.token {
-
-                // TODO check if token is valid to let user pass
-                print(token)
                 ApplicationManager.sharedInstance.token = token
                 ApplicationManager.sharedInstance.user = Variable<User>(User(login: self.login))
-                self.goToNextView()
-
+                // Check if token is valid
+                self.checkTokenValidity()
             }
         }
 
@@ -132,6 +129,34 @@ class LoginViewController: UIViewController {
         loginCall()
     }
 
+    /// Check if the current token is still valid by calling a light endpoint.
+    /// If so, we go to the next storyboard.
+    /// Otherwise, we delete all credentials and remove the waiting view to let user connect again.
+    func checkTokenValidity() {
+
+        MJProgressView.instance.showLoginProgress(self.loginButton, white: true)
+        usersRequests.getPhotoURL(ApplicationManager.sharedInstance.user?.value.login ?? "") { [weak self] result in
+            MJProgressView.instance.hideProgress()
+
+            guard let tmpSelf = self else {
+                return
+            }
+
+            switch (result) {
+            case .success(_):
+                // Token is still valid, we go to the main storyboard
+                tmpSelf.goToNextView()
+                break
+            case .failure(_):
+                // Token not valid, user should reconnect
+                tmpSelf.removeWaitingView()
+                KeychainUtil.deleteCredentials()
+                break
+            }
+        }
+    }
+
+    /// Authenticate user with the provided credentials
     func loginCall() {
 
         MJProgressView.instance.showLoginProgress(self.loginButton, white: true)
@@ -241,6 +266,7 @@ class LoginViewController: UIViewController {
         }
     }
 
+    /// Check the status of the API and the intranet
     func checkStatus() {
 
         func checkAPI() {
@@ -329,7 +355,6 @@ extension LoginViewController: UITableViewDataSource {
 
 extension LoginViewController: OAuthDelegate {
     func authentified(withEmail email: String?, andToken token: String?) {
-        // TODO Save token and change checking on start
 
         guard let email = email, let token = token else {
             ErrorViewer.errorShow(self, mess: NSLocalizedString("oauthWrongCredentials", comment: "")) { _ in }

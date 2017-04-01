@@ -22,6 +22,7 @@
 "invalidCombinaison" = "Mauvaise combinaison login / mot de passe";
 "serverNotAvailable" = "Le serveur est temporairement indisponible";
 "oauthWrongCredentials" = "L'authentification OAuth s'est mal passée. Si cela apparait encore merci de contacter l'équipe.";
+"officeAuth" = "Office 365";
 
 /**
  ** Splash screen
