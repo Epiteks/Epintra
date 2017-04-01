@@ -42,8 +42,6 @@ class HomeViewController: LoadingDataViewController {
     /// Get notifications if it is not available
     func getNotificationsIfNeeded() {
 
-        let app = ApplicationManager.sharedInstance
-
         // Check if the current user data contains all needed fields.
         // Otherwise, download it.
         if ApplicationManager.sharedInstance.user?.value.history.value.count ?? 0 == 0 {

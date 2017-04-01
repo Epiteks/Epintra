@@ -9,5 +9,5 @@
 import Foundation
 
 protocol OAuthDelegate: class {
-    func authentified(withEmail email: String, andToken token: String)
+    func authentified(withEmail email: String?, andToken token: String?)
 }

@@ -21,6 +21,7 @@
 "noOfficialApp" = "Non official application.";
 "invalidCombinaison" = "Invalid login/password combinaison";
 "serverNotAvailable" = "Server is currently not available";
+"oauthWrongCredentials" = "The OAuth process did not succeed, if it appears again please contact the team.";
 
 /**
  ** Splash screen

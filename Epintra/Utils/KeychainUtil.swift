@@ -19,43 +19,36 @@ class KeychainUtil {
     }
     
     // Private identifiers for Keychain access
-    private static let userEmailIdentifier = "userEmail"
-    private static let userPasswordIdentifier = "userPassword"
-    
+    private static let credentialsKey = "userCredentials"
+
     /// Save user credentials after log in successed.
     ///
-    /// - Parameters:
-    ///   - email: user email
-    ///   - password: user password
+    /// - Parameter credentials: user credentials
     /// - Throws: can throw when something went wrong when saving data
-    class func saveCredentials(email: String, password: String) throws {
-        
-        if KeychainWrapper.standard.set(email, forKey: userEmailIdentifier) == false
-            || KeychainWrapper.standard.set(password, forKey: userPasswordIdentifier) == false {
+    class func save(credentials: Authentication) throws {
+
+        let data = NSKeyedArchiver.archivedData(withRootObject: credentials)
+
+        if KeychainWrapper.standard.set(data, forKey: credentialsKey) == false {
             throw KeychainUtilError.failedToSaveData
         }
     }
-    
+
     /// Get user credentials if they exist
     ///
-    /// - Returns: tuple containing email/password or nil if there is nothing
-    class func getCredentials() -> (email: String, password: String)? {
-        
-        if let email = KeychainWrapper.standard.string(forKey: userEmailIdentifier),
-            let password = KeychainWrapper.standard.string(forKey: userPasswordIdentifier) {
-            return (email, password)
+    /// - Returns: authentication object or nil if there is nothing
+    class func getCredentials() -> Authentication? {
+
+        if let data = KeychainWrapper.standard.data(forKey: credentialsKey), let authentication = NSKeyedUnarchiver.unarchiveObject(with: data) as? Authentication {
+            return authentication
         }
-        
         return nil
     }
-    
+
     /// Delete saved credentials
     /// Used when the user wants to log out
     class func deleteCredentials() {
-        
-        KeychainWrapper.standard.removeObject(forKey: userEmailIdentifier)
-        KeychainWrapper.standard.removeObject(forKey: userPasswordIdentifier)
-        
+        KeychainWrapper.standard.removeObject(forKey: credentialsKey)
     }
-    
+
 }

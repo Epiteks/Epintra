@@ -85,7 +85,6 @@ class ProfileViewController: UIViewController {
             return
         }
 
-
 		self.downloadingFlags = true
 		
 		usersRequests.getUserFlags(login) { [weak self] result in

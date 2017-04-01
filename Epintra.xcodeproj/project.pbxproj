@@ -81,6 +81,7 @@
 		79622E9A1C5D56C000FBA456 /* Mark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79622E991C5D56C000FBA456 /* Mark.swift */; };
 		7964F69B1E3F5ABB00432D57 /* MGSwipeTableCell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7964F69A1E3F5ABB00432D57 /* MGSwipeTableCell.framework */; };
 		7964F69D1E3F673100432D57 /* PlanningCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7964F69C1E3F673100432D57 /* PlanningCellProtocol.swift */; };
+		79698A9E1E9045200066C57C /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79698A9D1E9045200066C57C /* Authentication.swift */; };
 		796B2EF91C4ADEB800327E22 /* UIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796B2EF81C4ADEB800327E22 /* UIUtils.swift */; };
 		7976955B1C562730001772A2 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7976955A1C562730001772A2 /* ImageDownloader.swift */; };
 		7976A1C11E37717000C06F36 /* KeychainUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7976A1C01E37717000C06F36 /* KeychainUtil.swift */; };
@@ -251,6 +252,7 @@
 		79622E991C5D56C000FBA456 /* Mark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Mark.swift; path = Model/Mark.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		7964F69A1E3F5ABB00432D57 /* MGSwipeTableCell.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MGSwipeTableCell.framework; path = "../../../Library/Developer/Xcode/DerivedData/Epintra-eynjybsoivxkenftnpjdjhxgoseh/Build/Products/Debug-iphonesimulator/MGSwipeTableCell/MGSwipeTableCell.framework"; sourceTree = "<group>"; };
 		7964F69C1E3F673100432D57 /* PlanningCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlanningCellProtocol.swift; path = Protocols/PlanningCellProtocol.swift; sourceTree = "<group>"; };
+		79698A9D1E9045200066C57C /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Authentication.swift; path = Model/Authentication.swift; sourceTree = "<group>"; };
 		796B2EF81C4ADEB800327E22 /* UIUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtils.swift; sourceTree = "<group>"; };
 		7976955A1C562730001772A2 /* ImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ImageDownloader.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		7976A1C01E37717000C06F36 /* KeychainUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainUtil.swift; sourceTree = "<group>"; };
@@ -907,6 +909,7 @@
 				790684291C6FC1E10067B26F /* AppointmentEvent.swift */,
 				797DC7F01C7A0AE700ED095E /* StudentInfo.swift */,
 				7907507A1E17B93A00B07F7E /* EpirankInformations.swift */,
+				79698A9D1E9045200066C57C /* Authentication.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1221,6 +1224,7 @@
 				7976A1C11E37717000C06F36 /* KeychainUtil.swift in Sources */,
 				7964F69D1E3F673100432D57 /* PlanningCellProtocol.swift in Sources */,
 				79AFFA501E25B1FF00FDEDF3 /* PlanningFilterViewController.swift in Sources */,
+				79698A9E1E9045200066C57C /* Authentication.swift in Sources */,
 				79306D611C4AF46600708BED /* MJProgressView.swift in Sources */,
 				7948FF331E19CC02001C5F3A /* ModuleTableViewCell.swift in Sources */,
 				793B77951E0C71AE006FFD16 /* ModulesRequests.swift in Sources */,

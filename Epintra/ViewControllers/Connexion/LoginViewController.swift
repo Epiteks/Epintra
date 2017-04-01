@@ -33,9 +33,13 @@ class LoginViewController: UIViewController {
 
         if let credentials = KeychainUtil.getCredentials() {
             self.addWaitingView()
-            login = credentials.email
-            password = credentials.password
-            loginCall()
+            self.login = credentials.email
+            if let tmpPassword = credentials.password {
+                // User used traditional authentication
+                self.password = tmpPassword
+                loginCall()
+            }
+
         }
 
         self.view.backgroundColor = UIUtils.backgroundColor
@@ -59,8 +63,17 @@ class LoginViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
 
         self.removeWaitingView()
-        if KeychainUtil.getCredentials() != nil {
+        if let credentials = KeychainUtil.getCredentials() {
             self.addWaitingView()
+            if let token = credentials.token {
+
+                // TODO check if token is valid to let user pass
+                print(token)
+                ApplicationManager.sharedInstance.token = token
+                ApplicationManager.sharedInstance.user = Variable<User>(User(login: self.login))
+                self.goToNextView()
+
+            }
         }
 
         if let waitingview = self.getWaitingView() {
@@ -133,7 +146,8 @@ class LoginViewController: UIViewController {
             case .success(_):
 
                 do {
-                    try KeychainUtil.saveCredentials(email: tmpSelf.login, password: tmpSelf.password)
+                    let auth = Authentication(fromCredentials: tmpSelf.login, password: tmpSelf.password)
+                    try KeychainUtil.save(credentials: auth)
                 } catch {
                     log.error("Thrown error when saving credentials")
                 }
@@ -314,16 +328,25 @@ extension LoginViewController: UITableViewDataSource {
 }
 
 extension LoginViewController: OAuthDelegate {
-    func authentified(withEmail email: String, andToken token: String) {
+    func authentified(withEmail email: String?, andToken token: String?) {
         // TODO Save token and change checking on start
-        // TODO Check if email is good error message never happens contact
 
-
-        let app = ApplicationManager.sharedInstance
+        guard let email = email, let token = token else {
+            ErrorViewer.errorShow(self, mess: NSLocalizedString("oauthWrongCredentials", comment: "")) { _ in }
+            return
+        }
+        
+        do {
+            let auth = Authentication(fromCredentials: email, token: token)
+            try KeychainUtil.save(credentials: auth)
+        } catch {
+            log.error("Thrown error when saving credentials")
+        }
+        
+        ApplicationManager.sharedInstance.token = token
         ApplicationManager.sharedInstance.user = Variable<User>(User(login: email))
-        print(token)
+        
         DispatchQueue.main.async {
-//            ApplicationManager.sharedInstance.token = token
             self.goToNextView()
         }
     }
