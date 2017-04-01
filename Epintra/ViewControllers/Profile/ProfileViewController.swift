@@ -80,10 +80,15 @@ class ProfileViewController: UIViewController {
 	Fetch all flags of current user and update tableview
 	*/
 	func callFlags() {
-		
+
+        guard let login = ApplicationManager.sharedInstance.user?.value.login else {
+            return
+        }
+
+
 		self.downloadingFlags = true
 		
-		usersRequests.getUserFlags((ApplicationManager.sharedInstance.user?.value.login)!) { [weak self] result in
+		usersRequests.getUserFlags(login) { [weak self] result in
 			switch (result) {
 			case .success(let data):
 					self?.flags = data

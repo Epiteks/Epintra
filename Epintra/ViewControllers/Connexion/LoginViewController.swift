@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class LoginViewController: UIViewController {
 
@@ -14,6 +15,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: ActionButton!
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var connexionBlockView: UIView!
+
+    @IBOutlet weak var oauthButton: ActionButton!
 
     var login = String()
     var password = String()
@@ -45,6 +48,7 @@ class LoginViewController: UIViewController {
 
         // Set different texts
         self.loginButton.setTitle(NSLocalizedString("login", comment: ""), for: UIControlState())
+        self.oauthButton.setTitle(NSLocalizedString("officeAuth", comment: ""), for: UIControlState())
         self.infoLabel.text = NSLocalizedString("noOfficialApp", comment: "")
 
         self.registerForKeyboardNotifications()
@@ -67,6 +71,13 @@ class LoginViewController: UIViewController {
 
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        if let navigation = segue.destination as? UINavigationController, let vc = navigation.viewControllers.first as? OAuthViewController {
+            vc.oAuthDelegate = self
+        }
+    }
+
     /**
      Register Notification to get when keyboard is shown and hidden.
      */
@@ -80,6 +91,10 @@ class LoginViewController: UIViewController {
 
     func tapOnView(_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
+    }
+
+    @IBAction func oauthPressed(_ sender: Any) {
+        self.performSegue(withIdentifier: "oAuthSegue", sender: nil)
     }
 
     @IBAction func loginPressed(_ sender: AnyObject) {
@@ -298,30 +313,18 @@ extension LoginViewController: UITableViewDataSource {
     }
 }
 
-extension LoginViewController {
+extension LoginViewController: OAuthDelegate {
+    func authentified(withEmail email: String, andToken token: String) {
+        // TODO Save token and change checking on start
+        // TODO Check if email is good error message never happens contact
 
-    //    func getUserDataAndGoNext() {
-    //
-    //        usersRequests.getCurrentUserData { result in
-    //            switch (result) {
-    //            case .success(_):
-    //                log.info("Get user data ok")
-    //            case .failure(let error):
-    //                DispatchQueue.main.async {
-    //                    self.errorDuringFetching = true
-    //                    MJProgressView.instance.hideProgress()
-    //                    if error.message != nil {
-    //                        ErrorViewer.errorPresent(self, mess: error.message!) {
-    //                            group.leave()
-    //                        }
-    //                    } else {
-    //                        ErrorViewer.errorPresent(self, mess: NSLocalizedString("unknownApiError", comment: "")) {
-    //                            group.leave()
-    //                        }
-    //                    }
-    //                }
-    //                break
-    //            }
-    //        }
-    //    }
+
+        let app = ApplicationManager.sharedInstance
+        ApplicationManager.sharedInstance.user = Variable<User>(User(login: email))
+        print(token)
+        DispatchQueue.main.async {
+//            ApplicationManager.sharedInstance.token = token
+            self.goToNextView()
+        }
+    }
 }

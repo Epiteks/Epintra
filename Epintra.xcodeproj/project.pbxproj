@@ -126,6 +126,10 @@
 		79DE54A41C5BAF5300E2ADDE /* FSCalendar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79DE54A01C5BAF5300E2ADDE /* FSCalendar.framework */; };
 		79DE54A61C5BAF5300E2ADDE /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79DE54A21C5BAF5300E2ADDE /* SwiftyJSON.framework */; };
 		79DE54A81C5BAF6600E2ADDE /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79DE54A71C5BAF6600E2ADDE /* EventKit.framework */; };
+		79DE62D91E6DEE1F002FE1E4 /* OAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DE62D81E6DEE1F002FE1E4 /* OAuthViewController.swift */; };
+		79DE62DB1E6DEE32002FE1E4 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79DE62DA1E6DEE32002FE1E4 /* WebKit.framework */; };
+		79DE62DD1E6DEEAB002FE1E4 /* WKWebViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DE62DC1E6DEEAB002FE1E4 /* WKWebViewExtensions.swift */; };
+		79DE62DF1E6DF625002FE1E4 /* OAuthDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DE62DE1E6DF625002FE1E4 /* OAuthDelegate.swift */; };
 		79DF37081C4D7B3B00EF69A3 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79DF37071C4D7B3B00EF69A3 /* MainStoryboard.storyboard */; };
 		79E4C5C91C6E35AC0003DA56 /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E4C5C81C6E35AC0003DA56 /* Slot.swift */; };
 		79EA5CB61D5E49E800DA7C30 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EA5CB51D5E49E800DA7C30 /* Requests.swift */; };
@@ -299,6 +303,10 @@
 		79DE54A11C5BAF5300E2ADDE /* Haneke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Haneke.framework; path = "Pods/../build/Debug-iphoneos/Haneke.framework"; sourceTree = "<group>"; };
 		79DE54A21C5BAF5300E2ADDE /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "Pods/../build/Debug-iphoneos/SwiftyJSON.framework"; sourceTree = "<group>"; };
 		79DE54A71C5BAF6600E2ADDE /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		79DE62D81E6DEE1F002FE1E4 /* OAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthViewController.swift; sourceTree = "<group>"; };
+		79DE62DA1E6DEE32002FE1E4 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		79DE62DC1E6DEEAB002FE1E4 /* WKWebViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKWebViewExtensions.swift; sourceTree = "<group>"; };
+		79DE62DE1E6DF625002FE1E4 /* OAuthDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OAuthDelegate.swift; path = Protocols/OAuthDelegate.swift; sourceTree = "<group>"; };
 		79DF37071C4D7B3B00EF69A3 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		79E4C5C81C6E35AC0003DA56 /* Slot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Slot.swift; path = Model/Slot.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		79EA5CB51D5E49E800DA7C30 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Requests.swift; path = Network/Requests.swift; sourceTree = "<group>"; };
@@ -330,6 +338,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79DE62DB1E6DEE32002FE1E4 /* WebKit.framework in Frameworks */,
 				791855981E5B5F8D001F1F62 /* RxCocoa.framework in Frameworks */,
 				791855991E5B5F8D001F1F62 /* RxSwift.framework in Frameworks */,
 				7964F69B1E3F5ABB00432D57 /* MGSwipeTableCell.framework in Frameworks */,
@@ -372,6 +381,7 @@
 		331ED8344BD2BA7948788795 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				79DE62DA1E6DEE32002FE1E4 /* WebKit.framework */,
 				791855961E5B5F8D001F1F62 /* RxCocoa.framework */,
 				791855971E5B5F8D001F1F62 /* RxSwift.framework */,
 				7964F69A1E3F5ABB00432D57 /* MGSwipeTableCell.framework */,
@@ -413,6 +423,7 @@
 				790750781E17ABB700B07F7E /* UpdateRankFilterProtocol.swift */,
 				79AFFA511E264AF500FDEDF3 /* PlanningFilterDelegate.swift */,
 				7964F69C1E3F673100432D57 /* PlanningCellProtocol.swift */,
+				79DE62DE1E6DF625002FE1E4 /* OAuthDelegate.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -431,6 +442,7 @@
 			children = (
 				7948FEC51E19CAC1001C5F3A /* LoginViewController.swift */,
 				7948FEC61E19CAC1001C5F3A /* SplashScreenViewController.swift */,
+				79DE62D81E6DEE1F002FE1E4 /* OAuthViewController.swift */,
 			);
 			path = Connexion;
 			sourceTree = "<group>";
@@ -785,6 +797,7 @@
 				795F1EA51C560F4A00B8C347 /* DateExtensions.swift */,
 				79779AA51C592355008803C5 /* String+NSDate.swift */,
 				798AF18C1DDC61B9002B8A8C /* StringExtension.swift */,
+				79DE62DC1E6DEEAB002FE1E4 /* WKWebViewExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -970,6 +983,7 @@
 				TargetAttributes = {
 					798850331C4AC51C00BAA888 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = JWHA9MBD3S;
 						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -1164,6 +1178,7 @@
 				79AFFA4D1E24FD2A00FDEDF3 /* EventTableViewCell.swift in Sources */,
 				7948FEC71E19CAC1001C5F3A /* LoginViewController.swift in Sources */,
 				795CC32A1C5CBE72007AFE87 /* ProjectDetail.swift in Sources */,
+				79DE62DD1E6DEEAB002FE1E4 /* WKWebViewExtensions.swift in Sources */,
 				797DB28C1E365D3900F1BFBD /* BasicInformation.swift in Sources */,
 				796B2EF91C4ADEB800327E22 /* UIUtils.swift in Sources */,
 				79E4C5C91C6E35AC0003DA56 /* Slot.swift in Sources */,
@@ -1218,7 +1233,9 @@
 				795CC32C1C5CC3A6007AFE87 /* ProjectGroup.swift in Sources */,
 				7948FEF41E19CB50001C5F3A /* ProjectDetailsViewController.swift in Sources */,
 				7948FF271E19CC02001C5F3A /* NoDataView.swift in Sources */,
+				79DE62DF1E6DF625002FE1E4 /* OAuthDelegate.swift in Sources */,
 				792B25931E3D1E3800FDCCB6 /* SlotRegisteredGroupTableViewCell.swift in Sources */,
+				79DE62D91E6DEE1F002FE1E4 /* OAuthViewController.swift in Sources */,
 				798C9F311E2E27F000675296 /* ProjectDetailsUserTableViewCell.swift in Sources */,
 				7948FF311E19CC02001C5F3A /* ModuleActivityTableViewCell.swift in Sources */,
 				7926D0FA1E37FF08004BA0A3 /* RealmStudentInfo.swift in Sources */,
@@ -1382,7 +1399,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = JWHA9MBD3S;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Epintra/Info.plist;
@@ -1406,7 +1423,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = JWHA9MBD3S;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
