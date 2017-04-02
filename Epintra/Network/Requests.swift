@@ -33,8 +33,8 @@ class Requests {
 		"userFlags": Request(endpoint: "/user/flags", method: .get, secured: true), // Get slected user flags
 		"allPromos": Request(endpoint: "", method: .get, secured: true), // Epirank, get all users for data
 
-        // User photo
-        "userPhoto": Request(endpoint: "/photo", method: .get, secured: true), // Get URL of the user image
+        	// User photo
+        	"userPhoto": Request(endpoint: "/photo", method: .get, secured: true), // Get URL of the user image
 
 		// Epirank
 		"epirank": Request(endpoint: "/", method: .get, secured: false), // Epirank, get users data
@@ -43,9 +43,9 @@ class Requests {
 		"planning": Request(endpoint: "/planning", method: .get, secured: true), // Get planning between two dates
 		"tokenValidation": Request(endpoint: "/token", method: .post, secured: true), // Token validation
 		"subscribeEvent": Request(endpoint: "/event", method: .post, secured: true), // Register to planning event
-        "subscribePersonalEvent": Request(endpoint: "/planning", method: .post, secured: true), // Register to planning event
+	        "subscribePersonalEvent": Request(endpoint: "/planning", method: .post, secured: true), // Register to planning event
 		"unsubscribeEvent": Request(endpoint: "/event", method: .delete, secured: true), // Unregister to planning event,
-        "unsubscribePersonalEvent": Request(endpoint: "/planning", method: .delete, secured: true), // Unregister to planning event,
+        	"unsubscribePersonalEvent": Request(endpoint: "/planning", method: .delete, secured: true), // Unregister to planning event,
 		"eventRegistered": Request(endpoint: "/event/registered", method: .get, secured: true), // Get users registered to an event
 		"eventDetails": Request(endpoint: "/event/rdv", method: .get, secured: true), // Get event details like slots
 		"subscribeSlot": Request(endpoint: "/event/rdv", method: .post, secured: true), // Subscribe to a slot
