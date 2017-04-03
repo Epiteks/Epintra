@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class LoginViewController: UIViewController {
 
@@ -14,6 +15,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: ActionButton!
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var connexionBlockView: UIView!
+
+    @IBOutlet weak var oauthButton: ActionButton!
 
     var login = String()
     var password = String()
@@ -30,9 +33,13 @@ class LoginViewController: UIViewController {
 
         if let credentials = KeychainUtil.getCredentials() {
             self.addWaitingView()
-            login = credentials.email
-            password = credentials.password
-            loginCall()
+            self.login = credentials.email
+            if let tmpPassword = credentials.password {
+                // User used traditional authentication
+                self.password = tmpPassword
+                loginCall()
+            }
+
         }
 
         self.view.backgroundColor = UIUtils.backgroundColor
@@ -45,6 +52,7 @@ class LoginViewController: UIViewController {
 
         // Set different texts
         self.loginButton.setTitle(NSLocalizedString("login", comment: ""), for: UIControlState())
+        self.oauthButton.setTitle(NSLocalizedString("officeAuth", comment: ""), for: UIControlState())
         self.infoLabel.text = NSLocalizedString("noOfficialApp", comment: "")
 
         self.registerForKeyboardNotifications()
@@ -55,8 +63,14 @@ class LoginViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
 
         self.removeWaitingView()
-        if KeychainUtil.getCredentials() != nil {
+        if let credentials = KeychainUtil.getCredentials() {
             self.addWaitingView()
+            if let token = credentials.token {
+                ApplicationManager.sharedInstance.token = token
+                ApplicationManager.sharedInstance.user = Variable<User>(User(login: self.login))
+                // Check if token is valid
+                self.checkTokenValidity()
+            }
         }
 
         if let waitingview = self.getWaitingView() {
@@ -65,6 +79,13 @@ class LoginViewController: UIViewController {
             MJProgressView.instance.hideProgress()
         }
 
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        if let navigation = segue.destination as? UINavigationController, let vc = navigation.viewControllers.first as? OAuthViewController {
+            vc.oAuthDelegate = self
+        }
     }
 
     /**
@@ -80,6 +101,10 @@ class LoginViewController: UIViewController {
 
     func tapOnView(_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
+    }
+
+    @IBAction func oauthPressed(_ sender: Any) {
+        self.performSegue(withIdentifier: "oAuthSegue", sender: nil)
     }
 
     @IBAction func loginPressed(_ sender: AnyObject) {
@@ -104,6 +129,34 @@ class LoginViewController: UIViewController {
         loginCall()
     }
 
+    /// Check if the current token is still valid by calling a light endpoint.
+    /// If so, we go to the next storyboard.
+    /// Otherwise, we delete all credentials and remove the waiting view to let user connect again.
+    func checkTokenValidity() {
+
+        MJProgressView.instance.showLoginProgress(self.loginButton, white: true)
+        usersRequests.getPhotoURL(ApplicationManager.sharedInstance.user?.value.login ?? "") { [weak self] result in
+            MJProgressView.instance.hideProgress()
+
+            guard let tmpSelf = self else {
+                return
+            }
+
+            switch (result) {
+            case .success(_):
+                // Token is still valid, we go to the main storyboard
+                tmpSelf.goToNextView()
+                break
+            case .failure(_):
+                // Token not valid, user should reconnect
+                tmpSelf.removeWaitingView()
+                KeychainUtil.deleteCredentials()
+                break
+            }
+        }
+    }
+
+    /// Authenticate user with the provided credentials
     func loginCall() {
 
         MJProgressView.instance.showLoginProgress(self.loginButton, white: true)
@@ -118,7 +171,8 @@ class LoginViewController: UIViewController {
             case .success(_):
 
                 do {
-                    try KeychainUtil.saveCredentials(email: tmpSelf.login, password: tmpSelf.password)
+                    let auth = Authentication(fromCredentials: tmpSelf.login, password: tmpSelf.password)
+                    try KeychainUtil.save(credentials: auth)
                 } catch {
                     log.error("Thrown error when saving credentials")
                 }
@@ -212,6 +266,7 @@ class LoginViewController: UIViewController {
         }
     }
 
+    /// Check the status of the API and the intranet
     func checkStatus() {
 
         func checkAPI() {
@@ -298,30 +353,26 @@ extension LoginViewController: UITableViewDataSource {
     }
 }
 
-extension LoginViewController {
+extension LoginViewController: OAuthDelegate {
+    func authentified(withEmail email: String?, andToken token: String?) {
 
-    //    func getUserDataAndGoNext() {
-    //
-    //        usersRequests.getCurrentUserData { result in
-    //            switch (result) {
-    //            case .success(_):
-    //                log.info("Get user data ok")
-    //            case .failure(let error):
-    //                DispatchQueue.main.async {
-    //                    self.errorDuringFetching = true
-    //                    MJProgressView.instance.hideProgress()
-    //                    if error.message != nil {
-    //                        ErrorViewer.errorPresent(self, mess: error.message!) {
-    //                            group.leave()
-    //                        }
-    //                    } else {
-    //                        ErrorViewer.errorPresent(self, mess: NSLocalizedString("unknownApiError", comment: "")) {
-    //                            group.leave()
-    //                        }
-    //                    }
-    //                }
-    //                break
-    //            }
-    //        }
-    //    }
+        guard let email = email, let token = token else {
+            ErrorViewer.errorShow(self, mess: NSLocalizedString("oauthWrongCredentials", comment: "")) { _ in }
+            return
+        }
+        
+        do {
+            let auth = Authentication(fromCredentials: email, token: token)
+            try KeychainUtil.save(credentials: auth)
+        } catch {
+            log.error("Thrown error when saving credentials")
+        }
+        
+        ApplicationManager.sharedInstance.token = token
+        ApplicationManager.sharedInstance.user = Variable<User>(User(login: email))
+        
+        DispatchQueue.main.async {
+            self.goToNextView()
+        }
+    }
 }
