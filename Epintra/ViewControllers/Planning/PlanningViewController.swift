@@ -89,7 +89,7 @@ class PlanningViewController: LoadingDataViewController {
             if let startTime = $0.startTime {
 
                 if let semester = $0.semester, let index = self.planningFilter.semesters.index(of: semester), index >= 0 {
-                    return calendar.component(.day, from: startTime) == calendar.component(.day, from: selectedDate)
+                    return calendar.component(.day, from: startTime) == calendar.component(.day, from: selectedDate ?? Date())
                 } else {
                     return false
                 }

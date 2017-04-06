@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import PDFReader
 
 class ProfileViewController: UIViewController {
 	
@@ -124,9 +125,28 @@ class ProfileViewController: UIViewController {
 	}
 
     func open(file: File) {
-        let vc = WebViewController()
-        vc.file = file
-        self.show(vc, sender: self)
+
+        guard let urlString = file.url, let fileURL = URL(string: urlString) else {
+            log.error("No url when trying to acces online project file")
+            return
+        }
+
+        if !urlString.contains(".pdf") {
+            let vc = WebViewController()
+            vc.file = file
+            self.show(vc, sender: self)
+        } else {
+            RequestManager.downloadData(fromURL: fileURL) { result in
+                switch result {
+                case .success(let data):
+                    let document = PDFDocument(fileData: data, fileName: file.title ?? "")!
+                    let readerController = PDFViewController.createNew(with: document, actionStyle: .activitySheet, isThumbnailsEnabled: false)
+                    self.navigationController?.pushViewController(readerController, animated: true)
+                case .failure(let err):
+                    log.error("Error retrieving pdf file : \(err.type) \(err.message ?? "")")
+                }
+            }
+        }
     }
 }
 

@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import WebKit
 
 class WebViewController: UIViewController {
 	
-    var webView: UIWebView!
+    var webView: WKWebView!
 	
     var file: File?
 	var fileName: String?
@@ -34,9 +35,9 @@ class WebViewController: UIViewController {
                                   width: self.view.frame.width,
                                   height: height)
         }
-        
-        self.webView = UIWebView(frame: webViewFrame)
-        
+
+        self.webView = WKWebView(frame: webViewFrame)
+
         self.view.addSubview(webView)
         
         if self.file != nil {
@@ -59,7 +60,7 @@ class WebViewController: UIViewController {
             request.addValue(header, forHTTPHeaderField: "Cookie")
             request.httpMethod = "GET"
             
-            webView.loadRequest(request)
+            webView.load(request)
         }
 	}
 	

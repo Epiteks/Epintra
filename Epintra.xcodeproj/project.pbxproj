@@ -153,6 +153,7 @@
 		79F826621C554BED0002DCC8 /* Netsoul.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F826611C554BED0002DCC8 /* Netsoul.swift */; };
 		79F8ADEE1C52AC9100F4FDD4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F8ADED1C52AC9100F4FDD4 /* User.swift */; };
 		79F9C7111E14083100431D49 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F9C7101E14083100431D49 /* RealmManager.swift */; };
+		79FDF0241E96A46200EFF8DE /* PDFReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79FDF0231E96A46200EFF8DE /* PDFReader.framework */; };
 		D6420C961E58BA500065A69B /* MiscRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6420C951E58BA500065A69B /* MiscRequests.swift */; };
 /* End PBXBuildFile section */
 
@@ -331,6 +332,7 @@
 		79F826611C554BED0002DCC8 /* Netsoul.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Netsoul.swift; path = Model/Netsoul.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		79F8ADED1C52AC9100F4FDD4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Model/User.swift; sourceTree = "<group>"; };
 		79F9C7101E14083100431D49 /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmManager.swift; path = Application/RealmManager.swift; sourceTree = "<group>"; };
+		79FDF0231E96A46200EFF8DE /* PDFReader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PDFReader.framework; path = "../../../Library/Developer/Xcode/DerivedData/Epintra-dkppmsmycjzqutdbnkglmxdemyab/Build/Products/Debug-iphonesimulator/PDFReader/PDFReader.framework"; sourceTree = "<group>"; };
 		8D7B38E3CE760CCA1D7F0ABE /* Pods_Epintra.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Epintra.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6420C951E58BA500065A69B /* MiscRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MiscRequests.swift; path = Network/MiscRequests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -340,6 +342,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79FDF0241E96A46200EFF8DE /* PDFReader.framework in Frameworks */,
 				79DE62DB1E6DEE32002FE1E4 /* WebKit.framework in Frameworks */,
 				791855981E5B5F8D001F1F62 /* RxCocoa.framework in Frameworks */,
 				791855991E5B5F8D001F1F62 /* RxSwift.framework in Frameworks */,
@@ -383,6 +386,7 @@
 		331ED8344BD2BA7948788795 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				79FDF0231E96A46200EFF8DE /* PDFReader.framework */,
 				79DE62DA1E6DEE32002FE1E4 /* WebKit.framework */,
 				791855961E5B5F8D001F1F62 /* RxCocoa.framework */,
 				791855971E5B5F8D001F1F62 /* RxSwift.framework */,

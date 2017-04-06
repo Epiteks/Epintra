@@ -14,4 +14,5 @@ target 'Epintra' do
 	pod 'MGSwipeTableCell'
 	pod 'RxSwift'
     	pod 'RxCocoa'
+	pod 'PDFReader', '~> 2.3.1'
 end

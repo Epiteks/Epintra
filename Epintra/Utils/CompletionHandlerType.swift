@@ -22,4 +22,7 @@ enum AppError: Error {
     case unauthorizedCalendar
     case noCalendarSelected
     case calendarNotExists
+
+    // Intranet error
+    case errorIntranetData
 }
