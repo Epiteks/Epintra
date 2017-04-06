@@ -65,4 +65,24 @@ class RequestManager {
                 }
         }
     }
+
+    class func downloadData(fromURL url: URL, completion: @escaping (Result<Data>) -> Void) {
+
+        var headers = [String: String]()
+
+        if let token = ApplicationManager.sharedInstance.token {
+            headers["Cookie"] = "PHPSESSID=\(token)"
+        }
+
+        Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: headers)
+            .responseData { res in
+
+                if let data = res.data {
+                    completion(Result.success(data))
+                } else {
+                    completion(Result.failure(type: AppError.errorIntranetData, message: nil))
+                }
+
+        }
+    }
 }

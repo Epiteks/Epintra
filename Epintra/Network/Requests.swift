@@ -33,8 +33,8 @@ class Requests {
 		"userFlags": Request(endpoint: "/user/flags", method: .get, secured: true), // Get slected user flags
 		"allPromos": Request(endpoint: "", method: .get, secured: true), // Epirank, get all users for data
 
-        	// User photo
-        	"userPhoto": Request(endpoint: "/photo", method: .get, secured: true), // Get URL of the user image
+        // User photo
+        "userPhoto": Request(endpoint: "/photo", method: .get, secured: true), // Get URL of the user image
 
 		// Epirank
 		"epirank": Request(endpoint: "/", method: .get, secured: false), // Epirank, get users data

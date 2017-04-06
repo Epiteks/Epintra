@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PDFReader
 
 class ProjectDetailsViewController: UIViewController {
     
@@ -164,9 +165,27 @@ extension ProjectDetailsViewController: UITableViewDelegate {
     }
     
     func open(file: File) {
-        let vc = WebViewController()
-        vc.file = file
-        self.show(vc, sender: self)
+
+        guard let urlString = file.url, let fileURL = URL(string: urlString) else {
+            log.error("No url when trying to acces online project file")
+            return
+        }
+
+        RequestManager.downloadData(fromURL: fileURL) { result in
+            switch result {
+            case .success(let data):
+                let document = PDFDocument(fileData: data, fileName: "Sample PDF")!
+                let readerController = PDFViewController.createNew(with: document, title: file.title ?? "", actionStyle: .activitySheet, isThumbnailsEnabled: false)
+
+                self.navigationController?.pushViewController(readerController, animated: true)
+            case .failure(let err):
+                print(err)
+            }
+        }
+
+//        let vc = WebViewController()
+//        vc.file = file
+//        self.show(vc, sender: self)
     }
     
 }

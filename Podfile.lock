@@ -1,21 +1,22 @@
 PODS:
-  - Alamofire (4.3.0)
+  - Alamofire (4.4.0)
   - AlamofireImage (3.2.0):
     - Alamofire (~> 4.1)
   - AlamofireNetworkActivityIndicator (2.1.0):
     - Alamofire (~> 4.1)
-  - FSCalendar (2.7.2)
+  - FSCalendar (2.7.4)
   - MGSwipeTableCell (1.5.6)
-  - Realm (2.4.2):
-    - Realm/Headers (= 2.4.2)
-  - Realm/Headers (2.4.2)
-  - RealmSwift (2.4.2):
-    - Realm (= 2.4.2)
-  - RxCocoa (3.2.0):
-    - RxSwift (~> 3.1)
-  - RxSwift (3.2.0)
+  - PDFReader (2.3.1)
+  - Realm (2.5.1):
+    - Realm/Headers (= 2.5.1)
+  - Realm/Headers (2.5.1)
+  - RealmSwift (2.5.1):
+    - Realm (= 2.5.1)
+  - RxCocoa (3.3.1):
+    - RxSwift (~> 3.3)
+  - RxSwift (3.3.1)
   - SwiftKeychainWrapper (3.0.1)
-  - SwiftyBeaver (1.1.1)
+  - SwiftyBeaver (1.1.4)
   - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
@@ -24,6 +25,7 @@ DEPENDENCIES:
   - AlamofireNetworkActivityIndicator (~> 2.0)
   - FSCalendar
   - MGSwipeTableCell
+  - PDFReader (~> 2.3.1)
   - RealmSwift
   - RxCocoa
   - RxSwift
@@ -32,19 +34,20 @@ DEPENDENCIES:
   - SwiftyJSON
 
 SPEC CHECKSUMS:
-  Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
   AlamofireNetworkActivityIndicator: 4716f6554bdfb9c7cf13b1e0e3af21163129690a
-  FSCalendar: 6200ef796dfe85005ff2fb19bbd429f8be742f86
+  FSCalendar: e95995a746acae531c4a7dd636b8393233125ec5
   MGSwipeTableCell: 616700eb0ffd1c611ba909066cb7fd739790a0a7
-  Realm: d27b758e12d62a3371879a065d4c40aa212c5a54
-  RealmSwift: 9556c0fe0f0cfecacfb755ae9e68ff379fc6bead
-  RxCocoa: ccdf43101a70407097a29082f648ba1676075b30
-  RxSwift: 46574f70d416b7923c237195939cc488a7fbf3a0
+  PDFReader: c910678ad3dad69441c570c5cff318a5b12944a6
+  Realm: 32f86104d37c8521f864d4274050b38ba6190733
+  RealmSwift: f719e7511c902b8908593e8f143f59e47931bdb6
+  RxCocoa: 7dcb7a1860fc9cd0e23dae67ab105fc2916670b6
+  RxSwift: 8fc9f2de6275a9101d518444e00bf32f1a42caac
   SwiftKeychainWrapper: 38952a3636320ae61bad3513cadd870929de7a4a
-  SwiftyBeaver: 2b68694df862381235e32bcfc4ec991e26bf131d
+  SwiftyBeaver: 9216b6e163c145628ccc7c0126df4287880d6e1e
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 012d026394f464e98d67b2a910691e49625b06c7
+PODFILE CHECKSUM: c751027e8d97cfd11837afa1de8fb9a94ad8c824
 
 COCOAPODS: 1.2.0
