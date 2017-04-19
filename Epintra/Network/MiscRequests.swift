@@ -20,7 +20,7 @@ class MiscRequests: RequestManager {
 			case .success(let responseJSON):
 				completion(Result.success(responseJSON["status"].boolValue))
 			case .failure(let err):
-				completion(Result.failure(type: err.type, message: err.message))
+				completion(Result.failure(err))
 				log.error("GetAPIStatus:  \(err)")
 			}
 		}
@@ -35,7 +35,7 @@ class MiscRequests: RequestManager {
 			case .success(let responseJSON):
 				completion(Result.success(responseJSON["status"].boolValue))
 			case .failure(let err):
-				completion(Result.failure(type: err.type, message: err.message))
+				completion(Result.failure(err))
 				log.error("GetIntraStatus:  \(err)")
 			}
 		}

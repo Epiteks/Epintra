@@ -24,7 +24,7 @@ class ProjectsRequests: RequestManager {
                 completion(Result.success(resp))
                 break
             case .failure(let err):
-                completion(Result.failure(type: err.type, message: err.message))
+                completion(Result.failure(err))
                 log.error("Fetching current projects:  \(err)")
             }
         }
@@ -41,7 +41,7 @@ class ProjectsRequests: RequestManager {
                 completion(Result.success(nil))
                 break
             case .failure(let err):
-                completion(Result.failure(type: err.type, message: err.message))
+                completion(Result.failure(err))
                 log.error("Fetching project details:  \(err)")
             }
         }
@@ -65,7 +65,7 @@ class ProjectsRequests: RequestManager {
                 if err.message == "File «  » not found" {
                     err.message = nil
                 }
-                completion(Result.failure(type: err.type, message: err.message))
+                completion(Result.failure(err))
                 log.error("Fetching project files:  \(err)")
             }
         }
@@ -86,7 +86,7 @@ class ProjectsRequests: RequestManager {
                 completion(Result.success(nil))
                 break
             case .failure(let err):
-                completion(Result.failure(type: err.type, message: err.message))
+                completion(Result.failure(err))
                 log.error("Fetching project marks:  \(err)")
             }
         }

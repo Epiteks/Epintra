@@ -186,3 +186,24 @@
 "REN" = "Rennes";
 "STG" = "Strasbourg";
 "TLS" = "Toulouse";
+
+/**
+ ** Errors
+ */
+
+"Epintra.APIError.unknownAPIError" = "An unknown error happened. If it appears again, please report it.";
+"Epintra.APIError.networkError" = "A network error happened, please check your connexion.";
+"Epintra.APIError.valueNotFound" = "API value not found.";
+
+"Epintra.APIError.AuthenticationError.wrongCredentials" = "Email or password is incorrect.";
+
+"Epintra.KeychainUtilError.failedToSaveData" = "A problem occured when saving your credentials.";
+
+"Epintra.TokenError.valueNotFound" = "The token received did not have the good format. It it appears again, please report it.";
+
+"Epintra.APIError.unknownAPIError" = "An unknown error happened. If it appears again, please report it.";
+
+"Epintra.CalendarError.unauthorizedCalendar" = "Access to calendar denied.";
+"Epintra.CalendarError.restricted" = "Access to this calendar restricted.";
+"Epintra.CalendarError.noCalendarSelected" = "You haven't choose any calendar. Go to Settings section to select one.";
+"Epintra.CalendarError.calendarDoesNotExist" = "Calendar not found.";

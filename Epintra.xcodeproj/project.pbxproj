@@ -139,6 +139,8 @@
 		79EA5CC41D5E789A00DA7C30 /* NotificationsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79EA5CC31D5E789A00DA7C30 /* NotificationsStoryboard.storyboard */; };
 		79EA5CC61D5E78BF00DA7C30 /* PlanningStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79EA5CC51D5E78BF00DA7C30 /* PlanningStoryboard.storyboard */; };
 		79EA5CC81D5E78D500DA7C30 /* UserStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79EA5CC71D5E78D500DA7C30 /* UserStoryboard.storyboard */; };
+		79F1031F1EA766500067534F /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F1031E1EA766500067534F /* LoginViewModel.swift */; };
+		79F103211EA76A390067534F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F103201EA76A390067534F /* Network.swift */; };
 		79F1F2731C5902B700AAFB69 /* Planning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F1F2721C5902B700AAFB69 /* Planning.swift */; };
 		79F1F2751C59044200AAFB69 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F1F2741C59044200AAFB69 /* Room.swift */; };
 		79F42BE21D68BDF6008DF047 /* ConnexionStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79F42BE01D68BDF6008DF047 /* ConnexionStoryboard.storyboard */; };
@@ -146,7 +148,7 @@
 		79F42BE91D68C5D7008DF047 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F42BE81D68C5D7008DF047 /* RequestManager.swift */; };
 		79F42BEB1D68C65A008DF047 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F42BEA1D68C65A008DF047 /* Configuration.swift */; };
 		79F42BED1D68C7CA008DF047 /* UsersRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F42BEC1D68C7C9008DF047 /* UsersRequests.swift */; };
-		79F42BEF1D68CCC6008DF047 /* CompletionHandlerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F42BEE1D68CCC6008DF047 /* CompletionHandlerType.swift */; };
+		79F42BEF1D68CCC6008DF047 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F42BEE1D68CCC6008DF047 /* AppError.swift */; };
 		79F826531C5521AE0002DCC8 /* GPA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F826521C5521AE0002DCC8 /* GPA.swift */; };
 		79F8265E1C552C5F0002DCC8 /* UIImageViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F8265D1C552C5F0002DCC8 /* UIImageViewExtensions.swift */; };
 		79F826601C554B420002DCC8 /* Spices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F8265F1C554B420002DCC8 /* Spices.swift */; };
@@ -318,6 +320,8 @@
 		79EA5CC31D5E789A00DA7C30 /* NotificationsStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = NotificationsStoryboard.storyboard; path = Storyboards/NotificationsStoryboard.storyboard; sourceTree = "<group>"; };
 		79EA5CC51D5E78BF00DA7C30 /* PlanningStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = PlanningStoryboard.storyboard; path = Storyboards/PlanningStoryboard.storyboard; sourceTree = "<group>"; };
 		79EA5CC71D5E78D500DA7C30 /* UserStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = UserStoryboard.storyboard; path = Storyboards/UserStoryboard.storyboard; sourceTree = "<group>"; };
+		79F1031E1EA766500067534F /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewModel.swift; path = ViewModels/LoginViewModel.swift; sourceTree = "<group>"; };
+		79F103201EA76A390067534F /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Network.swift; path = Network/Network.swift; sourceTree = "<group>"; };
 		79F1F2721C5902B700AAFB69 /* Planning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Planning.swift; path = Model/Planning.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		79F1F2741C59044200AAFB69 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = Room.swift; path = Model/Room.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		79F42BE01D68BDF6008DF047 /* ConnexionStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ConnexionStoryboard.storyboard; path = Storyboards/ConnexionStoryboard.storyboard; sourceTree = "<group>"; };
@@ -325,7 +329,7 @@
 		79F42BE81D68C5D7008DF047 /* RequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = RequestManager.swift; path = Network/RequestManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		79F42BEA1D68C65A008DF047 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Configuration.swift; path = Application/Configuration.swift; sourceTree = "<group>"; };
 		79F42BEC1D68C7C9008DF047 /* UsersRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UsersRequests.swift; path = Network/UsersRequests.swift; sourceTree = "<group>"; };
-		79F42BEE1D68CCC6008DF047 /* CompletionHandlerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompletionHandlerType.swift; sourceTree = "<group>"; };
+		79F42BEE1D68CCC6008DF047 /* AppError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		79F826521C5521AE0002DCC8 /* GPA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = GPA.swift; path = Model/GPA.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		79F8265D1C552C5F0002DCC8 /* UIImageViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtensions.swift; sourceTree = "<group>"; };
 		79F8265F1C554B420002DCC8 /* Spices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Spices.swift; path = Model/Spices.swift; sourceTree = "<group>"; };
@@ -443,13 +447,14 @@
 			name = SlotRegisteredGroupTableViewCell;
 			sourceTree = "<group>";
 		};
-		7948FEBC1E19CA2E001C5F3A /* Connexion */ = {
+		7948FEBC1E19CA2E001C5F3A /* Login */ = {
 			isa = PBXGroup;
 			children = (
 				7948FEC51E19CAC1001C5F3A /* LoginViewController.swift */,
 				7948FEC61E19CAC1001C5F3A /* SplashScreenViewController.swift */,
 				79DE62D81E6DEE1F002FE1E4 /* OAuthViewController.swift */,
 			);
+			name = Login;
 			path = Connexion;
 			sourceTree = "<group>";
 			tabWidth = 4;
@@ -711,7 +716,7 @@
 				7976955A1C562730001772A2 /* ImageDownloader.swift */,
 				79779A9D1C5912DA008803C5 /* SystemUtils.swift */,
 				79DE549D1C5BAF3300E2ADDE /* CalendarManager.swift */,
-				79F42BEE1D68CCC6008DF047 /* CompletionHandlerType.swift */,
+				79F42BEE1D68CCC6008DF047 /* AppError.swift */,
 				7976A1C01E37717000C06F36 /* KeychainUtil.swift */,
 			);
 			path = Utils;
@@ -750,6 +755,7 @@
 				798850651C4ACBC200BAA888 /* StoryBoards */,
 				796B2EF71C4ADE8D00327E22 /* Utils */,
 				7988506E1C4ACD9200BAA888 /* ViewControllers */,
+				79F1031D1EA766230067534F /* ViewModels */,
 				7948FEF91E19CC02001C5F3A /* Views */,
 				7988503E1C4AC51C00BAA888 /* Assets.xcassets */,
 				798850371C4AC51C00BAA888 /* AppDelegate.swift */,
@@ -811,7 +817,7 @@
 		7988506E1C4ACD9200BAA888 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7948FEBC1E19CA2E001C5F3A /* Connexion */,
+				7948FEBC1E19CA2E001C5F3A /* Login */,
 				7948FEBD1E19CA43001C5F3A /* Home */,
 				7948FEBE1E19CA49001C5F3A /* Others */,
 				7948FEBF1E19CA5C001C5F3A /* Planning */,
@@ -876,9 +882,18 @@
 			name = SlotTakenTableViewCell;
 			sourceTree = "<group>";
 		};
+		79F1031D1EA766230067534F /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				79F1031E1EA766500067534F /* LoginViewModel.swift */,
+			);
+			name = ViewModels;
+			sourceTree = "<group>";
+		};
 		79F8ADE51C52A7DC00F4FDD4 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				79F103201EA76A390067534F /* Network.swift */,
 				79EA5CB51D5E49E800DA7C30 /* Requests.swift */,
 				79F42BE81D68C5D7008DF047 /* RequestManager.swift */,
 				79F42BEC1D68C7C9008DF047 /* UsersRequests.swift */,
@@ -1169,7 +1184,7 @@
 				7948FEE41E19CB0E001C5F3A /* SchoolViewController.swift in Sources */,
 				79AFFA471E23EA5800FDEDF3 /* PlanningRequests.swift in Sources */,
 				79DE549E1C5BAF3300E2ADDE /* CalendarManager.swift in Sources */,
-				79F42BEF1D68CCC6008DF047 /* CompletionHandlerType.swift in Sources */,
+				79F42BEF1D68CCC6008DF047 /* AppError.swift in Sources */,
 				798AF18D1DDC61B9002B8A8C /* StringExtension.swift in Sources */,
 				7976955B1C562730001772A2 /* ImageDownloader.swift in Sources */,
 				798CF1B81E0FCE8D00BAB754 /* ProjectsRequests.swift in Sources */,
@@ -1180,6 +1195,7 @@
 				79CCF7D51E3A35BD00D71A20 /* AppointmentDetailsViewController.swift in Sources */,
 				79779AA61C592355008803C5 /* String+NSDate.swift in Sources */,
 				79CC0C761E3A750C00CBFF66 /* SlotRegisterTableViewCell.swift in Sources */,
+				79F1031F1EA766500067534F /* LoginViewModel.swift in Sources */,
 				7948FEDE1E19CAF1001C5F3A /* RankViewController.swift in Sources */,
 				79306D631C4AF79400708BED /* ModelName.swift in Sources */,
 				79AFFA4D1E24FD2A00FDEDF3 /* EventTableViewCell.swift in Sources */,
@@ -1187,6 +1203,7 @@
 				795CC32A1C5CBE72007AFE87 /* ProjectDetail.swift in Sources */,
 				79DE62DD1E6DEEAB002FE1E4 /* WKWebViewExtensions.swift in Sources */,
 				797DB28C1E365D3900F1BFBD /* BasicInformation.swift in Sources */,
+				79F103211EA76A390067534F /* Network.swift in Sources */,
 				796B2EF91C4ADEB800327E22 /* UIUtils.swift in Sources */,
 				79E4C5C91C6E35AC0003DA56 /* Slot.swift in Sources */,
 				7948FF351E19CC02001C5F3A /* ProjectTableViewCell.swift in Sources */,

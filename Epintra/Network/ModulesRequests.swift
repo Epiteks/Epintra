@@ -23,7 +23,7 @@ class ModulesRequests: RequestManager {
                 }
                 completion(Result.success(modules))
             case .failure(let err):
-                completion(Result.failure(type: err.type, message: err.message))
+                completion(Result.failure(err))
                 log.error("Fetching modules:  \(err)")
             }
         }
@@ -40,7 +40,7 @@ class ModulesRequests: RequestManager {
                 completion(Result.success(nil))
                 break
             case .failure(let err):
-                completion(Result.failure(type: err.type, message: err.message))
+                completion(Result.failure(err))
                 log.error("Fetching modules:  \(err)")
             }
         }
@@ -62,7 +62,7 @@ class ModulesRequests: RequestManager {
                 }
                 break
             case .failure(let err):
-                completion(Result.failure(type: err.type, message: err.message))
+                completion(Result.failure(err))
                 log.error("Fetching modules:  \(err)")
             }
         }

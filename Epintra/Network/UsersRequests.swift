@@ -20,25 +20,47 @@ class UsersRequests: RequestManager {
 	- parameter password:		user password
 	- parameter completion:	Request completion action
 	*/
-	func auth(_ login: String, password: String, completion: @escaping (Result<Any?>) -> Void) {
-		
-		super.call("authentication", params: ["login": login, "password": password]) { (response) in
-			switch response {
-			case .success(let responseJSON):
-				if let token = responseJSON["token"].string {
-					log.info("Token:  \(token)")
+	class func auth(_ login: String, password: String) -> Observable<Result<Any?>> {
 
-					ApplicationManager.sharedInstance.token = token
-                    //ApplicationManager.sharedInstance.user = User(login: login)
+        return Network.call(data: Network.routes["authentication"]!, parameters: ["login": login, "password": password])
+            .map({ result -> Result<Any?> in
+                switch result {
+                case .success(let json):
+                    log.verbose("Response from API : \(json)")
+                    if let token = json["token"].string {
+                        ApplicationManager.sharedInstance.token = token
+                    }
                     ApplicationManager.sharedInstance.user = Variable<User>(User(login: login))
-					completion(Result.success(nil))
-				}
-			case .failure(let err):
-				completion(Result.failure(type: err.type, message: err.message))
-				log.error("Authentication:  \(err)")
-				
-			}
-		}
+                    return Result.success(nil)
+                case .failure(var error):
+                    switch error.statusCode ?? 0 {
+                    case 401:
+                        error.newType(type: APIError.AuthenticationError.wrongCredentials)
+                    default:
+                        break
+                    }
+                    return Result.failure(error)
+                }
+            })
+//
+//
+//        Network.call(data: Network.routes["authentication"]!, parameters: ["login": login, "password": password]) { (response) in
+//			switch response {
+//			case .success(let responseJSON):
+//				if let token = responseJSON["token"].string {
+//					log.info("Token:  \(token)")
+//
+//					ApplicationManager.sharedInstance.token = token
+//                    //ApplicationManager.sharedInstance.user = User(login: login)
+//                    ApplicationManager.sharedInstance.user = Variable<User>(User(login: login))
+//					completion(Result.success(nil))
+//				}
+//			case .failure(let err):
+//				completion(Result.failure(err))
+//				log.error("Authentication:  \(err)")
+//				
+//			}
+//		}
 	}
 	
 	/*!
@@ -65,7 +87,7 @@ class UsersRequests: RequestManager {
                 ApplicationManager.sharedInstance.user?.value = User(dict: responseJSON)
 				completion(Result.success(nil))
 			case .failure(let err):
-				completion(Result.failure(type: err.type, message: err.message))
+				completion(Result.failure(err))
 				log.error("GetCurrentUserData:  \(err)")
 			}
 		}
@@ -87,9 +109,8 @@ class UsersRequests: RequestManager {
 				let usr = User(dict: responseJSON)
 				completion(Result.success(usr))
 			case .failure(let err):
-				completion(Result.failure(type: err.type, message: err.message))
+				completion(Result.failure(err))
 				log.error("GetUserData:  \(err)")
-				
 			}
 		}
 	}
@@ -111,7 +132,7 @@ class UsersRequests: RequestManager {
 				completion(Result.success(nil))
 				
 			case .failure(let err):
-				completion(Result.failure(type: err.type, message: err.message))
+				completion(Result.failure(err))
 				log.error("GetHistory:  \(err)")
 				
 			}
@@ -134,7 +155,7 @@ class UsersRequests: RequestManager {
 				resp.append(Flags(name: "ghost", dict: flags["ghost"]))
 				completion(Result.success(resp))
 			case .failure(let err):
-				completion(Result.failure(type: err.type, message: err.message))
+				completion(Result.failure(err))
 				log.error("GetUserFlags:  \(err)")
 			}
 		}
@@ -155,7 +176,7 @@ class UsersRequests: RequestManager {
 				completion(Result.success(resp))
 				
 			case .failure(let err):
-				completion(Result.failure(type: err.type, message: err.message))
+				completion(Result.failure(err))
 				log.error("GetUserDocuments:  \(err)")
 				
 			}
@@ -173,7 +194,7 @@ class UsersRequests: RequestManager {
                 }
                 completion(Result.success(resp))
             case .failure(let err):
-                completion(Result.failure(type: err.type, message: err.message))
+                completion(Result.failure(err))
                 log.error("Get all marks :  \(err)")
                 
             }
@@ -217,7 +238,7 @@ class UsersRequests: RequestManager {
                     }
                 }
             case .failure(let err):
-                completion(Result.failure(type: err.type, message: err.message))
+                completion(Result.failure(err))
                 log.error("Get all marks :  \(err)")
                 
             }
@@ -237,9 +258,8 @@ class UsersRequests: RequestManager {
                     completion(Result.success(""))
                 }
             case .failure(let err):
-                completion(Result.failure(type: err.type, message: err.message))
+                completion(Result.failure(err))
                 log.error("Authentication:  \(err)")
-                
             }
         }
     }

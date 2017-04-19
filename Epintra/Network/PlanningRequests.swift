@@ -33,7 +33,7 @@ class PlanningRequests: RequestManager {
                 completion(Result.success(resp))
                 break
             case .failure(let err):
-                completion(Result.failure(type: err.type, message: err.message))
+                completion(Result.failure(err))
                 log.error("Fetching planning events:  \(err)")
             }
         }
@@ -54,7 +54,7 @@ class PlanningRequests: RequestManager {
                 completion(Result.success(nil))
                 break
             case .failure(let err):
-                completion(Result.failure(type: err.type, message: err.message))
+                completion(Result.failure(err))
                 log.error("Enter token error : \(err)")
             }
         }
@@ -79,7 +79,7 @@ class PlanningRequests: RequestManager {
                 completion(Result.success(nil))
                 break
             case .failure(let err):
-                completion(Result.failure(type: err.type, message: err.message))
+                completion(Result.failure(err))
                 log.error("Register event error : \(err)")
             }
         }
@@ -104,7 +104,7 @@ class PlanningRequests: RequestManager {
                 completion(Result.success(nil))
                 break
             case .failure(let err):
-                completion(Result.failure(type: err.type, message: err.message))
+                completion(Result.failure(err))
                 log.error("Unregister event error : \(err)")
             }
         }
@@ -123,7 +123,7 @@ class PlanningRequests: RequestManager {
                 completion(Result.success(res))
                 break
             case .failure(let err):
-                completion(Result.failure(type: err.type, message: err.message))
+                completion(Result.failure(err))
                 log.error("Getting event slots error : \(err)")
             }
         }
@@ -142,7 +142,7 @@ class PlanningRequests: RequestManager {
                 completion(Result.success(nil))
                 break
             case .failure(let err):
-                completion(Result.failure(type: err.type, message: err.message))
+                completion(Result.failure(err))
                 log.error("Subscribe slot error : \(err)")
             }
         }
@@ -161,7 +161,7 @@ class PlanningRequests: RequestManager {
                 completion(Result.success(nil))
                 break
             case .failure(let err):
-                completion(Result.failure(type: err.type, message: err.message))
+                completion(Result.failure(err))
                 log.error("Unsubscribe from slot error : \(err)")
             }
         }

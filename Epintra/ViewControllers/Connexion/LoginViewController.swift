@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 class LoginViewController: UIViewController {
 
@@ -18,9 +19,6 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var oauthButton: ActionButton!
 
-    var login = String()
-    var password = String()
-
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -28,20 +26,34 @@ class LoginViewController: UIViewController {
     // Used for moving the view
     var connexionButtonConstraintSave: CGFloat?
 
+    let viewModel = LoginViewModel()
+    let disposeBag = DisposeBag()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let credentials = KeychainUtil.getCredentials() {
-            self.addWaitingView()
-            self.login = credentials.email
-            if let tmpPassword = credentials.password {
-                // User used traditional authentication
-                self.password = tmpPassword
-                loginCall()
-            }
+//        if let credentials = KeychainUtil.getCredentials() {
+//            self.addWaitingView()
+//            self.login = credentials.email
+//            if let tmpPassword = credentials.password {
+//                // User used traditional authentication
+//                self.password = tmpPassword
+//                loginCall()
+//            }
+//
+//        }
 
-        }
 
+        self.registerForKeyboardNotifications()
+
+        checkStatus()
+
+
+        self.setSubViewsProperties()
+        self.setReactive()
+    }
+
+    func setSubViewsProperties() {
         self.view.backgroundColor = UIUtils.backgroundColor
 
         // Set UITableView properties
@@ -54,32 +66,54 @@ class LoginViewController: UIViewController {
         self.loginButton.setTitle(NSLocalizedString("login", comment: ""), for: UIControlState())
         self.oauthButton.setTitle(NSLocalizedString("officeAuth", comment: ""), for: UIControlState())
         self.infoLabel.text = NSLocalizedString("noOfficialApp", comment: "")
-
-        self.registerForKeyboardNotifications()
-
-        checkStatus()
     }
 
     override func viewDidAppear(_ animated: Bool) {
 
-        self.removeWaitingView()
-        if let credentials = KeychainUtil.getCredentials() {
-            self.addWaitingView()
-            if let token = credentials.token {
-                ApplicationManager.sharedInstance.token = token
-                ApplicationManager.sharedInstance.user = Variable<User>(User(login: self.login))
-                // Check if token is valid
-                self.checkTokenValidity()
-            }
-        }
-
-        if let waitingview = self.getWaitingView() {
-            MJProgressView.instance.showProgress(waitingview, white: true)
-        } else {
-            MJProgressView.instance.hideProgress()
-        }
+//        self.removeWaitingView()
+//        if let credentials = KeychainUtil.getCredentials() {
+//            self.addWaitingView()
+//            if let token = credentials.token {
+//                ApplicationManager.sharedInstance.token = token
+//                ApplicationManager.sharedInstance.user = Variable<User>(User(login: self.login))
+//                // Check if token is valid
+//                self.checkTokenValidity()
+//            }
+//        }
+//
+//        if let waitingview = self.getWaitingView() {
+//            MJProgressView.instance.showProgress(waitingview, white: true)
+//        } else {
+//            MJProgressView.instance.hideProgress()
+//        }
 
     }
+
+    func setReactive() {
+
+        // Bind button to Rx to enable it
+        self.viewModel.isValid.map { $0 }.bindTo(self.loginButton.rx.isEnabled).addDisposableTo(self.disposeBag)
+
+        // Bind tap action to viewmodel to trigger network call
+        self.viewModel.bindResponse(action: self.loginButton.rx.tap.asObservable())
+
+        // Subscribe to authentication response and handle it
+        self.viewModel.authResponse?.subscribe(onNext: { response in
+            self.viewModel.isAuthenticating.value = false
+//            switch response {
+//            case .success(_):
+//                self.retrieveUserInformation()
+//            case .failure(let error):
+//                self.showError(withMessage: error.message)
+//            }
+        }).addDisposableTo(self.disposeBag)
+
+//        self.viewModel.isAuthenticating.asObservable().subscribe { value in
+//            (value.element ?? false) ? self.addActivityIndicator() : self.removeActivityIndicator()
+//            }.addDisposableTo(self.disposeBag)
+    }
+    
+
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
@@ -109,24 +143,24 @@ class LoginViewController: UIViewController {
 
     @IBAction func loginPressed(_ sender: AnyObject) {
 
-        self.view.endEditing(true)
-
-        // Getting login cell data
-        var cell = loginTableView.cellForRow(at: IndexPath(row: 0, section: 0))
-        var textField = cell?.viewWithTag(1) as! UITextField
-        login = textField.text!
-
-        // Getting password cell data
-        cell = loginTableView.cellForRow(at: IndexPath(row: 1, section: 0))
-        textField = cell?.viewWithTag(1) as! UITextField
-        password = textField.text!
-
-        if (login.characters.count == 0 || password.characters.count == 0) {
-            ErrorViewer.errorPresent(self, mess: NSLocalizedString("pleaseFillEverything", comment: "")) { _ in }
-            return
-        }
-
-        loginCall()
+//        self.view.endEditing(true)
+//
+//        // Getting login cell data
+//        var cell = loginTableView.cellForRow(at: IndexPath(row: 0, section: 0))
+//        var textField = cell?.viewWithTag(1) as! UITextField
+//        login = textField.text!
+//
+//        // Getting password cell data
+//        cell = loginTableView.cellForRow(at: IndexPath(row: 1, section: 0))
+//        textField = cell?.viewWithTag(1) as! UITextField
+//        password = textField.text!
+//
+//        if (login.characters.count == 0 || password.characters.count == 0) {
+//            ErrorViewer.errorPresent(self, mess: NSLocalizedString("pleaseFillEverything", comment: "")) { _ in }
+//            return
+//        }
+//
+//        loginCall()
     }
 
     /// Check if the current token is still valid by calling a light endpoint.
@@ -159,40 +193,40 @@ class LoginViewController: UIViewController {
     /// Authenticate user with the provided credentials
     func loginCall() {
 
-        MJProgressView.instance.showLoginProgress(self.loginButton, white: true)
-        usersRequests.auth(login, password: password) { [weak self] result in
-            MJProgressView.instance.hideProgress()
-
-            guard let tmpSelf = self else {
-                return
-            }
-
-            switch (result) {
-            case .success(_):
-
-                do {
-                    let auth = Authentication(fromCredentials: tmpSelf.login, password: tmpSelf.password)
-                    try KeychainUtil.save(credentials: auth)
-                } catch {
-                    log.error("Thrown error when saving credentials")
-                }
-
-                tmpSelf.goToNextView()
-                break
-            case .failure(let error):
-                if (error.type == AppError.authenticationFailure) {
-                    ErrorViewer.errorShow(tmpSelf, mess: NSLocalizedString("invalidCombinaison", comment: "")) { _ in }
-                } else if (error.type == AppError.apiError) {
-                    if let mess = error.message {
-                        ErrorViewer.errorShow(tmpSelf, mess: mess) { _ in }
-                    } else {
-                        ErrorViewer.errorShow(tmpSelf, mess: NSLocalizedString("unknownApiError", comment: "")) { _ in }
-                    }
-                }
-                tmpSelf.removeWaitingView()
-                break
-            }
-        }
+//        MJProgressView.instance.showLoginProgress(self.loginButton, white: true)
+//        usersRequests.auth(login, password: password) { [weak self] result in
+//            MJProgressView.instance.hideProgress()
+//
+//            guard let tmpSelf = self else {
+//                return
+//            }
+//
+//            switch (result) {
+//            case .success(_):
+//
+//                do {
+//                    let auth = Authentication(fromCredentials: tmpSelf.login, password: tmpSelf.password)
+//                    try KeychainUtil.save(credentials: auth)
+//                } catch {
+//                    log.error("Thrown error when saving credentials")
+//                }
+//
+//                tmpSelf.goToNextView()
+//                break
+//            case .failure(let error):
+//                if (error.type == AppError.authenticationFailure) {
+//                    ErrorViewer.errorShow(tmpSelf, mess: NSLocalizedString("invalidCombinaison", comment: "")) { _ in }
+//                } else if (error.type == AppError.apiError) {
+//                    if let mess = error.message {
+//                        ErrorViewer.errorShow(tmpSelf, mess: mess) { _ in }
+//                    } else {
+//                        ErrorViewer.errorShow(tmpSelf, mess: NSLocalizedString("unknownApiError", comment: "")) { _ in }
+//                    }
+//                }
+//                tmpSelf.removeWaitingView()
+//                break
+//            }
+//        }
     }
 
     /**

@@ -39,7 +39,10 @@ class RequestManager {
             .responseJSON { res in
                 
                 if res.response == nil || res.response?.statusCode == nil || res.result.isFailure {
-                    completion(Result.failure(type: AppError.apiError, message: res.result.error?.localizedDescription))
+
+                    completion(Result.failure(AppError(error: APIError.unknownAPIError,
+                                                       message: res.result.error?.localizedDescription,
+                                                       statusCode: res.response?.statusCode ?? nil)))
                     return
                 }
                 
@@ -52,15 +55,15 @@ class RequestManager {
                     if let val = res.result.value {
                         let responseJSON = JSON(val)
                         if let errorDictionary = responseJSON["error"].dictionary, let errorMessage = errorDictionary["message"]?.string {
-                            completion(Result.failure(type: AppError.apiError, message: errorMessage))
+                            completion(Result.failure(AppError(error: APIError.unknownAPIError, message: errorMessage, statusCode: res.response?.statusCode ?? nil)))
                             
                         } else if let errorMessage = responseJSON["error"].string {
-                            completion(Result.failure(type: AppError.apiError, message: errorMessage))
+                            completion(Result.failure(AppError(error: APIError.unknownAPIError, message: errorMessage, statusCode: res.response?.statusCode ?? nil)))
                         } else {
-                            completion(Result.failure(type: AppError.apiError, message: res.result.error?.localizedDescription))
+                            completion(Result.failure(AppError(error: APIError.unknownAPIError, message: res.result.error?.localizedDescription, statusCode: res.response?.statusCode ?? nil)))
                         }
                     } else {
-                        completion(Result.failure(type: AppError.apiError, message: nil))
+                        completion(Result.failure(AppError(error: APIError.unknownAPIError, message: res.result.error?.localizedDescription, statusCode: res.response?.statusCode ?? nil)))
                     }
                 }
         }
@@ -80,9 +83,8 @@ class RequestManager {
                 if let data = res.data {
                     completion(Result.success(data))
                 } else {
-                    completion(Result.failure(type: AppError.errorIntranetData, message: nil))
+                    completion(Result.failure(AppError(error: APIError.errorIntranetData, message: res.result.error?.localizedDescription, statusCode: res.response?.statusCode ?? nil)))
                 }
-
         }
     }
 }
