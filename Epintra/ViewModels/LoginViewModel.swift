@@ -43,7 +43,7 @@ class LoginViewModel {
     /// Validates password if it has enough parameters
     internal var passwordValidation: Observable<Bool> {
         return self.userPassword.asObservable()
-            .map { ($0?.characters.count ?? 0) > 1 }
+            .map { ($0?.characters.count ?? 0) >= 1 }
             .shareReplay(1)
     }
 
@@ -61,6 +61,26 @@ class LoginViewModel {
                 self.isAuthenticating.value = true
                 return UsersRequests.auth(email, password: password)
         }
+    }
+
+    func checkTokenValidity() {
+
+    }
+
+    func save(credentials: Authentication) throws {
+        let auth = Authentication(fromCredentials: credentials.email, password: credentials.password)
+        try KeychainUtil.save(credentials: auth)
+    }
+
+    func saveCurrentCredentials() throws {
+
+        guard let email = self.userEmail.value, let password = self.userPassword.value else {
+            log.error("Tried to save credentials without content")
+            return
+        }
+
+        let auth = Authentication(fromCredentials: email, password: password)
+        try KeychainUtil.save(credentials: auth)
     }
     
 }

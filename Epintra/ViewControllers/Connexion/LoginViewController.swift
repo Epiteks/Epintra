@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController {
 
     @IBOutlet weak var loginTableView: UITableView!
     @IBOutlet weak var loginButton: ActionButton!
@@ -24,10 +24,10 @@ class LoginViewController: UIViewController {
     }
 
     // Used for moving the view
-    var connexionButtonConstraintSave: CGFloat?
+    private var connexionButtonConstraintSave: CGFloat?
 
-    let viewModel = LoginViewModel()
-    let disposeBag = DisposeBag()
+    fileprivate let viewModel = LoginViewModel()
+    fileprivate let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,17 +43,15 @@ class LoginViewController: UIViewController {
 //
 //        }
 
-
         self.registerForKeyboardNotifications()
 
         checkStatus()
-
 
         self.setSubViewsProperties()
         self.setReactive()
     }
 
-    func setSubViewsProperties() {
+    private func setSubViewsProperties() {
         self.view.backgroundColor = UIUtils.backgroundColor
 
         // Set UITableView properties
@@ -89,7 +87,7 @@ class LoginViewController: UIViewController {
 
     }
 
-    func setReactive() {
+    private func setReactive() {
 
         // Bind button to Rx to enable it
         self.viewModel.isValid.map { $0 }.bindTo(self.loginButton.rx.isEnabled).addDisposableTo(self.disposeBag)
@@ -98,22 +96,24 @@ class LoginViewController: UIViewController {
         self.viewModel.bindResponse(action: self.loginButton.rx.tap.asObservable())
 
         // Subscribe to authentication response and handle it
-        self.viewModel.authResponse?.subscribe(onNext: { response in
-            self.viewModel.isAuthenticating.value = false
-//            switch response {
-//            case .success(_):
-//                self.retrieveUserInformation()
-//            case .failure(let error):
-//                self.showError(withMessage: error.message)
-//            }
+        self.viewModel.authResponse?
+            .subscribe(onNext: { [weak self] response in
+            self?.viewModel.isAuthenticating.value = false
+            switch response {
+            case .success(_):
+                try? self?.viewModel.saveCurrentCredentials()
+                self?.goToNextView()
+            case .failure(let error):
+                self?.showError(withMessage: error.message)
+            }
         }).addDisposableTo(self.disposeBag)
 
-//        self.viewModel.isAuthenticating.asObservable().subscribe { value in
-//            (value.element ?? false) ? self.addActivityIndicator() : self.removeActivityIndicator()
-//            }.addDisposableTo(self.disposeBag)
+        // Know if we are authenticating to add
+        self.viewModel.isAuthenticating.asObservable().subscribe { value in
+            (value.element ?? false) ? MJProgressView.instance.showLoginProgress(self.loginButton, white: true) : MJProgressView.instance.hideProgress()
+            }
+            .addDisposableTo(self.disposeBag)
     }
-    
-
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
@@ -125,11 +125,11 @@ class LoginViewController: UIViewController {
     /**
      Register Notification to get when keyboard is shown and hidden.
      */
-    func registerForKeyboardNotifications() {
+    private func registerForKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.tapOnView(_:)))
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(self.tapOnView(_:)))
         self.view.addGestureRecognizer(gesture)
     }
 
@@ -141,32 +141,10 @@ class LoginViewController: UIViewController {
         self.performSegue(withIdentifier: "oAuthSegue", sender: nil)
     }
 
-    @IBAction func loginPressed(_ sender: AnyObject) {
-
-//        self.view.endEditing(true)
-//
-//        // Getting login cell data
-//        var cell = loginTableView.cellForRow(at: IndexPath(row: 0, section: 0))
-//        var textField = cell?.viewWithTag(1) as! UITextField
-//        login = textField.text!
-//
-//        // Getting password cell data
-//        cell = loginTableView.cellForRow(at: IndexPath(row: 1, section: 0))
-//        textField = cell?.viewWithTag(1) as! UITextField
-//        password = textField.text!
-//
-//        if (login.characters.count == 0 || password.characters.count == 0) {
-//            ErrorViewer.errorPresent(self, mess: NSLocalizedString("pleaseFillEverything", comment: "")) { _ in }
-//            return
-//        }
-//
-//        loginCall()
-    }
-
     /// Check if the current token is still valid by calling a light endpoint.
     /// If so, we go to the next storyboard.
     /// Otherwise, we delete all credentials and remove the waiting view to let user connect again.
-    func checkTokenValidity() {
+    private func checkTokenValidity() {
 
         MJProgressView.instance.showLoginProgress(self.loginButton, white: true)
         usersRequests.getPhotoURL(ApplicationManager.sharedInstance.user?.value.login ?? "") { [weak self] result in
@@ -188,45 +166,6 @@ class LoginViewController: UIViewController {
                 break
             }
         }
-    }
-
-    /// Authenticate user with the provided credentials
-    func loginCall() {
-
-//        MJProgressView.instance.showLoginProgress(self.loginButton, white: true)
-//        usersRequests.auth(login, password: password) { [weak self] result in
-//            MJProgressView.instance.hideProgress()
-//
-//            guard let tmpSelf = self else {
-//                return
-//            }
-//
-//            switch (result) {
-//            case .success(_):
-//
-//                do {
-//                    let auth = Authentication(fromCredentials: tmpSelf.login, password: tmpSelf.password)
-//                    try KeychainUtil.save(credentials: auth)
-//                } catch {
-//                    log.error("Thrown error when saving credentials")
-//                }
-//
-//                tmpSelf.goToNextView()
-//                break
-//            case .failure(let error):
-//                if (error.type == AppError.authenticationFailure) {
-//                    ErrorViewer.errorShow(tmpSelf, mess: NSLocalizedString("invalidCombinaison", comment: "")) { _ in }
-//                } else if (error.type == AppError.apiError) {
-//                    if let mess = error.message {
-//                        ErrorViewer.errorShow(tmpSelf, mess: mess) { _ in }
-//                    } else {
-//                        ErrorViewer.errorShow(tmpSelf, mess: NSLocalizedString("unknownApiError", comment: "")) { _ in }
-//                    }
-//                }
-//                tmpSelf.removeWaitingView()
-//                break
-//            }
-//        }
     }
 
     /**
@@ -301,7 +240,7 @@ class LoginViewController: UIViewController {
     }
 
     /// Check the status of the API and the intranet
-    func checkStatus() {
+    private func checkStatus() {
 
         func checkAPI() {
             miscRequests.getAPIStatus { [weak self] responseAPI in
@@ -373,12 +312,14 @@ extension LoginViewController: UITableViewDataSource {
 
         cell?.dataTextField.tintColor = UIUtils.backgroundColor
 
-        if ((indexPath as NSIndexPath).row == 0) {
+        if indexPath.row == 0 {
             cell?.dataTextField.placeholder = NSLocalizedString("email", comment: "")
             cell?.dataTextField.keyboardType = .emailAddress
+            cell?.dataTextField.rx.text.bindTo(self.viewModel.userEmail).addDisposableTo(self.disposeBag)
         } else {
             cell?.dataTextField.placeholder = NSLocalizedString("password", comment: "")
             cell?.dataTextField.isSecureTextEntry = true
+            cell?.dataTextField.rx.text.bindTo(self.viewModel.userPassword).addDisposableTo(self.disposeBag)
         }
 
         cell?.layoutMargins.left = 0
@@ -388,7 +329,7 @@ extension LoginViewController: UITableViewDataSource {
 }
 
 extension LoginViewController: OAuthDelegate {
-    func authentified(withEmail email: String?, andToken token: String?) {
+    internal func authentified(withEmail email: String?, andToken token: String?) {
 
         guard let email = email, let token = token else {
             ErrorViewer.errorShow(self, mess: NSLocalizedString("oauthWrongCredentials", comment: "")) { _ in }

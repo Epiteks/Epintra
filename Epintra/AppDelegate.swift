@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		log.addDestination(console)
         
 		NetworkActivityIndicatorManager.shared.isEnabled = true
-		
+    
 		return true
 	}
 

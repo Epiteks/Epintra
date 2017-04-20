@@ -36,7 +36,7 @@ class Network {
     static let routes: [String: NetworkCallData] = [
 
         // Authentication requests
-        "authentication": NetworkCallData(endpoint: "/token", method: .post, secured: false), // Authenticate user
+        "authentication": NetworkCallData(endpoint: "/login", method: .post, secured: false) // Authenticate user
         
     ]
 

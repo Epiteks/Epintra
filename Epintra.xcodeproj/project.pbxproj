@@ -85,6 +85,7 @@
 		796B2EF91C4ADEB800327E22 /* UIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796B2EF81C4ADEB800327E22 /* UIUtils.swift */; };
 		7976955B1C562730001772A2 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7976955A1C562730001772A2 /* ImageDownloader.swift */; };
 		7976A1C11E37717000C06F36 /* KeychainUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7976A1C01E37717000C06F36 /* KeychainUtil.swift */; };
+		7977268F1EA78DAC0021FEE7 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7977268E1EA78DAC0021FEE7 /* UIViewControllerExtensions.swift */; };
 		79779A9E1C5912DA008803C5 /* SystemUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79779A9D1C5912DA008803C5 /* SystemUtils.swift */; };
 		79779AA21C59140E008803C5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79779AA11C59140E008803C5 /* QuartzCore.framework */; };
 		79779AA61C592355008803C5 /* String+NSDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79779AA51C592355008803C5 /* String+NSDate.swift */; };
@@ -259,6 +260,7 @@
 		796B2EF81C4ADEB800327E22 /* UIUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtils.swift; sourceTree = "<group>"; };
 		7976955A1C562730001772A2 /* ImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ImageDownloader.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		7976A1C01E37717000C06F36 /* KeychainUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainUtil.swift; sourceTree = "<group>"; };
+		7977268E1EA78DAC0021FEE7 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		79779A9D1C5912DA008803C5 /* SystemUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemUtils.swift; sourceTree = "<group>"; };
 		79779AA11C59140E008803C5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		79779AA51C592355008803C5 /* String+NSDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+NSDate.swift"; sourceTree = "<group>"; };
@@ -810,6 +812,7 @@
 				79779AA51C592355008803C5 /* String+NSDate.swift */,
 				798AF18C1DDC61B9002B8A8C /* StringExtension.swift */,
 				79DE62DC1E6DEEAB002FE1E4 /* WKWebViewExtensions.swift */,
+				7977268E1EA78DAC0021FEE7 /* UIViewControllerExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1181,6 +1184,7 @@
 				7948FECD1E19CAD7001C5F3A /* LoadingDataViewController.swift in Sources */,
 				79622E911C5D4AF100FBA456 /* Module.swift in Sources */,
 				79F1F2751C59044200AAFB69 /* Room.swift in Sources */,
+				7977268F1EA78DAC0021FEE7 /* UIViewControllerExtensions.swift in Sources */,
 				7948FEE41E19CB0E001C5F3A /* SchoolViewController.swift in Sources */,
 				79AFFA471E23EA5800FDEDF3 /* PlanningRequests.swift in Sources */,
 				79DE549E1C5BAF3300E2ADDE /* CalendarManager.swift in Sources */,

@@ -42,25 +42,6 @@ class UsersRequests: RequestManager {
                     return Result.failure(error)
                 }
             })
-//
-//
-//        Network.call(data: Network.routes["authentication"]!, parameters: ["login": login, "password": password]) { (response) in
-//			switch response {
-//			case .success(let responseJSON):
-//				if let token = responseJSON["token"].string {
-//					log.info("Token:  \(token)")
-//
-//					ApplicationManager.sharedInstance.token = token
-//                    //ApplicationManager.sharedInstance.user = User(login: login)
-//                    ApplicationManager.sharedInstance.user = Variable<User>(User(login: login))
-//					completion(Result.success(nil))
-//				}
-//			case .failure(let err):
-//				completion(Result.failure(err))
-//				log.error("Authentication:  \(err)")
-//				
-//			}
-//		}
 	}
 	
 	/*!

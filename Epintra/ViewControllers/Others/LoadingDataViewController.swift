@@ -57,7 +57,7 @@ class LoadingDataViewController: UIViewController {
     }
     
     /// Add ActivityIndicator on center of the view
-    func addActivityIndicator() {
+    override func addActivityIndicator() {
         
         let indicator = UIActivityIndicatorView()
         
@@ -72,7 +72,7 @@ class LoadingDataViewController: UIViewController {
     }
     
     /// Remove ActivityIndicator
-    func removeActivityIndicator() {
+    override func removeActivityIndicator() {
         for sub in self.view.subviews {
             if sub is UIActivityIndicatorView {
                 DispatchQueue.main.async {
