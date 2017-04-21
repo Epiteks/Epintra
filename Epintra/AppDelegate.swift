@@ -158,6 +158,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 case .failure(_):
                     // Authentication failed, send back to LoginViewController
                     self.goToLoginViewController()
+                    KeychainUtil.deleteCredentials()
                     break
                 }
             }).addDisposableTo(self.disposeBag)
