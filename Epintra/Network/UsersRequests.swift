@@ -20,18 +20,17 @@ class UsersRequests: RequestManager {
 	- parameter password:		user password
 	- parameter completion:	Request completion action
 	*/
-	class func auth(_ login: String, password: String) -> Observable<Result<Any?>> {
+	class func auth(_ login: String, password: String) -> Observable<Result<String>> {
 
         return Network.call(data: Network.routes["authentication"]!, parameters: ["login": login, "password": password])
-            .map({ result -> Result<Any?> in
+            .map({ result -> Result<String> in
                 switch result {
                 case .success(let json):
                     log.verbose("Response from API : \(json)")
-                    if let token = json["token"].string {
-                        ApplicationManager.sharedInstance.token = token
-                    }
+                    let token = json["token"].stringValue
+                    ApplicationManager.sharedInstance.token = token
                     ApplicationManager.sharedInstance.user = Variable<User>(User(login: login))
-                    return Result.success(nil)
+                    return Result.success(token)
                 case .failure(var error):
                     switch error.statusCode ?? 0 {
                     case 401:
@@ -226,23 +225,17 @@ class UsersRequests: RequestManager {
         }
     }
 
-    func getPhotoURL(_ login: String, completion: @escaping (Result<String>) -> Void) {
+    class func getPhotoURL(_ login: String) -> Observable<Result<String>> {
 
-        super.call("userPhoto", urlParams: "?login=\(login)") { (response) in
-            switch response {
-            case .success(let responseJSON):
-                print(responseJSON)
-                if let photoURL = responseJSON["url"].string {
-                    log.info("Photo URL : \(photoURL)")
-                    completion(Result.success(photoURL))
-                } else {
-                    completion(Result.success(""))
+        return Network.call(data: Network.routes["userPhoto"]!, urlParameters: "?login=\(login)")
+            .map({ result -> Result<String> in
+                switch result {
+                case .success(let json):
+                    return Result.success(json["url"].stringValue)
+                case .failure(let error):
+                    return Result.failure(error)
                 }
-            case .failure(let err):
-                completion(Result.failure(err))
-                log.error("Authentication:  \(err)")
-            }
-        }
+            })
     }
 }
 

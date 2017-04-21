@@ -195,6 +195,9 @@
 "Epintra.APIError.networkError" = "A network error happened, please check your connexion.";
 "Epintra.APIError.valueNotFound" = "API value not found.";
 
+"Epintra.APIError.apiDown" = "The API is not reachable.";
+"Epintra.APIError.intraDown" = "The EPITECH intranet is not working correctly.";
+
 "Epintra.APIError.AuthenticationError.wrongCredentials" = "Email or password is incorrect.";
 
 "Epintra.KeychainUtilError.failedToSaveData" = "A problem occured when saving your credentials.";

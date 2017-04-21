@@ -46,10 +46,9 @@ extension UIViewController {
     func showError(withMessage message: String?) {
 
         let alert = UIAlertController(title: NSLocalizedString("error", comment: ""), message: message, preferredStyle: .alert)
-
-        let action = UIAlertAction(title: NSLocalizedString("dismiss", comment: ""), style: .default)
-
+        let action = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default)
         alert.addAction(action)
+        alert.view.tintColor = UIUtils.backgroundColor
 
         self.present(alert, animated: true)
         

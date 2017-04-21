@@ -32,21 +32,7 @@ final class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        if let credentials = KeychainUtil.getCredentials() {
-//            self.addWaitingView()
-//            self.login = credentials.email
-//            if let tmpPassword = credentials.password {
-//                // User used traditional authentication
-//                self.password = tmpPassword
-//                loginCall()
-//            }
-//
-//        }
-
         self.registerForKeyboardNotifications()
-
-        checkStatus()
-
         self.setSubViewsProperties()
         self.setReactive()
     }
@@ -66,27 +52,6 @@ final class LoginViewController: UIViewController {
         self.infoLabel.text = NSLocalizedString("noOfficialApp", comment: "")
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-
-//        self.removeWaitingView()
-//        if let credentials = KeychainUtil.getCredentials() {
-//            self.addWaitingView()
-//            if let token = credentials.token {
-//                ApplicationManager.sharedInstance.token = token
-//                ApplicationManager.sharedInstance.user = Variable<User>(User(login: self.login))
-//                // Check if token is valid
-//                self.checkTokenValidity()
-//            }
-//        }
-//
-//        if let waitingview = self.getWaitingView() {
-//            MJProgressView.instance.showProgress(waitingview, white: true)
-//        } else {
-//            MJProgressView.instance.hideProgress()
-//        }
-
-    }
-
     private func setReactive() {
 
         // Bind button to Rx to enable it
@@ -98,10 +63,8 @@ final class LoginViewController: UIViewController {
         // Subscribe to authentication response and handle it
         self.viewModel.authResponse?
             .subscribe(onNext: { [weak self] response in
-            self?.viewModel.isAuthenticating.value = false
             switch response {
             case .success(_):
-                try? self?.viewModel.saveCurrentCredentials()
                 self?.goToNextView()
             case .failure(let error):
                 self?.showError(withMessage: error.message)
@@ -139,33 +102,6 @@ final class LoginViewController: UIViewController {
 
     @IBAction func oauthPressed(_ sender: Any) {
         self.performSegue(withIdentifier: "oAuthSegue", sender: nil)
-    }
-
-    /// Check if the current token is still valid by calling a light endpoint.
-    /// If so, we go to the next storyboard.
-    /// Otherwise, we delete all credentials and remove the waiting view to let user connect again.
-    private func checkTokenValidity() {
-
-        MJProgressView.instance.showLoginProgress(self.loginButton, white: true)
-        usersRequests.getPhotoURL(ApplicationManager.sharedInstance.user?.value.login ?? "") { [weak self] result in
-            MJProgressView.instance.hideProgress()
-
-            guard let tmpSelf = self else {
-                return
-            }
-
-            switch (result) {
-            case .success(_):
-                // Token is still valid, we go to the main storyboard
-                tmpSelf.goToNextView()
-                break
-            case .failure(_):
-                // Token not valid, user should reconnect
-                tmpSelf.removeWaitingView()
-                KeychainUtil.deleteCredentials()
-                break
-            }
-        }
     }
 
     /**
@@ -215,84 +151,6 @@ final class LoginViewController: UIViewController {
         let storyboard = UIStoryboard(name: "MainViewStoryboard", bundle: nil)
         let vc = storyboard.instantiateInitialViewController()
         self.present(vc!, animated: true, completion: nil)
-    }
-
-    func addWaitingView() {
-        let wview = UIView(frame: self.view.frame)
-        wview.backgroundColor = UIUtils.backgroundColor
-        wview.restorationIdentifier = "waitingview"
-        self.view.addSubview(wview)
-    }
-
-    func getWaitingView() -> UIView? {
-        for sub in self.view.subviews {
-            if sub.restorationIdentifier == "waitingview" {
-                return sub
-            }
-        }
-        return nil
-    }
-
-    func removeWaitingView() {
-        if let waitview = self.getWaitingView() {
-            waitview.removeFromSuperview()
-        }
-    }
-
-    /// Check the status of the API and the intranet
-    private func checkStatus() {
-
-        func checkAPI() {
-            miscRequests.getAPIStatus { [weak self] responseAPI in
-
-                guard let tmpSelf = self else {
-                    return
-                }
-
-                switch responseAPI {
-                case .success(let status):
-                    if status {
-                        checkIntra()
-                    } else {
-                        ErrorViewer.errorShow(tmpSelf, mess: NSLocalizedString("serverNotAvailable", comment: "")) { _ in }
-                    }
-                    break
-                case .failure(let error):
-                    if let mess = error.message {
-                        ErrorViewer.errorShow(tmpSelf, mess: mess) { _ in }
-                    } else {
-                        ErrorViewer.errorShow(tmpSelf, mess: NSLocalizedString("unknownApiError", comment: "")) { _ in }
-                    }
-                    break
-                }
-            }
-        }
-
-        func checkIntra() {
-            miscRequests.getIntraStatus(completion: { [weak self] responseIntra in
-
-                guard let tmpSelf = self else {
-                    return
-                }
-
-                switch responseIntra {
-                case .success(let status):
-                    if !status {
-                        ErrorViewer.errorShow(tmpSelf, mess: NSLocalizedString("serverNotAvailable", comment: "")) { _ in }
-                    }
-                    break
-                case .failure(let error):
-                    if let mess = error.message {
-                        ErrorViewer.errorShow(tmpSelf, mess: mess) { _ in }
-                    } else {
-                        ErrorViewer.errorShow(tmpSelf, mess: NSLocalizedString("unknownApiError", comment: "")) { _ in }
-                    }
-                    break
-                }
-            })
-        }
-
-        checkAPI()
     }
 }
 

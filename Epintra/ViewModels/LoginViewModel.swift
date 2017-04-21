@@ -19,7 +19,7 @@ class LoginViewModel {
 
     /// Observable value that the login view controller must observe on.
     /// Is set each time we attempt to authenticate.
-    var authResponse: Observable<Result<Any?>>?
+    var authResponse: Observable<Result<String>>?
 
     /// Boolean to know if we are authenticating
     var isAuthenticating = Variable<Bool>(false)
@@ -57,14 +57,21 @@ class LoginViewModel {
         }
 
         self.authResponse = action.withLatestFrom(userInputs)
-            .flatMap { (email, password) ->  Observable<Result<Any?>> in
+            .flatMap { (email, password) ->  Observable<Result<String>> in
                 self.isAuthenticating.value = true
                 return UsersRequests.auth(email, password: password)
-        }
+            }.do(onNext: { [weak self] result in
+                switch result {
+                case .success(let token):
+                    try? self?.saveCurrentCredentials(withToken: token)
+                case .failure(_): break
+                }
+                self?.isAuthenticating.value = false
+            })
     }
 
-    func checkTokenValidity() {
-
+    func checkTokenValidity() -> Observable<Result<String>> {
+        return UsersRequests.getPhotoURL(self.userEmail.value ?? "")
     }
 
     func save(credentials: Authentication) throws {
@@ -72,14 +79,14 @@ class LoginViewModel {
         try KeychainUtil.save(credentials: auth)
     }
 
-    func saveCurrentCredentials() throws {
+    func saveCurrentCredentials(withToken token: String?) throws {
 
         guard let email = self.userEmail.value, let password = self.userPassword.value else {
             log.error("Tried to save credentials without content")
             return
         }
 
-        let auth = Authentication(fromCredentials: email, password: password)
+        let auth = Authentication(fromCredentials: email, password: password, token: token)
         try KeychainUtil.save(credentials: auth)
     }
     

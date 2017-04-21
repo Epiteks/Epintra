@@ -77,6 +77,9 @@ enum APIError: Error {
     case networkError
     case valueNotFound
 
+    case apiDown
+    case intraDown
+
     /// Errors related to the authentication
     enum AuthenticationError: Error {
         case wrongCredentials

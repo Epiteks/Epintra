@@ -9,6 +9,7 @@
 import UIKit
 import AlamofireNetworkActivityIndicator
 import SwiftyBeaver
+import RxSwift
 
 let log = SwiftyBeaver.self
 
@@ -16,6 +17,8 @@ let log = SwiftyBeaver.self
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
+
+    let disposeBag = DisposeBag()
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
@@ -35,7 +38,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		log.addDestination(console)
         
 		NetworkActivityIndicatorManager.shared.isEnabled = true
-    
+
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        var initialViewController: UIViewController
+        if KeychainUtil.getCredentials()?.token != nil {
+            let sb: UIStoryboard = UIStoryboard(name: "MainViewStoryboard", bundle: nil)
+            initialViewController = sb.instantiateInitialViewController()!
+        } else {
+            //If not logged in then show LoginViewController
+            let sb = UIStoryboard(name: "ConnexionStoryboard", bundle: nil)
+            initialViewController = sb.instantiateInitialViewController()!
+        }
+        self.window?.rootViewController = initialViewController
+        self.window?.makeKeyAndVisible()
+
 		return true
 	}
 
@@ -52,10 +68,100 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func applicationWillEnterForeground(_ application: UIApplication) {
 		// Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 	}
-	
+
 	func applicationDidBecomeActive(_ application: UIApplication) {
 		// Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-	}
+
+        self.checkServersAvailability()
+
+        // Check token and credentials
+        guard let credentials = KeychainUtil.getCredentials() else {
+            return
+        }
+
+        // If user does not exist, we create it
+        if ApplicationManager.sharedInstance.user == nil {
+            ApplicationManager.sharedInstance.user = Variable<User>(User(login: credentials.email))
+        }
+
+        // Check token validity
+        if let tkn = credentials.token {
+            ApplicationManager.sharedInstance.token = tkn
+            // Check token validity.
+            // If not valid, generate it.
+            UsersRequests.getPhotoURL(credentials.email)
+                .single()
+                .subscribe(onNext: { [weak self] result in
+                    switch result {
+                    case .success(_): break // Token still valid
+                    case .failure(_): // Token not valid. Update it if we can.
+                        self?.updateToken(credentials)
+                    }
+                }).addDisposableTo(self.disposeBag)
+        }
+    }
+
+    private func getTopViewController() -> UIViewController? {
+        if var topController = UIApplication.shared.keyWindow?.rootViewController {
+            while let presentedViewController = topController.presentedViewController {
+                topController = presentedViewController
+            }
+            return topController
+        }
+        return nil
+    }
+
+    private func goToLoginViewController() {
+        let vc = UIStoryboard(name: "ConnexionStoryboard", bundle: nil).instantiateInitialViewController()!
+        self.getTopViewController()?.present(vc, animated: true, completion: nil)
+    }
+
+    private func checkServersAvailability() {
+
+        if let topController = self.getTopViewController() {
+
+            MiscRequests.getAPIStatus().single()
+                .subscribe(onNext: { result in
+                    switch result {
+                    case .success(_): break
+                    case .failure(let error):
+                        topController.showError(withMessage: error.message)
+                    }
+                }).addDisposableTo(self.disposeBag)
+
+            MiscRequests.getIntraStatus().single()
+                .subscribe(onNext: { result in
+                    switch result {
+                    case .success(_): break
+                    case .failure(let error):
+                        topController.showError(withMessage: error.message)
+                    }
+                }).addDisposableTo(self.disposeBag)
+        }
+    }
+
+    private func updateToken(_ credentials: Authentication) {
+
+        guard let password = credentials.password else {
+            // Authenticated with OAuth. Cannot generate new token manually.
+            // Should go back to LoginViewController
+            self.goToLoginViewController()
+            return
+        }
+
+        UsersRequests.auth(credentials.email, password: password)
+            .single()
+            .subscribe(onNext: { result in
+                switch result {
+                case .success(_):
+                    break
+                case .failure(_):
+                    // Authentication failed, send back to LoginViewController
+                    self.goToLoginViewController()
+                    break
+                }
+            }).addDisposableTo(self.disposeBag)
+    }
 
 	func applicationWillTerminate(_ application: UIApplication) {
 		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.

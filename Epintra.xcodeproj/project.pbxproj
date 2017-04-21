@@ -22,6 +22,7 @@
 		79306D531C4AEBF300708BED /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 79306D551C4AEBF300708BED /* Localizable.strings */; };
 		79306D611C4AF46600708BED /* MJProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79306D601C4AF46600708BED /* MJProgressView.swift */; };
 		79306D631C4AF79400708BED /* ModelName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79306D621C4AF79400708BED /* ModelName.swift */; };
+		793832D21EAA41AA00DC5C0F /* MenuTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793832D11EAA41AA00DC5C0F /* MenuTabBarViewController.swift */; };
 		793B77951E0C71AE006FFD16 /* ModulesRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793B77941E0C71AE006FFD16 /* ModulesRequests.swift */; };
 		793C52C21C5E1BE500C33328 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 793C52C11C5E1BE500C33328 /* MessageUI.framework */; };
 		793C52C41C5E2D9600C33328 /* thirdParty.html in Resources */ = {isa = PBXBuildFile; fileRef = 793C52C31C5E2D9600C33328 /* thirdParty.html */; };
@@ -196,6 +197,7 @@
 		79306D5A1C4AEC4A00708BED /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		79306D601C4AF46600708BED /* MJProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MJProgressView.swift; sourceTree = "<group>"; };
 		79306D621C4AF79400708BED /* ModelName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelName.swift; sourceTree = "<group>"; };
+		793832D11EAA41AA00DC5C0F /* MenuTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTabBarViewController.swift; sourceTree = "<group>"; };
 		793B77941E0C71AE006FFD16 /* ModulesRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModulesRequests.swift; path = Network/ModulesRequests.swift; sourceTree = "<group>"; };
 		793B779B1E0C83E2006FFD16 /* DZNEmptyDataSet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DZNEmptyDataSet.framework; path = "Pods/../build/Debug-iphoneos/DZNEmptyDataSet/DZNEmptyDataSet.framework"; sourceTree = "<group>"; };
 		793C52C11C5E1BE500C33328 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -827,6 +829,7 @@
 				7948FEC01E19CA67001C5F3A /* Profile */,
 				7948FEC11E19CA70001C5F3A /* School */,
 				7948FEC21E19CA76001C5F3A /* Settings */,
+				793832D11EAA41AA00DC5C0F /* MenuTabBarViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1214,6 +1217,7 @@
 				7948FEEF1E19CB47001C5F3A /* ModulesViewController.swift in Sources */,
 				79F8ADEE1C52AC9100F4FDD4 /* User.swift in Sources */,
 				798C9F371E2E2E5D00675296 /* NotificationTableViewCell.swift in Sources */,
+				793832D21EAA41AA00DC5C0F /* MenuTabBarViewController.swift in Sources */,
 				7948FF391E19CC02001C5F3A /* StudentTableViewCell.swift in Sources */,
 				7948FF2B1E19CC02001C5F3A /* EmptyDataTableViewCell.swift in Sources */,
 				79622E9A1C5D56C000FBA456 /* Mark.swift in Sources */,

@@ -19,7 +19,7 @@ class RequestManager {
         var newURL = Configuration.apiURL + (req?.endpoint)!
         
         if req!.secured == true {
-            headers["token"] = ApplicationManager.sharedInstance.token!
+            headers["token"] = ApplicationManager.sharedInstance.token ?? ""
         }
         
         // Change URL Epirank
