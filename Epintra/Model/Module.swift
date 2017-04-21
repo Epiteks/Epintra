@@ -58,7 +58,7 @@ class Module: BasicInformation {
             case .success(_):
                 completion(Result.success(nil))
             case .failure(let err):
-                completion(Result.failure(type: err.type, message: err.message))
+                completion(Result.failure(err))
                 break
             }
         }

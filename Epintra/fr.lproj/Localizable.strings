@@ -182,3 +182,24 @@
 "REN" = "Rennes";
 "STG" = "Strasbourg";
 "TLS" = "Toulouse";
+
+/**
+ ** Errors
+ */
+
+"Epintra.APIError.unknownAPIError" = "Une erreur réseau est arrivée. Si cela arrive encore, merci de nous le signaler.";
+"Epintra.APIError.networkError" = "Une erreur réseau est arrivée. Vérifiez votre connexion.";
+"Epintra.APIError.valueNotFound" = "API valeur non trouvée";
+
+"Epintra.APIError.apiDown" = "L'API est hors-service.";
+"Epintra.APIError.intraDown" = "L'intranet EPITECH est hors-service.";
+
+"Epintra.APIError.AuthenticationError.wrongCredentials" = "Combinaison email/mot de passe incorrecte.";
+
+"Epintra.KeychainUtilError.failedToSaveData" = "Un problème est arrivé lors de la sauvegarde de vos données.";
+
+"Epintra.CalendarError.unauthorizedCalendar" = "Accès au calendrier refusé.";
+"Epintra.CalendarError.restricted" = "Accès limité à ce calendrier.";
+"Epintra.CalendarError.noCalendarSelected" = "Vous n'avez pas choisi de calendrier. Allez dans les réglages et choisissez en un.";
+"Epintra.CalendarError.calendarDoesNotExist" = "Calendrier non trouvé.";
+

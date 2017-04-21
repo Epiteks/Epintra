@@ -8,37 +8,49 @@
 
 import Foundation
 import SwiftyJSON
+import RxSwift
 
 class MiscRequests: RequestManager {
 
 	/*!
-	Get current status of API
-	*/
-	func getAPIStatus(completion: @escaping (Result<Bool>) -> Void) {
-		super.call("apiStatus") { (response) in
-			switch response {
-			case .success(let responseJSON):
-				completion(Result.success(responseJSON["status"].boolValue))
-			case .failure(let err):
-				completion(Result.failure(type: err.type, message: err.message))
-				log.error("GetAPIStatus:  \(err)")
-			}
-		}
-	}
+     Get current status of API
+     */
+    class func getAPIStatus() -> Observable<Result<Bool>> {
+
+        return Network.call(data: Network.routes["apiStatus"]!)
+            .map({ result -> Result<Bool> in
+                switch result {
+                case .success(let json):
+                    guard let status = json["status"].bool else {
+                        return Result.failure(AppError(error: APIError.apiDown))
+                    }
+                    return Result.success(status)
+                case .failure(let error):
+                    log.error("Get API Status : \(error)")
+                    return Result.failure(error)
+                }
+            })
+    }
 
 	/*!
 	Get current status of intranet
 	*/
-	func getIntraStatus(completion: @escaping (Result<Bool>) -> Void) {
-		super.call("intraStatus") { (response) in
-			switch response {
-			case .success(let responseJSON):
-				completion(Result.success(responseJSON["status"].boolValue))
-			case .failure(let err):
-				completion(Result.failure(type: err.type, message: err.message))
-				log.error("GetIntraStatus:  \(err)")
-			}
-		}
+	class func getIntraStatus() -> Observable<Result<Bool>> {
+
+        return Network.call(data: Network.routes["intraStatus"]!)
+            .map({ result -> Result<Bool> in
+                switch result {
+                case .success(let json):
+                    guard let status = json["status"].bool else {
+                        return Result.failure(AppError(error: APIError.intraDown))
+                    }
+                    return Result.success(status)
+                case .failure(let error):
+                    log.error("Get Intra Status : \(error)")
+                    return Result.failure(error)
+                }
+            })
+
 	}
 
 }

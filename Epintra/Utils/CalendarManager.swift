@@ -23,32 +23,33 @@ class CalendarManager {
         case .authorized:
             onCompletion(Result.success(nil))
         case .denied:
-            onCompletion(Result.failure(type: AppError.unauthorizedCalendar, message: "CalendarAccessDenied"))
+            onCompletion(Result.failure(AppError(error: CalendarError.unauthorizedCalendar)))
         case .notDetermined:
             // Request access for calendar
             eventStore.requestAccess(to: EKEntityType.event) { (granted: Bool, _) in
                 if (granted) { // Authorized
                     onCompletion(Result.success(nil))
                 } else { // Denied
-                    onCompletion(Result.failure(type: AppError.unauthorizedCalendar, message: "CalendarAccessDenied"))
+                    onCompletion(Result.failure(AppError(error: CalendarError.unauthorizedCalendar)))
                 }
             }
         case .restricted:
-            onCompletion(Result.failure(type: AppError.unauthorizedCalendar, message: "CalendarAccessRestricted"))
+            onCompletion(Result.failure(AppError(error: CalendarError.restricted)))
         }
     }
 
     func insert(planning: Planning, completion: @escaping (Result<Any?>) -> Void) {
 
         guard let calendarIdentifier = ApplicationManager.sharedInstance.defaultCalendarIdentifier else {
-            completion(Result.failure(type: .noCalendarSelected, message: NSLocalizedString("NoCalendarSelected", comment: "")))
+
+            completion(Result.failure(AppError(error: CalendarError.noCalendarSelected)))
             return
         }
 
         let eventStore = EKEventStore()
 
         guard let defaultCalendar = eventStore.calendar(withIdentifier: calendarIdentifier) else {
-            completion(Result.failure(type: .calendarNotExists, message: NSLocalizedString("NoCalendar", comment: "")))
+            completion(Result.failure(AppError(error: CalendarError.calendarDoesNotExist)))
             return
         }
 
@@ -66,7 +67,7 @@ class CalendarManager {
         do {
             try eventStore.save(event, span: EKSpan.thisEvent)
         } catch {
-            completion(Result.failure(type: .unauthorizedByUser, message: NSLocalizedString("NoCalendar", comment: "")))
+            completion(Result.failure(AppError(error: CalendarError.unauthorizedCalendar)))
             return
         }
         completion(Result.success(nil))
@@ -75,14 +76,15 @@ class CalendarManager {
     func insert(slot: Slot, completion: @escaping (Result<Any?>) -> Void) {
 
         guard let calendarIdentifier = ApplicationManager.sharedInstance.defaultCalendarIdentifier else {
-            completion(Result.failure(type: .noCalendarSelected, message: NSLocalizedString("NoCalendarSelected", comment: "")))
+
+            completion(Result.failure(AppError(error: CalendarError.noCalendarSelected)))
             return
         }
 
         let eventStore = EKEventStore()
 
         guard let defaultCalendar = eventStore.calendar(withIdentifier: calendarIdentifier) else {
-            completion(Result.failure(type: .calendarNotExists, message: NSLocalizedString("NoCalendar", comment: "")))
+            completion(Result.failure(AppError(error: CalendarError.calendarDoesNotExist)))
             return
         }
 
@@ -102,7 +104,7 @@ class CalendarManager {
         do {
             try eventStore.save(event, span: EKSpan.thisEvent)
         } catch {
-            completion(Result.failure(type: .unauthorizedByUser, message: NSLocalizedString("NoCalendar", comment: "")))
+            completion(Result.failure(AppError(error: CalendarError.unauthorizedCalendar)))
             return
         }
         completion(Result.success(nil))
