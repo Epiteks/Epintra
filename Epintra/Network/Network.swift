@@ -80,8 +80,6 @@ class Network {
         // Marks
         "allMarks": NetworkCallData(endpoint: "/marks", method: .get, secured: true), // Get all marks of user
         "projectMarks": NetworkCallData(endpoint: "/project/marks", method: .get, secured: true) // Get all marks of a project
-
-        
     ]
 
     /// Calling MARQUIS API with specified data

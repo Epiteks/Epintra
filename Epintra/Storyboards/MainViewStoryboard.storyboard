@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Menu Tab Bar View Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="RHu-nZ-KQ0">
             <objects>
-                <tabBarController id="Z0r-jy-Ua2" customClass="MenuTabBarViewController" customModule="Epintra" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="Z0r-jy-Ua2" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="9zN-3w-CME">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
